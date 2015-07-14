@@ -1,0 +1,134 @@
+
+/* menu box */
+.menuBoxHeading {   color: #000000; background-color: #FCFCFC; }
+.menuBoxContent {   color: #616060; }
+.longDescription { visibility: hidden; display: none; }
+
+
+.pageHeading {  font-size: 18px; color: #000000; font-weight: bold; }
+
+/* data table */
+.dataTableHeadingRow {
+background-color: #F6F6F6;
+color: #000000;
+border-bottom: 1px solid;
+border-color: #000000;
+
+}
+.dataTableHeadingContent {
+
+    
+    font-weight: bold;
+    padding: 5px;
+    background-color: #FBFBFB;
+    border: 1px solid #CCCCCC;
+}
+
+.dataTableRowSelected {
+	background-color: #e2e2e2;
+	font-weight: bold;
+}
+.dataTableRowOver {
+ background-color: #F6F6F6; 
+
+ }
+ 
+.dataTableContent {
+  
+ color: #000000;
+ vertical-align: middle;
+ border-bottom: 1px dashed #cccccc;
+ text-align: left;
+ }
+ 
+td.categories_view_data {
+  
+ color: #000000;
+ vertical-align: middle;
+ border-bottom: 1px dashed #cccccc;
+ text-align: center;
+}
+
+.dataTableContent_products {
+  
+ color: #000000; 
+ vertical-align: middle;
+ background-color: #FFF2F2;
+ } 
+ 
+
+ 
+.dataTableContentRow {
+ 
+color: #000000; 
+vertical-align: middle;
+border-bottom: 1px solid;
+border-color: #cccccc;
+}
+
+/* info box */
+.infoBoxHeading {
+	
+	font-weight: bold;
+	padding: 5px;
+	width:100%;
+}
+.infoBoxContent {
+	
+	color: #000000;
+	background-color: #F9F9F9;
+}
+
+div.stock_warn {
+	background-color: #F9F0F1;
+}
+
+.contentTable {
+	
+	color: #000000;
+	background-color: #F9F9F9;
+	border: 1px solid #CCCCCC;
+}
+
+/* miscellaneous */
+.specialPrice { color: #ff0000; }
+.oldPrice { text-decoration: line-through; }
+.fieldRequired {   color: #ff0000; }
+.smallText {   }
+
+.errorText {   color: #ff0000; }
+
+/*Eingabefelder Zahlungs- u. Versandmodule*/
+.inputModule{
+width: 280px;
+}
+.textareaModule{
+width: 280px;
+height: 60px;
+}
+
+/*NEW TABLE DESIGN*/
+.borderall td{
+border: 1px solid #a3a3a3;
+}
+table.borderall{ 
+border-collapse:collapse; 
+empty-cells:show;
+}
+
+.nobr{
+white-space: nowrap;
+}
+
+table.option-table{
+border: 1px solid #a3a3a3;
+min-width:800px;
+}
+table.option-values-table{
+border: 1px solid #a3a3a3;
+min-width:800px;
+}
+
+/* --- bof -- ipdfbill -------- */ 
+.help-text { +  font-family:Arial,Verdana, Geneva, Helvetica, sans-serif; +  font-size: 11px; +  color: #333333; +  } +.help-headline { +  font-family:Arial,Verdana, Geneva, Helvetica, sans-serif; +  font-size: 12px; +  font-weight: bold; +  color: #333333;   +}
+/* --- eof -- ipdfbill -------- */ 

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<widget>
+	<name>Clock</name>
+	<author>Fishnet Services - Nicolas Gemsjäger</author>
+	<authorEmail>support@fishnet-services.com</authorEmail>
+	<authorUrl>www.fishnet-services.com</authorUrl>
+	<version>1.0.0</version>
+	
+	<runwidget>clock/clock.php</runwidget>
+	
+	<dimensions>
+		<width>2</width>
+		<height>1</height>
+		<resizable>false</resizable>
+	</dimensions>
+	
+	<defaultPosition>
+		<x>12</x>
+		<y>0</y>
+	</defaultPosition>
+	
+	<languages>
+		<language tag="de"></language>
+	</languages>
+</widget>

@@ -1,0 +1,121 @@
+{config_load file="$language/lang_$language.conf" section="index"}
+
+{$box_ADMIN}
+
+<div class="container">
+	<div class="row">
+		<div class="col-sm-6">
+			<a href="{$index}"><img src="{$tpl_path}img/logo.png" class="img-responsive" alt="{$store_name}" title="{$store_name}" /></a>
+		</div>
+		<div class="col-sm-6">
+			<div class="row">
+				<div class="col-xs-12">
+				{$box_LANGUAGES}
+				<ul class="list-inline pull-right">
+					{if $smarty.session.customers_status.customers_status_id == '1'}
+					<li><a href="{php}echo xtc_href_link(FILENAME_CREATE_ACCOUNT, '', 'SSL');{/php}">{#new_customer#}</a></li>
+					{else}
+						{if $account}
+						<li><a href="{$account}">{#link_account#}</a></li>
+						{/if}
+					{/if}
+					{if $smarty.session.customer_id}
+					<li><a href="{$logoff}">{#link_logoff#}</a></li>
+					{else}
+					<li><a href="{$login}">{#link_login#}</a></li>
+					{/if}			
+				</ul>
+				</div>		
+			</div>
+			<div class="row"><div class="col-xs-12">{$box_SEARCH}</div></div>
+			<div class="row">
+				<div class="col-xs-12">
+					<ul class="list-inline pull-right">
+						<li><a href="{$checkout}">{#link_checkout#}</a></li>
+						<li>&nbsp;</li>
+						{$box_CART}
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="container">
+	<div class="row">
+		<div class="hidden-xs col-sm-12">
+			<ol class="breadcrumb">
+				{$navtrail}
+			</ol>
+		</div>
+	</div>
+</div>
+
+<div class="container">
+
+	<div class="row row-offcanvas row-offcanvas-left">
+
+		{if !strstr($smarty.server.PHP_SELF, 'shopping_cart') && !strstr($smarty.server.PHP_SELF, 'checkout')}
+		<div class="col-xs-6 col-sm-4 col-md-3 sidebar-offcanvas" id="sidebar">
+
+			{$box_CATEGORIES}
+			
+			<div class="hidden-xs">
+			{$box_ADD_QUICKIE}
+			{$box_LOGIN}
+			{$box_LAST_VIEWED}
+			{$box_REVIEWS}
+			{$box_SPECIALS}
+			{$box_WHATSNEW}	
+			{$box_BESTSELLERS}
+			{$box_MANUFACTURERS_INFO}
+			{$box_MANUFACTURERS}	
+			{$box_CURRENCIES}
+			</div>			
+		</div>		  
+
+		<div class="col-xs-12 col-sm-8 col-md-9">
+		{else}
+		<div class="col-xs-12">
+		{/if}
+		
+			<p class="visible-xs">
+				<button type="button" class="btn btn-primary" data-toggle="offcanvas">Men&uuml; &ouml;ffnen</button>
+			</p>
+			
+			{$box_IMAGESLIDER}
+			
+			{if strstr ($smarty.server.PHP_SELF, 'index')}
+				{if $smarty.get.cPath==null and $smarty.get.manufacturers_id==''}
+					{if $BANNER}{$BANNER}{/if}
+				{/if}
+			{/if}
+			{$main_content}	
+		</div>
+		
+	</div>
+
+</div>
+
+<div class="container">
+	<div class="row row-offcanvas row-offcanvas-left" style="margin-top: 30px;">
+		<div class="col-sm-3">{$box_CONTENT}</div>
+		<div class="col-sm-3">{$box_INFORMATION}</div>
+		<div class="col-sm-3">{$box_CONTENT_TEMPLATEBOX1}</div>
+		<div class="hidden-xs col-xs-3">{$box_NEWSLETTER}</div>
+	</div>
+</div>
+	
+<div class="container footer">
+	{$smarty.const.TITLE} &copy; {$smarty.now|date_format:"%Y"} | Template &copy; 2014-{$smarty.now|date_format:"%Y"} by shophelfer.com
+</div>
+
+{if ($smarty.const.TRACKING_COUNT_ADMIN_ACTIVE=='true' and $smarty.session.customers_status.customers_status_id == '0')
+  or $smarty.session.customers_status.customers_status_id != '0'}
+  {if $smarty.const.TRACKING_PIWIK_ACTIVE=='true'}
+    {piwik url=$smarty.const.TRACKING_PIWIK_LOCAL_PATH id=$smarty.const.TRACKING_PIWIK_ID goal=$smarty.const.TRACKING_PIWIK_GOAL}
+  {/if}
+  {if $smarty.const.TRACKING_GOOGLEANALYTICS_ACTIVE=='true'}
+    {googleanalytics account=$smarty.const.TRACKING_GOOGLEANALYTICS_ID trackorders=true}
+  {/if}
+{/if}

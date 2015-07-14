@@ -1,0 +1,25 @@
+{config_load file="$language/lang_$language.conf" section="categorie_listing"}
+{if $CATEGORIES_HEADING_TITLE}
+	<h1>{$CATEGORIES_HEADING_TITLE}</h1>
+{else}
+	<h1>{$CATEGORIES_NAME}</h1>
+{/if}
+{if $CATEGORIES_IMAGE}<img src="{$CATEGORIES_IMAGE}" alt="{$CATEGORIES_NAME}" class="img-responsive" />{/if}
+{if $CATEGORIES_DESCRIPTION}<p>{$CATEGORIES_DESCRIPTION}</p>{/if}
+
+{if $module_content !=''}
+<strong>{#heading_more_categories#}</strong>
+<div class="hrproductpreview"></div>
+<div class="row">
+{foreach name=aussen item=module_data from=$module_content} 
+	<div class="col-xs-12 col-sm-6 col-md-4">
+		{if $module_data.CATEGORIES_IMAGE}<div class="text-center" style="height: 150px;"><a href="{$module_data.CATEGORIES_LINK}"><img class="img-responsive" style="max-height: 140px; margin: 0 auto;" src="{$module_data.CATEGORIES_IMAGE}" alt="{$module_data.CATEGORIES_NAME}" /></a></div>{/if}
+		<div class="text-center"><strong><a href="{$module_data.CATEGORIES_LINK}">{$module_data.CATEGORIES_NAME}</a></strong></div>
+		<div class="text-center">{$module_data.CATEGORIES_DESCRIPTION}</div>
+	</div>
+{/foreach}
+</div>
+{/if}
+
+<br />
+{$MODULE_new_products}

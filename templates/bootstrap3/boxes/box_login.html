@@ -1,0 +1,10 @@
+{config_load file="$language/lang_$language.conf" section="boxes"}
+<div class="well">
+	<h4>{#heading_login#}</h4>
+	{$FORM_ACTION}
+		{#text_email#}: {$FIELD_EMAIL}
+		{#text_pwd#}: {$FIELD_PWD}
+		{$BUTTON}
+		<br /><a href="{$LINK_LOST_PASSWORD}">{#text_password_forgotten#}</a>
+	{$FORM_END} 
+</div>

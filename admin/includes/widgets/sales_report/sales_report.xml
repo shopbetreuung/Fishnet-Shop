@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<widget>
+	<name>Sales Report</name>
+	<author>Fishnet Services - Nicolas Gemsjäger</author>
+	<authorEmail>support@fishnet-services.com</authorEmail>
+	<authorUrl>www.fishnet-services.com</authorUrl>
+	<version>1.0.0</version>
+	
+	<runwidget>sales_report/sales_report.php</runwidget>
+	
+	<dimensions>
+		<width>3</width>
+		<height>2</height>
+		<resizable>false</resizable>
+	</dimensions>
+	
+	<defaultPosition>
+		<x>0</x>
+		<y>0</y>
+	</defaultPosition>
+	
+	<languages>
+		<language tag="de"></language>
+	</languages>
+</widget>

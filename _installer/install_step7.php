@@ -317,7 +317,7 @@
                                                      
       xtc_db_query("INSERT INTO customers_status SET customers_status_id = '4',
                                                      language_id = '2',
-                                                     customers_status_name = 'Händler Ausland',
+                                                     customers_status_name = 'H&auml;ndler Ausland',
                                                      customers_status_public = 1,
                                                      customers_status_min_order = NULL,
                                                      customers_status_max_order = NULL,

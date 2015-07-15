@@ -546,17 +546,6 @@ switch ($action) {
     xtc_redirect(xtc_href_link(FILENAME_ORDERS, xtc_get_all_get_params(array ('oID', 'action'))));
     break;
 
-  // Remove CVV Number
-  case 'deleteccinfo' :
-    xtc_db_query("UPDATE ".TABLE_ORDERS." SET cc_cvv = null WHERE orders_id = ".$oID);
-    xtc_db_query("UPDATE ".TABLE_ORDERS." SET cc_number = '0000000000000000' WHERE orders_id = ".$oID);
-    xtc_db_query("UPDATE ".TABLE_ORDERS." SET cc_expires = null WHERE orders_id = ".$oID);
-    xtc_db_query("UPDATE ".TABLE_ORDERS." SET cc_start = null WHERE orders_id = ".$oID);
-    xtc_db_query("UPDATE ".TABLE_ORDERS." SET cc_issue = null WHERE orders_id = ".$oID);
-
-    xtc_redirect(xtc_href_link(FILENAME_ORDERS, 'oID='.$oID.'&action=edit'));
-    break;
-
   case 'afterbuy_send' :
     require_once (DIR_FS_CATALOG.'includes/classes/afterbuy.php');
     $aBUY = new xtc_afterbuy_functions($oID);
@@ -708,46 +697,6 @@ require (DIR_WS_INCLUDES.'header.php');
               
               /* easyBill */
               include (DIR_WS_MODULES.'easybill.info.php');
-              
-              // CC - START
-              if ($order->info['cc_type'] || $order->info['cc_owner'] || $order->info['cc_number']) {
-                ?>
-                <tr>
-                  <td colspan="2"><?php echo xtc_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
-                </tr>
-                <tr>
-                  <td class="main"><?php echo ENTRY_CREDIT_CARD_TYPE; ?></td>
-                  <td class="main"><?php echo $order->info['cc_type']; ?></td>
-                </tr>
-                <tr>
-                  <td class="main"><?php echo ENTRY_CREDIT_CARD_OWNER; ?></td>
-                  <td class="main"><?php echo $order->info['cc_owner']; ?></td>
-                </tr>
-                <?php
-                // BMC CC Mod Start
-                if ($order->info['cc_number'] != '0000000000000000') {
-                  if (strtolower(CC_ENC) == 'true') {
-                    $cipher_data = $order->info['cc_number'];
-                    $order->info['cc_number'] = changedataout($cipher_data, CC_KEYCHAIN);
-                  }
-                }
-                // BMC CC Mod End
-                ?>
-                <tr>
-                  <td class="main"><?php echo ENTRY_CREDIT_CARD_NUMBER; ?></td>
-                  <td class="main"><?php echo $order->info['cc_number']; ?></td>
-                </tr>
-                <tr>
-                <td class="main"><?php echo ENTRY_CREDIT_CARD_CVV; ?></td>
-                <td class="main"><?php echo $order->info['cc_cvv']; ?></td>
-                </tr>
-                <tr>
-                  <td class="main"><?php echo ENTRY_CREDIT_CARD_EXPIRES; ?></td>
-                  <td class="main"><?php echo $order->info['cc_expires']; ?></td>
-                </tr>
-                <?php
-              }
-              // CC - END
 
               // Paypal Express Modul
               if ($order->info['payment_method']=='paypal_directpayment' or $order->info['payment_method']=='paypal' or $order->info['payment_method']=='paypalexpress') {
@@ -1041,7 +990,6 @@ require (DIR_WS_INCLUDES.'header.php');
 			<?php
 			}
 			?>
-			<a class="btn btn-default" href="<?php echo xtc_href_link(FILENAME_ORDERS, 'oID='.$oID.'&action=deleteccinfo'); ?>"><?php echo BUTTON_REMOVE_CC_INFO;?></a>
             <a class="btn btn-default" href="<?php echo xtc_href_link(FILENAME_ORDERS, 'page='.$_GET['page'].'&oID='.$oID); ?>"><?php echo BUTTON_BACK;?></a>
 			
              <?php 

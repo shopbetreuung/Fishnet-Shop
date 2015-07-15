@@ -225,10 +225,6 @@ if (isset ($_SESSION['tmp_oID']) && is_numeric($_SESSION['tmp_oID'])) { // Dokum
                            'payment_class' => $order->info['payment_class'],
                            'shipping_method' => $order->info['shipping_method'],
                            'shipping_class' => $order->info['shipping_class'],
-                           'cc_type' => $order->info['cc_type'],
-                           'cc_owner' => $order->info['cc_owner'],
-                           'cc_number' => $order->info['cc_number'],
-                           'cc_expires' => $order->info['cc_expires'],
                            'date_purchased' => 'now()',
                            'orders_status' => $tmp_status,
                            'currency' => $order->info['currency'],
@@ -512,7 +508,7 @@ if (!$tmp) {
   }
 // EOF - Tomcraft - 2009-11-28 - Included xs:booster
 
-  // BOF - Tomcraft - 2009-10-03 - PayPal Express Modul (PayPal GiroPay aufrufen zum best‰tigen)
+  // BOF - Tomcraft - 2009-10-03 - PayPal Express Modul (PayPal GiroPay aufrufen zum best√§tigen)
   if(isset($_SESSION['reshash']['REDIRECTREQUIRED'])  && strtoupper($_SESSION['reshash']['REDIRECTREQUIRED'])=="TRUE") {
     $payment_modules->giropay_process();
   } else {
@@ -520,7 +516,7 @@ if (!$tmp) {
     unset($_SESSION['nvpReqArray']);
     unset($_SESSION['reshash']);
   }
-  // EOF - Tomcraft - 2009-10-03 - PayPal Express Modul (PayPal GiroPay aufrufen zum best‰tigen)
+  // EOF - Tomcraft - 2009-10-03 - PayPal Express Modul (PayPal GiroPay aufrufen zum best√§tigen)
 
   xtc_redirect(xtc_href_link(FILENAME_CHECKOUT_SUCCESS, '', 'SSL'));
 }

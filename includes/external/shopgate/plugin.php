@@ -1273,13 +1273,6 @@ class ShopgateModifiedPlugin extends ShopgatePlugin {
 		$orderData["shipping_method"]				= "Pauschal"; // TODO
 		$orderData["shipping_class"]				= "flat_flat"; // TODO
 
-		$orderData["cc_type"]						= "";
-		$orderData["cc_owner"]						= "";
-		$orderData["cc_number"]						= "";
-		$orderData["cc_expires"]					= "";
-		$orderData["cc_start"]						= "";
-		$orderData["cc_issue"]						= "";
-		$orderData["cc_cvv"]						= "";
 		$orderData["comments"]						= "";
 
 		$orderData["last_modified"]					= date( 'Y-m-d H:i:s' );

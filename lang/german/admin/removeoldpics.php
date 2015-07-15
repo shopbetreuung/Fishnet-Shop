@@ -22,7 +22,7 @@ define('LINK_INFO_TEXT', '<p>&Uuml;ber diese Funktion k&ouml;nnen &uuml;berfl&uu
 - /images/product_images/original_images<br/>
 - /images/product_images/popup_images<br/>
 - /images/product_images/thumbnail_images<br/>
-<p>vom Webserver gel&ouml;scht werden, wenn in der Datenbank kein Bezug mehr zu diesen Artikelbildern vorhanden ist.<br/>Wenn ein Bild von keinem Produkt mehr genutzt wird, so kann das Bild vom Webserver gefahrlos gel&ouml;scht werden.</p><br/>');
+<p>vom Webserver gel&ouml;scht werden, wenn in der Datenbank kein Bezug mehr zu diesen Artikelbildern vorhanden ist.<br/>Wenn ein Bild von keinem Artikel mehr genutzt wird, so kann das Bild vom Webserver gefahrlos gel&ouml;scht werden.</p><br/>');
 define('LINK_ORIGINAL', 'Alte Originalbilder l&ouml;schen');
 define('LINK_INFO', 'Alte Infobilder l&ouml;schen');
 define('LINK_THUMBNAIL', 'Alte Thumbnailbilder l&ouml;schen');

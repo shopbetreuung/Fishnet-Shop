@@ -202,7 +202,7 @@ define('IMAGE_BUTTON_UPDATE', 'Aktualisieren');
 define('IMAGE_BUTTON_UPDATE_CART', 'Warenkorb aktualisieren');
 define('IMAGE_BUTTON_WRITE_REVIEW', 'Bewertung schreiben');
 define('IMAGE_BUTTON_ADMIN', 'Admin'); 
-define('IMAGE_BUTTON_PRODUCT_EDIT', 'Produkt bearbeiten');
+define('IMAGE_BUTTON_PRODUCT_EDIT', 'Artikel bearbeiten');
 define('IMAGE_BUTTON_PRODUCT_MORE', 'Details');
 // BOF - vr - 2010-02-20 removed double definition 
 // define('IMAGE_BUTTON_LOGIN', 'Anmelden');

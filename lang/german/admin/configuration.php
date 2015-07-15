@@ -171,9 +171,9 @@ define('MAX_DISPLAY_PRODUCTS_IN_ORDER_HISTORY_BOX_TITLE' , 'Bestell&uuml;bersich
 define('MAX_DISPLAY_PRODUCTS_IN_ORDER_HISTORY_BOX_DESC' , 'Maximum Anzahl an Artikeln die in der pers&ouml;nlichen Bestell&uuml;bersichts Box des Kunden angezeigt werden sollen.');
 define('MAX_DISPLAY_ORDER_HISTORY_TITLE' , 'Bestell&uuml;bersicht');
 define('MAX_DISPLAY_ORDER_HISTORY_DESC' , 'Maximum Anzahl an Bestellungen die in der &Uuml;bersicht im Kundenbereich des Shop angezeigt werden sollen.');
-define('MAX_PRODUCTS_QTY_TITLE', 'Maximale Produktanzahl');
+define('MAX_PRODUCTS_QTY_TITLE', 'Maximale Artikelanzahl');
 define('MAX_PRODUCTS_QTY_DESC', 'Maximale Anzahl eines Artikels im Warenkorb');
-define('MAX_DISPLAY_NEW_PRODUCTS_DAYS_TITLE' , 'Anzahl der Tage f&uuml;r Neue Produkte');
+define('MAX_DISPLAY_NEW_PRODUCTS_DAYS_TITLE' , 'Anzahl der Tage f&uuml;r Neue Artikel');
 define('MAX_DISPLAY_NEW_PRODUCTS_DAYS_DESC' , 'Maximum Anzahl an Tagen die neue Artikel angezeigt werden sollen');
 
 define('PRODUCT_IMAGE_THUMBNAIL_WIDTH_TITLE' , 'Breite der Artikel-Thumbnails');
@@ -212,8 +212,8 @@ define('CONFIG_CALCULATE_IMAGE_SIZE_DESC' , 'Sollen die Bildgr&ouml;ssen berechn
 define('IMAGE_REQUIRED_TITLE' , 'Bilder werden ben&ouml;tigt?');
 define('IMAGE_REQUIRED_DESC' , 'Wenn Sie hier auf "1" setzen, werden nicht vorhandene Bilder als Rahmen angezeigt. Gut f&uuml;r Entwickler.');
 
-define('MO_PICS_TITLE', 'Anzahl zus&auml;tzlicher Produktbilder');
-define('MO_PICS_DESC', 'Anzahl der Produktbilder die zus&auml;tzlich zum Haupt-Produktbild zur Verf&uuml;gung stehen sollen.');
+define('MO_PICS_TITLE', 'Anzahl zus&auml;tzlicher Artikelbilder');
+define('MO_PICS_DESC', 'Anzahl der Artikelbilder die zus&auml;tzlich zum Haupt-Artikelbild zur Verf&uuml;gung stehen sollen.');
 
 //This is for the Images showing your products for preview. All the small stuff.
 
@@ -453,7 +453,7 @@ define('DOWNLOAD_BY_REDIRECT_TITLE' , 'Download durch Redirection');
 define('DOWNLOAD_BY_REDIRECT_DESC' , 'Browser-Umleitung f&uuml;r Artikeldownloads benutzen. Auf nicht Linux/Unix Systemen ausschalten.');
 define('DOWNLOAD_MAX_DAYS_TITLE' , 'Verfallsdatum der Download Links(Tage)');
 define('DOWNLOAD_MAX_DAYS_DESC' , 'Anzahl an Tagen, die ein Download Link f&uuml;r den Kunden aktiv bleibt. 0 bedeutet ohne Limit.');
-define('DOWNLOAD_MAX_COUNT_TITLE' , 'Maximale Anzahl der Downloads eines gekauften Medienproduktes');
+define('DOWNLOAD_MAX_COUNT_TITLE' , 'Maximale Anzahl der Downloads eines gekauften Medien-Artikels');
 define('DOWNLOAD_MAX_COUNT_DESC' , 'Stellen Sie die maximale Anzahl an Downloads ein, die Sie dem Kunden erlauben, der einen Artikel dieser Art erworben hat. 0 bedeutet kein Download.');
 
 define('GZIP_COMPRESSION_TITLE' , 'GZip Kompression einschalten');
@@ -549,7 +549,7 @@ define('IMAGE_QUALITY_TITLE','Bildqualit&auml;t');
 define('IMAGE_QUALITY_DESC','Bildqualit&auml;t (0= h&ouml;chste Kompression, 100=beste Qualit&auml;t)');
 
 define('GROUP_CHECK_TITLE','Kundengruppencheck');
-define('GROUP_CHECK_DESC','Nur bestimmten Kundengruppen Zugang zu einzelnen Kategorien, Produkten, Contentelementen erlauben? (Nach Aktivierung erscheinen Eingabem&ouml;glichkeiten bei Artikeln, Kategorien und im Contentmanager)');
+define('GROUP_CHECK_DESC','Nur bestimmten Kundengruppen Zugang zu einzelnen Kategorien, Artikeln, Contentelementen erlauben? (Nach Aktivierung erscheinen Eingabem&ouml;glichkeiten bei Artikeln, Kategorien und im Contentmanager)');
 
 define('ACTIVATE_NAVIGATOR_TITLE','Artikelnavigator aktivieren?');
 define('ACTIVATE_NAVIGATOR_DESC','Artikelnavigator in der Artikeldetailansicht aktivieren/deaktivieren (aus Performancegr&uuml;nden bei hoher Artikelanzahl)');
@@ -561,7 +561,7 @@ define('ACTIVATE_REVERSE_CROSS_SELLING_TITLE','Reverse Cross-Marketing');
 define('ACTIVATE_REVERSE_CROSS_SELLING_DESC','Reverse Cross-Marketing Funktion aktivieren?');
 
 define('DOWNLOAD_UNALLOWED_PAYMENT_TITLE', 'Unerlaubte Download-Zahlungsmodule');
-define('DOWNLOAD_UNALLOWED_PAYMENT_DESC', '<strong>NICHT</strong> Erlaubte Zahlungsweisen f&uuml;r Downloadprodukte durch Komma getrennt. Z.B. {banktransfer,cod,invoice,moneyorder}');
+define('DOWNLOAD_UNALLOWED_PAYMENT_DESC', '<strong>NICHT</strong> Erlaubte Zahlungsweisen f&uuml;r Download-Artikel durch Komma getrennt. Z.B. {banktransfer,cod,invoice,moneyorder}');
 define('DOWNLOAD_MIN_ORDERS_STATUS_TITLE', 'Min. Bestellstatus');
 define('DOWNLOAD_MIN_ORDERS_STATUS_DESC', 'Min. Bestellstatus, ab dem bestellte Downloads freigegeben sind.');
 
@@ -607,10 +607,10 @@ define('AFTERBUY_IGNORE_GROUPE_TITLE', 'Kundengruppe ignorieren');
 define('AFTERBUY_IGNORE_GROUPE_DESC', 'welche Kundengruppen sollen ignoiert werden?<br />Beispiel: <em>6,5,8</em>. Es d&uuml;rfen keine Leerzeichen enhalten sein!');
 
 // Search-Options
-define('SEARCH_IN_DESC_TITLE','Suche in Produktbeschreibungen');
-define('SEARCH_IN_DESC_DESC','Aktivieren um die Suche in den Produktbeschreibungen (Kurz + Lang) zu erm&ouml;glichen');
-define('SEARCH_IN_ATTR_TITLE','Suche in Produkt- Attributen');
-define('SEARCH_IN_ATTR_DESC','Aktivieren um die Suche in den Produktattributen (z.B. Farbe, L&auml;nge) zu erm&ouml;glichen');
+define('SEARCH_IN_DESC_TITLE','Suche in Artikelbeschreibungen');
+define('SEARCH_IN_DESC_DESC','Aktivieren um die Suche in den Artikelbeschreibungen (Kurz + Lang) zu erm&ouml;glichen');
+define('SEARCH_IN_ATTR_TITLE','Suche in Artikel-Attributen');
+define('SEARCH_IN_ATTR_DESC','Aktivieren um die Suche in den Artikelattributen (z.B. Farbe, L&auml;nge) zu erm&ouml;glichen');
 
 // changes for 3.0.4 SP2
 define('REVOCATION_ID_TITLE','Widerrufsrecht ID');
@@ -695,7 +695,7 @@ define('GOOGLE_RSS_FEED_REFID_DESC' , 'Tragen Sie hier die Kampagnen-ID ein. Die
 
 // BOF - web28 - 2010-08-17 -  Bildgroessenberechnung kleinerer Bilder
 define('PRODUCT_IMAGE_NO_ENLARGE_UNDER_DEFAULT_TITLE','Skalierung von Bildern mit geringer Aufl&ouml;sung');
-define('PRODUCT_IMAGE_NO_ENLARGE_UNDER_DEFAULT_DESC','Aktivieren Sie die Einstellung <strong>Nein</strong> um zu verhindern, dass Produktbilder geringerer Aufl&ouml;sung auf die eingestellten default Werte f&uuml;r Breite und H&ouml;he skaliert werden. Aktivieren Sie die Einstellung <strong>Ja</strong>, werden auch Bilder geringerer Aufl&ouml;sung auf die eingestellten default Bildgr&ouml;&szlig;enwerte skaliert. In diesem Fall k&ouml;nnen diese Bilder aber sehr unscharf und pixelig dargestellt werden.');
+define('PRODUCT_IMAGE_NO_ENLARGE_UNDER_DEFAULT_DESC','Aktivieren Sie die Einstellung <strong>Nein</strong> um zu verhindern, dass Artikelbilder geringerer Aufl&ouml;sung auf die eingestellten default Werte f&uuml;r Breite und H&ouml;he skaliert werden. Aktivieren Sie die Einstellung <strong>Ja</strong>, werden auch Bilder geringerer Aufl&ouml;sung auf die eingestellten default Bildgr&ouml;&szlig;enwerte skaliert. In diesem Fall k&ouml;nnen diese Bilder aber sehr unscharf und pixelig dargestellt werden.');
 // EOF - web28 - 2010-08-17 -  Bildgroessenberechnung kleinerer Bilder
 
 //BOF - hendrik - 2011-05-14 - independent invoice number and date
@@ -706,7 +706,7 @@ define('IBN_BILLNR_FORMAT_DESC', 'Aufbauschema Rechn.Nr.: {n}=laufende Nummer, {
 //EOF - hendrik - 2011-05-14 - independent invoice number and date
 
 //BOC - h-h-h - 2011-12-23 - Button "Buy Now" optional - default off
-define('SHOW_BUTTON_BUY_NOW_TITLE', 'Zeige "Jetzt Kaufen" in den Produktlisten');
+define('SHOW_BUTTON_BUY_NOW_TITLE', 'Zeige "Jetzt Kaufen" in den Artikellisten');
 define('SHOW_BUTTON_BUY_NOW_DESC', '<b>Achtung:</b><br /> Dies kann zu Abmahnungen f&uuml;hren, wenn dem Kunden nicht alle wichtigen Informationen schon in den Listenseiten gezeigt werden!');
 //EOC - h-h-h - 2011-12-23 - Button "Buy Now" optional - default off
 
@@ -735,7 +735,7 @@ define('SESSION_LIFE_CUSTOMERS_DESC', 'Zeitdauer in Sekunden nach der die Sessio
 //checkout confirmation options
 define('CHECKOUT_USE_PRODUCTS_SHORT_DESCRIPTION_TITLE','Bestellbest&auml;tigungsseite: Kurzbeschreibung');
 define('CHECKOUT_USE_PRODUCTS_SHORT_DESCRIPTION_DESC','Soll auf der Bestellbest&auml;tigungsseite die Artikel-Kurzbeschreibung angezeigt werden? Hinweis: Die Kurzbeschreibung wird dann angezeigt, wenn es KEINE Artikel-Bestellbeschreibung gibt. Mit Nein wird die Kurzbeschreibung grunds&auml;tzlich nicht angezeigt!');
-define('CHECKOUT_SHOW_PRODUCTS_IMAGES_TITLE','Bestellbest&auml;tigungsseite: Produktbilder');
+define('CHECKOUT_SHOW_PRODUCTS_IMAGES_TITLE','Bestellbest&auml;tigungsseite: Artikelbilder');
 define('CHECKOUT_SHOW_PRODUCTS_IMAGES_DESC','Sollen auf der Bestellbest&auml;tigungsseite die Artikelbilder angezeigt werden?');
 define('CHECKOUT_SHOW_PRODUCTS_MODEL_TITLE','Bestellbest&auml;tigungsseite: Artikel-Nr.');
 define('CHECKOUT_SHOW_PRODUCTS_MODEL_DESC','Sollen auf der Bestellbest&auml;tigungsseite die Artikel-Nr. angezeigt werden?');
@@ -761,16 +761,16 @@ define('POPUP_CONTENT_LINK_PARAMETERS_TITLE', 'Content-Seiten Popup Fenster URL-
 define('POPUP_CONTENT_LINK_PARAMETERS_DESC', 'Hier k&ouml;nnen die URL-Parameter eingegeben werden - Standard: &KeepThis=true&TB_iframe=true&height=400&width=600');
 define('POPUP_CONTENT_LINK_CLASS_TITLE', 'Content-Seiten Popup Fenster CSS-Klasse');
 define('POPUP_CONTENT_LINK_CLASS_DESC', 'Hier k&ouml;nnen CSS-Klassen eingegeben werden - Standard: thickbox');
-define('POPUP_PRODUCT_LINK_PARAMETERS_TITLE', 'Produkt-Seiten Popup Fenster URL-Parameter');
+define('POPUP_PRODUCT_LINK_PARAMETERS_TITLE', 'Artikel-Seiten Popup Fenster URL-Parameter');
 define('POPUP_PRODUCT_LINK_PARAMETERS_DESC', 'Hier k&ouml;nnen die URL-Parameter eingegeben werden - Standard: &KeepThis=true&TB_iframe=true&height=450&width=750');
-define('POPUP_PRODUCT_LINK_CLASS_TITLE', 'Produkt-Seiten Popup Fenster CSS-Klasse');
+define('POPUP_PRODUCT_LINK_CLASS_TITLE', 'Artikel-Seiten Popup Fenster CSS-Klasse');
 define('POPUP_PRODUCT_LINK_CLASS_DESC', 'Hier k&ouml;nnen CSS-Klassen eingegeben werden - Standard: thickbox');
 define('POPUP_COUPON_HELP_LINK_PARAMETERS_TITLE', 'Coupon Hilfe Popup Fenster URL-Parameter');
 define('POPUP_COUPON_HELP_LINK_PARAMETERS_DESC', 'Hier k&ouml;nnen die URL-Parameter eingegeben werden - Standard: &KeepThis=true&TB_iframe=true&height=400&width=600');
 define('POPUP_COUPON_HELP_LINK_CLASS_TITLE', 'Coupon Hilfe Popup Fenster CSS-Klasse');
 define('POPUP_COUPON_HELP_LINK_CLASS_DESC', 'Hier k&ouml;nnen CSS-Klassen eingegeben werden - Standard: thickbox');
 
-define('POPUP_PRODUCT_PRINT_SIZE_TITLE', 'Produkt Druckansicht Fenstergr&ouml;&szlig;e');
+define('POPUP_PRODUCT_PRINT_SIZE_TITLE', 'Artikel Druckansicht Fenstergr&ouml;&szlig;e');
 define('POPUP_PRODUCT_PRINT_SIZE_DESC', 'Hier kann die Gr&ouml;&szlig;e des Popup-Fensters definiert werden - Standard: width=640, height=600');
 define('POPUP_PRINT_ORDER_SIZE_TITLE', 'Bestellung Druckansicht Fenstergr&ouml;&szlig;e');
 define('POPUP_PRINT_ORDER_SIZE_DESC', 'Hier kann die Gr&ouml;&szlig;e des Popup-Fensters definiert werden - Standard: width=640, height=600');

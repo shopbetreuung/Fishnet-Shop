@@ -31,8 +31,8 @@ define('ENTRY_CUSTOMERS_STATUS_PUBLIC','&Ouml;ffentlich');
 define('ENTRY_CUSTOMERS_STATUS_SHIPPING_UNALLOWED','Geben Sie unerlaubte Versandarten ein');
 define('ENTRY_CUSTOMERS_STATUS_SHOW_PRICE','Preis');
 define('ENTRY_CUSTOMERS_STATUS_SHOW_PRICE_TAX','Preise inkl. MwSt.');
-define('ENTRY_CUSTOMERS_STATUS_WRITE_REVIEWS','Kundengruppe darf Produkte bewerten?');
-define('ENTRY_CUSTOMERS_STATUS_READ_REVIEWS','Kundengruppe darf Produktbewertungen lesen?');
+define('ENTRY_CUSTOMERS_STATUS_WRITE_REVIEWS','Kundengruppe darf Artikel bewerten?');
+define('ENTRY_CUSTOMERS_STATUS_READ_REVIEWS','Kundengruppe darf Artikelbewertungen lesen?');
 define('ENTRY_GRADUATED_PRICES','Staffelpreise');
 define('ENTRY_NO','Nein');
 define('ENTRY_OT_XMEMBER', 'Kundenrabatt auf Gesamtbestellwert? :');
@@ -70,7 +70,7 @@ define('TEXT_INFO_CUSTOMERS_STATUS_COD_PERMISSION_INTRO', '<strong>M&ouml;chten 
 define('TEXT_INFO_CUSTOMERS_STATUS_DISCOUNT_ATTRIBUTES_INTRO','<strong>Rabatt auf Artikel Attribute</strong><br />(Max. % Rabatt auf einen Artikel anwenden)');
 define('TEXT_INFO_CUSTOMERS_STATUS_DISCOUNT_OT_XMEMBER_INTRO','<strong>Rabatt auf gesamte Bestellung</strong>');
 define('TEXT_INFO_CUSTOMERS_STATUS_DISCOUNT_PRICE', 'Rabatt (0 bis 100%):');
-define('TEXT_INFO_CUSTOMERS_STATUS_DISCOUNT_PRICE_INTRO', '<strong>Maximaler Rabatt auf Produkte (abh&auml;ngig von Rabatt eingestellt bei Produkt).</strong>');
+define('TEXT_INFO_CUSTOMERS_STATUS_DISCOUNT_PRICE_INTRO', '<strong>Maximaler Rabatt auf Artikel (abh&auml;ngig von Rabatt eingestellt bei Artikel).</strong>');
 define('TEXT_INFO_CUSTOMERS_STATUS_GRADUATED_PRICES_INTRO','<strong>Staffelpreise</strong>');
 define('TEXT_INFO_CUSTOMERS_STATUS_IMAGE', '<strong>Kundengruppen-Bild:</strong>');
 define('TEXT_INFO_CUSTOMERS_STATUS_NAME','<strong>Gruppenname</strong>');
@@ -79,8 +79,8 @@ define('TEXT_INFO_CUSTOMERS_STATUS_PUBLIC_INTRO','<strong>Gruppe &Ouml;ffentlich
 define('TEXT_INFO_CUSTOMERS_STATUS_SHIPPING_UNALLOWED_INTRO','<strong>Nicht erlaubte Versandarten</strong>');
 define('TEXT_INFO_CUSTOMERS_STATUS_SHOW_PRICE_INTRO','<strong>Preisanzeige im Shop</strong>');
 define('TEXT_INFO_CUSTOMERS_STATUS_SHOW_PRICE_TAX_INTRO', '<strong>M&ouml;chten Sie die Preise inklusive oder exklusive Steuer anzeigen?</strong>');
-define('TEXT_INFO_CUSTOMERS_STATUS_WRITE_REVIEWS_INTRO','<strong>Produktbewertungen schreiben</strong>');
-define('TEXT_INFO_CUSTOMERS_STATUS_READ_REVIEWS_INTRO', '<strong>Produktbewertungen lesen</strong>');
+define('TEXT_INFO_CUSTOMERS_STATUS_WRITE_REVIEWS_INTRO','<strong>Artikelbewertungen schreiben</strong>');
+define('TEXT_INFO_CUSTOMERS_STATUS_READ_REVIEWS_INTRO', '<strong>Artikelbewertungen lesen</strong>');
 
 define('TEXT_INFO_DELETE_INTRO', 'Sind Sie sicher, dass Sie diese Kundengruppe l&ouml;schen wollen?');
 define('TEXT_INFO_EDIT_INTRO', 'Bitte nehmen Sie alle n&ouml;tigen Einstellungen vor');

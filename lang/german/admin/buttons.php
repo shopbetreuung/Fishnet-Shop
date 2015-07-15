@@ -17,10 +17,10 @@
 
 // buttons
 define('BUTTON_REVERSE_SELECTION', 'Auswahl umkehren');
-define('BUTTON_SWITCH_PRODUCTS', 'Nur Produkte');
+define('BUTTON_SWITCH_PRODUCTS', 'Nur Artikel');
 define('BUTTON_SWITCH_CATEGORIES', 'Nur Kategorien');
 define('BUTTON_NEW_CATEGORIES', 'Neue Kategorie');
-define('BUTTON_NEW_PRODUCTS', 'Neues Produkt');
+define('BUTTON_NEW_PRODUCTS', 'Neuen Artikel');
 define('BUTTON_COPY', 'Kopieren');
 define('BUTTON_BACK', 'Zur&uuml;ck');
 define('BUTTON_CANCEL', 'Abbrechen');
@@ -50,7 +50,7 @@ define('BUTTON_IPLOG', 'IP-Log');
 define('BUTTON_NEW_ORDER', 'Neue Bestellung');
 define('BUTTON_CREATE_ACCOUNT', 'Neuer Kunde');
 define('BUTTON_SEARCH', 'Suchen');
-define('BUTTON_PRODUCT_OPTIONS', 'Produktoptionen');
+define('BUTTON_PRODUCT_OPTIONS', 'Artikeloptionen');
 define('BUTTON_PREVIEW', 'Vorschau');
 define('BUTTON_MODULE_REMOVE', 'Deinstallieren');
 define('BUTTON_MODULE_INSTALL', 'Installieren');

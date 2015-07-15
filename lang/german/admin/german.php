@@ -75,7 +75,7 @@ define('BOX_HEADING_CONFIGURATION','Konfiguration');
 define('BOX_HEADING_MODULES','Module');
 define('BOX_HEADING_ZONE','Land / Steuer');
 define('BOX_HEADING_CUSTOMERS','Kunden');
-define('BOX_HEADING_PRODUCTS','Produkte');
+define('BOX_HEADING_PRODUCTS','Artikel');
 define('BOX_HEADING_STATISTICS','Statistiken');
 define('BOX_HEADING_TOOLS','Hilfsprogramme');
 define('BOX_HEADING_LOCALIZATION', 'Sprachen/W&auml;hrungen');
@@ -95,7 +95,7 @@ define('BOX_CONFIGURATION_4', 'Bild Optionen');
 define('BOX_CONFIGURATION_5', 'Kunden Details');
 define('BOX_CONFIGURATION_6', 'Modul Optionen');
 define('BOX_CONFIGURATION_7', 'Versand Optionen');
-define('BOX_CONFIGURATION_8', 'Produktlisten Optionen');
+define('BOX_CONFIGURATION_8', 'Artikellisten Optionen');
 define('BOX_CONFIGURATION_9', 'Lagerverwaltungs Optionen');
 define('BOX_CONFIGURATION_10', 'Logging Optionen');
 define('BOX_CONFIGURATION_11', 'Cache Optionen');
@@ -118,14 +118,14 @@ define('BOX_MODULES', 'Zahlungs-/Versand-/Verrechnungs-Module');
 define('BOX_PAYMENT', 'Zahlungsoptionen');
 define('BOX_SHIPPING', 'Versandart');
 define('BOX_ORDER_TOTAL', 'Bestellzusammenfassung');
-define('BOX_CATEGORIES', 'Kategorien / Produkte');
+define('BOX_CATEGORIES', 'Kategorien / Artikel');
 define('BOX_PRODUCTS_ATTRIBUTES', 'Attribute anlegen');
 define('BOX_MANUFACTURERS', 'Hersteller');
-define('BOX_REVIEWS', 'Produktbewertungen');
+define('BOX_REVIEWS', 'Artikelbewertungen');
 define('BOX_CAMPAIGNS', 'Kampagnen');
 define('BOX_XSELL_PRODUCTS', 'Cross Marketing');
 define('BOX_SPECIALS', 'Sonderangebote');
-define('BOX_PRODUCTS_EXPECTED', 'zuk&uuml;nftige Produkte');
+define('BOX_PRODUCTS_EXPECTED', 'zuk&uuml;nftige Artikel');
 define('BOX_CUSTOMERS', 'Kunden');
 define('BOX_ACCOUNTING', 'Adminrechte Verwaltung');
 define('BOX_CUSTOMERS_STATUS','Kundengruppen');
@@ -136,9 +136,9 @@ define('BOX_GEO_ZONES', 'Steuerzonen');
 define('BOX_TAX_CLASSES', 'Steuerklassen');
 define('BOX_TAX_RATES', 'Steuers&auml;tze');
 define('BOX_HEADING_REPORTS', 'Statistiken');
-define('BOX_PRODUCTS_VIEWED', 'Besuchte Produkte');
+define('BOX_PRODUCTS_VIEWED', 'Besuchte Artikel');
 define('BOX_STOCK_WARNING','Lager Bericht');
-define('BOX_PRODUCTS_PURCHASED', 'Verkaufte Produkte');
+define('BOX_PRODUCTS_PURCHASED', 'Verkaufte Artikel');
 define('BOX_STATS_CUSTOMERS', 'Kunden-Bestellstatistik');
 define('BOX_BACKUP', 'Datenbank Manager');
 define('BOX_BANNER_MANAGER', 'Banner Manager');
@@ -184,7 +184,7 @@ define('BOX_LAW','Rechtliches');
 define('TXT_GROUPS','<b>Gruppen</b>:');
 define('TXT_SYSTEM','System');
 define('TXT_CUSTOMERS','Kunden/Bestellungen');
-define('TXT_PRODUCTS','Produkte/Kategorien');
+define('TXT_PRODUCTS','Artikel/Kategorien');
 define('TXT_STATISTICS','Statistiktools');
 define('TXT_TOOLS','Zusatzprogramme');
 define('TEXT_ACCOUNTING','Zugriffseinstellungen f&uuml;r:');
@@ -199,15 +199,15 @@ define('JS_ERROR', 'W&auml;hrend der Eingabe sind Fehler aufgetreten!\nBitte kor
 define('JS_OPTIONS_VALUE_PRICE', '* Sie m&uuml;ssen diesem Wert einen Preis zuordnen\n');
 define('JS_OPTIONS_VALUE_PRICE_PREFIX', '* Sie m&uuml;ssen ein Vorzeichen f&uuml;r den Preis angeben (+/-)\n');
 
-define('JS_PRODUCTS_NAME', '* Das neue Produkt muss einen Namen haben\n');
-define('JS_PRODUCTS_DESCRIPTION', '* Das neue Produkt muss eine Beschreibung haben\n');
-define('JS_PRODUCTS_PRICE', '* Das neue Produkt muss einen Preis haben\n');
-define('JS_PRODUCTS_WEIGHT', '* Das neue Produkt muss eine Gewichtsangabe haben\n');
-define('JS_PRODUCTS_QUANTITY', '* Sie m&uuml;ssen dem neuen Produkt eine verf&uuml;gbare Anzahl zuordnen\n');
-define('JS_PRODUCTS_MODEL', '* Sie m&uuml;ssen dem neuen Produkt eine Artikel-Nr. zuordnen\n');
-define('JS_PRODUCTS_IMAGE', '* Sie m&uuml;ssen dem Produkt ein Bild zuordnen\n');
+define('JS_PRODUCTS_NAME', '* Der neue Artikel muss einen Namen haben\n');
+define('JS_PRODUCTS_DESCRIPTION', '* Der neue Artikel muss eine Beschreibung haben\n');
+define('JS_PRODUCTS_PRICE', '* Der neue Artikel muss einen Preis haben\n');
+define('JS_PRODUCTS_WEIGHT', '* Der neue Artikel muss eine Gewichtsangabe haben\n');
+define('JS_PRODUCTS_QUANTITY', '* Sie m&uuml;ssen dem neuen Artikel eine verf&uuml;gbare Anzahl zuordnen\n');
+define('JS_PRODUCTS_MODEL', '* Sie m&uuml;ssen dem neuen Artikel eine Artikel-Nr. zuordnen\n');
+define('JS_PRODUCTS_IMAGE', '* Sie m&uuml;ssen dem Artikel ein Bild zuordnen\n');
 
-define('JS_SPECIALS_PRODUCTS_PRICE', '* Es muss ein neuer Preis f&uuml;r dieses Produkt festgelegt werden\n');
+define('JS_SPECIALS_PRODUCTS_PRICE', '* Es muss ein neuer Preis f&uuml;r diesen Artikel festgelegt werden\n');
 
 define('JS_GENDER', '* Die \'Anrede\' muss ausgew&auml;hlt werden.\n');
 define('JS_FIRST_NAME', '* Der \'Vorname\' muss mindestens aus ' . ENTRY_FIRST_NAME_MIN_LENGTH . ' Zeichen bestehen.\n');
@@ -271,8 +271,8 @@ define('ENTRY_MAIL','E-Mail mit Passwort an Kunden versenden?');
 define('YES','ja');
 define('NO','nein');
 define('SAVE_ENTRY','&Auml;nderungen Speichern?');
-define('TEXT_CHOOSE_INFO_TEMPLATE','Vorlage f&uuml;r Produktdetails');
-define('TEXT_CHOOSE_OPTIONS_TEMPLATE','Vorlage f&uuml;r Produktoptionen');
+define('TEXT_CHOOSE_INFO_TEMPLATE','Vorlage f&uuml;r Artikeldetails');
+define('TEXT_CHOOSE_OPTIONS_TEMPLATE','Vorlage f&uuml;r Artikeloptionen');
 define('TEXT_SELECT','-- Bitte w&auml;hlen Sie --');
 
 // BOF - Tomcraft - 2009-06-10 - added some missing alternative text on admin icons
@@ -312,8 +312,8 @@ define('TEXT_DISPLAY_NUMBER_OF_ORDERS_STATUS', 'Angezeigt werden <b>%d</b> bis <
 define('TEXT_DISPLAY_NUMBER_OF_XSELL_GROUP', 'Angezeigt werden <b>%d</b> bis <b>%d</b> (von insgesamt <b>%d</b> Cross-Marketing Gruppen)');
 define('TEXT_DISPLAY_NUMBER_OF_PRODUCTS_VPE', 'Angezeigt werden <b>%d</b> bis <b>%d</b> (von insgesamt <b>%d</b> Verpackungseinheiten)');
 define('TEXT_DISPLAY_NUMBER_OF_SHIPPING_STATUS', 'Angezeigt werden <b>%d</b> bis <b>%d</b> (von insgesamt <b>%d</b> Lieferstatus)');
-define('TEXT_DISPLAY_NUMBER_OF_PRODUCTS', 'Angezeigt werden <b>%d</b> bis <b>%d</b> (von insgesamt <b>%d</b> Produkten)');
-define('TEXT_DISPLAY_NUMBER_OF_PRODUCTS_EXPECTED', 'Angezeigt werden <b>%d</b> bis <b>%d</b> (von insgesamt <b>%d</b> zuk&uuml;nftigen Produkte)');
+define('TEXT_DISPLAY_NUMBER_OF_PRODUCTS', 'Angezeigt werden <b>%d</b> bis <b>%d</b> (von insgesamt <b>%d</b> Artikeln)');
+define('TEXT_DISPLAY_NUMBER_OF_PRODUCTS_EXPECTED', 'Angezeigt werden <b>%d</b> bis <b>%d</b> (von insgesamt <b>%d</b> zuk&uuml;nftigen Artikeln)');
 define('TEXT_DISPLAY_NUMBER_OF_REVIEWS', 'Angezeigt werden <b>%d</b> bis <b>%d</b> (von insgesamt <b>%d</b> Bewertungen)');
 define('TEXT_DISPLAY_NUMBER_OF_SPECIALS', 'Angezeigt werden <b>%d</b> bis <b>%d</b> (von insgesamt <b>%d</b> Sonderangeboten)');
 define('TEXT_DISPLAY_NUMBER_OF_TAX_CLASSES', 'Angezeigt werden <b>%d</b> bis <b>%d</b> (von insgesamt <b>%d</b> Steuerklassen)');
@@ -390,9 +390,9 @@ define('TEXT_NEWSLETTER_REMOVE', 'Um sich von unserem Newsletter abzumelden klic
 
 define('TEXT_DISPLAY_NUMBER_OF_GIFT_VOUCHERS', 'Angezeigt werden <b>%d</b> bis <b>%d</b> (von insgesamt <b>%d</b> Gutscheinen)');
 define('TEXT_DISPLAY_NUMBER_OF_COUPONS', 'Angezeigt werden <b>%d</b> bis <b>%d</b> (von insgesamt <b>%d</b> Coupons)');
-define('TEXT_VALID_PRODUCTS_LIST', 'Produktliste');
-define('TEXT_VALID_PRODUCTS_ID', 'Produkt-ID');
-define('TEXT_VALID_PRODUCTS_NAME', 'Produktname');
+define('TEXT_VALID_PRODUCTS_LIST', 'Artikelliste');
+define('TEXT_VALID_PRODUCTS_ID', 'Artikel-ID');
+define('TEXT_VALID_PRODUCTS_NAME', 'Artikelname');
 define('TEXT_VALID_PRODUCTS_MODEL', 'Artikel-Nr.');
 
 define('TEXT_VALID_CATEGORIES_LIST', 'Kategorieliste');
@@ -480,7 +480,7 @@ define('BOX_XSBOOSTER_CONFIG','Grundkonfiguration');
 //BOF - web28 - 2010-04-10 - ADMIN SEARCH BAR
 define('ASB_QUICK_SEARCH_CUSTOMER','Kunde: ');
 define('ASB_QUICK_SEARCH_ORDER_ID','Bestellnummer: ');
-define('ASB_QUICK_SEARCH_ARTICLE','Produkt: ');
+define('ASB_QUICK_SEARCH_ARTICLE','Artikel: ');
 define('ASB_QUICK_SEARCH_EMAIL', 'E-Mail Adresse: ');
 //EOF - web28 - 2010-04-10 - ADMIN SEARCH BAR
 

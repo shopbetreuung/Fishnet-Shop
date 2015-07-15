@@ -42,7 +42,7 @@ define('TARGET_BLANK', '_blank');
 define('TARGET_TOP', '_top');
 define('TARGET_SELF', '_self');
 define('TARGET_PARENT', '_parent');
-define('TYP_PRODUCT', 'Link zum Produkt (bitte nur die productsID bei Linkadresse eintragen)');
+define('TYP_PRODUCT', 'Link zum Artikel (bitte nur die Artikel_ID bei Linkadresse eintragen)');
 define('TYP_CATEGORIE', 'Link zur Kategorie (bitte nur die catID bei Linkadresse eintragen)');
 define('TYP_CONTENT', 'Link zur Contentseite (bitte nur die coID bei Linkadresse eintragen)');
 define('TYP_INTERN', 'Interner Shoplink (z.B. account.php oder newsletter.php)');

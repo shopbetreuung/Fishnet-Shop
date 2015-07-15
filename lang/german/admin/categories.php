@@ -47,7 +47,7 @@ define('TEXT_INSERT_ELEMENT','Neues Element');
 define('TEXT_WARN_MAIN','Haupt');
 define('TEXT_NEW_PRODUCT', 'Neuer Artikel in &quot;%s&quot;');
 define('TEXT_CATEGORIES', 'Kategorien:');
-define('TEXT_PRODUCTS', 'Produkte:');
+define('TEXT_PRODUCTS', 'Artikel:');
 define('TEXT_PRODUCTS_PRICE_INFO', 'Preis:');
 define('TEXT_PRODUCTS_TAX_CLASS', 'Steuerklasse:');
 define('TEXT_PRODUCTS_AVERAGE_RATING', 'Durchschn. Bewertung:');
@@ -188,7 +188,7 @@ define('TEXT_PRODUCTS_VPE_VISIBLE','Anzeige VPE:');
 define('TEXT_PRODUCTS_VPE_VALUE',' Wert:');
 
 define('CROSS_SELLING','Cross Selling f&uuml;r Artikel');
-define('CROSS_SELLING_SEARCH','Produktsuche:<br/><small><i>Artikelnr. eingeben</i></small>');
+define('CROSS_SELLING_SEARCH','Artikelsuche:<br/><small><i>Artikelnr. eingeben</i></small>');
 define('BUTTON_EDIT_CROSS_SELLING','Cross Selling');
 define('HEADING_DEL','L&ouml;schen');
 define('HEADING_ADD','Hinzuf&uuml;gen?');

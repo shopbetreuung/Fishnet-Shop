@@ -78,7 +78,7 @@ define('SHOW_COUNTS_TITLE' , 'Display Number of Products after Category Name');
 define('SHOW_COUNTS_DESC' , 'Display number of products after each category name, counting products recursively');
 
 define('DISPLAY_PRICE_WITH_TAX_TITLE' , 'Display Prices with Tax');
-define('DISPLAY_PRICE_WITH_TAX_DESC' , 'Display prices with tax included (true) or add the tax at the end (false)');
+define('DISPLAY_PRICE_WITH_TAX_DESC' , 'Display prices with tax included or add the tax at the end');
 
 define('DEFAULT_CUSTOMERS_STATUS_ID_ADMIN_TITLE' , 'Customer Status of Administrators');
 define('DEFAULT_CUSTOMERS_STATUS_ID_ADMIN_DESC' , 'Choose the default customer status for administrators');
@@ -329,7 +329,7 @@ define('SHIPPING_INFOS_DESC' , 'Group ID of shipping costs content');
 define('SHIPPING_DEFAULT_TAX_CLASS_METHOD_TITLE' , 'Calculation method of default tax class');
 define('SHIPPING_DEFAULT_TAX_CLASS_METHOD_DESC' , 'none: do not show shipping tax<br />auto proportional: show shipping tax proportional to order<br />auto max: show shipping tax, use tax rate of biggest turnover group');
 
-define('PRODUCT_LIST_FILTER_TITLE' , 'Display Category/Manufacturer Filter (false=disable; true=enable)');
+define('PRODUCT_LIST_FILTER_TITLE' , 'Display Category/Manufacturer Filter');
 define('PRODUCT_LIST_FILTER_DESC' , 'Do you want to display the Category/Manufacturer Filter?');
 
 define('STOCK_CHECK_TITLE' , 'Check Stock Level');
@@ -400,7 +400,7 @@ define('SMTP_PORT_DESC' , 'Please enter the SMTP port of your SMTP server(defaul
 
 //DokuMan - 2011-09-20 - E-Mail SQL errors
 define('EMAIL_SQL_ERRORS_TITLE','Send SQL error messages to shop owner via email');
-define('EMAIL_SQL_ERRORS_DESC','When "true" an email will be sent to the shop owner\'s email address containing the appropriate SQL error message. The SQL error message itself will be hidden from the customer.<br />When "false" the SQL error message will be displayed directly and visible for everybody (default).');
+define('EMAIL_SQL_ERRORS_DESC','When "yes" an email will be sent to the shop owner\'s email address containing the appropriate SQL error message. The SQL error message itself will be hidden from the customer.<br />When "no" the SQL error message will be displayed directly and visible for everybody (default).');
 
 //Constants for contact_us
 define('CONTACT_US_EMAIL_ADDRESS_TITLE' , 'Contact Us - E-Mail Address');
@@ -466,15 +466,15 @@ This feature might reduce the operability of the shop system. Change it only whe
 define('SESSION_WRITE_DIRECTORY_TITLE' , 'Session Directory');
 define('SESSION_WRITE_DIRECTORY_DESC' , 'If sessions are file based, store them in this directory.');
 define('SESSION_FORCE_COOKIE_USE_TITLE' , 'Force Cookie Use');
-define('SESSION_FORCE_COOKIE_USE_DESC' , 'Force the use of sessions when cookies are only enabled (Default &quot;false&quot;)'.SESSION_WARNING);
+define('SESSION_FORCE_COOKIE_USE_DESC' , 'Force the use of sessions when cookies are only enabled (Default &quot;no&quot;)'.SESSION_WARNING);
 define('SESSION_CHECK_SSL_SESSION_ID_TITLE' , 'Check SSL Session ID');
-define('SESSION_CHECK_SSL_SESSION_ID_DESC' , 'Validate the SSL_SESSION_ID on every secure HTTPS page request. (Default &quot;false&quot;)'.SESSION_WARNING);
+define('SESSION_CHECK_SSL_SESSION_ID_DESC' , 'Validate the SSL_SESSION_ID on every secure HTTPS page request. (Default &quot;no&quot;)'.SESSION_WARNING);
 define('SESSION_CHECK_USER_AGENT_TITLE' , 'Check User Agent');
-define('SESSION_CHECK_USER_AGENT_DESC' , 'Validate the client\'s browser user agent on every page request. (Default &quot;false&quot;)'.SESSION_WARNING);
+define('SESSION_CHECK_USER_AGENT_DESC' , 'Validate the client\'s browser user agent on every page request. (Default &quot;no&quot;)'.SESSION_WARNING);
 define('SESSION_CHECK_IP_ADDRESS_TITLE' , 'Check IP Address');
-define('SESSION_CHECK_IP_ADDRESS_DESC' , 'Validate the client\'s IP address on every page request. (Default &quot;false&quot;)'.SESSION_WARNING);
+define('SESSION_CHECK_IP_ADDRESS_DESC' , 'Validate the client\'s IP address on every page request. (Default &quot;no&quot;)'.SESSION_WARNING);
 define('SESSION_RECREATE_TITLE' , 'Recreate Session');
-define('SESSION_RECREATE_DESC' , 'Recreate the session to generate a new session ID when a customer logs on or creates an account (PHP >=4.1 needed). (Default &quot;false&quot;)'.SESSION_WARNING);
+define('SESSION_RECREATE_DESC' , 'Recreate the session to generate a new session ID when a customer logs on or creates an account (PHP >=4.1 needed). (Default &quot;no&quot;)'.SESSION_WARNING);
 
 define('DISPLAY_CONDITIONS_ON_CHECKOUT_TITLE' , 'Display Conditions on Checkout');
 define('DISPLAY_CONDITIONS_ON_CHECKOUT_DESC' , 'Display terms and conditions and request approval on checkout');
@@ -512,7 +512,7 @@ define('MODULE_SHIPPING_INSTALLED_DESC' , 'List of shipping module filenames sep
 define('CACHE_LIFETIME_TITLE','Cache Lifetime');
 define('CACHE_LIFETIME_DESC','The number of seconds cached content will persist');
 define('CACHE_CHECK_TITLE','Check if Cache Modified');
-define('CACHE_CHECK_DESC','If true, then with cached content, If-Modified-Since headers are accounted for, and appropriate HTTP headers are sent. This way repeated hits to a cached page do not send the entire page to the client every time.');
+define('CACHE_CHECK_DESC','If yes, then with cached content, If-Modified-Since headers are accounted for, and appropriate HTTP headers are sent. This way repeated hits to a cached page do not send the entire page to the client every time.');
 
 define('PRODUCT_REVIEWS_VIEW_TITLE','Reviews in Product Details');
 define('PRODUCT_REVIEWS_VIEW_DESC','Number of reviews displayed on the product details page');
@@ -569,13 +569,13 @@ define('STORE_OWNER_VAT_ID_DESC' , 'The VAT Reg No of the Shop Owner');
 define('DEFAULT_CUSTOMERS_VAT_STATUS_ID_TITLE' , 'Customers Group Approved VAT Reg No (Foreign Country)');
 define('DEFAULT_CUSTOMERS_VAT_STATUS_ID_DESC' , 'Customers group for customers whose VAT Reg No has been checked and approved, shop country <> customer\'s country');
 define('ACCOUNT_COMPANY_VAT_CHECK_TITLE' , 'Validate VAT Reg No');
-define('ACCOUNT_COMPANY_VAT_CHECK_DESC' , 'Customers may enter a VAT Registration number. If false, the box disappears');
+define('ACCOUNT_COMPANY_VAT_CHECK_DESC' , 'Customers may enter a VAT Registration number. If no, the box disappears');
 define('ACCOUNT_COMPANY_VAT_LIVE_CHECK_TITLE' , 'Validate VAT Reg No online for plausability');
 define('ACCOUNT_COMPANY_VAT_LIVE_CHECK_DESC' , 'Validate VAT Registration number online for plausability using the webservice of the taxation portal of the EU (<a href="http://ec.europa.eu/taxation_customs" style="font-style:italic">http://ec.europa.eu/taxation_customs</a>).<br/>Requires PHP5 with activated "SOAP" support! <strong><span class="messageStackSuccess">The "PHP5 SOAP"-support is actually '.(in_array ('soap', get_loaded_extensions()) ? '' : '<span class="messageStackError">NOT</span>').' active!</span></strong>');
 define('ACCOUNT_COMPANY_VAT_GROUP_TITLE' , 'Automatic Pruning?');
-define('ACCOUNT_COMPANY_VAT_GROUP_DESC' , 'Set to true, the customers group will be changed automatically if a valid VAT Reg No is used');
+define('ACCOUNT_COMPANY_VAT_GROUP_DESC' , 'Set to yes, the customers group will be changed automatically if a valid VAT Reg No is used');
 define('ACCOUNT_VAT_BLOCK_ERROR_TITLE' , 'Allow Invalid VAT Reg No?');
-define('ACCOUNT_VAT_BLOCK_ERROR_DESC' , 'Set to true, only validated VAT Reg No are accepted');
+define('ACCOUNT_VAT_BLOCK_ERROR_DESC' , 'Set to yes, only validated VAT Reg No are accepted');
 define('DEFAULT_CUSTOMERS_VAT_STATUS_ID_LOCAL_TITLE','Customers Group - Approved VAT Reg No (Shop country)');
 define('DEFAULT_CUSTOMERS_VAT_STATUS_ID_LOCAL_DESC','Customers group for customers whose VAT Reg No has been checked and approved, shop country = customers country');
 
@@ -640,7 +640,7 @@ define('PAYPAL_API_CO_BACK_DESC','Enter a background colour to be displayed with
 define('PAYPAL_API_CO_BORD_TITLE','PayPal Border Colour');
 define('PAYPAL_API_CO_BORD_DESC','Enter a border colour to be displayed with PayPal. e.g. E4C558');
 define('PAYPAL_ERROR_DEBUG_TITLE','PayPal Error Message');
-define('PAYPAL_ERROR_DEBUG_DESC','Display PayPal error message? default=false');
+define('PAYPAL_ERROR_DEBUG_DESC','Display PayPal error message? default=no');
 define('PAYPAL_ORDER_STATUS_TMP_ID_TITLE','Order Status "cancel"');
 define('PAYPAL_ORDER_STATUS_TMP_ID_DESC','Select the order status for aborted transaction (e.g. PayPal abort)');
 define('PAYPAL_ORDER_STATUS_SUCCESS_ID_TITLE','Order Status OK');
@@ -693,7 +693,7 @@ define('GOOGLE_RSS_FEED_REFID_DESC' , 'Enter your campaign ID here. It will be a
 
 // BOF - web28 - 2010-08-17 -  Bildgrößenberechnung kleinerer Bilder
 define('PRODUCT_IMAGE_NO_ENLARGE_UNDER_DEFAULT_TITLE','Upscaling low-res images)');
-define('PRODUCT_IMAGE_NO_ENLARGE_UNDER_DEFAULT_DESC','If set to <strong>false</strong>, upscaling of low-res images to default settings for image size is disabled. Set to <strong>true</strong> to enable upscaling of low-res images. In this case those images will be shown blurry.');
+define('PRODUCT_IMAGE_NO_ENLARGE_UNDER_DEFAULT_DESC','If set to <strong>no</strong>, upscaling of low-res images to default settings for image size is disabled. Set to <strong>yes</strong> to enable upscaling of low-res images. In this case those images will be shown blurry.');
 // EOF - web28 - 2010-08-17 -  Bildgrößenberechnung kleinerer Bilder
 
 //BOF - hendrik - 2011-05-14 - independent invoice number and date
@@ -791,13 +791,13 @@ define('TRACKING_PIWIK_GOAL_DESC' , 'Enter your campaign number, if you want to 
 // EOF - Dokuman - 2012-08-27 - added entries for new google analytics & piwik tracking
 
 define ('CONFIRM_SAVE_ENTRY_TITLE', 'Confirmation when saving articles/category');
-define ('CONFIRM_SAVE_ENTRY_DESC', 'Should be made a confirmation message when saving products/categories? Default: true (yes)');
+define ('CONFIRM_SAVE_ENTRY_DESC', 'Should be made a confirmation message when saving products/categories? Default: yes');
 
 define('WHOS_ONLINE_IP_WHOIS_SERVICE_TITLE', 'Who\'s Online - Whois Lookup URL');
 define('WHOS_ONLINE_IP_WHOIS_SERVICE_DESC', 'http://www.utrace.de/?query= or http://whois.domaintools.com/');
 
 define('STOCK_CHECKOUT_UPDATE_PRODUCTS_STATUS_TITLE', 'Completion of order - disable Sold out?');
-define('STOCK_CHECKOUT_UPDATE_PRODUCTS_STATUS_DESC', 'If a sold-out items (stocks 0) be disabled at the end of the order automatically? The article is no longer visible in the shop! <br /> On Products are available again shortly, the option should be set to "false"');
+define('STOCK_CHECKOUT_UPDATE_PRODUCTS_STATUS_DESC', 'If a sold-out items (stocks 0) be disabled at the end of the order automatically? The article is no longer visible in the shop! <br /> On Products are available again shortly, the option should be set to "no"');
 
 define('SHIPPING_STATUS_INFOS_TITLE', 'Shippingtime ID');
 define('SHIPPING_STATUS_INFOS_DESC', 'Content ID for Shippingtime');

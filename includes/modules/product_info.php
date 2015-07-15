@@ -22,12 +22,6 @@
    Released under the GNU General Public License
    ---------------------------------------------------------------------------------------*/
 
-/******* SHOPGATE **********/
-if(strpos(MODULE_PAYMENT_INSTALLED, 'shopgate.php') !== false && strpos($_SESSION['customers_status']['customers_status_payment_unallowed'], 'shopgate') === false){
-  include_once DIR_FS_CATALOG.'includes/external/shopgate/base/includes/modules/product_info.php';
-}
-/******* SHOPGATE **********/
-
 //include needed functions
 require_once (DIR_FS_INC.'xtc_check_categories_status.inc.php');
 require_once (DIR_FS_INC.'xtc_get_products_mo_images.inc.php');

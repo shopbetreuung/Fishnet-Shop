@@ -498,12 +498,6 @@ switch ($action) {
 	// EOF - Fishnet Services - Nicolas Gemsjäger
 	
     if ($order_updated) {
-        if(strpos(MODULE_PAYMENT_INSTALLED, 'shopgate.php') !== false){
-          /******* SHOPGATE **********/
-          include_once DIR_FS_CATALOG.'includes/external/shopgate/base/admin/orders.php';
-          setShopgateOrderStatus($oID, $status);
-          /******* SHOPGATE **********/
-        }
       $messageStack->add_session(SUCCESS_ORDER_UPDATED, 'success');
     } else {
       $messageStack->add_session(WARNING_ORDER_NOT_UPDATED, 'warning');

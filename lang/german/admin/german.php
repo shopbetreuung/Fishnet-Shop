@@ -189,10 +189,6 @@ define('TXT_STATISTICS','Statistiktools');
 define('TXT_TOOLS','Zusatzprogramme');
 define('TEXT_ACCOUNTING','Zugriffseinstellungen f&uuml;r:');
 
-/******* SHOPGATE **********/
-include_once (DIR_FS_CATALOG.'includes/external/shopgate/base/lang/german/admin/german.php');
-/******* SHOPGATE **********/
-
 // javascript messages
 define('JS_ERROR', 'W&auml;hrend der Eingabe sind Fehler aufgetreten!\nBitte korrigieren Sie folgendes:\n\n');
 

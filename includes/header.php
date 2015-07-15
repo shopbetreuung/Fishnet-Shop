@@ -41,12 +41,6 @@ elseif (isset($error) && ($error == CATEGORIE_NOT_FOUND || $error == TEXT_PRODUC
   header("Status: 410 Gone"); // FAST CGI 
 }
 
-/******** SHOPGATE **********/
-if(strpos(MODULE_PAYMENT_INSTALLED, 'shopgate.php') !== false && strpos($_SESSION['customers_status']['customers_status_payment_unallowed'], 'shopgate') === false){
-  include_once (DIR_FS_CATALOG.'includes/external/shopgate/base/includes/header.php');
-}
-/******** SHOPGATE **********/
-
 if (USE_BOOTSTRAP == "true") {
 ?>
 <!DOCTYPE html>
@@ -64,13 +58,6 @@ if (USE_BOOTSTRAP == "true") {
 <meta http-equiv="Content-Style-Type" content="text/css" />
 <?php
 }
-?>
-<?php
-/******** SHOPGATE **********/
-if(strpos(MODULE_PAYMENT_INSTALLED, 'shopgate.php') !== false && strpos($_SESSION['customers_status']['customers_status_payment_unallowed'], 'shopgate') === false){
-  echo $shopgateJsHeader;
-}
-/******** SHOPGATE **********/
 ?>
 <?php include(DIR_WS_MODULES.FILENAME_METATAGS); ?>
 <link rel="shortcut icon" href="<?php echo (($request_type == 'SSL') ? HTTPS_SERVER : HTTP_SERVER).DIR_WS_CATALOG.'templates/'.CURRENT_TEMPLATE.'/favicon.ico';?>" type="image/x-icon" />

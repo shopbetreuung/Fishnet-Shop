@@ -125,7 +125,4 @@
   define('TABLE_IMAGESLIDERS_INFO', 'imagesliders_info');
   // Imageslider (c)2008 by Hetfield - www.MerZ-IT-SerVice.de - End
 
-	/******** SHOPGATE **********/
-	define('TABLE_SHOPGATE_ORDERS', 'orders_shopgate_order');
-	/******** SHOPGATE **********/
 ?>

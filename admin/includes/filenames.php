@@ -94,7 +94,6 @@ define('FILENAME_GOOGLE_SITEMAP', '../google_sitemap.php');
 define('FILENAME_PAYPAL','paypal.php');
 define('FILENAME_PAYPAL_CHECKOUT', 'paypal_checkout.php');
 define('FILENAME_REMOVEOLDPICS', 'removeoldpics.php');
-define('FILENAME_SHOPGATE', 'shopgate.php');
 define('FILENAME_JANOLAW','janolaw.php');
 define('FILENAME_HAENDLERBUND', 'haendlerbund.php'); //Tomcraft - 2012-12-08 - Added haendlerbund AGB interface
 define('FILENAME_SAFETERMS','safeterms.php'); // Tomcraft - 2013-06-21 - Safeterms AGB interface

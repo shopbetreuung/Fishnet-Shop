@@ -500,7 +500,7 @@ define('NAVBAR_TITLE_2_ACCOUNT_DELETE', 'Konto l&ouml;schen');
 	
 //contact-form error messages
 define('ERROR_EMAIL','<p><b>Ihre E-Mail-Adresse:</b> Keine oder ung&uuml;ltige Eingabe!</p>');
-define('ERROR_HONEYPOT','<p><b>Eingabegfehler:</b> Sie haben ein verstecktes Formularfeld ausgef&uuml;llt!</p>');
+define('ERROR_HONEYPOT','<p><b>Eingabefehler:</b> Sie haben ein verstecktes Formularfeld ausgef&uuml;llt!</p>');
 define('ERROR_MSG_BODY','<p><b>Ihre Nachricht:</b> Keine Eingabe!</p>');	
 
 // BOF - web28 - 2010-05-07 - PayPal API Modul

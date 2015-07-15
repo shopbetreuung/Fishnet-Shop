@@ -16,8 +16,6 @@
  
  //contact-form error messages
 define('ERROR_EMAIL','<p><b>Your e-mail address:</b> None or invalid input!</p>');
-define('ERROR_VVCODE','<p><b>Security code:</b> No match, please enter your security code again!</p>');
 define('ERROR_MSG_BODY','<p><b>Your message:</b> No input!</p>');
-
    
 ?>

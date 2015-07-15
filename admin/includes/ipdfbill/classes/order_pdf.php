@@ -23,10 +23,6 @@
    Copyright (c) Andre ambidex@gmx.net
    Copyright (c) 2001,2002 Ian C Wilson http://www.phesis.org
 
-   credit card encryption functions for the catalog module
-   BMC 2003 for the CC CVV Module
-
-
    Released under the GNU General Public License
    ---------------------------------------------------------------------------------------*/
 

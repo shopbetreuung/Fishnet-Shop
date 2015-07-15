@@ -13,7 +13,6 @@ chdir('../../');
 require_once('includes/application_top.php');
 require_once(DIR_FS_INC.'xtc_calculate_tax.inc.php');
 require_once(DIR_FS_INC.'xtc_address_label.inc.php');
-require_once(DIR_FS_INC.'changedatain.inc.php');
 require_once(DIR_WS_CLASSES.'payment.php');
 require_once(DIR_WS_CLASSES.'shipping.php');
 require_once(DIR_WS_CLASSES.'order.php');

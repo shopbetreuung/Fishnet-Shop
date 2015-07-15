@@ -10,7 +10,6 @@
 #  Customers status v3.x (c) 2002-2003 Elari elari@free.fr
 #  Download area : www.unlockgsm.com/dload-osc/
 #  CVS : http://cvs.sourceforge.net/cgi-bin/viewcvs.cgi/elari/?sortby=date#dirlist
-#  BMC 2003 for the CC CVV Module
 #  --------------------------------------------------------------
 #  based on:
 #  (c) 2000-2001 The Exchange Project  (earlier name of osCommerce)
@@ -1298,19 +1297,12 @@ INSERT INTO configuration (configuration_id, configuration_key, configuration_va
 INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'CURRENT_TEMPLATE', 'bootstrap3', 1, 26, NULL, NOW(), NULL, 'xtc_cfg_pull_down_template_sets(');
 INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'USE_BOOTSTRAP', 'true', 1, 10, NULL, NOW(), NULL, 'xtc_cfg_select_option(array(\'true\', \'false\'),');
 INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'PRICE_PRECISION', '4', 1, 28, NULL, NOW(), NULL, NULL);
-INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'CC_KEYCHAIN', 'changeme', 1, 29, NULL, NOW(), NULL, NULL);
 INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'IBN_BILLNR', '1', 1, 99, NULL , NOW(), NULL , NULL);            
 INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'IBN_BILLNR_FORMAT', '{n}-{d}-{m}-{y}', 1, 99, NULL, NOW(), NULL, NULL);   
 
 #Web28 - 2012-08-28 - Constants for checkout options
 INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'CHECKOUT_USE_PRODUCTS_SHORT_DESCRIPTION', 'false', 1, 40, NULL, NOW(), NULL, 'xtc_cfg_select_option(array(\'true\', \'false\'),');
 INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'CHECKOUT_SHOW_PRODUCTS_IMAGES', 'true', 1, 41, NULL, NOW(), NULL, 'xtc_cfg_select_option(array(\'true\', \'false\'),');
-
-
-# BOF - hendrik - 2011-05-14 - independent billingnumber and date
-#INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'IBN_BILLNR', '1', '1', '99', NULL, NOW(), NULL, NULL);
-#INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'IBN_BILLNR_FORMAT', '{n}-{d}-{m}-{y}', '1', '99', NULL, NOW(), NULL, NULL);
-# EOF - hendrik - 2011-05-14 - independent billingnumber and date
 
 
 # configuration_group_id 2, Minimum Values
@@ -1325,8 +1317,6 @@ INSERT INTO configuration (configuration_id, configuration_key, configuration_va
 INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'ENTRY_STATE_MIN_LENGTH', '0', 2, 9, NULL, NOW(), NULL, NULL); # h-h-h change state_min_length 2 to 0
 INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'ENTRY_TELEPHONE_MIN_LENGTH', '3', 2, 10, NULL, NOW(), NULL, NULL);
 INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'ENTRY_PASSWORD_MIN_LENGTH', '5', 2, 11, NULL, NOW(), NULL, NULL);
-INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'CC_OWNER_MIN_LENGTH', '3', 2, 12, NULL, NOW(), NULL, NULL);
-INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'CC_NUMBER_MIN_LENGTH', '10', 2, 13, NULL, NOW(), NULL, NULL);
 INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'REVIEW_TEXT_MIN_LENGTH', '50', 2, 14, NULL, NOW(), NULL, NULL);
 INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'MIN_DISPLAY_BESTSELLERS', '1', 2, 15, NULL, NOW(), NULL, NULL);
 INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'MIN_DISPLAY_ALSO_PURCHASED', '1', 2, 16, NULL, NOW(), NULL, NULL);

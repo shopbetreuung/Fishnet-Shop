@@ -18,8 +18,6 @@
    Third Party contribution:
    OSC German Banktransfer v0.85a Autor:  Dominik Guder <osc@guder.org>
    Customers Status v3.x  (c) 2002-2003 Copyright Elari elari@free.fr
-   credit card encryption functions for the catalog module
-   BMC 2003 for the CC CVV Module
 
    Released under the GNU General Public License
    --------------------------------------------------------------*/
@@ -33,7 +31,6 @@ require_once('includes/ipdfbill/pdfbill_lib.php');
 require_once (DIR_FS_CATALOG.DIR_WS_CLASSES.'class.phpmailer.php');
 require_once (DIR_FS_INC.'xtc_php_mail.inc.php');
 require_once (DIR_FS_INC.'xtc_add_tax.inc.php');
-require_once (DIR_FS_INC.'changedataout.inc.php');
 require_once (DIR_FS_INC.'xtc_validate_vatid_status.inc.php');
 require_once (DIR_FS_INC.'xtc_get_attributes_model.inc.php');
 

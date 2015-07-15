@@ -23,7 +23,6 @@ define('ENTRY_CUSTOMERS_STATUS_ADD_TAX','UST in Rechnung ausweisen');
 define('ENTRY_CUSTOMERS_STATUS_MIN_ORDER','Mindestbestellwert:');
 define('ENTRY_CUSTOMERS_STATUS_MAX_ORDER','H&ouml;chstbestellwert:');
 define('ENTRY_CUSTOMERS_STATUS_BT_PERMISSION','Per Bankeinzug');
-define('ENTRY_CUSTOMERS_STATUS_CC_PERMISSION','Per Kreditkarte');
 define('ENTRY_CUSTOMERS_STATUS_COD_PERMISSION','Per Nachnahme');
 define('ENTRY_CUSTOMERS_STATUS_DISCOUNT_ATTRIBUTES','Rabatt');
 define('ENTRY_CUSTOMERS_STATUS_PAYMENT_UNALLOWED','Geben Sie unerlaubte Zahlungsweisen ein');
@@ -65,7 +64,6 @@ define('TEXT_INFO_CUSTOMERS_STATUS_ADD_TAX_INTRO','<strong>Falls Preis inkl. Ste
 define('TEXT_INFO_CUSTOMERS_STATUS_MIN_ORDER_INTRO','<strong>Tragen Sie einen Mindestbestellwert ein oder lassen Sie dieses Feld leer.</strong>');
 define('TEXT_INFO_CUSTOMERS_STATUS_MAX_ORDER_INTRO','<strong>Tragen Sie einen H&ouml;chstbestellwert ein oder lassen Sie dieses Feld leer.</strong>');
 define('TEXT_INFO_CUSTOMERS_STATUS_BT_PERMISSION_INTRO', '<strong>M&ouml;chten Sie erlauben, dass diese Kundengruppe per Bankeinzug bezahlen darf?</strong>');
-define('TEXT_INFO_CUSTOMERS_STATUS_CC_PERMISSION_INTRO', '<strong>M&ouml;chten Sie erlauben, dass diese Kundengruppe per Kreditkarte bezahlen darf?</strong>');
 define('TEXT_INFO_CUSTOMERS_STATUS_COD_PERMISSION_INTRO', '<strong>M&ouml;chten Sie erlauben, dass diese Kundengruppe per Nachnahme bezahlen darf?</strong>');
 define('TEXT_INFO_CUSTOMERS_STATUS_DISCOUNT_ATTRIBUTES_INTRO','<strong>Rabatt auf Artikel Attribute</strong><br />(Max. % Rabatt auf einen Artikel anwenden)');
 define('TEXT_INFO_CUSTOMERS_STATUS_DISCOUNT_OT_XMEMBER_INTRO','<strong>Rabatt auf gesamte Bestellung</strong>');

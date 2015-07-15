@@ -139,11 +139,6 @@ class xtcPrice {
       $pPrice = $this->getPprice($pID);
     }
     $pPrice = $this->xtcAddTax($pPrice, $products_tax);
-
-    // xs:booster check bid price
-    if ($sPrice = $this->xtcCheckXTBAuction($pID)) {
-      return $this->xtcFormatSpecial($pID, $sPrice, $pPrice, $format, $vpeStatus);
-    }
     
     // check specialprice
     if ($sPrice = $this->xtcCheckSpecial($pID)) {
@@ -198,26 +193,6 @@ class xtcPrice {
     $price += $price / 100 * $tax;
     $price = $this->xtcCalculateCurr($price);
     return round($price, $this->currencies[$this->actualCurr]['decimal_places']);
-  }
-
-  /**
-   * xs:booster (v1.041, 2009-11-28)
-   *
-   * @param Integer $pID product id
-   * @return Mixed
-   */
-  function xtcCheckXTBAuction($pID) {
-    if (($pos = strpos($pID, "{")))
-      $pID = substr($pID, 0, $pos);
-    if (@!is_array($_SESSION['xtb0']['tx']))
-      return false;
-    foreach ($_SESSION['xtb0']['tx'] as $tx) {
-      if ($tx['products_id'] == $pID && $tx['XTB_QUANTITYPURCHASED'] != 0) {
-        $this->actualCurr = $tx['XTB_AMOUNTPAID_CURRENCY'];
-        return round($tx['XTB_AMOUNTPAID'], $this->currencies[$this->actualCurr]['decimal_places']);
-      }
-    }
-    return false;
   }
   
   /**

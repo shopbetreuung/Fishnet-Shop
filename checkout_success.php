@@ -165,10 +165,7 @@ $smarty->assign('language', $_SESSION['language']);
 //$smarty->assign('PAYMENT_BLOCK', $payment_block);
 //EOF - DokuMan - 2010-08-31 - PAYMENT_BLOCK not needed in checkout success
 $main_content = $smarty->fetch(CURRENT_TEMPLATE.'/module/checkout_success.html');
-// BOF - Tomcraft - 2009-11-28 - Included xs:booster
-//$smarty->assign('main_content', $main_content);
-$smarty->assign('main_content', $main_content.(isset($_SESSION['xtb2'])?"<div style=\"text-align:center;padding:3px;margin-top:10px;font-weight:bold;\"><a style=\"text-decoration:underline;color:blue;\" href=\"./callback/xtbooster/xtbcallback.php?reverse=true\">Zur&uuml;ck zur xs:booster Auktions&uuml;bersicht..</a></div>":""));
-// EOF - Tomcraft - 2009-11-28 - Included xs:booster
+$smarty->assign('main_content', $main_content);
 $smarty->caching = 0;
 if (!defined('RM'))
 	$smarty->load_filter('output', 'note');

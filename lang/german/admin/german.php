@@ -470,13 +470,6 @@ define('TEXT_ADMIN_START', 'Startseite');
 define('BOX_HEADING_CONFIGURATION2','Erweiterte Konfiguration');
 // EOF - Tomcraft - 2009-11-02 - New admin top menu
 
-// BOF - Tomcraft - 2009-11-28 - Included xs:booster
-define('BOX_HEADING_XSBOOSTER','xs:booster');
-define('BOX_XSBOOSTER_LISTAUCTIONS','Auktionen anzeigen');
-define('BOX_XSBOOSTER_ADDAUCTIONS','Auktionen erstellen');
-define('BOX_XSBOOSTER_CONFIG','Grundkonfiguration');
-// EOF - Tomcraft - 2009-11-28 - Included xs:booster
-
 //BOF - web28 - 2010-04-10 - ADMIN SEARCH BAR
 define('ASB_QUICK_SEARCH_CUSTOMER','Kunde: ');
 define('ASB_QUICK_SEARCH_ORDER_ID','Bestellnummer: ');

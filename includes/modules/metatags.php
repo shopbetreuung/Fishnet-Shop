@@ -16,36 +16,36 @@
    Modified by Gunnar Tillmann (August 2006)
    http://www.gunnart.de
    ---------------------------------------------------------------------------------------
-    AUTOMATISCHE METATAGS MULTILANGUAGE f¸r xt:Commerce 3.04
+    AUTOMATISCHE METATAGS MULTILANGUAGE f√ºr xt:Commerce 3.04
    ---------------------------------------------------------------------------------------
       Version 0.96n / 13. Dezember 2010 / DokuMan / modified eCommerce Shopsoftware
 
-    -  Unterst¸tzung f¸r Pagination
+    -  Unterst√ºtzung f√ºr Pagination
    ---------------------------------------------------------------------------------------
       Version 0.96m / 26. August 2010 / DokuMan / modified eCommerce Shopsoftware
 
-    -  Unterst¸tzung f¸r "canonical"-Tag
+    -  Unterst√ºtzung f√ºr "canonical"-Tag
    ---------------------------------------------------------------------------------------
       Version 0.96 / 21. Juni 2009
 
     -  Umwandlung von Umlauten in Keywords statt in ae und oe JETZT in &auml; &ouml;
-    -  "Bindestrich-Wˆrter" (z.B. T-Shirt oder DVD-Player) werden in den Keywords nicht
+    -  "Bindestrich-W√∂rter" (z.B. T-Shirt oder DVD-Player) werden in den Keywords nicht
        mehr getrennt
-    -  Metatags auch f¸r ContentManager-Seiten (Achtung! Dazu Erweiterung erforderlich!)
-    -  Im ContentManager kˆnnen auch automatische Metatags aus eingebundenen HTML- oder
+    -  Metatags auch f√ºr ContentManager-Seiten (Achtung! Dazu Erweiterung erforderlich!)
+    -  Im ContentManager k√∂nnen auch automatische Metatags aus eingebundenen HTML- oder
        Text-Dateien erzeugt werden
-    -  Standard-Meta-Angaben durch Content-Metas auch mehrsprachig mˆglich. Dazu eine
+    -  Standard-Meta-Angaben durch Content-Metas auch mehrsprachig m√∂glich. Dazu eine
        Seite namens "STANDARD_META" anlegen
-    -  Bei automatisch erzeugen Keywords oder Descriptions werden Wˆrter nach Zeilen-
-       umbr¸chen nicht mehr "zusammengezogen"
-    -  Eigene (mehrsprachige) Metas f¸r die Shop-Startseite mˆglich - Dazu werden die
+    -  Bei automatisch erzeugen Keywords oder Descriptions werden W√∂rter nach Zeilen-
+       umbr√ºchen nicht mehr "zusammengezogen"
+    -  Eigene (mehrsprachige) Metas f√ºr die Shop-Startseite m√∂glich - Dazu werden die
        Metas aus der "index"-Seite im ContentManager geholt
     -  Seiten-Nummer im Title bei Artikel-Listen (also Kategorien, Sonderangebote etc.)
     -  Eigener Title bei Suchergebnissen (Mit Seiten-Nummer, Suchbegriff, ggf. Hersteller
        und Kategorienname)
-    -  Bei allen Seiten, die nicht "Kategorie", "Startseite", "Content", "Produkt" o.‰.
-       sind, wird der Title aus den Eintr‰gen im $breadcrumb-Objekt zusammengesetzt
-    -  BugFix: BreadCrumb wird nicht mehr verk¸rzt
+    -  Bei allen Seiten, die nicht "Kategorie", "Startseite", "Content", "Produkt" o.√§.
+       sind, wird der Title aus den Eintr√§gen im $breadcrumb-Objekt zusammengesetzt
+    -  BugFix: BreadCrumb wird nicht mehr verk√ºrzt
    ---------------------------------------------------------------------------------------
     Inspired by "Dynamic Meta" - Ein WordPress-PlugIn von Michael Schwarz
     http://www.php-vision.de/plugins-scripte/dynamicmeta-wpplugin.php
@@ -56,22 +56,22 @@
 //  Konfiguration ...
 // ---------------------------------------------------------------------------------------
 
-  $metaStopWords   =  ('versandkosten,zzgl,mwst,lieferzeit,aber,alle,alles,als,auch,auf,aus,bei,beim,beinahe,bin,bis,ist,dabei,dadurch,daher,dank,darum,danach,das,daﬂ,dass,dein,deine,dem,den,der,des,dessen,dadurch,deshalb,die,dies,diese,dieser,diesen,diesem,dieses,doch,dort,durch,eher,ein,eine,einem,einen,einer,eines,einige,einigen,einiges,eigene,eigenes,eigener,endlich,euer,eure,etwas,fast,findet,f¸r,gab,gibt,geben,hatte,hatten,hattest,hattet,heute,hier,hinter,ich,ihr,ihre,ihn,ihm,im,immer,in,ist,ja,jede,jedem,jeden,jeder,jedes,jener,jenes,jetzt,kann,kannst,kein,kˆnnen,kˆnnt,machen,man,mein,meine,mehr,mit,muﬂ,muﬂt,musst,m¸ssen,m¸ﬂt,nach,nachdem,neben,nein,nicht,nichts,noch,nun,nur,oder,statt,anstatt,seid,sein,seine,seiner,sich,sicher,sie,sind,soll,sollen,sollst,sollt,sonst,soweit,sowie,und,uns,unser,unsere,unserem,unseren,unter,vom,von,vor,wann,warum,was,war,weiter,weitere,wenn,wer,werde,widmen,widmet,viel,viele,vieles,weil,werden,werdet,weshalb,wie,wieder,wieso,wir,wird,wirst,wohl,woher,wohin,wurdezum,zur,¸ber');
+  $metaStopWords   =  ('versandkosten,zzgl,mwst,lieferzeit,aber,alle,alles,als,auch,auf,aus,bei,beim,beinahe,bin,bis,ist,dabei,dadurch,daher,dank,darum,danach,das,da√ü,dass,dein,deine,dem,den,der,des,dessen,dadurch,deshalb,die,dies,diese,dieser,diesen,diesem,dieses,doch,dort,durch,eher,ein,eine,einem,einen,einer,eines,einige,einigen,einiges,eigene,eigenes,eigener,endlich,euer,eure,etwas,fast,findet,f√ºr,gab,gibt,geben,hatte,hatten,hattest,hattet,heute,hier,hinter,ich,ihr,ihre,ihn,ihm,im,immer,in,ist,ja,jede,jedem,jeden,jeder,jedes,jener,jenes,jetzt,kann,kannst,kein,k√∂nnen,k√∂nnt,machen,man,mein,meine,mehr,mit,mu√ü,mu√üt,musst,m√ºssen,m√º√üt,nach,nachdem,neben,nein,nicht,nichts,noch,nun,nur,oder,statt,anstatt,seid,sein,seine,seiner,sich,sicher,sie,sind,soll,sollen,sollst,sollt,sonst,soweit,sowie,und,uns,unser,unsere,unserem,unseren,unter,vom,von,vor,wann,warum,was,war,weiter,weitere,wenn,wer,werde,widmen,widmet,viel,viele,vieles,weil,werden,werdet,weshalb,wie,wieder,wieso,wir,wird,wirst,wohl,woher,wohin,wurdezum,zur,√ºber');
   $metaGoWords     =  ('tracht,dirndl,kleid,mode,modern,bluse,trachten,hose,leder,schmuck,t-shirt,t-shirts,schuh,schuhe'); // Hier rein, was nicht gefiltert werden soll
-  $metaMinLength   =  5;     // Mindestl‰nge eines Keywords
-  $metaMaxLength   =  18;    // Maximall‰nge eines Keywords
+  $metaMinLength   =  5;     // Mindestl√§nge eines Keywords
+  $metaMaxLength   =  18;    // Maximall√§nge eines Keywords
   $metaMaxKeywords =  15;    // Maximall Anzahl der Keywords
-  $metaDesLength   =  150;   // maximale L‰nge der "description" (in Buchstaben)
+  $metaDesLength   =  156;   // maximale L√§nge der "description" (in Buchstaben)
 // ---------------------------------------------------------------------------------------
   $addPagination        =   true;   // Seiten-Nummern anzeigen, ja/nein?
 // ---------------------------------------------------------------------------------------
-  $addCatShopTitle      =   true;   // Shop-Titel bei Kategorien anh‰ngen, ja/nein?
-  $addProdShopTitle     =   true;   // Shop-Titel bei Produkten anh‰ngen, ja/nein?
-  $addContentShopTitle  =   true;   // Shop-Titel bei Contentseiten anh‰ngen, ja/nein?
-  $addSpecialsShopTitle =   true;   // Shop-Titel bei Angeboten anh‰ngen, ja/nein?
-  $addNewsShopTitle     =   true;   // Shop-Titel bei Neuen Artikeln anh‰ngen, ja/nein?
-  $addSearchShopTitle   =   true;   // Shop-Titel bei Suchergebnissen anh‰ngen, ja/nein?
-  $addOthersShopTitle   =   true;   // Shop-Titel bei sonstigen Seiten anh‰ngen, ja/nein?
+  $addCatShopTitle      =   false;   // Shop-Titel bei Kategorien anh√§ngen, ja/nein?
+  $addProdShopTitle     =   false;   // Shop-Titel bei Produkten anh√§ngen, ja/nein?
+  $addContentShopTitle  =   false;   // Shop-Titel bei Contentseiten anh√§ngen, ja/nein?
+  $addSpecialsShopTitle =   false;   // Shop-Titel bei Angeboten anh√§ngen, ja/nein?
+  $addNewsShopTitle     =   false;   // Shop-Titel bei Neuen Artikeln anh√§ngen, ja/nein?
+  $addSearchShopTitle   =   false;   // Shop-Titel bei Suchergebnissen anh√§ngen, ja/nein?
+  $addOthersShopTitle   =   false;   // Shop-Titel bei sonstigen Seiten anh√§ngen, ja/nein?
 // ---------------------------------------------------------------------------------------
   $noIndexUnimportant   =   true;  // "unwichtige" Seiten mit noindex versehen
 // ---------------------------------------------------------------------------------------
@@ -98,7 +98,7 @@
 //   Ab hier lieber nix mehr machen!
 
 // ---------------------------------------------------------------------------------------
-//  Title f¸r "sonstige" Seiten
+//  Title f√ºr "sonstige" Seiten
 // ---------------------------------------------------------------------------------------
   //$breadcrumbTitle =   array_pop($breadcrumb->_trail);
   $breadcrumbTitle =   end($breadcrumb->_trail); // <-- BugFix
@@ -111,7 +111,7 @@
 // ---------------------------------------------------------------------------------------
   $meta_robots = META_ROBOTS;
   if($noIndexUnimportant && !in_array(basename($PHP_SELF),$pagesToShow)) {
-    $meta_robots = 'noindex, nofollow, noodp';
+    $meta_robots = 'noindex, follow, noodp';
   }
 // ---------------------------------------------------------------------------------------
 
@@ -145,13 +145,13 @@
   $ml_meta = xtc_db_fetch_array($ml_meta_query,true);
 
 // ---------------------------------------------------------------------------------------
-//  Mehrsprachige Standard-Metas definieren. Wenn leer, werden die ¸blichen genommen
+//  Mehrsprachige Standard-Metas definieren. Wenn leer, werden die √ºblichen genommen
 // ---------------------------------------------------------------------------------------
   define('ML_META_KEYWORDS',($ml_meta['content_meta_keywords'])?$ml_meta['content_meta_keywords']:META_KEYWORDS);
   define('ML_META_DESCRIPTION',($ml_meta['content_meta_description'])?$ml_meta['content_meta_description']:META_DESCRIPTION);
   define('ML_TITLE',($ml_meta['content_meta_title'])?$ml_meta['content_meta_title']:TITLE);
 // ---------------------------------------------------------------------------------------
-  $metaGoWords = getGoWords(); // <-- nur noch einmal ausf¸hren
+  $metaGoWords = getGoWords(); // <-- nur noch einmal ausf√ºhren
 // ---------------------------------------------------------------------------------------
 
 
@@ -169,7 +169,7 @@
 
 
 // ---------------------------------------------------------------------------------------
-//  Aufr‰umen: Umlaute und Sonderzeichen wandeln.
+//  Aufr√§umen: Umlaute und Sonderzeichen wandeln.
 // ---------------------------------------------------------------------------------------
   function metaNoEntities($Text){
     if (version_compare(PHP_VERSION, '5.3.4', '<')) {
@@ -200,7 +200,7 @@
 // ---------------------------------------------------------------------------------------
   function prepareWordArray($Text) {
     //$Text = str_replace(array('&nbsp;','\t','\r','\n','\b'),' ',strip_tags($Text));
-    $Text = str_replace(array('&nbsp;','\t','\r','\n','\b'),' ',preg_replace("/<[^>]*>/",' ',$Text)); // <-- Besser bei Zeilenumbr¸chen
+    $Text = str_replace(array('&nbsp;','\t','\r','\n','\b'),' ',preg_replace("/<[^>]*>/",' ',$Text)); // <-- Besser bei Zeilenumbr√ºchen
     $Text = htmlentities(metaNoEntities(strtolower($Text)), ENT_QUOTES, strtoupper($_SESSION['language_charset']));
     $Text = preg_replace("/\s\-|\-\s/",' ',$Text); // <-- Gegen Trenn- und Gedankenstriche
     $Text = preg_replace("/(&[^aoucizens][^;]*;)/",' ',$Text);
@@ -222,9 +222,9 @@
     return makeWordArray(prepareWordArray($Text));
   }
 // ---------------------------------------------------------------------------------------
-//  KeyWords aufr‰umen:
-//   Stop- und KeyWords-Liste in Array umwandeln, StopWords lˆschen,
-//  GoWords- und L‰ngen-Filter anwenden
+//  KeyWords aufr√§umen:
+//   Stop- und KeyWords-Liste in Array umwandeln, StopWords l√∂schen,
+//  GoWords- und L√§ngen-Filter anwenden
 // ---------------------------------------------------------------------------------------
   function cleanKeyWords($KeyWords) {
     global $metaStopWords;
@@ -235,7 +235,7 @@
     return $KeyWords;
   }
 // ---------------------------------------------------------------------------------------
-//  GoWords- und L‰ngen-Filter:
+//  GoWords- und L√§ngen-Filter:
 //  Alles, was zu kurz ist, fliegt raus, sofern nicht in der GoWords-Liste
 // ---------------------------------------------------------------------------------------
   function filterKeyWordArray($KeyWord) {
@@ -243,18 +243,18 @@
     $GoWords = WordArray($metaGoWords);
     if(!in_array($KeyWord,$GoWords)) {
       //$Length = strlen($KeyWord);
-      $Length = strlen(preg_replace("/(&[^;]*;)/",'#',$KeyWord)); // <-- Mindest-L‰nge auch bei Umlauten ber¸cksichtigen
-      if($Length < $metaMinLength) { // Mindest-L‰nge
+      $Length = strlen(preg_replace("/(&[^;]*;)/",'#',$KeyWord)); // <-- Mindest-L√§nge auch bei Umlauten ber√ºcksichtigen
+      if($Length < $metaMinLength) { // Mindest-L√§nge
         return false;
-      } elseif($Length > $metaMaxLength) { // Maximal-L‰nge
+      } elseif($Length > $metaMaxLength) { // Maximal-L√§nge
         return false;
       }
     }
     return true;
   }
 // ---------------------------------------------------------------------------------------
-//  GoWords: Werden grunds‰tzlich nicht gefiltert
-//  Sofern angelegt, werden (zus‰tzlich zu den Einstellungen oben) die "normalen"
+//  GoWords: Werden grunds√§tzlich nicht gefiltert
+//  Sofern angelegt, werden (zus√§tzlich zu den Einstellungen oben) die "normalen"
 //  Meta-Angaben genommen (gefixed anno Danno-Wanno)
 // ---------------------------------------------------------------------------------------
   function getGoWords(){
@@ -266,11 +266,11 @@
     return $GoWords;
   }
 // ---------------------------------------------------------------------------------------
-//  Aufr‰umen: Leerzeichen und HTML-Code raus, k¸rzen, Umlaute und Sonderzeichen wandeln
+//  Aufr√§umen: Leerzeichen und HTML-Code raus, k√ºrzen, Umlaute und Sonderzeichen wandeln
 // ---------------------------------------------------------------------------------------
   function metaClean($Text,$Length=false,$Abk=' ...') {
     //$Text = strip_tags($Text);
-    $Text = preg_replace("/<[^>]*>/",' ',$Text); // <-- Besser bei Zeilenumbr¸chen
+    $Text = preg_replace("/<[^>]*>/",' ',$Text); // <-- Besser bei Zeilenumbr√ºchen
     $Text = metaNoEntities($Text);
     $Text = str_replace(array('&nbsp;','\t','\r','\n','\b'),' ',$Text);
     $Text = trim(preg_replace("/\s\s+/",' ',$Text));
@@ -284,7 +284,7 @@
     return htmlspecialchars($Text, ENT_QUOTES, strtoupper($_SESSION['language_charset']));
   }
 // ---------------------------------------------------------------------------------------
-//  metaTitle und metaKeyWords, R¸ckgabe bzw. Formatierung
+//  metaTitle und metaKeyWords, R√ºckgabe bzw. Formatierung
 // ---------------------------------------------------------------------------------------
   function metaTitle($Title=array()) {
     $Title = func_get_args();
@@ -364,7 +364,7 @@ switch(basename($PHP_SELF)) {
 
     $manu_id = $manu_name = false;
 
-    // Nachsehen, ob ein Hersteller gew‰hlt ist
+    // Nachsehen, ob ein Hersteller gew√§hlt ist
     if(!empty($_GET['manu'])) {
       $manu_id = $_GET['manu'];
       $startpage = false;
@@ -387,23 +387,23 @@ switch(basename($PHP_SELF)) {
       ");
       $manu_name = xtc_db_fetch_array($manu_name_query,true);
       is_array($manu_name) ? $manu_name = implode('',$manu_name) :  $manu_name = '';
-      $metaGoWords .= ','.$manu_name; // <-- zu GoWords hinzuf¸gen
+      $metaGoWords .= ','.$manu_name; // <-- zu GoWords hinzuf√ºgen
     }
 
     // KeyWords ...
     if(!empty($categories_meta['categories_meta_keywords'])) {
-      $meta_keyw = $categories_meta['categories_meta_keywords']; // <-- 1:1 ¸bernehmen!
+      $meta_keyw = $categories_meta['categories_meta_keywords']; // <-- 1:1 √ºbernehmen!
     } else{
       $meta_keyw = metaKeyWords($categories_meta['categories_name'].' '.$manu_name.' '.$categories_meta['categories_description']);
     }
 
     // Description ...
     if(!empty($categories_meta['categories_meta_description'])) {
-      // ggf. Herstellername hinzuf¸gen
+      // ggf. Herstellername hinzuf√ºgen
       $meta_descr = $categories_meta['categories_meta_description'].(($manu_name)?' - '.$manu_name:'');
       $metaDesLength = false;
     } elseif($categories_meta) {
-      // ggf. Herstellername und Kategorientext hinzuf¸gen
+      // ggf. Herstellername und Kategorientext hinzuf√ºgen
       $meta_descr = $categories_meta['categories_name'].(($manu_name)?' - '.$manu_name:'').(($categories_meta['categories_description'])?' - '.$categories_meta['categories_description']:'');
     }
 
@@ -489,7 +489,7 @@ switch(basename($PHP_SELF)) {
     }
     break;
 // ---------------------------------------------------------------------------------------
-//  Title f¸r Suchergebnisse - Mit Suchbegriff, Kategorien-Namen, Seiten-Nummer etc.
+//  Title f√ºr Suchergebnisse - Mit Suchbegriff, Kategorien-Namen, Seiten-Nummer etc.
 // ---------------------------------------------------------------------------------------
   case FILENAME_ADVANCED_SEARCH_RESULT :
 
@@ -502,7 +502,7 @@ switch(basename($PHP_SELF)) {
       ");
       $manu_name = xtc_db_fetch_array($manu_name_query,true);
       is_array($manu_name) ? $manu_name = implode('',$manu_name) :  $manu_name = '';
-      $metaGoWords .= ','.$manu_name; // <-- zu GoWords hinzuf¸gen
+      $metaGoWords .= ','.$manu_name; // <-- zu GoWords hinzuf√ºgen
     }
     // ggf. Kategorien-Namen herausfinden ...
     if(!empty($_GET['categories_id'])) {
@@ -524,7 +524,7 @@ switch(basename($PHP_SELF)) {
                             );
     break;
 // ---------------------------------------------------------------------------------------
-//  Title f¸r Angebote
+//  Title f√ºr Angebote
 // ---------------------------------------------------------------------------------------
   case FILENAME_SPECIALS :
 
@@ -532,7 +532,7 @@ switch(basename($PHP_SELF)) {
     $canonical_url = xtc_href_link(FILENAME_SPECIALS, ltrim($page_param,'&'),$request_type,false);
     break;
 // ---------------------------------------------------------------------------------------
-//  Title f¸r Neue Artikel
+//  Title f√ºr Neue Artikel
 // ---------------------------------------------------------------------------------------
   case FILENAME_PRODUCTS_NEW :
 
@@ -540,7 +540,7 @@ switch(basename($PHP_SELF)) {
     $canonical_url = xtc_href_link(FILENAME_PRODUCTS_NEW, ltrim($page_param,'&'),$request_type,false);
     break;
 // ---------------------------------------------------------------------------------------
-//  Title f¸r sonstige Seiten
+//  Title f√ºr sonstige Seiten
 // ---------------------------------------------------------------------------------------
   default:
 

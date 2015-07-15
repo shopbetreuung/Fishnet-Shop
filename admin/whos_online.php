@@ -117,6 +117,14 @@
                 } else {
                   $last_page_url = $whos_online['last_page_url'];
                 }
+
+				// BOF - Fishnet Services - Nicolas Gemsjäger
+				// Bei Produkten - Link zum Produkt anzeigen
+				if (preg_match('/::([0-9]+)|--([0-9]+)|\?products_id=([0-9]+)/i', $last_page_url) == 1) {
+					$last_page_url = '<a href="'.$last_page_url.'" target="_blank">'.$last_page_url.'</a>';
+				}
+				// EOF - Fishnet Services - Nicolas Gemsjäger
+				
                 ?>
                 <td class="dataTableContent" align="center"><?php echo gmdate('H:i:s', $time_online); ?></td>
                 <td class="dataTableContent" align="center"><?php echo $whos_online['customer_id']; ?></td>

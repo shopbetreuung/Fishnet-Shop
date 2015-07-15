@@ -28,6 +28,7 @@
                           'dirs' => array('admin/backups',
                                           'admin/images/graphs',
                                           'admin/images/icons',
+										  'admin/pdf_invoices',
                                           'cache',
                                           'export',
                                           'export/idealo_realtime',

@@ -665,6 +665,7 @@ CREATE TABLE orders_status (
   orders_status_id INT DEFAULT 0 NOT NULL,
   language_id TINYINT DEFAULT 1 NOT NULL,
   orders_status_name VARCHAR(32) NOT NULL,
+  pdfbill_send TINYINT DEFAULT 0 NOT NULL,
   PRIMARY KEY (orders_status_id, language_id),
   KEY idx_orders_status_name (orders_status_name)
 ) ENGINE=MyISAM;
@@ -1961,12 +1962,12 @@ INSERT INTO languages VALUES (1,'English','en','icon.gif','english',2,'iso-8859-
 INSERT INTO languages VALUES (2,'Deutsch','de','icon.gif','german',1,'iso-8859-15',1);
 # EOF - Tomcraft - 2009-11-08 - Added option to deactivate languages (status 1)
 
-INSERT INTO orders_status VALUES (1,1,'Pending');
-INSERT INTO orders_status VALUES (1,2,'Offen');
-INSERT INTO orders_status VALUES (2,1,'Processing');
-INSERT INTO orders_status VALUES (2,2,'In Bearbeitung');
-INSERT INTO orders_status VALUES (3,1,'Delivered');
-INSERT INTO orders_status VALUES (3,2,'Versendet');
+INSERT INTO orders_status VALUES (1,1,'Pending', 0);
+INSERT INTO orders_status VALUES (1,2,'Offen', 0);
+INSERT INTO orders_status VALUES (2,1,'Processing', 0);
+INSERT INTO orders_status VALUES (2,2,'In Bearbeitung', 0);
+INSERT INTO orders_status VALUES (3,1,'Delivered', 0);
+INSERT INTO orders_status VALUES (3,2,'Versendet', 0);
 
 # USA
 INSERT INTO zones VALUES (1,223,'AL','Alabama');

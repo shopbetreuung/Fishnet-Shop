@@ -415,6 +415,88 @@ switch ($action) {
       xtc_db_perform(TABLE_ORDERS_STATUS_HISTORY,$sql_data_array);
       $order_updated = true;
     }
+	
+	// BOF - Fishnet Services - Nicolas Gemsjäger
+	// PDF Rechnung automatisch generieren und per E-Mail versenden
+	if (ENABLE_PDFBILL == 'true') {
+		$pdfbill_send_check_qry = xtc_db_query("SELECT pdfbill_send FROM ".TABLE_ORDERS_STATUS." WHERE orders_status_id = '".$status."' AND language_id = '".$_SESSION['languages_id']."' AND pdfbill_send = '1' LIMIT 1");
+		if (xtc_db_num_rows($pdfbill_send_check_qry) == 1) {
+
+			// Rechnungsnummer erzeugen (Fakturieren)
+			if ($order->info['ibn_billnr']==0) {
+				require_once (DIR_FS_INC.'xtc_get_next_ibillnr.inc.php');
+				require_once (DIR_FS_INC.'xtc_set_ibillnr.inc.php');
+				require_once (DIR_FS_INC.'xtc_inc_next_ibillnr.inc.php');
+
+				$ibillnr = xtc_get_next_ibillnr();
+				xtc_set_ibillnr($oID, $ibillnr);
+				xtc_inc_next_ibillnr();
+			}	
+
+			// PDF erzeugen
+			$profile=profile_load_n('default');
+			$profile=$profile['profile_parameter_arr'];
+			$pdf=new pdfbill( $profile, $oID );
+			$pdf->max_height=280;
+			$pdf->doc_name  =  get_pdf_invoice_filename( $oID );
+			$pdf->LoadData($oID);
+			// lieferdatum diskret eintragen
+			$pdf->data['delivery_date']= '';
+			$pdf->format();
+			$pdf->Output($pdf->doc_name, "F");
+			
+			// Rechnung per Mail verschicken
+			$check_status_query = xtc_db_query("select customers_name, customers_email_address, orders_status, date_purchased, ibn_billdate, ibn_billnr from ".TABLE_ORDERS." where orders_id = '".xtc_db_input($oID)."'");
+			$check_status = xtc_db_fetch_array($check_status_query);
+
+			$billnr = make_billnr( $check_status['ibn_billdate'], $check_status['ibn_billnr'] );
+
+			// assign language to template for caching
+			$smarty->assign('language', $_SESSION['language']);
+			$smarty->caching = false;
+
+			// set dirs manual
+			$smarty->template_dir = DIR_FS_CATALOG.'templates';
+			$smarty->compile_dir = DIR_FS_CATALOG.'templates_c';
+			$smarty->config_dir = DIR_FS_CATALOG.'lang';
+
+			$smarty->assign('tpl_path', 'templates/'.CURRENT_TEMPLATE.'/');
+			$smarty->assign('logo_path', HTTP_SERVER.DIR_WS_CATALOG.'templates/'.CURRENT_TEMPLATE.'/img/');
+
+			$smarty->assign('NAME', $check_status['customers_name']);
+			$smarty->assign('ORDER_NR', $billnr);
+			$smarty->assign('ORDER_LINK', xtc_catalog_href_link(FILENAME_CATALOG_ACCOUNT_HISTORY_INFO, 'order_id='.$oID, 'SSL'));
+			$smarty->assign('ORDER_DATE', xtc_date_long($check_status['date_purchased']));
+			$smarty->assign('NOTIFY_COMMENTS', $notify_comments);
+			$smarty->assign('ORDER_STATUS', $orders_status_array[$status]);
+
+			$html_mail = $smarty->fetch(CURRENT_TEMPLATE.'/admin/mail/'.$order->info['language'].'/invoice_mail.html');
+			$txt_mail = $smarty->fetch(CURRENT_TEMPLATE.'/admin/mail/'.$order->info['language'].'/invoice_mail.txt');
+
+			$pdffile= DIR_FS_ADMIN.get_pdf_invoice_filename( $oID );
+			$pdffile_downloadname = get_pdf_invoice_download_filename( $oID );
+
+			$order_subject = str_replace('{$nr}', $order->info['ibn_billnr'], EMAIL_BILLING_SUBJECT);
+			$order_subject = str_replace('{$date}', strftime(DATE_FORMAT_LONG), $order_subject);
+
+			xtc_php_mail( EMAIL_BILLING_ADDRESS,                                 //  $from_email_address,        
+						  EMAIL_BILLING_NAME,                                     //  $from_email_name,           
+						  $check_status['customers_email_address'],               //  $to_email_address,          
+						  $check_status['customers_name'],                        //  $to_name,                   
+						  '',                                                     //  $forwarding_to,             
+						  EMAIL_BILLING_REPLY_ADDRESS,                            //  $reply_address,             
+						  EMAIL_BILLING_REPLY_ADDRESS_NAME,                       //  $reply_address_name,        
+						  $pdffile,                                               //  $path_to_attachement,       
+						  '',                                  //  $name_of_attachment, 
+						  $order_subject,                                  //  $email_subject,             
+						  $html_mail,                                             //  $message_body_html,         
+						  $txt_mail );                                            //  $message_body_plain
+
+			xtc_db_query("update ".TABLE_ORDERS." set ibn_pdfnotifydate = now() where orders_id = '".$oID."'");		
+		}
+	}
+	// EOF - Fishnet Services - Nicolas Gemsjäger
+	
     if ($order_updated) {
         if(strpos(MODULE_PAYMENT_INSTALLED, 'shopgate.php') !== false){
           /******* SHOPGATE **********/

@@ -27,6 +27,7 @@ define('TEXT_INFO_DELETE_INTRO', 'Are you sure you want to delete this order sta
 define('TEXT_INFO_HEADING_NEW_ORDERS_STATUS', 'New Orders Status');
 define('TEXT_INFO_HEADING_EDIT_ORDERS_STATUS', 'Edit Orders Status');
 define('TEXT_INFO_HEADING_DELETE_ORDERS_STATUS', 'Delete Orders Status');
+define('TEXT_SET_PDFBILL_SEND', 'Automatically generate PDF invoice and send it via e-mail');
 
 define('ERROR_REMOVE_DEFAULT_ORDER_STATUS', 'Error: The default order status can not be removed. Please set another order status as default, and try again.');
 define('ERROR_STATUS_USED_IN_ORDERS', 'Error: This order status is currently used in orders.');

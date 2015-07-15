@@ -1355,6 +1355,8 @@ function check_form() {
                   $search = "AND (c.customers_lastname LIKE '%".$keywords."%' 
                                   OR c.customers_firstname LIKE '%".$keywords."%' 
                                   OR c.customers_email_address LIKE '%".$keywords."%'
+								  OR a.entry_company LIKE '%".$keywords."%'
+								  OR c.customers_cid LIKE '%".$keywords."%'
                                  )";
                 }
                 if (isset($_GET['status']) && ($_GET['status'] != '100' || $_GET['status'] == '0')) {

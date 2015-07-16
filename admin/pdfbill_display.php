@@ -4,10 +4,10 @@
   
   
 if( $_GET['file']!='' ) {  
-  $pdffile= $admindir.$_GET['file'];
+  $pdffile= $_GET['file'];
   $pdffile_downloadname = basename($_GET['file']);
 } else {
-  $pdffile= $admindir.get_pdf_invoice_filename( $_GET['oID'] );
+  $pdffile= get_pdf_invoice_filename( $_GET['oID'] );
   $pdffile_downloadname = get_pdf_invoice_download_filename( $_GET['oID'] );
 }
 

@@ -5,14 +5,13 @@
 	<h1>{$CATEGORIES_NAME}</h1>
 {/if}
 {if $CATEGORIES_DESCRIPTION || $CATEGORIES_IMAGE || $MANUFACTURER_DROPDOWN}
-	{if $CATEGORIES_IMAGE}<img src="{$CATEGORIES_IMAGE}" alt="{$CATEGORIES_NAME}" class="imgLeft img-responsive" /><br />{/if}
+	{if $CATEGORIES_IMAGE}<img src="{$CATEGORIES_IMAGE}" alt="{$CATEGORIES_NAME}" class="pull-left img-responsive" /><br />{/if}
 	{if $CATEGORIES_DESCRIPTION}{$CATEGORIES_DESCRIPTION}<br />{/if}
 	{if $MANUFACTURER_DROPDOWN}{$MANUFACTURER_DROPDOWN}<br />{/if}
 {/if}
 
 {$NAVIGATION}
 <div class="hrproductpreview"></div>
-
 
 {foreach name=aussen item=module_data from=$module_content}
 <div class="row">

@@ -76,7 +76,7 @@
       .popout .right { float: right; width: 300px; padding: 0 10px; }
       label { display: block; width: 290px; padding: 5px 0 2px 0; }
       <!--
-        .messageStackError, .messageStackWarning { font-family: Verdana, Arial, sans-serif; font-weight: bold; font-size: 10px; background-color: #; }
+        .messageStackError, .messageStackWarning { font-family: Verdana, Arial, sans-serif; font-weight: bold; font-size: 10px; }
       -->
     </style>
   </head>

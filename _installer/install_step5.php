@@ -33,7 +33,7 @@
       table,td,div { font-family: Arial, sans-serif; font-size: 12px;}
       h1 { font-size: 18px; margin: 0; padding: 0; margin-bottom: 10px; }
       <!--
-        .messageStackError, .messageStackWarning { font-family: Verdana, Arial, sans-serif; font-weight: bold; font-size: 10px; background-color: #; }
+        .messageStackError, .messageStackWarning { font-family: Verdana, Arial, sans-serif; font-weight: bold; font-size: 10px; }
       -->
     </style>
   </head>

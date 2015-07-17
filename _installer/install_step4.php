@@ -32,7 +32,7 @@
       .proxy {font-family: Courier New, Courier, mono; font-size: 12px;}
       .prov{width:120px; display:block; float:left; font-weight: bold;}
       <!--
-        .messageStackError, .messageStackWarning { font-family: Verdana, Arial, sans-serif; font-weight: bold; font-size: 10px; background-color: #; }
+        .messageStackError, .messageStackWarning { font-family: Verdana, Arial, sans-serif; font-weight: bold; font-size: 10px; }
       -->
     </style>
   </head>

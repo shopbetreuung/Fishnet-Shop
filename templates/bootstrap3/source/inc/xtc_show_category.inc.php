@@ -21,7 +21,7 @@
 
     $level = $foo[$counter]['level']+1;
 
-    //BOF +++ UL LI Verschachtelung  mit Quelltext Tab Einzügen +++    
+    //BOF +++ UL LI Verschachtelung  mit Quelltext Tab EinzÃ¼gen +++    
     $ul = $tab = '';  
     for ($i = 1; $i <= $level; $i++) {
       $tab .= "\t";
@@ -31,10 +31,10 @@
       $ul = "\n" . $tab. '<ul class="nav nav-pills nav-stacked">'. "\n";
       $categories_string = rtrim($categories_string, "\n"); //Zeilenumbruch entfernen
       $categories_string = substr($categories_string, 0, strlen($categories_string) -5);  //letztes  </li>  entfernen  
-    } elseif ($level < $oldlevel) { //zurück zur höheren Ebene
+    } elseif ($level < $oldlevel) { //zurÃ¼ck zur hÃ¶heren Ebene
       $ul = close_ul_tags($level,$oldlevel);      
     }
-    //EOF +++ UL LI Verschachtelung  mit Quelltext Tab Einzügen +++
+    //EOF +++ UL LI Verschachtelung  mit Quelltext Tab EinzÃ¼gen +++
 
     //BOF +++ Kategorien markieren +++
     $category_path = explode('_',$cPath); //Kategoriepfad in Array einlesen
@@ -57,8 +57,8 @@
     $categories_string .= $tab; //Tabulator Codedarstellung
     $categories_string .= '<li class="level'.$level.$cat_active.$cat_active_parent.'">';
     $categories_string .= '<a href="'.xtc_href_link(FILENAME_DEFAULT, $cPath_new).'" title="'. $foo[$counter]['name'] . '">';
-    $categories_string .= $foo[$counter]['name'];
-    //Anzeige Anzahl der Produkte in Kategorie, für bessere Performance im Admin deaktivieren
+    $categories_string .= '<h3 class="h6">'.$foo[$counter]['name'].'</h3>';
+    //Anzeige Anzahl der Produkte in Kategorie, fÃ¼r bessere Performance im Admin deaktivieren
     if (SHOW_COUNTS == 'true') {
       $products_in_category = xtc_count_products_in_category($counter);
       if ($products_in_category > 0) {
@@ -69,7 +69,7 @@
     $categories_string .= "\n"; //Zeilenschaltung Codedarstellung  
     //EOF  +++ Kategorie Linkerstellung +++
 
-    //Nächste Kategorie
+    //NÃ¤chste Kategorie
     if ($foo[$counter]['next_id']) {
       xtc_show_category($foo[$counter]['next_id'], $level);
     } else {  
@@ -78,11 +78,11 @@
     }
   }
 
-  //Alle offenen UL LI Tags schließen
+  //Alle offenen UL LI Tags schlieÃŸen
   function close_ul_tags($level, $oldlevel) {
     $count = 1;
     $ul = '';
-    while($count <= $oldlevel - $level) { //für jede Ebene die UL LI Tags schließen
+    while($count <= $oldlevel - $level) { //fÃ¼r jede Ebene die UL LI Tags schlieÃŸen
       $tab_end = '';
       for ($i = 1; $i <= $oldlevel - $count; $i++) {
         $tab_end .= "\t";

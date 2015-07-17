@@ -14,9 +14,9 @@ ServerSignature Off
 FileETag None
 
 ##-- When caching of gzipped JS and CSS files is used, enable this setting
-#<IfModule mod_headers.c>
-#  Header set Vary Accept-Encoding
-#</IfModule>
+<IfModule mod_headers.c>
+  Header set Vary Accept-Encoding
+</IfModule>
 
 ##-- when using Provider 1&1 set the following lines to activate PHP5
 #AddType x-mapp-php5 .php
@@ -26,11 +26,11 @@ FileETag None
 #Options All -Indexes
 
 ##-- Enable the compression for any type of content
-#<IfModule mod_deflate.c>
-#  <FilesMatch "\\.(js|css|html|htm|php|xml|jpg|jpeg|png|gif)$">
-#    SetOutputFilter DEFLATE
-#  </FilesMatch>
-#</IfModule>
+<IfModule mod_deflate.c>
+  <FilesMatch "\\.(js|css|html|htm|php|xml|jpg|jpeg|png|gif)$">
+    SetOutputFilter DEFLATE
+  </FilesMatch>
+</IfModule>
 
 ##-- Customization of HTTP request and response headers
 <IfModule mod_headers.c>

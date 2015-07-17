@@ -55,7 +55,6 @@ if (isset ($_GET['action']) && ($_GET['action'] == 'process')) {
 	$txt_mail = $smarty->fetch(CURRENT_TEMPLATE.'/mail/'.$_SESSION['language'].'/newsletter_mail.txt');
 
 	// Check if email exists 
-{
   //BOF - web28 - 2010-02-09: NEWSLETTER ERROR HANDLING
 	if (xtc_validate_email(trim($_POST['email'])) && ($_POST['check'] == 'inp')) {
   //BOF - web28 - 2010-02-09: NEWSLETTER ERROR HANDLING

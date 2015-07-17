@@ -38,6 +38,10 @@ a {outline: none !important;}
     width: 50%; /* 6 columns */
   }
 }
+.nav-stacked h3 {
+	margin: 0px;	
+}
+
 
 .nav-stacked > li > ul {
     padding-left:0;

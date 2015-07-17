@@ -3,11 +3,17 @@
 {* BOF - Hetfield - 2009-08-11 - show error message if no new products exist *}
 {if $NO_NEW_PRODUCTS}<p>{$NO_NEW_PRODUCTS}</p>{/if}
 {* EOF - Hetfield - 2009-08-11 - show error message if no new products exist *}
-<table class="productPreview" width="100%" border="0" cellspacing="0" cellpadding="0">
+
+{$NAVIGATION_BAR}
+<div class="hrproductpreview"></div>
+
 {foreach name=aussen item=module_data from=$module_content}
-  <tr>
-    <td align="center" class="productPreviewImage">{if $module_data.PRODUCTS_IMAGE!=''}<a href="{$module_data.PRODUCTS_LINK}"><img src="{$module_data.PRODUCTS_IMAGE}" alt="{$module_data.PRODUCTS_NAME}" class="productImageBorder" /></a>{else}&nbsp;{/if}</td>
-    <td class="productPreviewContent">
+<div class="row">
+
+	<div class="col-xs-4 col-sm-3">
+		{if $module_data.PRODUCTS_IMAGE!=''}<a href="{$module_data.PRODUCTS_LINK}"><img src="{$module_data.PRODUCTS_IMAGE}" alt="{$module_data.PRODUCTS_NAME}" class="img-responsive" /></a>{else}&nbsp;{/if}
+	</div>
+	<div class="col-xs-8 col-sm-9">
 		<h2><a href="{$module_data.PRODUCTS_LINK}">{$module_data.PRODUCTS_NAME}</a></h2>
 		<p>{$module_data.PRODUCTS_SHORT_DESCRIPTION}</p>
 		<p class="price">{$module_data.PRODUCTS_PRICE}</p><p class="taxandshippinginfo">( {$module_data.PRODUCTS_TAX_INFO}{$module_data.PRODUCTS_SHIPPING_LINK} )</p>
@@ -15,15 +21,10 @@
 		{if $module_data.PRODUCTS_SHIPPING_NAME}<p class="shippingtime">{#text_shippingtime#}{if $module_data.PRODUCTS_SHIPPING_IMAGE}<img src="{$module_data.PRODUCTS_SHIPPING_IMAGE}" alt="{$module_data.PRODUCTS_SHIPPING_NAME}" />{/if}
 			{$module_data.PRODUCTS_SHIPPING_NAME_LINK}</p>
 		{/if}
-		
 		<p>{$module_data.PRODUCTS_BUTTON_DETAILS}&nbsp;{$module_data.PRODUCTS_BUTTON_BUY_NOW}</p>	
-	</td>
-  </tr>
-  <tr>
-    <td align="center" colspan="2">
-    <div class="hrproductpreview"></div>
-    </td>
-  </tr>
+	</div>
+	<div class="col-xs-12"><div class="hrproductpreview"></div></div>
+
+</div>
 {/foreach}
-</table>
 {$NAVIGATION_BAR}

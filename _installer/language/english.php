@@ -237,8 +237,6 @@
   define('TEXT_STATUS_SHOW_TAX_LONG','Display prices with tax included (Yes) or without any tax (No)');
   define('TEXT_STATUS_COD_PERMISSION','Cash on Delivery');
   define('TEXT_STATUS_COD_PERMISSION_LONG','Allows the customer to order by cash on delivery.');
-  define('TEXT_STATUS_CC_PERMISSION','Credit cards');
-  define('TEXT_STATUS_CC_PERMISSION_LONG','Allows the customer to order their credit card number systems.');
   define('TEXT_STATUS_BT_PERMISSION','Debit');
   define('TEXT_STATUS_BT_PERMISSION_LONG','Allows the customer to order by bank move.');
   define('ENTRY_DISCOUNT_ERROR','Product discount -Guest');

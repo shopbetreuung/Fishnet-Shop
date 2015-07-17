@@ -9,7 +9,7 @@
 define('HEADING_TITLE', 'Kundengruppenberechtigungen setzen');
 
 define('TEXT_CATEGORIES', 'Kategorien');
-define('TEXT_PRODUCTS', 'Produkte');
+define('TEXT_PRODUCTS', 'Artikel');
 define('TEXT_CONTENT', 'Inhalte (Contentmanager)');
 define('TEXT_PERMISSION', 'Berechtigung');
 define('TEXT_SET', 'geben');
@@ -20,8 +20,8 @@ define('ERROR_PLEASE_SELECT_CUSTOMER_GROUP', 'Bitte w&auml;hlen sie mindestens e
 define('ERROR_PLEASE_SELECT_SHOP_AREA', 'Bitte w&auml;hlen sie mindestens einen Shopbereich aus');
 define('TEXT_CATEGORIES_SUCCESSFULLY_SET', 'Kategorieberechtigungen erfolgreich gesetzt.');
 define('TEXT_CATEGORIES_SUCCESSFULLY_UNSET', 'Kategorieberechtigungen erfolgreich entfernt.');
-define('TEXT_PRODUCTS_SUCCESSFULLY_SET', 'Produktberechtigungen erfolgreich gesetzt.');
-define('TEXT_PRODUCTS_SUCCESSFULLY_UNSET', 'Produktberechtigungen erfolgreich entfernt.');
+define('TEXT_PRODUCTS_SUCCESSFULLY_SET', 'Artikelberechtigungen erfolgreich gesetzt.');
+define('TEXT_PRODUCTS_SUCCESSFULLY_UNSET', 'Artikelberechtigungen erfolgreich entfernt.');
 define('TEXT_CONTENT_SUCCESSFULLY_SET', 'Inhaltsberechtigungen erfolgreich gesetzt.');
 define('TEXT_CONTENT_SUCCESSFULLY_UNSET', 'Inhaltsberechtigungen erfolgreich entfernt.');
 

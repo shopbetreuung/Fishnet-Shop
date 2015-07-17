@@ -202,7 +202,7 @@ define('IMAGE_BUTTON_UPDATE', 'Aktualisieren');
 define('IMAGE_BUTTON_UPDATE_CART', 'Warenkorb aktualisieren');
 define('IMAGE_BUTTON_WRITE_REVIEW', 'Bewertung schreiben');
 define('IMAGE_BUTTON_ADMIN', 'Admin'); 
-define('IMAGE_BUTTON_PRODUCT_EDIT', 'Produkt bearbeiten');
+define('IMAGE_BUTTON_PRODUCT_EDIT', 'Artikel bearbeiten');
 define('IMAGE_BUTTON_PRODUCT_MORE', 'Details');
 // BOF - vr - 2010-02-20 removed double definition 
 // define('IMAGE_BUTTON_LOGIN', 'Anmelden');
@@ -500,7 +500,7 @@ define('NAVBAR_TITLE_2_ACCOUNT_DELETE', 'Konto l&ouml;schen');
 	
 //contact-form error messages
 define('ERROR_EMAIL','<p><b>Ihre E-Mail-Adresse:</b> Keine oder ung&uuml;ltige Eingabe!</p>');
-define('ERROR_HONEYPOT','<p><b>Eingabegfehler:</b> Sie haben ein verstecktes Formularfeld ausgef&uuml;llt!</p>');
+define('ERROR_HONEYPOT','<p><b>Eingabefehler:</b> Sie haben ein verstecktes Formularfeld ausgef&uuml;llt!</p>');
 define('ERROR_MSG_BODY','<p><b>Ihre Nachricht:</b> Keine Eingabe!</p>');	
 
 // BOF - web28 - 2010-05-07 - PayPal API Modul

@@ -32,10 +32,10 @@
     define('MAX_DISPLAY_LIST_CUSTOMERS', 100);
   }
 
-  // BOF - JUNG GESTALTEN - 27.11.2008 - KUNDENUMSÄTZE
+  // BOF - JUNG GESTALTEN - 27.11.2008 - KUNDENUMSÃ„TZE
   require(DIR_WS_CLASSES . 'currencies.php');
   $currencies = new currencies();
-  // EOF - JUNG GESTALTEN - 27.11.2008 - KUNDENUMSÄTZE
+  // EOF - JUNG GESTALTEN - 27.11.2008 - KUNDENUMSÃ„TZE
 
   $customers_statuses_array = xtc_get_customers_statuses();
 
@@ -141,13 +141,6 @@
                               'billing_country_iso_code_2' => xtc_db_prepare_input($country['countries_iso_code_2']), //web28 - 2011-06-10 add missing iso_code2
                               'billing_address_format_id' => xtc_db_prepare_input($country['address_format_id']), //web28 - 2012-04-08 fix country address_format_id
                               'payment_method' => 'cod',
-                              'cc_type' => '',
-                              'cc_owner' => '',
-                              'cc_number' => '',
-                              'cc_expires' => '',
-                              'cc_start' => '',
-                              'cc_issue' => '',
-                              'cc_cvv' => '',
                               'comments' => '',
                               'last_modified' => 'now()',
                               'date_purchased' => 'now()',
@@ -1362,6 +1355,8 @@ function check_form() {
                   $search = "AND (c.customers_lastname LIKE '%".$keywords."%' 
                                   OR c.customers_firstname LIKE '%".$keywords."%' 
                                   OR c.customers_email_address LIKE '%".$keywords."%'
+								  OR a.entry_company LIKE '%".$keywords."%'
+								  OR c.customers_cid LIKE '%".$keywords."%'
                                  )";
                 }
                 if (isset($_GET['status']) && ($_GET['status'] != '100' || $_GET['status'] == '0')) {

@@ -23,10 +23,6 @@
    Copyright (c) Andre ambidex@gmx.net
    Copyright (c) 2001,2002 Ian C Wilson http://www.phesis.org
 
-   credit card encryption functions for the catalog module
-   BMC 2003 for the CC CVV Module
-
-
    Released under the GNU General Public License
    ---------------------------------------------------------------------------------------*/
 
@@ -81,15 +77,6 @@
       $this->info = array('currency' => $order['currency'],
                           'currency_value' => $order['currency_value'],
                           'payment_method' => $order['payment_method'],
-                          'cc_type' => $order['cc_type'],
-                          'cc_owner' => $order['cc_owner'],
-                          'cc_number' => $order['cc_number'],
-                          'cc_expires' => $order['cc_expires'],
-// BMC CC Mod Start
-                          'cc_start' => $order['cc_start'],
-                          'cc_issue' => $order['cc_issue'],
-                          'cc_cvv' => $order['cc_cvv'],
-// BMC CC Mod End
                           'date_purchased' => $order['date_purchased'],
                           'orders_invoice_date' => $order['orders_invoice_date'],
                           'orders_status' => $order_status['orders_status_name'],
@@ -280,13 +267,6 @@
                           'currency' => $_SESSION['currency'],
                           'currency_value' => $xtPrice->currencies[$_SESSION['currency']]['value'],
                           'payment_method' => $_SESSION['payment'],
-                          'cc_type' => (isset($_SESSION['payment'])=='cc' && isset($_SESSION['ccard']['cc_type']) ? $_SESSION['ccard']['cc_type'] : ''),
-                          'cc_owner'=>(isset($_SESSION['payment'])=='cc' && isset($_SESSION['ccard']['cc_owner']) ? $_SESSION['ccard']['cc_owner'] : ''),
-                          'cc_number' => (isset($_SESSION['payment'])=='cc' && isset($_SESSION['ccard']['cc_number']) ? $_SESSION['ccard']['cc_number'] : ''),
-                          'cc_expires' => (isset($_SESSION['payment'])=='cc' && isset($_SESSION['ccard']['cc_expires']) ? $_SESSION['ccard']['cc_expires'] : ''),
-                          'cc_start' => (isset($_SESSION['payment'])=='cc' && isset($_SESSION['ccard']['cc_start']) ? $_SESSION['ccard']['cc_start'] : ''),
-                          'cc_issue' => (isset($_SESSION['payment'])=='cc' && isset($_SESSION['ccard']['cc_issue']) ? $_SESSION['ccard']['cc_issue'] : ''),
-                          'cc_cvv' => (isset($_SESSION['payment'])=='cc' && isset($_SESSION['ccard']['cc_cvv']) ? $_SESSION['ccard']['cc_cvv'] : ''),
                           'shipping_method' => $_SESSION['shipping']['title'],
                           'shipping_cost' => $_SESSION['shipping']['cost'],
                           'comments' => $_SESSION['comments'],

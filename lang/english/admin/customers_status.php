@@ -23,7 +23,6 @@ define('ENTRY_CUSTOMERS_STATUS_ADD_TAX','Show tax in order total');
 define('ENTRY_CUSTOMERS_STATUS_MIN_ORDER','Minimum order value:');
 define('ENTRY_CUSTOMERS_STATUS_MAX_ORDER','Maximum order value:');
 define('ENTRY_CUSTOMERS_STATUS_BT_PERMISSION','Via Bank Collection');
-define('ENTRY_CUSTOMERS_STATUS_CC_PERMISSION','Via Credit Card');
 define('ENTRY_CUSTOMERS_STATUS_COD_PERMISSION','Via Cash on Delivery');
 define('ENTRY_CUSTOMERS_STATUS_DISCOUNT_ATTRIBUTES','Discount');
 define('ENTRY_CUSTOMERS_STATUS_PAYMENT_UNALLOWED','Enter not allowed Payment Methods');
@@ -65,7 +64,6 @@ define('TEXT_INFO_CUSTOMERS_STATUS_ADD_TAX_INTRO','<strong>If prices incl. tax =
 define('TEXT_INFO_CUSTOMERS_STATUS_MIN_ORDER_INTRO','<strong>Define a minimum order value or leave the field empty.</strong>');
 define('TEXT_INFO_CUSTOMERS_STATUS_MAX_ORDER_INTRO','<strong>Define a maximum order value or leave the field empty.</strong>');
 define('TEXT_INFO_CUSTOMERS_STATUS_BT_PERMISSION_INTRO', '<strong>Shall we allow customers of this group to pay via bank collection?</strong>');
-define('TEXT_INFO_CUSTOMERS_STATUS_CC_PERMISSION_INTRO', '<strong>Shall we allow customers of this group to pay with credit cards?</strong>');
 define('TEXT_INFO_CUSTOMERS_STATUS_COD_PERMISSION_INTRO', '<strong>Shall we allow customers of this group to pay COD?</strong>');
 define('TEXT_INFO_CUSTOMERS_STATUS_DISCOUNT_ATTRIBUTES_INTRO','<strong>Discount on product attributes</strong><br />(Max. % Discount on single product)');
 define('TEXT_INFO_CUSTOMERS_STATUS_DISCOUNT_OT_XMEMBER_INTRO','<strong>Discount on total order</strong>');

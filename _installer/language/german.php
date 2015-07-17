@@ -240,8 +240,6 @@
   define('TEXT_STATUS_SHOW_TAX_LONG','Zeigt die angegebenen Preise mit (Ja) oder ohne (Nein) Steuer.');
   define('TEXT_STATUS_COD_PERMISSION','Per Nachnahme');
   define('TEXT_STATUS_COD_PERMISSION_LONG','Erlaubt dem Kunden per Nachnahme zu bestellen.');
-  define('TEXT_STATUS_CC_PERMISSION','Kreditkarten.');
-  define('TEXT_STATUS_CC_PERMISSION_LONG','Erlaubt dem Kunden &uuml;ber ihre Kreditkartenzahlsysteme zu bestellen.');
   define('TEXT_STATUS_BT_PERMISSION','Bankeinzug');
   define('TEXT_STATUS_BT_PERMISSION_LONG','Erlaubt dem Kunden per Bankeinzug zu bestellen.');
   define('ENTRY_DISCOUNT_ERROR','Product discount -Guest');

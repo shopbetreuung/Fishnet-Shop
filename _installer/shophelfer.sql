@@ -10,7 +10,6 @@
 #  Customers status v3.x (c) 2002-2003 Elari elari@free.fr
 #  Download area : www.unlockgsm.com/dload-osc/
 #  CVS : http://cvs.sourceforge.net/cgi-bin/viewcvs.cgi/elari/?sortby=date#dirlist
-#  BMC 2003 for the CC CVV Module
 #  --------------------------------------------------------------
 #  based on:
 #  (c) 2000-2001 The Exchange Project  (earlier name of osCommerce)
@@ -80,7 +79,10 @@ CREATE TABLE products_xsell (
   products_xsell_grp_name_id INT(10) UNSIGNED NOT NULL DEFAULT 1,
   xsell_id INT(10) UNSIGNED NOT NULL DEFAULT 1,
   sort_order INT(10) UNSIGNED NOT NULL DEFAULT 1,
-  PRIMARY KEY (ID)
+  PRIMARY KEY (ID),
+  KEY idx_products_id(products_id),
+  KEY idx_xsell_id(xsell_id),
+  KEY idx_sort_order(sort_order)
 ) ENGINE=MyISAM;
 
 DROP TABLE IF EXISTS products_xsell_grp_name;
@@ -288,7 +290,8 @@ CREATE TABLE categories (
   date_added DATETIME,
   last_modified DATETIME,
   PRIMARY KEY (categories_id),
-  KEY idx_categories_parent_id (parent_id)
+  KEY idx_categories_parent_id (parent_id),
+  KEY idx_categories_categories_status(categories_status)
 ) ENGINE=MyISAM;
 
 DROP TABLE IF EXISTS categories_description;
@@ -606,13 +609,6 @@ CREATE TABLE orders (
   billing_country_iso_code_2 CHAR(2) NOT NULL,
   billing_address_format_id INT(5) NOT NULL,
   payment_method VARCHAR(32) NOT NULL,
-  cc_type VARCHAR(20),
-  cc_owner VARCHAR(64),
-  cc_number VARCHAR(64),
-  cc_expires VARCHAR(4),
-  cc_start VARCHAR(4) DEFAULT NULL,
-  cc_issue VARCHAR(3) DEFAULT NULL,
-  cc_cvv VARCHAR(4) DEFAULT NULL,
   comments text,
   last_modified DATETIME,
   date_purchased DATETIME,
@@ -636,7 +632,9 @@ CREATE TABLE orders (
   ibn_pdfnotifydate DATE NOT NULL,
   ibn_fullbillnr CHAR( 60 ) NOT NULL,
   PRIMARY KEY (orders_id),
-  KEY idx_customers_id (customers_id)
+  KEY idx_customers_id (customers_id),
+  KEY idx_date_purchased(date_purchased),
+  KEY idx_orders_status(orders_status)
 ) ENGINE=MyISAM;
 
 # vr - 2010-04-21 add indices idx_orders_id, idx_products_id
@@ -657,7 +655,8 @@ CREATE TABLE orders_products (
   products_order_description text,
   PRIMARY KEY (orders_products_id),
   KEY idx_orders_id (orders_id),
-  KEY idx_products_id (products_id)
+  KEY idx_products_id (products_id),
+  KEY idx_products_quantity(products_quantity)
 ) ENGINE=MyISAM;
 
 DROP TABLE IF EXISTS orders_status;
@@ -665,6 +664,7 @@ CREATE TABLE orders_status (
   orders_status_id INT DEFAULT 0 NOT NULL,
   language_id TINYINT DEFAULT 1 NOT NULL,
   orders_status_name VARCHAR(32) NOT NULL,
+  pdfbill_send TINYINT DEFAULT 0 NOT NULL,
   PRIMARY KEY (orders_status_id, language_id),
   KEY idx_orders_status_name (orders_status_name)
 ) ENGINE=MyISAM;
@@ -775,7 +775,12 @@ CREATE TABLE products (
   products_startpage INT(1) NOT NULL DEFAULT 0,
   products_startpage_sort INT(4) NOT NULL DEFAULT 0,
   PRIMARY KEY (products_id),
-  KEY idx_products_date_added (products_date_added)
+  KEY idx_products_date_added (products_date_added),
+  KEY idx_manufacturers_id(manufacturers_id),
+  KEY idx_products_status(products_status),
+  KEY idx_products_fsk18(products_fsk18),
+  KEY idx_products_ean(products_ean),
+  KEY idx_products_model(products_model)
 ) ENGINE=MyISAM;
 
 DROP TABLE IF EXISTS products_attributes;
@@ -830,7 +835,8 @@ CREATE TABLE products_images (
   products_id INT NOT NULL,
   image_nr SMALLINT NOT NULL,
   image_name VARCHAR(254) NOT NULL,
-  PRIMARY KEY (image_id)
+  PRIMARY KEY (image_id),
+  KEY idx_image_nr(image_nr)
 ) ENGINE=MyISAM;
 
 DROP TABLE IF EXISTS products_notifications;
@@ -918,7 +924,8 @@ CREATE TABLE sessions (
   expiry INT(11) unsigned NOT NULL,
   value text NOT NULL,
   flag VARCHAR( 5 ) NULL DEFAULT NULL,
-  PRIMARY KEY (sesskey)
+  PRIMARY KEY (sesskey),
+  KEY idx_expiry(expiry)
 ) ENGINE=MyISAM;
 
 # BOF - web28 - 2010-07-07 - set shop offline
@@ -947,7 +954,8 @@ CREATE TABLE specials (
   date_status_change DATETIME,
   status INT(1) NOT NULL DEFAULT 1,
   PRIMARY KEY (specials_id),
-  KEY idx_specials_products_id (products_id)
+  KEY idx_specials_products_id (products_id),
+  KEY idx_status(status)
 ) ENGINE=MyISAM;
 
 DROP TABLE IF EXISTS tax_class;
@@ -1020,7 +1028,9 @@ CREATE TABLE whos_online (
   time_entry VARCHAR(14) NOT NULL,
   time_last_click VARCHAR(14) NOT NULL,
   last_page_url VARCHAR(255) NOT NULL,
-  http_referer VARCHAR(255) NOT NULL
+  http_referer VARCHAR(255) NOT NULL,
+  KEY idx_ip_address(ip_address),
+  KEY idx_time_last_click(time_last_click)
 ) ENGINE=MyISAM;
 
 DROP TABLE IF EXISTS zones;
@@ -1216,7 +1226,9 @@ CREATE TABLE pdfbill_profile (
   PRIMARY KEY  (profile_id)
 ) ENGINE=MyISAM;
 
-INSERT INTO pdfbill_profile (profile_name, profile_parameter, profile_categories) VALUES ('default', 'bgimage_display=1,bgimage_image=hintergrund.png,headtext_display=1,headtext_text=Muster GBR Unterhaltungselektronik,headtext_font_color=#0000CC,headtext_font_type=arial,headtext_font_style={B;I},headtext_font_size=18,headtext_horizontal=15,headtext_vertical=0,headtext_width=,headtext_height=,addressblock_display=1,addressblock_text=Muster GBR#/K Postfach 4711#/K 12345 Flümme,addressblock_position=L,addressblock_font_color=,addressblock_font_type=arial,addressblock_font_style={B;U},addressblock_font_size=6,addressblock_position2=R,addressblock_font_color2=,addressblock_font_type2=arial,addressblock_font_style2={B;I},addressblock_font_size2=10,addressblock_horizontal=15,addressblock_vertical=15,addressblock_width=50,image_display=1,image_image=muster.jpg,image_horizontal=150,image_vertical=0,image_width=,image_height=,datafields_display=1,datafields_position=L,datafields_font_color=,datafields_font_type=arial,datafields_font_size=10,datafields_position2=R,datafields_font_color2=,datafields_font_type2=arial,datafields_font_style2={B},datafields_font_size2=10,datafields_text_1=Bestelldatum,datafields_value_1=*date_order*,datafields_text_2=Kundennummer,datafields_value_2=*customers_id*,datafields_text_3=Rechnungsnummer,datafields_value_3=*orders_id*,datafields_text_4=Rechnungsdatum,datafields_value_4=*date_invoice*,datafields_horizontal=110,datafields_vertical=80,datafields_width=40#/K30,billhead_display=1,billhead_text=Rechnung Nr: *orders_id*,billhead_position=L,billhead_font_color=,billhead_font_type=arial,billhead_font_style={B;I;U},billhead_font_size=12,billhead_horizontal=15,billhead_vertical=80,billhead_width=,billhead_height=,listhead_display=1,listhead_text=Rechnungspositionen,listhead_font_color=,listhead_font_type=arial,listhead_font_style={B},listhead_font_size=8,listhead_horizontal=15,listhead_vertical=100,listhead_width=,listhead_height=,poslist_font_color=,poslist_font_type=arial,poslist_font_size=6,poslist_head_1=Pos.,poslist_value_1=*pos_nr*,poslist_width_1=5,poslist_align_1=C,poslist_head_2=Art.Nr.,poslist_value_2=*p_model*,poslist_width_2=20,poslist_align_2=C,poslist_head_3=Artikel,poslist_value_3=*p_name*,poslist_width_3=105,poslist_align_3=L,poslist_head_4=Anz.,poslist_value_4=*p_qty*,poslist_width_4=5,poslist_align_4=C,poslist_head_5=Einz.Preis,poslist_value_5=*p_single_price*,poslist_width_5=15,poslist_align_5=R,poslist_head_6=Gesamt,poslist_value_6=*p_price*,poslist_width_6=15,poslist_align_6=R,poslist_head_7=,poslist_value_7=,poslist_width_7=,poslist_align_7=C,poslist_horizontal=15,poslist_vertical=,resumefields_display=1,resumefields_position=L,resumefields_font_color=,resumefields_font_type=arial,resumefields_font_size=8,resumefields_position2=R,resumefields_font_color2=,resumefields_font_type2=arial,resumefields_font_size2=8,resumefields_horizontal=60,resumefields_vertical=5,resumefields_width=80#/K40,subtext_display=1,subtext_text=Die Ware bleibt bis zur vollständigen Bezahlung Eigentum der Muster GBR ,subtext_font_color=,subtext_font_type=arial,subtext_font_size=8,subtext_horizontal=15,subtext_vertical=25,subtext_width=,subtext_height=,footer_display=1,footer_font_color=,footer_font_type=arial,footer_font_size=6,footer_display_1=1,footer_position_1=L,footer_text_1=Muster GbR Beispielstrasse 123 12345 Flümme,footer_display_2=1,footer_position_2=C,footer_text_2=Konto: 1234567 BLZ 222 333 44 Beispielbank,footer_display_3=1,footer_position_3=R,footer_text_3=HGR 32344424 AmtsG. Flümme StNr. 5545594,footer_position_4=L,footer_text_4=,terms_display=1,terms_formtext=Allgemeine Geschäftsbedingungen (AGB),terms_head_position=L,terms_head_font_style={B},terms_head_font_size=10,terms_font_color=,terms_font_type=arial,terms_font_size=6', '');
+INSERT INTO pdfbill_profile (profile_name, profile_parameter, profile_categories) VALUES ('default', 'bgimage_display=1,bgimage_image=hintergrund.png,headtext_display=1,headtext_text=Muster GBR Unterhaltungselektronik,headtext_font_color=#0000CC,headtext_font_type=arial,headtext_font_style={B;I},headtext_font_size=18,headtext_horizontal=15,headtext_vertical=0,headtext_width=,headtext_height=,addressblock_display=1,addressblock_text=Muster GBR#/K Postfach 4711#/K 12345 Flümme,addressblock_position=L,addressblock_font_color=,addressblock_font_type=arial,addressblock_font_style={B;U},addressblock_font_size=6,addressblock_position2=R,addressblock_font_color2=,addressblock_font_type2=arial,addressblock_font_style2={B;I},addressblock_font_size2=10,addressblock_horizontal=15,addressblock_vertical=15,addressblock_width=50,image_display=1,image_image=muster.jpg,image_horizontal=150,image_vertical=0,image_width=,image_height=,datafields_display=1,datafields_position=L,datafields_font_color=,datafields_font_type=arial,datafields_font_size=10,datafields_position2=R,datafields_font_color2=,datafields_font_type2=arial,datafields_font_style2={B},datafields_font_size2=10,datafields_text_1=Bestelldatum,datafields_value_1=*date_order*,datafields_text_2=Kundennummer,datafields_value_2=*customers_id*,datafields_text_3=Rechnungsnummer,datafields_value_3=*orders_id*,datafields_text_4=Rechnungsdatum,datafields_value_4=*date_invoice*,datafields_text_5=,datafields_value_5=,datafields_text_6=,datafields_value_6=,datafields_horizontal=110,datafields_vertical=80,datafields_width=40#/K30,billhead_display=1,billhead_text=Rechnung Nr: *orders_id*,billhead_position=L,billhead_font_color=,billhead_font_type=arial,billhead_font_style={B;I;U},billhead_font_size=12,billhead_horizontal=15,billhead_vertical=80,billhead_width=,billhead_height=,listhead_display=1,listhead_text=Rechnungspositionen,listhead_font_color=,listhead_font_type=arial,listhead_font_style={B},listhead_font_size=8,listhead_horizontal=15,listhead_vertical=100,listhead_width=,listhead_height=,poslist_font_color=,poslist_font_type=arial,poslist_font_size=6,poslist_head_1=Pos.,poslist_value_1=*pos_nr*,poslist_width_1=5,poslist_align_1=C,poslist_head_2=Art.Nr.,poslist_value_2=*p_model*,poslist_width_2=20,poslist_align_2=C,poslist_head_3=Artikel,poslist_value_3=*p_name*,poslist_width_3=105,poslist_align_3=L,poslist_head_4=Anz.,poslist_value_4=*p_qty*,poslist_width_4=5,poslist_align_4=C,poslist_head_5=Einz.Preis,poslist_value_5=*p_single_price*,poslist_width_5=15,poslist_align_5=R,poslist_head_6=Gesamt,poslist_value_6=*p_price*,poslist_width_6=15,poslist_align_6=R,poslist_head_7=,poslist_value_7=,poslist_width_7=,poslist_align_7=C,poslist_horizontal=15,poslist_vertical=,resumefields_display=1,resumefields_position=L,resumefields_font_color=,resumefields_font_type=arial,resumefields_font_size=8,resumefields_position2=R,resumefields_font_color2=,resumefields_font_type2=arial,resumefields_font_size2=8,resumefields_horizontal=60,resumefields_vertical=5,resumefields_width=80#/K40,subtext_display=1,subtext_text=Die Ware bleibt bis zur vollständigen Bezahlung Eigentum der Muster GBR ,subtext_font_color=,subtext_font_type=arial,subtext_font_size=8,subtext_horizontal=15,subtext_vertical=25,subtext_width=,subtext_height=,footer_display=1,footer_font_color=,footer_font_type=arial,footer_font_size=6,footer_display_1=1,footer_position_1=L,footer_text_1=Muster GbR Beispielstrasse 123 12345 Flümme,footer_display_2=1,footer_position_2=C,footer_text_2=Konto: 1234567 BLZ 222 333 44 Beispielbank,footer_display_3=1,footer_position_3=R,footer_text_3=HGR 32344424 AmtsG. Flümme StNr. 5545594,footer_position_4=L,footer_text_4=,terms_display=1,terms_formtext=Allgemeine Geschäftsbedingungen (AGB),terms_head_position=L,terms_head_font_style={B},terms_head_font_size=10,terms_font_color=,terms_font_type=arial,terms_font_size=6,default_profile=1,typeofbill=delivnote,languages_code=de', '');
+INSERT INTO pdfbill_profile (profile_name, profile_parameter, profile_categories) VALUES ('profile_de_delivnote', 'bgimage_display=1,bgimage_image=hintergrund.png,headtext_display=1,headtext_text=Muster GBR Unterhaltungselektronik,headtext_font_color=#0000CC,headtext_font_type=arial,headtext_font_style={B;I},headtext_font_size=18,headtext_horizontal=15,headtext_vertical=0,headtext_width=,headtext_height=,addressblock_display=1,addressblock_text=Muster GBR#/K Postfach 4711#/K 12345 Flümme,addressblock_position=L,addressblock_font_color=,addressblock_font_type=arial,addressblock_font_style={B;U},addressblock_font_size=6,addressblock_position2=R,addressblock_font_color2=,addressblock_font_type2=arial,addressblock_font_style2={B;I},addressblock_font_size2=10,addressblock_horizontal=15,addressblock_vertical=15,addressblock_width=50,image_display=1,image_image=muster.jpg,image_horizontal=150,image_vertical=0,image_width=,image_height=,datafields_display=1,datafields_position=L,datafields_font_color=,datafields_font_type=arial,datafields_font_size=10,datafields_position2=R,datafields_font_color2=,datafields_font_type2=arial,datafields_font_style2={B},datafields_font_size2=10,datafields_text_1=Bestelldatum,datafields_value_1=*date_order*,datafields_text_2=Kundennummer,datafields_value_2=*customers_id*,datafields_text_3=Rechnungsnummer,datafields_value_3=*orders_id*,datafields_text_4=Rechnungsdatum,datafields_value_4=*date_invoice*,datafields_text_5=,datafields_value_5=,datafields_text_6=,datafields_value_6=,datafields_horizontal=110,datafields_vertical=80,datafields_width=40#/K30,billhead_display=1,billhead_text=Lieferschein Nr: *orders_id*,billhead_position=L,billhead_font_color=,billhead_font_type=arial,billhead_font_style={B;I;U},billhead_font_size=12,billhead_horizontal=15,billhead_vertical=80,billhead_width=,billhead_height=,listhead_display=1,listhead_text=Lieferpositionen,listhead_font_color=,listhead_font_type=arial,listhead_font_style={B},listhead_font_size=8,listhead_horizontal=15,listhead_vertical=100,listhead_width=,listhead_height=,poslist_font_color=,poslist_font_type=arial,poslist_font_size=6,poslist_head_1=Pos.,poslist_value_1=*pos_nr*,poslist_width_1=5,poslist_align_1=C,poslist_head_2=Art.Nr.,poslist_value_2=*p_model*,poslist_width_2=20,poslist_align_2=C,poslist_head_3=Artikel,poslist_value_3=*p_name*,poslist_width_3=105,poslist_align_3=L,poslist_head_4=Anz.,poslist_value_4=*p_qty*,poslist_width_4=5,poslist_align_4=C,poslist_head_5=Einz.Preis,poslist_value_5=*p_single_price*,poslist_width_5=15,poslist_align_5=R,poslist_head_6=Gesamt,poslist_value_6=*p_price*,poslist_width_6=15,poslist_align_6=R,poslist_head_7=,poslist_value_7=,poslist_width_7=,poslist_align_7=C,poslist_horizontal=15,poslist_vertical=,resumefields_display=1,resumefields_position=L,resumefields_font_color=,resumefields_font_type=arial,resumefields_font_size=8,resumefields_position2=R,resumefields_font_color2=,resumefields_font_type2=arial,resumefields_font_size2=8,resumefields_horizontal=60,resumefields_vertical=5,resumefields_width=80#/K40,subtext_display=1,subtext_text=Die Ware bleibt bis zur vollständigen Bezahlung Eigentum der Muster GBR ,subtext_font_color=,subtext_font_type=arial,subtext_font_size=8,subtext_horizontal=15,subtext_vertical=25,subtext_width=,subtext_height=,footer_display=1,footer_font_color=,footer_font_type=arial,footer_font_size=6,footer_display_1=1,footer_position_1=L,footer_text_1=Muster GbR Beispielstrasse 123 12345 Flümme,footer_display_2=1,footer_position_2=C,footer_text_2=Konto: 1234567 BLZ 222 333 44 Beispielbank,footer_display_3=1,footer_position_3=R,footer_text_3=HGR 32344424 AmtsG. Flümme StNr. 5545594,footer_position_4=L,footer_text_4=,terms_formtext=Allgemeine Geschäftsbedingungen (AGB),terms_head_position=L,terms_head_font_style={B},terms_head_font_size=10,terms_font_color=,terms_font_type=arial,terms_font_size=6,typeofbill=delivnote,languages_code=de', '');
+INSERT INTO pdfbill_profile (profile_name, profile_parameter, profile_categories) VALUES ('profile_de_invoice', 'bgimage_display=1,bgimage_image=hintergrund.png,headtext_display=1,headtext_text=Muster GBR Unterhaltungselektronik,headtext_font_color=#0000CC,headtext_font_type=arial,headtext_font_style={B;I},headtext_font_size=18,headtext_horizontal=15,headtext_vertical=0,headtext_width=,headtext_height=,addressblock_display=1,addressblock_text=Muster GBR#/K Postfach 4711#/K 12345 Flümme,addressblock_position=L,addressblock_font_color=,addressblock_font_type=arial,addressblock_font_style={B;U},addressblock_font_size=6,addressblock_position2=R,addressblock_font_color2=,addressblock_font_type2=arial,addressblock_font_style2={B;I},addressblock_font_size2=10,addressblock_horizontal=15,addressblock_vertical=15,addressblock_width=50,image_display=1,image_image=muster.jpg,image_horizontal=150,image_vertical=0,image_width=,image_height=,datafields_display=1,datafields_position=L,datafields_font_color=,datafields_font_type=arial,datafields_font_size=10,datafields_position2=R,datafields_font_color2=,datafields_font_type2=arial,datafields_font_style2={B},datafields_font_size2=10,datafields_text_1=Bestelldatum,datafields_value_1=*date_order*,datafields_text_2=Kundennummer,datafields_value_2=*customers_id*,datafields_text_3=Rechnungsnummer,datafields_value_3=*orders_id*,datafields_text_4=Rechnungsdatum,datafields_value_4=*date_invoice*,datafields_text_5=,datafields_value_5=,datafields_text_6=,datafields_value_6=,datafields_horizontal=110,datafields_vertical=80,datafields_width=40#/K30,billhead_display=1,billhead_text=Rechnung Nr: *orders_id*,billhead_position=L,billhead_font_color=,billhead_font_type=arial,billhead_font_style={B;I;U},billhead_font_size=12,billhead_horizontal=15,billhead_vertical=80,billhead_width=,billhead_height=,listhead_display=1,listhead_text=Rechnungspositionen,listhead_font_color=,listhead_font_type=arial,listhead_font_style={B},listhead_font_size=8,listhead_horizontal=15,listhead_vertical=100,listhead_width=,listhead_height=,poslist_font_color=,poslist_font_type=arial,poslist_font_size=6,poslist_head_1=Pos.,poslist_value_1=*pos_nr*,poslist_width_1=5,poslist_align_1=C,poslist_head_2=Art.Nr.,poslist_value_2=*p_model*,poslist_width_2=20,poslist_align_2=C,poslist_head_3=Artikel,poslist_value_3=*p_name*,poslist_width_3=105,poslist_align_3=L,poslist_head_4=Anz.,poslist_value_4=*p_qty*,poslist_width_4=5,poslist_align_4=C,poslist_head_5=Einz.Preis,poslist_value_5=*p_single_price*,poslist_width_5=15,poslist_align_5=R,poslist_head_6=Gesamt,poslist_value_6=*p_price*,poslist_width_6=15,poslist_align_6=R,poslist_head_7=,poslist_value_7=,poslist_width_7=,poslist_align_7=C,poslist_horizontal=15,poslist_vertical=,resumefields_display=1,resumefields_position=L,resumefields_font_color=,resumefields_font_type=arial,resumefields_font_size=8,resumefields_position2=R,resumefields_font_color2=,resumefields_font_type2=arial,resumefields_font_size2=8,resumefields_horizontal=60,resumefields_vertical=5,resumefields_width=80#/K40,subtext_display=1,subtext_text=Die Ware bleibt bis zur vollständigen Bezahlung Eigentum der Muster GBR ,subtext_font_color=,subtext_font_type=arial,subtext_font_size=8,subtext_horizontal=15,subtext_vertical=25,subtext_width=,subtext_height=,footer_display=1,footer_font_color=,footer_font_type=arial,footer_font_size=6,footer_display_1=1,footer_position_1=L,footer_text_1=Muster GbR Beispielstrasse 123 12345 Flümme,footer_display_2=1,footer_position_2=C,footer_text_2=Konto: 1234567 BLZ 222 333 44 Beispielbank,footer_display_3=1,footer_position_3=R,footer_text_3=HGR 32344424 AmtsG. Flümme StNr. 5545594,footer_position_4=L,footer_text_4=,terms_display=1,terms_formtext=Allgemeine Geschäftsbedingungen (AGB),terms_head_position=L,terms_head_font_style={B},terms_head_font_size=10,terms_font_color=,terms_font_type=arial,terms_font_size=6,typeofbill=invoice,languages_code=de', '');
 
 DROP TABLE IF EXISTS personal_offers_by_customers_status_0;
 DROP TABLE IF EXISTS personal_offers_by_customers_status_1;
@@ -1304,19 +1316,12 @@ INSERT INTO configuration (configuration_id, configuration_key, configuration_va
 INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'CURRENT_TEMPLATE', 'bootstrap3', 1, 26, NULL, NOW(), NULL, 'xtc_cfg_pull_down_template_sets(');
 INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'USE_BOOTSTRAP', 'true', 1, 10, NULL, NOW(), NULL, 'xtc_cfg_select_option(array(\'true\', \'false\'),');
 INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'PRICE_PRECISION', '4', 1, 28, NULL, NOW(), NULL, NULL);
-INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'CC_KEYCHAIN', 'changeme', 1, 29, NULL, NOW(), NULL, NULL);
 INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'IBN_BILLNR', '1', 1, 99, NULL , NOW(), NULL , NULL);            
 INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'IBN_BILLNR_FORMAT', '{n}-{d}-{m}-{y}', 1, 99, NULL, NOW(), NULL, NULL);   
 
 #Web28 - 2012-08-28 - Constants for checkout options
 INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'CHECKOUT_USE_PRODUCTS_SHORT_DESCRIPTION', 'false', 1, 40, NULL, NOW(), NULL, 'xtc_cfg_select_option(array(\'true\', \'false\'),');
 INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'CHECKOUT_SHOW_PRODUCTS_IMAGES', 'true', 1, 41, NULL, NOW(), NULL, 'xtc_cfg_select_option(array(\'true\', \'false\'),');
-
-
-# BOF - hendrik - 2011-05-14 - independent billingnumber and date
-#INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'IBN_BILLNR', '1', '1', '99', NULL, NOW(), NULL, NULL);
-#INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'IBN_BILLNR_FORMAT', '{n}-{d}-{m}-{y}', '1', '99', NULL, NOW(), NULL, NULL);
-# EOF - hendrik - 2011-05-14 - independent billingnumber and date
 
 
 # configuration_group_id 2, Minimum Values
@@ -1331,8 +1336,6 @@ INSERT INTO configuration (configuration_id, configuration_key, configuration_va
 INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'ENTRY_STATE_MIN_LENGTH', '0', 2, 9, NULL, NOW(), NULL, NULL); # h-h-h change state_min_length 2 to 0
 INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'ENTRY_TELEPHONE_MIN_LENGTH', '3', 2, 10, NULL, NOW(), NULL, NULL);
 INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'ENTRY_PASSWORD_MIN_LENGTH', '5', 2, 11, NULL, NOW(), NULL, NULL);
-INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'CC_OWNER_MIN_LENGTH', '3', 2, 12, NULL, NOW(), NULL, NULL);
-INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'CC_NUMBER_MIN_LENGTH', '10', 2, 13, NULL, NOW(), NULL, NULL);
 INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'REVIEW_TEXT_MIN_LENGTH', '50', 2, 14, NULL, NOW(), NULL, NULL);
 INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'MIN_DISPLAY_BESTSELLERS', '1', 2, 15, NULL, NOW(), NULL, NULL);
 INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'MIN_DISPLAY_ALSO_PURCHASED', '1', 2, 16, NULL, NOW(), NULL, NULL);
@@ -1403,7 +1406,7 @@ INSERT INTO configuration (configuration_id, configuration_key, configuration_va
 
 # configuration_group_id 5, Customer Details
 INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'ACCOUNT_GENDER', 'true', 5, 10, NULL, NOW(), NULL, 'xtc_cfg_select_option(array(\'true\', \'false\'),');
-INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'ACCOUNT_DOB', 'true', 5, 20, NULL, NOW(), NULL, 'xtc_cfg_select_option(array(\'true\', \'false\'),');
+INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'ACCOUNT_DOB', 'false', 5, 20, NULL, NOW(), NULL, 'xtc_cfg_select_option(array(\'true\', \'false\'),');
 INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'ACCOUNT_COMPANY', 'true', 5, 30, NULL, NOW(), NULL, 'xtc_cfg_select_option(array(\'true\', \'false\'),');
 INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'ACCOUNT_SUBURB', 'true', 5, 50, NULL, NOW(), NULL, 'xtc_cfg_select_option(array(\'true\', \'false\'),');
 INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'ACCOUNT_STATE', 'false', 5, 60, NULL, NOW(), NULL, 'xtc_cfg_select_option(array(\'true\', \'false\'),');
@@ -1775,7 +1778,6 @@ INSERT INTO countries VALUES (70,'Faroe Islands','FO','FRO',1,1);
 INSERT INTO countries VALUES (71,'Fiji','FJ','FJI',1,1);
 INSERT INTO countries VALUES (72,'Finland','FI','FIN',1,1);
 INSERT INTO countries VALUES (73,'France','FR','FRA',1,1);
-INSERT INTO countries VALUES (74,'France, Metropolitan','FX','FXX',1,1);
 INSERT INTO countries VALUES (75,'French Guiana','GF','GUF',1,1);
 INSERT INTO countries VALUES (76,'French Polynesia','PF','PYF',1,1);
 INSERT INTO countries VALUES (77,'French Southern Territories','TF','ATF',1,1);
@@ -1961,12 +1963,12 @@ INSERT INTO languages VALUES (1,'English','en','icon.gif','english',2,'iso-8859-
 INSERT INTO languages VALUES (2,'Deutsch','de','icon.gif','german',1,'iso-8859-15',1);
 # EOF - Tomcraft - 2009-11-08 - Added option to deactivate languages (status 1)
 
-INSERT INTO orders_status VALUES (1,1,'Pending');
-INSERT INTO orders_status VALUES (1,2,'Offen');
-INSERT INTO orders_status VALUES (2,1,'Processing');
-INSERT INTO orders_status VALUES (2,2,'In Bearbeitung');
-INSERT INTO orders_status VALUES (3,1,'Delivered');
-INSERT INTO orders_status VALUES (3,2,'Versendet');
+INSERT INTO orders_status VALUES (1,1,'Pending', 0);
+INSERT INTO orders_status VALUES (1,2,'Offen', 0);
+INSERT INTO orders_status VALUES (2,1,'Processing', 0);
+INSERT INTO orders_status VALUES (2,2,'In Bearbeitung', 0);
+INSERT INTO orders_status VALUES (3,1,'Delivered', 0);
+INSERT INTO orders_status VALUES (3,2,'Versendet', 0);
 
 # USA
 INSERT INTO zones VALUES (1,223,'AL','Alabama');

@@ -4,7 +4,7 @@
     $fehler = array(404 => 'Fehler 404: Die gesuchte Seite wurde nicht gefunden!',
     401 => "Fehler 401: Authentifizierungsfehler.",
     400 => "Fehler 400: Die Anforderung war syntaktisch falsch.",
-    403 => "Fehler 403: Der Server verweigert die Ausführung.",
+    403 => "Fehler 403: Der Server verweigert die AusfÃ¼hrung.",
     500 => "Fehler 500: Beim Server gab es einen internen Fehler.");
   }
   else {
@@ -19,32 +19,18 @@
 {if $herror}
   <div class="error">{$herror}</div><br />
 {/if}
-<div class="sitemapwrap">
-	{php}$i=0;{/php}
+<div class="row">
 	{foreach name=aussen item=module_data from=$module_content}
-	{php}$i++;{/php}
-	{php}
-		if ($i==1) {
-			echo "<div class=\"sitemapleft\">";
-		} else {
-			echo "<div class=\"sitemapright\">";
-		}
-		{/php}
-				<div class="sitemapheader"><a href="{$module_data.CAT_LINK}">{$module_data.CAT_NAME}</a></div>
-				<div class="sitemapcontent">
-					<ul>
-					{foreach key=key_data item=item_data from=$module_data.SCATS}
-						<li><a href="{$item_data.link}">{$item_data.text}</a></li>
-					{/foreach}
-					</ul>
-				</div>
-		</div>
-	{php}
-	if ($i==2) { 
-		echo '<div style="clear:both;"></div>';
-		$i=0;
-	}
-	{/php}  
+	<div class="col-xs-12 col-sm-6">
+
+		<div class="well">
+			<h6 class="h4"><a href="{$module_data.CAT_LINK}">{$module_data.CAT_NAME}</a></h6>
+			<ul>
+			{foreach key=key_data item=item_data from=$module_data.SCATS}
+				<li><a href="{$item_data.link}">{$item_data.text}</a></li>
+			{/foreach}
+			</ul>
+		</div>	
+	</div>
 	{/foreach}
-	<div style="clear:both;"></div>
 </div>

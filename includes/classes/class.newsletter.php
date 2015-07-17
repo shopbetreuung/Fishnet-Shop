@@ -80,7 +80,7 @@ class newsletter {
 			
 			$this->generateCode();
 
-	if (($check == 'inp') && (($postCode == $_SESSION['vvcode'] && $_SESSION['vvcode']!='') || $this->auto==true)) {
+	if ($check == 'inp') {
 
 		$check_mail_query = xtc_db_query("select customers_email_address, mail_status from ".TABLE_NEWSLETTER_RECIPIENTS." where customers_email_address = '".xtc_db_input($mail)."'");
 		if (!xtc_db_num_rows($check_mail_query)) {
@@ -141,7 +141,7 @@ class newsletter {
 		$this->message_id = 10;
 	}
 
-	if (($check == 'del') && ($postCode == $_SESSION['vvcode'])) {
+	if ($check == 'del') {
 		
 		$check_mail_query = xtc_db_query("select customers_email_address from ".TABLE_NEWSLETTER_RECIPIENTS." where customers_email_address = '".xtc_db_input($mail)."'");
 		if (!xtc_db_num_rows($check_mail_query)) {

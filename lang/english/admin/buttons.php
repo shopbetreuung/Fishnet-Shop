@@ -39,7 +39,6 @@ define('BUTTON_SEND_EMAIL', 'Send E-Mail');
 define('BUTTON_SEND_COUPON', 'Send Coupon');
 define('BUTTON_INVOICE', 'Invoice');
 define('BUTTON_PACKINGSLIP', 'Packing slip');
-define('BUTTON_REMOVE_CC_INFO', 'Remove CC Info');
 define('BUTTON_AFTERBUY_SEND', 'Afterbuy - send');
 define('BUTTON_NEW_NEWSLETTER', 'New Newsletter');
 define('BUTTON_RESET', 'Reset');
@@ -74,11 +73,6 @@ define('BUTTON_DETAILS', 'Details');
 define('BUTTON_NEW_TAX_CLASS', 'New Tax Class');
 define('BUTTON_NEW_TAX_RATE', 'New Tax Rate');
 define('BUTTON_SEND', 'Send');
-
-// BOF - Tomcraft - 2009-11-28 - Included xs:booster
-define('BUTTON_EDIT_XTBOOSTER', 'eBay-Product');
-define('BUTTON_XTBOOSTER_MULTI', 'eBay-Multi-Product');
-// EOF - Tomcraft - 2009-11-28 - Included xs:booster
 
 // BOF - Dokuman - 2010-02-04 - delete cache files in admin section
 define('BUTTON_DELETE_CACHE', 'Delete Cache');

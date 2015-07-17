@@ -14,7 +14,7 @@
 {foreach name=aussen item=module_data from=$module_content} 
 	<div class="col-xs-12 col-sm-6 col-md-4">
 		{if $module_data.CATEGORIES_IMAGE}<div class="text-center" style="height: 150px;"><a href="{$module_data.CATEGORIES_LINK}"><img class="img-responsive" style="max-height: 140px; margin: 0 auto;" src="{$module_data.CATEGORIES_IMAGE}" alt="{$module_data.CATEGORIES_NAME}" /></a></div>{/if}
-		<div class="text-center"><strong><a href="{$module_data.CATEGORIES_LINK}">{$module_data.CATEGORIES_NAME}</a></strong></div>
+		<div class="text-center"><h2 class="h6"><strong><a href="{$module_data.CATEGORIES_LINK}">{$module_data.CATEGORIES_NAME}</a></strong></h2></div>
 		<div class="text-center">{$module_data.CATEGORIES_DESCRIPTION}</div>
 	</div>
 {/foreach}

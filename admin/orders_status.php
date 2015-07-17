@@ -31,7 +31,8 @@
           $orders_status_name_array = $_POST['orders_status_name'];
           $language_id = $languages[$i]['id'];
 
-          $sql_data_array = array('orders_status_name' => xtc_db_prepare_input($orders_status_name_array[$language_id]));
+          $sql_data_array = array('orders_status_name' => xtc_db_prepare_input($orders_status_name_array[$language_id]),
+								  'pdfbill_send' => ($_POST['pdfbill_send'] == 'on')?'1':'0');
 
           if ($action == 'insert') {
             if (!xtc_not_null($orders_status_id)) {
@@ -56,7 +57,7 @@
         if (isset($_POST['default']) && ($_POST['default'] == 'on')) {
           xtc_db_query("update " . TABLE_CONFIGURATION . " set configuration_value = '" . xtc_db_input($orders_status_id) . "' where configuration_key = 'DEFAULT_ORDERS_STATUS_ID'");
         }
-
+		
         xtc_redirect(xtc_href_link(FILENAME_ORDERS_STATUS, 'page=' . $_GET['page'] . '&oID=' . $orders_status_id));
         break;
 
@@ -133,7 +134,7 @@
                 <td class="dataTableHeadingContent" align="right"><?php echo TABLE_HEADING_ACTION; ?>&nbsp;</td>
               </tr>
 <?php
-  $orders_status_query_raw = "select orders_status_id, orders_status_name from " . TABLE_ORDERS_STATUS . " where language_id = '" . $_SESSION['languages_id'] . "' order by orders_status_id";
+  $orders_status_query_raw = "select orders_status_id, orders_status_name, pdfbill_send from " . TABLE_ORDERS_STATUS . " where language_id = '" . $_SESSION['languages_id'] . "' order by orders_status_id";
   $orders_status_split = new splitPageResults($_GET['page'], MAX_DISPLAY_SEARCH_RESULTS, $orders_status_query_raw, $orders_status_query_numrows);
   $orders_status_query = xtc_db_query($orders_status_query_raw);
   while ($orders_status = xtc_db_fetch_array($orders_status_query)) {
@@ -197,7 +198,9 @@
       }
 
       $contents[] = array('text' => '<br />' . TEXT_INFO_ORDERS_STATUS_NAME . $orders_status_inputs_string);
-      $contents[] = array('text' => '<br />' . xtc_draw_checkbox_field('default') . ' ' . TEXT_SET_DEFAULT);
+	  
+	  $contents[] = array('text' => '<br />' . xtc_draw_checkbox_field('pdfbill_send') . ' ' . TEXT_SET_PDFBILL_SEND);
+	  $contents[] = array('text' => '<br />' . xtc_draw_checkbox_field('default') . ' ' . TEXT_SET_DEFAULT);
       $contents[] = array('align' => 'center', 'text' => '<br /><input type="submit" class="btn btn-default" onclick="this.blur();" value="' . BUTTON_INSERT . '"/> <a class="btn btn-default" onclick="this.blur();" href="' . xtc_href_link(FILENAME_ORDERS_STATUS, 'page=' . $_GET['page']) . '">' . BUTTON_CANCEL . '</a>');
       break;
 
@@ -214,6 +217,7 @@
       }
 
       $contents[] = array('text' => '<br />' . TEXT_INFO_ORDERS_STATUS_NAME . $orders_status_inputs_string);
+	  $contents[] = array('text' => '<br />' . xtc_draw_checkbox_field('pdfbill_send', '', ($oInfo->pdfbill_send == '1')?true:false) . ' ' . TEXT_SET_PDFBILL_SEND); // TODO NICO
       if (DEFAULT_ORDERS_STATUS_ID != $oInfo->orders_status_id) $contents[] = array('text' => '<br />' . xtc_draw_checkbox_field('default') . ' ' . TEXT_SET_DEFAULT);
       $contents[] = array('align' => 'center', 'text' => '<br /><input type="submit" class="btn btn-default" onclick="this.blur();" value="' . BUTTON_UPDATE . '"/> <a class="btn btn-default" onclick="this.blur();" href="' . xtc_href_link(FILENAME_ORDERS_STATUS, 'page=' . $_GET['page'] . '&oID=' . $oInfo->orders_status_id) . '">' . BUTTON_CANCEL . '</a>');
       break;

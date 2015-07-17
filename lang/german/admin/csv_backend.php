@@ -27,7 +27,7 @@
    define('COMPRESS_EXPORT_DESC','Kompression der exportierten Daten');
    define('CSV_SETUP','Einstellungen');
    define('TEXT_IMPORT','');
-   define('TEXT_PRODUCTS','Produkte');
+   define('TEXT_PRODUCTS','Artikel');
    define('TEXT_EXPORT','Exportierte Datei wird im /export Verzeichnis gespeichert');
 
 ?>

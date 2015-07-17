@@ -20,13 +20,5 @@
     xtc_db_query("DELETE FROM ".TABLE_ORDERS_STATUS_HISTORY." WHERE orders_id = '".(int)$order_id."'");
     xtc_db_query("DELETE FROM ".TABLE_ORDERS_TOTAL." WHERE orders_id = '".(int)$order_id."'");
     xtc_db_query("DELETE FROM ".TABLE_ORDERS_PRODUCTS_DOWNLOAD." WHERE orders_id = '".(int)$order_id."'");
-
-    /******** SHOPGATE **********/
-    $sql_select="SHOW TABLES LIKE '".TABLE_SHOPGATE_ORDERS."'";
-    $query = xtc_db_query($sql_select);
-    if(xtc_db_num_rows($query) > 0) {
-      xtc_db_query("DELETE FROM ".TABLE_SHOPGATE_ORDERS. " WHERE orders_id = '".(int)$order_id."'");
-    }
-    /******** SHOPGATE **********/
   }
 ?>

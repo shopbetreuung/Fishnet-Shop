@@ -25,7 +25,6 @@ $smarty = new Smarty;
 require (DIR_FS_CATALOG.'templates/'.CURRENT_TEMPLATE.'/source/boxes.php');
 
 // include needed functions
-require_once (DIR_FS_INC.'xtc_render_vvcode.inc.php');
 require_once (DIR_FS_INC.'xtc_random_charcode.inc.php');
 require_once (DIR_FS_INC.'xtc_encrypt_password.inc.php');
 $case = 'double_opt';
@@ -57,10 +56,6 @@ if (isset ($_GET['action']) && ($_GET['action'] == 'first_opt_in') && $_POST) {
   $html_mail = $smarty->fetch(CURRENT_TEMPLATE.'/mail/'.$_SESSION['language'].'/password_verification_mail.html');
   $txt_mail = $smarty->fetch(CURRENT_TEMPLATE.'/mail/'.$_SESSION['language'].'/password_verification_mail.txt');
 
-  //BOF - Dokuman - 2009-09-04: convert uppercase Captchas to lowercase, to be more flexible on user input
-  //if ($_POST['vvcode'] == $_SESSION['vvcode']) {
-  if (isset($_POST['vvcode']) && isset($_SESSION['vvcode']) && strtoupper($_POST['vvcode']) == strtoupper($_SESSION['vvcode'])) {
-  //BOF - Dokuman - 2009-09-04: convert uppercase Captchas to lowercase, to be more flexible on user input
     if (!xtc_db_num_rows($check_customer_query)) {
       $case = 'wrong_mail';
       $info_message = TEXT_EMAIL_ERROR;
@@ -70,10 +65,6 @@ if (isset ($_GET['action']) && ($_GET['action'] == 'first_opt_in') && $_POST) {
       xtc_php_mail(EMAIL_SUPPORT_ADDRESS, EMAIL_SUPPORT_NAME, $check_customer['customers_email_address'], '', '', EMAIL_SUPPORT_REPLY_ADDRESS, EMAIL_SUPPORT_REPLY_ADDRESS_NAME, '', '', TEXT_EMAIL_PASSWORD_FORGOTTEN, $html_mail, $txt_mail);
 
     }
-  } else {
-    $case = 'code_error';
-    $info_message = TEXT_CODE_ERROR;
-  }
 }
 
 // Verification
@@ -134,10 +125,6 @@ switch ($case) {
     break;
 
   case 'code_error' :
-    //BOF - Dokuman - 2009-08-13: fix not displaying Captcha on SSL(Proxy) connections
-    //$smarty->assign('VVIMG', '<img src="'.xtc_href_link(FILENAME_DISPLAY_VVCODES).'" alt="Captcha" />');
-    $smarty->assign('VVIMG', '<img src="'.xtc_href_link(FILENAME_DISPLAY_VVCODES, '', 'SSL').'" alt="Captcha" />');
-    //EOF - Dokuman - 2009-08-13: fix not displaying Captcha on SSL(Proxy) connections
     $smarty->assign('text_heading', HEADING_PASSWORD_FORGOTTEN);
     $smarty->assign('info_message', $info_message);
     $smarty->assign('message', TEXT_PASSWORD_FORGOTTEN);
@@ -149,18 +136,12 @@ switch ($case) {
     //$smarty->assign('INPUT_EMAIL', xtc_draw_input_field('email', xtc_db_input(isset($_POST['email']) ? $_POST['email'] : '')));
     $smarty->assign('INPUT_EMAIL', xtc_draw_input_field('email', xtc_db_input(isset($_POST['email']) ? $_POST['email'] : ''), '', 'text', false));
     // EOF - DokuMan - 2010-10-28 - added missing arguments for xtc_draw_input_field
-
-    $smarty->assign('INPUT_CODE', xtc_draw_input_field('vvcode', '', 'size="8" maxlength="6"', 'text', '', false));
     $smarty->assign('BUTTON_SEND', xtc_image_submit('button_send.gif', IMAGE_BUTTON_LOGIN));
     $smarty->assign('FORM_END', '</form>');
     $main_content = $smarty->fetch(CURRENT_TEMPLATE.'/module/password_double_opt_in.html');
     break;
 
   case 'wrong_mail' :
-    //BOF - Dokuman - 2009-08-13: fix not displaying Captcha on SSL(Proxy) connections
-    //$smarty->assign('VVIMG', '<img src="'.xtc_href_link(FILENAME_DISPLAY_VVCODES).'" alt="Captcha" />');
-    $smarty->assign('VVIMG', '<img src="'.xtc_href_link(FILENAME_DISPLAY_VVCODES, '', 'SSL').'" alt="Captcha" />');
-    //EOF - Dokuman - 2009-08-13: fix not displaying Captcha on SSL(Proxy) connections
     $smarty->assign('text_heading', HEADING_PASSWORD_FORGOTTEN);
     $smarty->assign('info_message', $info_message);
     $smarty->assign('message', TEXT_PASSWORD_FORGOTTEN);
@@ -172,8 +153,6 @@ switch ($case) {
     //$smarty->assign('INPUT_EMAIL', xtc_draw_input_field('email', xtc_db_input(isset($_POST['email']) ? $_POST['email'] : '')));
     $smarty->assign('INPUT_EMAIL', xtc_draw_input_field('email', xtc_db_input(isset($_POST['email']) ? $_POST['email'] : ''), '', 'text', false));
     // EOF - DokuMan - 2010-10-28 - added missing arguments for xtc_draw_input_field
-
-    $smarty->assign('INPUT_CODE', xtc_draw_input_field('vvcode', '', 'size="8" maxlength="6"', 'text', '', false));
     $smarty->assign('BUTTON_SEND', xtc_image_submit('button_send.gif', IMAGE_BUTTON_LOGIN));
     $smarty->assign('FORM_END', '</form>');
     $main_content = $smarty->fetch(CURRENT_TEMPLATE.'/module/password_double_opt_in.html');
@@ -188,10 +167,6 @@ switch ($case) {
     break;
 
   case 'double_opt' :
-    //BOF - Dokuman - 2009-08-13: fix not displaying Captcha on SSL(Proxy) connections
-    //$smarty->assign('VVIMG', '<img src="'.xtc_href_link(FILENAME_DISPLAY_VVCODES).'" alt="Captcha" />');
-    $smarty->assign('VVIMG', '<img src="'.xtc_href_link(FILENAME_DISPLAY_VVCODES, '', 'SSL').'" alt="Captcha" />');
-    //EOF - Dokuman - 2009-08-13: fix not displaying Captcha on SSL(Proxy) connections
     $smarty->assign('text_heading', HEADING_PASSWORD_FORGOTTEN);
     //    $smarty->assign('info_message', $info_message);
     $smarty->assign('message', TEXT_PASSWORD_FORGOTTEN);
@@ -203,8 +178,6 @@ switch ($case) {
     //$smarty->assign('INPUT_EMAIL', xtc_draw_input_field('email', xtc_db_input(isset($_POST['email']) ? $_POST['email'] : '')));
     $smarty->assign('INPUT_EMAIL', xtc_draw_input_field('email', xtc_db_input(isset($_POST['email']) ? $_POST['email'] : ''), '', 'text', false));
     // EOF - DokuMan - 2010-10-28 - added missing arguments for xtc_draw_input_field
-
-    $smarty->assign('INPUT_CODE', xtc_draw_input_field('vvcode', '', 'size="8" maxlength="6"', 'text', '', false));
     $smarty->assign('BUTTON_SEND', xtc_image_submit('button_continue.gif', IMAGE_BUTTON_CONTINUE));
     $smarty->assign('FORM_END', '</form>');
     $main_content = $smarty->fetch(CURRENT_TEMPLATE.'/module/password_double_opt_in.html');

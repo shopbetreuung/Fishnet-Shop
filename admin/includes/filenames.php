@@ -86,7 +86,6 @@ define('FILENAME_SHIPPING_STATUS', 'shipping_status.php');
 define('FILENAME_SALES_REPORT','stats_sales_report.php');
 define('FILENAME_MODULE_EXPORT','module_export.php');
 define('FILENAME_EASY_POPULATE','easypopulate.php');
-define('FILENAME_BLACKLIST', 'blacklist.php');
 define('FILENAME_PRODUCTS_VPE','products_vpe.php');
 define('FILENAME_CAMPAIGNS_REPORT','stats_campaigns.php');
 define('FILENAME_XSELL_GROUPS','cross_sell_groups.php');
@@ -94,10 +93,8 @@ define('FILENAME_GOOGLE_SITEMAP', '../google_sitemap.php');
 define('FILENAME_PAYPAL','paypal.php');
 define('FILENAME_PAYPAL_CHECKOUT', 'paypal_checkout.php');
 define('FILENAME_REMOVEOLDPICS', 'removeoldpics.php');
-define('FILENAME_SHOPGATE', 'shopgate.php');
 define('FILENAME_JANOLAW','janolaw.php');
 define('FILENAME_HAENDLERBUND', 'haendlerbund.php'); //Tomcraft - 2012-12-08 - Added haendlerbund AGB interface
-define('FILENAME_XTBOOSTER','xtbooster.php'); // xs:booster
 define('FILENAME_SAFETERMS','safeterms.php'); // Tomcraft - 2013-06-21 - Safeterms AGB interface
 define('FILENAME_EASYMARKETING','easymarketing.php'); // Tomcraft - 2013-08-29 - Added easymarketing
 define('FILENAME_IT_RECHT_KANZLEI','it_recht_kanzlei.php');

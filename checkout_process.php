@@ -34,7 +34,6 @@ include ('includes/application_top.php');
 // include needed functions
 require_once (DIR_FS_INC.'xtc_calculate_tax.inc.php');
 require_once (DIR_FS_INC.'xtc_address_label.inc.php');
-require_once (DIR_FS_INC.'changedatain.inc.php');
 
 // initialize smarty
 $smarty = new Smarty;
@@ -155,13 +154,6 @@ if (isset ($_SESSION['tmp_oID']) && is_numeric($_SESSION['tmp_oID'])) { // Dokum
     $tmp_status = $order->info['order_status'];
   }
 
-  // BMC CC Mod Start
-  if (defined('CC_ENC') && strtolower(CC_ENC) == 'true') {
-    $plain_data = $order->info['cc_number'];
-    $order->info['cc_number'] = changedatain($plain_data, CC_KEYCHAIN);
-  }
-  // BMC CC Mod End
-
   if ($_SESSION['customers_status']['customers_status_ot_discount_flag'] == 1) {
     $discount = $_SESSION['customers_status']['customers_status_ot_discount'];
   } else {
@@ -217,18 +209,11 @@ if (isset ($_SESSION['tmp_oID']) && is_numeric($_SESSION['tmp_oID'])) { // Dokum
                            'billing_state' => $order->billing['state'],
                            'billing_country' => $order->billing['country']['title'],
                            'billing_country_iso_code_2' => $order->billing['country']['iso_code_2'],
-                           'billing_address_format_id' => $order->billing['format_id'],
-                           'cc_start' => $order->info['cc_start'],
-                           'cc_cvv' => $order->info['cc_cvv'],
-                           'cc_issue' => $order->info['cc_issue'],                           
+                           'billing_address_format_id' => $order->billing['format_id'],                   
                            'payment_method' => $order->info['payment_method'],
                            'payment_class' => $order->info['payment_class'],
                            'shipping_method' => $order->info['shipping_method'],
                            'shipping_class' => $order->info['shipping_class'],
-                           'cc_type' => $order->info['cc_type'],
-                           'cc_owner' => $order->info['cc_owner'],
-                           'cc_number' => $order->info['cc_number'],
-                           'cc_expires' => $order->info['cc_expires'],
                            'date_purchased' => 'now()',
                            'orders_status' => $tmp_status,
                            'currency' => $order->info['currency'],
@@ -505,14 +490,7 @@ if (!$tmp) {
   $order_total_modules->clear_posts(); //ICW ADDED FOR CREDIT CLASS SYSTEM
   // GV Code End
 
-// BOF - Tomcraft - 2009-11-28 - Included xs:booster
-  if(@isset($_SESSION['xtb0'])) {
-    define('XTB_CHECKOUT_PROCESS', __LINE__);
-    require_once (DIR_FS_CATALOG.'callback/xtbooster/xtbcallback.php');
-  }
-// EOF - Tomcraft - 2009-11-28 - Included xs:booster
-
-  // BOF - Tomcraft - 2009-10-03 - PayPal Express Modul (PayPal GiroPay aufrufen zum best‰tigen)
+  // BOF - Tomcraft - 2009-10-03 - PayPal Express Modul (PayPal GiroPay aufrufen zum best√§tigen)
   if(isset($_SESSION['reshash']['REDIRECTREQUIRED'])  && strtoupper($_SESSION['reshash']['REDIRECTREQUIRED'])=="TRUE") {
     $payment_modules->giropay_process();
   } else {
@@ -520,7 +498,7 @@ if (!$tmp) {
     unset($_SESSION['nvpReqArray']);
     unset($_SESSION['reshash']);
   }
-  // EOF - Tomcraft - 2009-10-03 - PayPal Express Modul (PayPal GiroPay aufrufen zum best‰tigen)
+  // EOF - Tomcraft - 2009-10-03 - PayPal Express Modul (PayPal GiroPay aufrufen zum best√§tigen)
 
   xtc_redirect(xtc_href_link(FILENAME_CHECKOUT_SUCCESS, '', 'SSL'));
 }

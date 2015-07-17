@@ -39,7 +39,7 @@ require (DIR_WS_INCLUDES.'head.php');
 	<dl>
 	  <dd>
 		<ul style="list-style: none; padding-left: 0px;">
-		  <li><?php echo '&copy; 2015-'.date('Y').'&nbsp;'; echo PROJECT_VERSION; ?> | http://www.shophelfer.com/ </li>
+		  <li><?php echo '&copy; 2015-'.date('Y').'&nbsp;'; echo PROJECT_VERSION; ?> | http://www.shophelfer.com/</li>
 		  <li>&copy; 2015 modified eCommerce Shopsoftware | http://www.modified-shop.org/</li>
 		  <li>&copy; 2006 xt:Commerce V3.0.4 SP2.1 | http://www.xtcommerce.de/</li>
 		  <li>&copy; 2003 neXTCommerce</li>

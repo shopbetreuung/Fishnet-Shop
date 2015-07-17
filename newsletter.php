@@ -25,7 +25,6 @@ $smarty = new Smarty;
 require (DIR_FS_CATALOG.'templates/'.CURRENT_TEMPLATE.'/source/boxes.php');
 
 // include needed functions
-require_once (DIR_FS_INC.'xtc_render_vvcode.inc.php');
 require_once (DIR_FS_INC.'xtc_random_charcode.inc.php');
 require_once (DIR_FS_INC.'xtc_encrypt_password.inc.php');
 require_once (DIR_FS_INC.'xtc_validate_password.inc.php');
@@ -56,14 +55,9 @@ if (isset ($_GET['action']) && ($_GET['action'] == 'process')) {
 	$txt_mail = $smarty->fetch(CURRENT_TEMPLATE.'/mail/'.$_SESSION['language'].'/newsletter_mail.txt');
 
 	// Check if email exists 
-
-  //BOF - Dokuman - 2009-09-04: convert uppercase Captchas to lowercase, to be more flexible on user input
-	//if (($_POST['check'] == 'inp') && ($_POST['vvcode'] == $_SESSION['vvcode'])) {
   //BOF - web28 - 2010-02-09: NEWSLETTER ERROR HANDLING
-    //if (($_POST['check'] == 'inp') && (strtoupper($_POST['vvcode']) == $_SESSION['vvcode'])) {
-	if (xtc_validate_email(trim($_POST['email'])) && ($_POST['check'] == 'inp') && (strtoupper($_POST['vvcode']) == $_SESSION['vvcode'])) {
+	if (xtc_validate_email(trim($_POST['email'])) && ($_POST['check'] == 'inp')) {
   //BOF - web28 - 2010-02-09: NEWSLETTER ERROR HANDLING
-  //EOF - Dokuman - 2009-09-04: convert uppercase Captchas to lowercase, to be more flexible on user input
 
 		$check_mail_query = xtc_db_query("select customers_email_address, mail_status from ".TABLE_NEWSLETTER_RECIPIENTS." where customers_email_address = '".xtc_db_input($_POST['email'])."'");
 		if (!xtc_db_num_rows($check_mail_query)) {
@@ -121,17 +115,12 @@ if (isset ($_GET['action']) && ($_GET['action'] == 'process')) {
 	    //BOF - web28 - 2010-02-09: NEWSLETTER ERROR HANDLING
 	    //$info_message = TEXT_WRONG_CODE;
 	    if (!xtc_validate_email(trim($_POST['email']))) $info_message .= ERROR_EMAIL;
-		if (strtoupper($_POST['vvcode']) != $_SESSION['vvcode']) $info_message .= ERROR_VVCODE;		
 		//EOF - web28 - 2010-02-09: NEWSLETTER ERROR HANDLING
 	}
 
-  //BOF - Dokuman - 2009-09-04: convert uppercase Captchas to lowercase, to be more flexible on user input
-	//if (($_POST['check'] == 'del') && ($_POST['vvcode'] == $_SESSION['vvcode'])) {
   //BOF - web28 - 2010-02-09: NEWSLETTER ERROR HANDLING
-	//if (($_POST['check'] == 'del') && (strtoupper($_POST['vvcode']) == $_SESSION['vvcode'])) {
-	if (xtc_validate_email(trim($_POST['email'])) && ($_POST['check'] == 'del') && (strtoupper($_POST['vvcode']) == $_SESSION['vvcode'])) {
+	if (xtc_validate_email(trim($_POST['email'])) && ($_POST['check'] == 'del')) {
   //EOF - web28 - 2010-02-09: NEWSLETTER ERROR HANDLING
-  //BOF - Dokuman - 2009-09-04: convert uppercase Captchas to lowercase, to be more flexible on user input
 
 		$check_mail_query = xtc_db_query("select customers_email_address from ".TABLE_NEWSLETTER_RECIPIENTS." where customers_email_address = '".xtc_db_input($_POST['email'])."'");
 		if (!xtc_db_num_rows($check_mail_query)) {
@@ -192,11 +181,6 @@ $breadcrumb->add(NAVBAR_TITLE_NEWSLETTER, xtc_href_link(FILENAME_NEWSLETTER, '',
 
 require (DIR_WS_INCLUDES.'header.php');
 
-//BOF - Dokuman - 2009-11-02 - Fix lost session on newsletter subscription
-//$smarty->assign('VVIMG', '<img src="'.DIR_WS_CATALOG.FILENAME_DISPLAY_VVCODES.'" alt="Captcha" />');
-$smarty->assign('VVIMG', '<img src="'.xtc_href_link(FILENAME_DISPLAY_VVCODES, 't='. time(), 'SSL') .'" alt="Captcha" />'); // web28 - 2010-09-21 - change NONSSL -> SSL 
-//EOF - Dokuman - 2009-11-02 - Fix lost session on newsletter subscription
-
 $smarty->assign('text_newsletter', TEXT_NEWSLETTER);
 $smarty->assign('info_message', $info_message);
 $smarty->assign('FORM_ACTION', xtc_draw_form('sign', xtc_href_link(FILENAME_NEWSLETTER, 'action=process', 'SSL'))); // web28 - 2010-09-21 - change NONSSL -> SSL 
@@ -204,10 +188,6 @@ $smarty->assign('FORM_ACTION', xtc_draw_form('sign', xtc_href_link(FILENAME_NEWS
 //$smarty->assign('INPUT_EMAIL', xtc_draw_input_field('email', xtc_db_input($_POST['email'])));
 $smarty->assign('INPUT_EMAIL', xtc_draw_input_field('email', ((isset($_GET['email']) && xtc_db_input($_GET['email'])!='') ? xtc_db_input($_GET['email']):((isset($_POST['email']) && xtc_db_input($_POST['email']))?xtc_db_input($_POST['email']):''))));
 //EOF - web28 - 2010-02-09: SHOW EMAIL IN INPUT FIELD
-// BOF - Tomcraft - 2010-01-24 - unified the captcha field size.
-//$smarty->assign('INPUT_CODE', xtc_draw_input_field('vvcode', '', 'size="6" maxlength="6"', 'text', false));
-$smarty->assign('INPUT_CODE', xtc_draw_input_field('vvcode', '', 'size="8" maxlength="6"', 'text', false));
-// EOF - Tomcraft - 2010-01-24 - unified the captcha field size.
 //BOF - web28 - 2010-02-09: NEWSLETTER ERROR HANDLING
 if(isset($_POST['check']) && $_POST['check'] == 'inp') {$inp = 'true'; $del = '';}
 if(isset($_POST['check']) && $_POST['check'] == 'del') {$inp = ''; $del = 'true';}	

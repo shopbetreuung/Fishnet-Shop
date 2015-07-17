@@ -17,10 +17,10 @@
 
 // buttons
 define('BUTTON_REVERSE_SELECTION', 'Auswahl umkehren');
-define('BUTTON_SWITCH_PRODUCTS', 'Nur Produkte');
+define('BUTTON_SWITCH_PRODUCTS', 'Nur Artikel');
 define('BUTTON_SWITCH_CATEGORIES', 'Nur Kategorien');
 define('BUTTON_NEW_CATEGORIES', 'Neue Kategorie');
-define('BUTTON_NEW_PRODUCTS', 'Neues Produkt');
+define('BUTTON_NEW_PRODUCTS', 'Neuen Artikel');
 define('BUTTON_COPY', 'Kopieren');
 define('BUTTON_BACK', 'Zur&uuml;ck');
 define('BUTTON_CANCEL', 'Abbrechen');
@@ -39,7 +39,6 @@ define('BUTTON_SEND_EMAIL', 'E-Mail senden');
 define('BUTTON_SEND_COUPON', 'Gutschein senden');
 define('BUTTON_INVOICE', 'Rechnung');
 define('BUTTON_PACKINGSLIP', 'Lieferschein');
-define('BUTTON_REMOVE_CC_INFO', 'L&ouml;sche KK Info');
 define('BUTTON_AFTERBUY_SEND', 'Afterbuy - senden');
 define('BUTTON_NEW_NEWSLETTER', 'Neuer Newsletter');
 define('BUTTON_RESET', 'Zur&uuml;cksetzen');
@@ -51,7 +50,7 @@ define('BUTTON_IPLOG', 'IP-Log');
 define('BUTTON_NEW_ORDER', 'Neue Bestellung');
 define('BUTTON_CREATE_ACCOUNT', 'Neuer Kunde');
 define('BUTTON_SEARCH', 'Suchen');
-define('BUTTON_PRODUCT_OPTIONS', 'Produktoptionen');
+define('BUTTON_PRODUCT_OPTIONS', 'Artikeloptionen');
 define('BUTTON_PREVIEW', 'Vorschau');
 define('BUTTON_MODULE_REMOVE', 'Deinstallieren');
 define('BUTTON_MODULE_INSTALL', 'Installieren');
@@ -74,11 +73,6 @@ define('BUTTON_DETAILS', 'Details');
 define('BUTTON_NEW_TAX_CLASS', 'Neue Steuerklasse');
 define('BUTTON_NEW_TAX_RATE', 'Neuer Steuersatz');
 define('BUTTON_SEND', 'Senden');
-
-// BOF - Tomcraft - 2009-11-28 - Included xs:booster
-define('BUTTON_EDIT_XTBOOSTER', 'eBay-Artikel');
-define('BUTTON_XTBOOSTER_MULTI', 'eBay-Multi-Artikel');
-// EOF - Tomcraft - 2009-11-28 - Included xs:booster
 
 // BOF - Dokuman - 2010-02-04 - delete cache files in admin section
 define('BUTTON_DELETE_CACHE', 'Cache leeren');

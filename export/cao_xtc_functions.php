@@ -2308,7 +2308,6 @@ function OrderUpdate ()
           require_once(DIR_FS_INC . 'xtc_php_mail.inc.php');
           require_once(DIR_FS_INC . 'xtc_add_tax.inc.php');
           require_once(DIR_FS_INC . 'xtc_not_null.inc.php');
-          require_once(DIR_FS_INC . 'changedataout.inc.php');
           require_once(DIR_FS_INC . 'xtc_href_link.inc.php');
           require_once(DIR_FS_INC . 'xtc_date_long.inc.php');
           require_once(DIR_FS_INC . 'xtc_check_agent.inc.php');
@@ -2501,7 +2500,6 @@ function CustomersUpdate ()
     require_once(DIR_FS_INC . 'xtc_php_mail.inc.php');
     require_once(DIR_FS_INC . 'xtc_add_tax.inc.php');
     require_once(DIR_FS_INC . 'xtc_not_null.inc.php');
-    require_once(DIR_FS_INC . 'changedataout.inc.php');
     require_once(DIR_FS_INC . 'xtc_href_link.inc.php');
     require_once(DIR_FS_INC . 'xtc_date_long.inc.php');
     require_once(DIR_FS_INC . 'xtc_check_agent.inc.php');

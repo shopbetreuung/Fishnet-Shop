@@ -18,8 +18,6 @@
    Third Party contribution:
    OSC German Banktransfer v0.85a Autor:  Dominik Guder <osc@guder.org>
    Customers Status v3.x  (c) 2002-2003 Copyright Elari elari@free.fr
-   credit card encryption functions for the catalog module
-   BMC 2003 for the CC CVV Module
 
    Released under the GNU General Public License
    --------------------------------------------------------------*/
@@ -33,7 +31,6 @@ require_once('includes/ipdfbill/pdfbill_lib.php');
 require_once (DIR_FS_CATALOG.DIR_WS_CLASSES.'class.phpmailer.php');
 require_once (DIR_FS_INC.'xtc_php_mail.inc.php');
 require_once (DIR_FS_INC.'xtc_add_tax.inc.php');
-require_once (DIR_FS_INC.'changedataout.inc.php');
 require_once (DIR_FS_INC.'xtc_validate_vatid_status.inc.php');
 require_once (DIR_FS_INC.'xtc_get_attributes_model.inc.php');
 
@@ -415,13 +412,89 @@ switch ($action) {
       xtc_db_perform(TABLE_ORDERS_STATUS_HISTORY,$sql_data_array);
       $order_updated = true;
     }
+	
+	// BOF - Fishnet Services - Nicolas Gemsjäger
+	// PDF Rechnung automatisch generieren und per E-Mail versenden
+	if (ENABLE_PDFBILL == 'true') {
+		$pdfbill_send_check_qry = xtc_db_query("SELECT pdfbill_send FROM ".TABLE_ORDERS_STATUS." WHERE orders_status_id = '".$status."' AND language_id = '".$_SESSION['languages_id']."' AND pdfbill_send = '1' LIMIT 1");
+		if (xtc_db_num_rows($pdfbill_send_check_qry) == 1) {
+
+			// Rechnungsnummer erzeugen (Fakturieren)
+			if ($order->info['ibn_billnr']==0) {
+				require_once (DIR_FS_INC.'xtc_get_next_ibillnr.inc.php');
+				require_once (DIR_FS_INC.'xtc_set_ibillnr.inc.php');
+				require_once (DIR_FS_INC.'xtc_inc_next_ibillnr.inc.php');
+
+				$ibillnr = xtc_get_next_ibillnr();
+				xtc_set_ibillnr($oID, $ibillnr);
+				xtc_inc_next_ibillnr();
+			}	
+
+			// PDF erzeugen
+			$profile=profile_load_n('default');
+			$profile=$profile['profile_parameter_arr'];
+			$pdf=new pdfbill( $profile, $oID );
+			$pdf->max_height=280;
+			$pdf->doc_name  =  get_pdf_invoice_filename( $oID );
+			$pdf->LoadData($oID);
+			// lieferdatum diskret eintragen
+			$pdf->data['delivery_date']= '';
+			$pdf->format();
+			$pdf->Output($pdf->doc_name, "F");
+			
+			// Rechnung per Mail verschicken
+			$check_status_query = xtc_db_query("select customers_name, customers_email_address, orders_status, date_purchased, ibn_billdate, ibn_billnr from ".TABLE_ORDERS." where orders_id = '".xtc_db_input($oID)."'");
+			$check_status = xtc_db_fetch_array($check_status_query);
+
+			$billnr = make_billnr( $check_status['ibn_billdate'], $check_status['ibn_billnr'] );
+
+			// assign language to template for caching
+			$smarty->assign('language', $_SESSION['language']);
+			$smarty->caching = false;
+
+			// set dirs manual
+			$smarty->template_dir = DIR_FS_CATALOG.'templates';
+			$smarty->compile_dir = DIR_FS_CATALOG.'templates_c';
+			$smarty->config_dir = DIR_FS_CATALOG.'lang';
+
+			$smarty->assign('tpl_path', 'templates/'.CURRENT_TEMPLATE.'/');
+			$smarty->assign('logo_path', HTTP_SERVER.DIR_WS_CATALOG.'templates/'.CURRENT_TEMPLATE.'/img/');
+
+			$smarty->assign('NAME', $check_status['customers_name']);
+			$smarty->assign('ORDER_NR', $billnr);
+			$smarty->assign('ORDER_LINK', xtc_catalog_href_link(FILENAME_CATALOG_ACCOUNT_HISTORY_INFO, 'order_id='.$oID, 'SSL'));
+			$smarty->assign('ORDER_DATE', xtc_date_long($check_status['date_purchased']));
+			$smarty->assign('NOTIFY_COMMENTS', $notify_comments);
+			$smarty->assign('ORDER_STATUS', $orders_status_array[$status]);
+
+			$html_mail = $smarty->fetch(CURRENT_TEMPLATE.'/admin/mail/'.$order->info['language'].'/invoice_mail.html');
+			$txt_mail = $smarty->fetch(CURRENT_TEMPLATE.'/admin/mail/'.$order->info['language'].'/invoice_mail.txt');
+
+			$pdffile= DIR_FS_ADMIN.get_pdf_invoice_filename( $oID );
+			$pdffile_downloadname = get_pdf_invoice_download_filename( $oID );
+
+			$order_subject = str_replace('{$nr}', $order->info['ibn_billnr'], EMAIL_BILLING_SUBJECT);
+			$order_subject = str_replace('{$date}', strftime(DATE_FORMAT_LONG), $order_subject);
+
+			xtc_php_mail( EMAIL_BILLING_ADDRESS,                                 //  $from_email_address,        
+						  EMAIL_BILLING_NAME,                                     //  $from_email_name,           
+						  $check_status['customers_email_address'],               //  $to_email_address,          
+						  $check_status['customers_name'],                        //  $to_name,                   
+						  '',                                                     //  $forwarding_to,             
+						  EMAIL_BILLING_REPLY_ADDRESS,                            //  $reply_address,             
+						  EMAIL_BILLING_REPLY_ADDRESS_NAME,                       //  $reply_address_name,        
+						  $pdffile,                                               //  $path_to_attachement,       
+						  '',                                  //  $name_of_attachment, 
+						  $order_subject,                                  //  $email_subject,             
+						  $html_mail,                                             //  $message_body_html,         
+						  $txt_mail );                                            //  $message_body_plain
+
+			xtc_db_query("update ".TABLE_ORDERS." set ibn_pdfnotifydate = now() where orders_id = '".$oID."'");		
+		}
+	}
+	// EOF - Fishnet Services - Nicolas Gemsjäger
+	
     if ($order_updated) {
-        if(strpos(MODULE_PAYMENT_INSTALLED, 'shopgate.php') !== false){
-          /******* SHOPGATE **********/
-          include_once DIR_FS_CATALOG.'includes/external/shopgate/base/admin/orders.php';
-          setShopgateOrderStatus($oID, $status);
-          /******* SHOPGATE **********/
-        }
       $messageStack->add_session(SUCCESS_ORDER_UPDATED, 'success');
     } else {
       $messageStack->add_session(WARNING_ORDER_NOT_UPDATED, 'warning');
@@ -462,17 +535,6 @@ switch ($action) {
     }
 
     xtc_redirect(xtc_href_link(FILENAME_ORDERS, xtc_get_all_get_params(array ('oID', 'action'))));
-    break;
-
-  // Remove CVV Number
-  case 'deleteccinfo' :
-    xtc_db_query("UPDATE ".TABLE_ORDERS." SET cc_cvv = null WHERE orders_id = ".$oID);
-    xtc_db_query("UPDATE ".TABLE_ORDERS." SET cc_number = '0000000000000000' WHERE orders_id = ".$oID);
-    xtc_db_query("UPDATE ".TABLE_ORDERS." SET cc_expires = null WHERE orders_id = ".$oID);
-    xtc_db_query("UPDATE ".TABLE_ORDERS." SET cc_start = null WHERE orders_id = ".$oID);
-    xtc_db_query("UPDATE ".TABLE_ORDERS." SET cc_issue = null WHERE orders_id = ".$oID);
-
-    xtc_redirect(xtc_href_link(FILENAME_ORDERS, 'oID='.$oID.'&action=edit'));
     break;
 
   case 'afterbuy_send' :
@@ -626,46 +688,6 @@ require (DIR_WS_INCLUDES.'header.php');
               
               /* easyBill */
               include (DIR_WS_MODULES.'easybill.info.php');
-              
-              // CC - START
-              if ($order->info['cc_type'] || $order->info['cc_owner'] || $order->info['cc_number']) {
-                ?>
-                <tr>
-                  <td colspan="2"><?php echo xtc_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
-                </tr>
-                <tr>
-                  <td class="main"><?php echo ENTRY_CREDIT_CARD_TYPE; ?></td>
-                  <td class="main"><?php echo $order->info['cc_type']; ?></td>
-                </tr>
-                <tr>
-                  <td class="main"><?php echo ENTRY_CREDIT_CARD_OWNER; ?></td>
-                  <td class="main"><?php echo $order->info['cc_owner']; ?></td>
-                </tr>
-                <?php
-                // BMC CC Mod Start
-                if ($order->info['cc_number'] != '0000000000000000') {
-                  if (strtolower(CC_ENC) == 'true') {
-                    $cipher_data = $order->info['cc_number'];
-                    $order->info['cc_number'] = changedataout($cipher_data, CC_KEYCHAIN);
-                  }
-                }
-                // BMC CC Mod End
-                ?>
-                <tr>
-                  <td class="main"><?php echo ENTRY_CREDIT_CARD_NUMBER; ?></td>
-                  <td class="main"><?php echo $order->info['cc_number']; ?></td>
-                </tr>
-                <tr>
-                <td class="main"><?php echo ENTRY_CREDIT_CARD_CVV; ?></td>
-                <td class="main"><?php echo $order->info['cc_cvv']; ?></td>
-                </tr>
-                <tr>
-                  <td class="main"><?php echo ENTRY_CREDIT_CARD_EXPIRES; ?></td>
-                  <td class="main"><?php echo $order->info['cc_expires']; ?></td>
-                </tr>
-                <?php
-              }
-              // CC - END
 
               // Paypal Express Modul
               if ($order->info['payment_method']=='paypal_directpayment' or $order->info['payment_method']=='paypal' or $order->info['payment_method']=='paypalexpress') {
@@ -959,7 +981,6 @@ require (DIR_WS_INCLUDES.'header.php');
 			<?php
 			}
 			?>
-			<a class="btn btn-default" href="<?php echo xtc_href_link(FILENAME_ORDERS, 'oID='.$oID.'&action=deleteccinfo'); ?>"><?php echo BUTTON_REMOVE_CC_INFO;?></a>
             <a class="btn btn-default" href="<?php echo xtc_href_link(FILENAME_ORDERS, 'page='.$_GET['page'].'&oID='.$oID); ?>"><?php echo BUTTON_BACK;?></a>
 			
              <?php 

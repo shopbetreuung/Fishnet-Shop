@@ -47,6 +47,8 @@ if (isset ($_POST['action']) && ($_POST['action'] == 'process')) {
       $messageStack->add('account_delete', TEXT_LOGIN_ERROR);
     } else {
 //EOF - 2009-08-25 - Require password to disable account
+
+  $_SESSION['cart']->reset(true);
     
   // delete account and logout customer  
   xtc_db_query("delete from ".TABLE_ADDRESS_BOOK." where customers_id = '".(int) $_SESSION['customer_id']."'");
@@ -72,7 +74,6 @@ if (isset ($_POST['action']) && ($_POST['action'] == 'process')) {
   unset ($_SESSION['gv_id']);
   unset ($_SESSION['cc_id']);
   // GV Code End
-  $_SESSION['cart']->reset();
 
   $smarty->assign('BUTTON_CONTINUE', '<a href="'.xtc_href_link(FILENAME_DEFAULT, '', 'NONSSL').'">'.xtc_image_button('button_continue.gif', IMAGE_BUTTON_CONTINUE).'</a>');
 //BOF - 2009-08-25 - Require password to disable account

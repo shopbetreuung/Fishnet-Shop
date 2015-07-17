@@ -79,7 +79,10 @@ CREATE TABLE products_xsell (
   products_xsell_grp_name_id INT(10) UNSIGNED NOT NULL DEFAULT 1,
   xsell_id INT(10) UNSIGNED NOT NULL DEFAULT 1,
   sort_order INT(10) UNSIGNED NOT NULL DEFAULT 1,
-  PRIMARY KEY (ID)
+  PRIMARY KEY (ID),
+  KEY idx_products_id(products_id),
+  KEY idx_xsell_id(xsell_id),
+  KEY idx_sort_order(sort_order)
 ) ENGINE=MyISAM;
 
 DROP TABLE IF EXISTS products_xsell_grp_name;
@@ -287,7 +290,8 @@ CREATE TABLE categories (
   date_added DATETIME,
   last_modified DATETIME,
   PRIMARY KEY (categories_id),
-  KEY idx_categories_parent_id (parent_id)
+  KEY idx_categories_parent_id (parent_id),
+  KEY idx_categories_categories_status(categories_status)
 ) ENGINE=MyISAM;
 
 DROP TABLE IF EXISTS categories_description;
@@ -628,7 +632,9 @@ CREATE TABLE orders (
   ibn_pdfnotifydate DATE NOT NULL,
   ibn_fullbillnr CHAR( 60 ) NOT NULL,
   PRIMARY KEY (orders_id),
-  KEY idx_customers_id (customers_id)
+  KEY idx_customers_id (customers_id),
+  KEY idx_date_purchased(date_purchased),
+  KEY idx_orders_status(orders_status)
 ) ENGINE=MyISAM;
 
 # vr - 2010-04-21 add indices idx_orders_id, idx_products_id
@@ -649,7 +655,8 @@ CREATE TABLE orders_products (
   products_order_description text,
   PRIMARY KEY (orders_products_id),
   KEY idx_orders_id (orders_id),
-  KEY idx_products_id (products_id)
+  KEY idx_products_id (products_id),
+  KEY idx_products_quantity(products_quantity)
 ) ENGINE=MyISAM;
 
 DROP TABLE IF EXISTS orders_status;
@@ -768,7 +775,12 @@ CREATE TABLE products (
   products_startpage INT(1) NOT NULL DEFAULT 0,
   products_startpage_sort INT(4) NOT NULL DEFAULT 0,
   PRIMARY KEY (products_id),
-  KEY idx_products_date_added (products_date_added)
+  KEY idx_products_date_added (products_date_added),
+  KEY idx_manufacturers_id(manufacturers_id),
+  KEY idx_products_status(products_status),
+  KEY idx_products_fsk18(products_fsk18),
+  KEY idx_products_ean(products_ean),
+  KEY idx_products_model(products_model)
 ) ENGINE=MyISAM;
 
 DROP TABLE IF EXISTS products_attributes;
@@ -823,7 +835,8 @@ CREATE TABLE products_images (
   products_id INT NOT NULL,
   image_nr SMALLINT NOT NULL,
   image_name VARCHAR(254) NOT NULL,
-  PRIMARY KEY (image_id)
+  PRIMARY KEY (image_id),
+  KEY idx_image_nr(image_nr)
 ) ENGINE=MyISAM;
 
 DROP TABLE IF EXISTS products_notifications;
@@ -911,7 +924,8 @@ CREATE TABLE sessions (
   expiry INT(11) unsigned NOT NULL,
   value text NOT NULL,
   flag VARCHAR( 5 ) NULL DEFAULT NULL,
-  PRIMARY KEY (sesskey)
+  PRIMARY KEY (sesskey),
+  KEY idx_expiry(expiry)
 ) ENGINE=MyISAM;
 
 # BOF - web28 - 2010-07-07 - set shop offline
@@ -940,7 +954,8 @@ CREATE TABLE specials (
   date_status_change DATETIME,
   status INT(1) NOT NULL DEFAULT 1,
   PRIMARY KEY (specials_id),
-  KEY idx_specials_products_id (products_id)
+  KEY idx_specials_products_id (products_id),
+  KEY idx_status(status)
 ) ENGINE=MyISAM;
 
 DROP TABLE IF EXISTS tax_class;
@@ -1013,7 +1028,9 @@ CREATE TABLE whos_online (
   time_entry VARCHAR(14) NOT NULL,
   time_last_click VARCHAR(14) NOT NULL,
   last_page_url VARCHAR(255) NOT NULL,
-  http_referer VARCHAR(255) NOT NULL
+  http_referer VARCHAR(255) NOT NULL,
+  KEY idx_ip_address(ip_address),
+  KEY idx_time_last_click(time_last_click)
 ) ENGINE=MyISAM;
 
 DROP TABLE IF EXISTS zones;

@@ -1015,9 +1015,8 @@ CREATE TABLE imagesliders_info (
   imagesliders_image VARCHAR(64) NOT NULL,
   url_clicked INT(5) DEFAULT NULL,
   date_last_click DATETIME NULL,
-  PRIMARY KEY (imagesliders_id)
+  PRIMARY KEY (imagesliders_id,languages_id)
 ) ENGINE=MyISAM;
-
 
 DROP TABLE IF EXISTS whos_online;
 CREATE TABLE whos_online (
@@ -1237,7 +1236,7 @@ DROP TABLE IF EXISTS personal_offers_by_customers_status_3;
 DROP TABLE IF EXISTS personal_offers_by_customers_status_4;
 
 #database Version
-INSERT INTO database_version(version) VALUES ('SH_1.1');
+INSERT INTO database_version(version) VALUES ('SH_1.1.1');
 
 INSERT INTO cm_file_flags (file_flag, file_flag_name) VALUES ('0', 'information');
 INSERT INTO cm_file_flags (file_flag, file_flag_name) VALUES ('1', 'content');

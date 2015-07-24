@@ -1326,7 +1326,7 @@ function xtc_output_string($string, $translate = false, $protected = false) {
    * @return
    */
   function xtc_cfg_select_option($select_array, $key_value, $key = '') {
-    $string = '<div class="switch-toggle switch-default switch-default-blue">';
+    $string = '<div class="switch-toggle switch-default switch-default-blue switch-'.(int)count($select_array).'">';
     for ($i = 0, $n = sizeof($select_array); $i < $n; $i ++) {
       $name = (($key) ? 'configuration['.$key.']' : 'configuration_value');
       $label = $select_array[$i];
@@ -2484,7 +2484,7 @@ function xtc_output_string($string, $translate = false, $protected = false) {
    * $data = unserialize($response);
    * returns an array (
       'geoplugin_city' => 'Mannheim',
-      'geoplugin_region' => 'Baden-Württemberg',
+      'geoplugin_region' => 'Baden-WÃ¼rttemberg',
       'geoplugin_areaCode' => '0',
       'geoplugin_dmaCode' => '0',
       'geoplugin_countryCode' => 'DE',
@@ -2493,9 +2493,9 @@ function xtc_output_string($string, $translate = false, $protected = false) {
       'geoplugin_latitude' => '49.488300323486',
       'geoplugin_longitude' => '8.4646997451782',
       'geoplugin_regionCode' => '01',
-      'geoplugin_regionName' => 'Baden-Württemberg',
+      'geoplugin_regionName' => 'Baden-WÃ¼rttemberg',
       'geoplugin_currencyCode' => 'EUR',
-      'geoplugin_currencySymbol' => '€',
+      'geoplugin_currencySymbol' => 'Â€',
       'geoplugin_currencyConverter' => 0.7195162136,
     )
    *

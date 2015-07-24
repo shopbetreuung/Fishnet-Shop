@@ -545,7 +545,7 @@
 											"access"	=> "configuration",
 											"check"		=> true);
 											
-	$menu_items['configuration'][] = array(	"name" 		=> 'Kunden Feldl&uuml;ngen', // BOX_CONFIGURATION_2
+	$menu_items['configuration'][] = array(	"name" 		=> 'Kunden Feldl&auml;ngen', // BOX_CONFIGURATION_2
 											"is_main"	=> false,
 											"link" 		=> xtc_href_link(FILENAME_CONFIGURATION, 'gID=2', 'NONSSL'),
 											"access"	=> "configuration",

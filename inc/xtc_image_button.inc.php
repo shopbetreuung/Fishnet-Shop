@@ -24,13 +24,13 @@ function xtc_image_button($image, $alt = '', $parameters = '', $submit = false) 
     $html           = '';
     $title          = xtc_parse_input_field_data($alt, array('"' => '&quot;'));
     
-    // Erklärung: es wird geprüft, welches Buttonbild von Modified aufgerufen wird. Dementsprechend werden neue Attribute zugewiesen.
+    // ErklÃ¤rung: es wird geprÃ¼ft, welches Buttonbild von Modified aufgerufen wird. Dementsprechend werden neue Attribute zugewiesen.
     // z.B. dem Buttonbild 'button_buy_now.gif' wird zugewiesen:
     //      'Image' => '' (kein Bild - vergleiche cart_del.gif, dort wird das Bild cart_del.gif zugewiesen, damit bleibt der Button ein Bildbutton).
     //      'Text' => IMAGE_BUTTON_IN_CART (der Text der auf dem neuen Button angezeigt wird, in der Regel der Text der Modifiedvariablen '$alt', in unserem Beispiel der Text der in der Languagedatei 'IMAGE_BUTTON_IN_CART' zugewiesen wurde).
     //      'icon' => 'glyphicon glyphicon-shopping-cart' (das Icon das im Button angezeigt wird - in der Bootstrapdokumentation unter 'Icons by Glyphicons' kann man diese aussuchen).
     //      'iconposition' => 'iconleft' (die Position des Icons im Button - 'iconleft' = links vom Text, 'iconright' = rechts vom Text).
-    //      'Class' => '' (hier kann dem Button noch eine zusätzliche CSS-Klasse zugewiesen werden).
+    //      'Class' => '' (hier kann dem Button noch eine zusÃ¤tzliche CSS-Klasse zugewiesen werden).
     /* Buttons array */
     $buttons = array(
     'default'                       => array('Image' => '',                       'Text' => $alt,                           'icon' => '',                     'iconposition' => '',             'Class' => 'btn-default'),
@@ -57,7 +57,7 @@ function xtc_image_button($image, $alt = '', $parameters = '', $submit = false) 
     'button_redeem.gif'             => array('Image' => '',                       'Text' => $alt,                           'icon' => 'glyphicon glyphicon-asterisk',        'iconposition' => 'iconleft',     'Class' => 'btn-default'),
     'button_search.gif'             => array('Image' => '',                       'Text' => $alt,                           'icon' => 'glyphicon glyphicon-search',          'iconposition' => 'iconleft',     'Class' => 'btn-default'),
     'button_send.gif'               => array('Image' => '',                       'Text' => $alt,                           'icon' => 'glyphicon glyphicon-ok',              'iconposition' => 'iconleft',     'Class' => 'btn-default'),
-    'button_login_small.gif'        => array('Image' => '',                       'Text' => $alt,                           'icon' => 'glyphicon glyphicon-user',            'iconposition' => 'iconleft',     'Class' => 'btn-default'),
+    'button_login_small.gif'        => array('Image' => '',                       'Text' => $alt,                           'icon' => 'glyphicon glyphicon-user',            'iconposition' => 'iconleft',     'Class' => 'btn-primary'),
     'button_update.gif'             => array('Image' => '',                       'Text' => $alt,                           'icon' => 'glyphicon glyphicon-refresh',         'iconposition' => 'iconleft',     'Class' => 'btn-default'),
     'button_update_cart.gif'        => array('Image' => '',                       'Text' => $alt,                           'icon' => 'glyphicon glyphicon-refresh',         'iconposition' => 'iconleft',     'Class' => 'btn-default'),
     'button_view.gif'               => array('Image' => '',                       'Text' => $alt,                           'icon' => 'glyphicon glyphicon-eye-open',        'iconposition' => 'iconleft',     'Class' => 'btn-default'),

@@ -64,7 +64,7 @@ if (!$box_smarty->is_cached(CURRENT_TEMPLATE.'/boxes/box_imagesliders.html', $ca
 		$allowed = false;
 		unset($imagesliders_categories);
 		$imagesliders_categories = explode(",", $imagesliders_data["imagesliders_categories"]);
-		$categories_array = (!empty($cPath))?$cPath:"0";
+		$categories_array = (!empty($cPath))?$cPath:((basename(set_php_self())=="index.php")?"0":"-1");
 		
 		if (strrpos($categories_array, "_") === false) {
 			$categories_array = substr($categories_array, strrpos($categories_array, "_"));

@@ -78,9 +78,7 @@ class xtc_afterbuy_functions
 
 		//***************************************************************************************************************************************//
 		//settings:
-		$this->file = DIR_FS_DOCUMENT_ROOT.'/automatik_import/afterbuylog.txt';
-	
-	//	$this->file = DIR_FS_DOCUMENT_ROOT.'afterbuylog.txt';
+		$this->file = DIR_FS_DOCUMENT_ROOT.'afterbuylog.txt';
 		$this->logging = 1;
 		
 		//Sendesperre: 
@@ -97,7 +95,7 @@ class xtc_afterbuy_functions
 		//unbezahlte PayPal Bestellungen nicht übertragen
 		// 1 = aktiv (Standard)
 		// 0 = inaktiv
-		$afterbuysperre_unbezahlte_Bestellungen_PayPal = 0;
+		$afterbuysperre_unbezahlte_Bestellungen_PayPal = 1;
 		
 		$verwende_shop_artikelnummer = 0;
 		// 0 = Artikelnummer des Shopartikels
@@ -219,10 +217,7 @@ class xtc_afterbuy_functions
 		$this->afterbuyString .= "PartnerPass=".$PartnerPass."&";
 		$this->afterbuyString .= "UserID=".$UserID."&";
 		//$this->afterbuyString .= "Kbenutzername=".$customer['id']."_XTC_".$this->order_id."&";
-		//xt:C-Knr".$this->cData['customers_id']."%20xt:C-Bestnr: ".$this->oID."&";
-		$this->afterbuyString .= "Kbenutzername=xt:C-Knr".$customer['id']."%20xt:C-Bestnr:%20".$this->order_id."&";
-		#oder
-		#$this->afterbuyString .= "Kbenutzername=".$customer['mail']."_XTC_".$this->order_id."&";
+		$this->afterbuyString .= "Kbenutzername=shop%20cID:".$customer['id']."%20oID:".$this->order_id."&";
 		$this->afterbuyString .= "Kanrede=".$customer['gender']."&";
 		$this->afterbuyString .= "KFirma=".$customer['firma']."&";
 		$this->afterbuyString .= "KVorname=".$customer['vorname']."&";
@@ -235,7 +230,6 @@ class xtc_afterbuy_functions
 		$this->afterbuyString .= "Kfax=&";
 		$this->afterbuyString .= "Kemail=".$customer['mail']."&";
 		$this->afterbuyString .= "KLand=".$customer['land']."&";
-		
 		
 		// ############# LIEFERANSCHRIFT SETZEN #############
 		// Modifiziert FT (Neuer Parameter Übergabe der 2.Adresszeile)
@@ -286,20 +280,11 @@ class xtc_afterbuy_functions
 			case '2': //Kunde
 				$this->afterbuyString .= "Haendler=0&";
 				break;
-			case '3': //im Standard B2B
+			case '3': //Händler
 				$this->afterbuyString .= "Haendler=1&";
 				break;
-			case '4': //eigene Kundengruppe
-				$this->afterbuyString .= "Haendler=0&";
-				break;
-			case '5': //eigene Kundengruppe
-				$this->afterbuyString .= "Haendler=0&";
-				break;
-			case '6': //eigene Kundengruppe
-				$this->afterbuyString .= "Haendler=0&";
-				break;
-			case '7': //eigene Kundengruppe
-				$this->afterbuyString .= "Haendler=0&";
+			case '4': //Händler Ausland
+				$this->afterbuyString .= "Haendler=1&";
 				break;
 			default: //wenn alles nicht zutrifft
 				$this->afterbuyString .= "Haendler=0&";

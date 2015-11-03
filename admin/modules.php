@@ -18,7 +18,7 @@
 
   require('includes/application_top.php');
 
-  //Eingefügt um Fehler in CC Modul zu unterdrücken.
+  //EingefÃ¼gt um Fehler in CC Modul zu unterdrÃ¼cken.
   require(DIR_FS_CATALOG.DIR_WS_CLASSES . 'xtcPrice.php');
   $xtPrice = new xtcPrice($_SESSION['currency'],'');
   $module_directory = '';
@@ -121,10 +121,17 @@ require (DIR_WS_INCLUDES.'head.php');
                           <td class="dataTableHeadingContent" align="right"><?php echo TABLE_HEADING_ACTION; ?>&nbsp;</td>
                         </tr>
                         <?php
+						$country_query = xtc_db_query('SELECT countries_iso_code_2 FROM countries WHERE countries_id = "'.$_SESSION['customer_country_id'].'"');
+						$country = xtc_db_fetch_array($country_query);
+						$user_country_iso = $country['countries_iso_code_2'];
+						$klarna_supported_countries = array('SE', 'NO', 'DK', 'FI', 'DE', 'NL', 'SWE', 'NOR', 'DNK', 'FIN', 'DEU', 'NLD');
                         $file_extension = substr($PHP_SELF, strrpos($PHP_SELF, '.'));
                         $directory_array = array();
                         if ($dir = @dir($module_directory)) {
-                          while ($file = $dir->read()) {
+							while ($file = $dir->read()) {
+							if(($file == 'klarna_invoice.php' || $file == 'klarna_SpecCamp.php' || $file == 'klarna_partPayment.php') && !in_array($user_country_iso, $klarna_supported_countries)){
+								continue;
+							}
                             if (!is_dir($module_directory . $file)) {
                               if (substr($file, strrpos($file, '.')) == $file_extension) {
                                 //BOF - DokuMan - 2011-07-19 - sorting of modules (credits to GTB)

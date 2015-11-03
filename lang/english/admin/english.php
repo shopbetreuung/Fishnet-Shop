@@ -499,3 +499,25 @@ define ('CONFIG_MAX_VALUE_WARNING', '"% s" WARNING:% s input was ignored [maximu
 define ('CONFIG_MIN_VALUE_WARNING', '"% s" WARNING:% s input was ignored [Minimum:% s]');
 
 define ('WHOS_ONLINE_TIME_LAST_CLICK_INFO', 'Display period in seconds:% s After this time, the entries will be deleted.');
+
+define ('BOX_BASIC_SETTINGS', 'Basic Settings');
+define ('BOX_SERVER_SETTINGS', 'Server Settings');
+define ('BOX_CONFIGURATION_9', 'Warehouse Settings');
+define ('BOX_SHIPPING_AND_PAYMENT', 'Shipping & Payment');
+define ('BOX_MENU_PAYMENT', 'Payment');
+define ('BOX_FRONTEND', 'Frontend');
+define ('BOX_CONFIGURATION_2', 'Customers field lengths');
+define ('BOX_MAINTAINANCE', 'Maintenance');
+define ('BOX_SHOP_ON_OFF', 'Shop online/offline');
+define ('BOX_CLEVER_REACH', 'CleverReach Newsletter');
+define ('BOX_ATTRIBUTES','Attributes');
+define ('BOX_IMPORT_EXPORT','Import / Export');
+define ('BOX_LAW','Disclaimer');
+define ('BOX_HEADING_GV', 'Vouchers');
+
+#Menu main items
+define ('BOX_MENU_CUSTOMERS', 'Customers');
+define ('BOX_MENU_PRODUCTS', 'Products');
+define ('BOX_MENU_CONTENT', 'Content');
+define ('BOX_MENU_MARKETING', 'Marketing & SEO');
+define ('BOX_MENU_CONFIGURATION', 'Configuration');

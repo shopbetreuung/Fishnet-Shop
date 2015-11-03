@@ -504,3 +504,21 @@ define('WHOS_ONLINE_TIME_LAST_CLICK_INFO', 'Anzeigezeitraum in Sek.: %s. Nach di
 
 define('LABEL_TRUE', 'Ja');
 define('LABEL_FALSE', 'Nein');
+
+define ('BOX_BASIC_SETTINGS', 'Grundeinstellungen');
+define ('BOX_SERVER_SETTINGS', 'Servereinstellungen');
+define ('BOX_CONFIGURATION_9', 'Lagereinstellungen');
+define ('BOX_SHIPPING_AND_PAYMENT', 'Versand & Zahlung');
+define ('BOX_MENU_PAYMENT', 'Zahlarten');
+define ('BOX_FRONTEND', 'Shopansicht');
+define ('BOX_CONFIGURATION_2', 'Kunden Feldl&auml;ngen');
+define ('BOX_MAINTAINANCE', 'Wartung');
+define ('BOX_SHOP_ON_OFF', 'Shop online/offline');
+define ('BOX_CLEVER_REACH', 'CleverReach Newsletter');
+
+#Menu main items
+define ('BOX_MENU_CUSTOMERS', 'Kunden');
+define ('BOX_MENU_PRODUCTS', 'Produkte');
+define ('BOX_MENU_CONTENT', 'Inhalte');
+define ('BOX_MENU_MARKETING', 'Marketing & SEO');
+define ('BOX_MENU_CONFIGURATION', 'Konfiguration');

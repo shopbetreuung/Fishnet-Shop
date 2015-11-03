@@ -203,6 +203,7 @@ define('IMAGE_BUTTON_UPDATE_CART', 'Update shopping cart');
 define('IMAGE_BUTTON_WRITE_REVIEW', 'Write evaluation');
 define('IMAGE_BUTTON_ADMIN', 'Admin');
 define('IMAGE_BUTTON_PRODUCT_EDIT', 'Edit product');
+define('IMAGE_BUTTON_PRODUCT_MORE', 'details');
 // BOF - vr - 2010-02-20 removed double definition 
 // define('IMAGE_BUTTON_LOGIN', 'Login');
 // EOF - vr - 2010-02-20 removed double definition 

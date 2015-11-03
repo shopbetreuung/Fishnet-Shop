@@ -160,6 +160,7 @@ define('BOX_SHIPPING_STATUS','Shipping status');
 define('BOX_SALES_REPORT','Sales Report');
 define('BOX_MODULE_EXPORT','Modules');
 define('BOX_HEADING_GV_ADMIN', 'Vouchers/Coupons');
+define('BOX_HEADING_GV', 'Vouchers');
 define('BOX_GV_ADMIN_QUEUE', 'Gift Voucher Queue');
 define('BOX_GV_ADMIN_MAIL', 'Mail Gift Voucher');
 define('BOX_GV_ADMIN_SENT', 'Gift Vouchers sent');

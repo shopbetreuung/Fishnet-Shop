@@ -308,8 +308,8 @@ define('JS_PRICE_FROM_MUST_BE_NUM', '* Price over, must be a number\n');
 define('JS_PRICE_TO_MUST_BE_NUM', '* Price up to, must be a number\n');
 define('JS_PRICE_TO_LESS_THAN_PRICE_FROM', '* Price up to must be larger or same size as Price over.\n');
 define('JS_INVALID_KEYWORDS', '* Invalid search key\n');
-define('TEXT_LOGIN_ERROR', '<font color="#ff0000"><strong>ERROR:</strong></font> The entered \'e-mail address\' and/or the \'password\' do not match.');
-define('TEXT_NO_EMAIL_ADDRESS_FOUND', '<font color="#ff0000"><strong>WARNING:</strong></font> The e-mail address entered is not registered. Please try again.');
+define('TEXT_LOGIN_ERROR', '<font color="#ff0000"><strong>ERROR:</strong></font> Wrong e-mail address or password.');
+define('TEXT_NO_EMAIL_ADDRESS_FOUND', '<font color="#ff0000"><strong>ERROR:</strong></font> Wrong e-mail address or password.');
 define('TEXT_PASSWORD_SENT', 'A new password was sent by e-mail.');
 define('TEXT_PRODUCT_NOT_FOUND', 'Product not found!');
 define('TEXT_MORE_INFORMATION', 'For further information, please visit the <a style="text-decoration:underline;" href="%s" onclick="window.open(this.href); return false;">homepage</a> of this product.');
@@ -471,10 +471,10 @@ define('YOUR_PRICE','your price ');
 // BOF - Tomcraft - 2009-10-09 - Added text-constant for unit price
 define('UNIT_PRICE','unit price ');
 // EOF - Tomcraft - 2009-10-09 - Added text-constant for unit price
-define('ONLY',' Now only ');// DokuMan - Werbung mit durchgestrichenen Statt-Preisen ist zul‰ssig
+define('ONLY',' Now only ');// DokuMan - Werbung mit durchgestrichenen Statt-Preisen ist zul√§ssig
 define('FROM','from ');
 define('YOU_SAVE','you save ');
-define('INSTEAD','Our previous price ');// DokuMan - Werbung mit durchgestrichenen Statt-Preisen ist zul‰ssig
+define('INSTEAD','Our previous price ');// DokuMan - Werbung mit durchgestrichenen Statt-Preisen ist zul√§ssig
 define('TXT_PER',' per ');
 define('TAX_INFO_INCL','%s VAT incl.');
 define('TAX_INFO_EXCL','%s VAT excl.');
@@ -522,7 +522,7 @@ define('PAYPAL_AMMOUNT_NULL','The order sum which can be expected (without dispa
 // EOF - web28 - 2010-05-07 - PayPal API Modul
 
 define('BASICPRICE_VPE_TEXT','in this volume only '); // Hetfield - 2009-11-26 - Added language definition for vpe at graduated prices
-//web - 2010-07-11 - Preisanzeige bei Staffelpreisen (grˆﬂte Staffel)
+//web - 2010-07-11 - Preisanzeige bei Staffelpreisen (gr√∂√üte Staffel)
 define('GRADUATED_PRICE_MAX_VALUE', 'from');
 
 //web28 - 2010-08-20 - VERSANDKOSTEN WARENKORB

@@ -153,6 +153,7 @@ define('BOX_TPL_BOXES','Boxes Sort Order');
 define('BOX_CURRENCIES', 'Currencies');
 define('BOX_LANGUAGES', 'Languages');
 define('BOX_ORDERS_STATUS', 'Order Status');
+define('BOX_ATTRIBUTES','Attributes');
 define('BOX_ATTRIBUTES_MANAGER','Attribute Manager');
 define('BOX_MODULE_NEWSLETTER','Newsletter');
 define('BOX_SHIPPING_STATUS','Shipping status');

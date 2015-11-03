@@ -82,7 +82,7 @@
     if ($coupon_result['coupon_type']=='P') $coupon_amount = COUPON_INFO . number_format($coupon_result['coupon_amount'], 2) . '% ';
     if ($coupon_result['coupon_minimum_order']>0) $coupon_amount .= COUPON_MINORDER_INFO . $xtPrice->xtcFormat($coupon_result['coupon_minimum_order'], true) . ' ';
     if (trim($coupon_result['restrict_to_products'])!='' || trim($coupon_result['restrict_to_categories'])!='') $coupon_amount .= COUPON_RESTRICT_INFO;
-    //TODO - Anzeige der gültigen Artikel/Kategorien
+    //TODO - Anzeige der gÃ¼ltigen Artikel/Kategorien
     //EOF - web28 - 2011-04-13 - ADD Coupon message infos
 
     $from = xtc_db_prepare_input($_POST['from']);

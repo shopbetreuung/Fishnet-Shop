@@ -2341,10 +2341,15 @@ function xtc_output_string($string, $translate = false, $protected = false) {
     $month_array[10] = _OCTOBER;
     $month_array[11] = _NOVEMBER;
     $month_array[12] = _DECEMBER;
+	if($date == ''){
+		$date = date("Y-m-d H:i:s");
+	}
     $usedate = getdate($date);
     $day = $usedate['mday'];
     $month = $usedate['mon'];
     $year = $usedate['year'];
+	$to_year = date("Y") + 15;
+    $from_year = date("Y") - 1;
     $date_selector = '<select name="'.$prefix.'_day">';
     for ($i = 1; $i < 32; $i ++) {
       $date_selector .= '<option value="'.$i.'"';
@@ -2362,7 +2367,7 @@ function xtc_output_string($string, $translate = false, $protected = false) {
     }
     $date_selector .= '</select>';
     $date_selector .= '<select name="'.$prefix.'_year">';
-    for ($i = 2001; $i < 2019; $i ++) {
+    for ($i = $from_year; $i < $to_year; $i ++) {
       $date_selector .= '<option value="'.$i.'"';
       if ($i == $year)
         $date_selector .= 'selected';

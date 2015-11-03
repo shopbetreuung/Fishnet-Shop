@@ -744,8 +744,6 @@ class xtc_afterbuy_functions
 		}
 		if ($oData['payment_method'] == 'paypal' ||
 			$oData['payment_method'] == 'paypal_gambio' ||	
-			$oData['payment_method'] == 'paypa_ipn' ||	
-			$oData['payment_method'] == 'paypal_ipn' ||	
 			$oData['payment_method'] == 'paypalde' ||	
 			$oData['payment_method'] == 'paypalexpress')
 		{
@@ -1010,8 +1008,6 @@ class xtc_afterbuy_functions
 			case 'paypal':
 			case 'paypalexpress':
 			case 'paypal_gambio':
-			case 'paypa_ipn':
-			case 'paypal_ipn':
 			case 'paypalde':
 				$this->payment_id = '5';
 				$this->payment_name = "Paypal";

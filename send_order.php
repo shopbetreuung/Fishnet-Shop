@@ -53,8 +53,8 @@ if ($_SESSION['customer_id'] == $order_check['customers_id'] || $send_by_admin) 
   $smarty->assign('address_label_payment', xtc_address_format($order->billing['format_id'], $order->billing, 1, '', '<br />'));
   $smarty->assign('csID', $order->customer['csID']);
 
-  $order_total = $order->getTotalData($insert_id); //ACHTUNG für Bestellbestätigung  aus Admin Funktion in admin/includes/classes/order.php
-  $smarty->assign('order_data', $order->getOrderData($insert_id)); //ACHTUNG für Bestellbestätigung  aus Admin Funktion in admin/includes/classes/order.php
+  $order_total = $order->getTotalData($insert_id); //ACHTUNG fÃ¼r BestellbestÃ¤tigung  aus Admin Funktion in admin/includes/classes/order.php
+  $smarty->assign('order_data', $order->getOrderData($insert_id)); //ACHTUNG fÃ¼r BestellbestÃ¤tigung  aus Admin Funktion in admin/includes/classes/order.php
   $smarty->assign('order_total', $order_total['data']);
 
   // assign language to template for caching Web28 2012-04-25 - change all $_SESSION['language'] to $order->info['language']
@@ -94,7 +94,7 @@ if ($_SESSION['customer_id'] == $order_check['customers_id'] || $send_by_admin) 
   }
   //EOF - web28 - 2010-08-20 - Fix for more personalized e-mails to the customer (show salutation and surname)
 
-  //BOF - web28 - 2010-08-20 - Erweiterung Variablen für Bestätigungsmail
+  //BOF - web28 - 2010-08-20 - Erweiterung Variablen fÃ¼r BestÃ¤tigungsmail
   $smarty->assign('CITY', $order->customer['city']);
   $smarty->assign('POSTCODE', $order->customer['postcode']);
   $smarty->assign('STATE', $order->customer['state']);
@@ -103,34 +103,11 @@ if ($_SESSION['customer_id'] == $order_check['customers_id'] || $send_by_admin) 
   $smarty->assign('STREET', $order->customer['street_address']);
   $smarty->assign('FIRSTNAME', $order->customer['firstname']);
     $smarty->assign('LASTNAME', $order->customer['lastname']);
-  //EOF - web28 - 2010-08-20 - Erweiterung Variablen für Bestätigungsmail
+  //EOF - web28 - 2010-08-20 - Erweiterung Variablen fÃ¼r BestÃ¤tigungsmail
 
   $smarty->assign('COMMENTS', $order->info['comments']);
   $smarty->assign('EMAIL', $order->customer['email_address']);
   $smarty->assign('PHONE',$order->customer['telephone']);
-
-  //BOF  - web28 - 2010-03-27 PayPal Bezahl-Link
-  unset ($_SESSION['paypal_link']);
-  if ($order->info['payment_method'] == 'paypal_ipn') {
-
-    //BOF - web28 - 2010-06-11 - Send Order  by Admin Paypal IPN
-    if(isset($send_by_admin)) { //DokuMan - 2010-09-18 - Undefined variable: send_by_admin
-      require (DIR_FS_CATALOG_MODULES.'payment/paypal_ipn.php');
-      include(DIR_FS_LANGUAGES.$order->info['language'].'/modules/payment/paypal_ipn.php');
-      $payment_modules = new paypal_ipn;
-    }
-    //EOF - web28 - 2010-06-11 - Send Order  by Admin Paypal IPN
-
-    $order_id= $insert_id;
-    $paypal_link = array();
-    $payment_modules->create_paypal_link();
-
-    $smarty->assign('PAYMENT_INFO_HTML', $paypal_link['html']);
-    $smarty->assign('PAYMENT_INFO_TXT',  MODULE_PAYMENT_PAYPAL_IPN_TXT_EMAIL . $paypal_link['text']);
-    $_SESSION['paypal_link']= $paypal_link['checkout'];
-
-  }
-  //EOF  - web28 - 2010-03-27 PayPal Bezahl-Link
 
   // PAYMENT MODUL TEXTS
   // EU Bank Transfer
@@ -289,7 +266,7 @@ if ($_SESSION['customer_id'] == $order_check['customers_id'] || $send_by_admin) 
   if(isset($send_by_admin)) { //DokuMan - 2010-09-18 - Undefined variable: send_by_admin
     $customer_notified = '1';
     $orders_status_id = '1';
-    //Comment out the next line for setting  the $orders_status_id= '1 '- Auskommentieren der nächste Zeile, um die $orders_status_id = '1' zu setzen
+    //Comment out the next line for setting  the $orders_status_id= '1 '- Auskommentieren der nÃ¤chste Zeile, um die $orders_status_id = '1' zu setzen
     $orders_status_id = ($order->info['orders_status']  < 1) ? '1' : $order->info['orders_status'];
 
     //web28 - 2011-03-20 - Fix order status

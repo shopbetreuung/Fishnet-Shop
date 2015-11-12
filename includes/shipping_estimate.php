@@ -25,7 +25,7 @@
 // http://www.xtc-modified.org/forum/topic.php?id=9883
 
 if (!defined('SHOW_ALWAYS_LANG_DROPDOWN')) {
-  define('SHOW_ALWAYS_LANG_DROPDOWN', true); // true: Zeigt immer das Länderauswahlfeld an - false: Zeigt Länderauswahlfeld nur bei nicht eingeloggten Kunden
+  define('SHOW_ALWAYS_LANG_DROPDOWN', true); // true: Zeigt immer das LÃ¤nderauswahlfeld an - false: Zeigt LÃ¤nderauswahlfeld nur bei nicht eingeloggten Kunden
 }
 require_once (DIR_WS_CLASSES.'order.php');
 require_once (DIR_FS_INC.'xtc_get_country_list.inc.php');

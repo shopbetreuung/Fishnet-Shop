@@ -112,6 +112,12 @@
 											"access"	=> "manufacturers",
 											"check"		=> true);	
 										
+    $menu_items['products'][] = array(		"name" 		=> BOX_WHOLESALERS,
+                                            "is_main"	=> true,
+                                            "link" 		=> xtc_href_link(FILENAME_WHOLESALERS, '', 'NONSSL'),
+                                            "access"	=> "wholesalers",
+                                            "check"		=> true);
+										
 	$menu_items['products'][] = array(		"name" 		=> BOX_REVIEWS,
 											"is_main"	=> true,
 											"link" 		=> xtc_href_link(FILENAME_REVIEWS, '', 'NONSSL'),

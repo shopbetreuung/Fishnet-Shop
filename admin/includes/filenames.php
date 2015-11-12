@@ -40,6 +40,8 @@ define('FILENAME_GEO_ZONES', 'geo_zones.php');
 define('FILENAME_LANGUAGES', 'languages.php');
 define('FILENAME_MAIL', 'mail.php');
 define('FILENAME_MANUFACTURERS', 'manufacturers.php');
+define('FILENAME_WHOLESALERS', 'wholesalers.php');
+define('FILENAME_WHOLESALER_LIST', 'wholesalers_list.php');
 define('FILENAME_MODULES', 'modules.php');
 define('FILENAME_ORDERS', 'orders.php');
 define('FILENAME_ORDERS_INVOICE', 'invoice.php');

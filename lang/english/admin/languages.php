@@ -41,4 +41,8 @@ define('ERROR_REMOVE_DEFAULT_LANGUAGE', 'Error: The default language can not be 
 define('TEXT_INFO_LANGUAGE_STATUS', 'Status:');
 define('TABLE_HEADING_LANGUAGE_STATUS', 'Status');
 // EOF - Tomcraft - 2009-11-08 - Added option to deactivate languages
+
+define('ERROR_TEXT_HEADING', 'Language not saved, fix errors:');
+define('ERROR_TEXT_NAME', 'Name invalid!');
+define('ERROR_TEXT_CODE', 'Code invalid!');
 ?>

@@ -41,4 +41,8 @@ define('ERROR_REMOVE_DEFAULT_LANGUAGE', 'Fehler: Die Standardsprache darf nicht 
 define('TEXT_INFO_LANGUAGE_STATUS', 'Status:');
 define('TABLE_HEADING_LANGUAGE_STATUS', 'Status');
 // EOF - Tomcraft - 2009-11-08 - Added option to deactivate languages
+
+define('ERROR_TEXT_HEADING', 'Fehler! Sprache konnte nicht gespeichert werden:');
+define('ERROR_TEXT_NAME', 'Name ung&uuml;ltig!');
+define('ERROR_TEXT_CODE', 'Codierung ung&uuml;ltig!');
 ?>

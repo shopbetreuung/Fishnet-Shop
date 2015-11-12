@@ -31,6 +31,7 @@
 	<link rel="stylesheet" type="text/css" href="includes/css/bootstrap-theme.css"> 
 	<link rel="stylesheet" type="text/css" href="includes/css/gridstack.min.css"> 
 	<link rel="stylesheet" type="text/css" href="includes/stylesheet.css">
+    <link rel="stylesheet" type="text/css" href="includes/css/admin_responsive.css">
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 	<script src="http://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.0/jquery-ui.js"></script>

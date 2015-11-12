@@ -116,43 +116,27 @@ require (DIR_WS_INCLUDES.'header.php');
 <!-- header_eof //-->
 
 <!-- body //-->
-<table border="0" width="100%" cellspacing="2" cellpadding="2">
-  <tr>
+<div class='row'>
+                <div class='col-xs-12'>
+                    <div class="col-xs-3 col-sm-1 text-right"><?php echo xtc_image(DIR_WS_ICONS.'heading_modules.gif'); ?></div>
+                    <div class="col-xs-9 col-sm-11"><p class="h2"><?php echo HEADING_TITLE; ?></p> Statistics</div>
+                </div>
+                <div class='col-xs-12'><br></div>
 
-
-<!-- body_text //-->
-
-    <td class="boxCenter" width="100%" valign="top">
-      <table border="0" width="100%" cellspacing="0" cellpadding="2">
-        <tr>
-          <td colspan=2>
-            <table border="0" width="100%" cellspacing="0" cellpadding="0">
-  <tr>
-    <td width="80" rowspan="2"><?php echo xtc_image(DIR_WS_ICONS.'heading_statistic.gif'); ?></td>
-    <td class="pageHeading"><?php echo HEADING_TITLE; ?></td>
-  </tr>
-  <tr>
-    <td class="main" valign="top">Statistics</td>
-  </tr>
-</table>
-          </td>
-        </tr>
 <?php
 
 if ($srExp < 1) {
 ?>
-        <tr>
-          <td colspan="2">
-            <form action="" method="get">
-              <table border="0" style="border: 1px solid; border-color: #cccccc;" width="100%" cellspacing="0" cellpadding="0">
-                <tr>
-                  <td align="left" rowspan="2" class="menuBoxHeading">
+        <div class='col-xs-12' style="border: 1px solid; border-color: #cccccc; background-color: #fcfcfc;">   
+            <div class='col-xs-12'><br></div>
+            <div class='col-xs-12 col-sm-4 '>
                     <input type="radio" name="report" value="1" <?php if ($srView == 1) echo "checked"; ?>><?php echo REPORT_TYPE_YEARLY; ?><br />
                     <input type="radio" name="report" value="2" <?php if ($srView == 2) echo "checked"; ?>><?php echo REPORT_TYPE_MONTHLY; ?><br />
                     <input type="radio" name="report" value="3" <?php if ($srView == 3) echo "checked"; ?>><?php echo REPORT_TYPE_WEEKLY; ?><br />
                     <input type="radio" name="report" value="4" <?php if ($srView == 4) echo "checked"; ?>><?php echo REPORT_TYPE_DAILY; ?><br />
-                  </td>
-                  <td class="menuBoxHeading">
+            </div>
+            <div class='col-xs-12 hidden-sm hidden-md hidden-lg'><hr></div>
+            <div class='col-xs-12 col-sm-4 '>
 <?php echo REPORT_START_DATE; ?><br />
                     <select name="startD" size="1">
 <?php
@@ -202,21 +186,7 @@ if ($srExp < 1) {
 	}
 ?>
                     </select>
-                  </td>
-                  <td rowspan="2" align="left" class="menuBoxHeading"> <?php echo REPORT_STATUS_FILTER; ?><br /> 
-                    <?php echo xtc_draw_pull_down_menu('status', array_merge(array(array('id' => '0', 'text' => REPORT_ALL)), $orders_statuses), $_GET['status']); ?> 
-                    
-                    <br /><?php echo REPORT_CAMPAIGN_FILTER; ?><br /> 
-<?php echo xtc_draw_pull_down_menu('campaign', array_merge(array(array('id' => '0', 'text' => REPORT_ALL)), $campaigns), $_GET['campaign']); ?> 
-                    
-                    </td>
-                  <td rowspan="2" align="left" class="menuBoxHeading"><br />
-                  </td>
-                  <td rowspan="2" align="left" class="menuBoxHeading"> <br />
-                  </td>
-                </tr>
-                <tr>
-                  <td class="menuBoxHeading">
+<br><br>
 <?php echo REPORT_END_DATE; ?><br />
                     <select name="endD" size="1">
 <?php
@@ -268,25 +238,28 @@ if ($srExp < 1) {
 	}
 ?>
                     </select>
-                  </td>
-                </tr>
-                <tr>
-                  <td colspan="5" class="menuBoxHeading" align="right">
+                  </div>
+            <div class='col-xs-12 hidden-sm hidden-md hidden-lg'><hr></div>
+            <div class="col-xs-12 col-sm-4"> <?php echo REPORT_STATUS_FILTER; ?><br /> 
+                    <?php echo xtc_draw_pull_down_menu('status', array_merge(array(array('id' => '0', 'text' => REPORT_ALL)), $orders_statuses), $_GET['status']); ?> 
+                    
+                    <br /><?php echo REPORT_CAMPAIGN_FILTER; ?><br /> 
+<?php echo xtc_draw_pull_down_menu('campaign', array_merge(array(array('id' => '0', 'text' => REPORT_ALL)), $campaigns), $_GET['campaign']); ?> 
+                    
+
+                
+
+                </div> 
+            <div class='col-xs-12 hidden-sm hidden-md hidden-lg'><hr></div>
+                  <div class="col-xs-12 text-right">
                   <?php echo '<input type="submit" class="btn btn-default" onclick="this.blur();" value="' . BUTTON_UPDATE . '"/>'; ?>
-                  </td>
-              </table>
-            </form>
-          </td>
-        </tr>
+                  </div>
+            </div>
 <?php
 
 } // end of ($srExp < 1)
 ?>
-        <tr>
-          <td width=100% valign=top>
-            <table border="0" width="100%" cellspacing="0" cellpadding="2">
-              <tr>
-                <td valign="top">
+
  <?php
 
 if (count($campaign->result)) {
@@ -295,22 +268,22 @@ if (count($campaign->result)) {
                 
     
     
-    
- <table border="0" width="100%" cellspacing="0" cellpadding="2">
+                <div class='table-responsive col-xs-12'>
+ <table class='table table-bordered'>
  
    <tr class="dataTableHeadingRow"> 
-    <td class="dataTableHeadingContent" colspan="2" width="25%"><?php echo HEADING_TOTAL; ?></td>
+    <td class="dataTableHeadingContent hidden-xs" colspan="2" width="25%"><?php echo HEADING_TOTAL; ?></td>
     <td class="dataTableHeadingContent" width="10%">&nbsp;</td>
-    <td class="dataTableHeadingContent" width="15%"><?php echo $campaign->total['leads']; ?></td>
-    <td class="dataTableHeadingContent" colspan="2" width="30%"><?php echo $campaign->total['sells']; ?></td>
+    <td class="dataTableHeadingContent hidden-xs" width="15%"><?php echo $campaign->total['leads']; ?></td>
+    <td class="dataTableHeadingContent hidden-xs" colspan="2" width="30%"><?php echo $campaign->total['sells']; ?></td>
     <td class="dataTableHeadingContent" width="20%"><?php echo $campaign->total['sum']; ?></td>
   </tr>
   <tr class="dataTableHeadingRow"> 
-    <td class="dataTableHeadingContent" colspan="2" width="25%">&nbsp;</td>
+    <td class="dataTableHeadingContent hidden-xs" colspan="2" width="25%">&nbsp;</td>
     <td class="dataTableHeadingContent" width="10%"><?php echo HEADING_HITS; ?></td>
-    <td class="dataTableHeadingContent" width="15%"><?php echo HEADING_LEADS; ?></td>
-    <td class="dataTableHeadingContent" width="15%"><?php echo HEADING_SELLS; ?></td>
-    <td class="dataTableHeadingContent" width="15%"><?php echo HEADING_LATESELLS; ?></td>
+    <td class="dataTableHeadingContent hidden-xs" width="15%"><?php echo HEADING_LEADS; ?></td>
+    <td class="dataTableHeadingContent hidden-xs" width="15%"><?php echo HEADING_SELLS; ?></td>
+    <td class="dataTableHeadingContent hidden-xs" width="15%"><?php echo HEADING_LATESELLS; ?></td>
     <td class="dataTableHeadingContent" width="20%"><?php echo HEADING_SUM; ?></td>
   </tr>
   
@@ -366,17 +339,9 @@ if (count($campaign->result)) {
 	}
 ?>
 </table>
+                    </div>
 <?php } ?>
-                &nbsp; </td>
-              </tr>
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-<!-- body_text_eof //-->
-  </tr>
-</table>
+</div>
 <!-- body_eof //-->
 
 <!-- footer //-->

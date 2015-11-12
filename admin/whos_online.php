@@ -36,44 +36,31 @@
 <?php require(DIR_WS_INCLUDES . 'header.php'); ?>
 <!-- header_eof //-->
 <!-- body //-->
-<table border="0" width="100%" cellspacing="2" cellpadding="2">
-  <tr>
+<div class='row'>
     
 <!-- body_text //-->
-    <td class="boxCenter" width="100%" valign="top">
-    <table border="0" width="100%" cellspacing="0" cellpadding="2">
-      <tr>
-        <td>
-        <table border="0" width="100%" cellspacing="0" cellpadding="0">
-          <tr>
-            <td class="pageHeading nobr"><?php echo HEADING_TITLE; ?></td>
-            <td class="smallText" align="left" width="100%">&nbsp;&nbsp;
+
+<div class="col-xs-12"><p class='h2'><?php echo HEADING_TITLE; ?></p></div>
+<div class="col-xs-12 smallText">
               <?php
               if (defined('WHOS_ONLINE_TIME_LAST_CLICK_INFO')) {
                 echo sprintf(WHOS_ONLINE_TIME_LAST_CLICK_INFO ,$time_last_click);
               }
               ?>
-            </td>
-          </tr>
-        </table>
-        </td>
-      </tr>
-      <tr>
-        <td>
-        <table border="0" width="100%" cellspacing="0" cellpadding="0">
-          <tr>
-            <td valign="top">
-            <table border="0" width="100%" cellspacing="0" cellpadding="2">
+</div>
+<div class='col-xs-12'>
+    <div id='responsive_table' class='table-responsive pull-left col-sm-12'>
+    <table class="table table-bordered table-striped">
               <tr class="dataTableHeadingRow">
                 <td class="dataTableHeadingContent" align="center"><?php echo TABLE_HEADING_ONLINE; ?></td>
                 <td class="dataTableHeadingContent" align="center"><?php echo TABLE_HEADING_CUSTOMER_ID; ?></td>
                 <td class="dataTableHeadingContent" align="center"><?php echo TABLE_HEADING_FULL_NAME; ?></td>
-                <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_IP_ADDRESS; ?></td>
+                <td class="dataTableHeadingContent hidden-xs"><?php echo TABLE_HEADING_IP_ADDRESS; ?></td>
                 <!--td class="dataTableHeadingContent" align="center"><?php echo TABLE_HEADING_COUNTRY; ?></td-->
-                <td class="dataTableHeadingContent" align="center"><?php echo TABLE_HEADING_ENTRY_TIME; ?></td>
-                <td class="dataTableHeadingContent" align="center"><?php echo TABLE_HEADING_LAST_CLICK; ?></td>
-                <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_LAST_PAGE_URL; ?></td>
-                <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_HTTP_REFERER; ?></td>
+                <td class="dataTableHeadingContent hidden-xs" align="center"><?php echo TABLE_HEADING_ENTRY_TIME; ?></td>
+                <td class="dataTableHeadingContent hidden-xs" align="center"><?php echo TABLE_HEADING_LAST_CLICK; ?></td>
+                <td class="dataTableHeadingContent hidden-xs"><?php echo TABLE_HEADING_LAST_PAGE_URL; ?></td>
+                <td class="dataTableHeadingContent hidden-xs"><?php echo TABLE_HEADING_HTTP_REFERER; ?></td>
               </tr>
               <?php
               $whos_online_query = xtc_db_query("select customer_id,
@@ -129,21 +116,22 @@
                 <td class="dataTableContent" align="center"><?php echo gmdate('H:i:s', $time_online); ?></td>
                 <td class="dataTableContent" align="center"><?php echo $whos_online['customer_id']; ?></td>
                 <td class="dataTableContent"  align="center"><?php echo $whos_online['full_name']; ?></td>
-                <td class="dataTableContent" align="center"><a href="<?php echo WHOS_ONLINE_IP_WHOIS_SERVICE.$whos_online['ip_address']; ?>" style="font-weight:bold; text-decoration:underline;" target="_blank"><?php echo $whos_online['ip_address']; ?></a><?php  echo (isset($whos_online_hostname) ? $whos_online_hostname : ''); ?></td>
+                <td class="dataTableContent hidden-xs" align="center"><a href="<?php echo WHOS_ONLINE_IP_WHOIS_SERVICE.$whos_online['ip_address']; ?>" style="font-weight:bold; text-decoration:underline;" target="_blank"><?php echo $whos_online['ip_address']; ?></a><?php  echo (isset($whos_online_hostname) ? $whos_online_hostname : ''); ?></td>
                 <!--td class="dataTableContent" align="center"><?php echo $geoip_data['geoplugin_countryName'].' ('.$geoip_data['geoplugin_countryCode'].')'; ?></td-->
-                <td class="dataTableContent"  align="center"><?php echo date('H:i:s', $whos_online['time_entry']); ?></td>
-                <td class="dataTableContent" align="center"><?php echo date('H:i:s', $whos_online['time_last_click']); ?></td>
-                <td class="dataTableContent"><?php echo $last_page_url; ?>&nbsp;</td>
-                <td class="dataTableContent"><?php echo encode_htmlentities($whos_online['http_referer']); ?></td>
+                <td class="dataTableContent hidden-xs"  align="center"><?php echo date('H:i:s', $whos_online['time_entry']); ?></td>
+                <td class="dataTableContent hidden-xs" align="center"><?php echo date('H:i:s', $whos_online['time_last_click']); ?></td>
+                <td class="dataTableContent hidden-xs"><?php echo $last_page_url; ?>&nbsp;</td>
+                <td class="dataTableContent hidden-xs"><?php echo encode_htmlentities($whos_online['http_referer']); ?></td>
               </tr>
               <?php
                 }
               ?>
-              <tr>
-                <td class="smallText" colspan="7"><?php echo sprintf(TEXT_NUMBER_OF_CUSTOMERS, xtc_db_num_rows($whos_online_query)); ?></td>
-              </tr>
             </table>
-          </td>
+              <div class='col-xs-12'>
+                <?php echo sprintf(TEXT_NUMBER_OF_CUSTOMERS, xtc_db_num_rows($whos_online_query)); ?>
+              </div>
+              </div>
+            
           <?php
           $heading = array();
           $contents = array();
@@ -181,21 +169,21 @@
             }
           }
           if ( (xtc_not_null($heading)) && (xtc_not_null($contents)) ) {
-            echo '            <td width="25%" valign="top">' . "\n";
+            echo '            <div class="col-md-3 col-sm-12 col-xs-12 pull-right">' . "\n";
             $box = new box;
             echo $box->infoBox($heading, $contents);
-            echo '            </td>' . "\n";
+            echo '            </div>' . "\n";
+                ?>
+            <script>
+                //responsive_table
+                $('#responsive_table').addClass('col-md-9');
+            </script>               
+            <?php
           }
           ?>
-          </tr>
-        </table>
-        </td>
-      </tr>
-    </table>
-    </td>
+</div>
 <!-- body_text_eof //-->
-  </tr>
-</table>
+</div>
 <!-- body_eof //-->
 <!-- footer //-->
 <?php require(DIR_WS_INCLUDES . 'footer.php'); ?>

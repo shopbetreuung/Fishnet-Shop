@@ -92,4 +92,7 @@ define('TEXT_INFO_CUSTOMERS_STATUS_BASE', '<strong>Basis Kundengruppe f&uuml;r A
 define('ENTRY_CUSTOMERS_STATUS_BASE', 'wird als Grundlage f&uuml;r die Preise der neuen Kundengruppe gew&auml;hlt. Wenn Auswahl = Admin werden keine Preise f&uuml;r die neue Kundengruppe angelegt.');
 
 define('IMAGE_ICON_INFO','Aktion');
+
+define('ERROR_TEXT_HEADING', 'Fehler! Kundengruppe konnte nicht gespeichert werden:');
+define('ERROR_TEXT_NAME', 'Kundengruppenname ung&uuml;ltig!');
 ?>

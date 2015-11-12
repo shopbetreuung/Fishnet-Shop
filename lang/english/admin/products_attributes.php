@@ -43,4 +43,8 @@ define('TEXT_OPTION_NAME', 'Option Name');
 define('TABLE_HEADING_SORTORDER', 'Sorting');
 define('TEXT_SORTORDER', 'Sorting');
 // EOF - Tomcraft - 2009-11-07 - Added sortorder to products_options
+
+define('ERROR_TEXT_HEADING', 'Option not saved, fix errors:');
+define('ERROR_TEXT_NAME', 'Name invalid!');
+define('ERROR_TEXT_OPTION_VALUE', 'Option value invalid!');
 ?>

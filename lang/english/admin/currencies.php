@@ -43,4 +43,8 @@ define('TEXT_INFO_CURRENCY_UPDATED', 'The exchange rate for %s (%s) was updated 
 
 define('ERROR_REMOVE_DEFAULT_CURRENCY', 'Error: The default currency can not be removed. Please set another currency as default, and try again.');
 define('ERROR_CURRENCY_INVALID', 'Error: The exchange rate for %s (%s) was not updated. Is it a valid currency code?');
+
+define('ERROR_TEXT_HEADING', 'Currency not saved, fix errors:');
+define('ERROR_TEXT_NAME', 'Name invalid!');
+define('ERROR_TEXT_CODE', 'Code invalid!');
 ?>

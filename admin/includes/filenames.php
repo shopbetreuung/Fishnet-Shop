@@ -99,4 +99,5 @@ define('FILENAME_SAFETERMS','safeterms.php'); // Tomcraft - 2013-06-21 - Safeter
 define('FILENAME_EASYMARKETING','easymarketing.php'); // Tomcraft - 2013-08-29 - Added easymarketing
 define('FILENAME_IT_RECHT_KANZLEI','it_recht_kanzlei.php');
 define('FILENAME_IMAGESLIDERS', 'imagesliders.php');  // Imageslider (c)2008 by Hetfield - www.MerZ-IT-SerVice.de
+define('FILENAME_ERROR_DISPLAY', 'error_display.php');
 ?>

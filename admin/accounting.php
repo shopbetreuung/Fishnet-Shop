@@ -87,60 +87,57 @@ function set_checkbox (set) {
 <!-- header_eof //-->
 
 <!-- body //-->
-<table border="0" width="100%" cellspacing="2" cellpadding="2">
-  <tr>
+<div class ="row">
     
+<!--                            <div class=""></div>                             -->
 <!-- body_text //-->
-    <td class="boxCenter" width="100%" valign="top"><table border="0" width="100%" cellspacing="0" cellpadding="0">
-      <tr>
-        <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
-          <tr>
-            <td class="pageHeading"><?php echo TEXT_ACCOUNTING.' '.$allow_edit['customers_lastname'].' '.$allow_edit['customers_firstname']; ?></td>
-            <td class="pageHeading" align="right"><?php echo xtc_draw_separator('pixel_trans.gif', HEADING_IMAGE_WIDTH, HEADING_IMAGE_HEIGHT); ?><br /><br /></td>
-          </tr>
-        </table></td>
-      </tr>
-      <tr>
-      <td colspan="2" class="main"> <br /><?php echo TXT_GROUPS; ?><br />
+    <div class="col-xs-12">
+        <div class="col-xs-12"><p class="h2"><?php echo TEXT_ACCOUNTING.' '.$allow_edit['customers_lastname'].' '.$allow_edit['customers_firstname']; ?></p><br /></div>  
+    </div>
 
-      <table width="100%" cellpadding="0" cellspacing="2">
+    <div class="col-xs-12">
+        <div class="col-xs-3">
+            <table class="table table-striped">
       <tr>
-       <td style="border: 1px solid; border-color: #000000;" width="10" bgcolor="FF6969" ><?php echo xtc_draw_separator('pixel_trans.gif',15, 15); ?></td>
-       <td width="100%" class="main"><?php echo TXT_SYSTEM; ?></td>
+                    <td  bgcolor="FF6969" ><?php echo xtc_draw_separator('pixel_trans.gif',15, 15); ?></td>
+                    <td  class="main"><?php echo TXT_SYSTEM; ?></td>
       </tr>
       <tr>
-       <td style="border: 1px solid; border-color: #000000;" width="10" bgcolor="69CDFF" ><?php echo xtc_draw_separator('pixel_trans.gif',10, 15); ?></td>
-       <td width="100%" class="main"><?php echo TXT_CUSTOMERS; ?></td>
+                    <td bgcolor="69CDFF" ><?php echo xtc_draw_separator('pixel_trans.gif',10, 15); ?></td>
+                    <td  class="main"><?php echo TXT_CUSTOMERS; ?></td>
       </tr>
       <tr>
-       <td style="border: 1px solid; border-color: #000000;" width="10" bgcolor="6BFF7F" ><?php echo xtc_draw_separator('pixel_trans.gif',15, 15); ?></td>
-       <td width="100%" class="main"><?php echo TXT_PRODUCTS; ?></td>
+                    <td bgcolor="6BFF7F" ><?php echo xtc_draw_separator('pixel_trans.gif',15, 15); ?></td>
+                    <td  class="main"><?php echo TXT_PRODUCTS; ?></td>
       </tr>
       <tr>
-       <td style="border: 1px solid; border-color: #000000;" width="10" bgcolor="BFA8FF" ><?php echo xtc_draw_separator('pixel_trans.gif',15, 15); ?></td>
-       <td width="100%" class="main"><?php echo TXT_STATISTICS; ?></td>
+                    <td bgcolor="BFA8FF" ><?php echo xtc_draw_separator('pixel_trans.gif',15, 15); ?></td>
+                    <td  class="main"><?php echo TXT_STATISTICS; ?></td>
       </tr>
       <tr>
-       <td style="border: 1px solid; border-color: #000000;" width="10" bgcolor="FFE6A8" ><?php echo xtc_draw_separator('pixel_trans.gif',15, 15); ?></td>
-       <td width="100%" class="main"><?php echo TXT_TOOLS; ?></td>
+                    <td bgcolor="FFE6A8" ><?php echo xtc_draw_separator('pixel_trans.gif',15, 15); ?></td>
+                    <td  class="main"><?php echo TXT_TOOLS; ?></td>
       </tr>
       </table>
-      <br />
+            <br /><br />
+        </div>
+    </div>
+    <div class="col-xs-12">
 	   <!-- BOF - web28 - 2010.05.30 - set all checkboxes -->
-	  <a class="btn btn-default" href="#" onclick="set_checkbox(1);"><?php echo BUTTON_SET; ?></a>&nbsp;&nbsp;&nbsp;<a class="btn btn-default" href="#" onclick="set_checkbox(0);"><?php echo BUTTON_UNSET; ?></a>
+       <a class="btn btn-default" href="#" onclick="set_checkbox(1);"><?php echo BUTTON_SET; ?></a>
+       &nbsp;&nbsp;&nbsp;<a class="btn btn-default" href="#" onclick="set_checkbox(0);"><?php echo BUTTON_UNSET; ?></a>
 	  <br /><br />
 	  <!-- EOF - web28 - 2010.05.30 - set all checkboxes -->
-      </td>
-      </tr>
+    </div>
+    <div class="col-xs-12">
+        <table class="table table-striped">
+            <thead>
       <tr>
-        <td><table valign="top" width="100%" border="0" cellpadding="0" cellspacing="0">
-          <tr class="dataTableHeadingRow">
             <td class="dataTableHeadingContent"><?php echo TEXT_ACCESS; ?></td>
             <td class="dataTableHeadingContent"><?php echo TEXT_ALLOWED; ?></td>
           </tr>
-        </table></td>
-      </tr>
-      <tr><table border="0" cellpadding="0" cellspacing="2">
+            </thead>
+            <tbody>
 <?php
  echo xtc_draw_form('accounting', FILENAME_ACCOUNTING, 'cID=' . $_GET['cID']  . '&action=save', 'post', 'enctype="multipart/form-data"');
 
@@ -186,22 +183,22 @@ for ($i = 0; $i < $columns; $i++) {
             $color='#FFE6A8';
 
     }
-    echo '<tr class="dataTable">
-    <td style="border: 1px solid; border-color: #000000;" width="10" bgcolor="'.$color.'" >'.xtc_draw_separator('pixel_trans.gif',15, 15).'</td>
-        <td width="100%" class="dataTableContentRow">
+    echo '<tr>
+    <td width="10" bgcolor="'.$color.'" >'.xtc_draw_separator('pixel_trans.gif',15, 15).'</td>
+        <td class="dataTableContentRow">
         <input type="checkbox" name="access[]" value="'.$field.'"'.$checked.'>
         '.$field.'</td>
-        <td></td></tr>';
+        </tr>';
     }
 }
 ?>
+    </tbody>
     </table>
+    </div>
 <input type="submit" class="btn btn-default" onclick="return confirm('<?php echo SAVE_ENTRY; ?>')" value="<?php echo BUTTON_SAVE; ?>">
-</td>
 
 <!-- body_text_eof //-->
-  </tr>
-</table>
+</div>
 <!-- body_eof //-->
 
 <!-- footer //-->

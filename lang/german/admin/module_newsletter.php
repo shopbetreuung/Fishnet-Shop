@@ -42,4 +42,6 @@ define('INFO_NEWSLETTER_LEFT', '%d Newsletter übrig');
 
 define('TEXT_NEWSLETTER_INFO', '<strong>ACHTUNG:</strong> Zum Versenden von Newslettern wird die Verwendung von externen Programmen empfohlen!<br /><br />Falls das Newsletter Shop Modul benutzt wird, sollte beim Provider nachgefragt werden, wie viele Emails in einem bestimmten Zeitraum &uuml;berhaupt versendet werden d&uuml;rfen.<br />Bei vielen Providern gibt es Einschr&auml;nkungen oder das Versenden ist nur &uuml;ber spezielle Emailserver erlaubt.');
 
+define('ERROR_TEXT_HEADING', 'Fehler! Newsletter nicht versand:');
+define('ERROR_TEXT_TITLE', 'Betreff ung&uuml;ltig!');
 ?>

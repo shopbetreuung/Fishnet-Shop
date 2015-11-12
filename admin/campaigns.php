@@ -23,12 +23,32 @@ require ('includes/application_top.php');
 switch ($_GET['action']) {
 	case 'insert' :
 	case 'save' :
+            $error = array();
 		$campaigns_id = xtc_db_prepare_input($_GET['cID']);
 		$campaigns_name = xtc_db_prepare_input($_POST['campaigns_name']);
 		$campaigns_refID = xtc_db_prepare_input($_POST['campaigns_refID']);
 		$sql_data_array = array ('campaigns_name' => $campaigns_name, 'campaigns_refID' => $campaigns_refID);
+                $url_action = 'new';
+                if ($_GET['action'] == 'insert') {
+                    $check_if_name_exist = xtc_db_find_database_field(TABLE_CAMPAIGNS, 'campaigns_name', $campaigns_name, 'campaigns_name');
+                } elseif ($_GET['action'] == 'save') {
+                    $url_action = 'edit';
+                    $check_if_name_exist = xtc_db_find_database_field(TABLE_CAMPAIGNS, 'campaigns_name', $campaigns_name);
+                }
+                
+                if(!$campaigns_name || $check_if_name_exist){
+                    if($_GET['action'] == 'save'){
+                        if($check_if_name_exist['campaigns_id'] != $campaigns_id){
+                            $error[] = ERROR_TEXT_NAME;
+                        }
+                    } else {
+                        $error[] = ERROR_TEXT_NAME;
+                    }
+                }
 
+                if(empty($error)){
 		if ($_GET['action'] == 'insert') {
+                        
 			$insert_sql_data = array ('date_added' => 'now()');
 			$sql_data_array = xtc_array_merge($sql_data_array, $insert_sql_data);
 			xtc_db_perform(TABLE_CAMPAIGNS, $sql_data_array);
@@ -41,6 +61,11 @@ switch ($_GET['action']) {
 		}
 
 		xtc_redirect(xtc_href_link(FILENAME_CAMPAIGNS, 'page='.$_GET['page'].'&cID='.$campaigns_id));
+                } else {
+                            $_SESSION['repopulate_form'] = $_REQUEST;
+                            $_SESSION['errors'] = $error;
+                            xtc_redirect(xtc_href_link(FILENAME_CAMPAIGNS, 'page='.$_GET['page'].'&cID='.$campaigns_id.'&action='.$url_action.'&errors=1'));
+                }
 		break;
 
 	case 'deleteconfirm' :
@@ -68,27 +93,24 @@ require (DIR_WS_INCLUDES.'head.php');
 <!-- header_eof //-->
 
 <!-- body //-->
-<table border="0" width="100%" cellspacing="2" cellpadding="2">
-  <tr>
+<div class='row'>
     
 <!-- body_text //-->
-    <td class="boxCenter" width="100%" valign="top"><table border="0" width="100%" cellspacing="0" cellpadding="2">
-      <tr>
-        <td width="100%"><table border="0" width="100%" cellspacing="0" cellpadding="0">
-          <tr>
-            <td class="pageHeading"><?php echo HEADING_TITLE; ?></td>
-            <td class="pageHeading" align="right"><?php echo xtc_draw_separator('pixel_trans.gif', HEADING_IMAGE_WIDTH, HEADING_IMAGE_HEIGHT); ?></td>
-          </tr>
-        </table></td>
-      </tr>
-      <tr>
-        <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
-          <tr>
-            <td valign="top"><table border="0" width="100%" cellspacing="0" cellpadding="2">
-              <tr class="dataTableHeadingRow">
+        <!-- body_text //-->
+        <div class='col-xs-12'>
+            <p class="h2">
+                <?php echo HEADING_TITLE; ?>
+            </p>
+        </div>
+        <?php include DIR_WS_INCLUDES.FILENAME_ERROR_DISPLAY; ?>
+        <div class='col-xs-12'> <br> </div>
+        <div class='col-xs-12'>
+        <div id='responsive_table' class='table-responsive pull-left col-sm-12'>
+        <table class='table table-bordered table-striped'>
+              <thead class="dataTableHeadingRow">
                 <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_CAMPAIGNS; ?></td>
                 <td class="dataTableHeadingContent" align="right"><?php echo TABLE_HEADING_ACTION; ?>&nbsp;</td>
-              </tr>
+              </thead>
 <?php
 
 $campaigns_query_raw = "select * from ".TABLE_CAMPAIGNS." order by campaigns_name";
@@ -116,39 +138,38 @@ while ($campaigns = xtc_db_fetch_array($campaigns_query)) {
 <?php
 
 }
-?>
-              <tr>
-                <td colspan="2"><table border="0" width="100%" cellspacing="0" cellpadding="2">
-                  <tr>
-                    <td class="smallText" valign="top"><?php echo $campaigns_split->display_count($campaigns_query_numrows, '20', $_GET['page'], TEXT_DISPLAY_NUMBER_OF_CAMPAIGNS); ?></td>
-                    <td class="smallText" align="right"><?php echo $campaigns_split->display_links($campaigns_query_numrows, '20', MAX_DISPLAY_PAGE_LINKS, $_GET['page']); ?></td>
-                  </tr>
-                </table></td>
-              </tr>
+?>      </table>
+            <div class='col-xs-12'>
+                <div class="smallText col-xs-6"><?php echo $campaigns_split->display_count($campaigns_query_numrows, '20', $_GET['page'], TEXT_DISPLAY_NUMBER_OF_CAMPAIGNS); ?></div>
+                <div class="smallText col-xs-6 text-right"><?php echo $campaigns_split->display_links($campaigns_query_numrows, '20', MAX_DISPLAY_PAGE_LINKS, $_GET['page']); ?></div>
+            </div>
 <?php
 
 if ($_GET['action'] != 'new') {
 ?>
-              <tr>
-                <td align="right" colspan="2" class="smallText"><?php echo xtc_button_link(BUTTON_INSERT, xtc_href_link(FILENAME_CAMPAIGNS, 'page=' . $_GET['page'] . '&cID=' . $cInfo->campaigns_id . '&action=new')); ?></td>
-              </tr>
+                <div class="smallText col-xs-12 text-right"><?php echo xtc_button_link(BUTTON_INSERT, xtc_href_link(FILENAME_CAMPAIGNS, 'page=' . $_GET['page'] . '&cID=' . $cInfo->campaigns_id . '&action=new')); ?></div>
 <?php
 
 }
 ?>
-            </table></td>
+        </div>
 <?php
 
 $heading = array ();
 $contents = array ();
 switch ($_GET['action']) {
 	case 'new' :
+                if(isset($_SESSION['repopulate_form'])){
+                    $c_name = ($_SESSION['repopulate_form']['campaigns_name']) ? $_SESSION['repopulate_form']['campaigns_name'] : '';
+                    $c_refID = ($_SESSION['repopulate_form']['campaigns_refID']) ? $_SESSION['repopulate_form']['campaigns_refID'] : '';
+                    unset($_SESSION['repopulate_form']);
+                }
 		$heading[] = array ('text' => '<b>'.TEXT_HEADING_NEW_CAMPAIGN.'</b>');
 
 		$contents = array ('form' => xtc_draw_form('campaigns', FILENAME_CAMPAIGNS, 'action=insert', 'post', 'enctype="multipart/form-data"'));
 		$contents[] = array ('text' => TEXT_NEW_INTRO);
-		$contents[] = array ('text' => '<br />'.TEXT_CAMPAIGNS_NAME.'<br />'.xtc_draw_input_field('campaigns_name'));
-		$contents[] = array ('text' => '<br />'.TEXT_CAMPAIGNS_REFID.'<br />'.xtc_draw_input_field('campaigns_refID'));
+		$contents[] = array ('text' => '<br />'.TEXT_CAMPAIGNS_NAME.'<br />'.xtc_draw_input_field('campaigns_name', $c_name));
+		$contents[] = array ('text' => '<br />'.TEXT_CAMPAIGNS_REFID.'<br />'.xtc_draw_input_field('campaigns_refID', $c_refID));
 		$contents[] = array ('align' => 'center', 'text' => '<br />'.xtc_button(BUTTON_SAVE).'&nbsp;'.xtc_button_link(BUTTON_CANCEL, xtc_href_link(FILENAME_CAMPAIGNS, 'page='.$_GET['page'].'&cID='.$_GET['cID'])));
 		break;
 
@@ -191,21 +212,23 @@ switch ($_GET['action']) {
 }
 
 if ((xtc_not_null($heading)) && (xtc_not_null($contents))) {
-	echo '            <td width="25%" valign="top">'."\n";
+	echo '            <div class="col-md-4 col-sm-12 col-xs-12 pull-right">'."\n";
 
 	$box = new box;
 	echo $box->infoBox($heading, $contents);
 
-	echo '            </td>'."\n";
+	echo '            </div>'."\n";
+        ?>
+        <script>
+            //responsive_table
+            $('#responsive_table').addClass('col-md-8');
+        </script>               
+        <?php
 }
 ?>
-          </tr>
-        </table></td>
-      </tr>
-    </table></td>
+</div>
 <!-- body_text_eof //-->
-  </tr>
-</table>
+</div>
 <!-- body_eof //-->
 
 <!-- footer //-->

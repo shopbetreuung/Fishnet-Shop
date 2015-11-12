@@ -73,22 +73,18 @@ require (DIR_WS_INCLUDES.'head.php');
 <!-- header_eof //-->
 
 <!-- body //-->
-<table border="0" width="100%" cellspacing="2" cellpadding="2">
-    <tr>
+<div class="row">
         
-            
-        </td>
-        <td  class="boxCenter" width="100%" valign="top"><table border="0" width="100%" cellspacing="0" cellpadding="2">
-    <tr>
-        <td>
-			<h1><?php echo HEADING_TITLE; ?></h1>
-        </td>
-    </tr>
-    <tr>
-        <td valign="top">
-            <table border="0" width="100%" cellspacing="0" cellpadding="0">
-                <tr>
-                    <td class="main">
+<div class='col-xs-12'>
+        <p class="h2">
+            <?php echo HEADING_TITLE; ?>
+        </p>
+    </div>
+<div class='col-xs-12'><br></div>
+
+            <div class='col-xs-12'>
+                <div class='col-xs-12'>
+                    <div class="main col-xs-12">
                     <form action="customers_group.php?action=send" method="post">
                     <?php
                     $group_query = xtc_db_query('SELECT customers_status_id,
@@ -108,12 +104,10 @@ require (DIR_WS_INCLUDES.'head.php');
                     echo '<br /><br />' . xtc_draw_input_field('senden', TEXT_SEND, '', false, 'submit');
                     ?>
                     </form>
-                    </td>
-                </tr>
-            </table>
-        </td>
-    </tr>
-</table>
+                    </div>
+                </div>
+            </div>
+</div>
 
 <!-- footer //-->
 <?php require(DIR_WS_INCLUDES . 'footer.php'); ?>

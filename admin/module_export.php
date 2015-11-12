@@ -130,27 +130,19 @@
     echo isset($selbstaufruf) ? $selbstaufruf :'';
     //EOF NEW MODULE PROCESSING
     ?>
-    <table border="0" width="100%" cellspacing="2" cellpadding="2">
-      <tr>
-        
-        </td>
-        <!-- body_text //-->
-        <td class="boxCenter" width="100%" valign="top">
-          <table border="0" width="100%" cellspacing="0" cellpadding="2">
-            <tr>
-              <td width="100%">
+<div class="row">
+<!-- body_text //-->
+    <div class='col-xs-12'>
                 <div style="float:left; width:80px;"><?php echo xtc_image(DIR_WS_ICONS.'heading_modules.gif'); ?></div>
-                <div class="pageHeading"><?php echo HEADING_TITLE; ?><br /></div>
+     <div class="pageHeading"><p class="h2"><?php echo HEADING_TITLE; ?></p></div>
                 <div class="main">Modules</div>
-                <div style="clear:both;margin:10px 0 5px 0;"><span class="main" style="border: 1px red solid; padding:5px; background: #FFD6D6;"><?php echo TEXT_MODULE_INFO; ?></span></div>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <table border="0" width="100%" cellspacing="0" cellpadding="0">
-                  <tr>
-                    <td valign="top">
-                      <table border="0" width="100%" cellspacing="0" cellpadding="2">
+                <div class='col-xs-12' style="clear:both;margin:10px 0 5px 0; border: 1px red solid; padding:5px; background: #FFD6D6;"><span class="main" ><?php echo TEXT_MODULE_INFO; ?></span></div>
+    </div>
+    <div class='col-xs-12'><br></div>
+    <div class='col-xs-12'>
+    <div id='responsive_table' class='table-responsive pull-left col-sm-12'>
+    <table class="table table-bordered">
+
                         <tr class="dataTableHeadingRow">
                           <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_MODULES; ?></td>
                           <td class="dataTableHeadingContent" align="right"><?php echo TABLE_HEADING_ACTION; ?> </td>
@@ -217,8 +209,21 @@
                             }
                               ?>
                               <td class="dataTableContent"><?php echo $module->title; ?></td>
-                              <td class="dataTableContent" align="right"><?php if (isset($mInfo) && is_object($mInfo) && ($class == $mInfo->code) ) { echo xtc_image(DIR_WS_IMAGES . 'icon_arrow_right.gif', ICON_ARROW_RIGHT); } else { echo '<a href="' . xtc_href_link(FILENAME_MODULE_EXPORT, 'set=' . $set . '&module=' . $class) . '">' . xtc_image(DIR_WS_IMAGES . 'icon_info.gif', IMAGE_ICON_INFO) . '</a>'; } ?> </td>
-                            </tr>
+                              <td class="dataTableContent" align="right">
+                                  <span class='hidden-xs hidden-sm'>
+                                  <?php if (isset($mInfo) && is_object($mInfo) && ($class == $mInfo->code) ) { echo xtc_image(DIR_WS_IMAGES . 'icon_arrow_right.gif', ICON_ARROW_RIGHT); } else { echo '<a href="' . xtc_href_link(FILENAME_MODULE_EXPORT, 'set=' . $set . '&module=' . $class) . '">' . xtc_image(DIR_WS_IMAGES . 'icon_info.gif', IMAGE_ICON_INFO) . '</a>'; } ?> 
+                                  </span>
+                                  <span class='hidden-lg hidden-md'>
+                                      <?php
+                                      if ($module->check() == 0) {
+                                        echo '<a class="btn btn-default" onclick="this.blur();" href="' . xtc_href_link(FILENAME_MODULE_EXPORT, 'set=' . $set. '&module=' . $mInfo->code . '&action=install') . '">' . BUTTON_MODULE_INSTALL . '</a>';
+                                      } else {
+                                        echo '<a class="btn btn-default" onclick="this.blur();" href="' . xtc_href_link(FILENAME_MODULE_EXPORT, 'set=' . $set . '&module=' . $mInfo->code . '&action=remove') . '">' . BUTTON_MODULE_REMOVE . '</a>';
+                                      }
+                                      ?>
+                                  </span>
+                              </td>
+                            
                             <?php
                           }
                         }
@@ -233,11 +238,12 @@
                           xtc_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_key, configuration_value, configuration_group_id, sort_order, date_added) values ( '" . $module_key . "', '" . implode(';', $installed_modules) . "','6', '0', now())");
                         }
                         ?>
-                        <tr>
-                          <td colspan="3" class="smallText"><?php echo TEXT_MODULE_DIRECTORY . ' admin/' . $module_directory; ?></td>
-                        </tr>
                       </table>
-                    </td>
+                        <div class="col-xs-12 smallText">
+                            <?php echo TEXT_MODULE_DIRECTORY . ' admin/' . $module_directory; ?>
+                        </div>
+                    </div>
+                      
                     <?php
                     $heading = array();
                     $contents = array();
@@ -302,7 +308,7 @@
                     }
 
                     if ( (xtc_not_null($heading)) && (xtc_not_null($contents)) ) {
-                      echo '            <td width="25%" valign="top">' . "\n";
+                      echo '<div class="col-md-3 hidden-xs hidden-sm  pull-right">' . "\n";#col-xs-12 col-sm-12
                       echo box::infoBoxSt($heading, $contents); // cYbercOsmOnauT - 2011-02-07 - Changed methods of the classes box and tableBox to static
                       //BOF NEW MODULE PROCESSING
                       if ($_GET['action']=='module_processing_do') {
@@ -313,17 +319,15 @@
                       }
                       //EOF NEW MODULE PROCESSING
                       echo '            </td>' . "\n";
+                          ?>
+                        <script>
+                            //responsive_table
+                            $('#responsive_table').addClass('col-md-9');
+                        </script>               
+                        <?php
                     }
                     ?>
-                  </tr>
-                </table>
-              </td>
-            </tr>
-          </table>
-        </td>
-        <!-- body_text_eof //-->
-      </tr>
-    </table>
+                    </div></div>
     <!-- body_eof //-->
     <!-- footer //-->
     <?php require(DIR_WS_INCLUDES . 'footer.php'); ?>

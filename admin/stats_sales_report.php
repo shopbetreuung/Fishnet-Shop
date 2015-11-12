@@ -195,8 +195,7 @@
           ?>
           <!-- header_eof //-->
           <!-- body //-->
-          <table border="0" width="100%" cellspacing="2" cellpadding="2">
-            <tr>
+
               <?php
               if ($srExp < 1) {
                 ?>
@@ -205,36 +204,25 @@
                 <?php
               } // end sr_exp
               ?>
-              <td class="boxCenter" width="100%" valign="top">
-                <table border="0" width="100%" cellspacing="0" cellpadding="2">
-                  <tr>
-                    <td colspan="2">
-                      <table border="0" width="100%" cellspacing="0" cellpadding="0">
-                        <tr>
-                          <td width="80" rowspan="2"><?php echo xtc_image(DIR_WS_ICONS.'heading_statistic.gif'); ?></td>
-                          <td class="pageHeading"><?php echo HEADING_TITLE; ?></td>
-                        </tr>
-                        <tr>
-                          <td class="main" valign="top">Statistics</td>
-                        </tr>
-                      </table>
-                    </td>
-                  </tr>
+<div class='row'>
+                <div class='col-xs-12'>
+                    <div class="col-xs-3 col-sm-1 text-right"><?php echo xtc_image(DIR_WS_ICONS.'heading_statistic.gif'); ?></div>
+                    <div class="col-xs-9 col-sm-11"><p class="h2"><?php echo HEADING_TITLE; ?></p> Statistics</div>
+                </div>
+                <div class='col-xs-12'><br></div>
                   <?php
                   if ($srExp < 1) {
                     ?>
-                    <tr>
-                      <td colspan="2">
-                        <form action="" method="get">
-                          <table border="0" style="border: 1px solid; border-color: #cccccc;" width="100%" cellspacing="0" cellpadding="0">
-                            <tr>
-                              <td align="left" rowspan="2" class="menuBoxHeading">
+        <div class='col-xs-12' style="border: 1px solid; border-color: #cccccc; background-color: #fcfcfc;">   
+            <div class='col-xs-12'><br></div>
+            <div class='col-xs-12 col-sm-4 col-md-2 '>
                                 <input type="radio" name="report" value="1" <?php if ($srView == 1) echo "checked"; ?>><?php echo REPORT_TYPE_YEARLY; ?><br />
                                 <input type="radio" name="report" value="2" <?php if ($srView == 2) echo "checked"; ?>><?php echo REPORT_TYPE_MONTHLY; ?><br />
                                 <input type="radio" name="report" value="3" <?php if ($srView == 3) echo "checked"; ?>><?php echo REPORT_TYPE_WEEKLY; ?><br />
                                 <input type="radio" name="report" value="4" <?php if ($srView == 4) echo "checked"; ?>><?php echo REPORT_TYPE_DAILY; ?><br />
-                              </td>
-                              <td class="menuBoxHeading">
+            </div>
+            <div class='col-xs-12  hidden-sm hidden-md hidden-lg'><hr></div>
+            <div class='col-xs-12 col-sm-4 col-md-3 '>
                                 <?php echo REPORT_START_DATE; ?><br />
                                 <select name="startD" size="1">
                                   <?php
@@ -278,87 +266,7 @@
                                   }
                                   ?>
                                 </select>
-                              </td>
-                              <td rowspan="2" align="left" class="menuBoxHeading">
-                                <?php echo REPORT_DETAIL; ?><br />
-                                <select name="detail" size="1">
-                                  <option value="0"<?php if ($srDetail == 0) echo "selected"; ?>><?php echo DET_HEAD_ONLY; ?></option>
-                                  <option value="1"<?php if ($srDetail == 1) echo " selected"; ?>><?php echo DET_DETAIL; ?></option>
-                                  <option value="2"<?php if ($srDetail == 2) echo " selected"; ?>><?php echo DET_DETAIL_ONLY; ?></option>
-                                </select>
-                                <br />
-                                <?php echo REPORT_MAX; ?><br />
-                                <select name="max" size="1">
-                                  <option value="0"><?php echo REPORT_ALL; ?></option>
-                                  <option<?php if ($srMax == 1) echo " selected"; ?>>1</option>
-                                  <option<?php if ($srMax == 3) echo " selected"; ?>>3</option>
-                                  <option<?php if ($srMax == 5) echo " selected"; ?>>5</option>
-                                  <option<?php if ($srMax == 10) echo " selected"; ?>>10</option>
-                                  <option<?php if ($srMax == 25) echo " selected"; ?>>25</option>
-                                  <option<?php if ($srMax == 50) echo " selected"; ?>>50</option>
-                                </select>
-                              </td>
-                              <td rowspan="2" align="left" class="menuBoxHeading">
-                                <?php echo REPORT_STATUS_FILTER; ?><br />
-                                <select name="status" size="1">
-                                  <option value="0"><?php echo REPORT_ALL; ?></option>
-                                  <?php
-                                  foreach ($sr->status as $value) {
-                                    ?>
-                                    <option value="<?php echo $value["orders_status_id"]?>"<?php if ($srStatus == $value["orders_status_id"]) echo " selected"; ?>><?php echo $value["orders_status_name"] ; ?></option>
-                                    <?php
-                                  }
-                                  ?>
-                                </select>
-                                <br />
-                                <?php echo REPORT_PAYMENT_FILTER; ?><br />
-                                <select name="payment" size="1">
-                                  <?php // BOF - Hendrik - 2010-08-06 - preselection bug found by Robert/Robo-X - modified by Dokuman 2010-10-13
-                                  /* <option value="0"><?php echo REPORT_ALL; ?></option> */
-                                  /* <option value="0" <?php if ($srPayment == '0') echo "selected='selected'"; ?>><?php echo REPORT_ALL; ?></option> */ ?>
-                                  <option value="0" <?php if ($srPayment === 0) echo " selected"; ?>><?php echo REPORT_ALL; ?></option>
-                                  <?php // EOF - Hendrik - 2010-08-06 - preselection bug found by Robert/Robo-X - modified by Dokuman 2010-10-13 ?>
-                                  <?php
-                                  $payments = explode(';', MODULE_PAYMENT_INSTALLED); // Hetfield - 2009-08-18 - replaced deprecated function split with explode to be ready for PHP >= 5.3
-                                  for ($i=0; $i<count($payments); $i++){
-                                    require(DIR_FS_LANGUAGES . $_SESSION['language'] . '/modules/payment/' . $payments[$i]);
-                                    $payment = substr($payments[$i], 0, strrpos($payments[$i], '.'));
-                                    $payment_text = constant(MODULE_PAYMENT_.strtoupper($payment)._TEXT_TITLE);
-                                    ?>
-                                    <?php // BOF - Hendrik - 2010-08-06 - preselection bug found by Robert/Robo-X - modified by Dokuman 2010-10-13
-                                    /* <option value="<?php echo $payment; ?>"<?php if ($srPayment == $payment) echo " selected"; ?>><?php echo $payment_text ; ?></option> */
-                                    /*<option value="<?php echo $payment; ?>"<?php if (($srPayment == $payment) && ($srPayment != '0')) echo "selected='selected'"; ?>><?php echo $payment_text ; ?></option> */ ?>
-                                    <option value="<?php echo $payment; ?>"<?php if ($srPayment === $payment) echo " selected"; ?>><?php echo $payment_text ; ?></option>
-                                    <?php // EOF - Hendrik - 2010-08-06 - preselection bug found by Robert/Robo-X - modified by Dokuman 2010-10-13 ?>
-                                    <?php
-                                  }
-                                  ?>
-                                </select>
-                                <br />
-                              </td>
-                              <td rowspan="2" align="left" class="menuBoxHeading">
-                                <?php echo REPORT_EXP; ?><br />
-                                <select name="export" size="1">
-                                  <option value="0" selected><?php echo EXP_NORMAL; ?></option>
-                                  <option value="1"><?php echo EXP_HTML; ?></option>
-                                  <option value="2"><?php echo EXP_CSV; ?></option>
-                                </select>
-                                <br />
-                                <?php echo REPORT_SORT; ?><br />
-                                <select name="sort" size="1">
-                                  <option value="0"<?php if ($srSort == 0) echo " selected"; ?>><?php echo SORT_VAL0; ?></option>
-                                  <option value="1"<?php if ($srSort == 1) echo " selected"; ?>><?php echo SORT_VAL1; ?></option>
-                                  <option value="2"<?php if ($srSort == 2) echo " selected"; ?>><?php echo SORT_VAL2; ?></option>
-                                  <option value="3"<?php if ($srSort == 3) echo " selected"; ?>><?php echo SORT_VAL3; ?></option>
-                                  <option value="4"<?php if ($srSort == 4) echo " selected"; ?>><?php echo SORT_VAL4; ?></option>
-                                  <option value="5"<?php if ($srSort == 5) echo " selected"; ?>><?php echo SORT_VAL5; ?></option>
-                                  <option value="6"<?php if ($srSort == 6) echo " selected"; ?>><?php echo SORT_VAL6; ?></option>
-                                </select>
-                                <br />
-                              </td>
-                            </tr>
-                            <tr>
-                              <td class="menuBoxHeading">
+                </br></br>
                                 <?php echo REPORT_END_DATE; ?><br />
                                 <select name="endD" size="1">
                                   <?php
@@ -402,32 +310,105 @@
                                   }
                                   ?>
                                 </select>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td colspan="5" class="menuBoxHeading" align="right">
+            </div>
+            <div class='col-xs-12  hidden-sm hidden-md hidden-lg'><hr></div>
+            <div class='col-xs-12 col-sm-4 col-md-3'>
+                                <?php echo REPORT_DETAIL; ?><br />
+                                <select name="detail" size="1">
+                                  <option value="0"<?php if ($srDetail == 0) echo "selected"; ?>><?php echo DET_HEAD_ONLY; ?></option>
+                                  <option value="1"<?php if ($srDetail == 1) echo " selected"; ?>><?php echo DET_DETAIL; ?></option>
+                                  <option value="2"<?php if ($srDetail == 2) echo " selected"; ?>><?php echo DET_DETAIL_ONLY; ?></option>
+                                </select>
+                                <br />
+                                <?php echo REPORT_MAX; ?><br />
+                                <select name="max" size="1">
+                                  <option value="0"><?php echo REPORT_ALL; ?></option>
+                                  <option<?php if ($srMax == 1) echo " selected"; ?>>1</option>
+                                  <option<?php if ($srMax == 3) echo " selected"; ?>>3</option>
+                                  <option<?php if ($srMax == 5) echo " selected"; ?>>5</option>
+                                  <option<?php if ($srMax == 10) echo " selected"; ?>>10</option>
+                                  <option<?php if ($srMax == 25) echo " selected"; ?>>25</option>
+                                  <option<?php if ($srMax == 50) echo " selected"; ?>>50</option>
+                                </select>
+                                
+            </div>
+            <div class='col-xs-12 hidden-md hidden-lg'><hr></div>
+            <div class='col-xs-12 col-sm-6 col-md-2 '>
+                                <?php echo REPORT_STATUS_FILTER; ?><br />
+                                <select name="status" size="1">
+                                  <option value="0"><?php echo REPORT_ALL; ?></option>
+                                  <?php
+                                  foreach ($sr->status as $value) {
+                                    ?>
+                                    <option value="<?php echo $value["orders_status_id"]?>"<?php if ($srStatus == $value["orders_status_id"]) echo " selected"; ?>><?php echo $value["orders_status_name"] ; ?></option>
+                                    <?php
+                                  }
+                                  ?>
+                                </select>
+                                <br />
+                                <?php echo REPORT_PAYMENT_FILTER; ?><br />
+                                <select name="payment" size="1">
+                                  <?php // BOF - Hendrik - 2010-08-06 - preselection bug found by Robert/Robo-X - modified by Dokuman 2010-10-13
+                                  /* <option value="0"><?php echo REPORT_ALL; ?></option> */
+                                  /* <option value="0" <?php if ($srPayment == '0') echo "selected='selected'"; ?>><?php echo REPORT_ALL; ?></option> */ ?>
+                                  <option value="0" <?php if ($srPayment === 0) echo " selected"; ?>><?php echo REPORT_ALL; ?></option>
+                                  <?php // EOF - Hendrik - 2010-08-06 - preselection bug found by Robert/Robo-X - modified by Dokuman 2010-10-13 ?>
+                                  <?php
+                                  $payments = explode(';', MODULE_PAYMENT_INSTALLED); // Hetfield - 2009-08-18 - replaced deprecated function split with explode to be ready for PHP >= 5.3
+                                  for ($i=0; $i<count($payments); $i++){
+                                    require(DIR_FS_LANGUAGES . $_SESSION['language'] . '/modules/payment/' . $payments[$i]);
+                                    $payment = substr($payments[$i], 0, strrpos($payments[$i], '.'));
+                                    $payment_text = constant(MODULE_PAYMENT_.strtoupper($payment)._TEXT_TITLE);
+                                    ?>
+                                    <?php // BOF - Hendrik - 2010-08-06 - preselection bug found by Robert/Robo-X - modified by Dokuman 2010-10-13
+                                    /* <option value="<?php echo $payment; ?>"<?php if ($srPayment == $payment) echo " selected"; ?>><?php echo $payment_text ; ?></option> */
+                                    /*<option value="<?php echo $payment; ?>"<?php if (($srPayment == $payment) && ($srPayment != '0')) echo "selected='selected'"; ?>><?php echo $payment_text ; ?></option> */ ?>
+                                    <option value="<?php echo $payment; ?>"<?php if ($srPayment === $payment) echo " selected"; ?>><?php echo $payment_text ; ?></option>
+                                    <?php // EOF - Hendrik - 2010-08-06 - preselection bug found by Robert/Robo-X - modified by Dokuman 2010-10-13 ?>
+                                    <?php
+                                  }
+                                  ?>
+                                </select>
+            </div>
+            <div class='col-xs-12  hidden-sm hidden-md hidden-lg'><hr></div>
+                <div class='col-xs-12 col-sm-6 col-md-2'>
+                                <?php echo REPORT_EXP; ?><br />
+                                <select name="export" size="1">
+                                  <option value="0" selected><?php echo EXP_NORMAL; ?></option>
+                                  <option value="1"><?php echo EXP_HTML; ?></option>
+                                  <option value="2"><?php echo EXP_CSV; ?></option>
+                                </select>
+                                <br />
+                                <?php echo REPORT_SORT; ?><br />
+                                <select name="sort" size="1">
+                                  <option value="0"<?php if ($srSort == 0) echo " selected"; ?>><?php echo SORT_VAL0; ?></option>
+                                  <option value="1"<?php if ($srSort == 1) echo " selected"; ?>><?php echo SORT_VAL1; ?></option>
+                                  <option value="2"<?php if ($srSort == 2) echo " selected"; ?>><?php echo SORT_VAL2; ?></option>
+                                  <option value="3"<?php if ($srSort == 3) echo " selected"; ?>><?php echo SORT_VAL3; ?></option>
+                                  <option value="4"<?php if ($srSort == 4) echo " selected"; ?>><?php echo SORT_VAL4; ?></option>
+                                  <option value="5"<?php if ($srSort == 5) echo " selected"; ?>><?php echo SORT_VAL5; ?></option>
+                                  <option value="6"<?php if ($srSort == 6) echo " selected"; ?>><?php echo SORT_VAL6; ?></option>
+                                </select>
+                </div>
+            
+                <div class='col-xs-12 hidden-md hidden-lg'><hr></div>
+                
+                <div class='col-xs-12 text-right'>
                                 <?php echo '<input type="submit" class="btn btn-default" onclick="this.blur();" value="' . BUTTON_UPDATE . '"/>'; ?>
-                              </td>
-                            </tr>
-                          </table>
+                </div>
                         </form>
-                      </td>
-                    </tr>
+        </div>
                     <?php
                   } // end of ($srExp < 1)
                   ?>
-                  <tr>
-                    <td width=100% valign=top>
-                      <table border="0" width="100%" cellspacing="0" cellpadding="2">
-                        <tr>
-                          <td valign="top">
-                            <table border="0" width="100%" cellspacing="0" cellpadding="2">
+                <div class='table-responsive col-xs-12'>
+                            <table class='table table-bordered'>
                               <tr class="dataTableHeadingRow">
                                 <td class="dataTableHeadingContent" align="right"><?php echo TABLE_HEADING_DATE; ?></td>
                                 <td class="dataTableHeadingContent" align="right"><?php echo TABLE_HEADING_ORDERS;?></td>
                                 <td class="dataTableHeadingContent" align="right"><?php echo TABLE_HEADING_ITEMS; ?></td>
-                                <td class="dataTableHeadingContent" align="right"><?php echo TABLE_HEADING_REVENUE;?></td>
-                                <td class="dataTableHeadingContent" align="right"><?php echo  TABLE_HEADING_SHIPPING;?></td>
+                                <td class="dataTableHeadingContent hidden-xs" align="right"><?php echo TABLE_HEADING_REVENUE;?></td>
+                                <td class="dataTableHeadingContent hidden-xs" align="right"><?php echo  TABLE_HEADING_SHIPPING;?></td>
                               </tr>
                               <?php
                             } // end of if $srExp < 2 csv export
@@ -458,8 +439,8 @@
                                   ?>
                                   <td class="dataTableContent" align="right"><?php echo /*$info[0]['order'];*/ (isset($info[0]['order']) ? $info[0]['order'] : '&nbsp;'); /*Dokuman - 2010-10-31 - fix empty <td>line without visible dashes*/ ?></td>
                                   <td class="dataTableContent" align="right"><?php echo /*$info[$last - 1]['totitem'];*/ (isset($info[$last - 1]['totitem']) ? $info[$last - 1]['totitem'] : '&nbsp;'); /*Dokuman - 2010-10-31 - Undefined offset: -1 */ ?></td>
-                                  <td class="dataTableContent" align="right"><?php echo /*$currencies->format($info[$last - 1]['totsum']);*/ (isset($info[$last - 1]['totsum']) ? $currencies->format($info[$last - 1]['totsum']) : '&nbsp;' ); /*Dokuman - 2010-10-31 - Undefined offset: -1 */?></td>
-                                  <td class="dataTableContent" align="right"><?php echo $currencies->format($info[0]['shipping']);?></td>
+                                  <td class="dataTableContent hidden-xs" align="right"><?php echo /*$currencies->format($info[$last - 1]['totsum']);*/ (isset($info[$last - 1]['totsum']) ? $currencies->format($info[$last - 1]['totsum']) : '&nbsp;' ); /*Dokuman - 2010-10-31 - Undefined offset: -1 */?></td>
+                                  <td class="dataTableContent hidden-xs" align="right"><?php echo $currencies->format($info[0]['shipping']);?></td>
                                 </tr>
                                 <?php
                               } else {
@@ -579,16 +560,8 @@
                             if ($srExp < 2) {
                             ?>
                           </table>
-                        </td>
-                      </tr>
-                    </table>
-                  </td>
-                </tr>
-              </table>
-            </td>
-            <!-- body_text_eof //-->
-          </tr>
-        </table>
+                    </div>
+</div>
         <!-- body_eof //-->
         <!-- footer //-->
         <?php

@@ -21,6 +21,7 @@ define('TABLE_HEADING_COUNTRY_NAME', 'Land');
 define('TABLE_HEADING_COUNTRY_CODES', 'ISO Codes');
 define('TABLE_HEADING_ACTION', 'Aktion');
 define('TABLE_HEADING_STATUS', 'Status');
+define('TABLE_HEADING_TOP', 'Top');
 
 define('TEXT_INFO_EDIT_INTRO', 'Bitte f&uuml;hren Sie alle notwendigen &Auml;nderungen durch');
 define('TEXT_INFO_COUNTRY_NAME', 'Name:');
@@ -32,4 +33,11 @@ define('TEXT_INFO_DELETE_INTRO', 'Sind Sie sicher, dass Sie das Land l&ouml;sche
 define('TEXT_INFO_HEADING_NEW_COUNTRY', 'neues Land');
 define('TEXT_INFO_HEADING_EDIT_COUNTRY', 'Land bearbeiten');
 define('TEXT_INFO_HEADING_DELETE_COUNTRY', 'Land l&ouml;schen');
+
+define('ERROR_TEXT_HEADING', 'Fehler! Land konnte nicht gespeichert werden:');
+define('ERROR_TEXT_NAME', 'L&auml;ndername ung&uuml;ltig');
+define('ERROR_TEXT_ISO2', 'ISO(2) code ung&uuml;ltig!');
+define('ERROR_TEXT_ISO3', 'ISO(3) code ung&uuml;ltig!');
+define('ERROR_TEXT_LENGTH_ISO2', 'ISO(2) code muss 2 Zeichen lang sein!');
+define('ERROR_TEXT_LENGTH_ISO3', 'ISO(3) code muss 3 Zeichen lang sein!');
 ?>

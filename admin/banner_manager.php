@@ -185,19 +185,15 @@ function popupImageWindow(url) {
 <!-- header_eof //-->
 
 <!-- body //-->
-<table border="0" width="100%" cellspacing="2" cellpadding="2">
-  <tr>
+<div class='row'>
     
 <!-- body_text //-->
-    <td class="boxCenter" width="100%" valign="top"><table border="0" width="100%" cellspacing="0" cellpadding="2">
-      <tr>
-        <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
-          <tr>
-            <td class="pageHeading"><?php echo HEADING_TITLE; ?></td>
-            <td class="pageHeading" align="right"><?php echo xtc_draw_separator('pixel_trans.gif', HEADING_IMAGE_WIDTH, HEADING_IMAGE_HEIGHT); ?></td>
-          </tr>
-        </table></td>
-      </tr>
+            
+        <div class='col-xs-12'>
+            <p class="h2">
+                <?php echo HEADING_TITLE; ?>
+            </p>
+        </div>
 <?php
   if ($_GET['action'] == 'new') {
     $form_action = 'insert';
@@ -236,47 +232,34 @@ function popupImageWindow(url) {
   var dateScheduled = new ctlSpiffyCalendarBox("dateScheduled", "new_banner", "date_scheduled","btnDate2","<?php echo $bInfo->date_scheduled; ?>",2);
 // EOF - Tomcraft - 2009-11-06 - Replaced the blue Button with calendar icon
 </script>
-      <tr>
-        <td><?php echo xtc_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
-      </tr>
-      <tr><?php echo xtc_draw_form('new_banner', FILENAME_BANNER_MANAGER, 'page=' . $_GET['page'] . '&action=' . $form_action, 'post', 'enctype="multipart/form-data"'); if ($form_action == 'update') echo xtc_draw_hidden_field('banners_id', $bID); ?>
-        <td><table border="0" cellspacing="0" cellpadding="2">
-          <tr>
-            <td class="main"><?php echo TEXT_BANNERS_TITLE; ?></td>
-            <td class="main"><?php echo xtc_draw_input_field('banners_title', $bInfo->banners_title, '', true); ?></td>
-          </tr>
-          <tr>
-            <td class="main"><?php echo TEXT_BANNERS_URL; ?></td>
-            <td class="main"><?php echo xtc_draw_input_field('banners_url', $bInfo->banners_url); ?></td>
-          </tr>
-          <tr>
-            <td class="main" valign="top"><?php echo TEXT_BANNERS_GROUP; ?></td>
-            <td class="main"><?php echo xtc_draw_pull_down_menu('banners_group', $groups_array, $bInfo->banners_group) . TEXT_BANNERS_NEW_GROUP . '<br />' . xtc_draw_input_field('new_banners_group', '', '', ((sizeof($groups_array) > 0) ? false : true)); ?></td>
-          </tr>
-          <tr>
-            <td colspan="2"><?php echo xtc_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
-          </tr>
-          <tr>
-            <td class="main" valign="top"><?php echo TEXT_BANNERS_IMAGE; ?></td>
-            <td class="main"><?php echo xtc_draw_file_field('banners_image') . ' ' . TEXT_BANNERS_IMAGE_LOCAL . '<br />' . DIR_FS_CATALOG_IMAGES.'banner/' . xtc_draw_input_field('banners_image_local', $bInfo->banners_image); ?></td>
-          </tr>
-          <tr>
-            <td colspan="2"><?php echo xtc_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
-          </tr>
-          <tr>
-            <td class="main"><?php echo TEXT_BANNERS_IMAGE_TARGET; ?></td>
-            <td class="main"><?php echo DIR_FS_CATALOG_IMAGES.'banner/' . xtc_draw_input_field('banners_image_target'); ?></td>
-          </tr>
-          <tr>
-            <td colspan="2"><?php echo xtc_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
-          </tr>
-          <tr>
-            <td valign="top" class="main"><?php echo TEXT_BANNERS_HTML_TEXT; ?></td>
-            <td class="main"><?php echo xtc_draw_textarea_field('html_text', 'soft', '60', '5', $bInfo->banners_html_text); ?></td>
-          </tr>
-          <tr>
-            <td colspan="2"><?php echo xtc_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
-          </tr>
+        <div class='col-xs-12'><?php echo xtc_draw_form('new_banner', FILENAME_BANNER_MANAGER, 'page=' . $_GET['page'] . '&action=' . $form_action, 'post', 'enctype="multipart/form-data"'); if ($form_action == 'update') echo xtc_draw_hidden_field('banners_id', $bID); ?></div>
+        <div class='col-xs-12'>
+            <div class='col-xs-12'>
+                <div class="main col-lg-1 col-md-2 col-sm-3 col-xs-12"><?php echo TEXT_BANNERS_TITLE; ?></div>
+                <div class="main col-xs-9"><?php echo xtc_draw_input_field('banners_title', $bInfo->banners_title, '', true); ?></div>
+            </div>
+            <div class='col-xs-12'>
+              <div class="main col-lg-1 col-md-2 col-sm-3 col-xs-12"><?php echo TEXT_BANNERS_URL; ?></div>
+              <div class="main col-xs-9"><?php echo xtc_draw_input_field('banners_url', $bInfo->banners_url); ?></div>
+            </div>
+            <div class='col-xs-12'>
+              <div class="main col-lg-1 col-md-2 col-sm-3 col-xs-12" valign="top"><?php echo TEXT_BANNERS_GROUP; ?></div>
+              <div class="main col-xs-9"><?php echo xtc_draw_pull_down_menu('banners_group', $groups_array, $bInfo->banners_group) . TEXT_BANNERS_NEW_GROUP . '<br />' . xtc_draw_input_field('new_banners_group', '', '', ((sizeof($groups_array) > 0) ? false : true)); ?></div>
+            </div>
+            <div class='col-xs-12'>
+              <div class="main col-lg-1 col-md-2 col-sm-3 col-xs-12" valign="top"><?php echo TEXT_BANNERS_IMAGE; ?></div>
+              <div class="main col-xs-9"><?php echo xtc_draw_file_field('banners_image') . ' ' . TEXT_BANNERS_IMAGE_LOCAL . '<br />' . DIR_FS_CATALOG_IMAGES.'banner/' . xtc_draw_input_field('banners_image_local', $bInfo->banners_image); ?></div>
+            </div>
+            <div class='col-xs-12'> <br> </div>
+            <div class='col-xs-12'>
+              <div class="main col-lg-1 col-md-2 col-sm-3 col-xs-12"><?php echo TEXT_BANNERS_IMAGE_TARGET; ?></div>
+              <div class="main col-xs-9"><?php echo DIR_FS_CATALOG_IMAGES.'banner/' . xtc_draw_input_field('banners_image_target'); ?></div>
+            </div>
+              <div class='col-xs-12'> <br> </div>
+            <div class='col-xs-12'>
+              <div class="main col-lg-1 col-md-2 col-sm-3 col-xs-12"><?php echo TEXT_BANNERS_HTML_TEXT; ?></div>
+              <div class="main col-xs-9"><?php echo xtc_draw_textarea_field('html_text', 'soft', '60', '5', $bInfo->banners_html_text); ?></div>
+            </div>
 <!-- BOF - Tomcraft - 2009-11-06 - Modified Section for use without Javascript //-->
 <!--
           <tr>
@@ -298,54 +281,43 @@ function popupImageWindow(url) {
 
 
           </tr>
-//-->
-          <tr>
-            <td class="main"><?php echo TEXT_BANNERS_SCHEDULED_AT; ?><br /><small><?php echo TEXT_BANNERS_DATE_FORMAT; ?></small></td>
-            <td valign="top" class="main"><script type="text/javascript">dateScheduled.writeControl(); dateScheduled.dateFormat="yyyy-MM-dd";</script>
+//-->   <div class='col-xs-12'> <br> </div>
+          <div class='col-xs-12'>
+            <div class="main col-lg-1 col-md-2 col-sm-3 col-xs-12"><?php echo TEXT_BANNERS_SCHEDULED_AT; ?><br /><small><?php echo TEXT_BANNERS_DATE_FORMAT; ?></small></div>
+            <div valign="top" class="main col-xs-9"><script type="text/javascript">dateScheduled.writeControl(); dateScheduled.dateFormat="yyyy-MM-dd";</script>
                 <noscript>
                 <?php echo  xtc_draw_input_field('dateScheduled', $bInfo->date_scheduled ,'style="width: 130px"'); ?>
                 </noscript>
-            </td>
-          </tr>
-          <tr>
-            <td colspan="2"><?php echo xtc_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
-          </tr>
-          <tr>
-            <td valign="top" class="main"><?php echo TEXT_BANNERS_EXPIRES_ON; ?><br /><small><?php echo TEXT_BANNERS_DATE_FORMAT; ?></small></td>
-            <td class="main"><script type="text/javascript">dateExpires.writeControl(); dateExpires.dateFormat="yyyy-MM-dd";</script><?php echo TEXT_BANNERS_OR_AT . '<br />' . xtc_draw_input_field('impressions', $bInfo->expires_impressions, 'maxlength="7" size="7"') . ' ' . TEXT_BANNERS_IMPRESSIONS; ?>
+            </div>
+          </div>
+            <div class='col-xs-12'> <br> </div>
+          <div class='col-xs-12'>
+            <div valign="top" class="main col-lg-1 col-md-2 col-sm-3 col-xs-12"><?php echo TEXT_BANNERS_EXPIRES_ON; ?><br /><small><?php echo TEXT_BANNERS_DATE_FORMAT; ?></small></div>
+            <div class="main col-xs-9"><script type="text/javascript">dateExpires.writeControl(); dateExpires.dateFormat="yyyy-MM-dd";</script><?php echo TEXT_BANNERS_OR_AT . '<br />' . xtc_draw_input_field('impressions', $bInfo->expires_impressions, 'maxlength="7" size="7"') . ' ' . TEXT_BANNERS_IMPRESSIONS; ?>
                 <noscript>
                 <?php echo  xtc_draw_input_field('dateExpires', $bInfo->expires_date ,'style="width: 130px"'); ?>
                 </noscript>
-            </td>
-          </tr>
+            </div>
+          </div>
+        </div>
+        <div class='col-xs-12'> <br> </div>
 <!-- BOF - Tomcraft - 2009-11-06 - Modified Section for use without Javascript //-->
-        </table></td>
-      </tr>
-      <tr>
-        <td><?php echo xtc_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
-      </tr>
-      <tr>
-        <td><table border="0" width="100%" cellspacing="0" cellpadding="2">
-          <tr>
-            <td class="main"><?php echo TEXT_BANNERS_BANNER_NOTE . '<br />' . TEXT_BANNERS_INSERT_NOTE . '<br />' . TEXT_BANNERS_EXPIRCY_NOTE . '<br />' . TEXT_BANNERS_SCHEDULE_NOTE; ?></td>
-            <td class="main" align="right" valign="top" nowrap><?php echo (($form_action == 'insert') ? '<input type="submit" class="btn btn-default" onclick="this.blur();" value="' . BUTTON_INSERT . '"/>' : '<input type="submit" class="btn btn-default" onclick="this.blur();" value="' . BUTTON_UPDATE . '"/>'). '&nbsp;&nbsp;<a class="btn btn-default" onclick="this.blur();" href="' . xtc_href_link(FILENAME_BANNER_MANAGER, 'page=' . $_GET['page'] . '&bID=' . $_GET['bID']) . '">' . BUTTON_CANCEL . '</a>'; ?></td>
-          </tr>
-        </table></td>
-      </form></tr>
+        <div class="main col-xs-12 text-right"><?php echo (($form_action == 'insert') ? '<input type="submit" class="btn btn-default" onclick="this.blur();" value="' . BUTTON_INSERT . '"/>' : '<input type="submit" class="btn btn-default" onclick="this.blur();" value="' . BUTTON_UPDATE . '"/>'). '&nbsp;&nbsp;<a class="btn btn-default" onclick="this.blur();" href="' . xtc_href_link(FILENAME_BANNER_MANAGER, 'page=' . $_GET['page'] . '&bID=' . $_GET['bID']) . '">' . BUTTON_CANCEL . '</a>'; ?></div>
+        <div class="main col-xs-12"><?php echo TEXT_BANNERS_BANNER_NOTE . '<br />' . TEXT_BANNERS_INSERT_NOTE . '<br />' . TEXT_BANNERS_EXPIRCY_NOTE . '<br />' . TEXT_BANNERS_SCHEDULE_NOTE; ?></div>        
+      </form>
 <?php
   } else {
-?>
-      <tr>
-        <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
-          <tr>
-            <td valign="top"><table border="0" width="100%" cellspacing="0" cellpadding="2">
-              <tr class="dataTableHeadingRow">
+    ?>
+      <div class="col-xs-12">
+        <div id='responsive_table' class='table-responsive pull-left col-sm-12'>
+        <table class='table table-bordered'>
+              <thead class="dataTableHeadingRow">
                 <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_BANNERS; ?></td>
-                <td class="dataTableHeadingContent" align="right"><?php echo TABLE_HEADING_GROUPS; ?></td>
-                <td class="dataTableHeadingContent" align="right"><?php echo TABLE_HEADING_STATISTICS; ?></td>
+                <td class="dataTableHeadingContent hidden-xs" align="right"><?php echo TABLE_HEADING_GROUPS; ?></td>
+                <td class="dataTableHeadingContent hidden-xs" align="right"><?php echo TABLE_HEADING_STATISTICS; ?></td>
                 <td class="dataTableHeadingContent" align="right"><?php echo TABLE_HEADING_STATUS; ?></td>
                 <td class="dataTableHeadingContent" align="right"><?php echo TABLE_HEADING_ACTION; ?>&nbsp;</td>
-              </tr>
+              </thead>
 <?php
     $banners_query_raw = "select banners_id, banners_title, banners_image, banners_group, status, expires_date, expires_impressions, date_status_change, date_scheduled, date_added from " . TABLE_BANNERS . " order by banners_title, banners_group";
     $banners_split = new splitPageResults($_GET['page'], '20', $banners_query_raw, $banners_query_numrows);
@@ -363,9 +335,9 @@ function popupImageWindow(url) {
       $banners_clicked = ($info['banners_clicked'] != '') ? $info['banners_clicked'] : '0';
 
       if ( (is_object($bInfo)) && ($banners['banners_id'] == $bInfo->banners_id) ) {
-        echo '              <tr class="dataTableRowSelected" onmouseover="this.style.cursor=\'pointer\'" onclick="document.location.href=\'' . xtc_href_link(FILENAME_BANNER_STATISTICS, 'page=' . $_GET['page'] . '&bID=' . $bInfo->banners_id) . '\'">' . "\n";
+        echo '              <tbody class="dataTableRowSelected" onmouseover="this.style.cursor=\'pointer\'" onclick="document.location.href=\'' . xtc_href_link(FILENAME_BANNER_STATISTICS, 'page=' . $_GET['page'] . '&bID=' . $bInfo->banners_id) . '\'">' . "\n";
       } else {
-        echo '              <tr class="dataTableRow" onmouseover="this.className=\'dataTableRowOver\';this.style.cursor=\'pointer\'" onmouseout="this.className=\'dataTableRow\'" onclick="document.location.href=\'' . xtc_href_link(FILENAME_BANNER_MANAGER, 'page=' . $_GET['page'] . '&bID=' . $banners['banners_id']) . '\'">' . "\n";
+        echo '              <tbody class="dataTableRow" onmouseover="this.className=\'dataTableRowOver\';this.style.cursor=\'pointer\'" onmouseout="this.className=\'dataTableRow\'" onclick="document.location.href=\'' . xtc_href_link(FILENAME_BANNER_MANAGER, 'page=' . $_GET['page'] . '&bID=' . $banners['banners_id']) . '\'">' . "\n";
       }
 ?>
 <!-- BOF - Tomcraft - 2009-06-10 - added some missing alternative text on admin icons -->
@@ -374,8 +346,8 @@ function popupImageWindow(url) {
 -->
                 <td class="dataTableContent"><?php echo '<a href="javascript:popupImageWindow(\'' . FILENAME_POPUP_IMAGE . '?banner=' . $banners['banners_id'] . '\')">' . xtc_image(DIR_WS_IMAGES . 'icon_popup.gif', ICON_POPUP) . '</a>&nbsp;' . $banners['banners_title']; ?></td>
 <!-- EOF - Tomcraft - 2009-06-10 - added some missing alternative text on admin icons -->
-                <td class="dataTableContent" align="right"><?php echo $banners['banners_group']; ?></td>
-                <td class="dataTableContent" align="right"><?php echo $banners_shown . ' / ' . $banners_clicked; ?></td>
+                <td class="dataTableContent hidden-xs" align="right"><?php echo $banners['banners_group']; ?></td>
+                <td class="dataTableContent hidden-xs" align="right"><?php echo $banners_shown . ' / ' . $banners_clicked; ?></td>
                 <td class="dataTableContent" align="right">
 <?php
 // BOF - Tomcraft - 2009-06-10 - added some missing alternative text on admin icons
@@ -397,24 +369,30 @@ function popupImageWindow(url) {
 <!--
                 <td class="dataTableContent" align="right"><?php echo '<a href="' . xtc_href_link(FILENAME_BANNER_STATISTICS, 'page=' . $_GET['page'] . '&bID=' . $banners['banners_id']) . '">' . xtc_image(DIR_WS_ICONS . 'statistics.gif', ICON_STATISTICS) . '</a>&nbsp;'; if ( (is_object($bInfo)) && ($banners['banners_id'] == $bInfo->banners_id) ) { echo xtc_image(DIR_WS_IMAGES . 'icon_arrow_right.gif', ''); } else { echo '<a href="' . xtc_href_link(FILENAME_BANNER_MANAGER, 'page=' . $_GET['page'] . '&bID=' . $banners['banners_id']) . '">' . xtc_image(DIR_WS_IMAGES . 'icon_info.gif', IMAGE_ICON_INFO) . '</a>'; } ?>&nbsp;</td>
 -->
-                <td class="dataTableContent" align="right"><?php echo '<a href="' . xtc_href_link(FILENAME_BANNER_STATISTICS, 'page=' . $_GET['page'] . '&bID=' . $banners['banners_id']) . '">' . xtc_image(DIR_WS_ICONS . 'statistics.gif', ICON_STATISTICS) . '</a>&nbsp;'; if ( (is_object($bInfo)) && ($banners['banners_id'] == $bInfo->banners_id) ) { echo xtc_image(DIR_WS_IMAGES . 'icon_arrow_right.gif', ICON_ARROW_RIGHT); } else { echo '<a href="' . xtc_href_link(FILENAME_BANNER_MANAGER, 'page=' . $_GET['page'] . '&bID=' . $banners['banners_id']) . '">' . xtc_image(DIR_WS_IMAGES . 'icon_info.gif', IMAGE_ICON_INFO) . '</a>'; } ?>&nbsp;</td>
+                <td class="dataTableContent" align="right">
+                    <?php echo '<a href="' . xtc_href_link(FILENAME_BANNER_STATISTICS, 'page=' . $_GET['page'] . '&bID=' . $banners['banners_id']) . '">' . xtc_image(DIR_WS_ICONS . 'statistics.gif', ICON_STATISTICS) . '</a>&nbsp;';
+                    echo "<span class='hidden-sm hidden-xs'>";
+                    if ( (is_object($bInfo)) && ($banners['banners_id'] == $bInfo->banners_id) ) { echo xtc_image(DIR_WS_IMAGES . 'icon_arrow_right.gif', ICON_ARROW_RIGHT); } else { echo '<a href="' . xtc_href_link(FILENAME_BANNER_MANAGER, 'page=' . $_GET['page'] . '&bID=' . $banners['banners_id']) . '">' . xtc_image(DIR_WS_IMAGES . 'icon_info.gif', IMAGE_ICON_INFO) . '</a>'; } 
+                    echo "</span>";
+                    echo "<span class='hidden-lg hidden-md'>";
+                    echo '<a class="btn btn-default" onclick="this.blur();" href="' . xtc_href_link(FILENAME_BANNER_MANAGER, 'page=' . $_GET['page'] . '&bID=' . $banners['banners_id'] . '&action=new') . '">' . BUTTON_EDIT . '</a>';
+                    echo "</span>";
+                    ?>
+                    &nbsp;</td>
 <!-- EOF - Tomcraft - 2009-06-10 - added some missing alternative text on admin icons -->
-              </tr>
+              </tbody>
 <?php
     }
-?>
-              <tr>
-                <td colspan="5"><table border="0" width="100%" cellspacing="0" cellpadding="2">
-                  <tr>
-                    <td class="smallText" valign="top"><?php echo $banners_split->display_count($banners_query_numrows, '20', $_GET['page'], TEXT_DISPLAY_NUMBER_OF_BANNERS); ?></td>
-                    <td class="smallText" align="right"><?php echo $banners_split->display_links($banners_query_numrows, '20', MAX_DISPLAY_PAGE_LINKS, $_GET['page']); ?></td>
-                  </tr>
-                  <tr>
-                    <td align="right" colspan="2"><?php echo '<a class="btn btn-default" onclick="this.blur();" href="' . xtc_href_link(FILENAME_BANNER_MANAGER, 'action=new') . '">' . BUTTON_NEW_BANNER . '</a>'; ?></td>
-                  </tr>
-                </table></td>
-              </tr>
-            </table></td>
+            
+?>              </table>
+
+                <div class="smallText col-xs-6"><?php echo $banners_split->display_count($banners_query_numrows, '20', $_GET['page'], TEXT_DISPLAY_NUMBER_OF_BANNERS); ?></div>
+                <div class="smallText col-xs-6 text-right"><?php echo $banners_split->display_links($banners_query_numrows, '20', MAX_DISPLAY_PAGE_LINKS, $_GET['page']); ?></div>
+
+                <div class='col-xs-12 text-right'><?php echo '<a class="btn btn-default" onclick="this.blur();" href="' . xtc_href_link(FILENAME_BANNER_MANAGER, 'action=new') . '">' . BUTTON_NEW_BANNER . '</a>'; ?></div>
+        </div>
+
+        
 <?php
   $heading = array();
   $contents = array();
@@ -461,26 +439,27 @@ function popupImageWindow(url) {
   }
 
   if ( (xtc_not_null($heading)) && (xtc_not_null($contents)) ) {
-    echo '            <td width="25%" valign="top">' . "\n";
+    echo '<div class="col-md-4 hidden-xs hidden-sm pull-right">' . "\n";
 
     $box = new box;
     echo $box->infoBox($heading, $contents);
 
-    echo '            </td>' . "\n";
+    echo '</div>' . "\n";
+    ?>
+    <script>
+        //responsive_table
+        $('#responsive_table').addClass('col-md-8');
+    </script>               
+    <?php
   }
 ?>
-          </tr>
-        </table></td>
-      </tr>
+    </div>
 <?php
   }
 ?>
-    </table></td>
+</div>
 <!-- body_text_eof //-->
-  </tr>
-</table>
 <!-- body_eof //-->
-
 <!-- footer //-->
 <?php require(DIR_WS_INCLUDES . 'footer.php'); ?>
 <!-- footer_eof //-->

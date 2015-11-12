@@ -12,13 +12,8 @@
 
   if (MODULE_EASYBILL_STATUS=='True') {
   ?>
-    <tr>
-      <td>
-        <fieldset>
-          <legend><span class="main">easyBill</span></legend>
-            <table>
-              <tr>
-                <td>
+              <div class="col-xs-12">
+                  <div class="col-xs-12 col-sm-4">
                   <?php
                     $easybill_query = xtc_db_query("SELECT * FROM easybill WHERE orders_id='".$oID."'");
                     if (xtc_db_num_rows($easybill_query)==0) {
@@ -34,14 +29,11 @@
                       }
                     }
                   ?>
-                  <a class="btn btn-default" href="<?php echo xtc_href_link(FILENAME_ORDERS, 'oID='.$oID.'&action=easybill&download=true'); ?>"><?php echo 'Rechnung &ouml;ffnen';?></a>
-                  <a class="btn btn-default" href="<?php echo xtc_href_link(FILENAME_ORDERS, 'oID='.$oID.'&action=easybill&save=true'); ?>"><?php echo 'Rechnung speichern';?></a>
-                </td>
-              </tr>
-            </table>
-        </fieldset>
-      </td>
-    </tr>
+                </div>
+                <div class="col-xs-12 col-sm-4"><a class="btn btn-default" href="<?php echo xtc_href_link(FILENAME_ORDERS, 'oID='.$oID.'&action=easybill&download=true'); ?>"><?php echo 'Rechnung &ouml;ffnen';?></a></div>
+                <div class="col-xs-12 col-sm-4"><a class="btn btn-default" href="<?php echo xtc_href_link(FILENAME_ORDERS, 'oID='.$oID.'&action=easybill&save=true'); ?>"><?php echo 'Rechnung speichern';?></a></div>
+
+              </div>
   <?php
   }
   ?>

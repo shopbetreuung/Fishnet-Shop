@@ -25,34 +25,17 @@
 <?php require(DIR_WS_INCLUDES . 'header.php'); ?>
 <!-- header_eof //-->
 <!-- body //-->
-<table border="0" width="100%" cellspacing="2" cellpadding="2">
-  <tr>
-    
-<!-- body_text //-->
-    <td class="boxCenter" width="100%" valign="top">
-      <table border="0" width="100%" cellspacing="0" cellpadding="2">
-        <tr>
-          <td>
-            <table border="0" width="100%" cellspacing="0" cellpadding="0">
-              <tr>
-                <td width="80" rowspan="2"><?php echo xtc_image(DIR_WS_ICONS.'heading_statistic.gif'); ?></td>
-                <td class="pageHeading"><?php echo HEADING_TITLE; ?></td>
-              </tr>
-              <tr>
-                <td class="main" valign="top">Statistics</td>
-              </tr>
-            </table>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <table border="0" width="100%" cellspacing="0" cellpadding="0">
-              <tr>
-                <td valign="top">
-                  <table border="0" width="100%" cellspacing="0" cellpadding="2">
+<div class='row'>
+                <div class='col-xs-12'>
+                    <div class="col-xs-3 col-sm-1 text-right"><?php echo xtc_image(DIR_WS_ICONS.'heading_statistic.gif'); ?></div>
+                    <div class="col-xs-9 col-sm-11"><p class="h2"><?php echo HEADING_TITLE; ?></p> Statistics</div>
+                </div>
+                <div class='col-xs-12'><br></div>
+                <div class='table-responsive col-xs-12'>
+<table class='table table-bordered'>
                     <tr class="dataTableHeadingRow">
-                      <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_NUMBER; ?></td>
-                      <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_MODEL; ?></td>
+                      <td class="dataTableHeadingContent hidden-xs"><?php echo TABLE_HEADING_NUMBER; ?></td>
+                      <td class="dataTableHeadingContent hidden-xs"><?php echo TABLE_HEADING_MODEL; ?></td>
                       <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_PRODUCTS; ?></td>
                       <td class="dataTableHeadingContent" align="center"><?php echo TABLE_HEADING_PURCHASED; ?>&nbsp;</td>
                       <td class="dataTableHeadingContent" align="center"><?php echo TABLE_HEADING_QUANTITY; ?>&nbsp;</td>
@@ -81,8 +64,8 @@
                       }
                     ?>
                     <tr class="dataTableRow" onmouseover="this.className='dataTableRowOver';this.style.cursor='pointer'" onmouseout="this.className='dataTableRow'" onclick="document.location.href='<?php echo xtc_href_link(FILENAME_CATEGORIES, 'action=new_product_preview&read=only&pID=' . $products['products_id'] . '&origin=' . FILENAME_STATS_PRODUCTS_PURCHASED . '?page=' . $_GET['page'], 'NONSSL'); ?>'">
-                      <td class="dataTableContent"><?php echo $rows; ?>.</td>
-                      <td class="dataTableContent"><?php echo $products['products_model']; ?>&nbsp;</td>
+                      <td class="dataTableContent hidden-xs"><?php echo $rows; ?>.</td>
+                      <td class="dataTableContent hidden-xs"><?php echo $products['products_model']; ?>&nbsp;</td>
                       <td class="dataTableContent"><?php echo $products['products_name']; ?></td>                      
                       <td class="dataTableContent" align="center"><?php echo $products['products_ordered']; ?>&nbsp;</td>
                       <td class="dataTableContent" align="center"><?php echo $products['products_quantity']; ?>&nbsp;</td>
@@ -91,26 +74,14 @@
                     }
                   ?>
                   </table>
-                </td>
-              </tr>
-              <tr>
-                <td colspan="3">
-                  <table border="0" width="100%" cellspacing="0" cellpadding="2">
-                    <tr>
-                      <td class="smallText" valign="top"><?php echo $products_split->display_count($products_query_numrows, '20', $_GET['page'], TEXT_DISPLAY_NUMBER_OF_PRODUCTS); ?></td>
-                      <td class="smallText" align="right"><?php echo $products_split->display_links($products_query_numrows, '20', MAX_DISPLAY_PAGE_LINKS, $_GET['page']); ?>&nbsp;</td>
-                    </tr>
-                  </table>
-                </td>
-              </tr>
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-<!-- body_text_eof //-->
-  </tr>
-</table>
+                </div>
+                
+                    <div class='col-xs-12'>
+                      <div class="smallText col-xs-6" ><?php echo $products_split->display_count($products_query_numrows, '20', $_GET['page'], TEXT_DISPLAY_NUMBER_OF_PRODUCTS); ?></div>
+                      <div class="smallText col-xs-6 text-right" ><?php echo $products_split->display_links($products_query_numrows, '20', MAX_DISPLAY_PAGE_LINKS, $_GET['page']); ?>&nbsp;</div>
+                    </div>
+                
+</div>
 <!-- body_eof //-->
 <!-- footer //-->
 <?php require(DIR_WS_INCLUDES . 'footer.php'); ?>

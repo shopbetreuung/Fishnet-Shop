@@ -1,0 +1,26 @@
+.table-responsive{
+    border: none;
+}
+
+.left_mobile{
+    margin-left: 18px;
+}
+
+@media only screen and (max-width: 768px) {
+    /* For mobile phones: */
+    .xs_full_width{
+        width: 100%;
+    }
+    .container-fluid {
+        padding-left: 0;
+        padding-right: 0;
+    }
+    
+    .form-control.no_full_width{
+        width: 100% !important;
+    }
+}
+
+div.error_display_box{
+    color:#FF0000;
+}

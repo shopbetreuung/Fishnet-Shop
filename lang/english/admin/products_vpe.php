@@ -29,4 +29,7 @@ define('TEXT_INFO_HEADING_EDIT_PRODUCTS_VPE', 'Edit packing unit');
 define('TEXT_INFO_HEADING_DELETE_PRODUCTS_VPE', 'Delete packing unit');
 
 define('ERROR_REMOVE_DEFAULT_PRODUCTS_VPE', 'Error: The default packing unit can not be removed. Please set another packing unit as default, and try again.');
+
+define('ERROR_TEXT_HEADING', 'Packing unit not saved, fix errors:');
+define('ERROR_TEXT_NAME', 'Name invalid!');
 ?>

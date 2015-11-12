@@ -32,65 +32,54 @@ require (DIR_WS_INCLUDES.'head.php');
 <!-- header_eof //-->
 
 <!-- body //-->
-<table border="0" width="100%" cellspacing="2" cellpadding="2">
-  <tr>
+<div class='row'>
     
 <!-- body_text //-->
-    <td class="boxCenter" width="100%" valign="top"><table border="0" width="100%" cellspacing="0" cellpadding="2">
-      <tr>
-        <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
-          <tr>
-            <td class="pageHeading"><?php echo HEADING_TITLE; ?></td>
-            <td class="pageHeading" align="right"><?php echo xtc_draw_separator('pixel_trans.gif', HEADING_IMAGE_WIDTH, HEADING_IMAGE_HEIGHT); ?></td>
-          </tr>
-        </table></td>
-      </tr>
-      <tr>
-        <td><table border="0" width="100%" cellspacing="0" cellpadding="2">
-          <tr>
-            <td align="left"><table border="0" cellspacing="0" cellpadding="3">
-              <tr>
-                <td class="smallText"><strong><?php echo TITLE_SERVER_HOST; ?></strong></td>
-                <td class="smallText"><?php echo $system['host'] . ' (' . $system['ip'] . ')'; ?></td>
-                <td class="smallText">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong><?php echo TITLE_DATABASE_HOST; ?></strong></td>
-                <td class="smallText"><?php echo $system['db_server'] . ' (' . $system['db_ip'] . ')'; ?></td>
-              </tr>
-              <tr>
-                <td class="smallText"><strong><?php echo TITLE_SERVER_OS; ?></strong></td>
-                <td class="smallText"><?php echo $system['system'] . ' ' . $system['kernel']; ?></td>
-                <td class="smallText">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong><?php echo TITLE_DATABASE; ?></strong></td>
-                <td class="smallText"><?php echo $system['db_version']; ?></td>
-              </tr>
-              <tr>
-                <td class="smallText"><strong><?php echo TITLE_SERVER_DATE; ?></strong></td>
-                <td class="smallText"><?php echo $system['date']; ?></td>
-                <td class="smallText">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong><?php echo TITLE_DATABASE_DATE; ?></strong></td>
-                <td class="smallText"><?php echo $system['db_date']; ?></td>
-              </tr>
-              <tr>
-                <td class="smallText"><strong><?php echo TITLE_SERVER_UP_TIME; ?></strong></td>
-                <td colspan="3" class="smallText"><?php echo $system['uptime']; ?></td>
-              </tr>
-              <tr>
-                <td colspan="4"><?php echo xtc_draw_separator('pixel_trans.gif', '1', '5'); ?></td>
-              </tr>
-              <tr>
-                <td class="smallText"><strong><?php echo TITLE_HTTP_SERVER; ?></strong></td>
-                <td colspan="3" class="smallText"><?php echo $system['http_server']; ?></td>
-              </tr>
-              <tr>
-                <td class="smallText"><strong><?php echo TITLE_PHP_VERSION; ?></strong></td>
-                <td colspan="3" class="smallText"><?php echo $system['php'] . ' (' . TITLE_ZEND_VERSION . ' ' . $system['zend'] . ')'; ?></td>
-              </tr>
-            </table></td>
-          </tr>
-        </table></td>
-      </tr>
-      <tr>
-        <td><?php echo xtc_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
-      </tr>
-      <tr>
-        <td>
+   
+    <div class='col-xs-12'>
+    <p class="h2">
+        <?php echo HEADING_TITLE; ?>
+    </p>
+    </div>
+    <div class='col-xs-12'>
+        <div class='col-xs-12 col-md-6'>
+            <div class='col-xs-4'><strong><?php echo TITLE_SERVER_HOST; ?></strong></div>
+            <div class='col-xs-8'><?php echo $system['host'] . ' (' . $system['ip'] . ')'; ?></div>
+            
+            
+            <div class='col-xs-4'><strong><?php echo TITLE_SERVER_OS; ?></strong></div>
+            <div class='col-xs-8'><?php echo $system['system'] . ' ' . $system['kernel']; ?></div>
+            
+            
+            <div class='col-xs-4'><strong><?php echo TITLE_SERVER_DATE; ?></strong></div>
+            <div class='col-xs-8'><?php echo $system['db_version']; ?></div>
+            
+            
+            <div class='col-xs-4'><strong><?php echo TITLE_SERVER_UP_TIME; ?></strong></div>
+            <div class='col-xs-8'><?php echo $system['uptime']; ?></div>
+            
+            
+            <div class='col-xs-4'><strong><?php echo TITLE_HTTP_SERVER; ?></strong></div>
+            <div class='col-xs-8'><?php echo $system['http_server']; ?></div>
+            
+            
+            <div class='col-xs-4'><strong><?php echo TITLE_PHP_VERSION; ?></strong></div>
+            <div class='col-xs-8'><?php echo $system['php'] . ' (' . TITLE_ZEND_VERSION . ' ' . $system['zend'] . ')'; ?></div>
+        </div>
+        <div class='col-xs-12 col-md-6'>
+            <div class='col-xs-4'><strong><?php echo TITLE_DATABASE_HOST; ?></strong></div>
+            <div class='col-xs-8 smallText'><?php echo $system['db_server'] . ' (' . $system['db_ip'] . ')'; ?></div>
+            
+            <div class='col-xs-4'><strong><?php echo TITLE_DATABASE; ?></strong></div>
+            <div class='col-xs-8 smallText'><?php echo $system['db_version']; ?></div>
+            
+            <div class='col-xs-4'><strong><?php echo TITLE_DATABASE_DATE; ?></strong></div>
+            <div class='col-xs-8 smallText'><?php echo $system['db_date']; ?></div>
+        </div>
+    </div>
+
+    <div class='col-xs-12'><br></div>
+    <div class='col-xs-12'>
            <iframe src="?phpInfo" width="100%" height="700" style="border: solid 1px #a3a3a3;">
            <p>Der verwendete Browser kann leider nicht mit inline Frames (iframe)
              umgehen:
@@ -98,12 +87,10 @@ require (DIR_WS_INCLUDES.'head.php');
              Seite vom System</a>
            </p>
          </iframe>
-        </td>
-      </tr>
-    </table></td>
+    </div>
+
 <!-- body_text_eof //-->
-  </tr>
-</table>
+</div>
 <!-- body_eof //-->
 
 <!-- footer //-->

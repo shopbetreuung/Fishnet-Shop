@@ -88,43 +88,30 @@ require (DIR_WS_INCLUDES.'head.php');
     <?php require(DIR_WS_INCLUDES . 'header.php'); ?>
     <!-- header_eof //-->
     <!-- body //-->
-    <table border="0" width="100%" cellspacing="2" cellpadding="2">
-      <tr>
         
-        </td>
-        <!-- body_text //-->
-        <td class="boxCenter" width="100%" valign="top">
-          <table border="0" width="100%" cellspacing="0" cellpadding="2">
-            <tr>
-              <td width="100%">
-                <table border="0" width="100%" cellspacing="0" cellpadding="0">
-                  <tr>
-                    <td width="80" rowspan="2"><?php echo xtc_image(DIR_WS_ICONS.'heading_modules.gif'); ?></td>
-                    <td class="pageHeading"><?php echo defined('HEADING_TITLE')?HEADING_TITLE:''; ?></td>
-                  </tr>
-                  <tr>
-                    <td class="main" valign="top">Modules</td>
-                  </tr>
-                </table>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <table border="0" width="100%" cellspacing="0" cellpadding="0">
-                  <tr>
-                    <td valign="top">
-                      <table border="0" width="100%" cellspacing="0" cellpadding="2">
+    <div class="row">
+      
+    <div class='col-xs-12'>
+        <div class="col-xs-3 col-sm-1 text-right"><?php echo xtc_image(DIR_WS_ICONS.'heading_modules.gif'); ?></div>
+        <div class="col-xs-9 col-sm-11"><p class="h2"><?php echo defined('HEADING_TITLE')?HEADING_TITLE:''; ?></p> Modules</div>
+    </div>
+    <div class='col-xs-12'><br></div>
+    <div class='col-xs-12'>
+        <div id='responsive_table' class='table-responsive pull-left col-sm-12'>
+        <table class="table table-bordered">
                         <tr class="dataTableHeadingRow">
                           <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_MODULES; ?></td>
-                          <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_FILENAME; ?></td>
-                          <td class="dataTableHeadingContent" align="right"><?php echo TABLE_HEADING_SORT_ORDER; ?></td>
+                          <td class="dataTableHeadingContent hidden-xs"><?php echo TABLE_HEADING_FILENAME; ?></td>
+                          <td class="dataTableHeadingContent hidden-xs" align="right"><?php echo TABLE_HEADING_SORT_ORDER; ?></td>
                           <td class="dataTableHeadingContent" align="right"><?php echo TABLE_HEADING_ACTION; ?>&nbsp;</td>
                         </tr>
                         <?php
+                        #MN: Country check for klarna
 						$country_query = xtc_db_query('SELECT countries_iso_code_2 FROM countries WHERE countries_id = "'.$_SESSION['customer_country_id'].'"');
 						$country = xtc_db_fetch_array($country_query);
 						$user_country_iso = $country['countries_iso_code_2'];
 						$klarna_supported_countries = array('SE', 'NO', 'DK', 'FI', 'DE', 'NL', 'SWE', 'NOR', 'DNK', 'FIN', 'DEU', 'NLD');
+                        ##MN##
                         $file_extension = substr($PHP_SELF, strrpos($PHP_SELF, '.'));
                         $directory_array = array();
                         if ($dir = @dir($module_directory)) {
@@ -231,10 +218,23 @@ require (DIR_WS_INCLUDES.'head.php');
                                     }
                                   ?>
                                 </td>
-                                <td class="dataTableContent"><?php echo str_replace('.php','',$file); ?></td>
-                                <td class="dataTableContent" align="right">
+                                <td class="dataTableContent hidden-xs"><?php echo str_replace('.php','',$file); ?></td>
+                                <td class="dataTableContent hidden-xs" align="right">
                                 <?php if (isset($module->sort_order) && is_numeric($module->sort_order)) echo $module->sort_order; ?>&nbsp;</td>
-                                <td class="dataTableContent" align="right"><?php if (isset($mInfo) && is_object($mInfo) && ($class == $mInfo->code) ) { echo xtc_image(DIR_WS_IMAGES . 'icon_arrow_right.gif', ICON_ARROW_RIGHT); } else { echo '<a href="' . xtc_href_link(FILENAME_MODULES, 'set=' . $set . '&module=' . $class) . '">' . xtc_image(DIR_WS_IMAGES . 'icon_info.gif', IMAGE_ICON_INFO) . '</a>'; } ?>&nbsp;</td>
+                                <td class="dataTableContent" align="right">
+                                    <span class="hidden-xs hidden-sm">
+                                    <?php if (isset($mInfo) && is_object($mInfo) && ($class == $mInfo->code) ) { echo xtc_image(DIR_WS_IMAGES . 'icon_arrow_right.gif', ICON_ARROW_RIGHT); } else { echo '<a href="' . xtc_href_link(FILENAME_MODULES, 'set=' . $set . '&module=' . $class) . '">' . xtc_image(DIR_WS_IMAGES . 'icon_info.gif', IMAGE_ICON_INFO) . '</a>'; } ?>&nbsp;
+                                    </span>
+                                    <span class="hidden-md hidden-lg">
+                                        <?php 
+                                        if ($module->check() == '1') {
+                                            echo '<a class="btn btn-default" onclick="this.blur();" href="' . xtc_href_link(FILENAME_MODULES, 'set=' . $set . '&module=' . $mInfo->code . '&action=remove') . '">' . BUTTON_MODULE_REMOVE . '</a>';
+                                        } else {
+                                            echo '<a class="btn btn-default" onclick="this.blur();" href="' . xtc_href_link(FILENAME_MODULES, 'set=' . $set . '&module=' . $mInfo->code . '&action=install') . '">' . BUTTON_MODULE_INSTALL . '</a>';
+                                        }
+                                        ?>
+                                    </span>
+                                </td>
                               </tr>
                               <?php
                               }
@@ -253,11 +253,11 @@ require (DIR_WS_INCLUDES.'head.php');
                           xtc_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_key, configuration_value, configuration_group_id, sort_order, date_added) values ( '" . $module_key . "', '" . implode(';', $installed_modules) . "','6', '0', now())");
                         }
                         ?>
-                        <tr>
-                          <td colspan="3" class="smallText"><?php echo TEXT_MODULE_DIRECTORY . ' ' . $module_directory; ?></td>
-                        </tr>
                       </table>
-                    </td>
+                        <div class="col-xs-12 smallText">
+                          <?php echo TEXT_MODULE_DIRECTORY . ' ' . $module_directory; ?>
+                        </div>
+                    </div>
                     <?php
                     $heading = array();
                     $contents = array();
@@ -336,20 +336,18 @@ require (DIR_WS_INCLUDES.'head.php');
                         }
                     }
                     if ( (xtc_not_null($heading)) && (xtc_not_null($contents)) ) {
-                      echo '            <td width="25%" valign="top">' . "\n";
+                      echo '<div class="col-md-3 hidden-xs hidden-sm pull-right">' . "\n";#col-sm-12 col-xs-12 
                       echo box::infoBoxSt($heading, $contents); // cYbercOsmOnauT - 2011-02-07 - Changed methods of the classes box and tableBox to static
-                      echo '            </td>' . "\n";
+                      echo '</div>' . "\n";
+                    ?>
+                      <script>
+                          //responsive_table
+                          $('#responsive_table').addClass('col-md-9');
+                      </script>               
+                      <?php
                     }
                     ?>
-                  </tr>
-                </table>
-              </td>
-            </tr>
-          </table>
-        </td>
-        <!-- body_text_eof //-->
-      </tr>
-    </table>
+    </div></div>
     <!-- body_eof //-->
     <!-- footer //-->
     <?php require(DIR_WS_INCLUDES . 'footer.php'); ?>

@@ -405,38 +405,30 @@ require (DIR_WS_INCLUDES.'head.php');
     <?php require(DIR_WS_INCLUDES . 'header.php'); ?>
     <!-- header_eof //-->
     <!-- body //-->
-    <table border="0" width="100%" cellspacing="2" cellpadding="2">
-      <tr>
-        
-        </td>
+<div class="row">
         <!-- body_text //-->
-        <td class="boxCenter" width="100%" valign="top">
-          <table border="0" width="100%" cellspacing="0" cellpadding="2">
-            <tr>
-              <td>
-                <table border="0" width="100%" cellspacing="0" cellpadding="0">
-                  <tr>
-                    <td valign="middle" class="pageHeading"><?php echo HEADING_TITLE; ?></td>
-                  </tr>
-                </table>
-              </td>
-            </tr>
-            <tr>
-              <td><?php echo xtc_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
-            </tr>
+        <div class='col-xs-12'>
+            <p class="h2">
+                <?php echo HEADING_TITLE; ?>
+            </p>
+        </div>
+        <div class='col-xs-12'><br></div>
+        <div class='col-xs-12'><br></div>
+        
             <?php echo xtc_draw_form('customers', FILENAME_CREATE_ACCOUNT, xtc_get_all_get_params(array('action')) . 'action=edit', 'post', 'onSubmit="return check_form();"') . xtc_draw_hidden_field('default_address_id', isset($customers_default_address_id)?$customers_default_address_id:''); ?>
-              <tr>
-                <td class="formAreaTitle"><?php echo CATEGORY_PERSONAL; ?></td>
-              </tr>
-              <tr>
-                <td class="formArea">
-                  <table border="0" cellspacing="2" cellpadding="2">
+            <div class='col-xs-12'>
+                <hr>
+                <p class="h3">
+                    <?php echo CATEGORY_PERSONAL; ?>
+                </p>
+                <hr>
+            </div>
                     <?php
                     if (ACCOUNT_GENDER == 'true') {
                       ?>
-                      <tr>
-                        <td class="main"><?php echo ENTRY_GENDER; ?></td>
-                        <td class="main">
+                      <div class="col-xs-12">
+                        <div class="col-sm-2 col-xs-12 main"><?php echo ENTRY_GENDER; ?></div>
+                        <div class="col-sm-10 col-xs-12 main">
                           <?php
                           if (isset($error) && $error == true) {
                             if (isset($entry_gender_error) && $entry_gender_error == true) {
@@ -449,18 +441,18 @@ require (DIR_WS_INCLUDES.'head.php');
                             echo xtc_draw_radio_field('customers_gender', 'm', false, isset($customers_gender)?$customers_gender:'').'&nbsp;&nbsp;'.MALE.'&nbsp;&nbsp;'.xtc_draw_radio_field('customers_gender', 'f', false, isset($customers_gender)?$customers_gender:'').'&nbsp;&nbsp;'.FEMALE;
                           }
                           ?>
-                        </td>
-                      </tr>
+                        </div>
+                      </div>
                       <?php
                     }
                     ?>
-                    <tr>
-                      <td class="main"><?php echo ENTRY_CID; ?></td>
-                      <td class="main"><?php echo xtc_draw_input_field('csID', isset($customers_cid)?$customers_cid:'', 'maxlength="32"'); ?></td>
-                    </tr>
-                    <tr>
-                      <td class="main"><?php echo ENTRY_FIRST_NAME; ?></td>
-                      <td class="main">
+                    <div class="col-xs-12">
+                      <div class="col-sm-2 col-xs-12 main"><?php echo ENTRY_CID; ?></div>
+                      <div class="col-sm-10 col-xs-12 main"><?php echo xtc_draw_input_field('csID', isset($customers_cid)?$customers_cid:'', 'maxlength="32"'); ?></div>
+                    </div>
+                    <div class="col-xs-12">
+                      <div class="col-sm-2 col-xs-12 main"><?php echo ENTRY_FIRST_NAME; ?></div>
+                      <div class="col-sm-10 col-xs-12 main">
                         <?php
                         if (isset($error) && $error == true) {
                           if (isset($entry_firstname_error) && $entry_firstname_error == true) {
@@ -472,11 +464,11 @@ require (DIR_WS_INCLUDES.'head.php');
                           echo xtc_draw_input_field('customers_firstname', isset($customers_firstname)?$customers_firstname:'', 'maxlength="64"');
                         }
                         ?>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td class="main"><?php echo ENTRY_LAST_NAME; ?></td>
-                      <td class="main">
+                      </div>
+                    </div>
+                    <div class="col-xs-12">
+                      <div class="col-sm-2 col-xs-12 main"><?php echo ENTRY_LAST_NAME; ?></div>
+                      <div class="col-sm-10 col-xs-12 main">
                         <?php
                         if (isset($error) && $error == true) {
                           if (isset($entry_lastname_error) && $entry_lastname_error == true) {
@@ -488,14 +480,14 @@ require (DIR_WS_INCLUDES.'head.php');
                           echo xtc_draw_input_field('customers_lastname', isset($customers_lastname)?$customers_lastname:'', 'maxlength="64"');
                         }
                         ?>
-                      </td>
-                    </tr>
+                      </div>
+                    </div>
                     <?php
                     if (ACCOUNT_DOB == 'true') {
                       ?>
-                      <tr>
-                        <td class="main"><?php echo ENTRY_DATE_OF_BIRTH; ?></td>
-                        <td class="main">
+                      <div class="col-xs-12">
+                        <div class="col-sm-2 col-xs-12 main"><?php echo ENTRY_DATE_OF_BIRTH; ?></div>
+                        <div class="col-sm-10 col-xs-12 main">
                           <?php
                           if (isset($error) && $error == true) {
                             if (isset($entry_date_of_birth_error) && $entry_date_of_birth_error == true) {
@@ -507,14 +499,14 @@ require (DIR_WS_INCLUDES.'head.php');
                             echo xtc_draw_input_field('customers_dob', xtc_date_short(isset($customers_dob)?$customers_dob:''), 'maxlength="10"');
                           }
                           ?>
-                        </td>
-                      </tr>
+                        </div>
+                      </div>
                       <?php
                     }
                     ?>
-                    <tr>
-                      <td class="main"><?php echo ENTRY_EMAIL_ADDRESS; ?></td>
-                      <td class="main">
+                    <div class="col-xs-12">
+                      <div class="col-sm-2 col-xs-12 main"><?php echo ENTRY_EMAIL_ADDRESS; ?></div>
+                      <div class="col-sm-10 col-xs-12 main">
                         <?php
                           if (isset($error) && $error == true) {
                             if (isset($entry_email_address_error) && $entry_email_address_error == true) {
@@ -530,26 +522,30 @@ require (DIR_WS_INCLUDES.'head.php');
                             echo xtc_draw_input_field('customers_email_address', isset($customers_email_address)?$customers_email_address:'', 'maxlength="96"');
                           }
                         ?>
-                      </td>
-                    </tr>
+                      </div>
+                    </div>
                   </table>
-                </td>
-              </tr>
+                </div>
+              </div>
               <?php
               if (ACCOUNT_COMPANY == 'true') {
                 ?>
-                <tr>
-                  <td><?php echo xtc_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
-                </tr>
-                <tr>
-                  <td class="formAreaTitle"><?php echo CATEGORY_COMPANY; ?></td>
-                </tr>
-                <tr>
-                  <td class="formArea">
+            <div class='col-xs-12'>
+                <hr>
+                <p class="h3">
+                    <?php echo CATEGORY_COMPANY; ?>
+                </p>
+                <hr>
+            </div>
+                <div class="col-xs-12">
+                  <div class="formAreaTitle">
+                </div>
+                <div class="col-xs-12">
+                  <div class="formArea">
                     <table border="0" cellspacing="2" cellpadding="2">
-                      <tr>
-                        <td class="main"><?php echo ENTRY_COMPANY; ?></td>
-                        <td class="main">
+                      <div class="col-xs-12">
+                        <div class="col-sm-2 col-xs-12 main"><?php echo ENTRY_COMPANY; ?></div>
+                        <div class="col-sm-10 col-xs-12 main">
                           <?php
                             if (isset($error) && $error == true) {
                               if (isset($entry_company_error) && $entry_company_error == true) {
@@ -561,14 +557,14 @@ require (DIR_WS_INCLUDES.'head.php');
                               echo xtc_draw_input_field('entry_company', isset($entry_company)?$entry_company:'', 'maxlength="64"');
                             }
                           ?>
-                        </td>
-                      </tr>
+                        </div>
+                      </div>
                       <?php
                         if (ACCOUNT_COMPANY_VAT_CHECK == 'true') {
                           ?>
-                          <tr>
-                            <td class="main"><?php echo ENTRY_VAT_ID; ?></td>
-                            <td class="main">
+                          <div class="col-xs-12">
+                            <div class="col-sm-2 col-xs-12 main"><?php echo ENTRY_VAT_ID; ?></div>
+                            <div class="col-sm-10 col-xs-12 main">
                               <?php
                               // BOF - Dokuman - 2011-07-28 - display correct error code of VAT ID check
                               echo xtc_draw_input_field('customers_vat_id', isset($customers_vat_id)?$customers_vat_id:'', 'maxlength="32"').'&nbsp;'.(isset($entry_vat_error_text)?$entry_vat_error_text:'');
@@ -585,29 +581,30 @@ require (DIR_WS_INCLUDES.'head.php');
                               */
                               // EOF - Dokuman - 2011-07-28 - display correct error code of VAT ID check
                               ?>
-                            </td>
-                          </tr>
+                            </div>
+                          </div>
                           <?php
                         }
                       ?>
                     </table>
-                  </td>
-                </tr>
+                  </div>
+                </div>
                 <?php
               }
               ?>
-              <tr>
-                <td><?php echo xtc_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
-              </tr>
-              <tr>
-                <td class="formAreaTitle"><?php echo CATEGORY_ADDRESS; ?></td>
-              </tr>
-              <tr>
-                <td class="formArea">
+            <div class='col-xs-12'>
+                <hr>
+                <p class="h3">
+                    <?php echo CATEGORY_ADDRESS; ?>
+                </p>
+                <hr>
+            </div>
+              <div class="col-xs-12">
+                <div class="formArea">
                   <table border="0" cellspacing="2" cellpadding="2">
-                    <tr>
-                      <td class="main"><?php echo ENTRY_STREET_ADDRESS; ?></td>
-                      <td class="main">
+                    <div class="col-xs-12">
+                      <div class="col-sm-2 col-xs-12 main"><?php echo ENTRY_STREET_ADDRESS; ?></div>
+                      <div class="col-sm-10 col-xs-12 main">
                         <?php
                         if (isset($error) && $error == true) {
                           if (isset($entry_street_address_error) && $entry_street_address_error == true) {
@@ -619,14 +616,14 @@ require (DIR_WS_INCLUDES.'head.php');
                           echo xtc_draw_input_field('entry_street_address', isset($entry_street_address)?$entry_street_address:'', 'maxlength="64"');
                         }
                         ?>
-                      </td>
-                    </tr>
+                      </div>
+                    </div>
                     <?php
                     if (ACCOUNT_SUBURB == 'true') {
                       ?>
-                      <tr>
-                        <td class="main"><?php echo ENTRY_SUBURB; ?></td>
-                        <td class="main">
+                      <div class="col-xs-12">
+                        <div class="col-sm-2 col-xs-12 main"><?php echo ENTRY_SUBURB; ?></div>
+                        <div class="col-sm-10 col-xs-12 main">
                           <?php
                           if (isset($error) && $error == true) {
                             if (isset($entry_suburb_error) && $entry_suburb_error == true) {
@@ -638,14 +635,14 @@ require (DIR_WS_INCLUDES.'head.php');
                             echo xtc_draw_input_field('entry_suburb', isset($entry_suburb)?$entry_suburb:'', 'maxlength="32"');
                           }
                           ?>
-                        </td>
-                      </tr>
+                        </div>
+                      </div>
                       <?php
                     }
                     ?>
-                    <tr>
-                      <td class="main"><?php echo ENTRY_POST_CODE; ?></td>
-                      <td class="main">
+                    <div class="col-xs-12">
+                      <div class="col-sm-2 col-xs-12 main"><?php echo ENTRY_POST_CODE; ?></div>
+                      <div class="col-sm-10 col-xs-12 main">
                         <?php
                         if (isset($error) && $error == true) {
                           if (isset($entry_post_code_error) && $entry_post_code_error == true) {
@@ -657,11 +654,11 @@ require (DIR_WS_INCLUDES.'head.php');
                           echo xtc_draw_input_field('entry_postcode', isset($entry_postcode)?$entry_postcode:'', 'maxlength="8"');
                         }
                         ?>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td class="main"><?php echo ENTRY_CITY; ?></td>
-                      <td class="main">
+                      </div>
+                    </div>
+                    <div class="col-xs-12">
+                      <div class="col-sm-2 col-xs-12 main"><?php echo ENTRY_CITY; ?></div>
+                      <div class="col-sm-10 col-xs-12 main">
                         <?php
                         if (isset($error) && $error == true) {
                           if (isset($entry_city_error) && $entry_city_error == true) {
@@ -673,14 +670,14 @@ require (DIR_WS_INCLUDES.'head.php');
                           echo xtc_draw_input_field('entry_city', isset($entry_city)?$entry_city:'', 'maxlength="64"');
                         }
                         ?>
-                      </td>
-                    </tr>
+                      </div>
+                    </div>
                     <?php
                     if (ACCOUNT_STATE == 'true') {
                       ?>
-                      <tr>
-                        <td class="main"><?php echo ENTRY_STATE; ?></td>
-                        <td class="main">
+                      <div class="col-xs-12">
+                        <div class="col-sm-2 col-xs-12 main"><?php echo ENTRY_STATE; ?></div>
+                        <div class="col-sm-10 col-xs-12 main">
                           <?php
                           $entry_state = xtc_get_zone_name(isset($entry_country_id)?$entry_country_id:'',
                                                            isset($entry_zone_id)?$entry_zone_id:'',
@@ -710,14 +707,14 @@ require (DIR_WS_INCLUDES.'head.php');
                                                                                        isset($entry_state)?$entry_state:''));
                           }
                           ?>
-                        </td>
-                      </tr>
+                        </div>
+                      </div>
                       <?php
                     }
                     ?>
-                    <tr>
-                      <td class="main"><?php echo ENTRY_COUNTRY; ?></td>
-                      <td class="main">
+                    <div class="col-xs-12">
+                      <div class="col-sm-2 col-xs-12 main"><?php echo ENTRY_COUNTRY; ?></div>
+                      <div class="col-sm-10 col-xs-12 main">
                         <?php
                         if (isset($error) && $error == true) {
                           if (isset($entry_country_error) && $entry_country_error == true) {
@@ -729,23 +726,24 @@ require (DIR_WS_INCLUDES.'head.php');
                           echo xtc_draw_pull_down_menu('entry_country_id', xtc_get_countries(xtc_get_country_name(STORE_COUNTRY)), isset($entry_country_id)?$entry_country_id:'');
                         }
                         ?>
-                      </td>
-                    </tr>
+                      </div>
+                    </div>
                   </table>
-                </td>
-              </tr>
-              <tr>
-                <td><?php echo xtc_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
-              </tr>
-              <tr>
-                <td class="formAreaTitle"><?php echo CATEGORY_CONTACT; ?></td>
-              </tr>
-              <tr>
-                <td class="formArea">
+                </div>
+              </div>
+            <div class='col-xs-12'>
+                <hr>
+                <p class="h3">
+                   <?php echo CATEGORY_CONTACT; ?>
+                </p>
+                <hr>
+            </div>
+              <div class="col-xs-12">
+                <div class="formArea">
                   <table border="0" cellspacing="2" cellpadding="2">
-                    <tr>
-                      <td class="main"><?php echo ENTRY_TELEPHONE_NUMBER; ?></td>
-                      <td class="main">
+                    <div class="col-xs-12">
+                      <div class="col-sm-2 col-xs-12 main"><?php echo ENTRY_TELEPHONE_NUMBER; ?></div>
+                      <div class="col-sm-10 col-xs-12 main">
                         <?php
                         if (isset($error) && $error == true) {
                           if (isset($entry_telephone_error) && $entry_telephone_error == true) {
@@ -757,27 +755,29 @@ require (DIR_WS_INCLUDES.'head.php');
                           echo xtc_draw_input_field('customers_telephone', isset($customers_telephone)?$customers_telephone:'');
                         }
                         ?>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td class="main"><?php echo ENTRY_FAX_NUMBER; ?></td>
-                      <td class="main"><?php echo xtc_draw_input_field('customers_fax'); ?></td>
-                    </tr>
+                      </div>
+                    </div>
+                    <div class="col-xs-12">
+                      <div class="col-sm-2 col-xs-12 main"><?php echo ENTRY_FAX_NUMBER; ?></div>
+                      <div class="col-sm-10 col-xs-12 main"><?php echo xtc_draw_input_field('customers_fax'); ?></div>
+                    </div>
                   </table>
-                </td>
-              </tr>
-              <tr>
-                <td><?php echo xtc_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
-              </tr>
-              <tr>
-                <td class="formAreaTitle"><?php echo CATEGORY_OPTIONS; ?></td>
-              </tr>
-              <tr>
-                <td class="formArea">
+                </div>
+              </div>
+              
+            <div class='col-xs-12'>
+                <hr>
+                <p class="h3">
+                  <?php echo CATEGORY_OPTIONS; ?>
+                </p>
+                <hr>
+            </div>
+              <div class="col-xs-12">
+                <div class="formArea">
                   <table border="0" cellspacing="2" cellpadding="2">
-                    <tr>
-                      <td class="main"><?php echo ENTRY_CUSTOMERS_STATUS; ?></td>
-                      <td class="main">
+                    <div class="col-xs-12">
+                      <div class="col-sm-2 col-xs-12 main"><?php echo ENTRY_CUSTOMERS_STATUS; ?></div>
+                      <div class="col-sm-10 col-xs-12 main">
                         <?php
                         if (isset($processed) && $processed == true) {
                           echo xtc_draw_hidden_field('status');
@@ -788,11 +788,11 @@ require (DIR_WS_INCLUDES.'head.php');
                           // EOF - Tomcraft - 2009-10-27 - Set default customers-group to default customers group
                         }
                         ?>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td class="main"><?php echo ENTRY_MAIL; ?></td>
-                      <td class="main">
+                      </div>
+                    </div>
+                    <div class="col-xs-12">
+                      <div class="col-sm-2 col-xs-12 main"><?php echo ENTRY_MAIL; ?></div>
+                      <div class="col-sm-10 col-xs-12 main">
                         <?php
                         if (isset($error) && $error == true) {
                           if (isset($entry_mail_error) && $entry_mail_error == true) {
@@ -804,19 +804,19 @@ require (DIR_WS_INCLUDES.'head.php');
                           echo xtc_draw_radio_field('customers_mail', 'yes', true, isset($customers_send_mail)?$customers_send_mail:'').'&nbsp;&nbsp;'.YES.'&nbsp;&nbsp;'.xtc_draw_radio_field('customers_mail', 'no', false, isset($customers_send_mail)?$customers_send_mail:'').'&nbsp;&nbsp;'.NO;
                         }
                         ?>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td class="main"><?php echo ENTRY_PAYMENT_UNALLOWED; ?></td>
-                      <td class="main"><?php echo xtc_draw_input_field('payment_unallowed'); ?></td>
-                    </tr>
-                    <tr>
-                      <td class="main"><?php echo ENTRY_SHIPPING_UNALLOWED; ?></td>
-                      <td class="main"><?php echo xtc_draw_input_field('shipping_unallowed'); ?></td>
-                    </tr>
-                    <tr>
-                      <td class="main" bgcolor="#FFCC33"><?php echo ENTRY_PASSWORD; ?></td>
-                      <td class="main" bgcolor="#FFCC33">
+                      </div>
+                    </div>
+                    <div class="col-xs-12">
+                      <div class="col-sm-2 col-xs-12 main"><?php echo ENTRY_PAYMENT_UNALLOWED; ?></div>
+                      <div class="col-sm-10 col-xs-12 main"><?php echo xtc_draw_input_field('payment_unallowed'); ?></div>
+                    </div>
+                    <div class="col-xs-12">
+                      <div class="col-sm-2 col-xs-12 main"><?php echo ENTRY_SHIPPING_UNALLOWED; ?></div>
+                      <div class="col-sm-10 col-xs-12 main"><?php echo xtc_draw_input_field('shipping_unallowed'); ?></div>
+                    </div>
+                    <div class="col-xs-12">
+                      <div class="col-sm-2 col-xs-12 main" bgcolor="#FFCC33"><?php echo ENTRY_PASSWORD; ?></div>
+                      <div class="col-sm-10 col-xs-12 main" bgcolor="#FFCC33">
                         <?php
                         if (isset($error) && $error == true) {
                           if (isset($entry_password_error) && $entry_password_error == true) {
@@ -828,27 +828,23 @@ require (DIR_WS_INCLUDES.'head.php');
                           echo xtc_draw_password_field('entry_password', isset($customers_password_encrypted)?$customers_password_encrypted:'');
                         }
                         ?>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td class="main" valign="top"><?php echo ENTRY_MAIL_COMMENTS; ?></td>
-                      <td class="main"><?php echo xtc_draw_textarea_field('mail_comments', 'soft', '60', '5', isset($mail_comments)?$mail_comments:''); ?></td>
-                    </tr>
-                  </table>
-                </td>
-              </tr>
-              <tr>
-                <td><?php echo xtc_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
-              </tr>
-              <tr>
-                <td align="right" class="main"><?php echo '<input type="submit" class="btn btn-default" onclick="this.blur();" value="' . BUTTON_INSERT . '"> <a class="btn btn-default" onclick="this.blur();" href="' . xtc_href_link(FILENAME_CUSTOMERS, xtc_get_all_get_params(array('action'))) .'">' . BUTTON_CANCEL . '</a>'; ?></td>
-              </tr>
+                      </div>
+                    </div>
+                    <div class="col-xs-12">
+                      <div class="col-sm-2 col-xs-12 main" valign="top"><?php echo ENTRY_MAIL_COMMENTS; ?></div>
+                      <div class="col-sm-10 col-xs-12 main"><?php echo xtc_draw_textarea_field('mail_comments', 'soft', '60', '5', isset($mail_comments)?$mail_comments:''); ?></div>
+                    </div>
+                </div>
+              </div>
+              <div class="col-xs-12">
+                <div><?php echo xtc_draw_separator('pixel_trans.gif', '1', '10'); ?></div>
+              </div>
+              <div class="col-xs-12">
+                <div align="right" class="pull-left main"><?php echo '<input type="submit" class="btn btn-default" onclick="this.blur();" value="' . BUTTON_INSERT . '"> <a class="btn btn-default" onclick="this.blur();" href="' . xtc_href_link(FILENAME_CUSTOMERS, xtc_get_all_get_params(array('action'))) .'">' . BUTTON_CANCEL . '</a>'; ?></div>
+              </div>
             </form>
-          </table>
-        </td>
         <!-- body_text_eof //-->
-      </tr>
-    </table>
+        </div>
     <!-- body_eof //-->
     <!-- footer //-->
     <?php require(DIR_WS_INCLUDES . 'footer.php'); ?>

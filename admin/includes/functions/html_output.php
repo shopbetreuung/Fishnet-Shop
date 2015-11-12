@@ -234,8 +234,8 @@
 
   ////
   // Output a form textarea field
-  function xtc_draw_textarea_field($name, $wrap, $width, $height, $text = '', $params = '', $reinsert_value = true) {
-    $field = '<textarea id="'.$name.'" class="form-control" name="' . $name . '" wrap="' . $wrap . '" cols="' . $width . '" rows="' . $height . '"';
+  function xtc_draw_textarea_field($name, $wrap, $width, $height, $text = '', $params = '', $reinsert_value = true, $additional_class = '') {
+    $field = '<textarea id="'.$name.'" class="form-control '.$additional_class.'" name="' . $name . '" wrap="' . $wrap . '" cols="' . $width . '" rows="' . $height . '"';
     if ($params) $field .= ' ' . $params;
     $field .= '>';
     if ( isset($GLOBALS[$name]) && ($reinsert_value) ) {

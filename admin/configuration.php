@@ -148,25 +148,18 @@
     <!-- header_eof //-->
     <!-- body //-->
     <div class="container"><div class="row">
-    <table border="0" width="100%" cellspacing="2" cellpadding="2">
-      <tr>
-        
-        </td>
-        <!-- body_text //-->
-        <td class="boxCenter" width="100%" valign="top">
-          <table border="0" width="100%" cellspacing="0" cellpadding="2">
-            <tr>
-              <td>
-                <table border="0" cellspacing="0" cellpadding="0">
-                  <tr>
                     
-                    <td width="300" class="pageHeading">
+    <div class='col-xs-12'>
+        <div class='col-sm-3 col-xs-12'>
+            <p class="h2">
                       <?php
                         $box_conf_gid = 'BOX_CONFIGURATION_'.$cfg_group['configuration_group_id'];
                         echo (defined($box_conf_gid) && constant($box_conf_gid) != '' ? constant($box_conf_gid) : $cfg_group['configuration_group_title']);
                       ?>
-                    </td>
-                    <td rowspan="2" class="pageHeading">
+            </p>
+                Configuration
+        </div>
+        <div class='col-sm-9 col-sm-12'>
                       <?php
                         if ($_GET['gID']==11) { // delete cache files in admin section
                           echo xtc_draw_form('configuration', FILENAME_CONFIGURATION, 'gID=' . (int)$_GET['gID'] . '&action=delcache');
@@ -175,17 +168,10 @@
                           echo '<input type="submit" class="btn btn-default" onclick="this.blur();" value="' . BUTTON_DELETE_TEMP_CACHE . '"/></form>';
                         }
                       ?>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="main" valign="top">Configuration</td>
-                  </tr>
-                </table>
-              </td>
-            </tr>
-            <tr>
-              <td style="border-top: 3px solid; border-color: #cccccc;" class="main">
-                <table border="0" width="100%" cellspacing="0" cellpadding="0">
+        </div>
+    </div>
+    <div class='col-xs-12'> <br> </div>
+                <table border="0" width="100%" cellspacing="0" cellpadding="0" style="border-top: 3px solid; border-color: #cccccc;">
                   <?php
                     switch ($_GET['gID']) {
                       case 21:
@@ -222,7 +208,7 @@
                   <tr>
                     <td valign="top" align="right">
                       <?php echo xtc_draw_form('configuration', FILENAME_CONFIGURATION, 'gID=' . (int)$_GET['gID'] . '&action=save'); ?>
-                        <table width="100%"  border="0" cellspacing="0" cellpadding="8">
+                        <div class="col-xs-12">
                           <?php
                             $configuration_query = xtc_db_query("select configuration_key,configuration_id, configuration_value, use_function,set_function from " . TABLE_CONFIGURATION . " where configuration_group_id = '" . (int)$_GET['gID'] . "' order by sort_order");
                             while ($configuration = xtc_db_fetch_array($configuration_query)) {
@@ -303,28 +289,21 @@
                                 $configuration_key_desc = encode_htmlentities($configuration_key_desc);
                               }
                               echo '
-                                    <tr>
-                                      <td style="min-width:20%; border-bottom: 1px solid #aaaaaa;" class="dataTableContent"><b>'.$configuration_key_title.'</b></td>
-                                      <td style="min-width:20%; border-bottom: 1px solid #aaaaaa;  class="dataTableContent">'.$value_field.'</td>
-                                      <td style="min-width:60%; border-bottom: 1px solid #aaaaaa;empty-cells: show;" class="dataTableContent">'.$configuration_key_desc.'</td>
-                                    </tr>
+                                    <div class="col-xs-12 text-left" style="border-bottom: 1px solid #aaaaaa;">
+                                      <div class=" col-sm-3 col-xs-12" ><b>'.$configuration_key_title.'</b></div>
+                                      <div class=" col-sm-3 col-xs-12" >'.$value_field.'</div>
+                                      <div class=" col-sm-6 col-xs-12" style="empty-cells: show;" >'.$configuration_key_desc.'</div>
+                                    </div>
                                    ';
 
                             }
                           ?>
-                        </table>
-                        <?php echo '<input type="submit" class="btn btn-default" onclick="this.blur();" value="' . BUTTON_SAVE . '"/>'; ?>
+                        </div>
+                        <?php echo '<input type="submit" class="btn btn-default xs_full_width" onclick="this.blur();" value="' . BUTTON_SAVE . '"/>'; ?>
                       </form>
                     </td>
                   </tr>
                 </table>
-              </td>
-            </tr>
-          </table>
-        </td>
-        <!-- body_text_eof //-->
-      </tr>
-    </table>
     </div></div>
     <!-- body_eof //-->
     <!-- footer //-->

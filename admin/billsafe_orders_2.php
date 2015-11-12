@@ -414,12 +414,12 @@
   }
 
   function showMessageSuccess($message) {
-    $message_box = '<table border="0" width="100%" cellspacing="0" cellpadding="2"><tr><td class="messageStackSuccess"><img border="0" title="" alt="" src="images/icons/success.gif">'.$message.'</td></tr></table>';
+    $message_box = '<div class="col-xs-12 messageStackSuccess"><img border="0" title="" alt="" src="images/icons/success.gif">'.$message.'</div>';
     return $message_box;
   }
 
   function showMessageError($message) {
-    $message = '<table border="0" width="100%" cellspacing="0" cellpadding="2"><tr><td class="messageStackError"><img border="0" title="" alt="" src="images/icons/error.gif">'.$message.'</td></tr></table>';
+    $message = '<div class="col-xs-12 messageStackError"><img border="0" title="" alt="" src="images/icons/error.gif">'.$message.'</div>';
     return $message;
   }
   
@@ -448,15 +448,10 @@
 </head>
 <body marginwidth="0" marginheight="0" topmargin="0" bottommargin="0" leftmargin="0" rightmargin="0" bgcolor="#FFFFFF" onload="SetFocus();">
 <?php require(DIR_WS_INCLUDES . 'header.php'); ?>
-<table border="0" width="100%" cellspacing="2" cellpadding="2"><tr>
-<td width="<?php echo BOX_WIDTH; ?>" valign="top">
-<table border="0" width="<?php echo BOX_WIDTH; ?>" cellspacing="1" cellpadding="1" class="columnLeft">
+<div class="row">
 
-</table></td>
-<td width="100%" valign="top">
-<table border="0" width="100%" cellspacing="0" cellpadding="2"><tr><td>
-<table border="0" width="100%" cellspacing="0" cellpadding="2"><tr>
-<td width="100%"><?php 
+<div class="col-xs-12">
+    <?php 
   if ($messageBox == 'SUCCESS') {
     $showMessage = showMessageSuccess($message);
     echo $showMessage;
@@ -464,14 +459,16 @@
     $showMessage = showMessageError($message);
     echo $showMessage;
   } ?>
-<table border="0" width="100%" cellspacing="0" cellpadding="2" height="40"><tr>
-<td class="pageHeading"><?php echo MODULE_PAYMENT_BILLSAFE_2_DETAILS; ?></td>
-<td class="pageHeading" align="right"><?php echo '<a class="btn btn-default" href="'.xtc_href_link(FILENAME_ORDERS, xtc_get_all_get_params(array('action'))).'">'.BUTTON_BACK.'</a>'; ?></td></tr>
-<tr><td colspan="2"><img width="100%" height="1" border="0" alt="" src="images/pixel_black.gif"></td></tr></table>
-</td></tr><tr><td>
-<table width="100%" border="0" cellspacing="0" cellpadding="2"><tr>
-<td colspan="3"><?php //echo xtc_draw_separator(); ?></td></tr>
-<tr><td valign="top" width="30%">
+</div>
+<div class="pageHeading col-xs-12 col-sm-6">            
+    <p class="h2">
+        <?php echo MODULE_PAYMENT_BILLSAFE_2_DETAILS; ?>
+    </p>
+</div>
+<div class="pageHeading text-right col-xs-12 col-sm-6"><?php echo '<a class="btn btn-default" href="'.xtc_href_link(FILENAME_ORDERS, xtc_get_all_get_params(array('action'))).'">'.BUTTON_BACK.'</a>'; ?></div>
+<div class="col-xs-12"><img width="100%" height="1" border="0" alt="" src="images/pixel_black.gif"></div>
+
+<div class="col-xs-12 col-sm-4">           
 <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr>
 <td class="main" valign="top"><strong><?php echo MODULE_PAYMENT_BILLSAFE_2_BADDRESS; ?></strong></td>
 </tr><tr>
@@ -481,15 +478,18 @@
   $country = xtc_db_fetch_array($country_query);
   echo $customer['company'].'<br />'.$customer['firstname'].' '.$customer['lastname'].'<br />'.$customer['street'].' '.$customer['housenumber'].'<br />'.$customer['postcode'].' '.$customer['city'].'<br />'.$country['countries_name'].'<br /><br />'.MODULE_PAYMENT_BILLSAFE_2_EMAIL.': '.$customer['email'].'<br />';
   ?>
-</td></tr></table></td>
-<td valign="top" width="30%"><table width="100%" border="0" cellspacing="0" cellpadding="2"><tr>
+</td></tr></table>
+</div>
+<div class="col-xs-12 col-sm-4">    
+<table width="100%" border="0" cellspacing="0" cellpadding="2"><tr>
 <td class="main" valign="top"><strong><?php echo MODULE_PAYMENT_BILLSAFE_2_SADDRESS; ?></strong></td>
 </tr><tr>
 <td class="main"><?php
   echo xtc_address_format($order->billing['format_id'], $order->delivery, 1, '', '<br />');
   ?>
-</td></tr></table></td>
-<td valign="top" width="40%"><?php
+</td></tr></table>
+</div>
+<div class="col-xs-12 col-sm-4"><?php
   $params = array('transactionId' => $billsafe_orders['transactionid']);
   $response = $bs->callMethod('getPaymentInstruction', $params);
   if ($response->ack == 'OK') {
@@ -534,8 +534,9 @@
       <td class="main"><?php echo number_format($ins->amount,2).' '.$ins->currencyCode; ?></td>
     </tr></table></td></tr></td></tr></table>
   <?php } ?>
-</td></tr></table>
-<table border="0" width="100%" cellspacing="0" cellpadding="2"><form action="<?php echo $post_url ?>" method="POST"><tr class="dataTableHeadingRow">
+</div>
+<div class="col-xs-12">
+<table class="table"><form action="<?php echo $post_url ?>" method="POST"><tr class="dataTableHeadingRow">
 <td class="dataTableHeadingContent"><?php echo MODULE_PAYMENT_BILLSAFE_2_PRODUCTS; ?></td>
 <td class="dataTableHeadingContent"><?php echo MODULE_PAYMENT_BILLSAFE_2_MODEL; ?></td>
 <td class="dataTableHeadingContent" align="right"><?php echo MODULE_PAYMENT_BILLSAFE_2_TAX; ?></td>
@@ -557,7 +558,11 @@
     }
     echo '</tr>';
   }
-  ?><tr><td colspan='9' align='right'><?php
+  ?>
+</table>
+</div>
+<div class="col-xs-12 text-right">
+    <?php
   if ($countOrder['quantity'] == $countUsed['quantity']) { ?>
     <input type="submit" name="reportShipmentFull" value="<?php echo MODULE_PAYMENT_BILLSAFE_2_FREPORT_SHIPMENT; ?>" disabled="disabled" />
     <input type="submit" name="reportShipmentPart" value="<?php echo MODULE_PAYMENT_BILLSAFE_2_PREPORT_SHIPMENT; ?>" disabled="disabled" />
@@ -577,7 +582,9 @@
     <input type="submit" name="updateArticleListStornoPart" value="<?php echo MODULE_PAYMENT_BILLSAFE_2_UPDATEARTICLELISTSTORNOPART; ?>" />
     <input type="hidden" name="id" value="<?php echo $id; ?>" />
   <?php } ?>
-</td></tr></form></table>
+</form>
+</div>
+<div class="col-xs-12">
 <br /><?php
   if (!empty($_SESSION['languages_id']) && $_SESSION['languages_id'] > 0) {
     $language_id = $_SESSION['languages_id'];
@@ -642,36 +649,40 @@
     </td></form>
   <?php echo '</table>';
   } ?>
-<table border="0" cellspacing="0" cellpadding="2"><tr valign="top">
+</div>
   <?php if ($countOrder['quantity'] == $countUsed['quantity']) { ?>
-    <td><table border="0" cellspacing="0" cellpadding="2"><tr class="dataTableHeadingRow">
+    <div class='col-xs-12 col-sm-3'><table border="0" cellspacing="0" cellpadding="2"><tr class="dataTableHeadingRow">
     <td class="dataTableHeadingContent"><?php echo MODULE_PAYMENT_BILLSAFE_2_PAUSETRANSACTION; ?></td>
     </tr><tr class="dataTableRow">
     <td class="dataTableContent" align="right" valign="top">
     <form id="pause" method="POST" action="<?php echo $post_url ?>">
     <input id="pauseDays" type="text" style="float:none;" maxlength="2" name="pauseDays" size="2" value="" />&nbsp;<?php echo MODULE_PAYMENT_BILLSAFE_2_PAUSEDAYS; ?>&nbsp;
     <input type="submit" name="pauseTransaction" value="<?php echo MODULE_PAYMENT_BILLSAFE_2_PAUSETRANSACTION; ?>" />
-    </form></td></tr></table></td>
+    </form></td></tr></table></div>
   <?php } ?>
-<td><table border="0" cellspacing="0" cellpadding="2"><tr class="dataTableHeadingRow">
+<div class='col-xs-12 col-sm-3'><table border="0" cellspacing="0" cellpadding="2"><tr class="dataTableHeadingRow">
 <td class="dataTableHeadingContent"><?php echo MODULE_PAYMENT_BILLSAFE_2_UPDATEARTICLELISTVOUCHER; ?></td>
 </tr><tr class="dataTableRow">
 <td class="dataTableContent" align="right" valign="top">
 <form id="voucher" method="POST" action="<?php echo $post_url ?>">
 <input id="voucherAmount" type="text" style="float:none;" maxlength="4" name="voucherAmount" size="4" value="" />,<input style="float:none;" id="voucherAmountKomma" type="text" maxlength="2" name="voucherAmountKomma" size="2" value="" />&nbsp;<?php echo $currency; ?>,&nbsp;<?php echo MODULE_PAYMENT_BILLSAFE_2_TAX.': '; echo xtc_draw_pull_down_menu('voucherTax', $tax_class_array, $tax_class_id); ?><br /><br />
 <input type="submit" name="updateArticleListVoucher" value="<?php echo MODULE_PAYMENT_BILLSAFE_2_UPDATEARTICLELISTVOUCHER; ?>" />
-</form></td></tr></table></td>
-<td style="text-align:center;"><a class="btn btn-default" href="Javascript:void()" onclick="window.open('<?php echo xtc_href_link('billsafe_print_order_2.php', 'oID='.$order_id); ?>', 'popup', 'toolbar=0, width=640, height=600')"><?php echo BUTTON_INVOICE; ?></a><br /><br />
-<a class="btn btn-default" href="https://client.billsafe.de" target="_blank"><?php echo MODULE_PAYMENT_BILLSAFE_2_MP; ?></td>
-<td><table border="0" cellspacing="0" cellpadding="2"><tr class="dataTableHeadingRow">
-<td class="dataTableHeadingContent"><?php echo MODULE_PAYMENT_BILLSAFE_2_DPAYMENT; ?></td>
+</form></td></tr></table></div>
+<div class='col-xs-12 col-sm-3'><a class="btn btn-default" href="Javascript:void()" onclick="window.open('<?php echo xtc_href_link('billsafe_print_order_2.php', 'oID='.$order_id); ?>', 'popup', 'toolbar=0, width=640, height=600')"><?php echo BUTTON_INVOICE; ?></a><br /><br />
+    <a class="btn btn-default" href="https://client.billsafe.de" target="_blank"><?php echo MODULE_PAYMENT_BILLSAFE_2_MP; ?></a></div>
+<div class='col-xs-12 col-sm-3'>
+<table border="0" cellspacing="0" cellpadding="2">
+<tr class="dataTableHeadingRow">
+<td class="dataTableHeadingContent"><?php echo MODULE_PAYMENT_BILLSAFE_2_DPAYMENT; ?></a>
 </tr><tr class="dataTableRow">
 <td class="dataTableContent" align="right" valign="top">
 <form id="dpayment" method="POST" action="<?php echo $post_url ?>">
 <input id="dpaymentAmount" type="text" style="float:none;" maxlength="10" name="dpaymentAmount" size="4" value="" />,<input style="float:none;" id="dpaymentAmountKomma" type="text" maxlength="2" name="dpaymentAmountKomma" size="2" value="" />&nbsp;<?php echo $currency; ?>&nbsp;&nbsp;&nbsp;<?php echo MODULE_PAYMENT_BILLSAFE_2_DAY; ?>:&nbsp;<input style="float:none;" id="dpaymentDay" type="text" maxlength="2" name="dpaymentDay" size="2" value="" />&nbsp;<?php echo MODULE_PAYMENT_BILLSAFE_2_MONTH; ?>:&nbsp;<input style="float:none;" id="dpaymentMonth" type="text" maxlength="2" name="dpaymentMonth" size="2" value="" />&nbsp;<?php echo MODULE_PAYMENT_BILLSAFE_2_YEAR; ?>:&nbsp;<input style="float:none;" id="dpaymentYear" type="text" maxlength="4" name="dpaymentYear" size="4" value="" /><br /><br />
 <input type="submit" name="reportDirectPayment" value="<?php echo MODULE_PAYMENT_BILLSAFE_2_REPORT_DPAYMENT; ?>" />
 </form></td></tr></table>
-</td></tr></table>
+</div>
+
+</div>
 <?php require(DIR_WS_INCLUDES.'footer.php'); ?>
 <br />
 </body>

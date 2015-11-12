@@ -37,16 +37,13 @@ $currencies = new currencies();
 
 ?>
 <!-- Begin Infotext //-->
-<table border="0" cellspacing="0" cellpadding="2" style="border: 1px red solid; padding:5px; background: #FFD6D6; margin: 5px 0 5px 0">
-  <tr>
-    <td class="main"> 
+    <div class="main col-xs-12" style="border: 1px red solid; padding:5px; background: #FFD6D6; margin: 5px 0 5px 0">
       <?php echo TEXT_ORDERS_PRODUCT_EDIT_INFO;?>
-    </td>
-  </tr>
-</table>
+    </div>
 <!-- End Infotext //-->
 <!-- Artikelbearbeitung Anfang //-->
-<table border="0" width="100%" cellspacing="0" cellpadding="2">
+<div class="col-xs-12">
+<table class="table table-striped table-bordered hidden-xs hidden-sm">
   <tr class="dataTableHeadingRow">
     <td class="dataTableHeadingContent"><b><?php echo TEXT_PRODUCT_ID;?></b></td>
     <td class="dataTableHeadingContent"><b><?php echo TEXT_QUANTITY;?></b></td>
@@ -125,6 +122,92 @@ $currencies = new currencies();
   }
   ?>
 </table>
+<?php
+for ($i = 0, $n = sizeof($order->products); $i < $n; $i++) {
+?>   
+    
+    <?php
+      echo xtc_draw_form('product_edit', FILENAME_ORDERS_EDIT, 'action=product_edit', 'post');
+        //BOF - web28 - 2011-01-16 - FIX missing sessions id
+        echo xtc_draw_hidden_field(xtc_session_name(), xtc_session_id());
+        //EOF - web28 - 2011-01-16 - FIX missing sessions id
+        //BOF - web28 - 2011-03-13 - FIX missing old_qty
+        echo xtc_draw_hidden_field('old_qty', $order->products[$i]['qty']);
+        //EOF - web28 - 2011-03-13 - FIX missing old_qty
+        echo xtc_draw_hidden_field('oID', $_GET['oID']);
+        echo xtc_draw_hidden_field('opID', $order->products[$i]['opid']);
+    ?>
+<table class="table table-striped table-bordered hidden-lg hidden-md">
+  <tr class="dataTableRow">
+    <td class="dataTableHeadingContent"><b><?php echo TEXT_PRODUCT_ID;?></b></td>
+    <td class="dataTableHeadingContent"><?php echo xtc_draw_input_field('products_id', $order->products[$i]['id'], 'size="5"');?></td>
+  </tr>
+  <tr class="dataTableRow">
+    <td class="dataTableContent"><b><?php echo TEXT_QUANTITY;?></b></td>
+    <td class="dataTableContent"><?php echo xtc_draw_input_field('products_quantity', $order->products[$i]['qty'], 'size="2"');?></td>
+  </tr>
+  <tr class="dataTableRow">
+    <td class="dataTableHeadingContent"><b><?php echo TEXT_PRODUCT;?></b></td>
+    <td class="dataTableHeadingContent"><?php echo xtc_draw_input_field('products_name', $order->products[$i]['name'], 'size="20"');?></td>
+  </tr>
+  <tr class="dataTableRow">
+    <td class="dataTableContent"><b><?php echo TEXT_PRODUCTS_MODEL;?></b></td>
+    <td class="dataTableContent"><?php echo xtc_draw_input_field('products_model', $order->products[$i]['model'], 'size="10"');?></td>
+  </tr>
+  <tr class="dataTableRow">
+    <td class="dataTableHeadingContent"><b><?php echo TEXT_TAX;?></b></td>
+    <td class="dataTableHeadingContent"><?php echo xtc_draw_input_field('products_tax', $order->products[$i]['tax'], 'size="6"');?></td>
+  </tr>
+  <tr class="dataTableRow">
+    <td class="dataTableContent"><b><?php echo TEXT_PRICE;?></b></td>
+    <td class="dataTableContent"><?php echo xtc_draw_input_field('products_price', $order->products[$i]['price'], 'size="10"');?></td>
+  </tr>
+  <tr class="dataTableRow">
+    <td class="dataTableHeadingContent"><b><?php echo TEXT_FINAL;?></b></td>
+     <td class="dataTableHeadingContent"><?php echo $order->products[$i]['final_price'];?></td>
+  </tr>
+  <tr class="dataTableRow">
+    <td class="">
+        <?php
+          echo xtc_draw_hidden_field('allow_tax', $order->products[$i]['allow_tax']);
+          echo '<input type="submit" class="btn btn-default" onclick="this.blur();" value="' . BUTTON_SAVE . '"/>';
+        ?>
+        </form>
+    <td class="">
+        <?php
+        echo xtc_draw_form('product_delete', FILENAME_ORDERS_EDIT, 'action=product_delete', 'post');
+          //BOF - web28 - 2011-01-16 - FIX missing sessions id
+          echo xtc_draw_hidden_field(xtc_session_name(), xtc_session_id());
+          //EOF - web28 - 2011-01-16 - FIX missing sessions id
+          echo xtc_draw_hidden_field('oID', $_GET['oID']);
+          echo xtc_draw_hidden_field('opID', $order->products[$i]['opid']);
+          //BOF - DokuMan - 2010-09-07 - variables for correct deletion of products (thx to franky_n)
+          echo xtc_draw_hidden_field('del_qty', $order->products[$i]['qty']);
+          echo xtc_draw_hidden_field('del_pID', $order->products[$i]['id']);
+          //EOF - DokuMan - 2010-09-07 - variables for correct deletion of products (thx to franky_n)
+          echo '<input type="submit" class="btn btn-default" onclick="this.blur();" value="' . BUTTON_DELETE . '"/>';
+          ?>
+        </form>
+        <?php
+        echo xtc_draw_form('select_options', FILENAME_ORDERS_EDIT, '', 'GET');
+          echo xtc_draw_hidden_field('edit_action', 'options');
+          echo xtc_draw_hidden_field('pID', $order->products[$i]['id']);
+          echo xtc_draw_hidden_field('oID', $_GET['oID']);
+          echo xtc_draw_hidden_field('opID', $order->products[$i]['opid']);
+          //BOF - web28 - 2011-01-16 - FIX missing sessions id
+          echo xtc_draw_hidden_field(xtc_session_name(), xtc_session_id());
+          //EOF - web28 - 2011-01-16 - FIX missing sessions id
+          echo '<input type="submit" class="btn btn-default" onclick="this.blur();" value="' . BUTTON_PRODUCT_OPTIONS . '"/>';
+          ?>
+        </form>
+      </td> </td>
+  </tr>
+
+<?php
+}
+?>
+</table>
+    
 <br /><br />
 <!-- Artikelbearbeitung Ende //-->
 <!-- Artikel Einfügen Anfang //-->
@@ -272,5 +355,6 @@ if ($_GET['action'] =='product_search') {
   <?php
 }
 ?>
-<br /><br />
+
+    </div>
 <!-- Artikel Einfügen Ende //-->

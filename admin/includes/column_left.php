@@ -603,7 +603,7 @@
 
 //echo '<nav class="navbar navbar-default navbar-fixed-top"><div class="container-fluid"><div class="navbar-header"><a class="navbar-brand" href="' . xtc_href_link('start.php', '', 'NONSSL') . '"><img class="img-responsive" style="height: 40px;" src="images/shophelferlogo.png" /></a></div>';
 
-echo '<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1"><ul class="nav navbar-nav">';
+echo '<div class="collapse navbar-collapse" id="navbar"><ul class="nav navbar-nav">';
 //---------------------------STARTSEITE
 
 foreach ($menues as $menu) {

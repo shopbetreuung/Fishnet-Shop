@@ -104,7 +104,7 @@ function xtc_wysiwyg($type, $lang, $langID = '') {
       $val ='<script type="text/javascript" src="'.$js_src.'"></script>
              <script type="text/javascript">
                window.onload = function() {
-                 var oFCKeditor = new FCKeditor( \'newsletter_body\', \'700\', \'400\'  ) ;
+                 var oFCKeditor = new FCKeditor( \'newsletter_body\', \'100%\', \'400\'  ) ;
                  oFCKeditor.BasePath = "'.$path.'" ;
                  oFCKeditor.Config["LinkBrowserURL"] = "'.$filemanager.$file_path.$sid.'" ;
                  oFCKeditor.Config["ImageBrowserURL"] = "'.$filemanager.$image_path.$sid.'" ;
@@ -121,7 +121,7 @@ function xtc_wysiwyg($type, $lang, $langID = '') {
       $val ='<script type="text/javascript" src="'.$js_src.'"></script>
              <script type="text/javascript">
                window.onload = function() {
-                 var oFCKeditor = new FCKeditor( \'message\', \'700\', \'400\' ) ;
+                 var oFCKeditor = new FCKeditor( \'message\', \'100%\', \'400\' ) ;
                  oFCKeditor.BasePath = "'.$path.'" ;
                  oFCKeditor.Config["LinkBrowserURL"] = "'.$filemanager.$file_path.$sid.'" ;
                  oFCKeditor.Config["ImageBrowserURL"] = "'.$filemanager.$image_path.$sid.'" ;
@@ -138,7 +138,7 @@ function xtc_wysiwyg($type, $lang, $langID = '') {
       $val ='<script type="text/javascript" src="'.$js_src.'"></script>
              <script type="text/javascript">
                window.onload = function() {
-                 var oFCKeditor = new FCKeditor( \'message\', \'700\', \'400\' ) ;
+                 var oFCKeditor = new FCKeditor( \'message\', \'100%\', \'400\' ) ;
                  oFCKeditor.BasePath = "'.$path.'" ;
                  oFCKeditor.Config["LinkBrowserURL"] = "'.$filemanager.$file_path.$sid.'" ;
                  oFCKeditor.Config["ImageBrowserURL"] = "'.$filemanager.$image_path.$sid.'" ;
@@ -168,7 +168,8 @@ function xtc_wysiwyg($type, $lang, $langID = '') {
       $val ='<script type="text/javascript" src="'.$js_src.'"></script>
              <script type="text/javascript">
                window.onload = function() {
-                 var oFCKeditor = new FCKeditor( \'offline_msg\', \'800\', \'400\' ) ;
+                 var oFCKeditor = new FCKeditor( \'offline_msg\', \'100%\', \'400\' ) ;
+                 //console.log(oFCKeditor);
                  oFCKeditor.BasePath = "'.$path.'" ;
                  oFCKeditor.Config["LinkBrowserURL"] = "'.$filemanager.$file_path.$sid.'" ;
                  oFCKeditor.Config["ImageBrowserURL"] = "'.$filemanager.$image_path.$sid.'" ;

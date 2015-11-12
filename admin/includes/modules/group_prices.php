@@ -43,9 +43,10 @@ while ($group_values = xtc_db_fetch_array($group_query)) {
 }
 ?>
 <div class="main" style="margin:10px 5px 5px 5px"><?php echo HEADING_PRICES_OPTIONS; ?></div>
-<table width="100%" border="0" cellpadding="5" cellspacing="0" style="border:1px solid #a3a3a3; background-color:#f3f3f3">
-  <tr>
-    <td style="width:120px" class="main"><?php echo TEXT_PRODUCTS_PRICE; ?></td>
+<div class='col-xs-12' style="border:1px solid #a3a3a3; background-color:#f3f3f3">
+  <div class='col-xs-12'>
+      <div class='col-xs-12'><br></div>
+    <div class='col-sm-6 col-xs-12 main'><?php echo TEXT_PRODUCTS_PRICE; ?></div>
       <?php
       // calculate brutto price for display
       if (PRICE_IS_BRUTTO == 'true') {
@@ -54,20 +55,20 @@ while ($group_values = xtc_db_fetch_array($group_query)) {
         $products_price = xtc_round($pInfo->products_price, PRICE_PRECISION);
       }
       ?>
-    <td class="main"><?php echo xtc_draw_input_field('products_price', $products_price); ?>
+    <div class='col-sm-6 col-xs-12 main'><?php echo xtc_draw_input_field('products_price', $products_price); ?>
       <?php
       if (PRICE_IS_BRUTTO == 'true') {
         echo TEXT_NETTO.'<strong>'.$xtPrice->xtcFormat($pInfo->products_price, false).'</strong>  ';
       }
       ?>
-    </td>
-  </tr>
+    </div>
+  </div>
 <?php
 for ($col = 1, $n = sizeof($group_data); $col < $n +1; $col ++) { //DokuMan - changed $col from 0 to 1 (there is no 0?)
   if ($group_data[$col]['STATUS_NAME'] != '') {
 ?>
-  <tr>
-    <td style="border-top: 1px solid; border-color: #cccccc;" valign="top" class="main"><?php echo $group_data[$col]['STATUS_NAME']; ?></td>
+  <div class='col-xs-12'>
+    <div class='col-sm-6 col-xs-12 main'><?php echo $group_data[$col]['STATUS_NAME']; ?></div>
       <?php
           if (PRICE_IS_BRUTTO == 'true') {
             $products_price = xtc_round(get_group_price($group_data[$col]['STATUS_ID'], $pInfo->products_id) * ((100 + xtc_get_tax_rate($pInfo->products_tax_class_id)) / 100), PRICE_PRECISION);
@@ -75,7 +76,7 @@ for ($col = 1, $n = sizeof($group_data); $col < $n +1; $col ++) { //DokuMan - ch
             $products_price = xtc_round(get_group_price($group_data[$col]['STATUS_ID'], $pInfo->products_id), PRICE_PRECISION);
           }
       ?>
-    <td style="border-top: 1px solid; border-color: #cccccc;" class="main">
+    <div class='col-sm-6 col-xs-12 main'>
       <?php
           echo xtc_draw_input_field('products_price_'.$group_data[$col]['STATUS_ID'], $products_price);
           if (PRICE_IS_BRUTTO == 'true' && get_group_price($group_data[$col]['STATUS_ID'], $pInfo->products_id) != '0') {
@@ -100,9 +101,9 @@ for ($col = 1, $n = sizeof($group_data); $col < $n +1; $col ++) { //DokuMan - ch
         while ($staffel_values = xtc_db_fetch_array($staffel_query)) {
           // load data into array
           ?>
-          <tr>
-            <td class="main" style="border: 1px solid; border-color: #cccccc; padding: 0 3px; width:30px;"><?php echo $staffel_values['quantity']; ?></td>            
-            <td class="main" style="border: 1px solid; border-color: #cccccc; padding: 0 3px; width:100px; white-space:nowrap;">
+          <div class='col-xs-12'>
+            <div class='col-sm-6 col-xs-12 main'><?php echo $staffel_values['quantity']; ?></div>            
+            <div class='col-sm-6 col-xs-12 main'>
               <?php
               if (PRICE_IS_BRUTTO == 'true') {
                 $tax_query = xtc_db_query("select tax_rate from ".TABLE_TAX_RATES." where tax_class_id = '".$pInfo->products_tax_class_id."' ");
@@ -116,9 +117,9 @@ for ($col = 1, $n = sizeof($group_data); $col < $n +1; $col ++) { //DokuMan - ch
                 echo ' <br />'.TEXT_NETTO.'<strong>'.$xtPrice->xtcFormat($staffel_values['personal_offer'], false).'</strong>  ';
               }
               ?>
-            </td>
-            <td align="left" style="padding-left:5px;"><a class="btn btn-default" onclick="W4B_graduated_prices_edit_removerow(this);" href="<?php echo xtc_href_link(FILENAME_CATEGORIES, 'cPath=' . $cPath . '&function=delete&quantity=' . $staffel_values['quantity'] . '&statusID=' . $group_data[$col]['STATUS_ID'] . '&action=new_product&pID=' . $_GET['pID']); ?>"><?php echo BUTTON_DELETE; ?></a></td>
-          </tr>          
+            </div>
+            <div align="left" style="padding-left:5px;"><a class="btn btn-default" onclick="W4B_graduated_prices_edit_removerow(this);" href="<?php echo xtc_href_link(FILENAME_CATEGORIES, 'cPath=' . $cPath . '&function=delete&quantity=' . $staffel_values['quantity'] . '&statusID=' . $group_data[$col]['STATUS_ID'] . '&action=new_product&pID=' . $_GET['pID']); ?>"><?php echo BUTTON_DELETE; ?></a></div>
+          </div>          
           <?php
         }
         echo '</table>';
@@ -130,22 +131,22 @@ for ($col = 1, $n = sizeof($group_data); $col < $n +1; $col ++) { //DokuMan - ch
         ?>
         <br />
       </div>
-    </td>
-  </tr>
+    </div>
+  </div>
 <?php
   }
 }
 W4B_graduated_prices_edit_logic();
 ?>
-  <tr>
-    <td style="border-top: 1px solid; border-color: #cccccc;" class="main"><?php echo TEXT_PRODUCTS_DISCOUNT_ALLOWED; ?></td>
-    <td style="border-top: 1px solid; border-color: #cccccc;" class="main"><?php echo xtc_draw_input_field('products_discount_allowed', $pInfo->products_discount_allowed); ?></td>
-  </tr>
-  <tr>
-    <td colspan="2"><?php echo xtc_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
-  </tr>
-  <tr>
-    <td class="main"><?php echo TEXT_PRODUCTS_TAX_CLASS; ?></td>
-    <td class="main"><?php echo xtc_draw_pull_down_menu('products_tax_class_id', $tax_class_array, $pInfo->products_tax_class_id); ?></td>
-  </tr>
-</table>
+  <div class='col-xs-12'>
+    <div class='col-sm-6 col-xs-12 main'><?php echo TEXT_PRODUCTS_DISCOUNT_ALLOWED; ?></div>
+    <div class='col-sm-6 col-xs-12 main'><?php echo xtc_draw_input_field('products_discount_allowed', $pInfo->products_discount_allowed); ?></div>
+  </div>
+    <div class='col-xs-12'>
+        <br>
+    </div>
+  <div class='col-xs-12'>
+    <div class='col-sm-6 col-xs-12 main'><?php echo TEXT_PRODUCTS_TAX_CLASS; ?></div>
+    <div class='col-sm-6 col-xs-12 main'><?php echo xtc_draw_pull_down_menu('products_tax_class_id', $tax_class_array, $pInfo->products_tax_class_id); ?></div>
+  </div>
+</div>

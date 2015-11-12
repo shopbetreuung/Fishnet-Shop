@@ -737,12 +737,7 @@ function check_form() {
 <!-- header //-->
 <?php require(DIR_WS_INCLUDES . 'header.php'); ?>
 <!-- header_eof //-->
-<!-- body //-->
-<table border="0" width="100%" cellspacing="2" cellpadding="2">
-  <tr>
-    <!-- body_text //-->
-    <td class="boxCenter" width="100%" valign="top">
-      <table border="0" width="100%" cellspacing="0" cellpadding="2">
+<div class="row">
         <?php
         if ($action == 'edit' || $action == 'update') {
           if (isset($_GET['edit']) && $_GET['edit'] != '') {
@@ -797,37 +792,40 @@ function check_form() {
            //} //DokuMan - 2010-10-01 - remove check if $cinfo is an object, otherwise customer status will be blank
           $newsletter_array = array (array ('id' => '1', 'text' => ENTRY_NEWSLETTER_YES), array ('id' => '0', 'text' => ENTRY_NEWSLETTER_NO));
         ?>
-        <tr>
-          <td>
-		  <h1><?php echo $cInfo->customers_lastname.' '.$cInfo->customers_firstname; ?> <small><?php echo BOX_HEADING_CUSTOMERS; ?></small></h1>
-          <table border="0" width="100%" cellspacing="0" cellpadding="0">
-            <tr>
-              <td valign="middle" class="pageHeading"><?php if ($customers_statuses_id_array[$customers['customers_status']]['csa_image'] != '') { echo xtc_image(DIR_WS_ICONS . $customers_statuses_id_array[$customers['customers_status']]['csa_image'], ''); } ?></td><?php// web28 - 2011-10-31 - change  $customers_statuses_array  to $customers_statuses_id_array?>
-              <td class="main"></td>
-              <td class="pageHeading" align="right"><?php echo xtc_draw_separator('pixel_trans.gif', HEADING_IMAGE_WIDTH, HEADING_IMAGE_HEIGHT); ?></td>
-            </tr>
-            <tr>
-              <td colspan="3" class="main"><?php echo HEADING_TITLE_STATUS  .': ' . $customers_statuses_id_array[$customers['customers_status']]['text'] ; ?></td><?php// web28 - 2011-10-31 - change  $customers_statuses_array  to $customers_statuses_id_array?>
-            </tr>
-          </table>
-          </td>
-        </tr>
-        <tr>
-          <td><?php echo xtc_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
-        </tr>
+<div class="row">
+<!-- body_text //-->
+    <div class='col-xs-12 left_mobile'>
+        <p class="h2">
+            <?php echo $cInfo->customers_lastname.' '.$cInfo->customers_firstname; ?> <small><?php echo BOX_HEADING_CUSTOMERS; ?></small>
+        </p>
+    </div>
+<div class='col-xs-12 left_mobile'><br></div>
+<div class='col-xs-12 left_mobile'>
+    <div>
+      <div valign="middle" class="pageHeading"><?php if ($customers_statuses_id_array[$customers['customers_status']]['csa_image'] != '') { echo xtc_image(DIR_WS_ICONS . $customers_statuses_id_array[$customers['customers_status']]['csa_image'], ''); } ?></div><?php// web28 - 2011-10-31 - change  $customers_statuses_array  to $customers_statuses_id_array?>
+      <div class="main"></div>
+      <div class="pageHeading" align="right"><?php echo xtc_draw_separator('pixel_divans.gif', HEADING_IMAGE_WIDTH, HEADING_IMAGE_HEIGHT); ?></div>
+    </div>
+    <div>
+      <div colspan="3" class="main"><?php echo HEADING_TITLE_STATUS  .': ' . $customers_statuses_id_array[$customers['customers_status']]['text'] ; ?></div><?php// web28 - 2011-10-31 - change  $customers_statuses_array  to $customers_statuses_id_array?>
+    </div>
+</div>
+<div class='col-xs-12'><br></div>
         <?php echo xtc_draw_form('customers', FILENAME_CUSTOMERS, xtc_get_all_get_params(array('action')) . 'action=update', 'post', 'onSubmit="return check_form();"') . xtc_draw_hidden_field('default_address_id', $cInfo->customers_default_address_id) . xtc_draw_hidden_field('address_book_id', $cInfo->address_book_id); ?>
-        <tr>
-          <td class="formAreaTitle"><?php echo CATEGORY_PERSONAL; ?></td>
-        </tr>
-        <tr>
-          <td class="formArea">
-          <table border="0" cellspacing="2" cellpadding="2">
+<div class='col-xs-12 left_mobile'>
+    <hr>
+    <p class="h3">
+        <?php echo CATEGORY_PERSONAL; ?>
+    </p>
+    <hr>
+</div>
+<div class='col-xs-12'>
             <?php
               if (ACCOUNT_GENDER == 'true') {
             ?>
-            <tr>
-              <td class="main"><?php echo ENTRY_GENDER; ?></td>
-              <td class="main">
+            <div class="col-xs-12">
+              <div class="main"><?php echo ENTRY_GENDER; ?></div>
+              <div class="main">
               <?php
               if ($error == true) {
                 if ($entry_gender_error == true) {
@@ -840,126 +838,124 @@ function check_form() {
                 echo xtc_draw_radio_field('customers_gender', 'm', false, $cInfo->customers_gender).'&nbsp;&nbsp;'.MALE.'&nbsp;&nbsp;'.xtc_draw_radio_field('customers_gender', 'f', false, $cInfo->customers_gender).'&nbsp;&nbsp;'.FEMALE;
               }
               ?>
-              </td>
-            </tr>
+              </div>
+            </div>
             <?php
               }
-            echo ($cInfo->customers_default_address_id != $cInfo->address_book_id) ? '<tr style="display:none;">' : '<tr>'; 
+            echo ($cInfo->customers_default_address_id != $cInfo->address_book_id) ? '<div style="display:none;">' : '<div class="col-xs-12">'; 
             ?>  
-              <td class="main" bgcolor="#FFCC33"><?php echo ENTRY_CID; ?></td>
-              <td class="main" width="100%" bgcolor="#FFCC33">
+              <div class="main col-xs-12 col-sm-2" bgcolor="#FFCC33"><?php echo ENTRY_CID; ?></div>
+              <div class="main col-xs-12 col-sm-10" width="100%" bgcolor="#FFCC33">
                 <?php
-                echo xtc_draw_input_field('csID', $cInfo->customers_cid, 'maxlength="32" style="max-width: 300px;"', false);
+                echo xtc_draw_input_field('csID', $cInfo->customers_cid, 'maxlength="32" "', false);
                 ?>
-              </td>
-            </tr>
-            <tr>
-              <td class="main"><?php echo ENTRY_FIRST_NAME; ?></td>
-              <td class="main">
+              </div>
+            </div>
+            <div class="col-xs-12">
+              <div class="main col-xs-12 col-sm-2"><?php echo ENTRY_FIRST_NAME; ?></div>
+              <div class="main col-xs-12 col-sm-10">
                 <?php
                 //BOF - DokuMan - 2010-11-01 - enhance eror-reporting on firstname
                 if ($error == true) {
                   if ($entry_firstname_error == true) {
-                    echo xtc_draw_input_field('customers_firstname', $cInfo->customers_firstname, 'maxlength="32" style="max-width: 300px;"').'&nbsp;'.ENTRY_FIRST_NAME_ERROR;
+                    echo xtc_draw_input_field('customers_firstname', $cInfo->customers_firstname, 'maxlength="32" "').'&nbsp;'.ENTRY_FIRST_NAME_ERROR;
                   } else {
                     echo $cInfo->customers_lastname.xtc_draw_hidden_field('customers_firstname');
                   }
                 } else {
-                  echo xtc_draw_input_field('customers_firstname', $cInfo->customers_firstname, 'maxlength="32" style="max-width: 300px;', true);
+                  echo xtc_draw_input_field('customers_firstname', $cInfo->customers_firstname, 'maxlength="32" ', true);
                 }
                 //EOF - DokuMan - 2010-11-01 - enhance eror-reporting on firstname
                 ?>
-              </td>
-            </tr>
-            <tr>
-              <td class="main"><?php echo ENTRY_LAST_NAME; ?></td>
-              <td class="main">
+              </div>
+            </div>
+            <div class="col-xs-12">
+              <div class="main col-xs-12 col-sm-2"><?php echo ENTRY_LAST_NAME; ?></div>
+              <div class="main col-xs-12 col-sm-10">
                 <?php
                 if ($error == true) {
                   if ($entry_lastname_error == true) {
-                    echo xtc_draw_input_field('customers_lastname', $cInfo->customers_lastname, 'maxlength="32" style="max-width: 300px;').'&nbsp;'.ENTRY_LAST_NAME_ERROR;
+                    echo xtc_draw_input_field('customers_lastname', $cInfo->customers_lastname, 'maxlength="32" ').'&nbsp;'.ENTRY_LAST_NAME_ERROR;
                   } else {
                     echo $cInfo->customers_lastname.xtc_draw_hidden_field('customers_lastname');
                   }
                 } else {
-                  echo xtc_draw_input_field('customers_lastname', $cInfo->customers_lastname, 'maxlength="32" style="max-width: 300px;', true);
+                  echo xtc_draw_input_field('customers_lastname', $cInfo->customers_lastname, 'maxlength="32" ', true);
                 }
                 ?>
-              </td>
-            </tr>
+              </div>
+            </div>
             <?php
             if (ACCOUNT_DOB == 'true') {
-              echo ($cInfo->customers_default_address_id != $cInfo->address_book_id) ? '<tr style="display:none;">' : '<tr>';              
+              echo ($cInfo->customers_default_address_id != $cInfo->address_book_id) ? '<div style="display:none;">' : '<div class="col-xs-12">';              
             ?>           
-              <td class="main"><?php echo ENTRY_DATE_OF_BIRTH; ?></td>
-              <td class="main">
+              <div class="main col-xs-12 col-sm-2"><?php echo ENTRY_DATE_OF_BIRTH; ?></div>
+              <div class="main col-xs-12 col-sm-10">
                  <?php
                 if ($error == true) {
                   if ($entry_date_of_birth_error == true) {
-                    echo xtc_draw_input_field('customers_dob', xtc_date_short($cInfo->customers_dob), 'maxlength="10" style="max-width: 300px;').'&nbsp;'.ENTRY_DATE_OF_BIRTH_ERROR;
+                    echo xtc_draw_input_field('customers_dob', xtc_date_short($cInfo->customers_dob), 'maxlength="10" ').'&nbsp;'.ENTRY_DATE_OF_BIRTH_ERROR;
                   } else {
                     echo $cInfo->customers_dob.xtc_draw_hidden_field('customers_dob');
                   }
                 } else {
-                  echo xtc_draw_input_field('customers_dob', xtc_date_short($cInfo->customers_dob), 'maxlength="10" style="max-width: 300px;', true);
+                  echo xtc_draw_input_field('customers_dob', xtc_date_short($cInfo->customers_dob), 'maxlength="10" ', true);
                 }
                 ?>
-              </td>
-            </tr>
+              </div>
+            </div>
             <?php
             }
-             echo ($cInfo->customers_default_address_id != $cInfo->address_book_id) ? '<tr style="display:none;">' : '<tr>'; 
+             echo ($cInfo->customers_default_address_id != $cInfo->address_book_id) ? '<div style="display:none;">' : '<div>'; 
             ?>  
-              <td class="main"><?php echo ENTRY_EMAIL_ADDRESS; ?></td>
-              <td class="main">
+              <div class="main col-xs-12 col-sm-2"><?php echo ENTRY_EMAIL_ADDRESS; ?></div>
+              <div class="main col-xs-12 col-sm-10">
                 <?php
                 if ($error == true) {
                   if ($entry_email_address_error == true) {
-                    echo xtc_draw_input_field('customers_email_address', $cInfo->customers_email_address, 'maxlength="96" style="max-width: 300px;').'&nbsp;'.ENTRY_EMAIL_ADDRESS_ERROR;
+                    echo xtc_draw_input_field('customers_email_address', $cInfo->customers_email_address, 'maxlength="96"').'&nbsp;'.ENTRY_EMAIL_ADDRESS_ERROR;
                   } elseif ($entry_email_address_check_error == true) {
-                    echo xtc_draw_input_field('customers_email_address', $cInfo->customers_email_address, 'maxlength="96" style="max-width: 300px;').'&nbsp;'.ENTRY_EMAIL_ADDRESS_CHECK_ERROR;
+                    echo xtc_draw_input_field('customers_email_address', $cInfo->customers_email_address, 'maxlength="96"').'&nbsp;'.ENTRY_EMAIL_ADDRESS_CHECK_ERROR;
                   } elseif ($entry_email_address_exists == true) {
-                    echo xtc_draw_input_field('customers_email_address', $cInfo->customers_email_address, 'maxlength="96" style="max-width: 300px;').'&nbsp;'.ENTRY_EMAIL_ADDRESS_ERROR_EXISTS;
+                    echo xtc_draw_input_field('customers_email_address', $cInfo->customers_email_address, 'maxlength="96"').'&nbsp;'.ENTRY_EMAIL_ADDRESS_ERROR_EXISTS;
                   } else {
                     echo $customers_email_address.xtc_draw_hidden_field('customers_email_address');
                   }
                 } else {
-                  echo xtc_draw_input_field('customers_email_address', $cInfo->customers_email_address, 'maxlength="96" style="max-width: 300px;', true);
+                  echo xtc_draw_input_field('customers_email_address', $cInfo->customers_email_address, 'maxlength="96"', true);
                 }
                 ?>
-            </td>
-            </tr>
-          </table>
-          </td>
-        </tr>
+            </div>
+            </div>
+          </div>
         <?php
           if (ACCOUNT_COMPANY == 'true') {
         ?>
-        <tr>
-          <td><?php echo xtc_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
-        </tr>
-        <tr>
-          <td class="formAreaTitle"><?php echo CATEGORY_COMPANY; ?></td>
-        </tr>
-        <tr>
-          <td class="formArea">
-          <table border="0" cellspacing="2" cellpadding="2">
-            <tr>
-              <td class="main"><?php echo ENTRY_COMPANY; ?></td>
-              <td class="main">
+        <div class='col-xs-12'><br></div>
+        <div class='col-xs-12'>
+            <hr>
+            <p class="h3">
+                <?php echo CATEGORY_COMPANY; ?>
+            </p>
+            <hr>
+        </div>
+        <div class='col-xs-12'>
+            <div class='col-xs-12'>
+              <div class="main col-xs-12 col-sm-2"><?php echo ENTRY_COMPANY; ?></div>
+              <div class="main col-xs-12 col-sm-10">
                 <?php
                 if ($error == true) {
                   if ($entry_company_error == true) {
-                    echo xtc_draw_input_field('entry_company', $cInfo->entry_company, 'maxlength="64" style="max-width: 300px;').'&nbsp;'.ENTRY_COMPANY_ERROR;
+                    echo xtc_draw_input_field('entry_company', $cInfo->entry_company, 'maxlength="64" ').'&nbsp;'.ENTRY_COMPANY_ERROR;
                   } else {
                     echo $cInfo->entry_company.xtc_draw_hidden_field('entry_company');
                   }
                 } else {
-                  echo xtc_draw_input_field('entry_company', $cInfo->entry_company, 'maxlength="64" style="max-width: 300px;');
+                  echo xtc_draw_input_field('entry_company', $cInfo->entry_company, 'maxlength="64" ');
                 }
                 ?>
-              </td>
-            </tr>
+              </div>
+            </div>
             <?php
             if(ACCOUNT_COMPANY_VAT_CHECK == 'true'){
               // BOF - Dokuman - 2011-08-26 - show error code of VAT ID check FROM DB (only in 'edit' process, not in 'update')  //web28 - 2012-04-08 - and only when customers_vat_id is not empty
@@ -997,10 +993,10 @@ function check_form() {
                 // EOF - Dokuman - 2011-09-13 - display correct error code of VAT ID check
               }
               // EOF - Dokuman - 2011-08-26 - show error code of VAT ID check FROM DB (only in 'edit' process, not in 'update')
-              echo ($cInfo->customers_default_address_id != $cInfo->address_book_id) ? '<tr style="display:none;">' : '<tr>';
+              echo ($cInfo->customers_default_address_id != $cInfo->address_book_id) ? '<div style="display:none;">' : '<div class="col-xs-12">';
               ?>
-                <td class="main"><?php echo ENTRY_VAT_ID; ?></td>
-                <td class="main">
+                <div class="main col-xs-12 col-sm-2"><?php echo ENTRY_VAT_ID; ?></div>
+                <div class="main col-xs-12 col-sm-10">
                   <?php
                     // BOF - Dokuman - 2011-07-28 - display correct error code of VAT ID check
                     echo xtc_draw_input_field('customers_vat_id', $cInfo->customers_vat_id, 'maxlength="32"').'&nbsp;'.$entry_vat_error_text;
@@ -1017,29 +1013,27 @@ function check_form() {
                                 */
                                 // EOF - Dokuman - 2011-07-28 - display correct error code of VAT ID check
                                 ?>
-                  </td>
-                </tr>
+                  </div>
+                </div>
+        </div>
               <?php
               }
               ?>
-            </table>
-          </td>
-        </tr>
         <?php
           }
         ?>
-        <tr>
-          <td><?php echo xtc_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
-        </tr>
-        <tr>
-          <td class="formAreaTitle"><?php echo CATEGORY_ADDRESS; ?></td>
-        </tr>
-        <tr>
-          <td class="formArea">
-          <table border="0" cellspacing="2" cellpadding="2">
-            <tr>
-              <td class="main"><?php echo ENTRY_STREET_ADDRESS; ?></td>
-              <td class="main">
+        <div class='col-xs-12'><br></div>
+        <div class='col-xs-12'>
+            <hr>
+            <p class="h3">
+                <?php echo CATEGORY_ADDRESS; ?>
+            </p>
+            <hr>
+        </div>
+          <div class='col-xs-12'>
+            <div class='col-xs-12'>
+              <div class="main col-xs-12 col-sm-2"><?php echo ENTRY_STREET_ADDRESS; ?></div>
+              <div class="main col-xs-12 col-sm-10">
                 <?php
                 if ($error == true) {
                   if ($entry_street_address_error == true) {
@@ -1051,14 +1045,14 @@ function check_form() {
                   echo xtc_draw_input_field('entry_street_address', $cInfo->entry_street_address, 'maxlength="64"', true);
                 }
                 ?>
-              </td>
-            </tr>
+              </div>
+            </div>
             <?php
               if (ACCOUNT_SUBURB == 'true') {
             ?>
-            <tr>
-              <td class="main"><?php echo ENTRY_SUBURB; ?></td>
-              <td class="main">
+            <div class='col-xs-12'>
+              <div class="main col-xs-12 col-sm-2"><?php echo ENTRY_SUBURB; ?></div>
+              <div class="main col-xs-12 col-sm-10">
                 <?php
                 if ($error == true) {
                   if ($entry_suburb_error == true) {
@@ -1070,14 +1064,14 @@ function check_form() {
                   echo xtc_draw_input_field('entry_suburb', $cInfo->entry_suburb, 'maxlength="32"');
                 }
                 ?>
-              </td>
-            </tr>
+              </div>
+            </div>
             <?php
               }
             ?>
-            <tr>
-              <td class="main"><?php echo ENTRY_POST_CODE; ?></td>
-              <td class="main">
+            <div class='col-xs-12'>
+              <div class="main col-xs-12 col-sm-2"><?php echo ENTRY_POST_CODE; ?></div>
+              <div class="main col-xs-12 col-sm-10">
                 <?php
                 if ($error == true) {
                   if ($entry_post_code_error == true) {
@@ -1089,11 +1083,11 @@ function check_form() {
                   echo xtc_draw_input_field('entry_postcode', $cInfo->entry_postcode, 'maxlength="8"', true);
                 }
               ?>
-              </td>
-            </tr>
-            <tr>
-              <td class="main"><?php echo ENTRY_CITY; ?></td>
-              <td class="main">
+              </div>
+            </div>
+            <div class='col-xs-12'>
+              <div class="main col-xs-12 col-sm-2"><?php echo ENTRY_CITY; ?></div>
+              <div class="main col-xs-12 col-sm-10">
                 <?php
                 if ($error == true) {
                   if ($entry_city_error == true) {
@@ -1105,14 +1099,14 @@ function check_form() {
                   echo xtc_draw_input_field('entry_city', $cInfo->entry_city, 'maxlength="32"', true);
                 }
                 ?>
-              </td>
-            </tr>
+              </div>
+            </div>
             <?php
               if (ACCOUNT_STATE == 'true') {
             ?>
-            <tr>
-              <td class="main"><?php echo ENTRY_STATE; ?></td>
-              <td class="main">
+            <div class='col-xs-12'>
+              <div class="main col-xs-12 col-sm-2"><?php echo ENTRY_STATE; ?></div>
+              <div class="main col-xs-12 col-sm-10">
                 <?php
                 $entry_state = xtc_get_zone_name($cInfo->entry_country_id, $cInfo->entry_zone_id, $cInfo->entry_state);
                 if ($error == true) {
@@ -1134,14 +1128,14 @@ function check_form() {
                   echo xtc_draw_input_field('entry_state', xtc_get_zone_name($cInfo->entry_country_id, $cInfo->entry_zone_id, $cInfo->entry_state));
                 }
                 ?>
-              </td>
-           </tr>
+              </div>
+           </div>
             <?php
               }
             ?>
-            <tr>
-              <td class="main"><?php echo ENTRY_COUNTRY; ?></td>
-              <td class="main">
+            <div class='col-xs-12'>
+              <div class="main col-xs-12 col-sm-2"><?php echo ENTRY_COUNTRY; ?></div>
+              <div class="main col-xs-12 col-sm-10">
                 <?php
                 if ($error == true) {
                   if ($entry_country_error == true) {
@@ -1153,29 +1147,28 @@ function check_form() {
                   echo xtc_draw_pull_down_menu('entry_country_id', xtc_get_countries('',1), $cInfo->entry_country_id); //Web28 - 2012-04-17 - NEW: show only active language
                 }
                 ?>
-              </td>
-            </tr>
-          </table>
-          </td>
-        </tr>
-        <tr>
-          <td><?php echo xtc_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
-        </tr>
+              </div>
+            </div>
+          </div>
+        <div class='col-xs-12'><br></div>
         <?php
         if ($cInfo->customers_default_address_id == $cInfo->address_book_id) {
         ?>
-        <tr>
-          <td class="formAreaTitle"><?php echo CATEGORY_CONTACT; ?></td>
-        </tr>
+        <div class='col-xs-12'>
+            <hr>
+            <p class="h3">
+                <?php echo CATEGORY_CONTACT; ?>
+            </p>
+            <hr>
+        </div>
         <?php
         }
-        echo ($cInfo->customers_default_address_id != $cInfo->address_book_id) ? '<tr style="display:none;">' : '<tr>'; 
+        echo ($cInfo->customers_default_address_id != $cInfo->address_book_id) ? '<div style="display:none;">' : '<div class="col-xs-12">'; 
         ?>        
-          <td class="formArea">
-          <table border="0" cellspacing="2" cellpadding="2">
-            <tr>
-              <td class="main"><?php echo ENTRY_TELEPHONE_NUMBER; ?></td>
-              <td class="main">
+          <div class='col-xs-12'>
+            <div class="col-xs-12">
+              <div class="main col-xs-12 col-sm-2"><?php echo ENTRY_TELEPHONE_NUMBER; ?></div>
+              <div class="main col-xs-12 col-sm-10">
               <?php
                 if ($error == true) {
                   if ($entry_telephone_error == true) {
@@ -1187,11 +1180,11 @@ function check_form() {
                   echo xtc_draw_input_field('customers_telephone', $cInfo->customers_telephone, 'maxlength="32"', true);
                 }
               ?>
-              </td>
-            </tr>
-            <tr>
-              <td class="main"><?php echo ENTRY_FAX_NUMBER; ?></td>
-              <td class="main">
+              </div>
+            </div>
+            <div class="col-xs-12">
+              <div class="main col-xs-12 col-sm-2"><?php echo ENTRY_FAX_NUMBER; ?></div>
+              <div class="main col-xs-12 col-sm-10">
               <?php
                 if ($processed == true) {
                   echo $cInfo->customers_fax.xtc_draw_hidden_field('customers_fax');
@@ -1199,26 +1192,25 @@ function check_form() {
                   echo xtc_draw_input_field('customers_fax', $cInfo->customers_fax, 'maxlength="32"');
                 }
               ?>
-              </td>
-            </tr>
-          </table>
-          </td>
-        </tr>
-        <tr>
-          <td><?php echo xtc_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
-        </tr>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class='col-xs-12'><br></div>
         <?php
         if ($cInfo->customers_default_address_id == $cInfo->address_book_id) {
         ?>
-        <tr>
-          <td class="formAreaTitle"><?php echo CATEGORY_OPTIONS; ?></td>
-        </tr>
-        <tr>
-          <td class="formArea">
-          <table border="0" cellspacing="2" cellpadding="2">
-                    <tr>
-              <td class="main"><?php echo ENTRY_PAYMENT_UNALLOWED; ?></td>
-              <td class="main">
+        <div class='col-xs-12'>
+            <hr>
+            <p class="h3">
+                <?php echo CATEGORY_OPTIONS; ?>
+            </p>
+            <hr>
+        </div>
+          <div class='col-xs-12'>
+            <div class='col-xs-12'>
+              <div class='main col-xs-12 col-sm-2'><?php echo ENTRY_PAYMENT_UNALLOWED; ?></div>
+              <div class='main col-xs-12 col-sm-10'>
               <?php
                 if ($processed == true) {
                   echo $cInfo->payment_unallowed.xtc_draw_hidden_field('payment_unallowed');
@@ -1226,11 +1218,11 @@ function check_form() {
                   echo xtc_draw_input_field('payment_unallowed', $cInfo->payment_unallowed, 'maxlength="255"');
                 }
               ?>
-              </td>
-            </tr>
-            <tr>
-              <td class="main"><?php echo ENTRY_SHIPPING_UNALLOWED; ?></td>
-              <td class="main">
+              </div>
+            </div>
+            <div class='col-xs-12'>
+              <div class='main col-xs-12 col-sm-2'><?php echo ENTRY_SHIPPING_UNALLOWED; ?></div>
+              <div class='main col-xs-12 col-sm-10'>
               <?php
                 if ($processed == true) {
                   echo $cInfo->shipping_unallowed.xtc_draw_hidden_field('shipping_unallowed');
@@ -1238,11 +1230,11 @@ function check_form() {
                   echo xtc_draw_input_field('shipping_unallowed', $cInfo->shipping_unallowed, 'maxlength="255"');
                 }
               ?>
-              </td>
-           </tr>
-           <tr>
-              <td class="main" bgcolor="#FFCC33"><?php echo ENTRY_NEW_PASSWORD; ?></td>
-              <td class="main" bgcolor="#FFCC33">
+              </div>
+           </div>
+           <div class='col-xs-12'>
+              <div class="main col-xs-12 col-sm-2" style="background-color:#FFCC33;"><?php echo ENTRY_NEW_PASSWORD; ?></div>
+              <div class="main col-xs-12 col-sm-10" style="background-color:#FFCC33;">
               <?php
                 if ($error == true) {
                   if ($entry_password_error == true) {
@@ -1254,13 +1246,13 @@ function check_form() {
                   echo xtc_draw_input_field('entry_password');
                 }
                 ?>
-              </td>
+              </div>
               <?php
                  // BOF - Christian - 2009-06-26 - delete Newsletter Funktion...
                   /*
-                        <tr>
-                          <td class="main"><?php echo ENTRY_NEWSLETTER; ?></td>
-                          <td class="main">
+                        <div class='col-xs-12'>
+                          <div class='main col-xs-12 col-sm-10'><?php echo ENTRY_NEWSLETTER; ?></div>
+                          <div class='main col-xs-12 col-sm-10'>
                           <?php
                 if ($processed == true) {
                   if ($cInfo->customers_newsletter == '1') {
@@ -1273,43 +1265,41 @@ function check_form() {
                   echo xtc_draw_pull_down_menu('customers_newsletter', $newsletter_array, $cInfo->customers_newsletter);
                 }
               ?>
-              </td>
-                        </tr>
+              </div>
+                        </div>
                         */
               // EOF - Christian - 2009-06-26 - delete Newsletter Funktion...
            ?>
-           </tr>
-            <tr>
+           </div>
+            <div class='col-xs-12'>
            <?php include(DIR_WS_MODULES . FILENAME_CUSTOMER_MEMO); ?>
-            </tr>
-          </table>
-          </td>
-        </tr>
+            </div>
+          </div>
         <?php
         }
         ?>
-        <tr>
-          <td><?php echo xtc_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
-        </tr>
-        <tr>
-          <td align="right" class="main"><input type="submit" class="btn btn-default" onclick="this.blur();" value="<?php echo BUTTON_UPDATE; ?>"><?php echo ' <a class="btn btn-default" onclick="this.blur();" href="' . xtc_href_link(FILENAME_CUSTOMERS, xtc_get_all_get_params(array('action'))) .'">' . BUTTON_CANCEL . '</a>'; ?></td>
-        </tr>
+        <div class="col-xs-12"><br></div>
+        <div class='col-xs-12'>
+          <input type="submit" class="btn btn-default" onclick="this.blur();" value="<?php echo BUTTON_UPDATE; ?>"><?php echo ' <a class="btn btn-default" onclick="this.blur();" href="' . xtc_href_link(FILENAME_CUSTOMERS, xtc_get_all_get_params(array('action'))) .'">' . BUTTON_CANCEL . '</a>'; ?>
+        </div>
         </form>
+        </div>
         <?php
         } else {
         ?>
-        <tr>
-          <td>
-		  <h1><?php echo HEADING_TITLE; ?> <small><?php echo BOX_HEADING_CUSTOMERS; ?></small></h1>
-          <table border="0" width="100%" cellspacing="0" cellpadding="0">
-            <tr>
+        <div class='col-xs-12'>
+            <p class="h2">
+                <?php echo HEADING_TITLE; ?>  <small><?php echo BOX_HEADING_CUSTOMERS; ?></small>
+            </p>
+        </div>
+        <div class="col-xs-12">
             <?php echo xtc_draw_form('search', FILENAME_CUSTOMERS, '', 'get'); ?>
-              <td class="pageHeading"><?php echo '<a class="btn btn-default" onclick="this.blur();" href="' . xtc_href_link(FILENAME_CREATE_ACCOUNT) . '">' . BUTTON_CREATE_ACCOUNT . '</a>'; ?></td>
-              <td class="pageHeading" align="right"><?php echo xtc_draw_separator('pixel_trans.gif', 1, HEADING_IMAGE_HEIGHT); ?></td>
-              <td class="smallText" align="right"><?php echo HEADING_TITLE_SEARCH . ' ' . xtc_draw_input_field('search').xtc_draw_hidden_field(xtc_session_name(), xtc_session_id()); ?></td>
+              <div class="col-sm-4 col-xs-12 pageHeading"><?php echo '<a class="btn btn-default" onclick="this.blur();" href="' . xtc_href_link(FILENAME_CREATE_ACCOUNT) . '">' . BUTTON_CREATE_ACCOUNT . '</a>'; ?></div>
+              <div class="col-sm-4 col-xs-12 pageHeading" align="right"><?php echo xtc_draw_separator('pixel_trans.gif', 1, HEADING_IMAGE_HEIGHT); ?></div>
+              <div class="col-sm-4 col-xs-12 smallText" align="right"><?php echo HEADING_TITLE_SEARCH . ' ' . xtc_draw_input_field('search').xtc_draw_hidden_field(xtc_session_name(), xtc_session_id()); ?></div>
             </form>
-            </tr>
-            <tr>
+        </div>
+        <div class="col-xs-12 smallText text-center">
             <?php echo xtc_draw_form('status', FILENAME_CUSTOMERS, '', 'get');
             $select_data = array ();
               //BOF - GTB - 2011-02-03 - show selected customer group
@@ -1318,34 +1308,30 @@ function check_form() {
               //<td class="smallText" align="right"><?php echo HEADING_TITLE_STATUS . ' ' . xtc_draw_pull_down_menu('status',xtc_array_merge($select_data, $customers_statuses_array), '99', 'onChange="this.form.submit();"').xtc_draw_hidden_field(xtc_session_name(), xtc_session_id()); </td>
               //EOF - GTB - 2011-02-03 - show selected customer group
               ?>
-              <td class="smallText" colspan="3" align="center"><?php echo HEADING_TITLE_STATUS . ' ' . xtc_draw_pull_down_menu('status',xtc_array_merge($select_data, $customers_statuses_array), isset($_GET['status']) ? $_GET['status'] : '', 'onChange="this.form.submit();" style="max-width: 200px;"').xtc_draw_hidden_field(xtc_session_name(), xtc_session_id()); ?></td>
+          <?php echo HEADING_TITLE_STATUS . ' ' . xtc_draw_pull_down_menu('status',xtc_array_merge($select_data, $customers_statuses_array), isset($_GET['status']) ? $_GET['status'] : '', 'onChange="this.form.submit();" style="max-width: 200px;"').xtc_draw_hidden_field(xtc_session_name(), xtc_session_id()); ?>
              </form>
-            </tr>
-          </table>
-          </td>
-        </tr>
-        <tr>
-          <td>
-          <table border="0" width="100%" cellspacing="0" cellpadding="0">
-            <tr>
-              <td valign="top"><table border="0" width="100%" cellspacing="0" cellpadding="2">
+        </div>
+        <div class='col-xs-12'>
+            <div id='responsive_table' class='table-responsive pull-left col-sm-12'>
+            <table class="table table-bordered">
                 <tr class="dataTableHeadingRow">
-                  <td class="dataTableHeadingContent" width="40"><?php echo TABLE_HEADING_ACCOUNT_TYPE; ?></td>
+                  <td class="dataTableHeadingContent hidden-xs hidden-sm" width="40"><?php echo TABLE_HEADING_ACCOUNT_TYPE; ?></td>
                   <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_CUSTOMERSCID.xtc_sorting(FILENAME_CUSTOMERS,'customers_cid'); ?></td>
                   <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_LASTNAME.xtc_sorting(FILENAME_CUSTOMERS,'customers_lastname'); ?></td>
                   <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_FIRSTNAME.xtc_sorting(FILENAME_CUSTOMERS,'customers_firstname'); ?></td>
-                  <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_EMAIL.xtc_sorting(FILENAME_CUSTOMERS,'customers_email_address'); ?></td>
-                  <td class="dataTableHeadingContent"><?php echo TEXT_INFO_COUNTRY.xtc_sorting(FILENAME_CUSTOMERS,'customers_country'); ?></td>
-                   <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_UMSATZ; ?></td>
-                  <td class="dataTableHeadingContent" align="left"><?php echo HEADING_TITLE_STATUS; ?></td>
+                  <td class="dataTableHeadingContent hidden-xs"><?php echo TABLE_HEADING_EMAIL.xtc_sorting(FILENAME_CUSTOMERS,'customers_email_address'); ?></td>
+                  <td class="dataTableHeadingContent hidden-xs hidden-sm"><?php echo TEXT_INFO_COUNTRY.xtc_sorting(FILENAME_CUSTOMERS,'customers_country'); ?></td>
+                   <td class="dataTableHeadingContent hidden-xs hidden-sm"><?php echo TABLE_HEADING_UMSATZ; ?></td>
+                  <td class="dataTableHeadingContent hidden-xs hidden-sm" align="left"><?php echo HEADING_TITLE_STATUS; ?></td>
                   <?php
                   if (ACCOUNT_COMPANY_VAT_CHECK == 'true') {
                   ?>
-                  <td class="dataTableHeadingContent" align="left"><?php echo HEADING_TITLE_VAT; ?></td>
+                  <td class="dataTableHeadingContent hidden-xs hidden-sm" align="left"><?php echo HEADING_TITLE_VAT; ?></td>
                   <?php
                   }
                   ?>
-                  <td class="dataTableHeadingContent" align="right"><?php echo TABLE_HEADING_ACCOUNT_CREATED.xtc_sorting(FILENAME_CUSTOMERS,'date_account_created'); ?></td>
+                  <td class="dataTableHeadingContent hidden-xs hidden-sm" align="right"><?php echo TABLE_COUPON_AMOUNT; ?></td>
+                  <td class="dataTableHeadingContent hidden-xs hidden-sm" align="right"><?php echo TABLE_HEADING_ACCOUNT_CREATED.xtc_sorting(FILENAME_CUSTOMERS,'date_account_created'); ?></td>
                   <td class="dataTableHeadingContent" align="right"><?php echo TABLE_HEADING_ACTION; ?>&nbsp;</td>
                 </tr>
                 <?php
@@ -1439,7 +1425,13 @@ function check_form() {
                 // EOF - vr - 2010-02-22 - removed group by part to prevent folding of customers records with the same creation timestamp
                 $customers_split = new splitPageResults($_GET['page'], MAX_DISPLAY_LIST_CUSTOMERS, $customers_query_raw, $customers_query_numrows);
                 $customers_query = xtc_db_query($customers_query_raw);
+                #MN
                 while ($customers = xtc_db_fetch_array($customers_query)) {
+                    $gv_amount = 0;
+                    $gv_query = xtc_db_query("select amount from ".TABLE_COUPON_GV_CUSTOMER." where customer_id = '".$customers['customers_id']."'");
+                    $gv_result = xtc_db_fetch_array($gv_query);
+                    $gv_amount = $gv_result['amount'];
+                        
                   // vr - 2012-10-27 moved info query into raw query
                   // BOF - DokuMan - 2011-09-12 - optimize sql query for customers sales volume - thx to GTB
                   $umsatz_query = xtc_db_query("-- admin/customers.php
@@ -1472,29 +1464,28 @@ function check_form() {
 
                   $account_type = ($customers['account_type'] == 1) ? TEXT_GUEST : TEXT_ACCOUNT;
                   ?>
-                  </td>
-                  <td class="dataTableContent" style="width:40px;"><?php echo $account_type; ?></td>
+                  <td class="dataTableContent hidden-xs hidden-sm" style="width:40px;"><?php echo $account_type; ?></td>
                   <td class="dataTableContent" style="width:80px;"><?php echo $customers['customers_cid']; ?>&nbsp;</td>
                   <td class="dataTableContent"><?php echo $customers['customers_lastname']; ?></td>
                   <td class="dataTableContent"><?php echo $customers['customers_firstname']; ?></td>
-                  <td class="dataTableContent"><?php echo $customers['customers_email_address']; ?></td>
-                  <td class="dataTableContent"><?php echo xtc_get_country_name($customers['entry_country_id']); ?></td>
+                  <td class="dataTableContent hidden-xs"><?php echo $customers['customers_email_address']; ?></td>
+                  <td class="dataTableContent hidden-xs hidden-sm"><?php echo xtc_get_country_name($customers['entry_country_id']); ?></td>
                   <?php
                   if ($umsatz['ordersum'] !='') {
                   ?>
-                  <td class="dataTableContent"><?php if ($umsatz['ordersum']>0) { echo $currencies->format($umsatz['ordersum']);} ?></td>
+                  <td class="dataTableContent hidden-xs hidden-sm"><?php if ($umsatz['ordersum']>0) { echo $currencies->format($umsatz['ordersum']);} ?></td>
                   <?php
                   } else {
                   ?>
-                  <td class="dataTableContent"> --- </td>
+                  <td class="dataTableContent hidden-xs hidden-sm"> --- </td>
                   <?php
                   }
                   ?>
-                  <td class="dataTableContent" align="left"><?php echo $customers_statuses_id_array[$customers['customers_status']]['text'] . ' (' . $customers['customers_status'] . ')' ; ?></td><?php// web28 - 2011-10-31 - change  $customers_statuses_array  to $customers_statuses_id_array?>
+                  <td class="dataTableContent hidden-xs hidden-sm" align="left"><?php echo $customers_statuses_id_array[$customers['customers_status']]['text'] . ' (' . $customers['customers_status'] . ')' ; ?></td><?php// web28 - 2011-10-31 - change  $customers_statuses_array  to $customers_statuses_id_array?>
                   <?php
                   if (ACCOUNT_COMPANY_VAT_CHECK == 'true') {
                     ?>
-                    <td class="dataTableContent" align="left">
+                    <td class="dataTableContent hidden-xs hidden-sm" align="left">
                       <?php
                       if ($customers['customers_vat_id']) {
                         if (xtc_not_null(xtc_validate_vatid_status($customers['customers_id']))) {
@@ -1508,33 +1499,35 @@ function check_form() {
                     <?php
                   }
                   ?>
-                  <td class="dataTableContent" align="right"><?php echo xtc_date_short($customers['date_account_created']); ?>&nbsp;</td>
-                  <td class="dataTableContent" align="right"><?php if (isset($cInfo) && is_object($cInfo) && ($customers['customers_id'] == $cInfo->customers_id) ) { echo xtc_image(DIR_WS_IMAGES . 'icon_arrow_right.gif', ICON_ARROW_RIGHT); } else { echo '<a href="' . xtc_href_link(FILENAME_CUSTOMERS, xtc_get_all_get_params(array('cID')) . 'cID=' . $customers['customers_id']) . '">' . xtc_image(DIR_WS_IMAGES . 'icon_info.gif', IMAGE_ICON_INFO) . '</a>'; } ?>&nbsp;</td>
+                  <td class="dataTableContent hidden-xs hidden-sm" align="right"><?php echo $currencies->format($gv_amount); ?>&nbsp;</td>
+                  <td class="dataTableContent hidden-xs hidden-sm" align="right"><?php echo xtc_date_short($customers['date_account_created']); ?>&nbsp;</td>
+                  <td class="dataTableContent" align="right">
+                      <span class='hidden-sm hidden-xs'>
+                      <?php if (isset($cInfo) && is_object($cInfo) && ($customers['customers_id'] == $cInfo->customers_id) ) { echo xtc_image(DIR_WS_IMAGES . 'icon_arrow_right.gif', ICON_ARROW_RIGHT); } else { echo '<a href="' . xtc_href_link(FILENAME_CUSTOMERS, xtc_get_all_get_params(array('cID')) . 'cID=' . $customers['customers_id']) . '">' . xtc_image(DIR_WS_IMAGES . 'icon_info.gif', IMAGE_ICON_INFO) . '</a>'; } ?>
+                      </span>
+                      <span class='hidden-md hidden-lg'>
+                      <?php echo '<a class="btn btn-default" onclick="this.blur();" href="'.xtc_href_link(FILENAME_CUSTOMERS, xtc_get_all_get_params(array ('cID', 'action', 'edit')).'cID='.$customers['customers_id'].'&action=edit&edit='.$addresses['address_book_id']).'">'.BUTTON_EDIT.'</a>'; ?>
+                      </span>
+                      &nbsp;</td>
                 </tr>
                 <?php
                   }
                 ?>
-                <tr>
-                  <td colspan="7">
-                    <table border="0" width="100%" cellspacing="0" cellpadding="2">
-                      <tr>
-                        <td class="smallText" valign="top"><?php echo $customers_split->display_count($customers_query_numrows, MAX_DISPLAY_LIST_CUSTOMERS, $_GET['page'], TEXT_DISPLAY_NUMBER_OF_CUSTOMERS); ?></td>
-                        <td class="smallText" align="right"><?php echo $customers_split->display_links($customers_query_numrows, MAX_DISPLAY_LIST_CUSTOMERS, MAX_DISPLAY_PAGE_LINKS, $_GET['page'], xtc_get_all_get_params(array('page', 'info', 'x', 'y', 'cID'))); ?></td>
-                      </tr>
+                </table>
+                    <div class="col-xs-12">
+                      <div class="col-xs-6 smallText" ><?php echo $customers_split->display_count($customers_query_numrows, MAX_DISPLAY_LIST_CUSTOMERS, $_GET['page'], TEXT_DISPLAY_NUMBER_OF_CUSTOMERS); ?></div>
+                      <div class="col-xs-6 smallText" ><?php echo $customers_split->display_links($customers_query_numrows, MAX_DISPLAY_LIST_CUSTOMERS, MAX_DISPLAY_PAGE_LINKS, $_GET['page'], xtc_get_all_get_params(array('page', 'info', 'x', 'y', 'cID'))); ?></div>
+                    </div>
                       <?php
                         if (isset($_GET['search'])) {
                       ?>
-                      <tr>
-                        <td align="right" colspan="2"><?php echo '<a class="btn btn-default" onclick="this.blur();" href="' . xtc_href_link(FILENAME_CUSTOMERS) . '">' . BUTTON_RESET . '</a>'; ?></td>
-                      </tr>
+                    <div class="col-xs-12">
+                      <div class="col-xs-12"><?php echo '<a class="btn btn-default pull-right" onclick="this.blur();" href="' . xtc_href_link(FILENAME_CUSTOMERS) . '">' . BUTTON_RESET . '</a>'; ?></div>
+                    </div>
                       <?php
                         }
                       ?>
-                    </table>
-                  </td>
-                </tr>
-              </table>
-            </td>
+                </div>
               <?php
                 $heading = array ();
                 $contents = array ();
@@ -1743,24 +1736,25 @@ function check_form() {
                     break;
                 }
                 if ((xtc_not_null($heading)) && (xtc_not_null($contents))) {
-                  echo '            <td width="25%" valign="top">'."\n";
+                  echo '            <div class="col-lg-2 col-md-12 hidden-sm hidden-xs  pull-right">'."\n";#col-sm-12 col-xs-12
                   $box = new box;
                   echo $box->infoBox($heading, $contents);
-                  echo '            </td>'."\n";
+                  echo '            </div>'."\n";
+                    ?>
+                    <script>
+                        //responsive_table
+                        $('#responsive_table').addClass('col-lg-10');
+                    </script>               
+                    <?php
                 }
               ?>
-            </tr>
-          </table>
-        </td>
-      </tr>
+  
+        
       <?php
       }
       ?>
-      </table>
-    </td>
-    <!-- body_text_eof //-->
-  </tr>
-</table>
+        </div></div>
+    <!-- body_text_eof // -->
 <!-- body_eof //-->
 <!-- footer //-->
 <?php require(DIR_WS_INCLUDES . 'footer.php'); ?>

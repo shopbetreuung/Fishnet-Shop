@@ -44,4 +44,7 @@ define('TEXT_DELETE_WARNING_PRODUCTS', '<b>WARNING:</b> There are %s products st
 
 define('ERROR_DIRECTORY_NOT_WRITEABLE', 'Error: I can not write to this directory. Please set the right user permissions on: %s');
 define('ERROR_DIRECTORY_DOES_NOT_EXIST', 'Error: Directory does not exist: %s');
+
+define('ERROR_TEXT_HEADING', 'Manufacturer not saved, fix errors:');
+define('ERROR_TEXT_NAME', 'Name invalid!');
 ?>

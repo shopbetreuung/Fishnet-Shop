@@ -6,7 +6,7 @@
  * xt:Commerce - Shopsoftware
  * (c) 2003-2007 xt:Commerce (Winger/Zanier), http://www.xt-commerce.com
  *
- * xt:Commerce ist eine geschützte Handelsmarke und wird vertreten durch die xt:Commerce GmbH (Austria)
+ * xt:Commerce ist eine gesch√ºzte Handelsmarke und wird vertreten durch die xt:Commerce GmbH (Austria)
  * xt:Commerce is a protected trademark and represented by the xt:Commerce GmbH (Austria)
  *
  * @copyright Copyright 2003-2007 xt:Commerce (Winger/Zanier), www.xt-commerce.com
@@ -18,7 +18,7 @@
  * For questions, help, comments, discussion, etc., please join the
  * xt:Commerce Support Forums at www.xt-commerce.com
  *
- * ab 15.08.2008 Teile vom Hamburger-Internetdienst ge‰ndert
+ * ab 15.08.2008 Teile vom Hamburger-Internetdienst ge√§ndert
  * Hamburger-Internetdienst Support Forums at www.forum.hamburger-internetdienst.de
  * Stand 29.04.2009
  */
@@ -122,38 +122,24 @@ require (DIR_WS_INCLUDES.'head.php');
 <?php require(DIR_WS_INCLUDES . 'header.php'); ?>
 <!-- header_eof //-->
 <!-- body //-->
-<table border="0" width="100%" cellspacing="2" cellpadding="2">
-	<tr>
+<div class="row">
 		
-			<table border="0" width="<?php echo BOX_WIDTH; ?>" cellspacing="1" cellpadding="1" class="columnLeft">
-<!-- left_navigation //-->
+    <div class="col-xs-12" style="background-color:#FFFFFF; border: solid #E9D28F 1px;">
+        <div class="col-sm-2 col-md-1 col-xs-4 text-right" style="padding-top:20px;"><img src="https://www.paypal.com/de_DE/DE/i/logo/logo_110x35.gif"></div>
+        <div class="col-sm-10 col-md-11 col-xs-8">
 
-<!-- left_navigation_eof //-->
-			</table>
-		</td>
-<!-- body_text //-->
-		<td class="boxCenter" width="100%" valign="top">
-			<table border="0" width="100%" cellspacing="0" cellpadding="2">
-				<tr>
-					<td width="100%" style="background-color:#FFFFFF; border: solid #E9D28F 1px;">
-						<table border="0" width="100%" cellspacing="0" cellpadding="0">
-							<tr>
-								<td width="100" rowspan="2"><img src="https://www.paypal.com/de_DE/DE/i/logo/logo_110x35.gif"></td>
-								<td class="pageHeading"><?php echo HEADING_TITLE; ?></td>
-							</tr>
-							<tr>
-								<td class="main" valign="top">Tools</td>
-							</tr>
+                <p class="h2"><?php echo HEADING_TITLE; ?></p> Tools</td>
+        </div>
+        <div class="col-sm-1 hidden-xs"></div>
+        <div class="col-xs-12 col-sm-11">
 							<?php if(!isset($_GET['view'])) { ?>
-								<tr>
-									<td class="main" valign="top"><a class="btn btn-default" href="<?php echo xtc_href_link(FILENAME_PAYPAL, 'view=search'); ?>"><?php echo BUTTON_SEARCH; ?></a></td>
-								</tr>
+                <a class="btn btn-default" href="<?php echo xtc_href_link(FILENAME_PAYPAL, 'view=search'); ?>"><?php echo BUTTON_SEARCH; ?></a>    
 							<?php } ?>
-						</table>
-					</td>
-				</tr>
-				<tr>
-					<td>
+        </div>  
+    </div>
+    <div class="col-xs-12"></br></div>
+<!-- body_text //-->
+			<div class="col-xs-12">
 <?php
 // errors
 if(isset($_GET['err']))
@@ -179,13 +165,9 @@ switch($_GET['view']) {
 		break;
 }
 ?>
-					</td>
-				</tr>
-			</table>
-		</td>
+                                            </div>
 <!-- body_text_eof //-->
-  </tr>
-</table>
+</div>
 <!-- body_eof //-->
 <!-- footer //-->
 <?php require(DIR_WS_INCLUDES . 'footer.php'); ?>

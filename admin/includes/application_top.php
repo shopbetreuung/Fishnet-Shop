@@ -140,6 +140,9 @@ require_once(DIR_FS_INC . 'xtc_product_link.inc.php');
 require_once(DIR_FS_INC . 'xtc_cleanName.inc.php');
 require_once(DIR_FS_INC . 'xtc_get_top_level_domain.inc.php');
 require_once(DIR_FS_INC . 'html_encoding.php'); //new function for PHP5.4
+require_once(DIR_FS_INC . 'xtc_db_find_database_field.inc.php');
+require_once(DIR_FS_INC . 'xtc_db_find_database_field_by_language.inc.php');
+require_once(DIR_FS_INC . 'xtc_db_find_by_multiple.inc.php');
 
 // design layout (wide of boxes in pixels) (default: 125)
 define('BOX_WIDTH', 125);

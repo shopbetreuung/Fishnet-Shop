@@ -44,4 +44,7 @@ define('TEXT_DELETE_WARNING_PRODUCTS', '<b>WARNUNG:</b> Es existieren noch %s Ar
 
 define('ERROR_DIRECTORY_NOT_WRITEABLE', 'Fehler: Das Verzeichnis %s ist schreibgesch&uuml;tzt. Bitte korrigieren Sie die Zugriffsrechte zu diesem Verzeichnis!');
 define('ERROR_DIRECTORY_DOES_NOT_EXIST', 'Fehler: Das Verzeichnis %s existiert nicht!');
+
+define('ERROR_TEXT_HEADING', 'Fehler! Hersteller nicht gespeichert:');
+define('ERROR_TEXT_NAME', 'Herstellername ung&uuml;ltig!');
 ?>

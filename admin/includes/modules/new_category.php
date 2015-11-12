@@ -70,21 +70,24 @@
   $order_array_desc =array(array('id' => 'ASC','text'=>TEXT_SORT_ASC),
                           array('id' => 'DESC','text'=>TEXT_SORT_DESC));
 ?>
-  <tr>
-    <td class="pageHeading"><?php echo sprintf($text_new_or_edit, xtc_output_generated_category_path($current_category_id)); ?></td>
-    <td class="pageHeading" align="right"><?php echo xtc_draw_separator('pixel_trans.gif', HEADING_IMAGE_WIDTH, HEADING_IMAGE_HEIGHT); ?></td>
-  </tr>
-  <tr>
+
+    <div class='col-xs-12'>
+        <p class="h3">
+            <?php echo sprintf($text_new_or_edit, xtc_output_generated_category_path($current_category_id)); ?>
+        </p>
+    </div>
+    <div class='col-xs-12'> <br> </div>
     <?php
     $form_action = isset($_GET['cID']) ? 'update_category' : 'insert_category';
     echo xtc_draw_form('new_category', FILENAME_CATEGORIES, 'cPath=' . $cPath . '&cID=' . $_GET['cID'] . '&action='.$form_action, 'post', 'enctype="multipart/form-data"'); ?>
-    <td>
       <!-- BOF - Tomcraft - 2009-11-02 - Block1 //-->
-      <div style="width: 860px; padding:5px;">
-      <table width="100%" border="0" cellpadding="5" cellspacing="0" bgcolor="f3f3f3" style="width: 100%; border: 1px solid; border-color: #aaaaaa; padding: 5px;">
-        <tr>
-          <td class="main" width="204" valign="top"><?php echo TEXT_EDIT_CATEGORIES_IMAGE; ?></td>
-          <td class="main"><?php echo xtc_draw_file_field('categories_image') . '<br />' . xtc_draw_separator('pixel_trans.gif', '24', '15') . xtc_draw_hidden_field('categories_previous_image', $cInfo->categories_image); ?>
+      <div class='col-xs-12'>
+          <hr>
+          <div class='col-xs-12'>
+            <div class="col-xs-2 main"><?php echo TEXT_EDIT_CATEGORIES_IMAGE; ?></div>
+            <div class="col-xs-10 main"><?php echo xtc_draw_file_field('categories_image') . '<br />' . xtc_draw_separator('pixel_trans.gif', '24', '15') . xtc_draw_hidden_field('categories_previous_image', $cInfo->categories_image); ?></div>
+          
+          
             <?php
             if ($cInfo->categories_image) {
               ?>
@@ -93,29 +96,27 @@
               <br /><?php echo '&nbsp;' .$cInfo->categories_image;
               echo xtc_draw_selection_field('del_cat_pic', 'checkbox', 'yes').TEXT_DELETE;
             } ?>
-          </td>
-        </tr>
-        <tr>
-          <td class="main"><?php echo TEXT_EDIT_STATUS; ?>:</td>
-          <td class="main"><?php echo xtc_draw_selection_field('status', 'checkbox', '1',$cInfo->categories_status==1 ? true : false); ?></td>
-        </tr>
-        <tr>
-          <td class="main"><?php echo TEXT_EDIT_PRODUCT_SORT_ORDER; ?>:</td>
-          <td class="main"><?php echo xtc_draw_pull_down_menu('products_sorting',$order_array,$cInfo->products_sorting, 'style="width: 130px"'); ?>&nbsp;<?php echo xtc_draw_pull_down_menu('products_sorting2',$order_array_desc,$cInfo->products_sorting2); ?></td>
-        </tr>
-        <tr>
-          <td class="main"><?php echo TEXT_EDIT_SORT_ORDER; ?></td>
-          <td class="main"><?php echo xtc_draw_input_field('sort_order', $cInfo->sort_order, 'style="width: 130px"'); ?></td>
-        </tr>
-        <tr>
-          <td><span class="main"><?php echo TEXT_CHOOSE_INFO_TEMPLATE_LISTING; ?>:</span></td>
-          <td><span class="main"><?php echo $catfunc->create_templates_dropdown_menu('listing_template','/module/product_listing/',$cInfo->listing_template, 'style="width: 200px"');?></span></td>
-        </tr>
-        <tr>
-          <td><span class="main"><?php echo TEXT_CHOOSE_INFO_TEMPLATE_CATEGORIE; ?>:</span></td>
-          <td><span class="main"><?php echo $catfunc->create_templates_dropdown_menu('categories_template','/module/categorie_listing/',$cInfo->categories_template, 'style="width: 200px"');?></span></td>
-        </tr>
-      </table>
+          </div>
+        <div class='col-xs-12'>
+          <div class="col-xs-2 main"><?php echo TEXT_EDIT_STATUS; ?>:</div>
+          <div class="col-xs-10 main"><?php echo xtc_draw_selection_field('status', 'checkbox', '1',$cInfo->categories_status==1 ? true : false); ?></div>
+        </div>
+        <div class='col-xs-12'>
+          <div class="col-xs-2 main"><?php echo TEXT_EDIT_PRODUCT_SORT_ORDER; ?>:</div>
+          <div class="col-xs-10 main"><?php echo xtc_draw_pull_down_menu('products_sorting',$order_array,$cInfo->products_sorting, 'style="width: 130px"'); ?>&nbsp;<?php echo xtc_draw_pull_down_menu('products_sorting2',$order_array_desc,$cInfo->products_sorting2); ?></div>
+        </div>
+        <div class='col-xs-12'>
+          <div class="col-xs-2 main"><?php echo TEXT_EDIT_SORT_ORDER; ?></div>
+          <div class="col-xs-10 main"><?php echo xtc_draw_input_field('sort_order', $cInfo->sort_order, 'style="width: 130px"'); ?></div>
+        </div>
+        <div class='col-xs-12'>
+          <div class="col-xs-2 main"><span class="main"><?php echo TEXT_CHOOSE_INFO_TEMPLATE_LISTING; ?>:</span></div>
+          <div class="col-xs-10 main"><span class="main"><?php echo $catfunc->create_templates_dropdown_menu('listing_template','/module/product_listing/',$cInfo->listing_template, 'style="width: 200px"');?></span></div>
+        </div>
+        <div class='col-xs-12'>
+          <div class="col-xs-2 main"><span class="main"><?php echo TEXT_CHOOSE_INFO_TEMPLATE_CATEGORIE; ?>:</span></div>
+          <div class="col-xs-10 main"><span class="main"><?php echo $catfunc->create_templates_dropdown_menu('categories_template','/module/categorie_listing/',$cInfo->categories_template, 'style="width: 200px"');?></span></div>
+        </div>
       </div>
       <!-- EOF - Tomcraft - 2009-11-02 - Block1 //-->
 
@@ -123,28 +124,27 @@
       <?php
       if (GROUP_CHECK=='true') {
       ?>
-      <div style="width: 860px; padding:5px;">
-      <table width="100%" border="0" cellpadding="5" cellspacing="0" bgcolor="f3f3f3" style="width: 100%; border: 1px solid; border-color: #aaaaaa; padding: 5px;">
-        <tr>
-          <td style="border-top: 0px solid;  border-color: #ff0000;" width="204" valign="top" class="main" ><?php echo ENTRY_CUSTOMERS_STATUS; ?></td>
-          <td style="border: 1px solid; border-color: #ff0000;"  bgcolor="#FFCC33" class="main">
+      <div class='col-xs-12'>
+        <div class='col-xs-12'>
+          <div class="col-xs-2 main" style="border-top: 0px solid;  border-color: #ff0000;" width="204" valign="top" class="main" ><?php echo ENTRY_CUSTOMERS_STATUS; ?></div>
+          <div class="col-xs-10 main" style="border: 1px solid; border-color: #ff0000;"  bgcolor="#FFCC33" class="main">
             <?php
             echo $catfunc->create_permission_checkboxes($category);
             ?>
-          </td>
-        </tr>
-      </table>
+          </div>
+        </div>
       </div>
       <?php
       }
       ?>
+      <div class='col-xs-12'> <hr><br> </div>
       <!-- EOF - Tomcraft - 2009-11-02 - Customers group block //-->
 
       <link rel="stylesheet" type="text/css" href="includes/lang_tabs_menu/lang_tabs_menu.css">
       <script type="text/javascript" src="includes/lang_tabs_menu/lang_tabs_menu.js"></script>
       <?php
       $langtabs = '<div class="tablangmenu"><ul>';
-      $csstabstyle = 'border: 1px solid #aaaaaa; padding: 5px; width: 850px; margin-top: -1px; margin-bottom: 10px; float: left; background: #f3f3f3;';
+      $csstabstyle = 'border: 1px solid #aaaaaa; padding: 5px; margin-top: -1px; margin-bottom: 10px; float: left; background: #f3f3f3;';
       $csstab = '<style type="text/css">' .  '#tab_lang_0' . '{display: block;' . $csstabstyle . '}';
       $csstab_nojs = '<style type="text/css">';
       for ($i = 0, $n = sizeof($languages); $i < $n; $i++) {
@@ -159,7 +159,7 @@
       //echo $csstab;
       //echo $langtabs;
       ?>
-      <div style="width: 860px; padding:5px;">
+      <div class='col-xs-12'>
         <?php if (USE_ADMIN_LANG_TABS != 'false') { ?>
         <script type="text/javascript">
           document.write('<?php echo ($csstab);?>');
@@ -172,7 +172,7 @@
         </noscript>
         <?php
         for ($i=0; $i<sizeof($languages); $i++) {
-          echo ('<div id="tab_lang_' . $i . '">');
+          echo ('<div class="col-md-6 col-sm-10 col-xs-12" id="tab_lang_' . $i . '">');
           $lng_image = '<div style="float:left;margin-right:5px;">'.xtc_image(DIR_WS_LANGUAGES.$languages[$i]['directory'].'/admin/images/'.$languages[$i]['image']).'</div>';
           $categories_desc_fields = $catfunc->get_categories_desc_fields($cInfo->categories_id, $languages[$i]['id']);
         ?>
@@ -193,28 +193,28 @@
             <td class="main" colspan="2"><?php echo xtc_draw_textarea_field('categories_description[' . $languages[$i]['id'] . ']', 'soft', '100', '25', (isset($categories_description[$languages[$i]['id']]) ? stripslashes($categories_description[$languages[$i]['id']]) : $categories_desc_fields['categories_description']), 'style="width:100%"'); ?></td>
           </tr>
             <td class="main" valign="top"><?php  echo $lng_image.TEXT_META_TITLE .'<br /> (max. 50 '. TEXT_CHARACTERS .')'; ?></td>
-            <td class="main"><?php echo xtc_draw_input_field('categories_meta_title[' . $languages[$i]['id'] . ']',(isset($categories_meta_title[$languages[$i]['id']]) ? stripslashes($categories_meta_title[$languages[$i]['id']]) : $categories_desc_fields['categories_meta_title']), 'style="width:100%" maxlength="50"'); ?></td>
+            <td class="main meta"><?php echo xtc_draw_input_field('categories_meta_title[' . $languages[$i]['id'] . ']',(isset($categories_meta_title[$languages[$i]['id']]) ? stripslashes($categories_meta_title[$languages[$i]['id']]) : $categories_desc_fields['categories_meta_title']), 'style="width:100%" maxlength="50"'); ?></td>
           <tr>
           </tr>
            <tr>
             <td class="main" valign="top"><?php  echo $lng_image.TEXT_META_DESCRIPTION .'<br /> (max. 140 '. TEXT_CHARACTERS .')'; ?></td>
-            <td class="main"><?php echo xtc_draw_input_field('categories_meta_description[' . $languages[$i]['id'] . ']', (isset($categories_meta_description[$languages[$i]['id']]) ? stripslashes($categories_meta_description[$languages[$i]['id']]) : $categories_desc_fields['categories_meta_description']),'style="width:100%" maxlength="140"'); ?></td>
+            <td class="main meta"><?php echo xtc_draw_input_field('categories_meta_description[' . $languages[$i]['id'] . ']', (isset($categories_meta_description[$languages[$i]['id']]) ? stripslashes($categories_meta_description[$languages[$i]['id']]) : $categories_desc_fields['categories_meta_description']),'style="width:100%" maxlength="140"'); ?></td>
           </tr>
            <tr>
             <td class="main" valign="top"><?php  echo $lng_image.TEXT_META_KEYWORDS .'<br /> (max. 180 '. TEXT_CHARACTERS .')'; ?></td>
-            <td class="main"><?php echo xtc_draw_input_field('categories_meta_keywords[' . $languages[$i]['id'] . ']',(isset($categories_meta_keywords[$languages[$i]['id']]) ? stripslashes($categories_meta_keywords[$languages[$i]['id']]) : $categories_desc_fields['categories_meta_keywords']),'style="width:100%" maxlength="180"'); ?></td>
+            <td class="main meta"><?php echo xtc_draw_input_field('categories_meta_keywords[' . $languages[$i]['id'] . ']',(isset($categories_meta_keywords[$languages[$i]['id']]) ? stripslashes($categories_meta_keywords[$languages[$i]['id']]) : $categories_desc_fields['categories_meta_keywords']),'style="width:100%" maxlength="180"'); ?></td>
           </tr>
         </table>
         <?php echo ('</div>');?>
         <?php } ?>
       </div>
-      <div style="clear:both;"></div>
-      <div style="text-align:right;width:850px;">
+      <div class='col-xs-12'> <br> </div>
+      <div class='col-xs-12'>
+        <div class='col-xs-6 text-right'>
         <?php echo xtc_draw_hidden_field('categories_date_added', (($cInfo->date_added) ? $cInfo->date_added : date('Y-m-d'))) . xtc_draw_hidden_field('parent_id', $cInfo->parent_id); ?>
         <?php echo xtc_draw_hidden_field('categories_id', $cInfo->categories_id); ?>
         <input type="submit" class="btn btn-default" name="update_category" value="<?php echo BUTTON_SAVE; ?>" style="cursor:pointer" <?php echo $confirm_save_entry;?>>&nbsp;&nbsp;
         <a class="btn btn-default" onclick="this.blur()" href="<?php echo xtc_href_link(FILENAME_CATEGORIES, 'cPath=' . $cPath . '&cID=' . $_GET['cID']); ?>"><?php echo BUTTON_CANCEL ; ?></a>
       </div>
-    </td>
+      </div>
   </form>
-  </tr>

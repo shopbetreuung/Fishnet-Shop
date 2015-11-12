@@ -20,46 +20,25 @@ require (DIR_WS_INCLUDES.'head.php');
     <?php require(DIR_WS_INCLUDES . 'header.php'); ?>
     <!-- header_eof //-->
     <!-- body //-->
-    <table border="0" width="100%" cellspacing="2" cellpadding="2">
-      <tr>
-        
-        </td>
+    <div class="row">
         <!-- body_text //-->
-        <td class="boxCenter" width="100%" valign="top">
-          <table border="0" width="100%" cellspacing="0" cellpadding="2">
-            <tr>
-              <td width="100%">
-                <table border="0" width="100%" cellspacing="0" cellpadding="0">
-                  <tr>
-                    <td width="80" rowspan="2"><?php echo xtc_image(DIR_WS_ICONS.'heading_modules.gif'); ?></td>
-                    <td class="pageHeading">EASYMARKETING</td>
-                  </tr>
-                  <tr>
-                    <td class="main" valign="top">Modules</td>
-                  </tr>
-                </table>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <table border="0" width="100%" cellspacing="0" cellpadding="0">
-                  <tr>
-                    <td width="250" valign="middle" class="dataTableHeadingContent">
+        
+                <div class='col-xs-12'>
+                    <div class="col-xs-2 col-sm-1 text-right"><?php echo xtc_image(DIR_WS_ICONS.'heading_modules.gif'); ?></div>
+                    <div class="col-xs-10 col-sm-11"><p class="h2">EASYMARKETING</p> Modules</div>
+                </div>
+                <div class='col-xs-12'><br></div>
+                <div class='col-sm-3 col-xs-12 dataTableHeadingContent left_mobile'>
                       Vollautomatisierte Online-Werbung
-                    </td>
-                    <td valign="middle" class="dataTableHeadingContent"  style="border-right: 0px;">
+                </div>
+                <div class='col-sm-9 col-xs-12 dataTableHeadingContent left_mobile'>
                       <a href="<?php echo xtc_href_link('module_export.php', 'set=&module=easymarketing'); ?>"><u>Einstellungen</u></a>  
-                    </td>
-                  </tr>
-                </table>
-                <table style="border: 1px solid #dddddd" border="0" cellpadding="0" cellspacing="0" width="100%">
-                  <tr style="background-color: #FFFFFF;">
-                    <td style="font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 12px; padding: 0px 10px 11px 10px; text-align: justify">
-                      <br />
-                      <font color="#FF7A00"><strong>Vollautomatisiert und optimiert werben auf Google uvm.</strong></font>
-                      <a href="https://easymarketing.de/analysis/new" target="_blank"><img src="images/easymarketing/logo-easymarketing.jpg" align="right" /></a>
-                      <br />
-                      <br />
+                </div>
+                <div class='col-xs-12'>
+                      
+                      
+                      <div class='col-xs-12 col-sm-6'><font color="#FF7A00"><strong>Vollautomatisiert und optimiert werben auf Google uvm.</strong></font></div>
+                      <div class='col-xs-12 col-sm-6 text-right'><a href="https://easymarketing.de/analysis/new" target="_blank"><img src="images/easymarketing/logo-easymarketing.jpg"  /></a></div>
                       <font color="#FF7A00"><strong>In drei Schritten durchstarten:</strong></font>
                       <ul>
                         <li style="list-style-type: circle !important;">Auf easymarketing.de die Shop-URL eingeben</li>
@@ -79,21 +58,14 @@ require (DIR_WS_INCLUDES.'head.php');
                       </ul>
                       <br />
                       <a href="https://easymarketing.de/analysis/new" target="_blank"><span style="font-size:12px; color:#FF7A00;"><u><strong>Weitere Infos zu EASYMARKETING finden Sie unter www.easymarketing.de</strong></u></span></a>
-                    </td>
-                  </tr>
-                  <tr style="background-color: #FFFFFF;">
-                    <td colspan="2">
+                    
+                </div>
+                <div class='col-xs-12'><br></div>
+                <div class='col-xs-12'>
                     <iframe style="background-color: transparent; border: 0px none transparent;padding: 0px; overflow: hidden;" seamless="seamless" scrolling="no" frameborder="0" allowtransparency="true" width="300px" height="250px" src="http://api.easymarketing.de/demo_chart?website_url=<?php echo urlencode(HTTP_SERVER.DIR_WS_CATALOG); ?>&version=large"></iframe>
-                    </td>
-                  </tr>
-                </table>
-              </td>
-            </tr>
-          </table>
-        </td>
+                </div>
+</div>
         <!-- body_text_eof //-->
-      </tr>
-    </table>
     <!-- body_eof //-->
     <!-- footer //-->
     <?php require(DIR_WS_INCLUDES . 'footer.php'); ?>

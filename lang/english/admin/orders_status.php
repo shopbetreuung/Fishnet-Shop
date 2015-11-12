@@ -32,4 +32,7 @@ define('TEXT_SET_PDFBILL_SEND', 'Automatically generate PDF invoice and send it 
 define('ERROR_REMOVE_DEFAULT_ORDER_STATUS', 'Error: The default order status can not be removed. Please set another order status as default, and try again.');
 define('ERROR_STATUS_USED_IN_ORDERS', 'Error: This order status is currently used in orders.');
 define('ERROR_STATUS_USED_IN_HISTORY', 'Error: This order status is currently used in the order status history.');
+
+define('ERROR_TEXT_HEADING', 'Orders status not saved, fix errors:');
+define('ERROR_TEXT_NAME', 'Orders status invalid!');
 ?>

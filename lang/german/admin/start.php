@@ -107,6 +107,10 @@ define('TOTAL_TURNOVER', 'Umsatz gesamt');
 // BOF - vr 2010-04-01 -  Added missing definitions
 // main heading
 define('HEADING_TITLE', 'Willkommen im Adminbereich');
+define('WIDGET_STATUS_NOT_ACTIVE_TEXT', 'Deaktiviert');
+define('WIDGET_STATUS_ACTIVE_TEXT', 'Aktiviert');
+define('WIDGET_DROPDOW_TEXT', 'Widget w&auml;hlen:');
+define('WIDGET_SAVE_POSITIONS', 'Positionen speichern');
 // users online
 define('TABLE_CAPTION_USERS_ONLINE', 'User Online');
 define('TABLE_CAPTION_USERS_ONLINE_HINT', '***f&uuml;r Infos zu einem User - auf Namen des Users klicken***');

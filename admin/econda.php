@@ -48,32 +48,23 @@ require (DIR_WS_INCLUDES.'head.php');
 <!-- header_eof //-->
 
 <!-- body //-->
-<table border="0" width="100%" cellspacing="2" cellpadding="2">
-  <tr>
+<div class="row">
     
-<!-- body_text //-->
-    <td class="boxCenter" width="100%" valign="top"><table border="0" width="100%" cellspacing="0" cellpadding="0">
 
-                
-     <tr>
-      <td style="border: 0px solid; border-color: #ffffff;">
+<div class="col-xs-12 text-center"><img src="../includes/econda/econda.jpg" class="img-responsive"></div>
 
-
-
-
-<p><img src="../includes/econda/econda.jpg" width="688" height="150"></p>
 <p>&nbsp;</p>
-<table border="0" cellspacing="0" cellpadding="0" class="text_box">
-  <tbody>
-    <tr>
-      <th colspan="3">Aktivierung </th>
-    </tr>
-    <tr>
-      <td class="text_box_image"><br />      </td>
-      <td class="text_box_text"><p>
+
+    <div class='col-xs-12'>
+        <hr>
+        <p class="h3">
+            Aktivierung
+        </p>
+        <hr>
+    </div>
+    <div class='col-xs-12'><p>
 	  
 	  <?php echo xtc_draw_form('configuration', 'econda.php', 'action=save'); ?>
-            <table width="100%"  border="0" cellspacing="0" cellpadding="4">
 <?php
   $configuration_query = xtc_db_query("select configuration_key,configuration_id, configuration_value, use_function,set_function from " . TABLE_CONFIGURATION . " where configuration_group_id = '23' order by sort_order");
 
@@ -111,41 +102,33 @@ require (DIR_WS_INCLUDES.'head.php');
    if (strstr($value_field,'configuration_value')) $value_field=str_replace('configuration_value',$configuration['configuration_key'],$value_field);
 
    echo '
-  <tr>
-    <td width="300" valign="top" class="dataTableContent"><strong>'.constant(strtoupper($configuration['configuration_key'].'_TITLE')).'</strong></td>
-    <td valign="top" class="dataTableContent">
-    <table width="100%"  border="0" cellspacing="0" cellpadding="2">
-      <tr>
-        <td style="background-color:#FCF2CF ; border: 1px solid; border-color: #CCCCCC;" class="dataTableContent">'.$value_field.'</td>
-      </tr>
-    </table>
-    <br />'.constant(strtoupper( $configuration['configuration_key'].'_DESC')).'</td>
-  </tr>
-  ';
+    <div class=" col-xs-12 col-sm-2"><strong>'.constant(strtoupper($configuration['configuration_key'].'_TITLE')).'</strong></div>
+    <div style="background-color:#FCF2CF ; border: 1px solid; border-color: #CCCCCC;" class="col-xs-12 col-sm-10 dataTableContent">'.$value_field.'</div>
+    <div class="col-xs-12>"'.constant(strtoupper( $configuration['configuration_key'].'_DESC')).'</div>
+        <div class="col-xs-12"><br></div>
+    <div class="clearfix"></div>  ';
 
   }
   
 ?>
-            </table>
 <?php echo '<input type="submit" class="btn btn-default" onclick="this.blur();" value="' . BUTTON_SAVE . '"/>'; ?></form>
+</div>
+    <div class='col-xs-12'>
+        <hr>
+        <p class="h3">
+            Web-Controlling f&uuml;r Profis 
+        </p>
+        <hr>
+    </div>
+    <div class='col-xs-12'>
+        <div class='col-xs-12'>
+            <div class='col-xs-12 col-sm-2'>
+                <a href ="http://www.econda.de/web-analyse/shop-monitor/testen/" target="_blank"><img src="../includes/econda/gfx/exitbereiche.png" alt="" width="540" height="360" border ="0" style="width: 132px; height: 88px;" /></a>
+                <br><br>
+                <a href ="http://www.econda.de/web-analyse/shop-monitor/testen/" target="_blank"><img src="../includes/econda/gfx/diff.png" alt="" width="540" height="360" border ="0" style="width: 132px; height: 88px;" /></a>
+            </div>
+            <div class='col-xs-12 col-sm-10'>
 	  
-	  </p>
-      </td>
-      <td class="text_box_lik">&nbsp;</td>
-    </tr>
-  </tbody>
-</table>
-<table border="0" cellspacing="0" cellpadding="0" class="text_box">
-		<tbody>
-			<tr>
-			<th colspan="3">Web-Controlling f&uuml;r Profis </th>
-			</tr>
-			<tr>
-			  <td class="text_box_image"><a href ="http://www.econda.de/web-analyse/shop-monitor/testen/" target="_blank"><img src="../includes/econda/gfx/exitbereiche.png" alt="" width="540" height="360" border ="0" style="width: 132px; height: 88px;" /></a>
-                  <br />
-                  <br />				
-                <a href ="http://www.econda.de/web-analyse/shop-monitor/testen/" target="_blank"><img src="../includes/econda/gfx/diff.png" alt="" width="540" height="360" border ="0" style="width: 132px; height: 88px;" /></a>			  </td>
-				<td class="text_box_text">
 				    <p><strong>ECONDA</strong> f&uuml;r Ihre modified eCommerce Shopsoftware
                       <br />
                       <br />
@@ -166,24 +149,24 @@ require (DIR_WS_INCLUDES.'head.php');
 						<li>Detaillierte Produktauswertungen</li>
 						<li>Deutschlands erste Klickbetrugsanalysen, etc.</li>
 					</ul>
-				</td>
-				<td class="text_box_lik">&nbsp;</td>
-			</tr>
-		</tbody>
-</table>
+            </div>
+        </div>
 
-<table border="0" cellspacing="0" cellpadding="0" class="text_box">
-		<tbody>
-			<tr>
-			<th colspan="3">Empfehlung der modified eCommerce Shopsoftware</th>
-			</tr>
-			<tr>
-			  <td class="text_box_image"><a href ="http://www.econda.de/web-analyse/shop-monitor/testen/" target="_blank"><img src="../includes/econda/gfx/searchConversion.png" alt="" width="540" height="360" border ="0" style="width: 132px; height: 88px;" /></a>
-                  <br />
-                  <br />	
 				
-                <a href ="http://www.econda.de/web-analyse/shop-monitor/testen/" target="_blank"><img src="../includes/econda/gfx/srcumsatz.png" alt="" width="540" height="360" border ="0" style="width: 132px; height: 88px;" /></a>			  </td>
-				<td class="text_box_text">
+    <div class='col-xs-12'>
+        <hr>
+        <p class="h3">
+            Empfehlung der modified eCommerce Shopsoftware
+        </p>
+        <hr>
+    </div>
+        <div class='col-xs-12'>
+            <div class='col-xs-12 col-sm-2'>
+                <a href ="http://www.econda.de/web-analyse/shop-monitor/testen/" target="_blank"><img src="../includes/econda/gfx/searchConversion.png" alt="" width="540" height="360" border ="0" style="width: 132px; height: 88px;" /></a>
+                <br><br>
+                <a href ="http://www.econda.de/web-analyse/shop-monitor/testen/" target="_blank"><img src="../includes/econda/gfx/srcumsatz.png" alt="" width="540" height="360" border ="0" style="width: 132px; height: 88px;" /></a>
+            </div>
+            <div class='col-xs-12 col-sm-10'>
 				    <p><strong>ECONDA</strong> Shop Monitor kann durch die Eingabe Ihres pers&ouml;nlichen Aktivierungscodes, den Sie von ECONDA erhalten, gestartet werden. Der Aufwand zur Aktivierung von ECONDA ist damit gleich null. </p>
 				    <p>Da die Integration in die modified eCommerce Shopsoftware optimal vorbereitet ist, <strong>sparen Sie bei ECONDA die Einrichtungsgeb&uuml;hr</strong>.</p>
 				    Die modified eCommerce Shopsoftware empfiehlt den ECONDA Shop Monitor, weil:
@@ -201,48 +184,37 @@ require (DIR_WS_INCLUDES.'head.php');
                       <li><a href="http://www.econda.de/web-analyse/shop-monitor/testen/" target="_new"> Online-Demo</a></li>
                       <li><a href="http://www.econda.de/web-analyse/shop-monitor/" target="_new"> Weitere Informationen </a></li>
                       </p>
-				  </ul></td>
 					</ul>
-				<td class="text_box_lik">&nbsp;</td>
-			</tr>
-		</tbody>
-</table>
-<table border="0" cellspacing="0" cellpadding="0" class="text_box">
-  <tbody>
-    <tr>
-      <th colspan="3">Kostenlos Testen </th>
-    </tr>
-    <tr>
-      <td class="text_box_image"><br />
-          <a href ="http://www.econda.de/web-analyse/shop-monitor/testen/" target="_blank"><img src="../includes/econda/gfx/crtl.png" alt="" width="540" height="360" border ="0" style="width: 132px; height: 88px;" /></a> </td>
-      <td class="text_box_text"><p><strong>Jetzt kostenlos Testen und in 5 Minuten Ihre Statistiken sehen!</strong></p>
+            </div>
+        </div>
+
+        
+    <div class='col-xs-12'>
+        <hr>
+        <p class="h3">
+           Kostenlos Testen
+        </p>
+        <hr>
+    </div>
+        
+        <div class='col-xs-12'>
+            <div class='col-xs-12 col-sm-2'>
+                <a href ="http://www.econda.de/web-analyse/shop-monitor/testen/" target="_blank"><img src="../includes/econda/gfx/crtl.png" alt="" width="540" height="360" border ="0" style="width: 132px; height: 88px;" /></a>
+            </div>
+            <div class='col-xs-12 col-sm-10'>
+		<p><strong>Jetzt kostenlos Testen und in 5 Minuten Ihre Statistiken sehen!</strong></p>
         <p>ECONDA bietet Ihnen gerne einen 14-t&auml;gigen, unverbindlichen und kostenlosen Test inkl. eines pers&ouml;nlichen Optimierungsgespr&auml;chs am Ende der Testphase. <br />
           Verwenden Sie bitte das folgende Formular, um einen Testaccount zu bestellen. Sie erhalten dann umgehend Ihren Aktivierungscode und Ihre Log-in Informationen von ECONDA. <br />
           <br />
           <a href="http://www.econda.de/web-analyse/shop-monitor/testen/" target="_blank">&gt;&gt; Jetzt 14-t&auml;gigen Testzugang f&uuml;r Ihre modified eCommerce Shopsoftware anfordern. </a></p>
         <ul>
           <p></p>
-        </ul></td>
-      <td class="text_box_lik">&nbsp;</td>
-    </tr>
-  </tbody>
-</table>
-
-
-
-
-
-
-</td>
-      
-      
-      </tr>		 
+                </ul>
+            </div>
+        </div>
   
-  
-    </table></td>
-<!-- body_text_eof //-->
-  </tr>
-</table>
+    </div>
+</div>
 <!-- body_eof //-->
 
 <!-- footer //-->

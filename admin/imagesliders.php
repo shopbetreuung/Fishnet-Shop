@@ -52,6 +52,7 @@
   switch ($_GET['action']) {
     case 'insert':
     case 'save':
+      $error = array();
       $imagesliders_id = xtc_db_prepare_input($_GET['iID']);
       $imagesliders_name = xtc_db_prepare_input($_POST['imagesliders_name']);	  
 	  // BOF - Fishnet Services - Nicolas Gemsjaeger
@@ -70,6 +71,25 @@
 							  'sorting' => $imagesliders_sorting
 	  );
 
+      $url_action = 'new';
+        if ($_GET['action'] == 'insert') {
+            $check_if_name_exist = xtc_db_find_database_field(TABLE_IMAGESLIDERS, 'imagesliders_name', $imagesliders_name, 'imagesliders_name');
+        } elseif ($_GET['action'] == 'save') {
+            $url_action = 'edit';
+            $check_if_name_exist = xtc_db_find_database_field(TABLE_IMAGESLIDERS, 'imagesliders_name', $imagesliders_name);
+        }
+        
+        if(!$imagesliders_name || $check_if_name_exist){
+            if($_GET['action'] == 'save'){
+                if($check_if_name_exist['imagesliders_id'] != $imagesliders_id){
+                    $error[] = ERROR_TEXT_NAME;
+                }
+            } else {
+                $error[] = ERROR_TEXT_NAME;
+            }
+        }
+        
+    if(empty($error)){
       if ($_GET['action'] == 'insert') {
         $insert_sql_data = array('date_added' => 'now()');
         $sql_data_array = xtc_array_merge($sql_data_array, $insert_sql_data);
@@ -118,6 +138,11 @@
       }
 
       xtc_redirect(xtc_href_link(FILENAME_IMAGESLIDERS, 'page=' . $_GET['page'] . '&iID=' . $imagesliders_id));
+    } else {
+        $_SESSION['repopulate_form'] = $_REQUEST;
+        $_SESSION['errors'] = $error;
+        xtc_redirect(xtc_href_link(FILENAME_IMAGESLIDERS, 'page='.$_GET['page'].'&action='.$url_action.'&errors=1&iID=' . $imagesliders_id));
+    }
       break;
 
     case 'deleteconfirm':
@@ -174,29 +199,26 @@ if (USE_WYSIWYG == 'true') {
 <!-- header_eof //-->
 
 <!-- body //-->
-<table border="0" width="100%" cellspacing="2" cellpadding="2">
-  <tr>
+<div class="row">
 <!-- body_text //-->
-    <td class="boxCenter" width="100%" valign="top"><table border="0" width="100%" cellspacing="0" cellpadding="2">
-      <tr>
-        <td width="100%"><table border="0" width="100%" cellspacing="0" cellpadding="0">
-          <tr>
-            <td class="pageHeading"><?php echo HEADING_TITLE; ?></td>
-            <td class="pageHeading" align="right"><?php echo xtc_draw_separator('pixel_trans.gif', HEADING_IMAGE_WIDTH, HEADING_IMAGE_HEIGHT); ?></td>
-          </tr>
-        </table></td>
-      </tr>
-      <tr>
-        <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
-          <tr>
+    <div class='col-xs-12'>
+        <p class="h2">
+            <?php echo HEADING_TITLE; ?>
+        </p>
+        Configuration
+    </div>
+<?php include DIR_WS_INCLUDES.FILENAME_ERROR_DISPLAY; ?>
+<div class='col-xs-12'><br></div>
+<div class='table-responsive col-xs-12'>
+    <div id='responsive_table' class='pull-left col-sm-12'>
+    
 <?php  
 if (($_GET['action'] != 'new') && ($_GET['action'] != 'edit')) {
 ?>		
-            <td valign="top">		
-             <table border="0" width="100%" cellspacing="0" cellpadding="2">		 
+            <table class="table table-bordered">		 
 			   <tr class="dataTableHeadingRow">
                 <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_IMAGESLIDERS; ?></td>
-                <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_SORTING; ?></td>
+                <td class="dataTableHeadingContent hidden-xs"><?php echo TABLE_HEADING_SORTING; ?></td>
                 <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_STATUS; ?></td>
                 <td class="dataTableHeadingContent" align="right"><?php echo TABLE_HEADING_ACTION; ?>&nbsp;</td>
               </tr>
@@ -222,7 +244,7 @@ if (($_GET['action'] != 'new') && ($_GET['action'] != 'edit')) {
 		}
 ?>
                 <td class="dataTableContent"><?php echo $imagesliders['imagesliders_name']; ?></td>
-                <td class="dataTableContent"><?php echo $imagesliders['sorting']; ?></td>
+                <td class="dataTableContent hidden-xs"><?php echo $imagesliders['sorting']; ?></td>
                 <td class="dataTableContent">
 <?php
                 if ($imagesliders['status'] == '0') {
@@ -239,18 +261,15 @@ if (($_GET['action'] != 'new') && ($_GET['action'] != 'edit')) {
   }
 if (($_GET['action'] != 'new') && ($_GET['action'] != 'edit')) {
 ?>
-              <tr>
-                <td colspan="4"><table border="0" width="100%" cellspacing="0" cellpadding="2">
-                  <tr>
-                    <td class="smallText" valign="top"><?php echo $imagesliders_split->display_count($imagesliders_query_numrows, '20', $_GET['page'], TEXT_DISPLAY_NUMBER_OF_IMAGESLIDERS); ?></td>
-                    <td class="smallText" align="right"><?php echo $imagesliders_split->display_links($imagesliders_query_numrows, '20', MAX_DISPLAY_PAGE_LINKS, $_GET['page']); ?></td>
-                  </tr>
-                </table></td>
-              </tr>
-              <tr>
-                <td align="right" colspan="4" class="smallText"><?php echo xtc_button_link(BUTTON_INSERT, xtc_href_link(FILENAME_IMAGESLIDERS, 'page=' . $_GET['page'] . '&iID=' . $iInfo->imagesliders_id . '&action=new')); ?></td>
-              </tr>
-            </table></td>
+              </table>
+                <div class="col-xs-12">
+                  <div class="smallText col-xs-6" ><?php echo $imagesliders_split->display_count($imagesliders_query_numrows, '20', $_GET['page'], TEXT_DISPLAY_NUMBER_OF_IMAGESLIDERS); ?></div>
+                  <div class="smallText col-xs-6 text-right" ><?php echo $imagesliders_split->display_links($imagesliders_query_numrows, '20', MAX_DISPLAY_PAGE_LINKS, $_GET['page']); ?></div>
+                </div>
+              <div class="col-xs-12 text-right">
+                <?php echo xtc_button_link(BUTTON_INSERT, xtc_href_link(FILENAME_IMAGESLIDERS, 'page=' . $_GET['page'] . '&iID=' . $iInfo->imagesliders_id . '&action=new')); ?>
+              </div>
+    </div>
 <?php 
 }
   $heading = array();
@@ -259,14 +278,24 @@ if (($_GET['action'] != 'new') && ($_GET['action'] != 'edit')) {
     case 'new':
       $heading[] = array('text' => '<b>' . TEXT_HEADING_NEW_IMAGESLIDER . '</b>');
 
+    if(isset($_SESSION['repopulate_form'])){
+        $i_name = ($_SESSION['repopulate_form']['imagesliders_name']) ? $_SESSION['repopulate_form']['imagesliders_name'] : '';
+        $i_cat = ($_SESSION['repopulate_form']['imagesliders_categories']) ? $_SESSION['repopulate_form']['imagesliders_categories'] : '';
+        $i_sort = ($_SESSION['repopulate_form']['imagesliders_sorting']) ? $_SESSION['repopulate_form']['imagesliders_sorting'] : '';
+        $i_url = ($_SESSION['repopulate_form']['imagesliders_url']) ? $_SESSION['repopulate_form']['imagesliders_url'] : '';
+        $i_title = ($_SESSION['repopulate_form']['imagesliders_title']) ? $_SESSION['repopulate_form']['imagesliders_title'] : '';
+        $i_desc = ($_SESSION['repopulate_form']['imagesliders_description']) ? $_SESSION['repopulate_form']['imagesliders_description'] : '';
+        unset($_SESSION['repopulate_form']);
+    }
+
       $contents = array('form' => xtc_draw_form('imagesliders', FILENAME_IMAGESLIDERS, 'action=insert', 'post', 'enctype="multipart/form-data"'));
       $contents[] = array('text' => ''.TEXT_NEW_INTRO.'');
-      $contents[] = array('text' => '<table width="100%"><tr><td class="infoBoxContent" width="150px" valign="top">' . TEXT_IMAGESLIDERS_NAME . '</td><td class="infoBoxContent"  valign="top">' . xtc_draw_input_field('imagesliders_name', '', 'style="width:99%;"').'</td></tr></table>');
+      $contents[] = array('text' => '<table width="100%"><tr><td class="infoBoxContent" width="150px" valign="top">' . TEXT_IMAGESLIDERS_NAME . '</td><td class="infoBoxContent"  valign="top">' . xtc_draw_input_field('imagesliders_name', $i_name, 'style="width:99%;"').'</td></tr></table>');
 	  // BOF - Fishnet Services - Nicolas Gemsjaeger
 	  // Erweiterung: Categories
-	  $contents[] = array('text' => '<table width="100%"><tr><td class="infoBoxContent" width="150px" valign="top">' . TEXT_CATEGORIES . '</td><td class="infoBoxContent"  valign="top">' . xtc_draw_input_field('imagesliders_categories', '', 'style="width:99%;"').'</td></tr></table>');
+	  $contents[] = array('text' => '<table width="100%"><tr><td class="infoBoxContent" width="150px" valign="top">' . TEXT_CATEGORIES . '</td><td class="infoBoxContent"  valign="top">' . xtc_draw_input_field('imagesliders_categories', $i_cat, 'style="width:99%;"').'</td></tr></table>');
 	  // EOF - Fishnet Services - Nicolas Gemsjaeger
-      $contents[] = array('text' => '<table width="100%"><tr><td class="infoBoxContent" width="150px" valign="top">' . TABLE_HEADING_SORTING . ':</td><td class="infoBoxContent"  valign="top">' . xtc_draw_input_field('imagesliders_sorting', '', 'style="width:99%;"').'</td></tr></table>');
+      $contents[] = array('text' => '<table width="100%"><tr><td class="infoBoxContent" width="150px" valign="top">' . TABLE_HEADING_SORTING . ':</td><td class="infoBoxContent"  valign="top">' . xtc_draw_input_field('imagesliders_sorting', $i_sort, 'style="width:99%;"').'</td></tr></table>');
 	  $contents[] = array('text' => '<table width="100%"><tr><td class="infoBoxContent" width="150px" valign="top">' . TABLE_HEADING_STATUS . ':</td><td class="infoBoxContent"  valign="top">' . xtc_draw_selection_field('imagesliders_status', 'radio', '0').ACTIVE.'&nbsp;&nbsp;&nbsp;'.xtc_draw_selection_field('imagesliders_status', 'radio', '1').NOTACTIVE.'</td></tr></table>');
 
       $languages = xtc_get_languages();
@@ -291,19 +320,19 @@ if (($_GET['action'] != 'new') && ($_GET['action'] != 'edit')) {
 									xtc_draw_selection_field('imagesliders_url_typ[' . $languages[$i]['id'] . ']', 'radio', '2').TYP_PRODUCT.'<br />'.
 									xtc_draw_selection_field('imagesliders_url_typ[' . $languages[$i]['id'] . ']', 'radio', '3').TYP_CATEGORIE.'<br />'.
 									xtc_draw_selection_field('imagesliders_url_typ[' . $languages[$i]['id'] . ']', 'radio', '4').TYP_CONTENT.'<br /><br />'.
-									TEXT_URL . xtc_draw_input_field('imagesliders_url[' . $languages[$i]['id'] . ']', '', 'style="width:50%;"') . '&nbsp;' . TEXT_TARGET . '&nbsp;' . xtc_draw_pull_down_menu('imagesliders_url_target[' . $languages[$i]['id'] . ']', $url_target_array) . '<br /><br /></td></tr></table>';
+									TEXT_URL . xtc_draw_input_field('imagesliders_url[' . $languages[$i]['id'] . ']', $i_url[$languages[$i]['id']], 'style="width:50%;"') . '&nbsp;' . TEXT_TARGET . '&nbsp;' . xtc_draw_pull_down_menu('imagesliders_url_target[' . $languages[$i]['id'] . ']', $url_target_array) . '<br /><br /></td></tr></table>';
 	  }      
       $contents[] = array('text' => '<table width="100%"><tr><td class="infoBoxContent" width="100%" valign="top">' . TEXT_IMAGESLIDERS_URL .'</td></tr></table>' . $imageslider_url_string);
 			
 	  $imageslider_title_string = '';
 	  for ($i = 0, $n = sizeof($languages); $i < $n; $i++) {
-        $imageslider_title_string .= '<table width="100%"><tr><td class="infoBoxContent" width="1%" valign="top">' . xtc_image(DIR_WS_LANGUAGES . $languages[$i]['directory'] . '/admin/images/' . $languages[$i]['image'], $languages[$i]['name']) . '</td><td>' . xtc_draw_input_field('imagesliders_title[' . $languages[$i]['id'] . ']', '', 'style="width:99%;"').'</td></tr></table>';
+        $imageslider_title_string .= '<table width="100%"><tr><td class="infoBoxContent" width="1%" valign="top">' . xtc_image(DIR_WS_LANGUAGES . $languages[$i]['directory'] . '/admin/images/' . $languages[$i]['image'], $languages[$i]['name']) . '</td><td>' . xtc_draw_input_field('imagesliders_title[' . $languages[$i]['id'] . ']', $i_title[$languages[$i]['id']], 'style="width:99%;"').'</td></tr></table>';
 	  }
 	  $contents[] = array('text' => '<table width="100%"><tr><td class="infoBoxContent" width="30%" valign="top">' . TEXT_IMAGESLIDERS_TITLE .'</td></tr></table>' .  $imageslider_title_string);
 			
       $imageslider_description_string = '';
 	  for ($i = 0, $n = sizeof($languages); $i < $n; $i++) {
-        $imageslider_description_string .= '<table width="100%"><tr><td class="infoBoxContent" width="1%" valign="top">' . xtc_image(DIR_WS_LANGUAGES . $languages[$i]['directory'] . '/admin/images/' . $languages[$i]['image'], $languages[$i]['name']) . '</td><td>' . xtc_draw_textarea_field('imagesliders_description['.$languages[$i]['id'].']', 'soft', '70', '25', '', 'style="width: 99%;"').'</td></tr></table>'; 
+        $imageslider_description_string .= '<table width="100%"><tr><td class="infoBoxContent" width="1%" valign="top">' . xtc_image(DIR_WS_LANGUAGES . $languages[$i]['directory'] . '/admin/images/' . $languages[$i]['image'], $languages[$i]['name']) . '</td><td>' . xtc_draw_textarea_field('imagesliders_description['.$languages[$i]['id'].']', 'soft', '70', '25', $i_desc[$languages[$i]['id']], 'style="width: 99%;"').'</td></tr></table>'; 
 	  }
 	  $contents[] = array('text' => '<table width="100%"><tr><td class="infoBoxContent" width="100%" valign="top">' . TEXT_IMAGESLIDERS_DESCRIPTION .'</td></tr></table>' .  $imageslider_description_string);
       
@@ -401,13 +430,8 @@ if (($_GET['action'] != 'new') && ($_GET['action'] != 'edit')) {
     echo '            </td>' . "\n";
   }
 ?>
-          </tr>
-        </table></td>
-      </tr>
-    </table></td>
-<!-- body_text_eof //-->
-  </tr>
-</table>
+</div>
+</div>
 <!-- body_eof //-->
 
 <!-- footer //-->

@@ -29,43 +29,43 @@
 
 require('includes/application_top.php');
 
-
+require (DIR_WS_INCLUDES.'head.php');
 ?>
 <html>
 <head>
 <title>Valid Categories/Products List</title>
 <link rel="stylesheet" type="text/css" href="includes/stylesheet.css">
 </head>
-<body>
-<table width="550" cellspacing="1">
-<tr>
-<td class="pageHeading" colspan="3">
-<?php echo TEXT_VALID_PRODUCTS_LIST; ?>
-</td>
-</tr>
+<body style="padding-top:10px;">
+<div class="row"><div class="col-xs-12">
+<div class="col-xs-12">
+    <p class="h2"><?php echo TEXT_VALID_PRODUCTS_LIST; ?></p>
+</div>
+<div class="col-xs-12">
+<table class="table table-bordered table-striped">
 <?php
-    echo "<tr><th class=\"dataTableHeadingContent\">". TEXT_VALID_PRODUCTS_ID . "</th><th class=\"dataTableHeadingContent\">" . TEXT_VALID_PRODUCTS_NAME . "</th><th class=\"dataTableHeadingContent\">" . TEXT_VALID_PRODUCTS_MODEL . "</th></tr><tr>";
+    echo "<tr><th class=\"\">". TEXT_VALID_PRODUCTS_ID . "</th><th class=\"\">" . TEXT_VALID_PRODUCTS_NAME . "</th><th class=\"\">" . TEXT_VALID_PRODUCTS_MODEL . "</th></tr><tr>";
    
-  //BOF JUNG GESTALTEN.com - BUGFIX: #0000255 ungültige SQL-Abfrage (pd undefiniert)
+  //BOF JUNG GESTALTEN.com - BUGFIX: #0000255 ungÃ¼ltige SQL-Abfrage (pd undefiniert)
   //$result = xtc_db_query("SELECT * FROM ".TABLE_PRODUCTS." p, ".TABLE_PRODUCTS_DESCRIPTION." WHERE p.products_id = pd.products_id and pd.language_id = '" . $_SESSION['languages_id'] . "' ORDER BY pd.products_name"); 
     $result = xtc_db_query("SELECT * FROM ".TABLE_PRODUCTS." p, ".TABLE_PRODUCTS_DESCRIPTION." pd WHERE p.products_id = pd.products_id and pd.language_id = '" . $_SESSION['languages_id'] . "' ORDER BY pd.products_name");
-  //EOF JUNG GESTALTEN.com - BUGFIX: #0000255 ungültige SQL-Abfrage (pd undefiniert)
+  //EOF JUNG GESTALTEN.com - BUGFIX: #0000255 ungÃ¼ltige SQL-Abfrage (pd undefiniert)
    
     if ($row = xtc_db_fetch_array($result)) {
         do {
-            echo "<td class=\"dataTableHeadingContent\">".$row["products_id"]."</td>\n";
-            echo "<td class=\"dataTableHeadingContent\">".$row["products_name"]."</td>\n";
-            echo "<td class=\"dataTableHeadingContent\">".$row["products_model"]."</td>\n";
+            echo "<td class=\"\">".$row["products_id"]."</td>\n";
+            echo "<td class=\"\">".$row["products_name"]."</td>\n";
+            echo "<td class=\"\">".$row["products_model"]."</td>\n";
             echo "</tr>\n";
         }
         while($row = xtc_db_fetch_array($result));
     }
     echo "</table>\n";
 ?>
+</table>
 <br />
-<table width="550" border="0" cellspacing="1">
-<tr>
-<td align=middle><input type="button" value="Close Window" onclick="window.close()"></td>
-</tr></table>
+</div>
+<div class="col-xs-12 text-center"><input type="button" value="Close Window" onclick="window.close()"></div>
+</div></div>
 </body>
 </html>

@@ -31,4 +31,8 @@ define('TEXT_INFO_DELETE_INTRO', 'Sind Sie sicher, dass Sie dieses Bundesland l&
 define('TEXT_INFO_HEADING_NEW_ZONE', 'Neues Bundesland');
 define('TEXT_INFO_HEADING_EDIT_ZONE', 'Bundesland bearbeiten');
 define('TEXT_INFO_HEADING_DELETE_ZONE', 'Bundesland l&ouml;schen');
+
+define('ERROR_TEXT_HEADING', 'Fehler! Bundesland konnte nicht gespeichert werden:');
+define('ERROR_TEXT_NAME', 'Bundeslandname ung&uuml;ltig!');
+define('ERROR_TEXT_CODE', 'Bundeslandcode ung&uuml;ltig!');
 ?>

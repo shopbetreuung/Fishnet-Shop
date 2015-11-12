@@ -30,4 +30,7 @@ define('TEXT_INFO_DELETE_INTRO', 'Are you sure you want to delete this tax class
 define('TEXT_INFO_HEADING_NEW_TAX_CLASS', 'New Tax Class');
 define('TEXT_INFO_HEADING_EDIT_TAX_CLASS', 'Edit Tax Class');
 define('TEXT_INFO_HEADING_DELETE_TAX_CLASS', 'Delete Tax Class');
+
+define('ERROR_TEXT_HEADING', 'Tax class not saved, fix errors:');
+define('ERROR_TEXT_NAME', 'Name invalid!');
 ?>

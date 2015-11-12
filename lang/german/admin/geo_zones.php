@@ -50,4 +50,7 @@ define('TEXT_INFO_COUNTRY_ZONE', 'Bundesland:');
 define('TYPE_BELOW', 'Alle Bundesl&auml;nder');
 define('PLEASE_SELECT', 'Alle Bundesl&auml;nder');
 define('TEXT_ALL_COUNTRIES', 'Alle L&auml;nder');
+
+define('ERROR_TEXT_HEADING', 'Fehler! Steuerzone konnte nicht gespeichert werden:');
+define('ERROR_TEXT_NAME', 'Name ung&uuml;ltig!');
 ?>

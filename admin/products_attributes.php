@@ -18,7 +18,7 @@
 require ('includes/application_top.php');
 $languages = xtc_get_languages();
 
-//Parameterübergabe
+//ParameterÃ¼bergabe
 if (isset($_POST['option_id'])) $_GET['option_id'] = $_POST['option_id'];
 $option_filter = '&option_filter='. $_GET['option_filter'] . '&value_order_by='. $_GET['value_order_by'] . '&option_id='. $_GET['option_id'] ;
 
@@ -45,23 +45,14 @@ require (DIR_WS_INCLUDES.'head.php');
 </head>
 <body>
 <?php require (DIR_WS_INCLUDES . 'header.php'); ?>
-<table border="0" width="100%" cellspacing="2" cellpadding="2">
-  <tr>
-    
-      <table border="0" width="<?php echo BOX_WIDTH; ?>" cellspacing="1" cellpadding="1" class="columnLeft">
-        
-      </table>
-    </td>
-    <td class="boxCenter" width="100%" valign="top">
+<div class="row">
       <!-- BOF options and values//-->
       <?php
       include (DIR_WS_MODULES.'products_attributes_options.php');
       include (DIR_WS_MODULES.'products_attributes_values.php');
       ?>
       <!-- BOF options and values//-->
-    </td>
-  </tr>
-</table>
+</div>
 <?php require (DIR_WS_INCLUDES . 'footer.php'); ?>
 </body>
 </html>

@@ -48,9 +48,10 @@
     switch ($action) {
       case 'insert':
       case 'save':
+        $error = array();
         $customers_status_id = xtc_db_prepare_input($_GET['cID']);
-
         $languages = xtc_get_languages();
+
         for ($i=0; $i<sizeof($languages); $i++) {
           $customers_status_name_array = $_POST['customers_status_name'];
           $customers_status_public = $_POST['customers_status_public'];
@@ -94,6 +95,20 @@
                                   'customers_status_read_reviews' => xtc_db_prepare_input($customers_status_read_reviews),
                                   'customers_status_discount_attributes' => xtc_db_prepare_input($customers_status_discount_attributes)
                                  );
+        $check_if_name_exist = xtc_db_find_database_field_by_language(TABLE_CUSTOMERS_STATUS, 'customers_status_name', $customers_status_name_array[$language_id], $language_id, 'language_id');
+        if(!$customers_status_name_array[$language_id] || $check_if_name_exist){
+            $url_action = 'edit';
+            if($_GET['action'] == 'save'){
+                if($check_if_name_exist['customers_status_id'] != $customers_status_id){
+                    $error[] = ERROR_TEXT_NAME;
+                }
+            } else {
+                $url_action = 'new';
+                $error[] = ERROR_TEXT_NAME;
+            }
+        }
+          
+        if(empty($error)){ 
           if ($action == 'insert') {
             if (!xtc_not_null($customers_status_id)) {
               $next_id_query = xtc_db_query("SELECT MAX(customers_status_id) AS customers_status_id FROM " . TABLE_CUSTOMERS_STATUS . "");
@@ -136,7 +151,8 @@
             xtc_db_perform(TABLE_CUSTOMERS_STATUS, $sql_data_array, 'update', "customers_status_id = '" . xtc_db_input($customers_status_id) . "' AND language_id = '" . $language_id . "'");
           }
         }
-
+        }
+    if(empty($error)){ 
         $accepted_customers_status_image_files_extensions = array("jpg","jpeg","jpe","gif","png","bmp","tiff","tif","bmp");
         $accepted_customers_status_image_files_mime_types = array("image/jpeg","image/gif","image/png","image/bmp");
         if ($customers_status_image = xtc_try_upload('customers_status_image', DIR_WS_ICONS, '', $accepted_customers_status_image_files_extensions, $accepted_customers_status_image_files_mime_types)) {
@@ -148,6 +164,11 @@
         }
 
         xtc_redirect(xtc_href_link(FILENAME_CUSTOMERS_STATUS, 'page=' . $_GET['page'] . '&cID=' . $customers_status_id));
+        } else {
+            $_SESSION['repopulate_form'] = $_REQUEST;
+            $_SESSION['errors'] = $error;
+            xtc_redirect(xtc_href_link(FILENAME_CUSTOMERS_STATUS, 'page='.$_GET['page']. '&cID=' .$customers_status_id.'&action='.$url_action.'&errors=1'));
+        }
         break;
 
       case 'deleteconfirm':
@@ -204,36 +225,30 @@ require (DIR_WS_INCLUDES.'head.php');
     <!-- header //-->
     <?php require(DIR_WS_INCLUDES . 'header.php'); ?>
     <!-- header_eof //-->
+<div class="row">
 
+<div class='col-xs-12'>
+        <p class="h2">
+            <?php echo HEADING_TITLE; ?>
+        </p>
+    </div>
+<?php include DIR_WS_INCLUDES.FILENAME_ERROR_DISPLAY; ?>
+<div class='col-xs-12'><br></div>
     <!-- body //-->
-    <table border="0" width="100%" cellspacing="2" cellpadding="2">
-      <tr>
         
-        </td>
-        <!-- body_text //-->
-        <td  class="boxCenter" width="100%" valign="top">
-          <table border="0" width="100%" cellspacing="0" cellpadding="2">
-            <tr>
-              <td>
-				<h1><?php echo HEADING_TITLE; ?></h1>
-              </td>
-            </tr>
-            <tr>
-              <td valign="top">
-                <table border="0" width="100%" cellspacing="0" cellpadding="0">
-                  <tr>
-                    <td valign="top">
-                      <table border="0" width="100%" cellspacing="0" cellpadding="2">
+                <div class='col-xs-12'>
+                    <div id='responsive_table' class='table-responsive pull-left col-sm-12'>
+                    <table class="table table-bordered">
                         <tr class="dataTableHeadingRow">
-                          <td class="dataTableHeadingContent" align="left" width=""><?php echo 'cID'; ?></td>
-                          <td class="dataTableHeadingContent" align="left" width=""><?php echo 'icon'; ?></td>
-                          <td class="dataTableHeadingContent" align="left" width=""><?php echo 'user'; ?></td>
+                          <td class="dataTableHeadingContent hidden-xs" align="left" width=""><?php echo 'cID'; ?></td>
+                          <td class="dataTableHeadingContent hidden-xs" align="left" width=""><?php echo 'icon'; ?></td>
+                          <td class="dataTableHeadingContent hidden-xs" align="left" width=""><?php echo 'user'; ?></td>
                           <td class="dataTableHeadingContent" align="left" width=""><?php echo TABLE_HEADING_CUSTOMERS_STATUS; ?></td>
-                          <td class="dataTableHeadingContent" align="center" width=""><?php echo TABLE_HEADING_TAX_PRICE; ?></td>
-                          <td class="dataTableHeadingContent" align="center" colspan="2"><?php echo TABLE_HEADING_DISCOUNT; ?></td>
-                          <td class="dataTableHeadingContent" width=""><?php echo TABLE_HEADING_CUSTOMERS_GRADUATED; ?></td>
-                          <td class="dataTableHeadingContent" width=""><?php echo TABLE_HEADING_CUSTOMERS_UNALLOW; ?></td>
-                          <td class="dataTableHeadingContent" width=""><?php echo TABLE_HEADING_CUSTOMERS_UNALLOW_SHIPPING; ?></td>
+                          <td class="dataTableHeadingContent hidden-xs" align="center" width=""><?php echo TABLE_HEADING_TAX_PRICE; ?></td>
+                          <td class="dataTableHeadingContent hidden-xs" align="center" colspan="2"><?php echo TABLE_HEADING_DISCOUNT; ?></td>
+                          <td class="dataTableHeadingContent hidden-xs" width=""><?php echo TABLE_HEADING_CUSTOMERS_GRADUATED; ?></td>
+                          <td class="dataTableHeadingContent hidden-xs" width=""><?php echo TABLE_HEADING_CUSTOMERS_UNALLOW; ?></td>
+                          <td class="dataTableHeadingContent hidden-xs" width=""><?php echo TABLE_HEADING_CUSTOMERS_UNALLOW_SHIPPING; ?></td>
                           <td class="dataTableHeadingContent" align="right"><?php echo TABLE_HEADING_ACTION; ?>&nbsp;</td>
                         </tr>
                         <?php
@@ -258,23 +273,23 @@ require (DIR_WS_INCLUDES.'head.php');
                           }
 
                           if (isset($cInfo) && is_object($cInfo) && ($customers_status['customers_status_id'] == $cInfo->customers_status_id) ) {
-                            echo '<tr class="dataTableRowSelected" onmouseover="this.style.cursor=\'pointer\'" onclick="document.location.href=\'' . xtc_href_link(FILENAME_CUSTOMERS_STATUS, 'page=' . $_GET['page'] . '&cID=' . $cInfo->customers_status_id . '&action=edit') . '\'">' . "\n";
+                            echo '<tr class="dataTableRowSelected" onmouseover="this.style.cursor=\'pointer\'" onclick="document.location.href=\'' . xtc_href_link(FILENAME_CUSTOMERS_STATUS, 'page=' . $_GET['page'] . '&cID=' . $cInfo->customers_status_id . '&action=edit') . '#edit-box\'">' . "\n";
                           } else {
-                            echo '<tr class="dataTableRow" onmouseover="this.className=\'dataTableRowOver\';this.style.cursor=\'pointer\'" onmouseout="this.className=\'dataTableRow\'" onclick="document.location.href=\'' . xtc_href_link(FILENAME_CUSTOMERS_STATUS, 'page=' . $_GET['page'] . '&cID=' . $customers_status['customers_status_id']) . '\'">' . "\n";
+                            echo '<tr class="dataTableRow" onmouseover="this.className=\'dataTableRowOver\';this.style.cursor=\'pointer\'" onmouseout="this.className=\'dataTableRow\'" onclick="document.location.href=\'' . xtc_href_link(FILENAME_CUSTOMERS_STATUS, 'page=' . $_GET['page'] . '&cID=' . $customers_status['customers_status_id']) . '#edit-box\'">' . "\n";
                           }
 
                             //BOC - web28 2011-10-26 - show customers group
-                            echo '<td class="dataTableContent" align="left">';
+                            echo '<td class="dataTableContent hidden-xs" align="left">';
                             echo $customers_status['customers_status_id'];
                             echo '</td>';
                             //EOC - web28 2011-10-26 - show customers group
-                            echo '<td class="dataTableContent" align="left">';
+                            echo '<td class="dataTableContent hidden-xs" align="left">';
                             if ($customers_status['customers_status_image'] != '') {
                               echo xtc_image(DIR_WS_ICONS . $customers_status['customers_status_image'] , IMAGE_ICON_INFO);
                             }
                             echo '</td>';
 
-                            echo '<td class="dataTableContent" align="left">';
+                            echo '<td class="dataTableContent hidden-xs" align="left">';
                             echo xtc_get_status_users($customers_status['customers_status_id']);
                             echo '</td>';
 
@@ -290,18 +305,18 @@ require (DIR_WS_INCLUDES.'head.php');
                             echo '</b></td>';
 
                             if ($customers_status['customers_status_show_price'] == '1') {
-                              echo '<td nowrap class="dataTableContent" align="center"> ';
+                              echo '<td nowrap class="dataTableContent hidden-xs" align="center"> ';
                               if ($customers_status['customers_status_show_price_tax'] == '1') {
                                 echo TAX_YES;
                               } else {
                                 echo TAX_NO;
                               }
                             } else {
-                              echo '<td class="dataTableContent" align="left"> ';
+                              echo '<td class="dataTableContent hidden-xs" align="left"> ';
                             }
                             echo '</td>';
-                            echo '<td nowrap class="dataTableContent" align="center">' . $customers_status['customers_status_discount'] . ' %</td>';
-                            echo '<td nowrap class="dataTableContent" align="center">';
+                            echo '<td nowrap class="dataTableContent hidden-xs" align="center">' . $customers_status['customers_status_discount'] . ' %</td>';
+                            echo '<td nowrap class="dataTableContent hidden-xs" align="center">';
                             if ($customers_status['customers_status_ot_discount_flag'] == 0){
                               echo '<font color="#ff0000">'.$customers_status['customers_status_ot_discount'].' %</font>';
                             } else {
@@ -309,47 +324,42 @@ require (DIR_WS_INCLUDES.'head.php');
                             }
                             echo ' </td>';
 
-                            echo '<td class="dataTableContent" align="center">';
+                            echo '<td class="dataTableContent hidden-xs" align="center">';
                             if ($customers_status['customers_status_graduated_prices'] == 0) {
                               echo NO;
                             } else {
                               echo YES;
                             }
                             echo '</td>';
-                            echo '<td nowrap class="dataTableContent" align="center">' . $customers_status['customers_status_payment_unallowed'] . '&nbsp;</td>';
-                            echo '<td nowrap class="dataTableContent" align="center">' . $customers_status['customers_status_shipping_unallowed'] . '&nbsp;</td>';
+                            echo '<td nowrap class="dataTableContent hidden-xs" align="center">' . $customers_status['customers_status_payment_unallowed'] . '&nbsp;</td>';
+                            echo '<td nowrap class="dataTableContent hidden-xs" align="center">' . $customers_status['customers_status_shipping_unallowed'] . '&nbsp;</td>';
                             echo "\n";
                             ?>
                             <?php /*<!-- BOF - Tomcraft - 2009-06-10 - added some missing alternative text on admin icons -->
                             <td class="dataTableContent" align="right"><?php if ( (is_object($cInfo)) && ($customers_status['customers_status_id'] == $cInfo->customers_status_id) ) { echo xtc_image(DIR_WS_IMAGES . 'icon_arrow_right.gif', ''); } else { echo '<a href="' . xtc_href_link(FILENAME_CUSTOMERS_STATUS, 'page=' . $_GET['page'] . '&cID=' . $customers_status['customers_status_id']) . '">' . xtc_image(DIR_WS_IMAGES . 'icon_info.gif', IMAGE_ICON_INFO) . '</a>'; } ?>&nbsp;</td>
                             */ ?>
-                            <td class="dataTableContent" align="right"><?php if (isset($cInfo) && is_object($cInfo) && ($customers_status['customers_status_id'] == $cInfo->customers_status_id) ) { echo xtc_image(DIR_WS_IMAGES . 'icon_arrow_right.gif', ICON_ARROW_RIGHT); } else { echo '<a href="' . xtc_href_link(FILENAME_CUSTOMERS_STATUS, 'page=' . $_GET['page'] . '&cID=' . $customers_status['customers_status_id']) . '">' . xtc_image(DIR_WS_IMAGES . 'icon_info.gif', IMAGE_ICON_INFO) . '</a>'; } ?>&nbsp;</td>
+                            <td class="dataTableContent" align="right"><?php if (isset($cInfo) && is_object($cInfo) && ($customers_status['customers_status_id'] == $cInfo->customers_status_id) ) { echo xtc_image(DIR_WS_IMAGES . 'icon_arrow_right.gif', ICON_ARROW_RIGHT); } else { echo '<a href="' . xtc_href_link(FILENAME_CUSTOMERS_STATUS, 'page=' . $_GET['page'] . '&cID=' . $customers_status['customers_status_id']) . '#edit-box">' . xtc_image(DIR_WS_IMAGES . 'icon_info.gif', IMAGE_ICON_INFO) . '</a>'; } ?>&nbsp;</td>
                             <?php /*<!-- EOF - Tomcraft - 2009-06-10 - added some missing alternative text on admin icons --> */?>
                           </tr>
                           <?php
                         }
                         ?>
-                        <tr>
-                          <td colspan="6">
-                            <table border="0" width="100%" cellspacing="0" cellpadding="2">
-                              <tr>
-                                <td class="smallText" valign="top"><?php echo $customers_status_split->display_count($customers_status_query_numrows, MAX_DISPLAY_SEARCH_RESULTS, $_GET['page'], TEXT_DISPLAY_NUMBER_OF_CUSTOMERS_STATUS); ?></td>
-                                <td class="smallText" align="right"><?php echo $customers_status_split->display_links($customers_status_query_numrows, MAX_DISPLAY_SEARCH_RESULTS, MAX_DISPLAY_PAGE_LINKS, $_GET['page']); ?></td>
-                              </tr>
+                        </table>
+                        <div class="col-xs-12">
+                          <div class="smallText col-xs-6"><?php echo $customers_status_split->display_count($customers_status_query_numrows, MAX_DISPLAY_SEARCH_RESULTS, $_GET['page'], TEXT_DISPLAY_NUMBER_OF_CUSTOMERS_STATUS); ?></div>
+                          <div class="smallText col-xs-6"><?php echo $customers_status_split->display_links($customers_status_query_numrows, MAX_DISPLAY_SEARCH_RESULTS, MAX_DISPLAY_PAGE_LINKS, $_GET['page']); ?></div>
+                        </div>
                               <?php
                               if (empty($action)) {
                                 ?>
-                                <tr>
-                                  <td colspan="2" align="right"><?php echo '<a class="btn btn-default" onclick="this.blur();" href="' . xtc_href_link(FILENAME_CUSTOMERS_STATUS, 'page=' . $_GET['page'] . '&action=new') . '">' . BUTTON_INSERT . '</a>'; ?></td>
-                                </tr>
+                          <div class="col-xs-12 text-center">
+                            <?php echo '<a class="btn btn-default" onclick="this.blur();" href="' . xtc_href_link(FILENAME_CUSTOMERS_STATUS, 'page=' . $_GET['page'] . '&action=new') . '">' . BUTTON_INSERT . '</a>'; ?>
+                          </div>
                                 <?php
                               }
                               ?>
-                            </table>
-                          </td>
-                        </tr>
-                      </table>
-                    </td>
+
+                    </div>
                     <?php
                       $heading = array();
                       $contents = array();
@@ -361,7 +371,13 @@ require (DIR_WS_INCLUDES.'head.php');
                           $customers_status_inputs_string = '';
                           $languages = xtc_get_languages();
                           for ($i=0; $i<sizeof($languages); $i++) {
-                            $customers_status_inputs_string .= '<br />' . xtc_image(DIR_WS_CATALOG.'lang/'.$languages[$i]['directory'].'/admin/images/' . $languages[$i]['image'], $languages[$i]['name']) . '&nbsp;' . xtc_draw_input_field('customers_status_name[' . $languages[$i]['id'] . ']');
+                            if(isset($_SESSION['repopulate_form'])){
+                                $c_name = ($_SESSION['repopulate_form']['customers_status_name'][$languages[$i]['id']]) ? $_SESSION['repopulate_form']['customers_status_name'][$languages[$i]['id']] : '';
+                            }
+                            $customers_status_inputs_string .= '<br />' . xtc_image(DIR_WS_CATALOG.'lang/'.$languages[$i]['directory'].'/admin/images/' . $languages[$i]['image'], $languages[$i]['name']) . '&nbsp;' . xtc_draw_input_field('customers_status_name[' . $languages[$i]['id'] . ']', $c_name);
+                          }
+                          if(isset($_SESSION['repopulate_form'])){
+                            unset($_SESSION['repopulate_form']);
                           }
                           $contents[] = array('text' => '<br />' . TEXT_INFO_CUSTOMERS_STATUS_NAME . $customers_status_inputs_string);
                           $contents[] = array('text' => '<br />' . TEXT_INFO_CUSTOMERS_STATUS_IMAGE . '<br />' . xtc_draw_file_field('customers_status_image') . ' (jpg,jpeg,jpe,gif,png,bmp,tiff,tif,bmp)');
@@ -439,7 +455,7 @@ require (DIR_WS_INCLUDES.'head.php');
                           if (isset($cInfo) && is_object($cInfo)) {
                             $heading[] = array('text' => '<b>' . $cInfo->customers_status_name . '</b>');
 
-                            $contents[] = array('align' => 'center', 'text' => '<a class="btn btn-default" onclick="this.blur();" href="' . xtc_href_link(FILENAME_CUSTOMERS_STATUS, 'page=' . $_GET['page'] . '&cID=' . $cInfo->customers_status_id . '&action=edit') . '">' . BUTTON_EDIT . '</a> <a class="btn btn-default" onclick="this.blur();" href="' . xtc_href_link(FILENAME_CUSTOMERS_STATUS, 'page=' . $_GET['page'] . '&cID=' . $cInfo->customers_status_id . '&action=delete') . '">' . BUTTON_DELETE . '</a>');
+                            $contents[] = array('align' => 'center', 'text' => '<a class="btn btn-default" onclick="this.blur();" href="' . xtc_href_link(FILENAME_CUSTOMERS_STATUS, 'page=' . $_GET['page'] . '&cID=' . $cInfo->customers_status_id . '&action=edit') . '#edit-box">' . BUTTON_EDIT . '</a> <a class="btn btn-default" onclick="this.blur();" href="' . xtc_href_link(FILENAME_CUSTOMERS_STATUS, 'page=' . $_GET['page'] . '&cID=' . $cInfo->customers_status_id . '&action=delete') . '#edit-box">' . BUTTON_DELETE . '</a>');
                             $customers_status_inputs_string = '';
                             $languages = xtc_get_languages();
                             for ($i=0; $i<sizeof($languages); $i++) {
@@ -462,21 +478,21 @@ require (DIR_WS_INCLUDES.'head.php');
                       }
 
                       if ( (xtc_not_null($heading)) && (xtc_not_null($contents)) ) {
-                        echo '<td width="25%" valign="top">' . "\n";
+                        echo '<div class="col-md-3 col-sm-12 col-xs-12 pull-right edit-box-class">' . "\n";
                         $box = new box;
                         echo $box->infoBox($heading, $contents);
-                        echo '</td>' . "\n";
+                        echo '</div>' . "\n";
+                        ?>
+                        <script>
+                            //responsive_table
+                            $('#responsive_table').addClass('col-md-9');
+                        </script>               
+                        <?php
                       }
                     ?>
-                  </tr>
-                </table>
-              </td>
-            </tr>
-          </table>
-        </td>
-        <!-- body_text_eof //-->
-      </tr>
-    </table>
+                </div>
+    
+</div>
     <!-- body_eof //-->
     <!-- footer //-->
     <?php require(DIR_WS_INCLUDES . 'footer.php'); ?>

@@ -325,11 +325,7 @@ if (USE_WYSIWYG == 'true') {
 		<!-- header_eof //-->
 
 		<!-- body //-->
-		<table style="border:none; width:100%;" cellspacing="2" cellpadding="2">
-			<tr>
-				
-				<!-- body_text //-->
-				<td class="boxCenter" width="100%" valign="top"><table width="100%" cellspacing="0" cellpadding="2">
+                <div class='row'>
                     <?php
 
 //----- new_category / edit_category (when ALLOW_CATEGORY_DESCRIPTIONS is 'true') -----
@@ -348,10 +344,7 @@ elseif ($_GET['action'] == 'edit_crossselling') {
 }
 ?>
                 <!-- close tables from above modules //-->
-				</table></td>
-				<!-- body_text_eof //-->
-			</tr>
-		</table>
+                </div>
 		<!-- body_eof //-->
 
 		<!-- footer //-->

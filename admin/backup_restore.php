@@ -12,7 +12,7 @@
 
   //#################################
   define ('ANZAHL_ZEILEN', 10000); //Anzahl der Zeilen die pro Durchlauf bei der Wiederherstellung aus der SQL-Datei eingelesen werden sollen
-  define ('RESTORE_TEST', false); //Standard: false - auf true ändern für Simulation für die Wiederherstellung, die SQL Befehle werden in eine Protokolldatei (log) im Backup-Verzeichnis geschrieben
+  define ('RESTORE_TEST', false); //Standard: false - auf true Ã¤ndern fÃ¼r Simulation fÃ¼r die Wiederherstellung, die SQL Befehle werden in eine Protokolldatei (log) im Backup-Verzeichnis geschrieben
   //#################################
   define ('VERSION', 'Database Restore Ver. 1.92');
 
@@ -80,7 +80,7 @@
 
   $action = (isset($_GET['action']) ? $_GET['action'] : '');
 
-  //Dateiname für Selbstaufruf
+  //Dateiname fÃ¼r Selbstaufruf
   $bk_filename =  basename($_SERVER['SCRIPT_NAME']); // web28 - 2011-07-02 - Security Fix - PHP_SELF
 
   //Animierte Gif-Datei und Hinweistext
@@ -117,7 +117,7 @@
       die('Direct Access to this location is not allowed.');
     }
 
-    //Protokollfatei löschen wenn sie schon existiert
+    //Protokollfatei lÃ¶schen wenn sie schon existiert
     $extension = substr($restore['file'], -3);
     if($extension == '.gz') {
       $protdatei = substr($restore['file'],0, -3). '.log.gz';
@@ -221,7 +221,12 @@ require (DIR_WS_INCLUDES.'head.php');
               <td>
                 <table border="0" width="100%" cellspacing="0" cellpadding="0">
                   <tr>
-                    <td class="pageHeading"><?php echo HEADING_TITLE; ?><span class="smallText"> [<?php echo VERSION; ?>]</span></td>
+                    <td class="pageHeading">            
+                    <p class="h2">
+                        <?php echo HEADING_TITLE; ?>
+                        <small> [<?php echo VERSION; ?>]</small>
+                    </p>
+                    </td>
                   </tr>
                 </table>
               </td>

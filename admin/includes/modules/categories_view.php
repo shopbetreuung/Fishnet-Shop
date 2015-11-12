@@ -126,72 +126,49 @@
   // EOF DokuMan - 2011-03-05 - show category name in heading title
   ?>
   <!-- categories_view HTML part begin -->
-  <tr>
-   <td>
-     <table border="0" width="100%" cellspacing="0" cellpadding="0">
-       <tr>
-         <td class="pageHeading">
-            <?php echo HEADING_TITLE. ' - '.$category_name['categories_name']; //DokuMan - 2011-03-05 - show category name in heading title ?>
-         </td>
-         <td class="pageHeading" align="right">
-            <?php echo xtc_draw_separator('pixel_trans.gif', 1, HEADING_IMAGE_HEIGHT); ?>
-         </td>
-         <td align="right">
-            <!-- search and quickjump -->
-            <table border="0" width="100%" cellspacing="0" cellpadding="0">
-              <tr>
-                <td class="smallText" align="right">
+        <div class='col-xs-6'>
+            <p class="h2"><?php echo HEADING_TITLE; ?></p>
+        </div>
+        
+        <div class='col-xs-6 text-right'>
                   <?php
                   echo xtc_draw_form('search', FILENAME_CATEGORIES, '', 'get');
                     echo HEADING_TITLE_SEARCH . ' ' . xtc_draw_input_field('search', $search).xtc_draw_hidden_field(xtc_session_name(), xtc_session_id());
                     ?>
                   </form>
-                </td>
-              </tr>
               <?php
               if (CAT_VIEW_DROPDOWN) {
               ?>
-              <tr>
-                <td class="smallText" align="right">
                  <?php
                     echo xtc_draw_form('goto', FILENAME_CATEGORIES, '', 'get');
                     echo HEADING_TITLE_GOTO . ' ' . xtc_draw_pull_down_menu('cPath', xtc_get_category_tree(), $current_category_id, 'onChange="this.form.submit();"').xtc_draw_hidden_field(xtc_session_name(), xtc_session_id());
                   ?>
                   </form>
-                </td>
-              </tr>
               <?php
               }
               ?>
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <table border="0" width="100%" cellspacing="0" cellpadding="0">
-        <tr>
-          <!-- categories & products column STARTS -->
-          <td valign="top">
+        </div>
+  <div class='col-xs-12'> <br> </div>
+            <!-- search and quickjump -->
+        <div class='col-xs-12'>
+        <div id='responsive_table' class='table-responsive pull-left col-sm-12'>
             <!-- categories and products table -->
-            <table border="0" width="100%" cellspacing="0" cellpadding="2">
+            <table class='table table-bordered'>
               <tr class="dataTableHeadingRow">
-                <td class="dataTableHeadingContent" width="4%" align="center">
+                <td class="dataTableHeadingContent hidden-xs" width="4%" align="center">
                   <?php echo TABLE_HEADING_EDIT; ?>
                   <input type="checkbox" onclick="javascript:CheckAll(this.checked);">
                 </td>
-                <td class="dataTableHeadingContent" width="10%" align="center">
+                <td class="dataTableHeadingContent hidden-xs" width="10%" align="center">
                   <?php echo TABLE_HEADING_PRODUCTS_MODEL.xtc_sorting(FILENAME_CATEGORIES,'model'); ?>
                 </td>
-                <td class="dataTableHeadingContent" align="center" width="10%">
+                <td class="dataTableHeadingContent hidden-xs" align="center" width="10%">
                   <?php echo TABLE_HEADING_SORT.xtc_sorting(FILENAME_CATEGORIES,'sort'); ?>
                 </td>
                 <?php
                 if( USE_ADMIN_THUMBS_IN_LIST=='true' ) {
                   ?>
-                  <td class="dataTableHeadingContent" width="10%" align="center">
+                  <td class="dataTableHeadingContent hidden-xs" width="10%" align="center">
                     <?php echo TABLE_HEADING_IMAGE ?>
                   </td>
                   <?php
@@ -203,19 +180,19 @@
                 <?php
                 // check Produkt and attributes stock
                 if (STOCK_CHECK == 'true') {
-                  echo '<td class="dataTableHeadingContent" align="center" width="20%">' . TABLE_HEADING_STOCK . xtc_sorting(FILENAME_CATEGORIES,'stock') . '</td>';
+                  echo '<td class="dataTableHeadingContent hidden-xs" align="center" width="20%">' . TABLE_HEADING_STOCK . xtc_sorting(FILENAME_CATEGORIES,'stock') . '</td>';
                 }
                 ?>
                 <td class="dataTableHeadingContent" align="center" width="7%">
                   <?php echo TABLE_HEADING_STATUS.xtc_sorting(FILENAME_CATEGORIES,'status'); ?>
                </td>
-               <td class="dataTableHeadingContent" align="center" width="7%">
+               <td class="dataTableHeadingContent hidden-xs" align="center" width="7%">
                   <?php echo TABLE_HEADING_STARTPAGE.xtc_sorting(FILENAME_CATEGORIES,'startpage'); ?>
                </td>
-               <td class="dataTableHeadingContent" align="center" width="10%">
+               <td class="dataTableHeadingContent hidden-xs" align="center" width="10%">
                   <?php echo TABLE_HEADING_PRICE.xtc_sorting(FILENAME_CATEGORIES,'price'); ?>
                </td>
-               <td class="dataTableHeadingContent" align="center" width="12%">
+               <td class="dataTableHeadingContent hidden-xs" align="center" width="12%">
                   <?php echo '%&nbsp;max' . xtc_sorting(FILENAME_CATEGORIES,'discount'); ?>
                </td>
                <td class="dataTableHeadingContent" width="10%" align="center">
@@ -294,13 +271,13 @@
             if (!xtc_not_null($search) && count($cPath_array) > 0 && $_GET['cPath'] != '0') {
               ?>
                <tr class="dataTableRow" onmouseover="this.className='dataTableRowOver';this.style.cursor='pointer'" onmouseout="this.className='dataTableRow'">
-                 <td class="categories_view_data">--</td>
-                 <td class="categories_view_data">--</td>
-                 <td class="categories_view_data">--</td>
+                 <td class="categories_view_data hidden-xs">--</td>
+                 <td class="categories_view_data hidden-xs">--</td>
+                 <td class="categories_view_data hidden-xs">--</td>
                  <?php
                  if ( USE_ADMIN_THUMBS_IN_LIST=='true' ) {
                  ?>
-                   <td class="categories_view_data" style="text-align: center;">--</td>
+                   <td class="categories_view_data hidden-xs" style="text-align: center;">--</td>
                  <?php
                  }
                  ?>
@@ -312,15 +289,15 @@
                  <?php                 
                  if (STOCK_CHECK == 'true') {
                  ?>
-                   <td class="categories_view_data">--</td>
+                   <td class="categories_view_data hidden-xs">--</td>
                  <?php
                  }
                  ?>
                  <td class="categories_view_data">--</td>
                  <td class="categories_view_data">--</td>
-                 <td class="categories_view_data">--</td>
-                 <td class="categories_view_data">--</td>
-                 <td class="categories_view_data">--</td>
+                 <td class="categories_view_data hidden-xs">--</td>
+                 <td class="categories_view_data hidden-xs">--</td>
+                 <td class="categories_view_data hidden-xs">--</td>
                </tr>
                <?php
             }
@@ -343,13 +320,13 @@
                }
                $checked = isset($_POST['multi_categories']) && is_array($_POST['multi_categories']) && in_array($categories['categories_id'], $_POST['multi_categories']) ? 'checked="checked"' : ''; 
                ?>
-                 <td class="categories_view_data"><input type="checkbox" name="multi_categories[]" value="<?php echo $categories['categories_id'];?>"<?php echo $checked;?>></td>
-                 <td class="categories_view_data">--</td>
-                 <td class="categories_view_data"><?php echo $categories['sort_order']; ?></td>
+                 <td class="categories_view_data hidden-xs"><input type="checkbox" name="multi_categories[]" value="<?php echo $categories['categories_id'];?>"<?php echo $checked;?>></td>
+                 <td class="categories_view_data hidden-xs">--</td>
+                 <td class="categories_view_data hidden-xs"><?php echo $categories['sort_order']; ?></td>
                  <?php
                  if ( USE_ADMIN_THUMBS_IN_LIST=='true' ) {
                    ?>
-                   <td class="categories_view_data">
+                   <td class="categories_view_data hidden-xs">
                      <?php
                      echo xtc_info_image_c($categories['categories_image'], $categories['categories_image'], '','',$admin_thumbs_size);
                      ?>
@@ -367,7 +344,7 @@
                  <?php
                  // check product and attributes stock
                  if (STOCK_CHECK == 'true') {
-                   echo '<td class="categories_view_data">--</td>';
+                   echo '<td class="categories_view_data hidden-xs">--</td>';
                  }
                  ?>
                  <td class="categories_view_data">
@@ -380,16 +357,17 @@
                    }
                    ?>
                  </td>
-                 <td class="categories_view_data">--</td>
-                 <td class="categories_view_data">--</td>
-                 <td class="categories_view_data">--</td>
+                 <td class="categories_view_data hidden-xs">--</td>
+                 <td class="categories_view_data hidden-xs">--</td>
+                 <td class="categories_view_data hidden-xs">--</td>
                  <td class="categories_view_data">
+                    
                    <?php
                    //if active category, show arrow, else show symbol with link (action col)
                    if (isset($cInfo) && (is_object($cInfo)) && ($categories['categories_id'] == $cInfo->categories_id) ) {
                      echo xtc_image(DIR_WS_IMAGES . 'icon_arrow_right.gif', ICON_ARROW_RIGHT);
                    } else {
-                     echo '<a href="' . xtc_href_link(FILENAME_CATEGORIES, xtc_get_all_get_params(array('cPath', 'action', 'pID', 'cID')) . 'cPath=' . $cPath . '&cID=' . $categories['categories_id']) . '">' . xtc_image(DIR_WS_IMAGES . 'icon_arrow_grey.gif', IMAGE_ICON_INFO) . '</a>';
+                     echo '<a href="' . xtc_href_link(FILENAME_CATEGORIES, xtc_get_all_get_params(array('cPath', 'action', 'pID', 'cID')) . 'cPath=' . $cPath . '&cID=' . $categories['categories_id']) . '#edit-box">' . xtc_image(DIR_WS_IMAGES . 'icon_arrow_grey.gif', IMAGE_ICON_INFO) . '</a>';
                    }
                    ?>
                  </td>
@@ -545,23 +523,23 @@
                    }
                  }
                  ?>
-                 <td class="categories_view_data">
+                 <td class="categories_view_data hidden-xs">
                    <input type="checkbox" name="multi_products[]" value="<?php echo $products['products_id']; ?>" <?php echo (isset($is_checked) ? $is_checked : ''); ?>>
                  </td>
                  <?php
                  if ($products['products_model'] !='' ){
                    ?>
-                   <td class="categories_view_data">
+                   <td class="categories_view_data hidden-xs">
                      <?php echo $products['products_model']; ?>
                    </td>
                    <?php
                  } else {
                    ?>
-                   <td class="categories_view_data" width="22">--</td>
+                   <td class="categories_view_data hidden-xs" width="22">--</td>
                    <?php
                  }
                  ?>
-                 <td class="categories_view_data">
+                 <td class="categories_view_data hidden-xs">
                    <?php
                    if ($current_category_id == 0){
                        echo $products['products_startpage_sort'];
@@ -572,7 +550,7 @@
                  </td>
                  <?php
                  if( USE_ADMIN_THUMBS_IN_LIST=='true' ) { ?>
-                   <td class="categories_view_data" style="text-align: center;">
+                   <td class="categories_view_data hidden-xs" style="text-align: center;">
                      <?php
                      echo xtc_product_thumb_image($products['products_image'], $products['products_name'], '','',$admin_thumbs_size);
                      ?>
@@ -590,7 +568,7 @@
                  <?php
                  // check product and attributes stock
                  if (STOCK_CHECK == 'true') { ?>
-                   <td class="categories_view_data">
+                   <td class="categories_view_data hidden-xs">
                      <?php echo check_stock($products['products_id']);
                      echo '&nbsp;'.TXT_STK.$products['products_quantity']; //BOF - DokuMan - 2012-03-05 - added products quantity to list view
                      ?>
@@ -607,7 +585,7 @@
                    }
                    ?>
                  </td>
-                 <td class="categories_view_data">
+                 <td class="categories_view_data hidden-xs">
                    <?php
                    if ($products['products_startpage'] == '1') {
                      echo xtc_image(DIR_WS_IMAGES . 'icon_status_green.gif', IMAGE_ICON_STATUS_GREEN, 10, 10) . '<a href="' . xtc_href_link(FILENAME_CATEGORIES, xtc_get_all_get_params(array('cPath', 'action', 'pID', 'cID')) . 'action=setsflag&flag=0&pID=' . $products['products_id'] . '&cPath=' . $cPath) . '">&nbsp;&nbsp;' . xtc_image(DIR_WS_IMAGES . 'icon_status_red_light.gif', IMAGE_ICON_STATUS_RED_LIGHT, 10, 10) . '</a>';
@@ -616,13 +594,13 @@
                    }
                    ?>
                  </td>
-                 <td class="categories_view_data">
+                 <td class="categories_view_data hidden-xs">
                    <?php
                    //show price
                    echo $currencies->format($products['products_price']);
                    ?>
                  </td>
-                 <td class="categories_view_data">
+                 <td class="categories_view_data hidden-xs">
                    <?php
                    // Show Max Allowed discount
                    echo $products['products_discount_allowed'] . ' %';
@@ -647,12 +625,11 @@
             <!-- categories and products table ENDS -->
 
             <!-- bottom buttons -->
-            <table border="0" width="100%" cellspacing="0" cellpadding="2" style="padding-top: 10px; border-top: 1px solid Black">
-              <tr>
-                <td class="smallText">
+
+            <div class="smallText col-sm-6 col-xs-12">
                   <?php echo TEXT_CATEGORIES . '&nbsp;' . $categories_count . '<br />' . TEXT_PRODUCTS . '&nbsp;' . $products_count; ?>
-                </td>
-                <td align="right" class="smallText">
+            </div>
+            <div class="smallText col-sm-6 col-xs-12 text-right">
                   <?php
                   if ($cPath) {
                     echo '<a class="btn btn-default" onclick="this.blur()" href="' . xtc_href_link(FILENAME_CATEGORIES, xtc_get_all_get_params(array('cPath', 'action', 'pID', 'cID')) .  $cPath_back . '&cID=' . $current_category_id) . '">' . BUTTON_BACK . '</a>&nbsp;';
@@ -661,10 +638,9 @@
                   echo '<a class="btn btn-default" href="javascript:SwitchProducts()" onclick="this.blur()">' . BUTTON_SWITCH_PRODUCTS . '</a>&nbsp;';
                   echo '<a class="btn btn-default" href="javascript:SwitchCategories()" onclick="this.blur()">' . BUTTON_SWITCH_CATEGORIES . '</a>&nbsp;';
                   ?>
-                </td>
-              </tr>
-            </table>
-          </td>
+            </div>
+            </div>
+
           <!-- categories & products column ENDS -->
           <?php
           $heading = array();
@@ -995,19 +971,21 @@
           } //end switch
           if ((xtc_not_null($heading)) && (xtc_not_null($contents))) {
             //display info box
-            echo '<td width="265" valign="top" style="padding-left: 5px;">' . "\n";
+            echo '<div class="col-md-3 col-sm-12 col-xs-12 pull-right edit-box-class">' . "\n";
             echo box::infoBox($heading, $contents); // cYbercOsmOnauT - 2011-02-05 - Changed methods of the classes box and tableBox to static
-            echo '</td>' . "\n";
+            echo '</div>' . "\n";
+            ?>
+            <script>
+                //responsive_table
+                $('#responsive_table').addClass('col-md-9');
+            </script>               
+            <?php
           }
           ?>
-        </tr>
-        <tr>
-          <td class="smallText" align="center" style="padding:5px;">
+      </div>
+
+          <div class="smallText" align="center" style="padding:5px;">
           <span style="padding-right:50px;"><?php echo $products_split->display_count($products_query_numrows, MAX_DISPLAY_LIST_PRODUCTS, $_GET['page'], TEXT_DISPLAY_NUMBER_OF_PRODUCTS); ?></span>
           <?php echo $products_split->display_links($products_query_numrows, MAX_DISPLAY_LIST_PRODUCTS, MAX_DISPLAY_PAGE_LINKS, $_GET['page'], xtc_get_all_get_params(array('page', 'action', 'pID', 'cID')) ); ?>
-          </td>
-          <td class="smallText" valign="top">&nbsp;</td>
-        </tr>
-      </table>
-    </td>
-  </tr>
+          </div>
+          <div class="smallText" valign="top">&nbsp;</div>

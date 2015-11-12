@@ -27,16 +27,29 @@
       break;
 // BOF - Tomcraft - 2009-11-22 - Added option to deactivate languages (clickable status icons)
     case 'insert':
+      $error = array();
+
       $name = xtc_db_prepare_input($_POST['name']);
       $code = xtc_db_prepare_input($_POST['code']);
       $image = xtc_db_prepare_input($_POST['image']);
-      $directory = xtc_db_prepare_input($_POST['directory']);
+      $directory = ($_POST['directory']) ? xtc_db_prepare_input($_POST['directory']) : strtolower($_POST['name']); 
 // BOF - Tomcraft - 2009-11-08 - Added option to deactivate languages
       $status = xtc_db_prepare_input($_POST['status']);
 // EOF - Tomcraft - 2009-11-08 - Added option to deactivate languages
       $sort_order = xtc_db_prepare_input($_POST['sort_order']);
-      $charset = xtc_db_prepare_input($_POST['charset']);
+      $charset = ($_POST['charset']) ? xtc_db_prepare_input($_POST['charset']) : 'UTF-8';
+      
+      $check_if_name_exist = xtc_db_find_database_field(TABLE_LANGUAGES, 'name', $name, 'name');
+        if(!$name || $check_if_name_exist){
+                $error[] = ERROR_TEXT_NAME;
+        }
+    
+      $check_if_code_exist = xtc_db_find_database_field(TABLE_LANGUAGES, 'code', $code, 'code');
+        if(!$code || $check_if_code_exist){
+                $error[] = ERROR_TEXT_CODE;
+        }
 
+        if(empty($error)){
 // BOF - Tomcraft - 2009-11-08 - Added option to deactivate languages
       //xtc_db_query("insert into " . TABLE_LANGUAGES . " (name, code, image, directory, sort_order,language_charset) values ('" . xtc_db_input($name) . "', '" . xtc_db_input($code) . "', '" . xtc_db_input($image) . "', '" . xtc_db_input($directory) . "', '" . xtc_db_input($sort_order) . "', '" . xtc_db_input($charset) . "')");
       xtc_db_query("insert into " . TABLE_LANGUAGES . " (name, code, image, directory, status, sort_order,language_charset) values ('" . xtc_db_input($name) . "', '" . xtc_db_input($code) . "', '" . xtc_db_input($image) . "', '" . xtc_db_input($directory) . "', '" . xtc_db_input($status) . "', '" . xtc_db_input($sort_order) . "', '" . xtc_db_input($charset) . "')");
@@ -127,6 +140,11 @@
       }
 
       xtc_redirect(xtc_href_link(FILENAME_LANGUAGES, 'page=' . $_GET['page'] . '&lID=' . $insert_id));
+      } else {
+        $_SESSION['repopulate_form'] = $_REQUEST;
+        $_SESSION['errors'] = $error;
+        xtc_redirect(xtc_href_link(FILENAME_LANGUAGES, 'page='.$_GET['page'].'&action=new&errors=1'));
+    }
       break;
 
     case 'save':
@@ -141,6 +159,21 @@
       $sort_order = xtc_db_prepare_input($_POST['sort_order']);
       $charset = xtc_db_prepare_input($_POST['charset']);
 	  
+       $check_if_name_exist = xtc_db_find_database_field(TABLE_LANGUAGES, 'name', $name);
+        if(!$name || $check_if_name_exist){
+            if($check_if_name_exist['languages_id'] != $lID){
+                $error[] = ERROR_TEXT_NAME;
+            }
+        }
+    
+      $check_if_code_exist = xtc_db_find_database_field(TABLE_LANGUAGES, 'code', $code);
+        if(!$code || $check_if_code_exist){
+            if($check_if_code_exist['languages_id'] != $lID){
+                $error[] = ERROR_TEXT_CODE;
+            }
+        }
+	  
+      if(empty($error)){
 // BOF - Tomcraft - 2009-11-08 - Added option to deactivate languages
       //xtc_db_query("update " . TABLE_LANGUAGES . " set name = '" . xtc_db_input($name) . "', code = '" . xtc_db_input($code) . "', image = '" . xtc_db_input($image) . "', directory = '" . xtc_db_input($directory) . "', sort_order = '" . xtc_db_input($sort_order) . "', language_charset = '" . xtc_db_input($charset) . "' where languages_id = '" . xtc_db_input($lID) . "'");
       xtc_db_query("update " . TABLE_LANGUAGES . " set name = '" . xtc_db_input($name) . "', code = '" . xtc_db_input($code) . "', image = '" . xtc_db_input($image) . "', directory = '" . xtc_db_input($directory) . "', status = '" . xtc_db_input($status) . "', sort_order = '" . xtc_db_input($sort_order) . "', language_charset = '" . xtc_db_input($charset) . "' where languages_id = '" . xtc_db_input($lID) . "'");
@@ -151,6 +184,11 @@
       }
 
       xtc_redirect(xtc_href_link(FILENAME_LANGUAGES, 'page=' . $_GET['page'] . '&lID=' . $_GET['lID']));
+    } else {
+        $_SESSION['repopulate_form'] = $_REQUEST;
+        $_SESSION['errors'] = $error;
+        xtc_redirect(xtc_href_link(FILENAME_LANGUAGES, 'page='.$_GET['page'].'&action=edit&errors=1&lID=' . $lID));
+    }
       break;
 
     case 'deleteconfirm':
@@ -202,31 +240,22 @@
 <!-- header //-->
 <?php require(DIR_WS_INCLUDES . 'header.php'); ?>
 <!-- header_eof //-->
-
+<div class="row">
 <!-- body //-->
-<table border="0" width="100%" cellspacing="2" cellpadding="2">
-  <tr>
-    
-<!-- body_text //-->
-    <td class="boxCenter" width="100%" valign="top"><table border="0" width="100%" cellspacing="0" cellpadding="2">
-      <tr>
-        <td width="100%"><table border="0" width="100%" cellspacing="0" cellpadding="0">
-  <tr>
-    
-    <td class="pageHeading"><?php echo HEADING_TITLE; ?></td>
-  </tr>
-  <tr>
-    <td class="main" valign="top">Configuration</td>
-  </tr>
-</table></td>
-      </tr>
-      <tr>
-        <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
-          <tr>
-            <td valign="top"><table border="0" width="100%" cellspacing="0" cellpadding="2">
+    <div class='col-xs-12'>
+        <p class="h2">
+            <?php echo HEADING_TITLE; ?>
+        </p>
+        Configuration
+    </div>
+<?php include DIR_WS_INCLUDES.FILENAME_ERROR_DISPLAY; ?>
+<div class='col-xs-12'><br></div>
+<div class='col-xs-12'>
+    <div id='responsive_table' class='table-responsive pull-left col-sm-12'>
+    <table class="table table-bordered">
               <tr class="dataTableHeadingRow">
                 <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_LANGUAGE_NAME; ?></td>
-                <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_LANGUAGE_CODE; ?></td>
+                <td class="dataTableHeadingContent hidden-xs"><?php echo TABLE_HEADING_LANGUAGE_CODE; ?></td>
 <!-- BOF - Tomcraft - 2009-11-08 - Added option to deactivate languages //-->
 				<td class="dataTableHeadingContent"><?php echo TABLE_HEADING_LANGUAGE_STATUS; ?></td>				
 <!-- EOF - Tomcraft - 2009-11-08 - Added option to deactivate languages //-->
@@ -246,9 +275,9 @@
     }
 
     if ( (is_object($lInfo)) && ($languages['languages_id'] == $lInfo->languages_id) ) {
-      echo '                  <tr class="dataTableRowSelected" onmouseover="this.style.cursor=\'pointer\'" onclick="document.location.href=\'' . xtc_href_link(FILENAME_LANGUAGES, 'page=' . $_GET['page'] . '&lID=' . $lInfo->languages_id . '&action=edit') . '\'">' . "\n";
+      echo '                  <tr class="dataTableRowSelected" onmouseover="this.style.cursor=\'pointer\'" onclick="document.location.href=\'' . xtc_href_link(FILENAME_LANGUAGES, 'page=' . $_GET['page'] . '&lID=' . $lInfo->languages_id . '&action=edit') . '#edit-box\'">' . "\n";
     } else {
-      echo '                  <tr class="dataTableRow" onmouseover="this.className=\'dataTableRowOver\';this.style.cursor=\'pointer\'" onmouseout="this.className=\'dataTableRow\'" onclick="document.location.href=\'' . xtc_href_link(FILENAME_LANGUAGES, 'page=' . $_GET['page'] . '&lID=' . $languages['languages_id']) . '\'">' . "\n";
+      echo '                  <tr class="dataTableRow" onmouseover="this.className=\'dataTableRowOver\';this.style.cursor=\'pointer\'" onmouseout="this.className=\'dataTableRow\'" onclick="document.location.href=\'' . xtc_href_link(FILENAME_LANGUAGES, 'page=' . $_GET['page'] . '&lID=' . $languages['languages_id']) . '#edit-box\'">' . "\n";
     }
 
     if (DEFAULT_LANGUAGE == $languages['code']) {
@@ -257,7 +286,7 @@
       echo '                <td class="dataTableContent">' . $languages['name'] . '</td>' . "\n";
     }
 ?>
-                <td class="dataTableContent"><?php echo $languages['code']; ?></td>
+                <td class="dataTableContent hidden-xs"><?php echo $languages['code']; ?></td>
 <!-- BOF - Tomcraft - 2009-11-22 - Added option to deactivate languages (clickable status icons) //-->
 				<td class="dataTableContent">				
 				<?php               
@@ -271,32 +300,30 @@
 <!-- EOF - Tomcraft - 2009-11-22 - Added option to deactivate languages (clickable status icons) //-->
 <!-- BOF - Tomcraft - 2009-06-10 - added some missing alternative text on admin icons //-->
 <!--
-                <td class="dataTableContent" align="right"><?php if ( (is_object($lInfo)) && ($languages['languages_id'] == $lInfo->languages_id) ) { echo xtc_image(DIR_WS_IMAGES . 'icon_arrow_right.gif'); } else { echo '<a href="' . xtc_href_link(FILENAME_LANGUAGES, 'page=' . $_GET['page'] . '&lID=' . $languages['languages_id']) . '">' . xtc_image(DIR_WS_IMAGES . 'icon_info.gif', IMAGE_ICON_INFO) . '</a>'; } ?>&nbsp;</td>
+                <td class="dataTableContent" align="right"><?php if ( (is_object($lInfo)) && ($languages['languages_id'] == $lInfo->languages_id) ) { echo xtc_image(DIR_WS_IMAGES . 'icon_arrow_right.gif'); } else { echo '<a href="' . xtc_href_link(FILENAME_LANGUAGES, 'page=' . $_GET['page'] . '&lID=' . $languages['languages_id']) . '#edit-box">' . xtc_image(DIR_WS_IMAGES . 'icon_info.gif', IMAGE_ICON_INFO) . '</a>'; } ?>&nbsp;</td>
 //-->
-                <td class="dataTableContent" align="right"><?php if ( (is_object($lInfo)) && ($languages['languages_id'] == $lInfo->languages_id) ) { echo xtc_image(DIR_WS_IMAGES . 'icon_arrow_right.gif', ICON_ARROW_RIGHT); } else { echo '<a href="' . xtc_href_link(FILENAME_LANGUAGES, 'page=' . $_GET['page'] . '&lID=' . $languages['languages_id']) . '">' . xtc_image(DIR_WS_IMAGES . 'icon_info.gif', IMAGE_ICON_INFO) . '</a>'; } ?>&nbsp;</td>
+                <td class="dataTableContent" align="right"><?php if ( (is_object($lInfo)) && ($languages['languages_id'] == $lInfo->languages_id) ) { echo xtc_image(DIR_WS_IMAGES . 'icon_arrow_right.gif', ICON_ARROW_RIGHT); } else { echo '<a href="' . xtc_href_link(FILENAME_LANGUAGES, 'page=' . $_GET['page'] . '&lID=' . $languages['languages_id']) . '#edit-box">' . xtc_image(DIR_WS_IMAGES . 'icon_info.gif', IMAGE_ICON_INFO) . '</a>'; } ?>&nbsp;</td>
 <!-- EOF - Tomcraft - 2009-06-10 - added some missing alternative text on admin icons //-->
               </tr>
 <?php
   }
 ?>
-              <tr>
-                <td colspan="3"><table border="0" width="100%" cellspacing="0" cellpadding="2">
-                  <tr>
-                    <td class="smallText" valign="top"><?php echo $languages_split->display_count($languages_query_numrows, '20', $_GET['page'], TEXT_DISPLAY_NUMBER_OF_LANGUAGES); ?></td>
-                    <td class="smallText" align="right"><?php echo $languages_split->display_links($languages_query_numrows, '20', MAX_DISPLAY_PAGE_LINKS, $_GET['page']); ?></td>
-                  </tr>
+              </table>
+                  <div class="col-xs-12">
+                    <div class="smallText col-xs-6"><?php echo $languages_split->display_count($languages_query_numrows, '20', $_GET['page'], TEXT_DISPLAY_NUMBER_OF_LANGUAGES); ?></div>
+                    <div class="smallText col-xs-6 text-right"><?php echo $languages_split->display_links($languages_query_numrows, '20', MAX_DISPLAY_PAGE_LINKS, $_GET['page']); ?></div>
+                  </div>
 <?php
   if (!$_GET['action']) {
 ?>
-                  <tr>
-                    <td align="right" colspan="2"><?php echo '<a class="btn btn-default" onclick="this.blur();" href="' . xtc_href_link(FILENAME_LANGUAGES, 'page=' . $_GET['page'] . '&lID=' . $lInfo->languages_id . '&action=new') . '">' . BUTTON_NEW_LANGUAGE . '</a>'; ?></td>
-                  </tr>
+                  <div class="col-xs-12 text-right">
+                    <?php echo '<a class="btn btn-default" onclick="this.blur();" href="' . xtc_href_link(FILENAME_LANGUAGES, 'page=' . $_GET['page'] . '&lID=' . $lInfo->languages_id . '&action=new') . '">' . BUTTON_NEW_LANGUAGE . '</a>'; ?>
+                  </div>
+                  
 <?php
   }
 ?>
-                </table></td>
-              </tr>
-            </table></td>
+                    </div>
 <?php
   $direction_options = array( array('id' => '', 'text' => TEXT_INFO_LANGUAGE_DIRECTION_DEFAULT),
                               array('id' => 'ltr', 'text' => TEXT_INFO_LANGUAGE_DIRECTION_LEFT_TO_RIGHT),
@@ -308,18 +335,30 @@
     case 'new':
       $heading[] = array('text' => '<b>' . TEXT_INFO_HEADING_NEW_LANGUAGE . '</b>');
 
+    $l_image = 'icon.gif';
+    if(isset($_SESSION['repopulate_form'])){
+        $l_name = ($_SESSION['repopulate_form']['name']) ? $_SESSION['repopulate_form']['name'] : '';
+        $l_code = ($_SESSION['repopulate_form']['code']) ? $_SESSION['repopulate_form']['code'] : '';
+        $l_charset = ($_SESSION['repopulate_form']['charset']) ? $_SESSION['repopulate_form']['charset'] : '';
+        $l_image = ($_SESSION['repopulate_form']['image']) ? $_SESSION['repopulate_form']['image'] : 'icon.gif';
+        $l_directory = ($_SESSION['repopulate_form']['directory']) ? $_SESSION['repopulate_form']['directory'] : '';
+        $l_status = ($_SESSION['repopulate_form']['status']) ? $_SESSION['repopulate_form']['status'] : '';
+        $l_sort_order = ($_SESSION['repopulate_form']['sort_order']) ? $_SESSION['repopulate_form']['sort_order'] : '';
+        unset($_SESSION['repopulate_form']);
+    }
+        
       $contents = array('form' => xtc_draw_form('languages', FILENAME_LANGUAGES, 'action=insert'));
       $contents[] = array('text' => TEXT_INFO_INSERT_INTRO);
-      $contents[] = array('text' => '<br />' . TEXT_INFO_LANGUAGE_NAME . '<br />' . xtc_draw_input_field('name'));
-      $contents[] = array('text' => '<br />' . TEXT_INFO_LANGUAGE_CODE . '<br />' . xtc_draw_input_field('code'));
-      $contents[] = array('text' => '<br />' . TEXT_INFO_LANGUAGE_CHARSET . '<br />' . xtc_draw_input_field('charset'));
-      $contents[] = array('text' => '<br />' . TEXT_INFO_LANGUAGE_IMAGE . '<br />' . xtc_draw_input_field('image', 'icon.gif'));
-      $contents[] = array('text' => '<br />' . TEXT_INFO_LANGUAGE_DIRECTORY . '<br />' . xtc_draw_input_field('directory'));
+      $contents[] = array('text' => '<br />' . TEXT_INFO_LANGUAGE_NAME . '<br />' . xtc_draw_input_field('name', $l_name));
+      $contents[] = array('text' => '<br />' . TEXT_INFO_LANGUAGE_CODE . '<br />' . xtc_draw_input_field('code', $l_code));
+      $contents[] = array('text' => '<br />' . TEXT_INFO_LANGUAGE_CHARSET . '<br />' . xtc_draw_input_field('charset', $l_charset));
+      $contents[] = array('text' => '<br />' . TEXT_INFO_LANGUAGE_IMAGE . '<br />' . xtc_draw_input_field('image', $l_image));
+      $contents[] = array('text' => '<br />' . TEXT_INFO_LANGUAGE_DIRECTORY . '<br />' . xtc_draw_input_field('directory', $l_directory));
 // BOF - Tomcraft - 2009-11-08 - Added option to deactivate languages
       //$contents[] = array('text' => '<br />' . TEXT_INFO_LANGUAGE_SORT_ORDER . '<br />' . xtc_draw_input_field('sort_order'));
-	  $contents[] = array('text' => '<br />' . TEXT_INFO_LANGUAGE_STATUS . '<br />' . xtc_draw_input_field('status'));	  
+	  $contents[] = array('text' => '<br />' . TEXT_INFO_LANGUAGE_STATUS . '<br />' . xtc_draw_input_field('status', $l_status));	  
 // EOF - Tomcraft - 2009-11-08 - Added option to deactivate languages
-	  $contents[] = array('text' => '<br />' . TEXT_INFO_LANGUAGE_SORT_ORDER . '<br />' . xtc_draw_input_field('sort_order'));
+	  $contents[] = array('text' => '<br />' . TEXT_INFO_LANGUAGE_SORT_ORDER . '<br />' . xtc_draw_input_field('sort_order', $l_sort_order));
       $contents[] = array('text' => '<br />' . xtc_draw_checkbox_field('default') . ' ' . TEXT_SET_DEFAULT);
       $contents[] = array('align' => 'center', 'text' => '<br /><button class="btn btn-default" type="submit" />' . BUTTON_INSERT . '</button> <a class="btn btn-default" onclick="this.blur();" href="' . xtc_href_link(FILENAME_LANGUAGES, 'page=' . $_GET['page'] . '&lID=' . $_GET['lID']) . '">' . BUTTON_CANCEL . '</a>');
       break;
@@ -355,7 +394,7 @@
       if (is_object($lInfo)) {
         $heading[] = array('text' => '<b>' . $lInfo->name . '</b>');
 
-        $contents[] = array('align' => 'center', 'text' => '<a class="btn btn-default" onclick="this.blur();" href="' . xtc_href_link(FILENAME_LANGUAGES, 'page=' . $_GET['page'] . '&lID=' . $lInfo->languages_id . '&action=edit') . '">' . BUTTON_EDIT . '</a> <a class="btn btn-default" onclick="this.blur();" href="' . xtc_href_link(FILENAME_LANGUAGES, 'page=' . $_GET['page'] . '&lID=' . $lInfo->languages_id . '&action=delete') . '">' . BUTTON_DELETE . '</a>');
+        $contents[] = array('align' => 'center', 'text' => '<a class="btn btn-default" onclick="this.blur();" href="' . xtc_href_link(FILENAME_LANGUAGES, 'page=' . $_GET['page'] . '&lID=' . $lInfo->languages_id . '&action=edit') . '#edit-box">' . BUTTON_EDIT . '</a> <a class="btn btn-default" onclick="this.blur();" href="' . xtc_href_link(FILENAME_LANGUAGES, 'page=' . $_GET['page'] . '&lID=' . $lInfo->languages_id . '&action=delete') . '#edit-box">' . BUTTON_DELETE . '</a>');
         $contents[] = array('text' => '<br />' . TEXT_INFO_LANGUAGE_NAME . ' ' . $lInfo->name);
         $contents[] = array('text' => TEXT_INFO_LANGUAGE_CODE . ' ' . $lInfo->code);
         $contents[] = array('text' => TEXT_INFO_LANGUAGE_CHARSET_INFO . ' ' . $lInfo->language_charset);
@@ -374,22 +413,22 @@
   }
 
   if ( (xtc_not_null($heading)) && (xtc_not_null($contents)) ) {
-    echo '            <td width="25%" valign="top">' . "\n";
+    echo '            <div class="col-md-3 col-sm-12 col-xs-12 pull-right edit-box-class">' . "\n";
 
     $box = new box;
     echo $box->infoBox($heading, $contents);
 
-    echo '            </td>' . "\n";
+    echo '            </div>' . "\n";
+    ?>
+    <script>
+        //responsive_table
+        $('#responsive_table').addClass('col-md-9');
+    </script>               
+    <?php
   }
 ?>
-          </tr>
-        </table></td>
-      </tr>
-    </table></td>
-<!-- body_text_eof //-->
-  </tr>
-</table>
-<!-- body_eof //-->
+</div>
+</div>
 
 <!-- footer //-->
 <?php require(DIR_WS_INCLUDES . 'footer.php'); ?>

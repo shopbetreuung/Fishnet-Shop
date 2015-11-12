@@ -198,8 +198,8 @@
 														</ul>
 														<div id="step-1">   
 															<div class="rowElem nobg" >
-																<label  style="width:150px"><b>API Sicherheitsschl&uuml;ssel:</b></label>
-																<div class="formRight"  style="width:500px">
+																<label  style="width:150px col-xs-12 col-sm-3"><b>API Sicherheitsschl&uuml;ssel:</b></label>
+																<div class="formRight col-xs-12 col-sm-9"  style="width:500px">
 																	<input type="text" name="haendlerbund_key" value="'.$this->getConfigurationValue("haendlerbund_key").'" id="haendlerbund_key"/>
 																</div>
 																<div class="fix"></div>

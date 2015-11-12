@@ -26,6 +26,15 @@
 
     // NEW OPTIONS
     case 'add_product_options':
+    $error = array();
+    $option_name = $_POST['option_name'];
+    for ($i = 0, $n = sizeof($languages); $i < $n; $i ++) {
+        if(!$option_name[$languages[$i]['id']]){
+            $error[] = ERROR_TEXT_NAME;
+        }
+    }
+    
+    if(empty($error)){
       if (!empty($_POST['products_options_id'])) {
         $option_name = $_POST['option_name'];
         for ($i = 0, $n = sizeof($languages); $i < $n; $i ++) {
@@ -42,6 +51,11 @@
       }
 
       xtc_redirect(xtc_href_link(basename($PHP_SELF),$page_info.'&add_product_option_status='.$updatestatus.'&option_order_by='.$_GET['option_order_by']));
+    } else {
+        $_SESSION['repopulate_form'] = $_REQUEST;
+        $_SESSION['errors'] = $error;
+        xtc_redirect(xtc_href_link(basename($PHP_SELF), 'page='.$_GET['page'].'&errors=1'));
+    }
       break;
 
     //UPDATE OPTIONS
@@ -83,6 +97,15 @@
 
     // NEW OPTIONSVALUES
     case 'add_product_option_values':
+        $error = array();
+        $value_name = $_POST['value_name'];
+        for ($i = 0, $n = sizeof($languages); $i < $n; $i ++) {
+            if(!$value_name[$languages[$i]['id']]){
+                $error[] = ERROR_TEXT_OPTION_VALUE;
+            }
+        }
+    
+        if(empty($error)){
       if ( !empty($_POST['option_id']) && !empty($_POST['value_id'])) {
         $value_name = $_POST['value_name'];
         for ($i = 0, $n = sizeof($languages); $i < $n; $i ++) {
@@ -103,6 +126,11 @@
         } else $updatestatus = 'empty';
       }
       xtc_redirect(xtc_href_link(basename($PHP_SELF),$page_info.'&add_product_option_values_status='.$updatestatus.'&option_order_by='.$_GET['option_order_by']));
+        } else {
+            $_SESSION['repopulate_form'] = $_REQUEST;
+            $_SESSION['errors'] = $error;
+            xtc_redirect(xtc_href_link(basename($PHP_SELF), 'page='.$_GET['page'].'&errors=1'));
+        }
       break;
 
     //UPDATE OPTIONSVALUES

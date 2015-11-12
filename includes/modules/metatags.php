@@ -441,13 +441,21 @@ switch(basename($PHP_SELF)) {
               content_title,
               content_heading,
               content_text,
-              content_file
+              content_file,
+              content_meta_index
       from   ".TABLE_CONTENT_MANAGER."
       where   content_group = '".(int)$_GET['coID']."'
       and   languages_id = '".(int)$_SESSION['languages_id']."'
     ");
     $contents_meta = xtc_db_fetch_array($contents_meta_query,true);
 
+      if($contents_meta['content_meta_index'] == '0'){
+            $ml_index = '<meta name="robots" content="index,follow" />';
+        } elseif($contents_meta['content_meta_index'] == '1'){
+            $ml_index = '<meta name="robots" content="noindex,follow" />';
+        }
+  
+    
     if(count($contents_meta) > 0) {
 
       // NEU! Eingebundene Dateien auslesen
@@ -609,7 +617,7 @@ if ($_SESSION['language_code'] != '') {
   echo '<meta name="language" content="'. $_SESSION['language_code'] .'" />'."\n";
 }
 }
-if ($meta_robots != '') {
+if ($meta_robots != '' && !isset($ml_index)) {
   echo '<meta name="robots" content="'. $meta_robots .'" />'."\n";
 }
 if (metaClean(META_AUTHOR) != '') {
@@ -636,6 +644,10 @@ if (META_REVISIT_AFTER != '0') {
 }
 if(isset($canonical_url)) {
   echo '<link rel="canonical" href="'.$canonical_url.'" />'."\n";
+}
+
+if(isset($ml_index)){
+    echo $ml_index;
 }
 // EOF - h-h-h - 2011-08-22 - show only defined Meta Tags
 ?>

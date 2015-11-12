@@ -76,6 +76,12 @@
 											"access"	=> "categories",
 											"check"		=> true);		
 	
+    $menu_items['products'][] = array(		"name" 		=> BOX_PRODUCTS_CONTENT,
+                                            "is_main"   => true,
+                                            "link"      => xtc_href_link(FILENAME_PRODUCTS_CONTENT, '', 'NONSSL'),
+                                            "access"    => "products_content",
+                                            "check"     => true);
+	
 	$menu_items['products'][] = array(		"name" 		=> BOX_ATTRIBUTES,
 											"is_main"	=> true,
 											"link" 		=> false,
@@ -646,7 +652,7 @@ foreach ($menues as $menu) {
 
 echo '</ul>';
 ?>
-		<ul class="hidden-lg nav navbar-nav navbar-right">
+		<ul class="hidden-lg nav navbar-nav navbar-right hidden-xs">
 			<li class="topicon"><a href="<?php echo xtc_href_link('../index.php', '', 'NONSSL') ; ?>" data-toggle="tooltip" data-placement="bottom" title="zum Shop"><span class="glyphicon glyphicon-globe"></span></a></li>			
 			<li class="topicon"><a href="<?php echo xtc_href_link('credits.php', '', 'NONSSL') ; ?>" data-toggle="tooltip" data-placement="bottom" title=" <?php echo (BOX_CREDITS) ; ?>"><span class="glyphicon glyphicon-info-sign"></span></a></li>
 			<li class="topicon"><a href="http://www.shophelfer.com/wiki/index.php" target="_blank" data-toggle="tooltip" data-placement="bottom" title="Wiki"><span class="glyphicon glyphicon-book"></span></a></li>

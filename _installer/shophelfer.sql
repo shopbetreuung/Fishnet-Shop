@@ -219,7 +219,7 @@ CREATE TABLE admin_access (
   payone_logs INT(1) NOT NULL DEFAULT 0,
   
   imagesliders INT(1) NOT NULL DEFAULT 0,
-  
+  products_content INT(1) NOT NULL DEFAULT 0,
   pdfbill_config INT(1) NOT NULL DEFAULT 0,
   pdfbill_display INT(1) NOT NULL DEFAULT 0,
   
@@ -1083,6 +1083,8 @@ CREATE TABLE content_manager (
   content_meta_title TEXT,
   content_meta_description TEXT,
   content_meta_keywords TEXT,
+  change_date datetime DEFAULT NULL,
+  content_meta_index tinyint(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (content_id),
   FULLTEXT (content_meta_title,content_meta_description,content_meta_keywords)
 ) ENGINE=MyISAM;

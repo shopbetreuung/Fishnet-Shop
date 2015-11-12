@@ -37,7 +37,7 @@ define('TEXT_REMOVE_LINK', 'Newsletter abmelden');
 
 // BOF - DokuMan - 2011-12-12 - Texts for Newsletter E-Mail send status
 define('INFO_NEWSLETTER_SEND', '%d Newsletter verschickt');
-define('INFO_NEWSLETTER_LEFT', '%d Newsletter übrig');
+define('INFO_NEWSLETTER_LEFT', '%d Newsletter Ã¼brig');
 // EOF - DokuMan - 2011-12-12 - Texts for Newsletter E-Mail send status
 
 define('TEXT_NEWSLETTER_INFO', '<strong>ACHTUNG:</strong> Zum Versenden von Newslettern wird die Verwendung von externen Programmen empfohlen!<br /><br />Falls das Newsletter Shop Modul benutzt wird, sollte beim Provider nachgefragt werden, wie viele Emails in einem bestimmten Zeitraum &uuml;berhaupt versendet werden d&uuml;rfen.<br />Bei vielen Providern gibt es Einschr&auml;nkungen oder das Versenden ist nur &uuml;ber spezielle Emailserver erlaubt.');

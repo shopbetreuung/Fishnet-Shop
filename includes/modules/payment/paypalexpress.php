@@ -6,7 +6,7 @@
  * xt:Commerce - Shopsoftware
  * (c) 2003-2007 xt:Commerce (Winger/Zanier), http://www.xt-commerce.com
  *
- * xt:Commerce ist eine geschŸtzte Handelsmarke und wird vertreten durch die xt:Commerce GmbH (Austria)
+ * xt:Commerce ist eine geschÂŸtzte Handelsmarke und wird vertreten durch die xt:Commerce GmbH (Austria)
  * xt:Commerce is a protected trademark and represented by the xt:Commerce GmbH (Austria)
  *
  * @copyright Copyright 2003-2007 xt:Commerce (Winger/Zanier), www.xt-commerce.com
@@ -16,7 +16,7 @@
  *
  * For questions, help, comments, discussion, etc., please join the
  * xt:Commerce Support Forums at www.xt-commerce.com
- * ab 15.08.2008 Teile vom Hamburger-Internetdienst geändert
+ * ab 15.08.2008 Teile vom Hamburger-Internetdienst geÃ¤ndert
  * Hamburger-Internetdienst Support Forums at www.forum.hamburger-internetdienst.de
  * Stand 04.03.2012
 */
@@ -130,7 +130,7 @@ class paypalexpress {
     if(!defined('TABLE_PAYPAL_STATUS_HISTORY'))define('TABLE_PAYPAL_STATUS_HISTORY', 'paypal_status_history');
     // nur zur Sicherheit falls noch alte Module da sind...
     $this->remove(1);
-    // Bestell Status prüfen oder erfassen
+    // Bestell Status prÃ¼fen oder erfassen
     $stati=array(
           'PAYPAL_INST_ORDER_STATUS_TMP_NAME'=>'PAYPAL_INST_ORDER_STATUS_TMP_ID',
           'PAYPAL_INST_ORDER_STATUS_SUCCESS_NAME'=>'PAYPAL_INST_ORDER_STATUS_SUCCESS_ID',
@@ -172,7 +172,7 @@ class paypalexpress {
     while($rest_values = xtc_db_fetch_array($rest_query)) {
       $rest_array[] = $rest_values;
     }
-    // Config Daten löschen - falls noch Teile von alten Modulen da sind
+    // Config Daten lÃ¶schen - falls noch Teile von alten Modulen da sind
     xtc_db_query("delete from ".TABLE_CONFIGURATION." where configuration_key like 'PAYPAL\_%'");
     // Config Daten restaurieren oder installieren mit Standard Werten
     $new_config=array();
@@ -220,7 +220,7 @@ class paypalexpress {
     if(xtc_db_num_rows($check_query) < 1):
       xtc_db_query("alter table ".TABLE_ADDRESS_BOOK." ADD address_class VARCHAR( 32 ) NOT NULL");
     else:
-      // Falls sich durch ein Update mal was ändert
+      // Falls sich durch ein Update mal was Ã¤ndert
       xtc_db_query("alter table ".TABLE_ADDRESS_BOOK." MODIFY address_class VARCHAR( 32 ) NOT NULL");
     endif;
     $check_query = xtc_db_query("show columns from ".TABLE_ADMIN_ACCESS." like 'paypal'");
@@ -285,7 +285,7 @@ class paypalexpress {
     endif;
     // Grund Install des Express
     xtc_db_query("delete from ".TABLE_CONFIGURATION." where configuration_key like 'MODULE\_PAYMENT\_PAYPALEXPRESS\_%'");
-    // Config Install für PayPal + Express - NUR falls das Paypal nicht installiert ist
+    // Config Install fÃ¼r PayPal + Express - NUR falls das Paypal nicht installiert ist
     $check_query = xtc_db_query("select configuration_key from ".TABLE_CONFIGURATION." where configuration_key = 'MODULE_PAYMENT_PAYPAL_STATUS'");
     if(xtc_db_num_rows($check_query)==0):
       xtc_db_query("delete from ".TABLE_CONFIGURATION." where configuration_key like 'PAYPAL\_%'");

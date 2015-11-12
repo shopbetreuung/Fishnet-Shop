@@ -150,6 +150,12 @@
 											"access"	=> "content_manager",
 											"check"		=> true);	
 											
+        $menu_items['content'][] = array(	"name" 		=> BOX_EMAIL,
+											"is_main"	=> true,
+											"link" 		=> xtc_href_link(FILENAME_EMAIL_MANAGER, '', 'NONSSL'),
+											"access"	=> "email_manager",
+											"check"		=> true);
+											
 	$menu_items['content'][] = array(		"name" 		=> BOX_IMAGESLIDERS,
 											"is_main"	=> true,
 											"link" 		=> xtc_href_link(FILENAME_IMAGESLIDERS, '', 'NONSSL'),

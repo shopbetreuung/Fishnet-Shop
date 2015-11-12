@@ -521,7 +521,7 @@ require (DIR_WS_INCLUDES.'head.php');
                                   </div>
                                   <div class="col-xs-12">
                                     <div class="col-sm-2 col-xs-12" ><?php echo 'Meta Index'; ?></div>
-                                    <div class="col-sm-10 col-xs-12" ><?php echo xtc_draw_pull_down_menu('cont_meta_index',array(array('id'=> '0', 'text' => 'Index'), array('id'=> '1', 'text' => 'No Index')), ($content['content_meta_index'] == '1') ? $content['content_meta_index'] : '0'); ?></div>
+                                    <div class="col-sm-10 col-xs-12" ><?php echo xtc_draw_pull_down_menu('cont_meta_index',array(array('id'=> '1', 'text' => 'index'), array('id'=> '0', 'text' => 'noindex')), ($content['content_meta_index'] == '1') ? $content['content_meta_index'] : '0'); ?></div>
                                   </div>
                                   <div class="col-xs-12">
                                     <div class="col-sm-2 col-xs-12"  valign="top"><?php echo TEXT_UPLOAD_FILE; ?></div>

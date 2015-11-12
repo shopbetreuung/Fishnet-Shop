@@ -17,7 +17,7 @@
    -----------------------------------------------------------------------------------------
    Third Party contribution:
 
-   ab 15.08.2008 Teile vom Hamburger-Internetdienst geändert
+   ab 15.08.2008 Teile vom Hamburger-Internetdienst geÃ¤ndert
    Hamburger-Internetdienst Support Forums at www.forum.hamburger-internetdienst.de
    Stand: 03.05.2012
 
@@ -141,16 +141,16 @@ if (defined('PAYPAL_API_VERSION')) {
       return;
     }
   /*************************************************************/
-  /******* fürs express als Zahlbedingung **********************/
+  /******* fÃ¼rs express als Zahlbedingung **********************/
   /*************************************************************/
     function paypal_auth_call(){
-      // aufruf aus paypal.php NICHT für PP Express aus Warenkorb
+      // aufruf aus paypal.php NICHT fÃ¼r PP Express aus Warenkorb
       // Daten aus der Cart - Order noch nicht gespeichert
       // 1. Call um die Token ID zu bekommen
-      // Daten mitgeben, da direkt bestätigung ohne nochmaliges Confirm im Shop
+      // Daten mitgeben, da direkt bestÃ¤tigung ohne nochmaliges Confirm im Shop
       // Stand: 05.01.2010
       global $xtPrice,$order,$order_totals;
-      // Session säubern
+      // Session sÃ¤ubern
       unset($_SESSION['reshash']);
       unset($_SESSION['nvpReqArray']);
       // BOF - franky_n - 2011-12-05 - dont redeclare the class if already declared in checkout_process.php
@@ -287,7 +287,7 @@ if (defined('PAYPAL_API_VERSION')) {
       }
     }
   /*************************************************************/
-  /******* fürs express aus dem warenkorb **********************/
+  /******* fÃ¼rs express aus dem warenkorb **********************/
   /*************************************************************/
     function paypal_express_auth_call(){
       // aufruf aus cart_actions.php
@@ -295,7 +295,7 @@ if (defined('PAYPAL_API_VERSION')) {
       // Steuer, Artikel usw bei eingeloggt
       // Stand: 03.05.2012
       global $xtPrice,$order;
-      // Session säubern
+      // Session sÃ¤ubern
       unset($_SESSION['reshash']);
       unset($_SESSION['nvpReqArray']);
       // Shipping:
@@ -309,7 +309,7 @@ if (defined('PAYPAL_API_VERSION')) {
           $_SESSION['sendto'] = $_SESSION['customer_default_address_id'];
         }
       }
-      // Shipping beim 1. Call auf jeden Fall löschen falls Änderungen im WK
+      // Shipping beim 1. Call auf jeden Fall lÃ¶schen falls Ã„nderungen im WK
       if(isset($_SESSION['shipping']))unset($_SESSION['shipping']);
       // Shipping END
       require(DIR_WS_CLASSES.'order.php');
@@ -370,7 +370,7 @@ if (defined('PAYPAL_API_VERSION')) {
       if($_SESSION['customers_status']['customers_status_show_price_tax'] == 0 && $_SESSION['customers_status']['customers_status_add_tax_ot'] == 1) {
         $order_tax=$_SESSION['cart']->show_tax(false);
       }
-      // Vorläufige Versandkosten
+      // VorlÃ¤ufige Versandkosten
       if(PAYPAL_EXP_VORL!='' && PAYPAL_EXP_VERS!=0) {
         $paymentAmount+=PAYPAL_EXP_VERS;
       }
@@ -447,7 +447,7 @@ if (defined('PAYPAL_API_VERSION')) {
       }
     }
   /*************************************************************/
-  /******* für abgelehnte Zahlungen **********************/
+  /******* fÃ¼r abgelehnte Zahlungen **********************/
   /*************************************************************/
     function paypal_second_auth_call($insert_id){
       // aufruf aus shopping_cart.php
@@ -455,7 +455,7 @@ if (defined('PAYPAL_API_VERSION')) {
       // Daten aus der Order !
       // Stand: 17.10.2010
       global $xtPrice,$order;
-      // Session säubern
+      // Session sÃ¤ubern
       unset($_SESSION['reshash']);
       unset($_SESSION['nvpReqArray']);
       require(DIR_WS_CLASSES.'order.php');
@@ -539,7 +539,7 @@ if (defined('PAYPAL_API_VERSION')) {
       }
     }
   /*************************************************************/
-  /******* für beide Versionen *********************************/
+  /******* fÃ¼r beide Versionen *********************************/
   /*************************************************************/
     function complete_ceckout($insert_id, $data=''){
       // aufruf aus paypal.php oder paypalexpress.php aus Warenkorb
@@ -612,7 +612,7 @@ if (defined('PAYPAL_API_VERSION')) {
       }
     }
   /*************************************************************/
-  /******* funktionen nur für Warenkorb ************************/
+  /******* funktionen nur fÃ¼r Warenkorb ************************/
   /*************************************************************/
     function paypal_get_customer_data(){
       // Stand: 09.01.2011
@@ -866,13 +866,13 @@ if (defined('PAYPAL_API_VERSION')) {
       $_SESSION['sendto'] = $send_to;
     }
   /*************************************************************/
-  /******* funktionen für beide versionen **********************/
+  /******* funktionen fÃ¼r beide versionen **********************/
   /*************************************************************/
     //  hash_call: Function to perform the API call to PayPal using API signature
     //  @methodName is name of API  method.
     //  @nvpStr is nvp string.
     //  returns an associtive array containing the response from the server.
-    //  08.01.2009.ergänzt für PHP ohne cURL von Stefan Kl.
+    //  08.01.2009.ergÃ¤nzt fÃ¼r PHP ohne cURL von Stefan Kl.
     //  05.01.2010 Verbose auf 0 da bei einigen Hostern sonst zuviel angezeigt wird
     function hash_call($methodName,$nvpStr,$pp_token=''){
       // Stand: 05.01.2010
@@ -988,9 +988,9 @@ if (defined('PAYPAL_API_VERSION')) {
     }
   /*************************************************************/
     function paypal_get_products($paymentAmount,$order_tax,$order_discount,$order_fee,$order_shipping,$order_gs,$express_call=False){
-      // für beide PayPal Versionen
+      // fÃ¼r beide PayPal Versionen
       // Artikel Details mitgeben incl. Attribute
-      // Für den Express Call Vermerk für den Versand + Vorläufige Kosten mitgeben
+      // FÃ¼r den Express Call Vermerk fÃ¼r den Versand + VorlÃ¤ufige Kosten mitgeben
       // Stand: 19.10.2010
       global $xtPrice,$order;
       require_once(DIR_FS_INC . 'xtc_get_attributes_model.inc.php');
@@ -1233,7 +1233,7 @@ if (defined('PAYPAL_API_VERSION')) {
             $verspos=$ipn_data['num_cart_items'];
             for($p=1;$p<=$verspos;$p++) {
               if($this->data['item_name'.$p] == substr(SUB_TITLE_OT_DISCOUNT,0,127) || $this->data['item_name'.$p] == substr(PAYPAL_GS,0,127) || $this->data['item_name'.$p] == "Handling" || $this->data['item_name'.$p] == substr(PAYPAL_TAX,0,127) || $this->data['item_name'.$p] == "Differenz" ) {
-                // Artikel Nummer aus den Details für Sonderzeilen
+                // Artikel Nummer aus den Details fÃ¼r Sonderzeilen
                 $ipn_data['num_cart_items']--;
               }
               if($this->data['item_name'.$p] == substr(SHIPPING_COSTS,0,127)) {
@@ -1354,7 +1354,7 @@ if (defined('PAYPAL_API_VERSION')) {
             //Set status for Refunded
             } elseif(strtolower($this->data['payment_status']) == 'refunded') {
               $order_status_id = DEFAULT_ORDERS_STATUS_ID;
-            //Set status for Pendign - eigentlich nicht nötig?
+            //Set status for Pendign - eigentlich nicht nÃ¶tig?
             } elseif(strtolower($this->data['payment_status']) == 'pending') {
               $order_status_id = PAYPAL_ORDER_STATUS_PENDING_ID;
             //Set status for Processed - wann kommt das ?
@@ -1525,7 +1525,7 @@ if (defined('PAYPAL_API_VERSION')) {
       }
       /// Kein iconv im PHP
       if($t2 == "UTF-8") {
-        // nur als Ersatz für das iconv und nur in eine richtung 1251 to UTF8
+        // nur als Ersatz fÃ¼r das iconv und nur in eine richtung 1251 to UTF8
         //ISO 8859-1 to UTF-8
         if(function_exists('utf8_encode')) {
           return utf8_encode($string);
@@ -1542,7 +1542,7 @@ if (defined('PAYPAL_API_VERSION')) {
           return($string);
         }
       } else {
-        // keine Konvertierung möglich
+        // keine Konvertierung mÃ¶glich
         return($string);
       }
     }

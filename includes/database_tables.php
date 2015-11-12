@@ -38,6 +38,7 @@
   define('TABLE_CONFIGURATION', 'configuration');
   define('TABLE_CONFIGURATION_GROUP', 'configuration_group');
   define('TABLE_CONTENT_MANAGER','content_manager');
+  define('TABLE_EMAILS_MANAGER','email_manager');
   define('TABLE_COUNTER', 'counter');
   define('TABLE_COUNTER_HISTORY', 'counter_history');
   define('TABLE_COUNTRIES', 'countries');

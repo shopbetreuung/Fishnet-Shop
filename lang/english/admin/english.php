@@ -86,6 +86,7 @@ define('BOX_HEADING_LOCATION_AND_TAXES', 'Location / Tax');
 define('BOX_HEADING_CATALOG', 'Catalog');
 
 define('BOX_CONTENT','Content Manager');
+define('BOX_EMAIL','Email Manager');
 define('TEXT_ALLOWED', 'Permission');
 define('TEXT_ACCESS', 'Usable Area');
 define('BOX_CONFIGURATION', 'General Options');

@@ -85,6 +85,7 @@ define('BOX_HEADING_CATALOG', 'Katalog');
 define('BOX_MODULE_NEWSLETTER','Newsletter');
 
 define('BOX_CONTENT','Content Manager');
+define('BOX_EMAIL','E-Mail Manager');
 define('TEXT_ALLOWED', 'Erlaubnis');
 define('TEXT_ACCESS', 'Zugriffsbereich');
 define('BOX_CONFIGURATION', 'Grundeinstellungen');

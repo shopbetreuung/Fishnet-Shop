@@ -24,8 +24,8 @@ function xtc_php_mail($from_email_address, $from_email_name,
   global $mail_error;
 
 //*********************************************************************************************
-// Signatur für E-Mails
-// by Dipl.-Ing. Daniel Wallas für www.tuvino.de
+// Signatur fÃ¼r E-Mails
+// by Dipl.-Ing. Daniel Wallas fÃ¼r www.tuvino.de
 //*********************************************************************************************
   $mailsmarty= new Smarty;
   $mailsmarty->compile_dir = DIR_FS_CATALOG.'templates_c';
@@ -112,7 +112,7 @@ function xtc_php_mail($from_email_address, $from_email_name,
   //BOF  - web28 - 2010-08-27 -  decode html2txt
   $html_array = array('<br />', '<br/>', '<br>');
   $txt_array = array(" \n", " \n", " \n");
-  $message_body_plain = str_replace($html_array, $txt_array, $message_body_plain.$txt_signatur);//DPW Signatur ergänzt.
+  $message_body_plain = str_replace($html_array, $txt_array, $message_body_plain.$txt_signatur);//DPW Signatur ergÃ¤nzt.
   // remove html tags
   $message_body_plain = strip_tags($message_body_plain);
   $message_body_plain = html_entity_decode($message_body_plain, ENT_NOQUOTES, $charset);
@@ -120,7 +120,7 @@ function xtc_php_mail($from_email_address, $from_email_name,
 
   if (EMAIL_USE_HTML == 'true') { // set email format to HTML
     $mail->IsHTML(true);
-    $mail->Body = $message_body_html.$html_signatur;//DPW Signatur ergänzt.
+    $mail->Body = $message_body_html.$html_signatur;//DPW Signatur ergÃ¤nzt.
     $mail->AltBody = $message_body_plain;
   } else {
     $mail->IsHTML(false);

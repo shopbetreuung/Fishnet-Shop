@@ -119,8 +119,10 @@ define('BOX_PAYMENT', 'Payment Systems');
 define('BOX_SHIPPING', 'Shipping Methods');
 define('BOX_ORDER_TOTAL', 'Order Total');
 define('BOX_CATEGORIES', 'Categories / Products');
+define('BOX_PRODUCTS_CONTENT', 'Products content');
 define('BOX_PRODUCTS_ATTRIBUTES', 'Product Options');
 define('BOX_MANUFACTURERS', 'Manufacturers');
+define('BOX_WHOLESALERS', 'Wholesalers');
 define('BOX_REVIEWS', 'Product Reviews');
 define('BOX_CAMPAIGNS', 'Campaigns');
 define('BOX_XSELL_PRODUCTS', 'Cross Marketing');
@@ -154,14 +156,12 @@ define('BOX_TPL_BOXES','Boxes Sort Order');
 define('BOX_CURRENCIES', 'Currencies');
 define('BOX_LANGUAGES', 'Languages');
 define('BOX_ORDERS_STATUS', 'Order Status');
-define('BOX_ATTRIBUTES','Attributes');
 define('BOX_ATTRIBUTES_MANAGER','Attribute Manager');
 define('BOX_MODULE_NEWSLETTER','Newsletter');
 define('BOX_SHIPPING_STATUS','Shipping status');
 define('BOX_SALES_REPORT','Sales Report');
 define('BOX_MODULE_EXPORT','Modules');
 define('BOX_HEADING_GV_ADMIN', 'Vouchers/Coupons');
-define('BOX_HEADING_GV', 'Vouchers');
 define('BOX_GV_ADMIN_QUEUE', 'Gift Voucher Queue');
 define('BOX_GV_ADMIN_MAIL', 'Mail Gift Voucher');
 define('BOX_GV_ADMIN_SENT', 'Gift Vouchers sent');
@@ -179,7 +179,6 @@ define('BOX_HAENDLERBUND','H&auml;ndlerbund AGB Service'); // Tomcraft - 2012-12
 define('BOX_SAFETERMS','Safeterms - AGB Service'); // Tomcraft - 2013-06-21 - Safeterms AGB interface
 define('BOX_EASYMARKETING','EASYMARKETING AG'); // Tomcraft - 2013-08-29 - Added easymarketing
 define('BOX_IT_RECHT_KANZLEI', 'IT Recht Kanzlei');
-define('BOX_LAW','Law');
 
 define('TXT_GROUPS','<b>Groups</b>:');
 define('TXT_SYSTEM','System');
@@ -302,6 +301,7 @@ define('TEXT_DISPLAY_NUMBER_OF_CUSTOMERS', 'Displaying <b>%d</b> to <b>%d</b> (o
 define('TEXT_DISPLAY_NUMBER_OF_CURRENCIES', 'Displaying <b>%d</b> to <b>%d</b> (of <b>%d</b> Currencies)');
 define('TEXT_DISPLAY_NUMBER_OF_LANGUAGES', 'Displaying <b>%d</b> to <b>%d</b> (of <b>%d</b> Languages)');
 define('TEXT_DISPLAY_NUMBER_OF_MANUFACTURERS', 'Displaying <b>%d</b> to <b>%d</b> (of <b>%d</b> Manufacturers)');
+define('TEXT_DISPLAY_NUMBER_OF_WHOLESALERS', 'Displaying <b>%d</b> to <b>%d</b> (of <b>%d</b> Wholesalers)');
 define('TEXT_DISPLAY_NUMBER_OF_NEWSLETTERS', 'Displaying <b>%d</b> to <b>%d</b> (of <b>%d</b> Newsletters)');
 define('TEXT_DISPLAY_NUMBER_OF_ORDERS', 'Displaying <b>%d</b> to <b>%d</b> (of <b>%d</b> Orders)');
 define('TEXT_DISPLAY_NUMBER_OF_ORDERS_STATUS', 'Displaying <b>%d</b> to <b>%d</b> (of <b>%d</b> Orders Status)');

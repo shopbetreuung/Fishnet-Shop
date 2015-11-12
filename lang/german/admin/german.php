@@ -120,8 +120,10 @@ define('BOX_PAYMENT', 'Zahlungsoptionen');
 define('BOX_SHIPPING', 'Versandart');
 define('BOX_ORDER_TOTAL', 'Bestellzusammenfassung');
 define('BOX_CATEGORIES', 'Kategorien / Artikel');
+define('BOX_PRODUCTS_CONTENT', 'Artikel Content');
 define('BOX_PRODUCTS_ATTRIBUTES', 'Attribute anlegen');
 define('BOX_MANUFACTURERS', 'Hersteller');
+define('BOX_WHOLESALERS', 'Gro&szlig;h&auml;ndler');
 define('BOX_REVIEWS', 'Artikelbewertungen');
 define('BOX_CAMPAIGNS', 'Kampagnen');
 define('BOX_XSELL_PRODUCTS', 'Cross Marketing');
@@ -303,6 +305,7 @@ define('TEXT_DISPLAY_NUMBER_OF_CUSTOMERS', 'Angezeigt werden <b>%d</b> bis <b>%d
 define('TEXT_DISPLAY_NUMBER_OF_CURRENCIES', 'Angezeigt werden <b>%d</b> bis <b>%d</b> (von insgesamt <b>%d</b> W&auml;hrungen)');
 define('TEXT_DISPLAY_NUMBER_OF_LANGUAGES', 'Angezeigt werden <b>%d</b> bis <b>%d</b> (von insgesamt <b>%d</b> Sprachen)');
 define('TEXT_DISPLAY_NUMBER_OF_MANUFACTURERS', 'Angezeigt werden <b>%d</b> bis <b>%d</b> (von insgesamt <b>%d</b> Herstellern)');
+define('TEXT_DISPLAY_NUMBER_OF_WHOLESALERS', 'Angezeigt werden <b>%d</b> bis <b>%d</b> (von insgesamt <b>%d</b> Großhändler)');
 define('TEXT_DISPLAY_NUMBER_OF_NEWSLETTERS', 'Angezeigt werden <b>%d</b> bis <b>%d</b> (von insgesamt <b>%d</b> Newslettern)');
 define('TEXT_DISPLAY_NUMBER_OF_ORDERS', 'Angezeigt werden <b>%d</b> bis <b>%d</b> (von insgesamt <b>%d</b> Bestellungen)');
 define('TEXT_DISPLAY_NUMBER_OF_ORDERS_STATUS', 'Angezeigt werden <b>%d</b> bis <b>%d</b> (von insgesamt <b>%d</b> Bestellstatus)');

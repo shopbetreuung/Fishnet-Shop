@@ -13,7 +13,7 @@
    (c) 2007 XT-Commerce (paypal.php)
    @license http://www.xt-commerce.com.com/license/2_0.txt GNU Public License V2.0
 
-   ab 15.08.2008 Teile vom Hamburger-Internetdienst geÃ¤ndert
+   ab 15.08.2008 Teile vom Hamburger-Internetdienst geändert
    Hamburger-Internetdienst Support Forums at www.forum.hamburger-internetdienst.de
    Stand 04.03.2012
 */
@@ -95,13 +95,13 @@ class paypal {
 /**************************************************************/
 	function before_process() {
 		// Stand: 29.04.2009
-		// Bereits geholt und bestÃ¤tigt
+		// Bereits geholt und bestätigt
 		if($_GET['PayerID']!='' AND $_SESSION['reshash']['TOKEN']!='' AND (strtoupper($_SESSION['reshash']["ACK"])=="SUCCESS" OR strtoupper($_SESSION['reshash']["ACK"])=="SUCCESSWITHWARNING"))
 			return;
 		// Den PayPal Token holen, ohne das commit keine Preisanzeige !
 		global $order, $o_paypal;
 		$o_paypal->paypal_auth_call();
-		// Gleich auf Bezahl-BestÃ¤tigt setzten bei PayPal
+		// Gleich auf Bezahl-Bestätigt setzten bei PayPal
 		xtc_redirect($o_paypal->payPalURL.'&useraction=commit');
 		return;
 	}
@@ -154,7 +154,7 @@ class paypal {
 		if(!defined('TABLE_PAYPAL_STATUS_HISTORY'))define('TABLE_PAYPAL_STATUS_HISTORY', 'paypal_status_history');
 		// nur zur Sicherheit falls noch alte Module da sind...
 		$this->remove(1);
-		// Bestell Status prÃ¼fen oder erfassen
+		// Bestell Status prüfen oder erfassen
 		$stati=array(
 					'PAYPAL_INST_ORDER_STATUS_TMP_NAME'=>'PAYPAL_INST_ORDER_STATUS_TMP_ID',
 					'PAYPAL_INST_ORDER_STATUS_SUCCESS_NAME'=>'PAYPAL_INST_ORDER_STATUS_SUCCESS_ID',
@@ -196,7 +196,7 @@ class paypal {
 		while($rest_values = xtc_db_fetch_array($rest_query)) {
 			$rest_array[] = $rest_values;
 		}
-		// Config Daten lÃ¶schen - falls noch Teile von alten Modulen da sind
+		// Config Daten löschen - falls noch Teile von alten Modulen da sind
 		xtc_db_query("delete from ".TABLE_CONFIGURATION." where configuration_key like 'PAYPAL\_%'");
 		// Config Daten restaurieren oder installieren mit Standard Werten
 		$new_config=array();
@@ -244,7 +244,7 @@ class paypal {
 		if(xtc_db_num_rows($check_query) < 1):
 			xtc_db_query("alter table ".TABLE_ADDRESS_BOOK." ADD address_class VARCHAR( 32 ) NOT NULL");
 		else:
-			// Falls sich durch ein Update mal was Ã¤ndert
+			// Falls sich durch ein Update mal was ändert
 			xtc_db_query("alter table ".TABLE_ADDRESS_BOOK." MODIFY address_class VARCHAR( 32 ) NOT NULL");
 		endif;
 		$check_query = xtc_db_query("show columns from ".TABLE_ADMIN_ACCESS." like 'paypal'");
@@ -309,7 +309,7 @@ class paypal {
 		endif;
 		// Grund Install des PayPal
 		xtc_db_query("delete from ".TABLE_CONFIGURATION." where configuration_key like 'MODULE\_PAYMENT\_PAYPAL\_%'");
-		// Config Install fÃ¼r PayPal + Express - NUR falls das Express nicht installiert ist
+		// Config Install für PayPal + Express - NUR falls das Express nicht installiert ist
 		$check_query = xtc_db_query("select configuration_key from ".TABLE_CONFIGURATION." where configuration_key = 'MODULE_PAYMENT_PAYPALEXPRESS_STATUS'");
 		if(xtc_db_num_rows($check_query)==0):
 			xtc_db_query("delete from ".TABLE_CONFIGURATION." where configuration_key like 'PAYPAL\_%'");

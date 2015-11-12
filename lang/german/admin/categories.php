@@ -120,6 +120,8 @@ define('TEXT_PRODUCT_NOT_AVAILABLE', 'Deaktiviert');
 // EOF - Hetfield - 2010-01-28 - Changing product available in correctly names for status
 define('TEXT_PRODUCTS_MANUFACTURER', 'Artikelhersteller:');
 define('TEXT_PRODUCTS_MANUFACTURER_MODEL', 'Hersteller Art.Nr.(HAN):');
+define('TEXT_PRODUCTS_WHOLESALER', 'Produkte Gro&szlig;h&auml;ndler:');
+define('TEXT_PRODUCTS_WHOLESALER_REORDER', 'Nachbestellnummern:');
 define('TEXT_PRODUCTS_NAME', 'Artikelname:');
 define('TEXT_PRODUCTS_DESCRIPTION', 'Artikelbeschreibung:');
 define('TEXT_PRODUCTS_QUANTITY', 'Artikelanzahl:');
@@ -141,6 +143,9 @@ define('TEXT_COPY_AS_DUPLICATE', 'Duplizieren');
 define('ERROR_CANNOT_LINK_TO_SAME_CATEGORY', 'Fehler: Artikel k&ouml;nnen nicht in der gleichen Kategorie verlinkt werden.');
 define('ERROR_CATALOG_IMAGE_DIRECTORY_NOT_WRITEABLE', 'Fehler: Das Verzeichnis \'images\' im Katalogverzeichnis ist schreibgesch&uuml;tzt: ' . DIR_FS_CATALOG_IMAGES);
 define('ERROR_CATALOG_IMAGE_DIRECTORY_DOES_NOT_EXIST', 'Fehler: Das Verzeichnis \'images\' im Katalogverzeichnis ist nicht vorhanden: ' . DIR_FS_CATALOG_IMAGES);
+
+define('ERROR_WHOLESALER_NOT_SELECTED', 'Gro&szlig;h&auml;ndler nicht ausgew&auml;hlt.');
+define('ERROR_WHOLESALER_NUMBER', 'Nachbestellnummern muss kleiner als Produktmenge .');
 
 define('TEXT_PRODUCTS_DISCOUNT_ALLOWED','Maximal erlaubter Rabatt:');
 define('HEADING_PRICES_OPTIONS','<b>Preis-Optionen</b>');

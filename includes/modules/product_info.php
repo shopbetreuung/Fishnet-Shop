@@ -27,6 +27,7 @@ require_once (DIR_FS_INC.'xtc_check_categories_status.inc.php');
 require_once (DIR_FS_INC.'xtc_get_products_mo_images.inc.php');
 require_once (DIR_FS_INC.'xtc_get_vpe_name.inc.php');
 require_once (DIR_FS_INC.'get_cross_sell_name.inc.php');
+require_once (DIR_FS_INC.'xtc_format_price.inc.php');
 require_once (DIR_FS_INC.'xtc_date_short.inc.php');  // for specials
 
 if (!is_object($product) || !$product->isProduct()) {
@@ -124,7 +125,17 @@ if (!is_object($product) || !$product->isProduct()) {
   $info_smarty->assign('PRODUCTS_PRICE', $products_price['formated']);
 
   //get products vpe
-  $info_smarty->assign('PRODUCTS_VPE',$main->getVPEtext($product->data, $products_price['plain'])); //web28 - 2012-04-17 - use classes function getVPEtext() 
+		$info_smarty->assign('PRODUCTS_VPE', $xtPrice->xtcFormat($products_price['plain'] * (1 / $product->data['products_vpe_value']), true).TXT_PER.xtc_get_vpe_name($product->data['products_vpe']));
+
+			if ($product->data['products_vpe_value'] > 1 && $product->getAttributesCount() > 0)
+			{
+				$info_smarty->assign('PRODUCTS_VPE', $xtPrice->xtcFormat($products_price['plain'] * (1 / $product->data['products_vpe_value'] * $product->data['products_vpe_value']), true).TXT_PER.xtc_precision($product->data['products_vpe_value'],0).xtc_get_vpe_name($product->data['products_vpe']));
+			}
+			else
+			{
+				$info_smarty->assign('PRODUCTS_VPE', $xtPrice->xtcFormat($products_price['plain'] * (1 / $product->data['products_vpe_value']), true).TXT_PER.xtc_get_vpe_name($product->data['products_vpe']));
+			}
+// EOF - Tomcraft - 2010-06-14 - Grundpreismodul hinzugefügt
   
   // products id
   $info_smarty->assign('PRODUCTS_ID', $product->data['products_id']);

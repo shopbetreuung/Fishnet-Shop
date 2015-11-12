@@ -144,6 +144,7 @@ require_once (DIR_FS_INC.'xtc_draw_separator.inc.php');
 require_once (DIR_FS_INC.'xtc_draw_textarea_field.inc.php');
 require_once (DIR_FS_INC.'xtc_image_button.inc.php');
 
+require_once (DIR_FS_INC.'xtc_get_categories_children.inc.php');
 require_once (DIR_FS_INC.'xtc_not_null.inc.php');
 require_once (DIR_FS_INC.'xtc_update_whos_online.inc.php');
 require_once (DIR_FS_INC.'xtc_activate_banners.inc.php');
@@ -151,6 +152,7 @@ require_once (DIR_FS_INC.'xtc_expire_banners.inc.php');
 require_once (DIR_FS_INC.'xtc_expire_specials.inc.php');
 require_once (DIR_FS_INC.'xtc_parse_category_path.inc.php');
 require_once (DIR_FS_INC.'xtc_get_product_path.inc.php');
+require_once (DIR_FS_INC.'xtc_get_product_original_path.inc.php');
 require_once (DIR_FS_INC.'xtc_get_top_level_domain.inc.php');
 require_once (DIR_FS_INC.'xtc_get_category_path.inc.php');
 

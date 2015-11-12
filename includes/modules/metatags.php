@@ -334,10 +334,15 @@ switch(basename($PHP_SELF)) {
       } else {
         $meta_title = metaTitle($product->data['products_name'],isset($product->data['manufacturers_name'])?$product->data['manufacturers_name']:'',$Page,($addProdShopTitle)?ML_TITLE:'');
       }
+        $category_query = "select p2c.categories_id from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_TO_CATEGORIES . " p2c where p.products_id = '" . (int)$product->data['products_id'] . "' and p.products_status = '1' and p.products_id = p2c.products_id and p2c.categories_id != 0 LIMIT 1";
+        $category_query  = xtDBquery($category_query);
+        if (xtc_db_num_rows($category_query,true)) {
+            $cID = xtc_db_fetch_array($category_query)['categories_id'];
+        }
 
       //-- Canonical-URL
       //-- http://www.linkvendor.com/blog/der-canonical-tag-%E2%80%93-was-kann-man-damit-machen.html
-      $canonical_url = xtc_href_link(FILENAME_PRODUCT_INFO, 'products_id='.$product->data['products_id'],$request_type,false);
+      $canonical_url = xtc_href_link(FILENAME_PRODUCT_INFO, 'products_id='.$product->data['products_id'].'&cPath='.$cID,$request_type,false, true, true, true);
     }
     break;
 // ---------------------------------------------------------------------------------------

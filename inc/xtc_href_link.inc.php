@@ -17,7 +17,7 @@
    ---------------------------------------------------------------------------------------*/
 
 // The HTML href link wrapper function
-  function xtc_href_link($page = '', $parameters = '', $connection = 'NONSSL', $add_session_id = true, $search_engine_safe = true, $urlencode=false) {
+  function xtc_href_link($page = '', $parameters = '', $connection = 'NONSSL', $add_session_id = true, $search_engine_safe = true, $urlencode=false, $meta = false) {
     global $request_type, $session_started, $http_domain, $https_domain,$truncate_session_id;
 
     $parameters = str_replace('&amp;', '&', $parameters); // web28 - 2010-09-02 -- making link W3C-Conform
@@ -78,7 +78,8 @@
                                     $connection,
                                     $add_session_id,
                                     $search_engine_safe,
-                                    'user');
+                                    'user',
+                                    $meta);
         if($seolink){
             $link       = $seolink;
             $elements   = parse_url($link);

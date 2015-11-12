@@ -124,5 +124,6 @@
   define('TABLE_IMAGESLIDERS', 'imagesliders');
   define('TABLE_IMAGESLIDERS_INFO', 'imagesliders_info');
   // Imageslider (c)2008 by Hetfield - www.MerZ-IT-SerVice.de - End
+  define('TABLE_WIDGETS', 'widgets');
 
 ?>

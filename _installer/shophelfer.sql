@@ -1033,6 +1033,17 @@ CREATE TABLE whos_online (
   KEY idx_time_last_click(time_last_click)
 ) ENGINE=MyISAM;
 
+DROP TABLE IF EXISTS widgets;
+CREATE TABLE widgets (
+  widgets_id INT(11) NOT NULL AUTO_INCREMENT,
+  widgets_path VARCHAR(255) NOT NULL,
+  customer_id INT(11) DEFAULT NULL,
+  widgets_x INT(11) DEFAULT NULL,
+  widgets_y INT(11) DEFAULT NULL,
+  widgets_active TINYINT(1) NOT NULL DEFAULT 1,
+  PRIMARY KEY (widgets_id)
+) ENGINE=MyISAM;
+
 DROP TABLE IF EXISTS zones;
 CREATE TABLE zones (
   zone_id INT NOT NULL AUTO_INCREMENT,

@@ -30,6 +30,7 @@ define( 'PDFBILL_MSG_DELINFO_PDF' ,               '<br /><br />Eine PDF-Rechnung
 define( 'PDFBILL_TXT_DELIVERYDATE' ,              'Lieferdatum:' );      
 define( 'PDFBILL_TXT_BILLPROFILE' ,               'Rechnung:' );      
 define( 'PDFBILL_TXT_DELIVNOTEPROFILE' ,          'Lieferschein:' );
+define( 'PDFBILL_TXT_AUTOMATIC' ,                 'Automatische Profilauswahl:' );  
 // --- eof -- ipdfbill --------
    
    
@@ -57,6 +58,7 @@ define('TEXT_BANK_ERRORCODE', 'Fehlercode:');
 define('HEADING_TITLE', 'Bestellungen');
 define('HEADING_TITLE_SEARCH', 'Bestell-Nr.:');
 define('HEADING_TITLE_STATUS', 'Status:');
+define('HEADING_CHOOSE_PAYMENT', 'Wählen Sie die Zahlung');
 
 define('TABLE_HEADING_COMMENTS', 'Kommentar');
 define('TABLE_HEADING_CUSTOMERS', 'Kunden');
@@ -115,6 +117,7 @@ define('TEXT_INFO_SHIPPING_METHOD', 'Versandart:');
 
 define('TEXT_ALL_ORDERS', 'Alle Bestellungen');
 define('TEXT_NO_ORDER_HISTORY', 'Keine Bestellhistorie verf&uuml;gbar');
+define('TEXT_ALL_PAYMENT_METHODS', 'Alle Methoden');
 
 define('EMAIL_SEPARATOR', '------------------------------------------------------');
 define('EMAIL_TEXT_SUBJECT', 'Status&auml;nderung Ihrer Bestellung');

@@ -1223,6 +1223,7 @@ CREATE TABLE pdfbill_profile (
   profile_name varchar(255) NOT NULL default '',
   profile_parameter text NOT NULL,
   profile_categories text NOT NULL,
+  rules text NOT NULL,
   PRIMARY KEY  (profile_id)
 ) ENGINE=MyISAM;
 

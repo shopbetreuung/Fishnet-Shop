@@ -191,8 +191,7 @@ function order_nr_list() {
   return $ret;
 }
 
-function profile_save( $profile_name, $parameter_arr ) {
-
+function profile_save( $profile_name, $parameter_arr, $checked_ids = '', $rules = '' ) {
   $sql = "select 
             profile_id
           from ".
@@ -209,17 +208,20 @@ function profile_save( $profile_name, $parameter_arr ) {
     $sql = "update ".
               TABLE_PDFBILL_PROFILE."
             set
-              profile_parameter = '$parameter_list'
+              profile_parameter = '$parameter_list',
+              rules = '$rules'
             where 
               profile_id = '".$data['profile_id']."'";
   } else {              // profile not exists
     $sql = "insert into ".
               TABLE_PDFBILL_PROFILE."
             ( profile_name,
-              profile_parameter )
+              profile_parameter,
+              rules)
             values (
               '$profile_name',
-              '$parameter_list' )";
+              '$parameter_list',
+              '$rules')";
   }    
   xtDBquery($sql);
 }
@@ -255,7 +257,7 @@ function profile_load_n( $profile_name ) {
   
 }  
 function profile_list() {
-  $sql = "select profile_id, profile_name from ".TABLE_PDFBILL_PROFILE;    
+  $sql = "select profile_id, profile_name, rules from ".TABLE_PDFBILL_PROFILE;    
   $sql = xtDBquery($sql);
   $ret=array();
   while( $data = xtc_db_fetch_array($sql) ) {

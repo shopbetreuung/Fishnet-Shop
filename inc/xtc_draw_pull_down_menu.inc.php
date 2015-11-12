@@ -31,6 +31,14 @@
 
     for ($i=0, $n=sizeof($values); $i<$n; $i++) {
       $field .= '<option value="' . xtc_parse_input_field_data($values[$i]['id'], array('"' => '&quot;')) . '"';
+
+      # New $values parameter disabled
+      if(isset($values[$i]['disabled'])){ 
+        if ($values[$i]['disabled'] == "disabled") {
+          $field .= ' disabled="disabled"';
+        }   
+      }
+      
       if ($default == $values[$i]['id']) {
         $field .= ' selected="selected"';
       }
@@ -59,6 +67,14 @@
 
     for ($i=0, $n=sizeof($values); $i<$n; $i++) {
       $field .= '<option value="' . xtc_parse_input_field_data($values[$i]['id'], array('"' => '&quot;')) . '"';
+        
+      # New $values parameter disabled
+      if(isset($values[$i]['disabled'])){ 
+        if ($values[$i]['disabled'] == "disabled") {
+          $field .= ' disabled="disabled"';
+        }   
+      }
+      
       if ($default == $values[$i]['id']) {
         $field .= ' selected="selected"';
       }

@@ -76,7 +76,7 @@ if (isset($_POST['action']) && ($_POST['action'] == 'process')) {
   }
   $telephone = xtc_db_prepare_input($_POST['telephone']);
   $fax = xtc_db_prepare_input($_POST['fax']);
-  $newsletter = ''; //no newsletter for guest accounts ???
+  $newsletter = isset($_POST['newsletter']) ? (int)$_POST['newsletter'] : '';
   //$password = xtc_db_prepare_input($_POST['password']);
   //$confirmation = xtc_db_prepare_input($_POST['confirmation']);
 

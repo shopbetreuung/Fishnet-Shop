@@ -16,7 +16,7 @@
    Released under the GNU General Public License
    -----------------------------------------------------------------------------------------
    Third Party contributions:
-   agree_conditions_1.01          Autor:  Thomas Plänkers (webmaster@oscommerce.at)
+   agree_conditions_1.01          Autor:  Thomas PlÃ¤nkers (webmaster@oscommerce.at)
 
    Customers Status v3.x  (c) 2002-2003 Copyright Elari elari@free.fr | www.unlockgsm.com/dload-osc/ | CVS : http://cvs.sourceforge.net/cgi-bin/viewcvs.cgi/elari/?sortby=date#dirlist
 
@@ -46,6 +46,7 @@ require_once (DIR_FS_INC . 'xtc_get_address_format_id.inc.php');
 require_once (DIR_FS_INC . 'xtc_check_stock.inc.php');
 unset ($_SESSION['tmp_oID']);
 unset ($_SESSION['transaction_id']); //Dokuman - 2009-10-02 - added moneybookers payment module version 2.4
+unset ($_SESSION['conditions']);
 
 // if the customer is not logged on, redirect them to the login page
 if (!isset ($_SESSION['customer_id'])) {
@@ -132,7 +133,7 @@ $order_total_modules->process();
 $breadcrumb->add(NAVBAR_TITLE_1_CHECKOUT_PAYMENT, xtc_href_link(FILENAME_CHECKOUT_SHIPPING, '', 'SSL'));
 $breadcrumb->add(NAVBAR_TITLE_2_CHECKOUT_PAYMENT, xtc_href_link(FILENAME_CHECKOUT_PAYMENT, '', 'SSL'));
 
-$smarty->assign('FORM_ACTION', xtc_draw_form('checkout_payment', xtc_href_link(FILENAME_CHECKOUT_CONFIRMATION, '', 'SSL'), 'post', 'onSubmit="return check_form();"'));
+$smarty->assign('FORM_ACTION', xtc_draw_form('checkout_agree_download', xtc_href_link(FILENAME_CHECKOUT_AGREE_DOWNLOAD, '', 'SSL'), 'post', 'onSubmit="return check_form();"'));
 $smarty->assign('ADDRESS_LABEL', xtc_address_label($_SESSION['customer_id'], $_SESSION['billto'], true, ' ', '<br />'));
 $smarty->assign('BUTTON_ADDRESS', '<a href="' . xtc_href_link(FILENAME_CHECKOUT_PAYMENT_ADDRESS, '', 'SSL') . '">' . xtc_image_button('button_change_address.gif', IMAGE_BUTTON_CHANGE_ADDRESS) . '</a>');
 $smarty->assign('BUTTON_CONTINUE', xtc_image_submit('button_continue.gif', IMAGE_BUTTON_CONTINUE));

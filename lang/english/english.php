@@ -274,7 +274,7 @@ define('ERROR_CHECKOUT_SHIPPING_NO_MODULE', 'No shipping method available.');
 //  conditions check
 
 define('ERROR_CONDITIONS_NOT_ACCEPTED', 'Please accept our terms and conditions to proceed with your order.');
-
+define('ERROR_AGREE_DOWNLOAD_NOT_ACCEPTED', '* Please specify the desired start of the contract execution for downloads to proceed your order.\n\n');
 define('SUB_TITLE_OT_DISCOUNT','Discount:');
 
 define('TAX_ADD_TAX','incl. ');
@@ -354,6 +354,8 @@ define('NAVBAR_TITLE_DELETE_ENTRY_ADDRESS_BOOK_PROCESS', 'Delete Entry');
 define('NAVBAR_TITLE_ADVANCED_SEARCH', 'Advanced Search');
 define('NAVBAR_TITLE1_ADVANCED_SEARCH', 'Advanced Search');
 define('NAVBAR_TITLE2_ADVANCED_SEARCH', 'Search results');
+define('NAVBAR_TITLE_1_CHECKOUT_AGREE_DOWNLOAD', 'Checkout');
+define('NAVBAR_TITLE_2_CHECKOUT_AGREE_DOWNLOAD', 'Digital Content');
 define('NAVBAR_TITLE_1_CHECKOUT_CONFIRMATION', 'Checkout');
 define('NAVBAR_TITLE_2_CHECKOUT_CONFIRMATION', 'Confirmation');
 define('NAVBAR_TITLE_1_CHECKOUT_PAYMENT', 'Checkout');
@@ -472,10 +474,10 @@ define('YOUR_PRICE','your price ');
 // BOF - Tomcraft - 2009-10-09 - Added text-constant for unit price
 define('UNIT_PRICE','unit price ');
 // EOF - Tomcraft - 2009-10-09 - Added text-constant for unit price
-define('ONLY',' Now only ');// DokuMan - Werbung mit durchgestrichenen Statt-Preisen ist zul√§ssig
+define('ONLY',' Now only ');// DokuMan - Werbung mit durchgestrichenen Statt-Preisen ist zul‰ssig
 define('FROM','from ');
 define('YOU_SAVE','you save ');
-define('INSTEAD','Our previous price ');// DokuMan - Werbung mit durchgestrichenen Statt-Preisen ist zul√§ssig
+define('INSTEAD','Our previous price ');// DokuMan - Werbung mit durchgestrichenen Statt-Preisen ist zul‰ssig
 define('TXT_PER',' per ');
 define('TAX_INFO_INCL','%s VAT incl.');
 define('TAX_INFO_EXCL','%s VAT excl.');
@@ -523,7 +525,7 @@ define('PAYPAL_AMMOUNT_NULL','The order sum which can be expected (without dispa
 // EOF - web28 - 2010-05-07 - PayPal API Modul
 
 define('BASICPRICE_VPE_TEXT','in this volume only '); // Hetfield - 2009-11-26 - Added language definition for vpe at graduated prices
-//web - 2010-07-11 - Preisanzeige bei Staffelpreisen (gr√∂√üte Staffel)
+//web - 2010-07-11 - Preisanzeige bei Staffelpreisen (grˆﬂte Staffel)
 define('GRADUATED_PRICE_MAX_VALUE', 'from');
 
 //web28 - 2010-08-20 - VERSANDKOSTEN WARENKORB

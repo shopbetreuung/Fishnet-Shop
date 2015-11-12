@@ -500,6 +500,9 @@ if (!$tmp) {
   }
   // EOF - Tomcraft - 2009-10-03 - PayPal Express Modul (PayPal GiroPay aufrufen zum bestätigen)
 
+  unset($_SESSION['conditions']);
+  unset($_SESSION['agree_download']);
+  
   xtc_redirect(xtc_href_link(FILENAME_CHECKOUT_SUCCESS, '', 'SSL'));
 }
 ?>

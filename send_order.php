@@ -57,6 +57,8 @@ if ($_SESSION['customer_id'] == $order_check['customers_id'] || $send_by_admin) 
   $smarty->assign('order_data', $order->getOrderData($insert_id)); //ACHTUNG für Bestellbestätigung  aus Admin Funktion in admin/includes/classes/order.php
   $smarty->assign('order_total', $order_total['data']);
 
+  $smarty->assign('agree_download', $_SESSION['agree_download']);
+
   // assign language to template for caching Web28 2012-04-25 - change all $_SESSION['language'] to $order->info['language']
   $smarty->assign('language', $order->info['language']);
   $smarty->assign('tpl_path','templates/'.CURRENT_TEMPLATE.'/');

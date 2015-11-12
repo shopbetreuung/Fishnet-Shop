@@ -274,6 +274,7 @@ define('ERROR_CHECKOUT_SHIPPING_NO_MODULE', 'Es ist keine Versandart vorhanden.'
 //  conditions check
 
 define('ERROR_CONDITIONS_NOT_ACCEPTED', '* Sofern Sie unsere Allgemeinen Gesch&auml;ftsbedingungen nicht akzeptieren,\n k&ouml;nnen wir Ihre Bestellung bedauerlicherweise nicht entgegennehmen!\n\n');
+define('ERROR_AGREE_DOWNLOAD_NOT_ACCEPTED', '* Sofern Sie keine Angaben zum gew&uuml;nschten Beginn der Vertragsausf&uuml;hrung bei den Downloads machen,\n k&ouml;nnen wir Ihre Bestellung bedauerlicherweise nicht entgegennehmen!\n\n');
 
 define('SUB_TITLE_OT_DISCOUNT','Rabatt:');
 
@@ -354,6 +355,8 @@ define('NAVBAR_TITLE_DELETE_ENTRY_ADDRESS_BOOK_PROCESS', 'Eintrag l&ouml;schen')
 define('NAVBAR_TITLE_ADVANCED_SEARCH', 'Erweiterte Suche');
 define('NAVBAR_TITLE1_ADVANCED_SEARCH', 'Erweiterte Suche');
 define('NAVBAR_TITLE2_ADVANCED_SEARCH', 'Suchergebnisse');
+define('NAVBAR_TITLE_1_CHECKOUT_AGREE_DOWNLOAD', 'Kasse');
+define('NAVBAR_TITLE_2_CHECKOUT_AGREE_DOWNLOAD', 'Digitale Inhalte');
 define('NAVBAR_TITLE_1_CHECKOUT_CONFIRMATION', 'Kasse');
 define('NAVBAR_TITLE_2_CHECKOUT_CONFIRMATION', 'Best&auml;tigung');
 define('NAVBAR_TITLE_1_CHECKOUT_PAYMENT', 'Kasse');

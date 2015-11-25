@@ -70,6 +70,8 @@
   define('BOX_BGCOLOR_CONTENTS', '#f8f8f9');
   define('BOX_SHADOW', '#b6b7cb');
 
+  require_once(DIR_FS_CATALOG.'includes/functions/sessions.php');
+
   // include General functions
   require_once(DIR_FS_INC.'xtc_set_time_limit.inc.php');
   require_once(DIR_FS_INC.'xtc_check_agent.inc.php');
@@ -98,6 +100,9 @@
   require_once(DIR_FS_INC.'xtc_draw_box_heading.inc.php');
   require_once(DIR_FS_INC.'xtc_draw_box_contents.inc.php');
   require_once(DIR_FS_INC.'xtc_draw_box_content_bullet.inc.php');
+
+  require_once(DIR_FS_INC . 'xtc_db_query.inc.php');
+  require_once(DIR_FS_INC . 'xtc_db_fetch_array.inc.php');
 
   // include check functions
   require_once(DIR_FS_INC .'xtc_gdlib_check.inc.php');

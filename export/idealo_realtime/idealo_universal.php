@@ -200,7 +200,7 @@ class idealo_universal {
 	    $string = str_replace("Ü", "Ue", $string);
 	    $string = str_replace("Ö", "Oe", $string);
 	    $string = str_replace("ß", "ss", $string);
-	    $string = ereg_replace("[^A-Za-z0-9 .\,\:\"\']", '', $string);
+	    $string = preg_replace("[^A-Za-z0-9 .\,\:\"\']", '', $string);
 
 	    return $string;	
 	}

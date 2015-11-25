@@ -43,7 +43,7 @@ class XtcKlarnaDB implements KlarnaDB
      * @param string $table database table
      * @param array  $data  associative array to insert into the table
      *
-     * @return mysql_result
+     * @return mysqli_result
      */
     public function perform($table, $data)
     {

@@ -19,8 +19,6 @@
 
   require_once(DIR_FS_INC . 'xtc_encrypt_password.inc.php');
   require_once(DIR_FS_INC . 'xtc_db_connect.inc.php');
-  require_once(DIR_FS_INC . 'xtc_db_query.inc.php');
-  require_once(DIR_FS_INC . 'xtc_db_fetch_array.inc.php');
   require_once(DIR_FS_INC .'xtc_validate_email.inc.php');
   require_once(DIR_FS_INC .'xtc_db_input.inc.php');
   require_once(DIR_FS_INC .'xtc_db_num_rows.inc.php');
@@ -224,13 +222,13 @@
                                 )");
                                 
 	  // customers_status
-	  mysql_query("INSERT INTO " . TABLE_ADMIN_ACCESS . " (`customers_id`) VALUES ('1');");
-	  mysql_query("INSERT INTO " . TABLE_ADMIN_ACCESS . " (`customers_id`) VALUES ('groups');");
-	  $aa_spalten_qry = mysql_query("SHOW COLUMNS FROM admin_access");
-	  while ($aa_spalten = mysql_fetch_array($aa_spalten_qry)) {
+	  xtc_db_query("INSERT INTO " . TABLE_ADMIN_ACCESS . " (`customers_id`) VALUES ('1');");
+	  xtc_db_query("INSERT INTO " . TABLE_ADMIN_ACCESS . " (`customers_id`) VALUES ('groups');");
+	  $aa_spalten_qry = xtc_db_query("SHOW COLUMNS FROM admin_access");
+	  while ($aa_spalten = xtc_db_fetch_array($aa_spalten_qry)) {
 		  if ($aa_spalten['Type'] == 'int(1)') {
-			  mysql_query("UPDATE admin_access SET ".$aa_spalten['Field']." = '1' WHERE customers_id = '1'");
-			  mysql_query("UPDATE admin_access SET ".$aa_spalten['Field']." = '1' WHERE customers_id = 'groups'");
+			  xtc_db_query("UPDATE admin_access SET ".$aa_spalten['Field']." = '1' WHERE customers_id = '1'");
+			  xtc_db_query("UPDATE admin_access SET ".$aa_spalten['Field']." = '1' WHERE customers_id = 'groups'");
 		  }
 	  }
 

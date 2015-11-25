@@ -28,7 +28,7 @@
       $result_products_query = xtc_db_query("SHOW COLUMNS FROM ".$table);
       $columns = array();
       $test = false;
-      while($row = mysql_fetch_assoc($result_products_query)){
+      while($row = mysqli_fetch_assoc($result_products_query)){
         $columns[$row['Field']] = '';        
         if ($col != '' && $col == $row['Field']) {
           $test = true;

@@ -19,12 +19,12 @@ defined( '_VALID_XTC' ) or die( 'Direct Access to this location is not allowed.'
     global $$link;
 
     if (USE_PCONNECT == 'true') {
-      $$link = mysql_pconnect($server, $username, $password);
+      $$link = mysqli_connect($server, $username, $password, $database);
     } else {
-      $$link = mysql_connect($server, $username, $password);
+      $$link = mysqli_connect($server, $username, $password, $database);
     }
 
-    if ($$link) mysql_select_db($database);
+    if ($$link) mysqli_select_db($database);
 
     return $$link;
   }
@@ -34,12 +34,12 @@ defined( '_VALID_XTC' ) or die( 'Direct Access to this location is not allowed.'
     global $$link_service;
 
     if (SERVICE_USE_PCONNECT == 'true') {
-      $$link_service = mysql_pconnect($server_service, $username_service, $password_service);
+      $$link_service = mysqli_connect($server_service, $username_service, $password_service, $database);
     } else {
-      $$link_service = mysql_connect($server_service, $username_service, $password_service);
+      $$link_service = mysqli_connect($server_service, $username_service, $password_service, $database_service);
     }
 
-    if ($$link_service) mysql_select_db($database_service);
+    if ($$link_service) mysqli_select_db($database_service);
 
     return $$link_service;
   }
@@ -47,14 +47,14 @@ defined( '_VALID_XTC' ) or die( 'Direct Access to this location is not allowed.'
   function xtc_db_close($link = 'db_link') {
     global $$link;
 
-    return mysql_close($$link);
+    return mysqli_close($$link);
   }
 
   // db connection for Servicedatabase  
   function service_xtc_db_close($link_service = 'db_link_service') {
     global $$link_service;
 
-    return mysql_close($$link_service);
+    return mysqli_close($$link_service);
   }
 
 
@@ -70,10 +70,10 @@ defined( '_VALID_XTC' ) or die( 'Direct Access to this location is not allowed.'
       $logger->write($query, 'QUERY');
     }
 
-    $result = mysql_query($query, $$link) or xtc_db_error($query, mysql_errno(), mysql_error());
+    $result = mysqli_query($$link, $query) or xtc_db_error($query, mysqli_errno($$link), mysqli_error($$link));
 
     if (STORE_DB_TRANSACTIONS == 'true') {
-      if (mysql_error()) $logger->write(mysql_error(), 'ERROR');
+      if (mysqli_error($$link)) $logger->write(mysqli_error($$link), 'ERROR');
     }
 
     return $result;
@@ -88,10 +88,10 @@ defined( '_VALID_XTC' ) or die( 'Direct Access to this location is not allowed.'
       $logger_service->write($query, 'QUERY');
     }
 
-    $result = mysql_query($query, $$link_service) or xtc_db_error($query, mysql_errno(), mysql_error());
+    $result = mysqli_query($$link_service, $query) or xtc_db_error($query, mysqli_errno($$link_service), mysqli_error($$link_service));
 
     if (STORE_DB_TRANSACTIONS == 'true') {
-      if (mysql_error()) $logger_service->write(mysql_error(), 'ERROR');
+      if (mysqli_error($$link_service)) $logger_service->write(mysqli_error($$link_service), 'ERROR');
     }
 
     return $result;
@@ -142,31 +142,33 @@ defined( '_VALID_XTC' ) or die( 'Direct Access to this location is not allowed.'
   }
 
   function xtc_db_fetch_array($db_query) {
-    return mysql_fetch_array($db_query, MYSQL_ASSOC);
+    return mysqli_fetch_array($db_query, MYSQLI_ASSOC);
   }
 
   function xtc_db_result($result, $row, $field = '') {
-    return mysql_result($result, $row, $field);
+    return mysqli_result($result, $row, $field);
   }
 
   function xtc_db_num_rows($db_query) {
-    return mysql_num_rows($db_query);
+    return mysqli_num_rows($db_query);
   }
 
   function xtc_db_data_seek($db_query, $row_number) {
-    return mysql_data_seek($db_query, $row_number);
+    return mysqli_data_seek($db_query, $row_number);
   }
 
-  function xtc_db_insert_id() {
-    return mysql_insert_id();
+  function xtc_db_insert_id($link = 'db_link') {
+    global $$link;
+
+    return mysqli_insert_id($$link);
   }
 
   function xtc_db_free_result($db_query) {
-    return mysql_free_result($db_query);
+    return mysqli_free_result($db_query);
   }
 
   function xtc_db_fetch_fields($db_query) {
-    return mysql_fetch_field($db_query);
+    return mysqli_fetch_field($db_query);
   }
 
   function xtc_db_output($string) {

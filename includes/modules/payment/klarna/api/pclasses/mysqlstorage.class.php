@@ -142,16 +142,16 @@ class MySQLStorage extends PCStorage {
      * @return void
      */
     protected function connect() {
-        $this->link = mysql_connect($this->addr, $this->user, $this->passwd);
+        $this->link = mysqli_connect($this->addr, $this->user, $this->passwd, $this->dbName);
         if($this->link === false) {
-            throw new Exception('Failed to connect to database! ('.mysql_error().')');
+            throw new Exception('Failed to connect to database! ('.mysqli_error($this->link).')');
         }
 
-        if(!mysql_query('CREATE DATABASE IF NOT EXISTS `'.$this->dbName.'`', $this->link)) {
-            throw new Exception('Database not existing, failed to create! ('.mysql_error().')');
+        if(!mysqli_query($this->link, 'CREATE DATABASE IF NOT EXISTS `'.$this->dbName.'`')) {
+            throw new Exception('Database not existing, failed to create! ('.mysqli_error($this->link).')');
         }
 
-        $create = mysql_query(
+        $create = mysqli_query($this->link,
                 "CREATE TABLE IF NOT EXISTS `".$this->dbName."`.`".$this->dbTable."` (
                     `eid` int(10) unsigned NOT NULL,
                     `id` int(10) unsigned NOT NULL,
@@ -165,11 +165,11 @@ class MySQLStorage extends PCStorage {
                     `country` int(11) NOT NULL,
                     `expire` int(11) NOT NULL,
                     KEY `id` (`id`)
-                )", $this->link
+                )"
         );
 
         if(!$create) {
-            throw new Exception('Table not existing, failed to create! ('.mysql_error().')');
+            throw new Exception('Table not existing, failed to create! ('.mysqli_error($this->link).')');
         }
     }
 
@@ -233,10 +233,10 @@ class MySQLStorage extends PCStorage {
         try {
             $this->splitURI($uri);
             $this->connect();
-            if(($result = mysql_query('SELECT * FROM `'.$this->dbName.'`.`'.$this->dbTable.'`', $this->link)) === false) {
-                throw new Exception('SELECT query failed! ('.mysql_error().')');
+            if(($result = mysqli_query($this->link, 'SELECT * FROM `'.$this->dbName.'`.`'.$this->dbTable.'`')) === false) {
+                throw new Exception('SELECT query failed! ('.mysqli_error($this->link).')');
             }
-            while($row = mysql_fetch_assoc($result)) {
+            while($row = mysqli_fetch_assoc($result)) {
                 $this->addPClass(new KlarnaPClass($row));
             }
         }
@@ -260,10 +260,10 @@ class MySQLStorage extends PCStorage {
             foreach($this->pclasses as $pclasses) {
                 foreach($pclasses as $pclass) {
                     //Remove the pclass if it exists.
-                    mysql_query("DELETE FROM `".$this->dbName.'`.`'.$this->dbTable."` WHERE `id` = '".$pclass->getId()."' AND `eid` = '".$pclass->getEid()."'");
+                    mysqli_query($this->link, "DELETE FROM `".$this->dbName.'`.`'.$this->dbTable."` WHERE `id` = '".$pclass->getId()."' AND `eid` = '".$pclass->getEid()."'");
 
                     //Insert it again.
-                    $result = mysql_query(
+                    $result = mysqli_query($this->link,
                         "INSERT INTO `".$this->dbName.'`.`'.$this->dbTable."`
                            (`eid`, `id`, `type`, `description`, `months`, `interestrate`, `invoicefee`, `startfee`, `minamount`, `country`, `expire`)
                          VALUES
@@ -277,10 +277,10 @@ class MySQLStorage extends PCStorage {
                             '".$pclass->getStartFee()."',
                             '".$pclass->getMinAmount()."',
                             '".$pclass->getCountry()."',
-                            '".$pclass->getExpire()."')", $this->link
+                            '".$pclass->getExpire()."')"
                     );
                     if($result === false) {
-                        throw new Exception('INSERT INTO query failed! ('.mysql_error().')');
+                        throw new Exception('INSERT INTO query failed! ('.mysqli_error($this->link).')');
                     }
                 }
             }
@@ -299,7 +299,7 @@ class MySQLStorage extends PCStorage {
             unset($this->pclasses);
             $this->connect();
 
-            mysql_query("DELETE FROM `".$this->dbName."`.`".$this->dbTable."`", $this->link);
+            mysqli_query($this->link, "DELETE FROM `".$this->dbName."`.`".$this->dbTable."`");
         }
         catch(Exception $e) {
             throw new KlarnaException("Error in " . __METHOD__ . ": " . $e->getMessage());

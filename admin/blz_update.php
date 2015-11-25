@@ -14,6 +14,7 @@
 require('includes/application_top.php');
 
 $blz_file_default_link = 'http://www.bundesbank.de/Redaktion/DE/Downloads/Kerngeschaeftsfelder/Unbarer_Zahlungsverkehr/Bankleitzahlen/2012_12_02/blz_2012_09_03_txt.txt?__blob=publicationFile';
+$connection = xtc_db_connect();
 
 require (DIR_WS_INCLUDES.'head.php');
 ?>
@@ -123,8 +124,8 @@ require (DIR_WS_INCLUDES.'head.php');
             $sql = sprintf('insert into banktransfer_blz (blz, bankname, prz) values (%s, \'%s\', \'%s\')',
            (int)$rec['blz'], xtc_db_input($rec['bankname']), xtc_db_input($rec['prz']));
             xtc_db_query($sql);
-            if(mysql_affected_rows() != 0) {
-              $j = $j + mysql_affected_rows(); // sum up affected rows
+            if(mysqli_affected_rows($connection) != 0) {
+              $j = $j + mysqli_affected_rows($connection); // sum up affected rows
             }
           }
           echo '<span class="messageStackSuccess">'.$j.BLZ_UPDATE_SUCCESS_TEXT.'</span>';

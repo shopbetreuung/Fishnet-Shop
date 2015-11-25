@@ -26,11 +26,12 @@
        $admin_access_query = xtc_db_query("select * from " . TABLE_ADMIN_ACCESS . " where customers_id = '" . (int)$_GET['cID'] . "'");
        $admin_access = xtc_db_fetch_array($admin_access_query);
 
-       $fields = mysql_list_fields(DB_DATABASE, TABLE_ADMIN_ACCESS);
-       $columns = mysql_num_fields($fields);
+       $admin_access_columns_query = xtc_db_query("select * from " . TABLE_ADMIN_ACCESS);
+       $fields = mysqli_fetch_fields($admin_access_columns_query);
+       $columns = mysqli_num_fields($admin_access_columns_query);
 
-		for ($i = 0; $i < $columns; $i++) {
-             $field=mysql_field_name($fields, $i);
+	    for ($i = 0; $i < $columns; $i++) {
+                    $field = $fields[$i]->name;
                     if ($field!='customers_id') {
 
                     xtc_db_query("UPDATE ".TABLE_ADMIN_ACCESS." SET
@@ -156,11 +157,12 @@ function set_checkbox (set) {
       $admin_access = xtc_db_fetch_array($admin_access_query);
     }
 
-$fields = mysql_list_fields(DB_DATABASE, TABLE_ADMIN_ACCESS);
-$columns = mysql_num_fields($fields);
+$fields = mysqli_fetch_fields($admin_access_columns_query);
+$columns = mysqli_num_fields($admin_access_columns_query);
 
 for ($i = 0; $i < $columns; $i++) {
-    $field=mysql_field_name($fields, $i);
+    $field = $fields[$i]->name;
+
     if ($field!='customers_id') {
     $checked='';
     if ($admin_access[$field] == '1') $checked='checked';

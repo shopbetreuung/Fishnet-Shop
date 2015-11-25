@@ -120,7 +120,7 @@ class categories {
   // listing_template, previous_image, array[name][lang_id], array[heading_title][lang_id], array[description][lang_id],
   // array[meta_title][lang_id], array[meta_description][lang_id], array[meta_keywords][lang_id]
 
-  function insert_category($categories_data, $dest_category_id, $action = 'insert') {
+  function insert_category($categories_data, $dest_category_id, $link,$action = 'insert') {
     $categories_id = xtc_db_prepare_input($categories_data['categories_id']);
     $sort_order = xtc_db_prepare_input($categories_data['sort_order']);
     $categories_status = xtc_db_prepare_input($categories_data['status']);
@@ -440,7 +440,7 @@ class categories {
 
   // inserts / updates a product from given data
 
-  function insert_product($products_data, $dest_category_id, $action = 'insert') {
+  function insert_product($products_data, $dest_category_id, $link, $action = 'insert') {
     $products_id = xtc_db_prepare_input($products_data['products_id']);
     $products_date_available = xtc_db_prepare_input($products_data['products_date_available']);
     $products_date_available = (date('Y-m-d') < $products_date_available) ? $products_date_available : 'null';
@@ -1060,7 +1060,7 @@ class categories {
 
     // ----------------------------------------------------------------------------------------------------- //
 
-  function edit_cross_sell($cross_data) {
+  function edit_cross_sell($cross_data, $link) {
     if ($cross_data['special'] == 'add_entries') {
         if (isset ($cross_data['ids'])) {
           foreach ($cross_data['ids'] AS $pID) {

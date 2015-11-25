@@ -16,6 +16,6 @@
    ---------------------------------------------------------------------------------------*/
    
   function xtc_db_fetch_fields($db_query) {
-    return mysql_fetch_field($db_query);
+    return mysqli_fetch_field($db_query);
   }
  ?>

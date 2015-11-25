@@ -33,7 +33,7 @@ require_once (DIR_FS_INC.'xtc_php_mail.inc.php');
 require_once (DIR_FS_INC.'xtc_add_tax.inc.php');
 require_once (DIR_FS_INC.'xtc_validate_vatid_status.inc.php');
 require_once (DIR_FS_INC.'xtc_get_attributes_model.inc.php');
-
+$connection = xtc_db_connect();
 //split page results
 if(!defined('MAX_DISPLAY_ORDER_RESULTS')) {
   define('MAX_DISPLAY_ORDER_RESULTS', 30);
@@ -1449,8 +1449,8 @@ elseif ($action == 'custom_action') {
                     // Paypal Express Modul
                     if(defined('TABLE_PAYPAL')) {
                       $db_installed = false;
-                      $tables = mysql_query('SHOW TABLES FROM `' . DB_DATABASE . '`');
-                      while ($row = mysql_fetch_row($tables)) {
+                      $tables = xtc_db_query('SHOW TABLES FROM `' . DB_DATABASE . '`');
+                      while ($row = mysqli_fetch_row($tables)) {
                         if ($row[0] == TABLE_PAYPAL) $db_installed = true;
                       }
                       if ($db_installed) {

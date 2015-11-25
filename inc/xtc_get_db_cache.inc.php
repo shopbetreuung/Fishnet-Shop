@@ -28,9 +28,9 @@
 // check for the refresh flag and try to the data
     if (($refresh == true)|| !read_cache($var, $filename)) {
 // Didn' get cache so go to the database.
-//      $conn = mysql_connect("localhost", "apachecon", "apachecon");
+//      $conn = mysqli_connect("localhost", "apachecon", "apachecon");
       $res = xtc_db_query($sql);
-//      if ($err = mysql_error()) trigger_error($err, E_USER_ERROR);
+//      if ($err = mysqli_error()) trigger_error($err, E_USER_ERROR);
 // loop through the results and add them to an array
       while ($rec = xtc_db_fetch_array($res)) {
         $var[] = $rec;

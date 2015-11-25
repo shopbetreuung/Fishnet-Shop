@@ -354,7 +354,7 @@ if (isset($_POST['action']) && ($_POST['action'] == 'process')) {
       if (NEW_SIGNUP_GIFT_VOUCHER_AMOUNT > 0) {
         $coupon_code = create_coupon_code();
         $insert_query = xtc_db_query("INSERT INTO ".TABLE_COUPONS." (coupon_code, coupon_type, coupon_amount, date_created) VALUES ('".$coupon_code."', 'G', '".NEW_SIGNUP_GIFT_VOUCHER_AMOUNT."', now())");
-        $insert_id = xtc_db_insert_id($insert_query);
+        $insert_id = xtc_db_insert_id();
         $insert_query = xtc_db_query("INSERT INTO ".TABLE_COUPON_EMAIL_TRACK." (coupon_id, customer_id_sent, sent_firstname, emailed_to, date_sent) VALUES ('".$insert_id."', '0', 'Admin', '".$email_address."', now() )");
 
         $smarty->assign('SEND_GIFT', 'true');

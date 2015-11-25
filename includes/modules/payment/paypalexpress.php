@@ -240,12 +240,12 @@ class paypalexpress {
     // Table paypal
     $m_fields="paypal_ipn_id int(11) unsigned NOT NULL auto_increment, xtc_order_id int(11) unsigned NOT NULL default '0', txn_type varchar(32) NOT NULL default '', reason_code varchar(15) default NULL, payment_type varchar(7) NOT NULL default '', payment_status varchar(17) NOT NULL default '', pending_reason varchar(14) default NULL, invoice varchar(64) default NULL, mc_currency char(3) NOT NULL default '', first_name varchar(32) NOT NULL default '', last_name varchar(32) NOT NULL default '', payer_business_name varchar(64) default NULL, address_name varchar(32) default NULL, address_street varchar(64) default NULL, address_city varchar(32) default NULL, address_state varchar(32) default NULL, address_zip varchar(10) default NULL, address_country varchar(64) default NULL, address_status varchar(11) default NULL, payer_email varchar(96) NOT NULL default '', payer_id varchar(32) NOT NULL default '', payer_status varchar(10) NOT NULL default '', payment_date datetime NOT NULL default '0001-01-01 00:00:00', business varchar(96) NOT NULL default '', receiver_email varchar(96) NOT NULL default '', receiver_id varchar(32) NOT NULL default '', txn_id varchar(40) NOT NULL default '', parent_txn_id varchar(17) default NULL, num_cart_items tinyint(4) unsigned NOT NULL default '1', mc_gross decimal(7,2) NOT NULL default '0.00', mc_fee decimal(7,2) NOT NULL default '0.00', mc_shipping decimal(7,2) NOT NULL default '0.00', payment_gross decimal(7,2) default NULL, payment_fee decimal(7,2) default NULL, settle_amount decimal(7,2) default NULL, settle_currency char(3) default NULL, exchange_rate decimal(4,2) default NULL, notify_version decimal(2,1) NOT NULL default '0.0', verify_sign varchar(128) NOT NULL default '', last_modified datetime NOT NULL default '0001-01-01 00:00:00', date_added datetime NOT NULL default '0001-01-01 00:00:00', memo text, mc_authorization decimal(7,2) NOT NULL, mc_captured decimal(7,2) NOT NULL";
     $db_installed = false;
-    //BOF - Hetfield - 2010-01-28 - replace mysql_list_tables with query SHOW TABLES -> PHP5.3 depricated
+    //BOF - Hetfield - 2010-01-28 - replace mysqli_list_tables with query SHOW TABLES -> PHP5.3 depricated
     $tables = xtc_db_query("SHOW TABLES LIKE '".TABLE_PAYPAL."'");
-    if ($checktables = mysql_fetch_array($tables, MYSQL_NUM)) { //mysql_fetch_array used with "MYSQL_NUM", xtc_db_fetch_array() not applicable
+    if ($checktables = mysqli_fetch_array($tables, MYSQLI_NUM)) { //mysqli_fetch_array used with "MYSQLI_NUM", xtc_db_fetch_array() not applicable
       $db_installed = ($checktables[0] == TABLE_PAYPAL);
     }
-    //EOF - Hetfield - 2010-01-28 - replace mysql_list_tables with query SHOW TABLES -> PHP5.3 depricated
+    //EOF - Hetfield - 2010-01-28 - replace mysqli_list_tables with query SHOW TABLES -> PHP5.3 depricated
     if($db_installed==false):
       xtc_db_query("create table ".TABLE_PAYPAL." ( ".$m_fields.", PRIMARY KEY (paypal_ipn_id, txn_id), KEY xtc_order_id (xtc_order_id) ) ENGINE = MYISAM;");
     else:
@@ -254,13 +254,13 @@ class paypalexpress {
     // Table paypal_status_history
     $m_fields="payment_status_history_id int(11) NOT NULL auto_increment, paypal_ipn_id int(11) NOT NULL default '0', txn_id varchar(64) NOT NULL default '', parent_txn_id varchar(64) NOT NULL default '', payment_status varchar(17) NOT NULL default '', pending_reason varchar(64) default NULL, mc_amount decimal(7,2) NOT NULL, date_added datetime NOT NULL default '0001-01-01 00:00:00'";
     $db_installed = false;
-    //BOF - Hetfield - 2010-02-04 - replace mysql_list_tables with query SHOW TABLES -> PHP5.3 depricated
-    //$tables = mysql_list_tables(DB_DATABASE);
+    //BOF - Hetfield - 2010-02-04 - replace mysqli_list_tables with query SHOW TABLES -> PHP5.3 depricated
+    //$tables = mysqli_list_tables(DB_DATABASE);
     $tables = xtc_db_query("SHOW TABLES LIKE '".TABLE_PAYPAL_STATUS_HISTORY."'");
-    if ($checktables = mysql_fetch_array($tables, MYSQL_NUM)) { //mysql_fetch_array used with "MYSQL_NUM", xtc_db_fetch_array() not applicable
+    if ($checktables = mysqli_fetch_array($tables, MYSQLI_NUM)) { //mysqli_fetch_array used with "MYSQLI_NUM", xtc_db_fetch_array() not applicable
       $db_installed = ($checktables[0] == TABLE_PAYPAL_STATUS_HISTORY);
     }
-    //EOF - Hetfield - 2010-02-04 - replace mysql_list_tables with query SHOW TABLES -> PHP5.3 depricated
+    //EOF - Hetfield - 2010-02-04 - replace mysqli_list_tables with query SHOW TABLES -> PHP5.3 depricated
     if($db_installed==false):
       xtc_db_query("create table ".TABLE_PAYPAL_STATUS_HISTORY." ( ".$m_fields.", PRIMARY KEY ( payment_status_history_id), KEY paypal_ipn_id (paypal_ipn_id) ) ENGINE = MYISAM;");
     else:

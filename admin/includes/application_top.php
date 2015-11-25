@@ -72,12 +72,6 @@ if (file_exists(DIR_FS_CATALOG.'export/_error_reporting.all') || file_exists(DIR
   error_reporting(0);
 }
 
-/*
- * turn off magic-quotes support, for both runtime and sybase, as both will cause problems if enabled
- */
-if (version_compare(PHP_VERSION, 5.3, '<') && function_exists('set_magic_quotes_runtime')) set_magic_quotes_runtime(0);
-if (version_compare(PHP_VERSION, 5.4, '<') && @ini_get('magic_quotes_sybase') != 0) @ini_set('magic_quotes_sybase', 0);
-
 // solve compatibility issues
 require_once (DIR_WS_FUNCTIONS.'compatibility.php');
 

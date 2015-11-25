@@ -132,7 +132,7 @@ function print_xml_status ($code, $action, $msg, $mode, $item, $value)
 function table_exists($table_name)
 {
   $Table = xtc_db_query("show tables like '" . $table_name . "'");
-  if(mysql_fetch_row($Table) === false)
+  if(mysqli_fetch_row($Table) === false)
   {
     return(false);
   } else {
@@ -145,7 +145,7 @@ function table_exists($table_name)
 function column_exists($table, $column)
 {
   $Table = xtc_db_query("show columns from $table LIKE '" . $column . "'");
-  if(mysql_fetch_row($Table) === false)
+  if(mysqli_fetch_row($Table) === false)
   {
     return(false);
   } else {
@@ -1194,7 +1194,7 @@ function UpdateTables ()
     }
      else
     {
-      $error = mysql_error();
+      $error = mysqli_error(xtc_db_connect());
       $pos=strpos($error,'Duplicate column name');
 
       if ($pos===false)

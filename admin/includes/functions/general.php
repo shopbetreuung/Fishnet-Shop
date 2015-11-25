@@ -1406,7 +1406,7 @@ function xtc_output_string($string, $translate = false, $protected = false) {
 
                   //MYSQL information
                   'db_server' => DB_SERVER, 'db_ip' => gethostbyname(DB_SERVER),
-                  'db_version' => 'MySQL '. (function_exists('mysql_get_server_info') ? mysql_get_server_info() : ''),
+                  'db_version' => 'MySQL '. (function_exists('mysqli_get_server_info') ? mysqli_get_server_info(xtc_db_connect()) : ''),
                   'db_date' => $db['datetime'], //DokuMan - 2011-05-10 - Update date with timezone
 
                   //PHP information
@@ -1414,7 +1414,6 @@ function xtc_output_string($string, $translate = false, $protected = false) {
                   'zend' => (function_exists('zend_version') ? zend_version() : ''),
                   'sapi' => PHP_SAPI,
                   'int_size' => defined('PHP_INT_SIZE') ? PHP_INT_SIZE : '',
-                  'safe_mode' => (int) @ini_get('safe_mode'),
                   'open_basedir' => (int) @ini_get('open_basedir'),
                   'memory_limit' => @ini_get('memory_limit'),
                   'error_reporting' => error_reporting(),
@@ -1427,10 +1426,7 @@ function xtc_output_string($string, $translate = false, $protected = false) {
                   'disable_functions' => @ini_get('disable_functions'),
                   'disable_classes' => @ini_get('disable_classes'),
                   'enable_dl' => (int) @ini_get('enable_dl'),
-                  'magic_quotes_gpc' => (int) @ini_get('magic_quotes_gpc'),
-                  'register_globals' => (int) @ini_get('register_globals'),
                   'filter.default' => @ini_get('filter.default'),
-                  'zend.ze1_compatibility_mode' => (int) @ini_get('zend.ze1_compatibility_mode'),
                   'unicode.semantics' => (int) @ini_get('unicode.semantics'),
                   'zend_thread_safty' => (int) function_exists('zend_thread_id'),
                   'extensions' => get_loaded_extensions());

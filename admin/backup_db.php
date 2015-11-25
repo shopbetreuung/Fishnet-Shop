@@ -21,6 +21,11 @@ $Id: backup_db.php 4174 2013-01-04 15:55:13Z web28 $
   require('includes/application_top.php');
   include ('includes/functions/db_restore.php');
 
+  $link = 'db_link';
+  global $$link;
+  
+  $connection = $$link;
+  
   $action = (isset($_GET['action']) ? $_GET['action'] : '');
 
   //Dateiname fuer Selbstaufruf
@@ -66,10 +71,11 @@ $Id: backup_db.php 4174 2013-01-04 15:55:13Z web28 $
   }
 
   function GetTableInfo($table) {
+    global $connection;
     //BOF NEW TABLE  STRUCTURE  - LIKE MYSQLDUMPER -  functions_dump.php line 133
     $data = "DROP TABLE IF EXISTS `$table`;\n";
-    $res = mysql_query('SHOW CREATE TABLE `'.$table.'`');
-    $row = @mysql_fetch_row($res);
+    $res = mysqli_query($connection, 'SHOW CREATE TABLE `'.$table.'`');
+    $row = @mysqli_fetch_row($res);
     $data .= $row[1].';'."\n\n";
     $data .= "/*!40000 ALTER TABLE `$table` DISABLE KEYS */;\n";
     //EOF NEW TABLE  STRUCTURE  - LIKE MYSQLDUMPER
@@ -78,25 +84,26 @@ $Id: backup_db.php 4174 2013-01-04 15:55:13Z web28 $
 
     //Datensaetze feststellen
     $sql="SELECT count(*) as `count_records` FROM `".$table."`";
-    $res=@mysql_query($sql);
-    $res_array = mysql_fetch_array($res);
+    $res=@mysqli_query($connection, $sql);
+    $res_array = mysqli_fetch_array($res);
 
     return $res_array['count_records'];
   }
 
   function GetTableData($table) {
     global $dump;
+    global $connection;
     // Dump the data
     if ( ($table != TABLE_SESSIONS ) && ($table != TABLE_WHOS_ONLINE) && ($table != TABLE_ADMIN_ACTIVITY_LOG) ) {
 
       $table_list = array();
-      $fields_query = mysql_query("SHOW COLUMNS FROM " . $table);
-      while ($fields = mysql_fetch_array($fields_query)) {
+      $fields_query = mysqli_query($connection, "SHOW COLUMNS FROM " . $table);
+      while ($fields = mysqli_fetch_array($fields_query)) {
         $table_list[] = $fields['Field'];
       }
 
-      $rows_query = mysql_query('select `' . implode('`,`', $table_list) . '` from '.$table . ' limit '.$dump['zeilen_offset'].','.($dump['anzahl_zeilen']));
-      $ergebnisse = @mysql_num_rows($rows_query);
+      $rows_query = mysqli_query($connection, 'select `' . implode('`,`', $table_list) . '` from '.$table . ' limit '.$dump['zeilen_offset'].','.($dump['anzahl_zeilen']));
+      $ergebnisse = @mysqli_num_rows($rows_query);
 
       $data = '';
 
@@ -113,14 +120,14 @@ $Id: backup_db.php 4174 2013-01-04 15:55:13Z web28 $
         //BOF Complete Inserts ja/nein
         if ($_SESSION['dump']['complete_inserts'] == 'yes') {
 
-          while ($rows = mysql_fetch_array($rows_query)) {
+          while ($rows = mysqli_fetch_array($rows_query)) {
             $insert = 'INSERT INTO `'.$table.'` (`' . implode('`, `', $table_list) . '`) VALUES (';
             foreach ($table_list as $column) {
               //EOF NEW TABLE  STRUCTURE  - LIKE MYSQLDUMPER -functions_dump.php line 186
               if (!isset($rows[$column])) {
                 $insert.='NULL,';
               } else if ($rows[$column]!='') {
-                $insert.='\''.mysql_real_escape_string($rows[$column]).'\',';
+                $insert.='\''.mysqli_real_escape_string($connection, $rows[$column]).'\',';
               } else {
                 $insert.='\'\',';
               }
@@ -131,14 +138,14 @@ $Id: backup_db.php 4174 2013-01-04 15:55:13Z web28 $
         } else {
 
           $lines = array();
-          while ($rows = mysql_fetch_array($rows_query)) {
+          while ($rows = mysqli_fetch_array($rows_query)) {
             $values=array();
             foreach ($table_list as $column) {
               //EOF NEW TABLE  STRUCTURE  - LIKE MYSQLDUMPER
               if (!isset($rows[$column])) {
                 $values[] ='NULL';
               } else if ($rows[$column]!='') {
-                $values[] ='\''.mysql_real_escape_string($rows[$column]).'\'';
+                $values[] ='\''.mysqli_real_escape_string($connection, $rows[$column]).'\'';
               } else {
                 $values[] ='\'\'';
               }
@@ -176,16 +183,16 @@ $Id: backup_db.php 4174 2013-01-04 15:55:13Z web28 $
     @xtc_set_time_limit(0);
 
     //BOF Disable "STRICT" mode!
-    $vers = @mysql_get_client_info();
+    $vers = @mysqli_get_client_info($connection);
     if(substr($vers,0,1) > 4) {
-      @mysql_query("SET SESSION sql_mode=''");
+      @mysqli_query($connection, "SET SESSION sql_mode=''");
     }
     //EOF Disable "STRICT" mode!
 
-    if (function_exists('mysql_get_client_info')) {
-      $mysql_version = '-- MySQL-Client-Version: ' . mysql_get_client_info() . "\n--\n";
+    if (function_exists('mysqli_get_client_info')) {
+      $mysqli_version = '-- MySQL-Client-Version: ' . mysqli_get_client_info($connection) . "\n--\n";
     } else {
-      $mysql_verion = '';
+      $mysqli_version = '';
     }
     $schema = '-- XT-Commerce & compatible' . "\n" .
               '--' . "\n" .
@@ -195,7 +202,7 @@ $Id: backup_db.php 4174 2013-01-04 15:55:13Z web28 $
               '--' . "\n" .
               '-- Database: ' . DB_DATABASE . "\n" .
               '-- Database Server: ' . DB_SERVER . "\n" .
-              '--' . "\n" . $mysql_version .
+              '--' . "\n" . $mysqli_version .
               '-- Backup Date: ' . date(PHP_DATE_TIME_FORMAT) . "\n\n";
     $backup_file =  'dbd_' . DB_DATABASE . '-' . date('YmdHis');
     $dump['file'] = DIR_FS_BACKUP . $backup_file;
@@ -212,14 +219,14 @@ $Id: backup_db.php 4174 2013-01-04 15:55:13Z web28 $
       $dump['complete_inserts']  = 'yes';
     }
 
-    $tabellen = mysql_query('SHOW TABLE STATUS');
-    $dump['num_tables'] = mysql_num_rows($tabellen);
+    $tabellen = mysqli_query($connection, 'SHOW TABLE STATUS');
+    $dump['num_tables'] = mysqli_num_rows($tabellen);
 
     //Tabellennamen in Array einlesen
     $dump['tables'] = Array();
     if ($dump['num_tables'] > 0){
       for ($i=0; $i < $dump['num_tables']; $i++){
-        $row = mysql_fetch_array($tabellen);
+        $row = mysqli_fetch_array($tabellen);
         $dump['tables'][$i] = $row['Name'];
       }
       $dump['nr'] = 0;

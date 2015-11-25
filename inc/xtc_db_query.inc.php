@@ -30,7 +30,7 @@
     //EOF - DokuMan - 2010-02-25 - also check for defined STORE_DB_TRANSACTIONS constant
     
 //    $queryStartTime = array_sum(explode(" ",microtime()));
-    $result = mysql_query($query, $$link) or xtc_db_error($query, mysql_errno(), mysql_error());
+    $result = mysqli_query($$link,$query) or xtc_db_error($query, mysqli_errno($$link), mysqli_error($$link));
 //	$queryEndTime = array_sum(explode(" ",microtime())); 
 //	$processTime = $queryEndTime - $queryStartTime;
 //	echo 'time: '.$processTime.' Query: '.$query.'<br />';
@@ -40,7 +40,7 @@
     if (defined('STORE_DB_TRANSACTIONS') && STORE_DB_TRANSACTIONS == 'true') {
        error_log('QUERY ' . $query . "\n", 3, STORE_PAGE_PARSE_TIME_LOG);
     //EOF - DokuMan - 2010-02-25 - also check for defined STORE_DB_TRANSACTIONS constant   
-       $result_error = mysql_error();
+       $result_error = mysqli_error($$link);
        error_log('RESULT ' . $result . ' ' . $result_error . "\n", 3, STORE_PAGE_PARSE_TIME_LOG);
     }
 

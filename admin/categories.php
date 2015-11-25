@@ -32,6 +32,9 @@ require_once (DIR_FS_INC.'xtc_wysiwyg.inc.php');
 require_once (DIR_WS_MODULES.'graduated-prices-edit.php');
 require_once (DIR_FS_INC.'xtc_get_order_description.inc.php');
 
+
+$link = xtc_db_connect() or die('Unable to connect to database server!');
+
 $currencies = new currencies();
 $catfunc = new categories();
 
@@ -132,23 +135,23 @@ if ($_GET['action']) {
 			//EOB setsflag
 
 		case 'update_category' :
-			$catfunc->insert_category($_POST, '', 'update');
+			$catfunc->insert_category($_POST, '', $link, 'update');
 			break;
 
 		case 'insert_category' :
-			$catfunc->insert_category($_POST, $current_category_id);
+			$catfunc->insert_category($_POST, $current_category_id, $link);
 			break;
 
 		case 'update_product' :
-			$catfunc->insert_product($_POST, '', 'update');
+			$catfunc->insert_product($_POST, '', $link,'update');
 			break;
 
 		case 'insert_product' :
-			$catfunc->insert_product($_POST, $current_category_id);
+			$catfunc->insert_product($_POST, $current_category_id, $link);
 			break;
 
 		case 'edit_crossselling' :
-			$catfunc->edit_cross_sell($_GET);
+			$catfunc->edit_cross_sell($_GET, $link);
 			break;
 
 		case 'multi_action_confirm' :

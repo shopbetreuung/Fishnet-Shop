@@ -61,7 +61,7 @@
     $time = xtc_db_prepare_input(date("Y-m-d H:i:s"));
 
     $content_query = xtc_db_query("SELECT MAX(content_group) AS content_group FROM ".TABLE_CONTENT_MANAGER."");
-    $content_data = mysql_fetch_row($content_query);
+    $content_data = mysqli_fetch_row($content_query);
     if ($_POST['content_group'] == '0' || $_POST['content_group'] == '') {
       $group_id = $content_data[0] + 1;
     } else {

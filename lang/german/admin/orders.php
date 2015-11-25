@@ -58,7 +58,7 @@ define('TEXT_BANK_ERRORCODE', 'Fehlercode:');
 define('HEADING_TITLE', 'Bestellungen');
 define('HEADING_TITLE_SEARCH', 'Bestell-Nr.:');
 define('HEADING_TITLE_STATUS', 'Status:');
-define('HEADING_CHOOSE_PAYMENT', 'Wählen Sie die Zahlung');
+define('HEADING_CHOOSE_PAYMENT', 'Zahlart');
 
 define('TABLE_HEADING_COMMENTS', 'Kommentar');
 define('TABLE_HEADING_CUSTOMERS', 'Kunden');

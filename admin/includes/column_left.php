@@ -210,16 +210,6 @@
 											"access"	=> "safeterms",
 											"check"		=> true);		
 											
-	$menu_items['content'][] = array(		"name" 		=> BOX_BACKUP,
-											"is_main"	=> true,
-											"link" 		=> xtc_href_link(FILENAME_BACKUP, '', 'NONSSL'),
-											"access"	=> "backup",
-											"check"		=> true);											
-											
-
-							
-											
-											
 				
 	// Setup: Marketing / Seo
 	// =================================================================================================================											
@@ -618,6 +608,12 @@
 											"link" 		=> xtc_href_link('shop_offline.php', '', 'NONSSL'),
 											"access"	=> "shop_offline",
 											"check"		=> true);																																							
+											
+	$menu_items['configuration'][] = array(	"name" 		=> BOX_BACKUP,
+											"is_main"	=> false,
+											"link" 		=> xtc_href_link(FILENAME_BACKUP, '', 'NONSSL'),
+											"access"	=> "backup",
+											"check"		=> true);																																															
 
 //echo '<nav class="navbar navbar-default navbar-fixed-top"><div class="container-fluid"><div class="navbar-header"><a class="navbar-brand" href="' . xtc_href_link('start.php', '', 'NONSSL') . '"><img class="img-responsive" style="height: 40px;" src="images/shophelferlogo.png" /></a></div>';
 

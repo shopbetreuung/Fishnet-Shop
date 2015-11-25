@@ -188,7 +188,7 @@
                   <tr>
                     <td width="98"><img src="images/icons/arrow02.gif" width="13" height="6" alt="" />Deutsch</td>
                     <td width="192"><img src="images/icons/icon-deu.gif" width="30" height="16" alt="" />
-                      <?php echo xtc_draw_radio_field_installer('LANGUAGE', 'german'); ?>
+                      <?php echo xtc_draw_radio_field_installer('LANGUAGE', 'german', true); ?>
                     </td>
                   </tr>
                   <tr>

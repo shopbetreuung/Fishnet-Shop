@@ -89,9 +89,9 @@ for ($i = 0, $n = sizeof($products); $i < $n; $i ++) {
                                 'LINK_DELETE' => $del_link,                  
                                 'PRODUCTS_PRICE' => $xtPrice->xtcFormat($products[$i]['price'] * $products[$i]['quantity'], true), 
                                 'PRODUCTS_SINGLE_PRICE' =>$xtPrice->xtcFormat($products[$i]['price'], true), 
+                                'PRODUCTS_VPE' =>$products[$i]['vpe'],
                                 'PRODUCTS_SHORT_DESCRIPTION' => xtc_get_short_description($products[$i]['id']), 
                                 'ATTRIBUTES' => '');
-
   //products attributes
   if (isset ($products[$i]['attributes']) && is_array($products[$i]['attributes'])) {
     $subindex = 0;

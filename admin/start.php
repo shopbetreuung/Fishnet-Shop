@@ -16,15 +16,6 @@ if($_POST){
         }
         break;
     }
-    if(isset($_POST['stock_range_number'])){
-        $_SESSION['stock_range_days'] = $_POST['stock_range_number'];
-    }
-    if(isset($_POST['cust_on_maps'])){
-        $data = $_POST['cust_on_maps'];
-        $_SESSION['cust_on_maps']['kg'] = $data['kg'];
-        $_SESSION['cust_on_maps']['von'] = $data['von'];
-        $_SESSION['cust_on_maps']['bis'] = $data['bis'];
-    }
     xtc_redirect(xtc_href_link(FILENAME_START));
 }
 require (DIR_WS_INCLUDES.'head.php');
@@ -104,7 +95,7 @@ ul {
 
 <?php require(DIR_WS_INCLUDES . 'header.php'); ?>
 
-<?php// include(DIR_WS_MODULES.FILENAME_SECURITY_CHECK); ?>
+<?php include(DIR_WS_MODULES.FILENAME_SECURITY_CHECK); ?>
 
 <?php
 

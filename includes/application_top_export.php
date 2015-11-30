@@ -42,7 +42,7 @@ if (version_compare(PHP_VERSION, '5.1.0', '>=')) {
 // EOF - Tomcraft - 2009-11-08 - FIX for PHP5.3 date_default_timezone_set
   
 // define the project version
-define('PROJECT_VERSION', 'modified eCommerce Shopsoftware');
+define('PROJECT_VERSION', 'shophelfer.com Shop');
 
 // BOF - Tomcraft - 2009-11-09 - Added missing definition for TAX_DECIMAL_PLACES
 define('TAX_DECIMAL_PLACES', 0);

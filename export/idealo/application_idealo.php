@@ -55,7 +55,7 @@ if (is_file(DIR_FS_CATALOG.'export/_error_reporting.shop')) {
 $php4_3_10 = (0 == version_compare(phpversion(), "4.3.10"));
 define('PHP4_3_10', $php4_3_10);
 // define the project version
-define('PROJECT_VERSION', 'modified eCommerce Shopsoftware');
+define('PROJECT_VERSION', 'shophelfer.com Shop');
 
 // set the type of request (secure or not)
 $request_type = (getenv('HTTPS') == '1' || getenv('HTTPS') == 'on') ? 'SSL' : 'NONSSL';

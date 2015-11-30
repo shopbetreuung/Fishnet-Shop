@@ -104,7 +104,7 @@ ul {
 
 <?php require(DIR_WS_INCLUDES . 'header.php'); ?>
 
-<?php include(DIR_WS_MODULES.FILENAME_SECURITY_CHECK); ?>
+<?php// include(DIR_WS_MODULES.FILENAME_SECURITY_CHECK); ?>
 
 <?php
 

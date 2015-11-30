@@ -17,18 +17,18 @@
           $rss->addAttribute('encoding', 'UTF-8');
           ?>
           <div style="background:#F0F1F1;font-size:11px; border:1px solid #999; padding:5px; font-weight: 700" align="left">
-            <a target="_blank" href="<?php echo $rss->channel->link; ?>"><?php echo utf8_decode($rss->channel->title); ?></a>
+            <a target="_blank" href="<?php echo $rss->channel->link; ?>"><?php echo $rss->channel->title; ?></a>
             <br/>
-            <?php echo utf8_decode($rss->channel->description); ?>
+            <?php echo $rss->channel->description; ?>
           </div>
           <br/>
           <?php        
           for ($i=0; $i<=3; $i++) {
           ?>
             <div class="feedtitle" align="left" style="padding:5px;font-size:11px;">
-              <a target="_blank" href="<?php echo $rss->channel->item[$i]->link; ?>"><?php echo utf8_decode($rss->channel->item[$i]->title); ?></a>
+              <a target="_blank" href="<?php echo $rss->channel->item[$i]->link; ?>"><?php echo $rss->channel->item[$i]->title; ?></a>
               <br/>
-              <?php echo utf8_decode($rss->channel->item[$i]->description); ?>
+              <?php echo $rss->channel->item[$i]->description; ?>
             </div>
             <hr noshade="noshade">
           <?php

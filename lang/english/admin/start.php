@@ -110,7 +110,6 @@ define('HEADING_TITLE', 'Welcome to the Admin Area');
 define('WIDGET_STATUS_NOT_ACTIVE_TEXT', 'Deactivated');
 define('WIDGET_STATUS_ACTIVE_TEXT', 'Activated');
 define('WIDGET_DROPDOW_TEXT', 'Select widget:');
-define('WIDGET_SAVE_POSITIONS', 'Save positions');
 // users online
 define('TABLE_CAPTION_USERS_ONLINE', 'Users Online');
 define('TABLE_CAPTION_USERS_ONLINE_HINT', '***Please click user name for details***');

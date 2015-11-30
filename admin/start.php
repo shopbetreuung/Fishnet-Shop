@@ -97,8 +97,6 @@ ul {
     background: red!important;
 }
 
-
-
     </style>
     
 </head>
@@ -159,7 +157,8 @@ echo '</form>';
 
 echo xtc_draw_form('save_widgets_positions', FILENAME_START, '');
 echo xtc_draw_hidden_field('action', 'widget_save_position');
-echo '<div class="pull-right">'. xtc_button(WIDGET_SAVE_POSITIONS,'submit', "id='submit_position'").'</div>';
+echo '<div class="pull-right"><button class="btn btn-default" type="submit" id="submit_position">&nbsp;<span class="glyphicon glyphicon-th"></span>&nbsp;</button></div>';
+
 ?>
     
 <h1 id="1"><?php echo HEADING_TITLE; ?></h1>
@@ -202,18 +201,34 @@ echo '</form>';
             }
         });
     });
-    
+	   
     $( "#submit_position" ).click(function() {
-        $( ".grid-stack-item" ).each(function(i) {
-            w_id = $(this).attr('id');
-            w_x = $(this).attr('data-gs-x');
-            w_y = $(this).attr('data-gs-y');
-            if(typeof w_id != 'undefined'){
-                $("#h_wx"+w_id).val( w_x );
-                $("#hw_y"+w_id).val( w_y );
-                console.log(w_id);
-	}
-        });
+		if ($(this).hasClass("enabled")) {
+			$( ".grid-stack-item" ).each(function(i) {
+				w_id = $(this).attr('id');
+				w_x = $(this).attr('data-gs-x');
+				w_y = $(this).attr('data-gs-y');
+				if(typeof w_id != 'undefined'){
+					$("#h_wx"+w_id).val( w_x );
+					$("#hw_y"+w_id).val( w_y );
+					console.log(w_id);
+				}
+			});
+			$(this).removeClass("enabled");
+		} else {
+	        var grid = $('.grid-stack').data('gridstack');
+			grid.enable();
+
+			$(this).addClass("enabled");
+			$(this).children("span").removeClass("glyphicon-th");
+			$(this).children("span").addClass("glyphicon-ok");
+			$(this).children("span").css("color", "green");
+			
+			$('select[name=widgets]').show();
+			
+			return false;		
+			
+		};
     });
 
 
@@ -228,7 +243,11 @@ echo '</form>';
 		var grid = $('.grid-stack').data('gridstack');
 		grid.cell_height(grid.cell_width() * 0.9);
 		
+		grid.disable();
+		$('select[name=widgets]').hide();
 	});
+	
+	
 </script>
 
 <?php require(DIR_WS_INCLUDES . 'footer.php'); ?>

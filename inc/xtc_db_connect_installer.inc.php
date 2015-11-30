@@ -16,7 +16,7 @@
    Released under the GNU General Public License
    ---------------------------------------------------------------------------------------*/
 
-  function xtc_db_connect_installer($server, $username, $password,$database, $link = 'db_link') {
+  function xtc_db_connect_installer($server, $username, $password, $database, $link = 'db_link') {
     global $$link, $db_error;
 
     $db_error = false;
@@ -35,7 +35,7 @@
 
     // set charset defined in configure.php
     if(!defined('DB_SERVER_CHARSET')) {
-      define('DB_SERVER_CHARSET','latin1');
+      define('DB_SERVER_CHARSET','utf8');
     }
  
     if(function_exists('mysqli_set_charset')) { //requires MySQL 5.0.7 or later

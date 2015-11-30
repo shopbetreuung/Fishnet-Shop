@@ -15,7 +15,10 @@
    --------------------------------------------------------------*/
 
   require('includes/application.php');
-
+  require_once(DIR_FS_CATALOG.'/includes/database_tables.php');
+  require_once(DIR_FS_INC.'xtc_db_connect.inc.php');
+  require_once(DIR_FS_INC.'xtc_db_query.inc.php');
+  
   // include needed functions
   require_once(DIR_FS_INC.'xtc_image.inc.php');
   require_once(DIR_FS_INC.'xtc_draw_separator.inc.php');
@@ -32,10 +35,17 @@
   define('DIR_WS_BASE',''); //web28 - 2010-12-13 - FIX for $messageStack icons
 
   //BOF - web28 - 2010-12-13 - redirect to db_upgrade.php, if database is already set up (do an update instead of a new installation)
-  include(DIR_FS_CATALOG.'/includes/configure.php');
-  $upgrade = true;;
-  if (DB_SERVER_USERNAME == 'root' && DB_SERVER_PASSWORD == 'root' && DB_DATABASE == 'modified-shop') {
-    $upgrade = false;
+  $upgrade = false;
+  if (file_exists(DIR_FS_CATALOG.'/includes/configure.php')) {
+	  ob_start();
+	  include(DIR_FS_CATALOG.'/includes/configure.php');
+	  if (xtc_db_connect() !== false) {
+		$version_query = xtc_db_query("SELECT version FROM " . TABLE_DATABASE_VERSION);
+		if (xtc_db_num_rows($version_query) == 1) {
+			$upgrade = true;
+		}
+	  }
+	  ob_clean();
   }
   if (isset($_POST['db_upgrade']) && ($_POST['db_upgrade'] == true)) {
     xtc_redirect('db_upgrade.php?upgrade_redir=1', '', 'NONSSL');
@@ -202,11 +212,11 @@
                   <input type="hidden" name="action" value="process" />
                   <table width="95%" border="0" cellpadding="0" cellspacing="0">
                     <tr>
-                      <?php /* if($upgrade) { ?>
+                      <?php if($upgrade) { ?>
                         <td style="padding-left:4px"><img src="images/icons/arrow02.gif" width="13" height="6" alt="" /></td>
                         <td><?php echo TEXT_DB_UPGRADE; ?></td>
                         <td  style="padding-right:10px"><?php echo xtc_draw_checkbox_field_installer('db_upgrade','',true); //enable upgrade by default ?></td>
-                      <?php } */ ?>
+                      <?php } ?>
                       <td align="right"><input type="image" src="buttons/<?php echo $lang;?>/button_continue.gif"></td>
                     </tr>
                   </table>

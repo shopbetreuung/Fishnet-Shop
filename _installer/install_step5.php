@@ -71,7 +71,7 @@
                     $db['DB_SERVER_PASSWORD'] = trim(stripslashes($_POST['DB_SERVER_PASSWORD']));
                     $db['DB_DATABASE'] = trim(stripslashes($_POST['DB_DATABASE']));
                     $db_error = false;
-                    xtc_db_connect_installer($db['DB_SERVER'], $db['DB_SERVER_USERNAME'], $db['DB_SERVER_PASSWORD']);
+                    xtc_db_connect_installer($db['DB_SERVER'], $db['DB_SERVER_USERNAME'], $db['DB_SERVER_PASSWORD'], $db['DB_DATABASE']);
                     if (!$db_error) {
                       xtc_db_test_connection($db['DB_DATABASE']);
                     }

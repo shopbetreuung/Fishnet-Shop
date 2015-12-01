@@ -36,21 +36,13 @@
       @mysqli_query("SET SESSION sql_mode=''");
     }
 
-    if (mysqli_connect_errno())
-    {
+    if (mysqli_connect_errno()) {
         echo "Failed to connect to MySQL: " . mysqli_connect_error();
     }
 
-    // set charset defined in configure.php
-    if(!defined('DB_SERVER_CHARSET')) {
-      define('DB_SERVER_CHARSET','utf8');
-    }
-    if(function_exists('mysqli_set_charset')) { //requires MySQL 5.0.7 or later
-      mysqli_set_charset($$link, DB_SERVER_CHARSET);
-    } else {
-      mysqli_query($$link, 'SET NAMES '.DB_SERVER_CHARSET);
-    }    
-
+    
+    mysqli_set_charset($$link, 'utf8');
+    
     return $$link;
   }
 ?>

@@ -51,7 +51,7 @@
         
         if(!$wholesaler_email){
             $error[] = ERROR_TEXT_EMAIL;
-        } elseif(xtc_validate_email($wholesaler_email)){
+        } elseif(!xtc_validate_email($wholesaler_email)){
             $error[] = ERROR_TEXT_EMAIL_INVALID;
         }
         
@@ -63,6 +63,13 @@
         if ($_GET['action'] == 'insert') {
             xtc_db_perform(TABLE_WHOLESALERS, $sql_data_array);
             $wholesaler_id = xtc_db_insert_id();
+			
+			// BOF - Mail Manager Template
+			xtc_db_query("INSERT INTO email_manager (em_name, em_language, em_body, em_delete, em_type, em_body_txt) VALUES
+('".$wholesaler_file."',	2,	'<p>Sehr geehrte Damen und Herren,</p>\\r\\n<p>wir m&ouml;chten bitte folgende Produkte bei Ihnen Nachbestellen:</p>\\r\\n<p><br />\\r\\n{foreach name=aussen item=order_values from=\$PRODUCTS}{\$order_values.products_quantity} x {\$order_values.products_name}<br />\\r\\n{/foreach}</p>',	0,	'wholesaler',	'Sehr geehrte Damen und Herren,\\r\\n\\r\\nwir möchten bitte folgende Produkte bei Ihnen Nachbestellen\\r\\n\\r\\n{foreach name=aussen item=order_values from=\$PRODUCTS}\\r\\n{\$order_values.products_quantity} x {\$order_values.products_name}\\r\\n{/foreach}');
+");
+			// EOF - Mail Manager Template
+			
         } elseif ($_GET['action'] == 'save') {
               xtc_db_perform(TABLE_WHOLESALERS, $sql_data_array, 'update', "wholesaler_id = '" . xtc_db_input($wholesaler_id) . "'");
         }

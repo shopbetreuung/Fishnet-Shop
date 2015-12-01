@@ -33,17 +33,7 @@
       @mysqli_query($$link, "SET SESSION sql_mode=''");
     }
 
-    // set charset defined in configure.php
-    if(!defined('DB_SERVER_CHARSET')) {
-      define('DB_SERVER_CHARSET','utf8');
-    }
- 
-    if(function_exists('mysqli_set_charset')) { //requires MySQL 5.0.7 or later
-      mysqli_set_charset($$link, DB_SERVER_CHARSET);
-    } else {
-      $collation = DB_SERVER_CHARSET == 'utf8' ? 'utf8_general_ci' : 'latin1_german1_ci';      
-      mysqli_query($$link, 'SET NAMES '.DB_SERVER_CHARSET. ' COLLATE '. $collation );      
-    }
+    mysqli_set_charset($$link, 'utf8');
 
     return $$link;
   }

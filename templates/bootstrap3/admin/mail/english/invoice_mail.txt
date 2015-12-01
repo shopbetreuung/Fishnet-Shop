@@ -1,6 +1,0 @@
-
-Dear customer,
-
-the attachment of this e-Mail includes the invoice of your order from {$ORDER_DATE}.
-
-The state of your order you can inspect under: {$ORDER_LINK}.

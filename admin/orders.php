@@ -301,8 +301,8 @@ if (($action == 'edit' || $action == 'update_order') && $order_exists) {
       $smarty->assign('NOTIFY_COMMENTS', $notify_comments);
       $smarty->assign('ORDER_STATUS', $orders_status_array[$status]);
 
-      $html_mail = $smarty->fetch(CURRENT_TEMPLATE.'/admin/mail/'.$order->info['language'].'/invoice_mail.html');
-      $txt_mail = $smarty->fetch(CURRENT_TEMPLATE.'/admin/mail/'.$order->info['language'].'/invoice_mail.txt');
+      $html_mail = $smarty->fetch('db:invoice_mail.html');
+      $txt_mail = $smarty->fetch('db:invoice_mail.txt');
 
       $pdffile= DIR_FS_ADMIN.get_pdf_invoice_filename( $oID );
       $pdffile_downloadname = get_pdf_invoice_download_filename( $oID );
@@ -476,8 +476,8 @@ switch ($action) {
         $smarty->assign('ORDER_DATE', xtc_date_long($check_status['date_purchased']));
         $smarty->assign('NOTIFY_COMMENTS', nl2br($notify_comments));
         $smarty->assign('ORDER_STATUS', $orders_status_array[$status]);
-        $html_mail = $smarty->fetch(CURRENT_TEMPLATE.'/admin/mail/'.$order->info['language'].'/change_order_mail.html');
-        $txt_mail = $smarty->fetch(CURRENT_TEMPLATE.'/admin/mail/'.$order->info['language'].'/change_order_mail.txt');
+        $html_mail = $smarty->fetch('db:change_order_mail.html');
+        $txt_mail = $smarty->fetch('db:change_order_mail.txt');
         $order_subject_search = array('{$nr}', '{$date}', '{$lastname}', '{$firstname}');
         $order_subject_replace = array($oID, strftime(DATE_FORMAT_LONG), $order->customer['lastname'], $order->customer['firstname']);
         $order_subject = str_replace($order_subject_search, $order_subject_replace, EMAIL_BILLING_SUBJECT);
@@ -563,8 +563,8 @@ switch ($action) {
 			$smarty->assign('NOTIFY_COMMENTS', $notify_comments);
 			$smarty->assign('ORDER_STATUS', $orders_status_array[$status]);
 
-			$html_mail = $smarty->fetch(CURRENT_TEMPLATE.'/admin/mail/'.$order->info['language'].'/invoice_mail.html');
-			$txt_mail = $smarty->fetch(CURRENT_TEMPLATE.'/admin/mail/'.$order->info['language'].'/invoice_mail.txt');
+			$html_mail = $smarty->fetch('db:invoice_mail.html');
+			$txt_mail = $smarty->fetch('db:invoice_mail.txt');
 
 			$pdffile= DIR_FS_ADMIN.get_pdf_invoice_filename( $oID );
 			$pdffile_downloadname = get_pdf_invoice_download_filename( $oID );

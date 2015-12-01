@@ -96,7 +96,6 @@ if ($product->getAttributesCount() > 0) {
 		                                                        AND pa.options_id = '".$products_options_name['products_options_id']."'
 		                                                        AND pa.options_values_id = pov.products_options_values_id
 		                                                        AND pov.language_id = '".(int) $_SESSION['languages_id']."'
-		                                                        AND pvpe.language_id = '".(int) $_SESSION['languages_id']."'
 		                                                   ORDER BY pa.sortorder, pa.options_values_id");
 		}
 		$col = 0;

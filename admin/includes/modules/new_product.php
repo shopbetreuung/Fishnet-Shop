@@ -111,16 +111,6 @@
             </p>
         </div>
         <div class='col-xs-12'> <br> </div>
-  <?php 
-  #Display of error message for wholesaler
-  if(isset($_GET['wError'])){
-      if($_GET['wError'] == 1){
-            echo ERROR_WHOLESALER_NOT_SELECTED."<br />";
-        } elseif($_GET['wError'] == 2) {
-            echo ERROR_WHOLESALER_NUMBER."<br />";
-        }
-  }   
-  ?>
 <div class='col-xs-12'>
 <hr>
     <div class='col-sm-6 col-xs-12'>

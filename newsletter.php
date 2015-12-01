@@ -51,8 +51,8 @@ if (isset ($_GET['action']) && ($_GET['action'] == 'process')) {
 	$smarty->caching = false;
 
 	// create mails
-	$html_mail = $smarty->fetch(CURRENT_TEMPLATE.'/mail/'.$_SESSION['language'].'/newsletter_mail.html');
-	$txt_mail = $smarty->fetch(CURRENT_TEMPLATE.'/mail/'.$_SESSION['language'].'/newsletter_mail.txt');
+	$html_mail = $smarty->fetch('db:newsletter_mail.html');
+	$txt_mail = $smarty->fetch('db:newsletter_mail.txt');
 
 	// Check if email exists 
   //BOF - web28 - 2010-02-09: NEWSLETTER ERROR HANDLING

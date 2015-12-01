@@ -1,3 +1,9 @@
+<?php
+
+	define('TABLE_CELL_NEW_CUSTOMERS_DELETE', 'l&ouml;schen');
+	
+?>
+
 <p class="h3" style="margin-top: 0;"><?php echo TABLE_CAPTION_NEW_ORDERS; ?> <small><?php echo TABLE_CAPTION_NEW_ORDERS_COMMENT; ?></small></p>
 
 <table class="table table-striped">
@@ -16,9 +22,9 @@
 	while($row = xtc_db_fetch_array($ergebnis)){
 	?>
 		<tr>
-			<td><?php  echo $row-> orders_id; ?></td>
-			<td><?php echo $row-> date_purchased; ?></td>
-			<td><?php  echo $row-> delivery_name; ?></td>
+			<td><?php  echo $row["orders_id"]; ?></td>
+			<td><?php echo $row["date_purchased"]; ?></td>
+			<td><?php  echo $row["delivery_name"]; ?></td>
 			<td><a href="orders.php?page=1&oID=<?php echo $row-> orders_id; ?>&action=edit"><?php echo TABLE_CELL_NEW_CUSTOMERS_EDIT; ?></a></td>
 			<td><a href="orders.php?page=1&oID=<?php echo $row-> orders_id; ?>&action=delete"><?php echo TABLE_CELL_NEW_CUSTOMERS_DELETE; ?></a></td>
 		</tr>

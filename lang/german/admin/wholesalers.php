@@ -37,7 +37,7 @@ define('TEXT_EDIT_INTRO', 'Bitte f&uuml;llen Sie die folgenden Informationen zum
 
 define('TEXT_WHOLESALERS_NAME', 'Name:');
 define('TEXT_WHOLESALERS_EMAIL', 'E-Mail:');
-define('TEXT_WHOLESALERS_FILE', 'Wholesaler email template (example.html):');
+define('TEXT_WHOLESALERS_FILE', 'Gro&szlig;h&auml;ndler EMail Manager Vorlage (z.B. example):');
 
 define('TEXT_DELETE_INTRO', 'Are you sure you want to delete this wholesaler?');
 define('TEXT_DELETE_IMAGE', 'Delete wholesalers image?');

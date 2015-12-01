@@ -377,8 +377,8 @@
         $smarty->assign('PASSWORD', $customers_password_encrypted);
         $smarty->caching = 0;
 
-        $html_mail = $smarty->fetch(CURRENT_TEMPLATE.'/admin/mail/'.$_SESSION['language'].'/create_account_mail.html');
-        $txt_mail = $smarty->fetch(CURRENT_TEMPLATE.'/admin/mail/'.$_SESSION['language'].'/create_account_mail.txt');
+        $html_mail = $smarty->fetch('db:create_account_mail_admin.html');
+        $txt_mail = $smarty->fetch('db:create_account_mail_admin.txt');
 
         xtc_php_mail(EMAIL_SUPPORT_ADDRESS,
                      EMAIL_SUPPORT_NAME,

@@ -1,7 +1,7 @@
 <?php
 define( PDFBILL_LOADED_PROFILE, 'Geladenes Profil: ');
 define( PDFBILL_LOAD_PROFILE, 'Lade Profil: ');
-define( PDFBILL_PROFILE_LANG, 'Profil für Sprache: ');
+define( PDFBILL_PROFILE_LANG, 'Profil fÃ¼r Sprache: ');
 
 
 $help_var_orderdata = kl('
@@ -158,31 +158,31 @@ function texts_html( $texts ) {
                  'pos_x'                                  => 'Horizontal',
                  'pos_y'                                  => 'Vertikal',
                  'width'                                  => 'Breite',
-                 'height'                                 => 'Höhe',
+                 'height'                                 => 'HÃ¶he',
                  'help'                                   => $dimensions_helptext );
   $text_std_dimensions_rellist = array( 
                  'question'                               => 'Dimension:',
                  'pos_x'                                  => 'Horizontal relativ',
                  'pos_y'                                  => 'Vertikal relativ',
                  'width'                                  => 'Breite',
-                 'height'                                 => 'Höhe',
+                 'height'                                 => 'HÃ¶he',
                  'help'                                   => $dimensions_helptext );
   $text_std_dimensions_image = array( 
                  'question'                               => 'Dimension:',
                  'pos_x'                                  => 'Horizontal',
                  'pos_y'                                  => 'Vertikal',
                  'width'                                  => 'Breite',
-                 'height'                                 => 'Höhe',
+                 'height'                                 => 'HÃ¶he',
                  'help'                                   => $dimensions_helptext_image );
   $txt_std_position = array( 
                  'question'                               => 'Ausrichtung:',
-                 'chk_text_l'                             => 'Linksbündig',
+                 'chk_text_l'                             => 'LinksbÃ¼ndig',
                  'chk_text_c'                             => 'Zentriert',
-                 'chk_text_r'                             => 'Rechtsbündig',
+                 'chk_text_r'                             => 'RechtsbÃ¼ndig',
                  'chk_text_j'                             => 'Blocksatz'    );
   $txt_std_color = array( 
                  'question'                               => 'Schriftfarbe:',
-                 'button_text'                            => 'Auswählen' );
+                 'button_text'                            => 'AuswÃ¤hlen' );
   $txt_std_font_style = array( 
                  'question'                               => 'Schriftstil:',
                  'text_bold'                              => 'Fett',           
@@ -200,7 +200,7 @@ function texts_html( $texts ) {
              
              // Frage ob es ein Lieferschein oder Rechnungsprofil sein soll
              'typeofbill' => array( 
-               'question'                                 => 'Profil für:',
+               'question'                                 => 'Profil fÃ¼r:',
                'text_1'                                   => 'Rechnung',
                'text_2'                                   => 'Lieferschein' ),
              // Frage ob es ein Lieferschein oder Rechnungsprofil sein soll
@@ -208,7 +208,7 @@ function texts_html( $texts ) {
                'question'                                 => 'Sprache' ),
              'default_profile' => array( 
                'question'                               => 'Default',
-               'chk_text'                               => 'Dieses Profil ist gültig wenn kein Profil gewählt' ),
+               'chk_text'                               => 'Dieses Profil ist gÃ¼ltig wenn kein Profil gewÃ¤hlt' ),
                
 
              'profile_options' => array(   
@@ -235,7 +235,7 @@ function texts_html( $texts ) {
                  'question'                               => 'Schriftart:'),
                'headtext_font_style'                      => $txt_std_font_style,
                'headtext_font_size' => array(     
-                 'question'                               => 'Schriftgröße:' ),
+                 'question'                               => 'SchriftgrÃ¶ÃŸe:' ),
                'headtext_dimensions'                      => $text_std_dimensions
                ),
   
@@ -256,16 +256,16 @@ function texts_html( $texts ) {
                  'question'                               => 'Schriftart:'),
                'addressblock_font_style'                  => $txt_std_font_style,
                'addressblock_font_size' => array(     
-                 'question'                               => 'Schriftgröße:' ),
+                 'question'                               => 'SchriftgrÃ¶ÃŸe:' ),
 
-               'addressblock_trenn2'                      => 'Empfängeradresse',
+               'addressblock_trenn2'                      => 'EmpfÃ¤ngeradresse',
                'addressblock_position2'                   => $txt_std_position,
                'addressblock_font_color2'                 => $txt_std_color,
                'addressblock_font_type2' => array( 
                  'question2'                              => 'Schriftart:'),
                'addressblock_font_style2'                 => $txt_std_font_style,
                'addressblock_font_size2' => array(     
-                 'question'                               => 'Schriftgröße:' ),
+                 'question'                               => 'SchriftgrÃ¶ÃŸe:' ),
 
                'addressblock_dimensions'                  => $text_std_dimensions,
                'addressblock_bind'                        => $txt_std_bind 
@@ -304,7 +304,7 @@ function texts_html( $texts ) {
                  'question'                               => 'Schriftart:'),
                'datafields_font_style'                    => $txt_std_font_style,
                'datafields_font_size' => array(     
-                 'question'                               => 'Schriftgröße:' ),
+                 'question'                               => 'SchriftgrÃ¶ÃŸe:' ),
 
                'datafields_trenn2'                       => 'Rechte Spalte',
                'datafields_position2'                      => $txt_std_position,
@@ -313,7 +313,7 @@ function texts_html( $texts ) {
                  'question'                               => 'Schriftart:'),
                'datafields_font_style2'                    => $txt_std_font_style,
                'datafields_font_size2' => array(     
-                 'question'                               => 'Schriftgröße:' ),
+                 'question'                               => 'SchriftgrÃ¶ÃŸe:' ),
 
                'datafields_dimensions'                    => $text_std_dimensions,
                'datafields_bind'                          => $txt_std_bind,
@@ -348,7 +348,7 @@ function texts_html( $texts ) {
 
              'billhead' => array(                    // billhead (4)
                'headline' => array( 
-                 'headline'                               => 'Rechnungsüberschrift (4)' ),
+                 'headline'                               => 'RechnungsÃ¼berschrift (4)' ),
                'billhead_display' => array( 
                  'question'                               => 'Anzeige',
                  'chk_text'                               => 'anzeigen' ),
@@ -361,7 +361,7 @@ function texts_html( $texts ) {
                  'question'                               => 'Schriftart:'),
                'billhead_font_style'                      => $txt_std_font_style,
                'billhead_font_size' => array(     
-                 'question'                               => 'Schriftgröße:' ),
+                 'question'                               => 'SchriftgrÃ¶ÃŸe:' ),
                'billhead_dimensions'                      => $text_std_dimensions
                ),
 
@@ -385,7 +385,7 @@ function texts_html( $texts ) {
                  'question'                            => 'Schriftart:'),
                'freeinfo_font_style'                   => $txt_std_font_style,
                'freeinfo_font_size' => array(     
-                 'question'                            => 'Schriftgröße:' ),
+                 'question'                            => 'SchriftgrÃ¶ÃŸe:' ),
                'freeinfo_dimensions'                   => $text_std_dimensions
                ),
 
@@ -397,7 +397,7 @@ function texts_html( $texts ) {
                
              'listhead' => array(                    // listhead (2)
                'headline' => array( 
-                 'headline'                               => 'Listenüberschrift (2)' ),
+                 'headline'                               => 'ListenÃ¼berschrift (2)' ),
                'listhead_display' => array( 
                  'question'                               => 'Anzeige',
                  'chk_text'                               => 'anzeigen' ),
@@ -410,7 +410,7 @@ function texts_html( $texts ) {
                  'question'                               => 'Schriftart:'),
                'listhead_font_style'                      => $txt_std_font_style,
                'listhead_font_size' => array(     
-                 'question'                               => 'Schriftgröße:' ),
+                 'question'                               => 'SchriftgrÃ¶ÃŸe:' ),
                'listhead_dimensions'                      => $text_std_dimensions
                ),                 
 
@@ -423,10 +423,10 @@ function texts_html( $texts ) {
                  'question'                               => 'Schriftart:'),
                'poslist_font_style'                      => $txt_std_font_style,
                'poslist_font_size' => array(     
-                 'question'                               => 'Schriftgröße:' ),
+                 'question'                               => 'SchriftgrÃ¶ÃŸe:' ),
                'poslist_texts' => array( 
                  'question'        => 'Datenspalte',
-                 'text_a'          => 'Überschrift',
+                 'text_a'          => 'Ãœberschrift',
                  'text_b'          => 'Wert',
                  'text_c'          => 'Breite',
                  'pos_left'        => 'links',
@@ -453,7 +453,7 @@ function texts_html( $texts ) {
                  'question'                               => 'Schriftart:'),
                'resumefields_font_style'                    => $txt_std_font_style,
                'resumefields_font_size' => array(     
-                 'question'                               => 'Schriftgröße:' ),
+                 'question'                               => 'SchriftgrÃ¶ÃŸe:' ),
                                   
                'resumefields_trenn2'                       => 'Rechte Spalte',
                'resumefields_position2'                      => $txt_std_position,
@@ -462,7 +462,7 @@ function texts_html( $texts ) {
                  'question'                               => 'Schriftart:'),
                'resumefields_font_style2'                    => $txt_std_font_style,
                'resumefields_font_size2' => array(     
-                 'question'                               => 'Schriftgröße:' ),
+                 'question'                               => 'SchriftgrÃ¶ÃŸe:' ),
 
                'resumefields_dimensions'                    => $text_std_dimensions_rellist,
                
@@ -499,7 +499,7 @@ function texts_html( $texts ) {
                  'question'                               => 'Schriftart:'),
                'subtext_font_style'                       => $txt_std_font_style,
                'subtext_font_size' => array(     
-                 'question'                               => 'Schriftgröße:' ),
+                 'question'                               => 'SchriftgrÃ¶ÃŸe:' ),
                'subtext_dimensions'                       => $text_std_dimensions_rellist
                ),
   
@@ -514,7 +514,7 @@ function texts_html( $texts ) {
                  'question'                               => 'Schriftart:'),
                'footer_font_style'                        => $txt_std_font_style,
                'footer_font_size' => array(     
-                 'question'                               => 'Schriftgröße:' ),
+                 'question'                               => 'SchriftgrÃ¶ÃŸe:' ),
                  
                'footer_display_1' => array( 
                  'question'                               => 'Block Anzeigen',
@@ -557,27 +557,27 @@ function texts_html( $texts ) {
                  'question'                               => 'Anzeige',
                  'chk_text'                               => 'anzeigen' ),
                'terms_formtext' => array( 
-                 'question'                               => 'Überschrift:',
+                 'question'                               => 'Ãœberschrift:',
                  'fieldtext'                              => ''),               
                'terms_head_position'              => array( 
-                 'question'                               => 'Ausrichtung Überschrift:',
-                 'chk_text_l'                             => 'Linksbündig',
+                 'question'                               => 'Ausrichtung Ãœberschrift:',
+                 'chk_text_l'                             => 'LinksbÃ¼ndig',
                  'chk_text_c'                             => 'Zentriert',
-                 'chk_text_r'                             => 'Rechtsbündig' ),
+                 'chk_text_r'                             => 'RechtsbÃ¼ndig' ),
                'terms_head_font_style'            => array( 
-                 'question'                               => 'Schriftstil Überschrift:',
+                 'question'                               => 'Schriftstil Ãœberschrift:',
                  'text_bold'                              => 'Fett',           
                  'text_italic'                            => 'Kursiv',         
                  'text_underlined'                        => 'Unterstrichen' ),
                'terms_head_font_size' => array( 
-                 'question'                               => 'Schriftgröße Überschift:' ),
+                 'question'                               => 'SchriftgrÃ¶ÃŸe Ãœberschift:' ),
 
                'terms_font_color'                         => $txt_std_color,
                'terms_font_type' => array( 
                  'question'                               => 'Schriftart:'),
                'terms_font_style'                         => $txt_std_font_style,
                'terms_font_size' => array( 
-                 'question'                               => 'Schriftgröße:' )
+                 'question'                               => 'SchriftgrÃ¶ÃŸe:' )
                ),
              
              'profile_save' => array(                    // Sektion Staffelpreise

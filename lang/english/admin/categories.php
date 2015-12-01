@@ -121,7 +121,7 @@ define('TEXT_PRODUCT_NOT_AVAILABLE', 'Deactivated');
 define('TEXT_PRODUCTS_MANUFACTURER', 'Products Manufacturer:');
 define('TEXT_PRODUCTS_MANUFACTURER_MODEL', 'Manufacturer model no.:');
 define('TEXT_PRODUCTS_WHOLESALER', 'Products Wholesaler:');
-define('TEXT_PRODUCTS_WHOLESALER_REORDER', 'Reorder number:');
+define('TEXT_PRODUCTS_WHOLESALER_REORDER', 'Reorder from X units:');
 define('TEXT_PRODUCTS_NAME', 'Products Name:');
 define('TEXT_PRODUCTS_DESCRIPTION', 'Products Description:');
 define('TEXT_PRODUCTS_QUANTITY', 'Products Quantity:');
@@ -143,9 +143,6 @@ define('TEXT_COPY_AS_DUPLICATE', 'Duplicate product');
 define('ERROR_CANNOT_LINK_TO_SAME_CATEGORY', 'Error: Can not link products in the same directory.');
 define('ERROR_CATALOG_IMAGE_DIRECTORY_NOT_WRITEABLE', 'Error: Catalog images directory is not writeable: ' . DIR_FS_CATALOG_IMAGES);
 define('ERROR_CATALOG_IMAGE_DIRECTORY_DOES_NOT_EXIST', 'Error: Catalog images directory does not exist: ' . DIR_FS_CATALOG_IMAGES);
-
-define('ERROR_WHOLESALER_NOT_SELECTED', 'Wholesaler not selected.');
-define('ERROR_WHOLESALER_NUMBER', 'Reorder number must be less than product quantity.');
 
 define('TEXT_PRODUCTS_DISCOUNT_ALLOWED','Max. allowed Discount:');
 define('HEADING_PRICES_OPTIONS','<b>Price options</b>');

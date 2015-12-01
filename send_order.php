@@ -30,15 +30,7 @@ if ($_SESSION['customer_id'] == $order_check['customers_id'] || $send_by_admin) 
 //EOF - web28 - 2010-03-20 - Send Order by Admin
 
   $order = new order($insert_id);
-    $order_id_templates = $order->info['order_id'];
-    #Find language ID and signatur html/txt
-    $language_query = xtc_db_query("SELECT languages_id FROM ".TABLE_LANGUAGES." WHERE directory = '".$order->info['language']."'");
-    $language = xtc_db_fetch_array($language_query);   
 
-    $email_signatur_query = xtc_db_query("SELECT em_body, em_body_txt FROM ".TABLE_EMAILS_MANAGER." WHERE em_language = '".$language['languages_id']."' AND em_name = 'signatur'");
-    $email_signatur = xtc_db_fetch_array($email_signatur_query);
-    $signatur_html = $email_signatur['em_body'];
-    $signatur_txt = $email_signatur['em_body_txt'];
 // BOF - Tomcraft - 2009-10-03 - Paypal Express Modul
   if (isset($_SESSION['paypal_express_new_customer']) && $_SESSION['paypal_express_new_customer'] == 'true' && isset($_SESSION['ACCOUNT_PASSWORD']) && $_SESSION['ACCOUNT_PASSWORD'] == 'true') {
     require_once (DIR_FS_INC.'xtc_create_password.inc.php');
@@ -163,42 +155,16 @@ if ($_SESSION['customer_id'] == $order_check['customers_id'] || $send_by_admin) 
       $smarty->assign('PAYMENT_BANKTRANSFER_IBAN', $rec['banktransfer_iban']);
       $smarty->assign('PAYMENT_BANKTRANSFER_BANKNAME', $rec['banktransfer_bankname']);
 
-    #Find template
-    $email_template_query = xtc_db_query("SELECT em_body, em_body_txt FROM ".TABLE_EMAILS_MANAGER." WHERE em_language = '".$language['languages_id']."' AND em_name = 'sepa_info'");
-    $email_template = xtc_db_fetch_array($email_template_query);
-    
-    $sepa_info_html_template = str_replace('[SIGNATUR]', $signatur_html, $email_template['em_body']);
-
-    $myfile = fopen("temp_template_sepai".$order_id_templates.".html", "w") or die("Unable to open file!");
-    fwrite($myfile, $sepa_info_html_template);
-    
-      $sepa_info = $smarty->fetch(realpath(dirname(__FILE__))."temp_template_sepa".$order_id_templates.".html");
+      $sepa_info = $smarty->fetch('db:sepa_info.html');
           
-    fclose($myfile);
-    unlink("temp_template_sepai".$order_id_templates.".html");
-            
       $smarty->assign('PAYMENT_INFO_HTML', $sepa_info);
       $smarty->assign('PAYMENT_INFO_TXT', str_replace("<br />", "\n", $sepa_info));
       
       // separate pre-notification necessary?
       if ($rec['banktransfer_owner_email'] != $order->customer['email_address']) {
         $banktransfer_owner_email = $rec['banktransfer_owner_email'];
-
-        #Find template
-        $email_template_query = xtc_db_query("SELECT em_body, em_body_txt FROM ".TABLE_EMAILS_MANAGER." WHERE em_language = '".$language['languages_id']."' AND em_name = 'sepa_mail'");
-        $email_template = xtc_db_fetch_array($email_template_query);
-        
-        $sepa_mail_html_template = str_replace('[SIGNATUR]', $signatur_html, $email_template['em_body']);
-        $sepa_mail_txt_template = str_replace('[SIGNATUR]', $signatur_txt, $email_template['em_body_txt']);
-        
-        $myfile = fopen("temp_template_sepa".$order_id_templates.".html", "w") or die("Unable to open file!");
-	fwrite($myfile, $sepa_mail_html_template);
-        
-        $sepa_html_mail = $smarty->fetch(realpath(dirname(__FILE__))."temp_template_sepa".$order_id_templates.".html");
-        $sepa_txt_mail = $smarty->fetch($sepa_mail_html_template);
-        
-        fclose($myfile);
-	unlink("temp_template_sepa".$order_id_templates.".html");
+        $sepa_html_mail = $smarty->fetch('db:sepa_mail.html');
+        $sepa_txt_mail = $smarty->fetch('db:sepa_mail.txt');
         
         // no pre-notification in order mail
         $smarty->clear_assign('PAYMENT_INFO_HTML');
@@ -226,21 +192,9 @@ if ($_SESSION['customer_id'] == $order_check['customers_id'] || $send_by_admin) 
   $smarty->assign('REVOCATION_TXT', $revocation); //replace br, strip_tags, html_entity_decode are allready execute in xtc_php_mail  function
 
   // EOF - Tomcraft - 2011-06-17 - Added revocation to email
-  #Find template
-  $email_template_query = xtc_db_query("SELECT em_body, em_body_txt FROM ".TABLE_EMAILS_MANAGER." WHERE em_language = '".$language['languages_id']."' AND em_name = 'order_mail'");
-  $email_template = xtc_db_fetch_array($email_template_query); 
   
-  $order_mail_html_template = str_replace('[SIGNATUR]', $signatur_html, $email_template['em_body']);
-  $order_mail_txt_template = str_replace('[SIGNATUR]', $signatur_txt, $email_template['em_body_txt']);
-
-	$myfile = fopen("temp_template_order".$order_id_templates.".html", "w") or die("Unable to open file!");
-	fwrite($myfile, $order_mail_html_template);
-
-	$html_mail = $smarty->fetch(realpath(dirname(__FILE__))."temp_template_order".$order_id_templates.".html");
-	$txt_mail = $smarty->fetch($order_mail_txt_template);
-
-	fclose($myfile);
-	unlink("temp_template_order".$order_id_templates.".html");
+  $html_mail = $smarty->fetch('db:order_mail.html');
+  $txt_mail = $smarty->fetch('db:order_mail.txt');
 
   //email attachments
   $email_attachments = defined('EMAIL_BILLING_ATTACHMENTS') ? EMAIL_BILLING_ATTACHMENTS : '';

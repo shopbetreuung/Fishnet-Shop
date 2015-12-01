@@ -107,8 +107,8 @@
       $smarty->assign('WEBSITE', HTTP_SERVER  . DIR_WS_CATALOG);
 
 
-      $html_mail=$smarty->fetch(CURRENT_TEMPLATE . '/admin/mail/'.$_SESSION['language'].'/send_coupon.html');
-      $txt_mail=$smarty->fetch(CURRENT_TEMPLATE . '/admin/mail/'.$_SESSION['language'].'/send_coupon.txt');
+      $html_mail=$smarty->fetch('db:send_coupon.html');
+      $txt_mail=$smarty->fetch('db:send_coupon.txt');
 
       xtc_php_mail(EMAIL_BILLING_ADDRESS,EMAIL_BILLING_NAME, $mail['customers_email_address'] , $mail['customers_firstname'] . ' ' . $mail['customers_lastname'] , '', EMAIL_BILLING_REPLY_ADDRESS, EMAIL_BILLING_REPLY_ADDRESS_NAME, '', '', $subject, $html_mail , $txt_mail);
     }

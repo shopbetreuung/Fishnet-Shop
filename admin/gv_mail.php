@@ -88,8 +88,8 @@
 
       $smarty->assign('GIFT_LINK',$link);
 
-      $html_mail=$smarty->fetch(CURRENT_TEMPLATE . '/admin/mail/'.$_SESSION['language'].'/send_gift.html');
-      $txt_mail=$smarty->fetch(CURRENT_TEMPLATE . '/admin/mail/'.$_SESSION['language'].'/send_gift.txt');
+      $html_mail=$smarty->fetch('db:send_gift.html');
+      $txt_mail=$smarty->fetch('db:send_gift.txt');
 
       if ($subject=='') $subject=EMAIL_BILLING_SUBJECT;
       xtc_php_mail(EMAIL_BILLING_ADDRESS,EMAIL_BILLING_NAME, $mail['customers_email_address'] , $mail['customers_firstname'] . ' ' . $mail['customers_lastname'] , '', EMAIL_BILLING_REPLY_ADDRESS, EMAIL_BILLING_REPLY_ADDRESS_NAME, '', '', $subject, $html_mail , $txt_mail);
@@ -129,8 +129,8 @@
     $link = HTTP_SERVER  . DIR_WS_CATALOG . 'gv_redeem.php' . '?gv_no='.$id1;
 //-- SEO ShopStat
       $smarty->assign('GIFT_LINK',$link);
-      $html_mail=$smarty->fetch(CURRENT_TEMPLATE . '/admin/mail/'.$_SESSION['language'].'/send_gift.html');
-      $txt_mail=$smarty->fetch(CURRENT_TEMPLATE . '/admin/mail/'.$_SESSION['language'].'/send_gift.txt');
+      $html_mail=$smarty->fetch('db:send_gift.html');
+      $txt_mail=$smarty->fetch('db:send_gift.txt');
 
       if ($subject == '') $subject = EMAIL_BILLING_SUBJECT; //web28 - 2011-07-07 - Fix email subject
       xtc_php_mail(EMAIL_BILLING_ADDRESS,EMAIL_BILLING_NAME, $_POST['email_to'] , '' , '', EMAIL_BILLING_REPLY_ADDRESS, EMAIL_BILLING_REPLY_ADDRESS_NAME, '', '', $subject, $html_mail , $txt_mail); //web28 - 2011-07-07 - Fix email subject

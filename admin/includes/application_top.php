@@ -294,7 +294,7 @@ if (!isset($_SESSION['language']) || isset($_GET['language'])) {
   }
   $_SESSION['language'] = $lng->language['directory'];
   $_SESSION['languages_id'] = $lng->language['id'];
-  $_SESSION['language_charset'] = $lng->language['language_charset']; //web28 - 2012-04-29 - add $_SESSION['language_charset']
+  $_SESSION['language_charset'] = 'utf-8';
   $_SESSION['language_code'] = $lng->language['code']; //web28 - 2010-09-05 - add $_SESSION['language_code']
 }
 

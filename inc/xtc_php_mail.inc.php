@@ -24,41 +24,14 @@ function xtc_php_mail($from_email_address, $from_email_name,
   global $mail_error;
 
 //*********************************************************************************************
-// Signatur für E-Mails
-// by Dipl.-Ing. Daniel Wallas für www.tuvino.de
+// Signatur fÃ¼r E-Mails
+// by Dipl.-Ing. Daniel Wallas fÃ¼r www.tuvino.de
 //*********************************************************************************************
   $mailsmarty= new Smarty;
   $mailsmarty->compile_dir = DIR_FS_CATALOG.'templates_c';
 
-  
-  // load the signatures only, if the appropriate file(s) exists
-  $html_signatur = '';
-  $txt_signatur = '';
-  if (file_exists(DIR_FS_CATALOG.'templates/'.CURRENT_TEMPLATE.'/mail/'.$_SESSION['language'].'/signatur.html')) {
-    $html_signatur = '<br />' .$mailsmarty->fetch(DIR_FS_CATALOG.'templates/'.CURRENT_TEMPLATE.'/mail/'.$_SESSION['language'].'/signatur.html'); //web28 - 2011-06-10 - ADD Linebreak
-  }
-  if (file_exists(DIR_FS_CATALOG.'templates/'.CURRENT_TEMPLATE.'/mail/'.$_SESSION['language'].'/signatur.txt')) {
-    $txt_signatur = "\n" . $mailsmarty->fetch(DIR_FS_CATALOG.'templates/'.CURRENT_TEMPLATE.'/mail/'.$_SESSION['language'].'/signatur.txt'); //web28 - 2011-06-10 - ADD Linebreak
-  }
-  //EOF - Dokuman - 2009-10-30 - Check for existing signature files
-
-  //BOF - web28 - 2010-06-05 - Widerruf in Email
-  $html_widerruf = '';
-  $txt_widerruf = '';
-  if (file_exists(DIR_FS_CATALOG.'templates/'.CURRENT_TEMPLATE.'/mail/'.$_SESSION['language'].'/widerruf.html')) {
-    $html_widerruf = '<br />' . $mailsmarty->fetch(DIR_FS_CATALOG.'templates/'.CURRENT_TEMPLATE.'/mail/'.$_SESSION['language'].'/widerruf.html'); //web28 - 2011-06-10 - ADD Linebreak
-  }
-  if (file_exists(DIR_FS_CATALOG.'templates/'.CURRENT_TEMPLATE.'/mail/'.$_SESSION['language'].'/widerruf.txt')) {
-    $txt_widerruf = "\n" . $mailsmarty->fetch(DIR_FS_CATALOG.'templates/'.CURRENT_TEMPLATE.'/mail/'.$_SESSION['language'].'/widerruf.txt'); //web28 - 2011-06-10 - ADD Linebreak
-  }
-
-  //Platzhalter [WIDERRUF] durch Widerruf Text ersetzen
-  if (strpos($message_body_html,'[WIDERRUF]') !== false) {
-    $message_body_html = str_replace('[WIDERRUF]', $html_widerruf, $message_body_html);
-  }
-  if (strpos($message_body_plain,'[WIDERRUF]') !== false) {
-    $message_body_plain = str_replace('[WIDERRUF]', $txt_widerruf, $message_body_plain);
-  }
+  $html_signatur = '<br />' .$mailsmarty->fetch('db:signatur.html'); //web28 - 2011-06-10 - ADD Linebreak
+  $txt_signatur = "\n" . $mailsmarty->fetch('db:signatur.txt'); //web28 - 2011-06-10 - ADD Linebreak
 
   //Platzhalter [SIGNATUR] durch Signatur Text ersetzen
   if (strpos($message_body_html,'[SIGNATUR]') !== false) {
@@ -85,9 +58,9 @@ function xtc_php_mail($from_email_address, $from_email_name,
     $lang_query = "SELECT * FROM ".TABLE_LANGUAGES." WHERE code = '".DEFAULT_LANGUAGE."'";
     $lang_query = xtc_db_query($lang_query);
     $lang_data = xtc_db_fetch_array($lang_query);
-    $mail->CharSet = $lang_data['language_charset'];
+    $mail->CharSet = 'utf-8';
     $mail->SetLanguage(DEFAULT_LANGUAGE, DIR_WS_CLASSES);
-    $charset = $lang_data['language_charset']; // web28 - 2010-07-15 - needed for html_entity_decode
+    $charset = 'utf-8';
     $lang_code = DEFAULT_LANGUAGE;
   }
 
@@ -112,7 +85,7 @@ function xtc_php_mail($from_email_address, $from_email_name,
   //BOF  - web28 - 2010-08-27 -  decode html2txt
   $html_array = array('<br />', '<br/>', '<br>');
   $txt_array = array(" \n", " \n", " \n");
-  $message_body_plain = str_replace($html_array, $txt_array, $message_body_plain.$txt_signatur);//DPW Signatur ergänzt.
+  $message_body_plain = str_replace($html_array, $txt_array, $message_body_plain.$txt_signatur);//DPW Signatur ergÃ¤nzt.
   // remove html tags
   $message_body_plain = strip_tags($message_body_plain);
   $message_body_plain = html_entity_decode($message_body_plain, ENT_NOQUOTES, $charset);
@@ -120,7 +93,7 @@ function xtc_php_mail($from_email_address, $from_email_name,
 
   if (EMAIL_USE_HTML == 'true') { // set email format to HTML
     $mail->IsHTML(true);
-    $mail->Body = $message_body_html.$html_signatur;//DPW Signatur ergänzt.
+    $mail->Body = $message_body_html.$html_signatur;//DPW Signatur ergÃ¤nzt.
     $mail->AltBody = $message_body_plain;
   } else {
     $mail->IsHTML(false);

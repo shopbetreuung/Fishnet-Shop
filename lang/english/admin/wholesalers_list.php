@@ -19,21 +19,17 @@ define('WHOLESALER_DETAILS', 'Wholesaler details:');
 define('WHOLESALER_NAME', 'Name:');
 define('WHOLESALER_EMAIL', 'Email:');
 define('WHOLESALER_TEMPLATE', 'Template file:');
-define('WHOLESALER_PRODUCTS', 'Products:');
 
-define('WHOLESALER_PRODUCTS_PRICE', 'Price');
-define('WHOLESALER_PRODUCTS_QUANTITY', 'Quantity');
 define('WHOLESALER_PRODUCTS_NAME', 'Name');
-define('WHOLESALER_PRODUCTS_REORDER', 'Reorder number');
-
-define('TEXT_HEADING_EDIT_WHOLESALER_PRODUCT', 'Edit wholesalers product');
-define('TEXT_WHOLESALERS_NUMBER', 'Reorder number:');
+define('WHOLESALER_PRODUCTS_QUANTITY', 'Quantity');
+define('WHOLESALER_PRODUCTS_REORDER', 'reorder as');
+define('WHOLESALER_PRODUCTS_ORDER', 'order quantity');
 
 define('TEXT_DELETE_INTRO', 'Are you sure you want to delete this wholesalers product?');
 define('TEXT_HEADING_DELETE_WHOLESALER', 'Delete ');
 define('ERROR_MESSAGE_WHOLESALER', 'Nothing to display.');
 
-define('EMAIL_SUBJECT_WHOLESALER', 'Write subject here.');
+define('EMAIL_SUBJECT_WHOLESALER', 'New Order');
 
 define('WHOLESALER_TOTAL_PRICE', 'Total price:');
 define('WHOLESALER_PRODUCTS_MULTIPLIED_PRICE', 'Calculated price');

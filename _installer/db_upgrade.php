@@ -211,6 +211,29 @@
                     // get new(!) DB-Version from the database itself
                     $version_query = xtc_db_query("SELECT version FROM " . TABLE_DATABASE_VERSION);
                     $version_array = xtc_db_fetch_array($version_query);
+					// BOF - Convert to UTF8
+					if ($version_array['version'] == "SH_1.2.0") {
+						xtc_db_query('ALTER DATABASE '.DB_DATABASE.' CHARACTER SET utf8 COLLATE utf8_general_ci');
+						$sql="SELECT CONCAT('ALTER TABLE `', t.`TABLE_SCHEMA`, '`.`', t.`TABLE_NAME`, '` CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci;') as FRST FROM `information_schema`.`TABLES` t WHERE t.`TABLE_SCHEMA` = '".DB_DATABASE."' AND t.`TABLE_COLLATION` NOT LIKE 'utf8_general_ci' ORDER BY 1";
+						$result = xtc_db_query($sql) or die(mysql_error());
+						while ($row = xtc_db_fetch_array($result)) {
+							xtc_db_query($row["FRST"]);
+						}
+						$sql="SELECT CONCAT('ALTER TABLE `', t.`TABLE_SCHEMA`, '`.`', t.`TABLE_NAME`, '` CHARACTER SET utf8 COLLATE utf8_general_ci;') as FRST FROM `information_schema`.`TABLES` t WHERE t.`TABLE_SCHEMA` = '".DB_DATABASE."' AND t.`TABLE_COLLATION` NOT LIKE 'utf8_general_ci' ORDER BY 1";
+						$result = xtc_db_query($sql) or die(mysql_error());
+						while ($row = xtc_db_fetch_array($result)) {
+							xtc_db_query($row["FRST"]);
+						}	
+					}
+					// EOF - Convert to UTF8
+					// BOF - Set Admin Flags
+						$aa_spalten_qry = xtc_db_query("SHOW COLUMNS FROM ".TABLE_ADMIN_ACCESS);
+						while ($aa_spalten = xtc_db_fetch_array($aa_spalten_qry)) {
+							if ($aa_spalten['Field'] != 'customers_id') {
+								mysql_query("UPDATE admin_access SET ".$aa_spalten['Field']." = '1' WHERE customers_id = '1'");
+							}
+						}						
+					// EOF - Set Admin Flags
                     echo CURRENT_DB_VERSION.' <strong>'.$version_array['version'].'</strong>';
                     echo SUCCESS_MESSAGE;                   
                   } else {

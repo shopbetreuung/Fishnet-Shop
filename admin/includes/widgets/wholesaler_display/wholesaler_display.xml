@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <widget>
-	<name>New orders</name>
-	<author>Fishnet Services - Milan Niksic</author>
+	<name>Wholesaler display</name>
+	<author>Fishnet Services - Niksic Milan</author>
 	<authorEmail>support@fishnet-services.com</authorEmail>
 	<authorUrl>www.fishnet-services.com</authorUrl>
 	<version>1.0.0</version>
 	
-	<runwidget>new_orders/new_orders.php</runwidget>
+	<runwidget>wholesaler_display/wholesaler_display.php</runwidget>
 	
 	<dimensions>
-		<width>8</width>
+		<width>12</width>
 		<height>2</height>
 		<resizable>false</resizable>
 	</dimensions>
 	
 	<defaultPosition>
 		<x>0</x>
-		<y>2</y>
+		<y>6</y>
 	</defaultPosition>
 	
 	<languages>

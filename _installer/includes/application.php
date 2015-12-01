@@ -21,19 +21,6 @@
   
   // Set the level of error reporting
   error_reporting(E_ALL & ~E_NOTICE  & ~E_DEPRECATED);
-  
-  if (INSTALL_CHARSET == 'utf8') {
-    $charset = 'utf-8';
-    $character_set = 'utf8';
-    $collation = 'utf8_general_ci';
-  } else {
-    $charset = 'iso-8859-15';
-    $character_set = 'latin1';
-    $collation = 'latin1_german1_ci'; 
-  }
-  if (!defined('DB_SERVER_CHARSET')) {
-     define('DB_SERVER_CHARSET',$character_set);
-  }
 
   if (version_compare(PHP_VERSION, '5.1.0', '>=')) {
     date_default_timezone_set('Europe/Berlin');

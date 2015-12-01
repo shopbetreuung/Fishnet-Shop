@@ -27,7 +27,8 @@ $rules = '';
 if(isset($_POST['rules'])){
     $rules_build = '';
     foreach($_POST['rules'] as $rule => $values){
-        if(isset($values['active']) && !empty($option = str_replace(' ', '', $values['option']))){
+		$option = str_replace(' ', '', $values['option']);
+        if(isset($values['active']) && !empty($option)){
             #Operation check
             $operation = '=';
             if($values['operation'] == '1'){
@@ -196,7 +197,7 @@ function toggle_column() {
           <tr>
             <td valign="top"><table border="0" width="100%" cellspacing="0" cellpadding="2">
               <tr class="dataTableHeadingRow">
-                <td class="dataTableHeadingContent"><div class="createCat"><a id="HideShowColumn" onFocus="if(this.blur)this.blur()" href="javascript:void(0);" onclick="toggle_column()" class='btn btn-default'>Menü</a><div style="float:left;padding-top:4px;font-weight:bold;letter-spacing: 1px;"><?php echo PDFBILL_LOADED_PROFILE.'</div><div style="padding-top:4px">'.$profile_name ?></div><div style="clear:left"></div></div></td>
+                <td class="dataTableHeadingContent"><div class="createCat"><a id="HideShowColumn" onFocus="if(this.blur)this.blur()" href="javascript:void(0);" onclick="toggle_column()" class='btn btn-default'>Men&uuml;</a><div style="float:left;padding-top:4px;font-weight:bold;letter-spacing: 1px;"><?php echo PDFBILL_LOADED_PROFILE.'</div><div style="padding-top:4px">'.$profile_name ?></div><div style="clear:left"></div></div></td>
         </tr>
               <tr class="dataTableHeadingRow">
                 
@@ -509,7 +510,7 @@ function toggle_column() {
 ?>
     <tr align="left">
       <td colspan="4" class="BilldataTableContent">
-        <div class="OuterDiv"><img src="includes/ipdfbill/images/schema_4.png" border="0" width="150" height="91" alt="Rechnungs�berschrift"></div><div class="gallerycontainer"><a class="thumbnail" href="#thumb"><img src="includes/ipdfbill/images/zoom.gif" border="0" alt="zoom"><span><img src="includes/ipdfbill/images/schema_4_big.png" /></span></a></div>
+        <div class="OuterDiv"><img src="includes/ipdfbill/images/schema_4.png" border="0" width="150" height="91" alt="Rechnungs&uuml;berschrift"></div><div class="gallerycontainer"><a class="thumbnail" href="#thumb"><img src="includes/ipdfbill/images/zoom.gif" border="0" alt="zoom"><span><img src="includes/ipdfbill/images/schema_4_big.png" /></span></a></div>
       
       </td>
     </tr>
@@ -544,7 +545,7 @@ if( FREEE_INFO ) {
 ?>
     <tr align="left">
       <td colspan="4" class="BilldataTableContent">
-        <div class="OuterDiv"><img src="includes/ipdfbill/images/schema_4.png" border="0" width="150" height="91" alt="Rechnungs�berschrift"></div><div class="gallerycontainer"><a class="thumbnail" href="#thumb"><img src="includes/ipdfbill/images/zoom.gif" border="0" alt="zoom"><span><img src="includes/ipdfbill/images/schema_4_big.png" /></span></a></div>
+        <div class="OuterDiv"><img src="includes/ipdfbill/images/schema_4.png" border="0" width="150" height="91" alt="Rechnungs&uuml;berschrift"></div><div class="gallerycontainer"><a class="thumbnail" href="#thumb"><img src="includes/ipdfbill/images/zoom.gif" border="0" alt="zoom"><span><img src="includes/ipdfbill/images/schema_4_big.png" /></span></a></div>
       
       </td>
     </tr>
@@ -1173,9 +1174,9 @@ function tr_trennzeile( $text ) {
 /*
   tr_align( 'product_names_position',
             array( 'question' => 'Ausrichtung:',
-                   'chk_text_l' => 'Linksb�ndig',
+                   'chk_text_l' => 'Linksb&uuml;ndig',
                    'chk_text_c' => 'Zentriert',
-                   'chk_text_r' => 'Rechtsb�ndig',
+                   'chk_text_r' => 'Rechtsb&uuml;ndig',
               ),
             $profile_product_names_position 
             );
@@ -1258,7 +1259,7 @@ function tr_align4(  $fieldname, $text_arr, $check ) {
 /*
   tr_color( 'product_names_color',
             array( 'question'        => 'Schriftfarbe:',
-                   'button_text'     => 'Ausw�hlen' ),
+                   'button_text'     => 'Ausw&auml;hlen' ),
             $profile_product_names 
             );
 */
@@ -1377,7 +1378,7 @@ function tr_font_style( $fieldname, $text_arr, $check ) {
 
 /*
   tr_font_size( 'product_names_font_size',
-                 array( 'question'        => 'Schriftgr��e:' ),
+                 array( 'question'        => 'Schriftgr&ouml;&szlig;e:' ),
                  $profile_product_names_font_size 
             );
 */

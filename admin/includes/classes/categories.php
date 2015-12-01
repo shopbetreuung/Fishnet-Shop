@@ -486,13 +486,6 @@ class categories {
         $permission_array = array_merge($permission_array, array ('group_permission_'.$customers_statuses_array[$i]['id'] => $permission[$customers_statuses_array[$i]['id']]));
       }
     }
-
-    # Error if reorder number is larger than product quantity and if reorder number is entered without selected wholesaler
-    if($products_data['wholesaler_reorder'] != 0 && $products_data['wholesaler_id'] == ""){
-        xtc_redirect(xtc_href_link(FILENAME_CATEGORIES, 'cPath='.$products_id.'&action=new_product&wError=1&pID='.$products_id));
-    } elseif($products_data['wholesaler_reorder'] > $products_data['products_quantity'] ){
-        xtc_redirect(xtc_href_link(FILENAME_CATEGORIES, 'cPath='.$products_id.'&action=new_product&wError=2&pID='.$products_id));
-    }
     
     $sql_data_array = array ('products_quantity' => xtc_db_prepare_input($products_data['products_quantity']),
                              'products_model' => xtc_db_prepare_input($products_data['products_model']),

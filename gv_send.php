@@ -112,8 +112,8 @@ if (isset($_GET['action']) && $_GET['action'] == 'process') {
     // dont allow cache
     $smarty->caching = false;
 
-    $html_mail = $smarty->fetch(CURRENT_TEMPLATE.'/mail/'.$_SESSION['language'].'/send_gift_to_friend.html');
-    $txt_mail = $smarty->fetch(CURRENT_TEMPLATE.'/mail/'.$_SESSION['language'].'/send_gift_to_friend.txt');
+    $html_mail = $smarty->fetch('db:send_gift_to_friend.html');
+    $txt_mail = $smarty->fetch('db:send_gift_to_friend.txt');
 
     // send mail
     xtc_php_mail(EMAIL_BILLING_ADDRESS, EMAIL_BILLING_NAME, $_POST['email'], $_POST['to_name'], '', EMAIL_BILLING_REPLY_ADDRESS, EMAIL_BILLING_REPLY_ADDRESS_NAME, '', '', $gv_email_subject, $html_mail, $txt_mail);

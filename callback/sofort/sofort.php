@@ -251,7 +251,7 @@ class sofort {
 			$check_query = xtc_db_query('SHOW COLUMNS FROM sofort_orders LIKE "serialized_session"');
 			
 			if (xtc_db_num_rows($check_query) == 0) {
-				xtc_db_query('ALTER TABLE sofort_orders ADD serialized_session LONGTEXT COLLATE utf8_unicode_ci NOT NULL');
+				xtc_db_query('ALTER TABLE sofort_orders ADD serialized_session LONGTEXT COLLATE utf8_general_ci NOT NULL');
 			}
 			
 			$check_query = xtc_db_query('SHOW COLUMNS FROM sofort_orders LIKE "data_acquired"');
@@ -260,7 +260,7 @@ class sofort {
 
 			if (xtc_db_num_rows($check_query) == 0) {
 
-				xtc_db_query('ALTER TABLE sofort_orders ADD data_acquired TINYINT(1) COLLATE utf8_unicode_ci NOT NULL');
+				xtc_db_query('ALTER TABLE sofort_orders ADD data_acquired TINYINT(1) COLLATE utf8_general_ci NOT NULL');
 
 			}
 			
@@ -579,12 +579,12 @@ class sofort {
 			CREATE TABLE IF NOT EXISTS `sofort_orders` (
 				`id` int(11) unsigned NOT NULL AUTO_INCREMENT,
 				`orders_id` int(11) unsigned NOT NULL,
-				`transaction_id` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
-				`payment_method` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
-				`payment_secret` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
+				`transaction_id` varchar(32) COLLATE utf8_general_ci NOT NULL,
+				`payment_method` varchar(32) COLLATE utf8_general_ci NOT NULL,
+				`payment_secret` varchar(32) COLLATE utf8_general_ci NOT NULL,
 				`date_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-				`serialized_session` LONGTEXT COLLATE utf8_unicode_ci NOT NULL,
-				`data_acquired` TINYINT(1) COLLATE utf8_unicode_ci NOT NULL,
+				`serialized_session` LONGTEXT COLLATE utf8_general_ci NOT NULL,
+				`data_acquired` TINYINT(1) COLLATE utf8_general_ci NOT NULL,
 				PRIMARY KEY (`id`)
 			)
 		';
@@ -603,15 +603,15 @@ class sofort {
 			CREATE TABLE IF NOT EXISTS `sofort_orders_notification` (
 				`id` int(11) unsigned NOT NULL AUTO_INCREMENT,
 				`sofort_orders_id` int(11) unsigned NOT NULL,
-				`items` text COLLATE utf8_unicode_ci NOT NULL,
+				`items` text COLLATE utf8_general_ci NOT NULL,
 				`amount` float NOT NULL,
-				`customer_comment` text COLLATE utf8_unicode_ci NOT NULL,
-				`seller_comment` text COLLATE utf8_unicode_ci NOT NULL,
+				`customer_comment` text COLLATE utf8_general_ci NOT NULL,
+				`seller_comment` text COLLATE utf8_general_ci NOT NULL,
 				`status_id` int(11) unsigned NOT NULL,
-				`status` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
-				`status_reason` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
-				`invoice_status` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
-				`invoice_objection` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
+				`status` varchar(32) COLLATE utf8_general_ci NOT NULL,
+				`status_reason` varchar(32) COLLATE utf8_general_ci NOT NULL,
+				`invoice_status` varchar(32) COLLATE utf8_general_ci NOT NULL,
+				`invoice_objection` varchar(45) COLLATE utf8_general_ci NOT NULL,
 				`date_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
 				PRIMARY KEY (`id`)
 			)
@@ -632,7 +632,7 @@ class sofort {
 				`id` int(11) unsigned NOT NULL AUTO_INCREMENT,
 				`orders_id` int(11) unsigned NOT NULL,
 				`orders_products_id` int(11) unsigned NOT NULL,
-				`item_id` text COLLATE utf8_unicode_ci NOT NULL,
+				`item_id` text COLLATE utf8_general_ci NOT NULL,
 				PRIMARY KEY (`id`)
 			)
 		';

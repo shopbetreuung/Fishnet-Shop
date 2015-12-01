@@ -580,6 +580,8 @@ class Smarty
     {
       $this->assign('SCRIPT_NAME', isset($_SERVER['SCRIPT_NAME']) ? $_SERVER['SCRIPT_NAME']
                     : @$GLOBALS['HTTP_SERVER_VARS']['SCRIPT_NAME']);
+	  
+	  $this->register_resource("db", array("db_get_template", "db_get_timestamp", "db_get_secure", "db_get_trusted"));	
     }
 
     /**
@@ -1974,6 +1976,36 @@ class Smarty
     /**#@-*/
 
 }
+
+// BOF - Email DB Templates
+function db_get_template ($tpl_name, &$tpl_source, &$smarty_obj) {
+
+	$template = substr($tpl_name, (strrpos($tpl_name, "/") !==false)?strrpos($tpl_name, "/")+1:0);
+	$template = explode(".", $template);
+
+	$db_qry = xtc_db_query("SELECT em_body, em_body_txt FROM ".TABLE_EMAILS_MANAGER." WHERE em_language = '".$_SESSION['languages_id']."' AND em_name = '".$template[0]."'");
+	$db_template = xtc_db_fetch_array($db_qry);
+
+	if (strtolower($template[1]) == 'html') {
+		$tpl_source = $db_template["em_body"];
+	} else {
+		$tpl_source = $db_template["em_body_txt"];
+	}
+
+	return true;
+
+}
+function db_get_timestamp($tpl_name, &$tpl_timestamp, &$smarty_obj) {
+	$tpl_timestamp = time(); // this example will always recompile!
+	return true;
+}
+function db_get_secure($tpl_name, &$smarty_obj) {
+	return true;
+}
+function db_get_trusted($tpl_name, &$smarty_obj) {
+	// not used for templates
+}
+// EOF - Email DB Templates
 
 /* vim: set expandtab: */
 

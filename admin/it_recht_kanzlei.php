@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: it-recht-kanzlei.php 2011-11-24 modified-shop $
+   $Id: it_recht_kanzlei.php 2011-11-24 modified-shop $
 
    modified eCommerce Shopsoftware
    http://www.modified-shop.org
@@ -26,47 +26,29 @@ require (DIR_WS_INCLUDES.'head.php');
     <?php require(DIR_WS_INCLUDES . 'header.php'); ?>
     <!-- header_eof //-->
     <!-- body //-->
-    <table border="0" width="100%" cellspacing="2" cellpadding="2">
-      <tr>
+    <div class="row">
         
-        </td>
-        <!-- body_text //-->
-        <td class="boxCenter" width="100%" valign="top">
-          <table border="0" width="100%" cellspacing="0" cellpadding="2">
-            <tr>
-              <td width="100%">
-                <table border="0" width="100%" cellspacing="0" cellpadding="0">
-                  <tr>
-                    <td width="80" rowspan="2"><?php echo xtc_image(DIR_WS_ICONS.'heading_modules.gif'); ?></td>
-                    <td class="pageHeading">IT-Recht Kanzlei</td>
-                  </tr>
-                  <tr>
-                    <td class="main" valign="top">Modules</td>
-                  </tr>
-                </table>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <table border="0" width="100%" cellspacing="0" cellpadding="0">
-                  <tr>
-                    <td width="250" valign="middle" class="dataTableHeadingContent">
+    <div class='col-xs-12'>
+        <div class="col-xs-3 col-sm-1 text-right"><?php echo xtc_image(DIR_WS_ICONS.'heading_modules.gif'); ?></div>
+        <div class="col-xs-9 col-sm-11"><p class="h2">IT-Recht Kanzlei</p> Modules</div>
+    </div>
+    <div class='col-xs-12'><br></div>
+    <div class='col-sm-3 col-xs-12 dataTableHeadingContent'>
                       Update-Service
-                    </td>
-                    <td valign="middle" class="dataTableHeadingContent"  style="border-right: 0px;">
+    </div>
+    <div class='col-sm-9 col-xs-12 dataTableHeadingContent'>
                       <a href="<?php echo xtc_href_link('module_export.php', 'set=&module=it_recht_kanzlei'); ?>"><u>Einstellungen</u></a>  
-                    </td>
-                  </tr>
-                </table>
-                <table style="border: 1px solid #dddddd" border="0" cellpadding="0" cellspacing="0" width="100%">
-                  <tr style="background-color: #FFFFFF;">
-                    <td style="font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 12px; padding: 0px 10px 11px 10px; text-align: justify">
-                      <br />
+    </div>
+    <div style="background-color: #FFFFFF; border: 1px solid #dddddd; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 12px; padding: 0px 10px 11px 10px; text-align: justify" class='col-xs-12'>
+        
+        <div class='col-xs-12'>
+            <div class='col-sm-10'>
+                
                       <font color="#2B7AC4"><strong>Schnittstellenmodul der IT-Recht Kanzlei M&uuml;nchen: Entspannter e-Commerce.</strong></font><br />
-                      <img src="images/it_recht_kanzlei/it_recht_kanzlei.png" /><img src="images/it_recht_kanzlei/pruefzeichen-partner3.png" align="right" />
+                      <img src="images/it_recht_kanzlei/it_recht_kanzlei.png" class='img-responsive' />
                       <br />
                       <br />
-                      <img src="images/it_recht_kanzlei/schutzpaket_grafik.png" align="right" />
+                      
                       Das modified eCommerce Schnittstellen-Modul f&uuml;r den e-Commerce in Deutschland aktualisiert automatisch ihre Rechtstexte &ndash; so bleiben Sie 
                       dauerhaft vor Abmahnungen gesch&uuml;tzt und k&ouml;nnen sich ganz entspannt ihrem operativen Gesch&auml;ft widmen.<br />
                       <br />
@@ -99,16 +81,20 @@ require (DIR_WS_INCLUDES.'head.php');
                         <br />
                         <a href="http://www.it-recht-kanzlei.de/Service/agb-online-shop.php" target="_blank"><font size="3" color="#893769"><u><strong>Jetzt den Update-Service der IT-Recht Kanzlei buchen.</strong></u></font></a> 
                       </p>
-                    </td>
-                  </tr>
-                </table>
-              </td>
-            </tr>
-          </table>
-        </td>
-        <!-- body_text_eof //-->
-      </tr>
-    </table>
+            </div>
+            <div class='col-sm-2'>
+                <br><br>
+                <img src="images/it_recht_kanzlei/pruefzeichen-partner3.png" align="right" class='img-responsive' />
+                <br>
+                <img src="images/it_recht_kanzlei/schutzpaket_grafik.png" align="right" />
+            </div>
+            
+            <br />
+                      
+        </div>
+    </div>
+
+    </div>
     <!-- body_eof //-->
     <!-- footer //-->
     <?php require(DIR_WS_INCLUDES . 'footer.php'); ?>

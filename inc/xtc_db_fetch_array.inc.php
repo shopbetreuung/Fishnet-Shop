@@ -14,15 +14,12 @@
 
    Released under the GNU General Public License 
    ---------------------------------------------------------------------------------------*/
-  /*
-  function xtc_db_fetch_array($db_query) {
-    return mysql_fetch_array($db_query, MYSQL_ASSOC);
-  }
-  */
 
-
-  function xtc_db_fetch_array(&$db_query,$cq=false) {
-
+  function xtc_db_fetch_array(&$db_query,$cq=false, $link = 'db_link') {
+      global $$link;
+	  if ($db_query == false) {
+		  return false;
+	  }
       //BOF - DokuMan - 2010-02-25 - also check for defined DB_CACHE constant
       if (defined('DB_CACHE') && DB_CACHE=='true' && $cq) {
       //if (DB_CACHE=='true' && $cq) {
@@ -41,7 +38,7 @@
           next($db_query);
           return $curr;
           }
-        return mysql_fetch_array($db_query, MYSQL_ASSOC);
+        return mysqli_fetch_array($db_query, MYSQLI_ASSOC);
       }
   }
 ?>

@@ -138,19 +138,14 @@ require (DIR_WS_INCLUDES.'head.php');
 <!-- header_eof //-->
 
 <!-- body //-->
-<table border="0" width="100%" cellspacing="2" cellpadding="2">
-  <tr>
-    
+<div class="row">
 <!-- body_text //-->
-    <td class="boxCenter" width="100%" valign="top"><table border="0" width="100%" cellspacing="0" cellpadding="2">
-      <tr>
-        <td width="100%"><table border="0" width="100%" cellspacing="0" cellpadding="0">
-          <tr>
-            <td class="pageHeading"><?php echo HEADING_TITLE; ?></td>
-            <td class="pageHeading" align="right"><?php echo xtc_draw_separator('pixel_trans.gif', HEADING_IMAGE_WIDTH, HEADING_IMAGE_HEIGHT); ?></td>
-          </tr>
-        </table></td>
-      </tr>
+    <div class='col-xs-12'>
+        <p class="h2">
+            <?php echo HEADING_TITLE; ?>
+        </p>
+    </div>
+<div class='col-xs-12'><br></div>
 <?php
   if ( ($_GET['action'] == 'new') || ($_GET['action'] == 'edit') ) {
     $form_action = 'insert';
@@ -206,10 +201,11 @@ require (DIR_WS_INCLUDES.'head.php');
   var specialExpires = new ctlSpiffyCalendarBox("specialExpires", "new_special", "specials_expires","btnDate1","<?php echo $expires_date; ?>",2);
 </script>
 <!-- EOF - Tomcraft - 2009-11-06 - SPIFFY CAL 2.1 //-->
-      <tr><form name="new_special" <?php echo 'action="' . xtc_href_link(FILENAME_SPECIALS, xtc_get_all_get_params(array('action', 'info', 'sID')) . 'action=' . $form_action, 'NONSSL') . '"'; ?> method="post"><?php if ($form_action == 'update') echo xtc_draw_hidden_field('specials_id', $_GET['sID']); ?>
-        <td><br /><table border="0" cellspacing="0" cellpadding="2">
+<div class='col-xs-12'>
+     <form name="new_special" <?php echo 'action="' . xtc_href_link(FILENAME_SPECIALS, xtc_get_all_get_params(array('action', 'info', 'sID')) . 'action=' . $form_action, 'NONSSL') . '"'; ?> method="post"><?php if ($form_action == 'update') echo xtc_draw_hidden_field('specials_id', $_GET['sID']); ?>
+        <div class="col-xs-12">
           
-                <td class="main"><?php echo TEXT_SPECIALS_PRODUCT; echo ($sInfo->products_name) ? "" :  ''; ?>&nbsp;</td>
+                <div class="main col-xs-12 col-sm-1"><?php echo TEXT_SPECIALS_PRODUCT; echo ($sInfo->products_name) ? "" :  ''; ?>&nbsp;</div>
 	   <?php
 		$price=$sInfo->products_price;
 		$new_price=$sInfo->specials_new_products_price;
@@ -224,46 +220,45 @@ require (DIR_WS_INCLUDES.'head.php');
 
 		echo '<input type="hidden" name="products_up_id" value="' . $sInfo->products_id . '">';
 	   ?>      
-          <td class="main"><?php echo ($sInfo->products_name) ? $sInfo->products_name . ' <small>(' . $xtPrice->xtcFormat($price,true). ')</small>' : xtc_draw_products_pull_down('products_id', 'style="font-size:10px"', $specials_array); echo xtc_draw_hidden_field('products_price', $sInfo->products_price); ?></td>
-	  </tr>
-          <tr>
-            <td class="main"><?php echo TEXT_SPECIALS_SPECIAL_PRICE; ?>&nbsp;</td>
-            <td class="main"><?php echo xtc_draw_input_field('specials_price', $new_price);?> </td>
-          </tr>
-          <tr>
-            <td class="main"><?php echo TEXT_SPECIALS_SPECIAL_QUANTITY; ?>&nbsp;</td>
-            <td class="main"><?php echo xtc_draw_input_field('specials_quantity', $sInfo->specials_quantity);?> </td>
-          </tr>
-          <tr>
-            <td class="main"><?php echo TEXT_SPECIALS_EXPIRES_DATE; ?>&nbsp;</td>
+          <div class="main col-xs-12 col-sm-11"><?php echo ($sInfo->products_name) ? $sInfo->products_name . ' <small>(' . $xtPrice->xtcFormat($price,true). ')</small>' : xtc_draw_products_pull_down('products_id', 'style="font-size:10px"', $specials_array); echo xtc_draw_hidden_field('products_price', $sInfo->products_price); ?></div>
+	  </div>
+          <div class="col-xs-12">
+            <div class="main col-xs-12 col-sm-1"><?php echo TEXT_SPECIALS_SPECIAL_PRICE; ?>&nbsp;</div>
+            <div class="main  col-xs-12 col-sm-11"><?php echo xtc_draw_input_field('specials_price', $new_price);?> </div>
+          </div>
+          <div class="col-xs-12">
+            <div class="main col-xs-12 col-sm-1"><?php echo TEXT_SPECIALS_SPECIAL_QUANTITY; ?>&nbsp;</div>
+            <div class="main col-xs-12 col-sm-11"><?php echo xtc_draw_input_field('specials_quantity', $sInfo->specials_quantity);?> </div>
+          </div>
+          <div class="col-xs-12">
+            <div class="main col-xs-12 col-sm-1"><?php echo TEXT_SPECIALS_EXPIRES_DATE; ?>&nbsp;</div>
 <!-- BOF - Tomcraft - 2009-11-06 - SPIFFY CAL 2.1 //-->
 <!--
-            <td class="main"><?php echo xtc_draw_input_field('day', substr($sInfo->expires_date, 8, 2), 'size="2" maxlength="2" class="cal-TextBox"') . xtc_draw_input_field('month', substr($sInfo->expires_date, 5, 2), 'size="2" maxlength="2" class="cal-TextBox"') . xtc_draw_input_field('year', substr($sInfo->expires_date, 0, 4), 'size="4" maxlength="4" class="cal-TextBox"'); ?><a class="so-BtnLink" href="javascript:calClick();return false;" onMouseOver="calSwapImg('BTN_date', 'img_Date_OVER',true);" onMouseOut="calSwapImg('BTN_date', 'img_Date_UP',true);" onclick="calSwapImg('BTN_date', 'img_Date_DOWN');showCalendar('new_special','dteWhen','BTN_date');return false;"><?php echo xtc_image(DIR_WS_IMAGES . 'cal_date_up.gif', 'Calendar', '22', '17', 'align="absmiddle" name="BTN_date"'); ?></a></td>
+            <div class="main"><?php echo xtc_draw_input_field('day', substr($sInfo->expires_date, 8, 2), 'size="2" maxlength="2" class="cal-TextBox"') . xtc_draw_input_field('month', substr($sInfo->expires_date, 5, 2), 'size="2" maxlength="2" class="cal-TextBox"') . xtc_draw_input_field('year', substr($sInfo->expires_date, 0, 4), 'size="4" maxlength="4" class="cal-TextBox"'); ?><a class="so-BtnLink" href="javascript:calClick();return false;" onMouseOver="calSwapImg('BTN_date', 'img_Date_OVER',true);" onMouseOut="calSwapImg('BTN_date', 'img_Date_UP',true);" onclick="calSwapImg('BTN_date', 'img_Date_DOWN');showCalendar('new_special','dteWhen','BTN_date');return false;"><?php echo xtc_image(DIR_WS_IMAGES . 'cal_date_up.gif', 'Calendar', '22', '17', 'align="absmiddle" name="BTN_date"'); ?></a></div>
 //-->
-            <td class="main"><script type="text/javascript">specialExpires.writeControl(); specialExpires.dateFormat="yyyy-MM-dd";</script>
+            <div class="main col-xs-12 col-sm-11"><script type="text/javascript">specialExpires.writeControl(); specialExpires.dateFormat="yyyy-MM-dd";</script>
                 <noscript>
                 <?php echo  xtc_draw_input_field('specials_expires', $expires_date ,'style="width: 130px"'); ?>
                 </noscript>
-            </td>
+            </div>
 <!-- EOF - Tomcraft - 2009-11-06 - SPIFFY CAL 2.1 //-->
-          </tr>
-        </table></td>
-      </tr>
-      <tr>
-        <td><table border="0" width="100%" cellspacing="0" cellpadding="2">
-          <tr>
-            <td class="main"><br /><?php echo TEXT_SPECIALS_PRICE_TIP; ?></td>
-            <td class="main" align="right" valign="top"><br /><?php echo (($form_action == 'insert') ? '<input type="submit" class="btn btn-default" onclick="this.blur();" value="' . BUTTON_INSERT . '"/>' : '<input type="submit" class="btn btn-default" onclick="this.blur();" value="' . BUTTON_UPDATE . '"/>'). '&nbsp;&nbsp;&nbsp;<a class="btn btn-default" onclick="this.blur();" href="' . xtc_href_link(FILENAME_SPECIALS, 'page=' . $_GET['page'] . '&sID=' . $_GET['sID']) . '">' . BUTTON_CANCEL . '</a>'; ?></td>
-          </tr>
-        </table></td>
-      </form></tr>
+          </div>
+          <div class='col-xs-12'>
+            <div class='col-xs-12'>
+                <?php echo TEXT_SPECIALS_PRICE_TIP; ?>
+            </div>
+            <div class='col-xs-12'>
+                <?php echo (($form_action == 'insert') ? '<input type="submit" class="btn btn-default" onclick="this.blur();" value="' . BUTTON_INSERT . '"/>' : '<input type="submit" class="btn btn-default" onclick="this.blur();" value="' . BUTTON_UPDATE . '"/>'). '&nbsp;&nbsp;&nbsp;<a class="btn btn-default" onclick="this.blur();" href="' . xtc_href_link(FILENAME_SPECIALS, 'page=' . $_GET['page'] . '&sID=' . $_GET['sID']) . '">' . BUTTON_CANCEL . '</a>'; ?>
+            </div>
+          </div>
+      </form>
+</div>
 <?php
   } else {
 ?>
-      <tr>
-        <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
-          <tr>
-            <td valign="top"><table border="0" width="100%" cellspacing="0" cellpadding="2">
+        <div class='col-xs-12'>
+            <div id='responsive_table' class='table-responsive pull-left col-sm-12'>
+            <table class="table table-bordered table-striped">
               <tr class="dataTableHeadingRow">
                 <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_PRODUCTS; ?></td>
                 <td class="dataTableHeadingContent" align="right"><?php echo TABLE_HEADING_PRODUCTS_PRICE; ?></td>
@@ -324,32 +319,36 @@ require (DIR_WS_INCLUDES.'head.php');
 ?></td>
 <!-- BOF - Tomcraft - 2009-06-10 - added some missing alternative text on admin icons -->
 <!--
-                <td class="dataTableContent" align="right"><?php if ( (is_object($sInfo)) && ($specials['specials_id'] == $sInfo->specials_id) ) { echo xtc_image(DIR_WS_IMAGES . 'icon_arrow_right.gif', ''); } else { echo '<a href="' . xtc_href_link(FILENAME_SPECIALS, 'page=' . $_GET['page'] . '&sID=' . $specials['specials_id']) . '">' . xtc_image(DIR_WS_IMAGES . 'icon_info.gif', IMAGE_ICON_INFO) . '</a>'; } ?>&nbsp;</td>
+                <td class="dataTableContent" align="right"><?php if ( (is_object($sInfo)) && ($specials['specials_id'] == $sInfo->specials_id) ) { echo xtc_image(DIR_WS_IMAGES . 'icon_arrow_right.gif', ''); } else { echo '<a href="' . xtc_href_link(FILENAME_SPECIALS, 'page=' . $_GET['page'] . '&sID=' . $specials['specials_id']) . '">' . xtc_image(DIR_WS_IMAGES . 'icon_info.gif', IMAGE_ICON_INFO) . '</a>'; } ?>
 -->
-                <td class="dataTableContent" align="right"><?php if ( (is_object($sInfo)) && ($specials['specials_id'] == $sInfo->specials_id) ) { echo xtc_image(DIR_WS_IMAGES . 'icon_arrow_right.gif', ICON_ARROW_RIGHT); } else { echo '<a href="' . xtc_href_link(FILENAME_SPECIALS, 'page=' . $_GET['page'] . '&sID=' . $specials['specials_id']) . '">' . xtc_image(DIR_WS_IMAGES . 'icon_info.gif', IMAGE_ICON_INFO) . '</a>'; } ?>&nbsp;</td>
+                <td class="dataTableContent" align="right">
+                    <span class='hidden-xs hidden-sm'>
+                    <?php if ( (is_object($sInfo)) && ($specials['specials_id'] == $sInfo->specials_id) ) { echo xtc_image(DIR_WS_IMAGES . 'icon_arrow_right.gif', ICON_ARROW_RIGHT); } else { echo '<a href="' . xtc_href_link(FILENAME_SPECIALS, 'page=' . $_GET['page'] . '&sID=' . $specials['specials_id']) . '">' . xtc_image(DIR_WS_IMAGES . 'icon_info.gif', IMAGE_ICON_INFO) . '</a>'; } ?>&nbsp;
+                    </span>
+                    <span class='hidden-lg hidden-md'>
+                    <?php echo '<a class="btn btn-default" onclick="this.blur();" href="' . xtc_href_link(FILENAME_SPECIALS, 'page=' . $_GET['page'] . '&sID=' . $specials['specials_id'] . '&action=edit') . '">' . BUTTON_EDIT . '</a>'; ?>    
+                    </span>
+                </td>
 <!-- EOF - Tomcraft - 2009-06-10 - added some missing alternative text on admin icons -->
       </tr>
 <?php
     }
 ?>
-              <tr>
-                <td colspan="4"><table border="0" width="100%" cellpadding="0"cellspacing="2">
-                  <tr>
-                    <td class="smallText" valign="top"><?php echo $specials_split->display_count($specials_query_numrows, '20', $_GET['page'], TEXT_DISPLAY_NUMBER_OF_SPECIALS); ?></td>
-                    <td class="smallText" align="right"><?php echo $specials_split->display_links($specials_query_numrows, '20', MAX_DISPLAY_PAGE_LINKS, $_GET['page']); ?></td>
-                  </tr>
+              </table>
+                  <div class='col-xs-12'>
+                    <div class="smallText col-xs-6"><?php echo $specials_split->display_count($specials_query_numrows, '20', $_GET['page'], TEXT_DISPLAY_NUMBER_OF_SPECIALS); ?></div>
+                    <div class="smallText col-xs-6 text-right"><?php echo $specials_split->display_links($specials_query_numrows, '20', MAX_DISPLAY_PAGE_LINKS, $_GET['page']); ?></div>
+                  </div>
 <?php
   if (!$_GET['action']) {
 ?>
-                  <tr> 
-                    <td colspan="2" align="right"><?php echo '<a class="btn btn-default" onclick="this.blur();" href="' . xtc_href_link(FILENAME_SPECIALS, 'page=' . $_GET['page'] . '&action=new') . '">' . BUTTON_NEW_PRODUCTS . '</a>'; ?></td>
-                  </tr>
+                  <div class='col-xs-12 text-right'> 
+                    <?php echo '<a class="btn btn-default" onclick="this.blur();" href="' . xtc_href_link(FILENAME_SPECIALS, 'page=' . $_GET['page'] . '&action=new') . '">' . BUTTON_NEW_PRODUCTS . '</a>'; ?>
+                  </div>
 <?php
   }
 ?>
-                </table></td>
-              </tr>
-            </table></td>
+</div>
 <?php
   $heading = array();
   $contents = array();
@@ -380,22 +379,23 @@ require (DIR_WS_INCLUDES.'head.php');
       break;
   }
   if ( (xtc_not_null($heading)) && (xtc_not_null($contents)) ) {
-    echo '            <td width="25%" valign="top">' . "\n";
+    echo '            <div class="col-md-3 hidden-xs hidden-sm pull-right">' . "\n";#col-sm-12 col-xs-12 
 
     $box = new box;
     echo $box->infoBox($heading, $contents);
 
-    echo '            </td>' . "\n";
+    echo '            </div>' . "\n";
+    ?>
+    <script>
+        //responsive_table
+        $('#responsive_table').addClass('col-md-9');
+    </script>               
+    <?php
   }
+  ?> </div><?php
 }
 ?>
-          </tr>
-        </table></td>
-      </tr>
-    </table></td>
-<!-- body_text_eof //-->
-  </tr>
-</table>
+</div>
 <!-- body_eof //-->
 
 <!-- footer //-->

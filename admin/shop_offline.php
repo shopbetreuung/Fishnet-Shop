@@ -47,49 +47,36 @@ if (USE_WYSIWYG == 'true') {
     <?php require(DIR_WS_INCLUDES . 'header.php'); ?>
     <!-- header_eof //-->
     <!-- body //-->
-    <table border="0" width="100%" cellspacing="2" cellpadding="2">
-      <tr>
+<div class="row">
+<!-- body_text //-->
+    <div class='col-xs-12'>
+        <p class="h2">
+            <?php echo HEADING_TITLE; ?>
+        </p>
+    </div>
+<div class='col-xs-12'><br></div>
+<div class='col-xs-12'>
+    <div class="col-xs-12 dataTableHeadingContent">
+      <?php echo BOX_SHOP_OFFLINE; ?>                          
+    </div>
+</div>
         
-        </td>
-        <!-- body_text //-->
-        <td class="boxCenter" width="100%" valign="top">
-          <table border="0" width="100%" cellspacing="0" cellpadding="0">
-            <tr>
-              <td>
-                <div class="pageHeading"><?php echo HEADING_TITLE; ?></div>
-                <br />
-                <table border="0" width="100%" cellspacing="0" cellpadding="0">
-                  <tr>
-                    <td class="dataTableHeadingContent">
-                      <?php echo BOX_SHOP_OFFLINE; ?>                          
-                    </td>
-                  </tr>
-                </table>
-                <table border="0" width="100%" cellspacing="0" cellpadding="0" style="width: 100%; border: 1px solid; border-color: #aaaaaa; padding: 5px;">
-                  <tr>
-                    <td valign="top" class="main">    
-                      <form name="img_upload" action="shop_offline.php" method="post" enctype="multipart/form-data">
+<div class='col-xs-12'>
+    <div class="main col-xs-12"  style="border: 1px solid; border-color: #aaaaaa; padding: 5px;">    
+      <form role="form" name="img_upload" action="shop_offline.php" method="post" enctype="multipart/form-data">
                         <input type="checkbox" name="shop_offline" value="checked" <?php echo xtc_get_shop_conf('SHOP_OFFLINE'); ?>>
                         <?php echo SETTINGS_OFFLINE ?><br /><br />
                         <?php echo SETTINGS_OFFLINE_MSG ?>:<br />
                         <?php
-                          echo xtc_draw_textarea_field('offline_msg', 'soft', '150', '20', stripslashes(xtc_get_shop_conf('SHOP_OFFLINE_MSG')));
+          echo xtc_draw_textarea_field('offline_msg', 'soft', '150', '20', stripslashes(xtc_get_shop_conf('SHOP_OFFLINE_MSG')),'','class="form-control"');
                         ?>
                         <br />
                         <br />
                         <?php echo '<input type="submit" name="go" class="btn btn-default" onclick="this.blur();" value="' . BUTTON_SAVE . '"/>'; ?>
                       </form>
-                    </td>
-                  </tr>
-                </table>
-                <br />
-              </td>
-            </tr>
-          </table>
-        </td>
-        <!-- body_text_eof //-->
-      </tr>
-    </table>
+    </div>
+</div>
+</div>
     <!-- body_eof //-->
     <!-- footer //-->
     <?php require(DIR_WS_INCLUDES . 'footer.php'); ?>

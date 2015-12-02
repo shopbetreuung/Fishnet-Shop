@@ -6,7 +6,7 @@
  * xt:Commerce - Shopsoftware
  * (c) 2003-2007 xt:Commerce (Winger/Zanier), http://www.xt-commerce.com
  *
- * xt:Commerce ist eine geschŸtzte Handelsmarke und wird vertreten durch die xt:Commerce GmbH (Austria)
+ * xt:Commerce ist eine geschÃ¼tzte Handelsmarke und wird vertreten durch die xt:Commerce GmbH (Austria)
  * xt:Commerce is a protected trademark and represented by the xt:Commerce GmbH (Austria)
  *
  * @copyright Copyright 2003-2007 xt:Commerce (Winger/Zanier), www.xt-commerce.com
@@ -45,7 +45,7 @@ if(isset($error)) echo $error;
 if($show) {
 ?>
 	<div class="highlightbox">
-		<p class="pageHeading"><?php echo TEXT_PAYPAL_TRANSACTION_DETAIL; ?></p>
+		<p class="h3"><?php echo TEXT_PAYPAL_TRANSACTION_DETAIL; ?></p>
 		<table class="main" width="100%" border="0">
 			<tr>
 				<td width="10%"><?php echo TEXT_PAYPAL_TXN_ID; ?></td>

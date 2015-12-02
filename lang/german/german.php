@@ -196,6 +196,8 @@ define('IMAGE_BUTTON_CONFIRM_ORDER', 'Kaufen');
 define('IMAGE_BUTTON_CONTINUE', 'Weiter');
 define('IMAGE_BUTTON_DELETE', 'L&ouml;schen');
 define('IMAGE_BUTTON_LOGIN', 'Anmelden');
+define('IMAGE_BUTTON_LOGIN_NEWSLETTER', 'Anmelden');
+define('IMAGE_BUTTON_UNSUBSCRIBE_NEWSLETTER', 'Abmelden');
 define('IMAGE_BUTTON_IN_CART', 'In den Warenkorb');
 define('IMAGE_BUTTON_SEARCH', 'Suchen');
 define('IMAGE_BUTTON_UPDATE', 'Aktualisieren');
@@ -274,6 +276,7 @@ define('ERROR_CHECKOUT_SHIPPING_NO_MODULE', 'Es ist keine Versandart vorhanden.'
 //  conditions check
 
 define('ERROR_CONDITIONS_NOT_ACCEPTED', '* Sofern Sie unsere Allgemeinen Gesch&auml;ftsbedingungen nicht akzeptieren,\n k&ouml;nnen wir Ihre Bestellung bedauerlicherweise nicht entgegennehmen!\n\n');
+define('ERROR_AGREE_DOWNLOAD_NOT_ACCEPTED', '* Sofern Sie keine Angaben zum gew&uuml;nschten Beginn der Vertragsausf&uuml;hrung bei den Downloads machen,\n k&ouml;nnen wir Ihre Bestellung bedauerlicherweise nicht entgegennehmen!\n\n');
 
 define('SUB_TITLE_OT_DISCOUNT','Rabatt:');
 
@@ -309,8 +312,8 @@ define('JS_PRICE_FROM_MUST_BE_NUM', '* \"Preis ab\" muss eine Zahl sein\n\n');
 define('JS_PRICE_TO_MUST_BE_NUM', '* \"Preis bis\" muss eine Zahl sein\n\n');
 define('JS_PRICE_TO_LESS_THAN_PRICE_FROM', '* Preis bis muss gr&ouml;&szlig;er oder gleich Preis ab sein.\n');
 define('JS_INVALID_KEYWORDS', '* Suchbegriff unzul&auml;ssig\n');
-define('TEXT_LOGIN_ERROR', '<font color="#ff0000"><strong>FEHLER:</strong></font> Keine &Uuml;bereinstimmung der eingegebenen \'E-Mail-Adresse\' und/oder dem \'Passwort\'.');
-define('TEXT_NO_EMAIL_ADDRESS_FOUND', '<font color="#ff0000"><strong>ACHTUNG:</strong></font> Die eingegebene E-Mail-Adresse ist nicht registriert. Bitte versuchen Sie es noch einmal.');
+define('TEXT_LOGIN_ERROR', '<font color="#ff0000"><strong>FEHLER:</strong></font> Falsche E-Mail Adresse oder Passwort.');
+define('TEXT_NO_EMAIL_ADDRESS_FOUND', '<font color="#ff0000"><strong>FEHLER:</strong></font> Falsche E-Mail Adresse oder Passwort.');
 define('TEXT_PASSWORD_SENT', 'Ein neues Passwort wurde per E-Mail verschickt.');
 define('TEXT_PRODUCT_NOT_FOUND', 'Artikel wurde nicht gefunden!');
 define('TEXT_MORE_INFORMATION', 'F&uuml;r weitere Informationen besuchen Sie bitte die <a style="text-decoration:underline;" href="%s" onclick="window.open(this.href); return false;">Homepage</a> zu diesem Artikel.');
@@ -354,6 +357,8 @@ define('NAVBAR_TITLE_DELETE_ENTRY_ADDRESS_BOOK_PROCESS', 'Eintrag l&ouml;schen')
 define('NAVBAR_TITLE_ADVANCED_SEARCH', 'Erweiterte Suche');
 define('NAVBAR_TITLE1_ADVANCED_SEARCH', 'Erweiterte Suche');
 define('NAVBAR_TITLE2_ADVANCED_SEARCH', 'Suchergebnisse');
+define('NAVBAR_TITLE_1_CHECKOUT_AGREE_DOWNLOAD', 'Kasse');
+define('NAVBAR_TITLE_2_CHECKOUT_AGREE_DOWNLOAD', 'Digitale Inhalte');
 define('NAVBAR_TITLE_1_CHECKOUT_CONFIRMATION', 'Kasse');
 define('NAVBAR_TITLE_2_CHECKOUT_CONFIRMATION', 'Best&auml;tigung');
 define('NAVBAR_TITLE_1_CHECKOUT_PAYMENT', 'Kasse');
@@ -397,7 +402,7 @@ define('TEXT_NEWSLETTER','Sie m&ouml;chten immer auf dem Laufenden bleiben?<br /
 define('TEXT_EMAIL_INPUT','Ihre E-Mail-Adresse wurde in unser System eingetragen.<br />Gleichzeitig wurde Ihnen vom System eine E-Mail mit einem Aktivierungslink geschickt. Bitte klicken Sie nach dem Erhalt der E-Mail auf den Link, um Ihre Eintragung zu best&auml;tigen. Ansonsten bekommen Sie keinen Newsletter von uns zugestellt!');
 
 define('TEXT_WRONG_CODE','<font color="#ff0000">Ihr eingegebener Sicherheitscode stimmte nicht mit dem angezeigten Code &uuml;berein. Bitte versuchen Sie es erneut.</font>');
-define('TEXT_EMAIL_EXIST_NO_NEWSLETTER','<font color="#ff0000">Diese E-Mail-Adresse existiert bereits in unserer Datenbank, ist aber noch nicht f&uuml;r den Empfang des Newsletters freigeschaltet!</font>');
+define('TEXT_EMAIL_EXIST_NO_NEWSLETTER','<font color="#ff0000">Es wurde ein neuer Sicherheitscode auf diese Adresse gesendet!</font>');
 define('TEXT_EMAIL_EXIST_NEWSLETTER','<font color="#ff0000">Diese E-Mail-Adresse existiert bereits in unserer Datenbank und ist f&uuml;r den Newsletterempfang bereits freigeschaltet!</font>');
 define('TEXT_EMAIL_NOT_EXIST','<font color="#ff0000">Diese E-Mail-Adresse existiert nicht in unserer Datenbank!</font>');
 define('TEXT_EMAIL_DEL','Ihre E-Mail-Adresse wurde aus unserer Newsletterdatenbank gel&ouml;scht.');

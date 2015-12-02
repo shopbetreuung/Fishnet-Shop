@@ -94,7 +94,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'process') {
     $gv_query = xtc_db_query("select customers_firstname, customers_lastname from ".TABLE_CUSTOMERS." where customers_id = '".$_SESSION['customer_id']."'");
     $gv_customer = xtc_db_fetch_array($gv_query);
     $gv_query = xtc_db_query("insert into ".TABLE_COUPONS." (coupon_type, coupon_code, date_created, coupon_amount) values ('G', '".$id1."', NOW(), '".str_replace(",", ".", xtc_db_input($_POST['amount']))."')");
-    $insert_id = xtc_db_insert_id($gv_query);
+    $insert_id = xtc_db_insert_id();
     $gv_query = xtc_db_query("insert into ".TABLE_COUPON_EMAIL_TRACK." (coupon_id, customer_id_sent, sent_firstname, sent_lastname, emailed_to, date_sent) values ('".$insert_id."' ,'".$_SESSION['customer_id']."', '".addslashes($gv_customer['customers_firstname'])."', '".addslashes($gv_customer['customers_lastname'])."', '".xtc_db_input($_POST['email'])."', now())");
 
     $gv_email_subject = sprintf(EMAIL_GV_TEXT_SUBJECT, stripslashes($_POST['send_name']));
@@ -112,8 +112,8 @@ if (isset($_GET['action']) && $_GET['action'] == 'process') {
     // dont allow cache
     $smarty->caching = false;
 
-    $html_mail = $smarty->fetch(CURRENT_TEMPLATE.'/mail/'.$_SESSION['language'].'/send_gift_to_friend.html');
-    $txt_mail = $smarty->fetch(CURRENT_TEMPLATE.'/mail/'.$_SESSION['language'].'/send_gift_to_friend.txt');
+    $html_mail = $smarty->fetch('db:send_gift_to_friend.html');
+    $txt_mail = $smarty->fetch('db:send_gift_to_friend.txt');
 
     // send mail
     xtc_php_mail(EMAIL_BILLING_ADDRESS, EMAIL_BILLING_NAME, $_POST['email'], $_POST['to_name'], '', EMAIL_BILLING_REPLY_ADDRESS, EMAIL_BILLING_REPLY_ADDRESS_NAME, '', '', $gv_email_subject, $html_mail, $txt_mail);

@@ -50,4 +50,7 @@ define('TEXT_INFO_COUNTRY_ZONE', 'Zone:');
 define('TYPE_BELOW', 'All Zones');
 define('PLEASE_SELECT', 'All Zones');
 define('TEXT_ALL_COUNTRIES', 'All Countries');
+
+define('ERROR_TEXT_HEADING', 'Zone not saved, fix errors:');
+define('ERROR_TEXT_NAME', 'Name invalid!');
 ?>

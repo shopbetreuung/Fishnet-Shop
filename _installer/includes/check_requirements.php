@@ -10,8 +10,8 @@
    Copyright (c) 2009 - 2013 [www.modified-shop.org]
    --------------------------------------------------------------*/
 
-  define('PHP_VERSION_MIN', '5.0.0');
-  define('PHP_VERSION_MAX', '5.4.99');
+  define('PHP_VERSION_MIN', '5.4.0');
+  define('PHP_VERSION_MAX', '5.6.99');
 
   //BOF *************  check PHP-Version *************
   //BOF - Dokuman - 2012-11-19: remove irritating PHP-Version message

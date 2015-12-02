@@ -12,7 +12,7 @@
 
   //#################################
   define ('ANZAHL_ZEILEN', 10000); //Anzahl der Zeilen die pro Durchlauf bei der Wiederherstellung aus der SQL-Datei eingelesen werden sollen
-  define ('RESTORE_TEST', false); //Standard: false - auf true ändern für Simulation für die Wiederherstellung, die SQL Befehle werden in eine Protokolldatei (log) im Backup-Verzeichnis geschrieben
+  define ('RESTORE_TEST', false); //Standard: false - auf true Ã¤ndern fÃ¼r Simulation fÃ¼r die Wiederherstellung, die SQL Befehle werden in eine Protokolldatei (log) im Backup-Verzeichnis geschrieben
   //#################################
   define ('VERSION', 'Database Restore Ver. 1.92');
 
@@ -46,7 +46,7 @@
   require_once(DIR_FS_INC . 'xtc_db_output.inc.php');
   require_once(DIR_FS_INC . 'xtc_db_input.inc.php');
 
-  xtc_db_connect() or die('Unable to connect to database server!');
+  $connection = xtc_db_connect() or die('Unable to connect to database server!');
 
   //Start Session
   session_name('dbdump');
@@ -80,7 +80,7 @@
 
   $action = (isset($_GET['action']) ? $_GET['action'] : '');
 
-  //Dateiname für Selbstaufruf
+  //Dateiname fÃ¼r Selbstaufruf
   $bk_filename =  basename($_SERVER['SCRIPT_NAME']); // web28 - 2011-07-02 - Security Fix - PHP_SELF
 
   //Animierte Gif-Datei und Hinweistext
@@ -105,9 +105,9 @@
     unset($_SESSION['dump']);
     xtc_set_time_limit(0);
     //BOF Disable "STRICT" mode!
-    $vers = @mysql_get_client_info();
+    $vers = @mysqli_get_client_info($connection);
     if(substr($vers,0,1) > 4) {
-      @mysql_query("SET SESSION sql_mode=''");
+      @mysqli_query($connection, "SET SESSION sql_mode=''");
     }
     //EOF Disable "STRICT" mode!
     $restore['file'] = DIR_FS_BACKUP . $_GET['file'];
@@ -117,7 +117,7 @@
       die('Direct Access to this location is not allowed.');
     }
 
-    //Protokollfatei löschen wenn sie schon existiert
+    //Protokollfatei lÃ¶schen wenn sie schon existiert
     $extension = substr($restore['file'], -3);
     if($extension == '.gz') {
       $protdatei = substr($restore['file'],0, -3). '.log.gz';
@@ -159,17 +159,17 @@
 
     // Disable Keys of actual table to speed up restoring
     if (sizeof($restore['tables_to_restore'])==0 && ($restore['actual_table'] > ''&& $restore['actual_table']!='unbekannt'))
-      @mysql_query('/*!40000 ALTER TABLE `'.$restore['actual_table'].'` DISABLE KEYS */;');
+      @mysqli_query($connection, '/*!40000 ALTER TABLE `'.$restore['actual_table'].'` DISABLE KEYS */;');
     while (($a < $restore['anzahl_zeilen']) && (!$restore['fileEOF']) && !$restore['EOB']) {
       xtc_set_time_limit(0);
       $sql_command = get_sqlbefehl();
       //Echo $sql_command;
       if ($sql_command > '') {
         if (!RESTORE_TEST) {
-          $res = mysql_query($sql_command);
+          $res = mysqli_query($connection, $sql_command);
           if ($res===false) {
             // Bei MySQL-Fehlern sofort abbrechen und Info ausgeben
-            $meldung=@mysql_error;
+            $meldung=@mysqli_error($connection);
             if ($meldung!='')
               die($sql_command.' -> '.$meldung);
           }
@@ -221,7 +221,12 @@ require (DIR_WS_INCLUDES.'head.php');
               <td>
                 <table border="0" width="100%" cellspacing="0" cellpadding="0">
                   <tr>
-                    <td class="pageHeading"><?php echo HEADING_TITLE; ?><span class="smallText"> [<?php echo VERSION; ?>]</span></td>
+                    <td class="pageHeading">            
+                    <p class="h2">
+                        <?php echo HEADING_TITLE; ?>
+                        <small> [<?php echo VERSION; ?>]</small>
+                    </p>
+                    </td>
                   </tr>
                 </table>
               </td>

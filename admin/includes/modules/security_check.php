@@ -147,15 +147,6 @@ while ($row = xtc_db_fetch_array($stmt)) {
 */
 
 /*******************************************************************************
- ** register_globals = off check:
- ******************************************************************************/
-$registerGlobals = ini_get('register_globals');
-// see notes for boolean values: http://php.net/manual/en/function.ini-get.php
-if (($registerGlobals == '1') || (strtolower($registerGlobals) == 'on')) {
-  $warnings[] = WARNING_REGISTER_GLOBALS;
-}
-
-/*******************************************************************************
  ** output warnings:
  ******************************************************************************/
 if (!empty($warnings)) {

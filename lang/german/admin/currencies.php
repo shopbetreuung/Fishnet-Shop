@@ -43,4 +43,8 @@ define('TEXT_INFO_CURRENCY_UPDATED', 'Der Wechselkurs %s (%s) wurde erfolgreich 
 
 define('ERROR_REMOVE_DEFAULT_CURRENCY', 'Fehler: Die Standardw&auml;hrung darf nicht gel&ouml;scht werden. Bitte definieren Sie eine neue Standardw&auml;hrung und wiederholen Sie den Vorgang.');
 define('ERROR_CURRENCY_INVALID', 'Fehler: Der Wechselkurs f&uuml;r %s (%s) wurde nicht aktualisiert. Ist dies ein g&uuml;ltiges W&auml;hrungsk&uuml;rzel?');
+
+define('ERROR_TEXT_HEADING', 'Fehler! W&auml;hrung konnte nicht gespeichert werden:');
+define('ERROR_TEXT_NAME', 'W&auml;hrungsname ung&uuml;ltig!');
+define('ERROR_TEXT_CODE', 'K&uuml;rzel ung&uuml;ltig');
 ?>

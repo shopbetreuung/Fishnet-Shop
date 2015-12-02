@@ -66,38 +66,23 @@
 <!-- header_eof //-->
 
 <!-- body //-->
-<table border="0" width="100%" cellspacing="2" cellpadding="2">
-  <tr>
+<div class="row">
+<!-- body //-->
     
-<!-- body_text //-->
-    <td class="boxCenter" width="100%" valign="top"><table border="0" width="100%" cellspacing="0" cellpadding="0">
-      <tr>
-        <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
-  <tr>
-    <td width="80" rowspan="2"><?php echo xtc_image(DIR_WS_ICONS.'heading_news.gif'); ?></td>
-    <td class="pageHeading">CSV Import/Export</td>
-  </tr>
-  <tr>
-    <td class="main" valign="top">Tools</td>
-  </tr>
-</table></td>
-      </tr>
-      <tr>
-        <td class="main">
-        <table class="infoBoxHeading" width="100%">
-            <tr>
-                <td width="150" align="center">
-                <a href="#" onclick="toggleBox('config');"><?php echo CSV_SETUP; ?></a>
-                </td>
-                <td width="1">|
-                </td>
-                <td>
-                </td>
-            </tr>
-        </table>
-<div id="config" class="longDescription">
+        <div class='col-xs-12'>
+            <div class="col-xs-3 col-sm-1  text-right">
+                <?php echo xtc_image(DIR_WS_ICONS.'heading_news.gif'); ?>
+            </div>
+            <div class="col-xs-9 col-sm-11">
+                <p class="h2">CSV Import/Export</p>
+                Tools
+            </div>
+            <div class="col-xs-12 col-sm-push-1">
+                 <a href="#" onclick="toggleBox('config');"><?php echo CSV_SETUP; ?></a> |
+            </div>
+        </div>
+<div id="config" class="longDescription  col-xs-12">
 <?php echo xtc_draw_form('configuration', FILENAME_CSV_BACKEND, 'gID=20&action=save'); ?>
-            <table width="100%"  border="0" cellspacing="0" cellpadding="4">
 <?php
   $configuration_query = xtc_db_query("select configuration_key,configuration_id, configuration_value, use_function,set_function from " . TABLE_CONFIGURATION . " where configuration_group_id = '20' order by sort_order");
 
@@ -179,7 +164,6 @@
 
   }
 ?>
-            </table>
 <?php echo '<input type="submit" class="btn btn-default" onclick="this.blur();" value="' . BUTTON_SAVE . '"/>'; ?></form>
 </div>
 <?php
@@ -227,35 +211,33 @@
   }
 
 ?>
-<table width="100%"  border="0" cellspacing="5" cellpadding="0">
-  <tr>
-    <td class="pageHeading">IMPORT</td>
-  </tr>
-  <tr>
-    <td class="dataTableHeadingContent"><?php echo TEXT_IMPORT; ?>
-      <table width="100%"  border="0" cellspacing="2" cellpadding="0">
-        <tr>
-          <td width="7%"></td>
-          <td width="93%" class="infoBoxHeading"><?php echo UPLOAD; ?></td>
-        </tr>
-        <tr>
-          <td>&nbsp;</td>
-          <td>
+    <div class="col-xs-12">
+        <p class="h3">IMPORT</p>
+        <?php echo TEXT_IMPORT; ?>
+    </div>
+
+    <div class="col-xs-12 dataTableHeadingContent">
+        <div class="col-xs-12 col-sm-push-1">
+        <div class="col-xs-12"><?php echo TEXT_IMPORT; ?></div>
+        <div>
+          <div class="infoBoxHeading"><?php echo UPLOAD; ?></div>
+        </div>
+        <div>
+          <div>&nbsp;</div>
+          <div>
 <?php
 echo xtc_draw_form('upload',FILENAME_CSV_BACKEND,'action=upload','POST','enctype="multipart/form-data"');
 echo xtc_draw_file_field('file_upload');
 echo '<br/><input type="submit" class="btn btn-default" onclick="this.blur();" value="' . BUTTON_UPLOAD . '"/>';
 ?>
 </form>
-          </td>
-        </tr>
-        <tr>
-          <td></td>
-          <td class="infoBoxHeading"><?php echo SELECT; ?></td>
-        </tr>
-        <tr>
-          <td>&nbsp;</td>
-          <td>
+          </div>
+        </div>
+        <div>
+          <div></div>
+          <div class="infoBoxHeading"><?php echo SELECT; ?></div>
+        </div>
+          <div>&nbsp;</div>
           <?php
           $files=array();
           echo xtc_draw_form('import',FILENAME_CSV_BACKEND,'action=import','POST','enctype="multipart/form-data"');
@@ -275,53 +257,33 @@ echo '<br/><input type="submit" class="btn btn-default" onclick="this.blur();" v
           echo '<br/><input type="submit" class="btn btn-default" onclick="this.blur();" value="' . BUTTON_IMPORT . '"/>';
 
           ?></form>
-</td>
-        </tr>
-      </table>      <p>&nbsp; </p></td>
-  </tr>
-</table>
+          </div>
+</div>
 
+    <div class="col-xs-12">
+        <p class="h3">Export</p>
+    </div>
 
-<table width="100%"  border="0" cellspacing="5" cellpadding="0">
-  <tr>
-    <td class="pageHeading">Export</td>
-  </tr>
-  <tr>
-    <td class="dataTableHeadingContent">
-      <table width="100%"  border="0" cellspacing="2" cellpadding="0">
-       <tr>
-          <td width="7%"></td>
-          <td width="93%" class="infoBoxHeading"><?php echo TEXT_EXPORT; ?></td>
-        </tr>
-        <tr>
-          <td>&nbsp;</td>
-          <td>
-<?php
-echo xtc_draw_form('export',FILENAME_CSV_BACKEND,'action=export','POST','enctype="multipart/form-data"');
-$content=array();
-$content[]=array('id'=>'products','text'=>TEXT_PRODUCTS);
-echo xtc_draw_pull_down_menu('select_content',$content,'products');
-echo '<br/><input type="submit" class="btn btn-default" onclick="this.blur();" value="' . BUTTON_EXPORT . '"/>';
-?>
-</form>
-          </td>
-        </tr>
-        <tr>
-          <td>&nbsp;</td>
-          <td>
-
-</td>
-        </tr>
-      </table>      <p>&nbsp; </p></td>
-  </tr>
-</table>
-
-</td>
-      </tr>
-    </table></td>
-<!-- body_text_eof //-->
-  </tr>
-</table>
+    <div class="col-xs-12 dataTableHeadingContent">
+        <div class="col-xs-12 col-sm-push-1">
+        <div>
+          <div class="pageHeading"></div>
+        </div>
+        <div>
+          <div width="7%"></div>
+          <div width="93%" class="infoBoxHeading"><?php echo TEXT_EXPORT; ?></div>
+        </div>
+        <?php
+        echo xtc_draw_form('export',FILENAME_CSV_BACKEND,'action=export','POST','enctype="multipart/form-data"');
+        $content=array();
+        $content[]=array('id'=>'products','text'=>TEXT_PRODUCTS);
+        echo xtc_draw_pull_down_menu('select_content',$content,'products');
+        echo '<br/><input type="submit" class="btn btn-default" onclick="this.blur();" value="' . BUTTON_EXPORT . '"/>';
+        ?>
+        </form>
+        </div>
+    </div>
+</div>
 <!-- body_eof //-->
 
 <!-- footer //-->

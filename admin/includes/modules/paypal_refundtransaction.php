@@ -6,7 +6,7 @@
  * xt:Commerce - Shopsoftware
  * (c) 2003-2007 xt:Commerce (Winger/Zanier), http://www.xt-commerce.com
  *
- * xt:Commerce ist eine geschŸtzte Handelsmarke und wird vertreten durch die xt:Commerce GmbH (Austria)
+ * xt:Commerce ist eine geschÃ¼tzte Handelsmarke und wird vertreten durch die xt:Commerce GmbH (Austria)
  * xt:Commerce is a protected trademark and represented by the xt:Commerce GmbH (Austria)
  *
  * @copyright Copyright 2003-2007 xt:Commerce (Winger/Zanier), www.xt-commerce.com
@@ -25,50 +25,48 @@ echo xtc_draw_hidden_field('amount', $ipn_data['mc_gross']);
 echo xtc_draw_hidden_field('ipn_id', (int)$_GET['paypal_ipn_id']);
 ?>
 <div class="highlightbox">
-	<p class="pageHeading"><?php echo TEXT_PAYPAL_REFUND_TRANSACTION; ?></p>
+	<p class="h3"><?php echo TEXT_PAYPAL_REFUND_TRANSACTION; ?></p>
 	<p><?php echo TEXT_PAYPAL_NOTE_REFUND_INFO; ?></p>
-	<table class="main" width="100%" border="0">
-		<tr>
-			<td colspan="2"><hr noshade></td>
-		</tr>
-		<tr>
-			<td width="10%" nowrap="nowrap"><?php echo TEXT_PAYPAL_TXN_ID; ?></td>
-			<td width="90%"><?php echo $ipn_data['txn_id']; ?></td>
-		</tr>
+            <div class="col-xs-12"><hr noshade></div>
+        <div class="col-xs-12">
+		<div class="col-xs-12">
+			<div class="col-xs-12 col-sm-2"><?php echo TEXT_PAYPAL_TXN_ID; ?></div>
+			<div class="col-xs-12 col-sm-10"><?php echo $ipn_data['txn_id']; ?></div>
+		</div>
 		<?php if($ipn_data['address_name']!='') { ?>
-			<tr>
-				<td width="10%" valign="top"><?php echo TEXT_PAYPAL_ADRESS; ?></td>
-				<td width="90%"><?php echo $ipn_data['address_name']; ?></td>
-			</tr>
+			<div class="col-xs-12">
+				<div class="col-xs-12 col-sm-2"><?php echo TEXT_PAYPAL_ADRESS; ?></div>
+				<div class="col-xs-12 col-sm-10"><?php echo $ipn_data['address_name']; ?></div>
+			</div>
 		<?php } else { ?>
-			<tr>
-				<td width="10%" valign="top"><?php echo TEXT_PAYPAL_ADRESS; ?></td>
-				<td width="90%"><?php echo $ipn_data['first_name'].' '.$ipn_data['last_name']; ?></td>
-			</tr>
+			<div class="col-xs-12">
+				<div width="10%" valign="top"><?php echo TEXT_PAYPAL_ADRESS; ?></div>
+				<div class="col-xs-12 col-sm-10"><?php echo $ipn_data['first_name'].' '.$ipn_data['last_name']; ?></div>
+			</div>
 		<?php } ?>
-		<tr>
-			<td width="10%" nowrap="nowrap"><?php echo TEXT_PAYPAL_PAYER_EMAIL; ?></td>
-			<td width="90%" valign="middle"><?php echo $ipn_data['payer_email'];?></td>
-		</tr>
-		<tr>
-			<td width="10%" nowrap="nowrap"><?php echo TEXT_PAYPAL_TRANSACTION_TOTAL; ?></td>
-			<td width="90%"><?php echo $ipn_data['mc_gross'].' '.$ipn_data['mc_currency']; ?></td>
-		</tr>
-		<tr>
-			<td width="10%" nowrap="nowrap"><?php echo TEXT_PAYPAL_TRANSACTION_LEFT; ?></td>
-			<td width="90%"><?php echo $ipn_data['mc_gross'].' '.$ipn_data['mc_currency']; ?></td>
-		</tr>
-		<tr>
-			<td width="10%" nowrap="nowrap"><?php echo TEXT_PAYPAL_AMOUNT; ?></td>
-			<td width="90%"><?php echo xtc_draw_input_field('refund_amount',$ipn_data['mc_gross'],'size="10"'); ?></td>
-		</tr>
-		<tr>
-			<td width="10%" valign="top"><?php echo TEXT_PAYPAL_REFUND_NOTE; ?></td>
-			<td width="90%">
+		<div class="col-xs-12">
+			<div class="col-xs-12 col-sm-2"><?php echo TEXT_PAYPAL_PAYER_EMAIL; ?></div>
+			<div class="col-xs-12 col-sm-10" valign="middle"><?php echo $ipn_data['payer_email'];?></div>
+		</div>
+		<div class="col-xs-12">
+			<div class="col-xs-12 col-sm-2"><?php echo TEXT_PAYPAL_TRANSACTION_TOTAL; ?></div>
+			<div class="col-xs-12 col-sm-10"><?php echo $ipn_data['mc_gross'].' '.$ipn_data['mc_currency']; ?></div>
+		</div>
+		<div class="col-xs-12">
+			<div class="col-xs-12 col-sm-2"><?php echo TEXT_PAYPAL_TRANSACTION_LEFT; ?></div>
+			<div class="col-xs-12 col-sm-10"><?php echo $ipn_data['mc_gross'].' '.$ipn_data['mc_currency']; ?></div>
+		</div>
+		<div class="col-xs-12">
+			<div class="col-xs-12 col-sm-2"><?php echo TEXT_PAYPAL_AMOUNT; ?></div>
+			<div class="col-xs-12 col-sm-10"><?php echo xtc_draw_input_field('refund_amount',$ipn_data['mc_gross'],'size="10"'); ?></div>
+		</div>
+		<div class="col-xs-12">
+			<div width="10%" valign="top"><?php echo TEXT_PAYPAL_REFUND_NOTE; ?></div>
+			<div class="col-xs-12 col-sm-10">
 				<?php echo xtc_draw_textarea_field('refund_info', '', '50', '5', ''); ?>
-			</td>
-		</tr>
-	</table>
+			</div>
+		</div>
+        </div>
 	<input type="submit" class="btn btn-default" value="<?php echo REFUND; ?>">
 	<?php echo '<a class="btn btn-default" href="'.xtc_href_link(FILENAME_PAYPAL).'">Zur&uuml;ck</a>'; ?>
 </div>

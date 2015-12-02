@@ -23,7 +23,7 @@ define( 'BUTTON_PDFBILL_RECREATE',          'Recreate PDF-Invoice');  // pdfbill
 define( 'BUTTON_PDFBILL_DISPLAY',           'Display PDF');           // pdfbill
 define( 'BUTTON_PDFBILL_SEND_INVOICE_MAIL', 'Send Invoice');          // pdfbill
 define( 'BUTTON_PDFBILL_INVOICE_MAIL2',     'Send Invoice again');    // pdfbill
-define( 'BUTTON_BILL',                      'Fakturieren');           // ibillnr   
+define( 'BUTTON_BILL',                      'Billing');           // ibillnr   
 define( 'PDFBILL_INVOICE_WORD',             'invoice' );              // used for pdf e-mail 
 define( 'PDFBILL_MSG_INVOICEMAIL_SENT',     'E-Mail sent' );      
 define( 'PDFBILL_MSG_DELINFO_PDF' ,         '<br /><br />Any PDF-Invoice exists and will be removed additionally.' );      
@@ -55,6 +55,7 @@ define('TEXT_BANK_ERRORCODE', 'Errorcode:');
 define('HEADING_TITLE', 'Orders');
 define('HEADING_TITLE_SEARCH', 'Order ID:');
 define('HEADING_TITLE_STATUS', 'Status:');
+define('HEADING_CHOOSE_PAYMENT', 'Payment');
 
 define('TABLE_HEADING_COMMENTS', 'Comments');
 define('TABLE_HEADING_CUSTOMERS', 'Customers');
@@ -114,6 +115,7 @@ define('TEXT_INFO_SHIPPING_METHOD', 'Shipping Method:');
 
 define('TEXT_ALL_ORDERS', 'All Orders');
 define('TEXT_NO_ORDER_HISTORY', 'No Order History Available');
+define('TEXT_ALL_PAYMENT_METHODS', 'All payment methods');
 
 define('EMAIL_SEPARATOR', '------------------------------------------------------');
 define('EMAIL_TEXT_SUBJECT', 'Order Update');
@@ -157,4 +159,5 @@ define('TEXT_SHIPPING_TO', 'Shipping to');
 define('TEXT_SHIPPING_LANG', 'Language');
 
 define('TABLE_HEADING_COMMENTS_SENT', 'Comment is sent');
+
 ?>

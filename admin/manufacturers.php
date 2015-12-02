@@ -20,11 +20,31 @@
   switch ($_GET['action']) {
     case 'insert':
     case 'save':
+      $error = array();
       $manufacturers_id = xtc_db_prepare_input($_GET['mID']);
       $manufacturers_name = xtc_db_prepare_input($_POST['manufacturers_name']);
 
       $sql_data_array = array('manufacturers_name' => $manufacturers_name);
 
+        $url_action = 'new';
+        if ($_GET['action'] == 'insert') {
+            $check_if_name_exist = xtc_db_find_database_field(TABLE_MANUFACTURERS, 'manufacturers_name', $manufacturers_name, 'manufacturers_name');
+        } elseif ($_GET['action'] == 'save') {
+            $url_action = 'edit';
+            $check_if_name_exist = xtc_db_find_database_field(TABLE_MANUFACTURERS, 'manufacturers_name', $manufacturers_name);
+        }
+
+        if(!$manufacturers_name || $check_if_name_exist){
+            if($_GET['action'] == 'save'){
+                if($check_if_name_exist['manufacturers_id'] != $manufacturers_id){
+                    $error[] = ERROR_TEXT_NAME;
+                }
+            } else {
+                $error[] = ERROR_TEXT_NAME;
+            }
+        }
+      
+    if(empty($error)){ 
       if ($_GET['action'] == 'insert') {
         $insert_sql_data = array('date_added' => 'now()');
         $sql_data_array = xtc_array_merge($sql_data_array, $insert_sql_data);
@@ -35,6 +55,11 @@
         $sql_data_array = xtc_array_merge($sql_data_array, $update_sql_data);
         xtc_db_perform(TABLE_MANUFACTURERS, $sql_data_array, 'update', "manufacturers_id = '" . xtc_db_input($manufacturers_id) . "'");
       }
+    } else {
+            $_SESSION['repopulate_form'] = $_REQUEST;
+            $_SESSION['errors'] = $error;
+            xtc_redirect(xtc_href_link(FILENAME_MANUFACTURERS, 'page='.$_GET['page'].'&action='.$url_action.'&errors=1&mID=' . $manufacturers_id));
+    }
 
 	$dir_manufacturers=DIR_FS_CATALOG_IMAGES."/manufacturers";
     if ($manufacturers_image = xtc_try_upload('manufacturers_image', $dir_manufacturers)) {
@@ -118,23 +143,19 @@ require (DIR_WS_INCLUDES.'head.php');
 <!-- header_eof //-->
 
 <!-- body //-->
-<table border="0" width="100%" cellspacing="2" cellpadding="2">
-  <tr>
-    
+<div class="row">
 <!-- body_text //-->
-    <td class="boxCenter" width="100%" valign="top"><table border="0" width="100%" cellspacing="0" cellpadding="2">
-      <tr>
-        <td width="100%"><table border="0" width="100%" cellspacing="0" cellpadding="0">
-          <tr>
-            <td class="pageHeading"><?php echo HEADING_TITLE; ?></td>
-            <td class="pageHeading" align="right"><?php echo xtc_draw_separator('pixel_trans.gif', HEADING_IMAGE_WIDTH, HEADING_IMAGE_HEIGHT); ?></td>
-          </tr>
-        </table></td>
-      </tr>
-      <tr>
-        <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
-          <tr>
-            <td valign="top"><table border="0" width="100%" cellspacing="0" cellpadding="2">
+    <div class='col-xs-12'>
+        <p class="h2">
+            <?php echo HEADING_TITLE; ?>
+        </p>
+        Configuration
+    </div>
+<?php include DIR_WS_INCLUDES.FILENAME_ERROR_DISPLAY; ?>
+<div class='col-xs-12'><br></div>
+<div class='col-xs-12'>
+    <div id='responsive_table' class='table-responsive pull-left col-sm-12'>
+    <table class="table table-bordered">
               <tr class="dataTableHeadingRow">
                 <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_MANUFACTURERS; ?></td>
                 <td class="dataTableHeadingContent" align="right"><?php echo TABLE_HEADING_ACTION; ?>&nbsp;</td>
@@ -153,40 +174,37 @@ require (DIR_WS_INCLUDES.'head.php');
     }
 
     if ( (is_object($mInfo)) && ($manufacturers['manufacturers_id'] == $mInfo->manufacturers_id) ) {
-      echo '              <tr class="dataTableRowSelected" onmouseover="this.style.cursor=\'pointer\'" onclick="document.location.href=\'' . xtc_href_link(FILENAME_MANUFACTURERS, 'page=' . $_GET['page'] . '&mID=' . $manufacturers['manufacturers_id'] . '&action=edit') . '\'">' . "\n";
+      echo '              <tr class="dataTableRowSelected" onmouseover="this.style.cursor=\'pointer\'" onclick="document.location.href=\'' . xtc_href_link(FILENAME_MANUFACTURERS, 'page=' . $_GET['page'] . '&mID=' . $manufacturers['manufacturers_id'] . '&action=edit') . '#edit-box\'">' . "\n";
     } else {
-      echo '              <tr class="dataTableRow" onmouseover="this.className=\'dataTableRowOver\';this.style.cursor=\'pointer\'" onmouseout="this.className=\'dataTableRow\'" onclick="document.location.href=\'' . xtc_href_link(FILENAME_MANUFACTURERS, 'page=' . $_GET['page'] . '&mID=' . $manufacturers['manufacturers_id']) . '\'">' . "\n";
+      echo '              <tr class="dataTableRow" onmouseover="this.className=\'dataTableRowOver\';this.style.cursor=\'pointer\'" onmouseout="this.className=\'dataTableRow\'" onclick="document.location.href=\'' . xtc_href_link(FILENAME_MANUFACTURERS, 'page=' . $_GET['page'] . '&mID=' . $manufacturers['manufacturers_id']) . '#edit-box\'">' . "\n";
     }
 ?>
                 <td class="dataTableContent"><?php echo $manufacturers['manufacturers_name']; ?></td>
 <!-- BOF - Tomcraft - 2009-06-10 - added some missing alternative text on admin icons -->
 <!--
-                <td class="dataTableContent" align="right"><?php if ( (is_object($mInfo)) && ($manufacturers['manufacturers_id'] == $mInfo->manufacturers_id) ) { echo xtc_image(DIR_WS_IMAGES . 'icon_arrow_right.gif'); } else { echo '<a href="' . xtc_href_link(FILENAME_MANUFACTURERS, 'page=' . $_GET['page'] . '&mID=' . $manufacturers['manufacturers_id']) . '">' . xtc_image(DIR_WS_IMAGES . 'icon_info.gif', IMAGE_ICON_INFO) . '</a>'; } ?>&nbsp;</td>
+                <td class="dataTableContent" align="right"><?php if ( (is_object($mInfo)) && ($manufacturers['manufacturers_id'] == $mInfo->manufacturers_id) ) { echo xtc_image(DIR_WS_IMAGES . 'icon_arrow_right.gif'); } else { echo '<a href="' . xtc_href_link(FILENAME_MANUFACTURERS, 'page=' . $_GET['page'] . '&mID=' . $manufacturers['manufacturers_id']) . '#edit-box">' . xtc_image(DIR_WS_IMAGES . 'icon_info.gif', IMAGE_ICON_INFO) . '</a>'; } ?>&nbsp;</td>
 -->
-                <td class="dataTableContent" align="right"><?php if ( (is_object($mInfo)) && ($manufacturers['manufacturers_id'] == $mInfo->manufacturers_id) ) { echo xtc_image(DIR_WS_IMAGES . 'icon_arrow_right.gif', ICON_ARROW_RIGHT); } else { echo '<a href="' . xtc_href_link(FILENAME_MANUFACTURERS, 'page=' . $_GET['page'] . '&mID=' . $manufacturers['manufacturers_id']) . '">' . xtc_image(DIR_WS_IMAGES . 'icon_info.gif', IMAGE_ICON_INFO) . '</a>'; } ?>&nbsp;</td>
+                <td class="dataTableContent" align="right"><?php if ( (is_object($mInfo)) && ($manufacturers['manufacturers_id'] == $mInfo->manufacturers_id) ) { echo xtc_image(DIR_WS_IMAGES . 'icon_arrow_right.gif', ICON_ARROW_RIGHT); } else { echo '<a href="' . xtc_href_link(FILENAME_MANUFACTURERS, 'page=' . $_GET['page'] . '&mID=' . $manufacturers['manufacturers_id']) . '#edit-box">' . xtc_image(DIR_WS_IMAGES . 'icon_info.gif', IMAGE_ICON_INFO) . '</a>'; } ?>&nbsp;</td>
 <!-- EOF - Tomcraft - 2009-06-10 - added some missing alternative text on admin icons -->
               </tr>
 <?php
   }
 ?>
-              <tr>
-                <td colspan="2"><table border="0" width="100%" cellspacing="0" cellpadding="2">
-                  <tr>
-                    <td class="smallText" valign="top"><?php echo $manufacturers_split->display_count($manufacturers_query_numrows, '20', $_GET['page'], TEXT_DISPLAY_NUMBER_OF_MANUFACTURERS); ?></td>
-                    <td class="smallText" align="right"><?php echo $manufacturers_split->display_links($manufacturers_query_numrows, '20', MAX_DISPLAY_PAGE_LINKS, $_GET['page']); ?></td>
-                  </tr>
-                </table></td>
-              </tr>
+              </table>
+                  <div class="col-xs-12">
+                    <div class="col-xs-6"><?php echo $manufacturers_split->display_count($manufacturers_query_numrows, '20', $_GET['page'], TEXT_DISPLAY_NUMBER_OF_MANUFACTURERS); ?></div>
+                    <div class="col-xs-6 text-right"><?php echo $manufacturers_split->display_links($manufacturers_query_numrows, '20', MAX_DISPLAY_PAGE_LINKS, $_GET['page']); ?></div>
+                  </div>
 <?php
   if ($_GET['action'] != 'new') {
 ?>
-              <tr>
-                <td align="right" colspan="2" class="smallText"><?php echo xtc_button_link(BUTTON_INSERT, xtc_href_link(FILENAME_MANUFACTURERS, 'page=' . $_GET['page'] . '&mID=' . $mInfo->manufacturers_id . '&action=new')); ?></td>
-              </tr>
+              <div class="col-xs-12 text-right">
+                <?php echo xtc_button_link(BUTTON_INSERT, xtc_href_link(FILENAME_MANUFACTURERS, 'page=' . $_GET['page'] . '&mID=' . $mInfo->manufacturers_id . '&action=new')); ?>
+              </div>
 <?php
   }
 ?>
-            </table></td>
+            </div>
 <?php
   $heading = array();
   $contents = array();
@@ -194,15 +212,21 @@ require (DIR_WS_INCLUDES.'head.php');
     case 'new':
       $heading[] = array('text' => '<b>' . TEXT_HEADING_NEW_MANUFACTURER . '</b>');
 
+        if(isset($_SESSION['repopulate_form'])){
+            $m_name = ($_SESSION['repopulate_form']['manufacturers_name']) ? $_SESSION['repopulate_form']['manufacturers_name'] : '';
+            $m_url = ($_SESSION['repopulate_form']['manufacturers_url']) ? $_SESSION['repopulate_form']['manufacturers_url'] : '';
+            unset($_SESSION['repopulate_form']);
+        }
+
       $contents = array('form' => xtc_draw_form('manufacturers', FILENAME_MANUFACTURERS, 'action=insert', 'post', 'enctype="multipart/form-data"'));
       $contents[] = array('text' => TEXT_NEW_INTRO);
-      $contents[] = array('text' => '<br />' . TEXT_MANUFACTURERS_NAME . '<br />' . xtc_draw_input_field('manufacturers_name'));
+      $contents[] = array('text' => '<br />' . TEXT_MANUFACTURERS_NAME . '<br />' . xtc_draw_input_field('manufacturers_name', $m_name));
       $contents[] = array('text' => '<br />' . TEXT_MANUFACTURERS_IMAGE . '<br />' . xtc_draw_file_field('manufacturers_image'));
 
       $manufacturer_inputs_string = '';
       $languages = xtc_get_languages();
       for ($i = 0, $n = sizeof($languages); $i < $n; $i++) {
-        $manufacturer_inputs_string .= '<br />' . xtc_image(DIR_WS_LANGUAGES . $languages[$i]['directory'] . '/admin/images/' . $languages[$i]['image'], $languages[$i]['name']) . '&nbsp;' . xtc_draw_input_field('manufacturers_url[' . $languages[$i]['id'] . ']');
+        $manufacturer_inputs_string .= '<br />' . xtc_image(DIR_WS_LANGUAGES . $languages[$i]['directory'] . '/admin/images/' . $languages[$i]['image'], $languages[$i]['name']) . '&nbsp;' . xtc_draw_input_field('manufacturers_url[' . $languages[$i]['id'] . ']', $m_url[$languages[$i]['id']]);
       }
 
       $contents[] = array('text' => '<br />' . TEXT_MANUFACTURERS_URL . $manufacturer_inputs_string);
@@ -247,7 +271,7 @@ require (DIR_WS_INCLUDES.'head.php');
       if (is_object($mInfo)) {
         $heading[] = array('text' => '<b>' . $mInfo->manufacturers_name . '</b>');
 
-        $contents[] = array('align' => 'center', 'text' => xtc_button_link(BUTTON_EDIT, xtc_href_link(FILENAME_MANUFACTURERS, 'page=' . $_GET['page'] . '&mID=' . $mInfo->manufacturers_id . '&action=edit')) . '&nbsp;' . xtc_button_link(BUTTON_DELETE, xtc_href_link(FILENAME_MANUFACTURERS, 'page=' . $_GET['page'] . '&mID=' . $mInfo->manufacturers_id . '&action=delete')));
+        $contents[] = array('align' => 'center', 'text' => xtc_button_link(BUTTON_EDIT, xtc_href_link(FILENAME_MANUFACTURERS, 'page=' . $_GET['page'] . '&mID=' . $mInfo->manufacturers_id . '&action=edit#edit-box')) . '&nbsp;' . xtc_button_link(BUTTON_DELETE, xtc_href_link(FILENAME_MANUFACTURERS, 'page=' . $_GET['page'] . '&mID=' . $mInfo->manufacturers_id . '&action=delete#edit-box')));
         $contents[] = array('text' => '<br />' . TEXT_DATE_ADDED . ' ' . xtc_date_short($mInfo->date_added));
         if (xtc_not_null($mInfo->last_modified)) $contents[] = array('text' => TEXT_LAST_MODIFIED . ' ' . xtc_date_short($mInfo->last_modified));
         $contents[] = array('text' => '<br />' . xtc_info_image($mInfo->manufacturers_image, $mInfo->manufacturers_name, 200));
@@ -257,21 +281,22 @@ require (DIR_WS_INCLUDES.'head.php');
   }
 
   if ( (xtc_not_null($heading)) && (xtc_not_null($contents)) ) {
-    echo '            <td width="25%" valign="top" >' . "\n";
+    echo '            <div class="col-md-3 col-sm-12 col-xs-12 pull-right edit-box-class">' . "\n";
 
     $box = new box;
     echo $box->infoBox($heading, $contents);
 
-    echo '            </td>' . "\n";
+    echo '            </div>' . "\n";
+    ?>
+    <script>
+        //responsive_table
+        $('#responsive_table').addClass('col-md-9');
+    </script>               
+    <?php
   }
 ?>
-          </tr>
-        </table></td>
-      </tr>
-    </table></td>
-<!-- body_text_eof //-->
-  </tr>
-</table>
+    </div>
+</div>
 <!-- body_eof //-->
 
 <!-- footer //-->

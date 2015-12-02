@@ -584,7 +584,7 @@ border-top: 1px solid #E8E8E8;
 }
 div.checkoutbox div.hr{
 border:none;
-border-top: 1px solid ##E8E8E8;
+border-top: 1px solid #E8E8E8;
 color: #E3F4DA; /*wie hintergrundfarbe*/
 background-color:#E3F4DA; /*wie hintergrundfarbe*/
 height: 1px;
@@ -641,4 +641,39 @@ BASIC Template for AGB Hosting Content
 #tblcelltotalblock select {
 	width: 100%!important;
 }
+}
+
+ul#checkoutnavigation li {
+height:70px;
+list-style-type:none;
+float:left;
+width:156px;
+margin-right:10px;
+border:solid 1px;
+padding:8px;
+}
+
+div.agreedownloadbox{
+border: 2px solid #FFF!important;
+background: #FFF!important;
+}
+div.agreedownloadbox .image{
+max-width:80px;
+}
+div.agreedownloadbox td.main_row {
+border-top: 1px solid #666;
+}
+div.agreedownloadbox .details{
+padding: 0 12px 0 0; 
+background: url(img/external.gif) no-repeat 100% 0px;
+color: #000;
+font-weight: bold;
+}
+div.agreedownloadbox .small{
+font-size: 11px;
+}
+
+.cat_desc {
+  position: absolute;
+  bottom:0px;
 }

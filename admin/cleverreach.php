@@ -27,32 +27,9 @@ require (DIR_WS_INCLUDES.'head.php');
 <!-- header_eof //-->
 
 <!-- body //-->
-<table border="0" width="100%" cellspacing="2" cellpadding="2">
-  <tr>
-    
-<!-- body_text //-->
-    <td class="boxCenter" width="100%" valign="top"><table border="0" width="100%" cellspacing="0" cellpadding="0">
-
-                
-     <tr>
-      <td style="border: 0px solid; border-color: #ffffff;">
-
-
-<?php include 'cleverreach.html'; ?>
-
-
-</td>
-      
-      
-      </tr>		 
-  
-  
-    </table></td>
-<!-- body_text_eof //-->
-  </tr>
-</table>
-<!-- body_eof //-->
-
+<div class='row'>
+        <?php include 'cleverreach.html'; ?>
+</div>
 <!-- footer //-->
 <?php require(DIR_WS_INCLUDES . 'footer.php'); ?>
 <!-- footer_eof //-->

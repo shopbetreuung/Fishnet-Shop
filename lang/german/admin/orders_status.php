@@ -32,4 +32,7 @@ define('TEXT_SET_PDFBILL_SEND', 'PDF Rechnung automatisch generieren und per E-M
 define('ERROR_REMOVE_DEFAULT_ORDER_STATUS', 'Fehler: Der Standard-Bestellstatus kann nicht gel&ouml;scht werden. Bitte definieren Sie einen neuen Standard-Bestellstatus und wiederholen Sie den Vorgang.');
 define('ERROR_STATUS_USED_IN_ORDERS', 'Fehler: Dieser Bestellstatus wird zur Zeit noch bei den Bestellungen verwendet.');
 define('ERROR_STATUS_USED_IN_HISTORY', 'Fehler: Dieser Bestellstatus wird zur Zeit noch in der Bestellhistorie verwendet.');
+
+define('ERROR_TEXT_HEADING', 'Fehler! Bestellstatus konnte nicht gespeichert werden:');
+define('ERROR_TEXT_NAME', 'Bestellstatus ung&uuml;ltig!');
 ?>

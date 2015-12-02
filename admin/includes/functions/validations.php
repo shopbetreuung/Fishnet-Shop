@@ -46,79 +46,37 @@
   //
   ////////////////////////////////////////////////////////////////////////////////////////////////
   defined( '_VALID_XTC' ) or die( 'Direct Access to this location is not allowed.' );
-  function xtc_validate_email($email) {
-    $valid_address = true;
+	function xtc_validate_email($email) {
 
-    $mail_pat = '^(.+)@(.+)$';
-    $valid_chars = "[^] \(\)<>@,;:\.\\\"\[]";
-    $atom = "$valid_chars+";
-    $quoted_user='(\"[^\"]*\")';
-    $word = "($atom|$quoted_user)";
-    $user_pat = "^$word(\.$word)*$";
-    $ip_domain_pat='^\[([0-9]{1,3})\.([0-9]{1,3})\.([0-9]{1,3})\.([0-9]{1,3})\]$';
-    $domain_pat = "^$atom(\.$atom)*$";
+		//BOF - web28 - 2011-07-31 - SQL nullbyte injection fix 16.02.2011
+		if (strpos($email,"\0")!== false) {return false;}
+		if (strpos($email,"\x00")!== false) {return false;}
+		if (strpos($email,"\u0000")!== false) {return false;}
+		if (strpos($email,"\000")!== false) {return false;}
+		//EOF - web28 - 2011-07-31 - SQL nullbyte injection fix 16.02.2011
 
-    if (preg_match('/'.$mail_pat.'/i', $email, $components)) { // Hetfield - 2009-08-19 - replaced deprecated function eregi with preg_match to be ready for PHP >= 5.3
-      $user = $components[1];
-      $domain = $components[2];
-      // validate user
-      if (preg_match('/'.$user_pat.'/i', $user)) { // Hetfield - 2009-08-19 - replaced deprecated function eregi with preg_match to be ready for PHP >= 5.3
-        // validate domain
-        if (preg_match('/'.$ip_domain_pat.'/i', $domain, $ip_components)) { // Hetfield - 2009-08-19 - replaced deprecated function eregi with preg_match to be ready for PHP >= 5.3
-          // this is an IP address
-      	  for ($i=1;$i<=4;$i++) {
-      	    if ($ip_components[$i] > 255) {
-      	      $valid_address = false;
-      	      break;
-      	    }
-          }
-        } else {
-          // Domain is a name, not an IP
-          if (preg_match('/'.$domain_pat.'/i', $domain)) { // Hetfield - 2009-08-19 - replaced deprecated function eregi with preg_match to be ready for PHP >= 5.3
-            /* domain name seems valid, but now make sure that it ends in a valid TLD or ccTLD
-               and that there's a hostname preceding the domain or country. */
-            $domain_components = explode(".", $domain);
-            // Make sure there's a host name preceding the domain.
-            if (sizeof($domain_components) < 2) {
-              $valid_address = false;
-            } else {
-              $top_level_domain = strtolower($domain_components[sizeof($domain_components)-1]);
-              // Allow all 2-letter TLDs (ccTLDs)
-              if (preg_match('/^[a-z][a-z]$/i', $top_level_domain) != 1) { // Hetfield - 2009-08-19 - replaced deprecated function eregi with preg_match to be ready for PHP >= 5.3
-                $tld_pattern = '';
-                // Get authorized TLDs from text file
-                $tlds = file(DIR_WS_INCLUDES . 'tld.txt');
-                while (list(,$line) = each($tlds)) {
-                  // Get rid of comments
-                  $words = explode('#', $line);
-                  $tld = trim($words[0]);
-                  // TLDs should be 3 letters or more
-                  if (preg_match('/^[a-z]{3,}$/i', $tld) == 1) { // Hetfield - 2009-08-19 - replaced deprecated function eregi with preg_match to be ready for PHP >= 5.3
-                    $tld_pattern .= '^' . $tld . '$|';
-                  }
-                }
-                // Remove last '|'
-                $tld_pattern = substr($tld_pattern, 0, -1);
-                if (preg_match("/$tld_pattern/i", $top_level_domain) == 0) { // Hetfield - 2009-08-19 - replaced deprecated function eregi with preg_match to be ready for PHP >= 5.3
-                    $valid_address = false;
-                }
-              }
-            }
-          } else {
-      	    $valid_address = false;
-      	  }
-      	}
-      } else {
-        $valid_address = false;
-      }
-    } else {
-      $valid_address = false;
-    }
-    if ($valid_address && ENTRY_EMAIL_ADDRESS_CHECK == 'true') {
-      if (!checkdnsrr($domain, "MX") && !checkdnsrr($domain, "A")) {
-        $valid_address = false;
-      }
-    }
-    return $valid_address;
-  }
+		$email = trim($email);
+		$valid_address = false;
+		
+		if (strlen($email) > 255) {
+			return false;  
+		} else {
+
+			// Check for one @
+			if (substr_count($email, '@') !== 1 ) {
+				return false;
+			}  
+
+			$valid_address = true;
+		}
+
+		if ($valid_address && ENTRY_EMAIL_ADDRESS_CHECK == 'true') {
+			$domain = explode('@', $email);
+			if (!checkdnsrr($domain[1], "MX") && !checkdnsrr($domain[1], "A")) {
+				$valid_address = false;
+			}
+		}    
+		
+		return $valid_address;
+	}
 ?>

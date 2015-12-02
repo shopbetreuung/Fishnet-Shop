@@ -26,11 +26,11 @@
 	$admin_access = xtc_db_fetch_array($admin_access_query); 
 	$admin_access["admin"] = '1';
   
-	$menues[] = array("name" => "Kunden", "array" => "customers");
-	$menues[] = array("name" => "Produkte", "array" => "products");
-	$menues[] = array("name" => "Inhalte", "array" => "content");
-	$menues[] = array("name" => "Marketing & SEO", "array" => "marketingseo");
-	$menues[] = array("name" => "Konfiguration", "array" => "configuration");
+	$menues[] = array("name" => BOX_MENU_CUSTOMERS, "array" => "customers");
+	$menues[] = array("name" => BOX_MENU_PRODUCTS, "array" => "products");
+	$menues[] = array("name" => BOX_MENU_CONTENT, "array" => "content");
+	$menues[] = array("name" => BOX_MENU_MARKETING, "array" => "marketingseo");
+	$menues[] = array("name" => BOX_MENU_CONFIGURATION, "array" => "configuration");
   
   
 	// Setup: Customers
@@ -76,6 +76,12 @@
 											"access"	=> "categories",
 											"check"		=> true);		
 	
+    $menu_items['products'][] = array(		"name" 		=> BOX_PRODUCTS_CONTENT,
+                                            "is_main"   => true,
+                                            "link"      => xtc_href_link(FILENAME_PRODUCTS_CONTENT, '', 'NONSSL'),
+                                            "access"    => "products_content",
+                                            "check"     => true);
+	
 	$menu_items['products'][] = array(		"name" 		=> BOX_ATTRIBUTES,
 											"is_main"	=> true,
 											"link" 		=> false,
@@ -105,6 +111,12 @@
 											"link" 		=> xtc_href_link(FILENAME_MANUFACTURERS, '', 'NONSSL'),
 											"access"	=> "manufacturers",
 											"check"		=> true);	
+										
+    $menu_items['products'][] = array(		"name" 		=> BOX_WHOLESALERS,
+                                            "is_main"	=> true,
+                                            "link" 		=> xtc_href_link(FILENAME_WHOLESALERS, '', 'NONSSL'),
+                                            "access"	=> "wholesalers",
+                                            "check"		=> true);
 										
 	$menu_items['products'][] = array(		"name" 		=> BOX_REVIEWS,
 											"is_main"	=> true,
@@ -137,6 +149,12 @@
 											"link" 		=> xtc_href_link(FILENAME_CONTENT_MANAGER, '', 'NONSSL'),
 											"access"	=> "content_manager",
 											"check"		=> true);	
+											
+        $menu_items['content'][] = array(	"name" 		=> BOX_EMAIL,
+											"is_main"	=> true,
+											"link" 		=> xtc_href_link(FILENAME_EMAIL_MANAGER, '', 'NONSSL'),
+											"access"	=> "email_manager",
+											"check"		=> true);
 											
 	$menu_items['content'][] = array(		"name" 		=> BOX_IMAGESLIDERS,
 											"is_main"	=> true,
@@ -191,16 +209,6 @@
 											"link" 		=> xtc_href_link(FILENAME_SAFETERMS, '', 'NONSSL'),
 											"access"	=> "safeterms",
 											"check"		=> true);		
-											
-	$menu_items['content'][] = array(		"name" 		=> BOX_BACKUP,
-											"is_main"	=> true,
-											"link" 		=> xtc_href_link(FILENAME_BACKUP, '', 'NONSSL'),
-											"access"	=> "backup",
-											"check"		=> true);											
-											
-
-							
-											
 											
 				
 	// Setup: Marketing / Seo
@@ -260,7 +268,7 @@
 											"access"	=> "module_newsletter",
 											"check"		=> true);																						
 											
-	$menu_items['marketingseo'][] = array(	"name" 		=> 'CleverReach Newsletter',
+	$menu_items['marketingseo'][] = array(	"name" 		=> BOX_CLEVER_REACH,
 											"is_main"	=> true,
 											"link" 		=> xtc_href_link('cleverreach.php', '', 'NONSSL'),
 											"access"	=> "cleverreach",
@@ -346,7 +354,7 @@
 												
 	// Setup: Configuration
 	// =================================================================================================================											
-	$menu_items['configuration'][] = array(	"name" 		=> "Grundeinstellungen",
+	$menu_items['configuration'][] = array(	"name" 		=> BOX_BASIC_SETTINGS,
 											"is_main"	=> true,
 											"link" 		=> false,
 											"access"	=> false,
@@ -382,7 +390,7 @@
 											"access"	=> "pdfbill_config",
 											"check"		=> true);	
 		
-	$menu_items['configuration'][] = array(	"name" 		=> "Servereinstellungen",
+	$menu_items['configuration'][] = array(	"name" 		=> BOX_SERVER_SETTINGS,
 											"is_main"	=> true,
 											"link" 		=> false,
 											"access"	=> false,
@@ -418,7 +426,7 @@
 											"access"	=> "configuration",
 											"check"		=> true);		
 											
-	$menu_items['configuration'][] = array(	"name" 		=> 'Lagereinstellungen', //BOX_CONFIGURATION_9
+	$menu_items['configuration'][] = array(	"name" 		=> BOX_CONFIGURATION_9,
 											"is_main"	=> true,
 											"link" 		=> xtc_href_link(FILENAME_CONFIGURATION, 'gID=9', 'NONSSL'),
 											"access"	=> "configuration",
@@ -483,7 +491,7 @@
 											
 	$menu_items['configuration'][] = array(	"name" 		=> false, "is_main"	=> true);							
 											
-	$menu_items['configuration'][] = array(	"name" 		=> "Versand & Zahlung",
+	$menu_items['configuration'][] = array(	"name" 		=> BOX_SHIPPING_AND_PAYMENT,
 											"is_main"	=> true,
 											"link" 		=> false,
 											"access"	=> false,
@@ -501,7 +509,7 @@
 											"access"	=> "configuration",
 											"check"		=> true);;
 														
-	$menu_items['configuration'][] = array(	"name" 		=> 'Zahlarten', // BOX_PAYMENT
+	$menu_items['configuration'][] = array(	"name" 		=> BOX_PAYMENT,
 											"is_main"	=> false,
 											"link" 		=> xtc_href_link(FILENAME_MODULES, 'set=payment', 'NONSSL'),
 											"access"	=> "modules",
@@ -533,7 +541,7 @@
 											"access"	=> "configuration",
 											"check"		=> true);	
 																						
-	$menu_items['configuration'][] = array(	"name" 		=> "Shopansicht",
+	$menu_items['configuration'][] = array(	"name" 		=> BOX_FRONTEND,
 											"is_main"	=> true,
 											"link" 		=> false,
 											"access"	=> false,
@@ -545,7 +553,7 @@
 											"access"	=> "configuration",
 											"check"		=> true);
 											
-	$menu_items['configuration'][] = array(	"name" 		=> 'Kunden Feldl&auml;ngen', // BOX_CONFIGURATION_2
+	$menu_items['configuration'][] = array(	"name" 		=> BOX_CONFIGURATION_2,
 											"is_main"	=> false,
 											"link" 		=> xtc_href_link(FILENAME_CONFIGURATION, 'gID=2', 'NONSSL'),
 											"access"	=> "configuration",
@@ -589,30 +597,27 @@
 																					
 	$menu_items['configuration'][] = array(	"name" 		=> false, "is_main"	=> true);
 	
-	$menu_items['configuration'][] = array(	"name" 		=> "Wartung",
+	$menu_items['configuration'][] = array(	"name" 		=> BOX_MAINTAINANCE,
 											"is_main"	=> true,
 											"link" 		=> false,
 											"access"	=> false,
 											"check"		=> true);																
 														
-	$menu_items['configuration'][] = array(	"name" 		=> 'Shop online/offline',
+	$menu_items['configuration'][] = array(	"name" 		=> BOX_SHOP_ON_OFF,
 											"is_main"	=> false,
 											"link" 		=> xtc_href_link('shop_offline.php', '', 'NONSSL'),
 											"access"	=> "shop_offline",
 											"check"		=> true);																																							
-	/*
+											
+	$menu_items['configuration'][] = array(	"name" 		=> BOX_BACKUP,
+											"is_main"	=> false,
+											"link" 		=> xtc_href_link(FILENAME_BACKUP, '', 'NONSSL'),
+											"access"	=> "backup",
+											"check"		=> true);																																															
 
-
-  */									
-										
-										
-										
-																										
- 
-// BOF - Tomcraft - 2009-11-02 - NEW LISTSTYLE MENU
 //echo '<nav class="navbar navbar-default navbar-fixed-top"><div class="container-fluid"><div class="navbar-header"><a class="navbar-brand" href="' . xtc_href_link('start.php', '', 'NONSSL') . '"><img class="img-responsive" style="height: 40px;" src="images/shophelferlogo.png" /></a></div>';
 
-echo '<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1"><ul class="nav navbar-nav">';
+echo '<div class="collapse navbar-collapse" id="navbar"><ul class="nav navbar-nav">';
 //---------------------------STARTSEITE
 
 foreach ($menues as $menu) {
@@ -655,9 +660,10 @@ foreach ($menues as $menu) {
 
 echo '</ul>';
 ?>
-		<ul class="hidden-lg nav navbar-nav navbar-right">
+		<ul class="hidden-lg nav navbar-nav navbar-right hidden-xs">
 			<li class="topicon"><a href="<?php echo xtc_href_link('../index.php', '', 'NONSSL') ; ?>" data-toggle="tooltip" data-placement="bottom" title="zum Shop"><span class="glyphicon glyphicon-globe"></span></a></li>			
 			<li class="topicon"><a href="<?php echo xtc_href_link('credits.php', '', 'NONSSL') ; ?>" data-toggle="tooltip" data-placement="bottom" title=" <?php echo (BOX_CREDITS) ; ?>"><span class="glyphicon glyphicon-info-sign"></span></a></li>
+			<li class="topicon"><a href="http://www.shophelfer.com/wiki/index.php" target="_blank" data-toggle="tooltip" data-placement="bottom" title="Wiki"><span class="glyphicon glyphicon-book"></span></a></li>
 			<li class="topicon"><a href="<?php echo xtc_href_link('../logoff.php', '', 'NONSSL') ; ?>" data-toggle="tooltip" data-placement="bottom" title=" <?php echo (BOX_LOGOUT) ; ?>"><span class="glyphicon glyphicon-log-out"></span></a></li>
 		</ul>
 <?php					

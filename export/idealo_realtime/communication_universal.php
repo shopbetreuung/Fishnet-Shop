@@ -641,7 +641,7 @@ class communication_universal{
 				
 				$sql = "UPDATE " . IDEALO_REQUEST_ERROR_TABLE . " SET `try` = '" . $try . "' WHERE `id` = " . $db_request_failed_id . ";";
 			}else{
-				$sql = "INSERT INTO `" . IDEALO_REQUEST_ERROR_TABLE . "` (`try`, `first_send_date`, `xml`) VALUES ('1', '" . $date . "', '" . mysql_real_escape_string($xml) . "');";
+				$sql = "INSERT INTO `" . IDEALO_REQUEST_ERROR_TABLE . "` (`try`, `first_send_date`, `xml`) VALUES ('1', '" . $date . "', '" . mysqli_real_escape_string(xtc_db_connect(), $xml) . "');";
 				
 			}
 

@@ -18,16 +18,21 @@
   // This funstion validates a plain text password with an
   // encrpyted password
   function xtc_validate_password($plain, $encrypted) {
-    if (xtc_not_null($plain) && xtc_not_null($encrypted)) {
-      // split apart the hash / salt
-      if ($encrypted!= md5($plain)){
-            return false;
-      } else {
-             return true;
-      }
+	
+	if (xtc_not_null($plain) && xtc_not_null($encrypted)) {
+		// split apart the hash / salt
+		if ($encrypted== md5($plain)){
+			return true;
+		} else {
+			$plain = mb_convert_encoding($plain, "ISO-8859-15", "UTF-8");
+			if ($encrypted== md5($plain)){
+				return true;
+			} else {
+				return false;
+			}
+		}
+	}
+	return false;	
 
-    }
-
-    return false;
   }
 ?>

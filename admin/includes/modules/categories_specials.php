@@ -122,92 +122,83 @@ function showSpecialsBox() {
 </noscript>
   <div id="special">
     <div style="padding: 8px 0px 3px 5px;">
-      <table border="0" cellspacing="0" cellpadding="0">
-        <tr>
-          <td class="main">
+          <div class="main">
             <strong><?php echo SPECIALS_TITLE; ?></strong>
-          </td>
-        </tr>
-      </table>
+          </div>
     </div>
-    <table bgcolor="f3f3f3" style="width: 100%; border: 1px solid; border-color: #aaaaaa; padding:5px;">      
-      <tr>
-        <td>
-          <table width="100%" border="0" cellpadding="3" cellspacing="0" style="border: 0px dotted black;">
+    <div class='col-xs-12' style="width: 100%; border: 1px solid; border-color: #aaaaaa; padding:5px; background-color: #f3f3f3;">   
             <?php if(!isset($_GET['pID'])) { ?>
-            <tr>
-              <td class="main"><?php echo TEXT_SPECIALS_NO_PID; ?>&nbsp;</td>             
-            </tr>
+            <div class="col-xs-12 col-sm-9 col-md-5 col-lg-5">
+              <div class="main col-xs-12 col-sm-4"><?php echo TEXT_SPECIALS_NO_PID; ?></div>             
+            </div>
+            <div class='clearfix' ></div>
             <?php } else { ?>
-            <tr>
-              <td class="main"><?php echo TEXT_PRODUCTS_PRICE; ?>&nbsp;</td>
-              <td class="main"><?php echo $products_price_sp; ?>&nbsp;&nbsp;&nbsp;<?php echo $products_price_netto_sp; ?></td>
-              <td class="main">&nbsp;</td>
-            </tr>            
-            <tr>
-              <td class="main" style="width:270px;">
-                <?php echo TEXT_SPECIALS_SPECIAL_PRICE; ?>&nbsp;
-              </td>
-              <td class="main" style="width:250px;">
+            <div class="col-xs-12 col-xs-12 col-sm-9 col-md-5 col-lg-5 ">
+              <div class="main col-xs-12 col-sm-4"><?php echo TEXT_PRODUCTS_PRICE; ?></div>
+              <div class="main col-xs-12 col-sm-4"><?php echo $products_price_sp; ?><?php echo $products_price_netto_sp; ?></div>
+            </div>   
+            <div class='clearfix' ></div>
+            <div class="col-xs-12 col-xs-12 col-sm-9 col-md-5 col-lg-5">
+              <div class="main col-xs-12 col-sm-4" >
+                <?php echo TEXT_SPECIALS_SPECIAL_PRICE; ?>
+              </div>
+              <div class="main col-xs-12 col-sm-4" >
                 <?php echo xtc_draw_input_field('specials_price', $new_price, 'style="width: 135px"'). '&nbsp;&nbsp;&nbsp;' . $new_price_netto;?>
-              </td>
-              <td class="main" style="width:340px;">
-                &nbsp;
+              </div>
+              <div class="main col-xs-12 col-sm-4" >
                 <?php if(isset($_GET['pID']) and xtc_db_num_rows($specials_query, true) > 0) { ?>
                 <input type="checkbox" name="specials_delete" value="true" id="input_specials_delete"  onclick="if(this.checked==true)return confirm('<?php echo TEXT_INFO_DELETE_INTRO; ?>');"style="vertical-align:middle;"/><label for="input_specials_delete">&nbsp;<?php echo TEXT_INFO_HEADING_DELETE_SPECIALS; ?></label>
                 <?php } ?>
-              </td>
-            </tr>
-            <tr>
-              <td class="main">
+              </div>
+            </div>
+            <div class='clearfix' ></div>
+            <div class="col-xs-12 col-xs-12 col-sm-9 col-md-5 col-lg-5">
+              <div class="main col-xs-12 col-sm-4">
                 <?php echo TEXT_SPECIALS_SPECIAL_QUANTITY; ?>&nbsp;
-              </td>
-              <td class="main">
+              </div>
+              <div class="main col-xs-12 col-sm-4">
                 <?php echo xtc_draw_input_field('specials_quantity', $sInfo->specials_quantity, 'style="width: 135px"');?>
-              </td>
-              <td class="main">
-                &nbsp;
-              </td>
-            </tr>
+              </div>
+            </div>
+            <div class='clearfix' ></div>
             <?php if(isset($_GET['pID']) and xtc_db_num_rows($specials_query, true) > 0) { ?>
-              <tr>
-                <td class="main"><?php echo TEXT_INFO_DATE_ADDED; ?></td>
-                <td class="main"><?php echo xtc_date_short($sInfo->specials_date_added); ?></td>
-                <td class="main">&nbsp;</td>
-              </tr>
-              <tr>
-                <td class="main"><?php echo TEXT_INFO_LAST_MODIFIED; ?></td>
-                <td class="main"><?php echo xtc_date_short($sInfo->specials_last_modified); ?></td>
-                <td class="main">&nbsp;</td>
-              </tr>
+              <div class="col-xs-12 col-xs-12 col-sm-9 col-md-5 col-lg-5">
+                <div class="main col-xs-12 col-sm-4"><?php echo TEXT_INFO_DATE_ADDED; ?></div>
+                <div class="main col-xs-12 col-sm-4"><?php echo xtc_date_short($sInfo->specials_date_added); ?></div>
+                <div class="main col-xs-12 col-sm-4">&nbsp;</div>
+              </div>
+            <div class='clearfix' ></div>
+              <div class="col-xs-12 col-xs-12 col-sm-9 col-md-5 col-lg-5">
+                <div class="main col-xs-12 col-sm-4"><?php echo TEXT_INFO_LAST_MODIFIED; ?></div>
+                <div class="main col-xs-12 col-sm-4"><?php echo xtc_date_short($sInfo->specials_last_modified); ?></div>
+                <div class="main col-xs-12 col-sm-4">&nbsp;</div>
+              </div>
+            <div class='clearfix' ></div>
             <?php } ?>
-            <tr>
-              <td class="main">
+            <div class="col-xs-12 col-xs-12 col-sm-9 col-md-5 col-lg-5"> 
+              <div class="main col-xs-12 col-sm-4">
                 <?php echo TEXT_SPECIALS_EXPIRES_DATE; ?>
-              </td>
-              <td class="main">
+              </div>
+              <div class="main col-xs-12 col-sm-4">
                 <script type="text/javascript">specialExpires.writeControl(); specialExpires.dateFormat="yyyy-MM-dd";</script>
                 <noscript>
                 <?php echo  xtc_draw_input_field('specials_expires', $expires_date ,'style="width: 135px"'); ?>
                 </noscript>
-              </td>
-              <td class="main">
-                &nbsp;
+              </div>
+              <div class="main col-xs-12 col-sm-4">
                 <?php if(isset($_GET['pID']) and xtc_db_num_rows($specials_query, true) > 0) { ?>
                 <input type="checkbox" name="specials_status" value="1" id="input_specials_status"  style="vertical-align:middle;" <?php echo $status;?>/><label for="input_specials_status">&nbsp;<?php echo TEXT_EDIT_STATUS; ?></label>
                 <?php } ?>
-              </td>
-            </tr>
-            <tr>
-              <td colspan="3" class="main" style="padding:3px; background: #D8D8D8;">
+              </div>
+            </div>
+            <div class='clearfix' ></div>
+            <div class="col-xs-12">
+              <div class="main" style="padding:3px; background: #D8D8D8;">
                 <?php echo TEXT_SPECIALS_PRICE_TIP; ?>
-              </td>
-            </tr>
+              </div>
+            </div>
             <?php } ?>
-          </table>
-        </td>
-      </tr>
-    </table>
+    </div>
   </div>
 <?php
 }

@@ -196,6 +196,8 @@ define('IMAGE_BUTTON_CONFIRM_ORDER', 'Buy');
 define('IMAGE_BUTTON_CONTINUE', 'Next');
 define('IMAGE_BUTTON_DELETE', 'Delete');
 define('IMAGE_BUTTON_LOGIN', 'Login');
+define('IMAGE_BUTTON_LOGIN_NEWSLETTER', 'Subscribe');
+define('IMAGE_BUTTON_UNSUBSCRIBE_NEWSLETTER', 'Unubscribe');
 define('IMAGE_BUTTON_IN_CART', 'Add to cart');
 define('IMAGE_BUTTON_SEARCH', 'Search');
 define('IMAGE_BUTTON_UPDATE', 'Update');
@@ -203,6 +205,7 @@ define('IMAGE_BUTTON_UPDATE_CART', 'Update shopping cart');
 define('IMAGE_BUTTON_WRITE_REVIEW', 'Write evaluation');
 define('IMAGE_BUTTON_ADMIN', 'Admin');
 define('IMAGE_BUTTON_PRODUCT_EDIT', 'Edit product');
+define('IMAGE_BUTTON_PRODUCT_MORE', 'details');
 // BOF - vr - 2010-02-20 removed double definition 
 // define('IMAGE_BUTTON_LOGIN', 'Login');
 // EOF - vr - 2010-02-20 removed double definition 
@@ -273,7 +276,7 @@ define('ERROR_CHECKOUT_SHIPPING_NO_MODULE', 'No shipping method available.');
 //  conditions check
 
 define('ERROR_CONDITIONS_NOT_ACCEPTED', 'Please accept our terms and conditions to proceed with your order.');
-
+define('ERROR_AGREE_DOWNLOAD_NOT_ACCEPTED', '* Please specify the desired start of the contract execution for downloads to proceed your order.\n\n');
 define('SUB_TITLE_OT_DISCOUNT','Discount:');
 
 define('TAX_ADD_TAX','incl. ');
@@ -308,8 +311,8 @@ define('JS_PRICE_FROM_MUST_BE_NUM', '* Price over, must be a number\n');
 define('JS_PRICE_TO_MUST_BE_NUM', '* Price up to, must be a number\n');
 define('JS_PRICE_TO_LESS_THAN_PRICE_FROM', '* Price up to must be larger or same size as Price over.\n');
 define('JS_INVALID_KEYWORDS', '* Invalid search key\n');
-define('TEXT_LOGIN_ERROR', '<font color="#ff0000"><strong>ERROR:</strong></font> The entered \'e-mail address\' and/or the \'password\' do not match.');
-define('TEXT_NO_EMAIL_ADDRESS_FOUND', '<font color="#ff0000"><strong>WARNING:</strong></font> The e-mail address entered is not registered. Please try again.');
+define('TEXT_LOGIN_ERROR', '<font color="#ff0000"><strong>ERROR:</strong></font> Wrong e-mail address or password.');
+define('TEXT_NO_EMAIL_ADDRESS_FOUND', '<font color="#ff0000"><strong>ERROR:</strong></font> Wrong e-mail address or password.');
 define('TEXT_PASSWORD_SENT', 'A new password was sent by e-mail.');
 define('TEXT_PRODUCT_NOT_FOUND', 'Product not found!');
 define('TEXT_MORE_INFORMATION', 'For further information, please visit the <a style="text-decoration:underline;" href="%s" onclick="window.open(this.href); return false;">homepage</a> of this product.');
@@ -353,6 +356,8 @@ define('NAVBAR_TITLE_DELETE_ENTRY_ADDRESS_BOOK_PROCESS', 'Delete Entry');
 define('NAVBAR_TITLE_ADVANCED_SEARCH', 'Advanced Search');
 define('NAVBAR_TITLE1_ADVANCED_SEARCH', 'Advanced Search');
 define('NAVBAR_TITLE2_ADVANCED_SEARCH', 'Search results');
+define('NAVBAR_TITLE_1_CHECKOUT_AGREE_DOWNLOAD', 'Checkout');
+define('NAVBAR_TITLE_2_CHECKOUT_AGREE_DOWNLOAD', 'Digital Content');
 define('NAVBAR_TITLE_1_CHECKOUT_CONFIRMATION', 'Checkout');
 define('NAVBAR_TITLE_2_CHECKOUT_CONFIRMATION', 'Confirmation');
 define('NAVBAR_TITLE_1_CHECKOUT_PAYMENT', 'Checkout');
@@ -396,7 +401,7 @@ define('TEXT_NEWSLETTER','You want to stay up to date?<br />No problem, receive 
 define('TEXT_EMAIL_INPUT','Your e-mail adress has been registered in our system.<br />An e-mail with a confirmation link has been send out. Click the link in order to complete registration!');
 
 define('TEXT_WRONG_CODE','<font color="#ff0000">The security code you entered was not correct. Please try again. <br />The form is not case sensitive.</font>');
-define('TEXT_EMAIL_EXIST_NO_NEWSLETTER','<font color="#ff0000">This e-mail address is registered but not yet activated!</font>');
+define('TEXT_EMAIL_EXIST_NO_NEWSLETTER','<font color="#ff0000">New code sent on this address!</font>');
 define('TEXT_EMAIL_EXIST_NEWSLETTER','<font color="#ff0000">This e-mail address is already registered for the newsletter!</font>');
 define('TEXT_EMAIL_NOT_EXIST','<font color="#ff0000">This e-mail address is not registered for newsletters!</font>');
 define('TEXT_EMAIL_DEL','Your e-mail address was deleted successfully from our newsletter-database.');

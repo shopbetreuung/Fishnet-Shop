@@ -13,7 +13,7 @@
    @copyright Porttions Copyright 2003-2007 Zen Cart Development Team
    @copyright Porttions Copyright 2004 DevosC.com
    @license http://www.xt-commerce.com.com/license/2_0.txt GNU Public License V2.0
-   ab 15.08.2008 Teile vom Hamburger-Internetdienst geändert
+   ab 15.08.2008 Teile vom Hamburger-Internetdienst geÃ¤ndert
    Hamburger-Internetdienst Support Forums at www.forum.hamburger-internetdienst.de
    Stand 04.03.2012
    */
@@ -319,14 +319,14 @@
       global $_GET;
       include(DIR_FS_CATALOG . 'lang/' . $_SESSION['language'] . '/admin/paypal.php');
       $db_installed = false;
-      //BOF - Dokuman - 2009-11-23 - replace mysql_list_tables by xtc_db_query -> PHP5.3 deprecated
-      //$tables = mysql_list_tables(DB_DATABASE);
+      //BOF - Dokuman - 2009-11-23 - replace mysqlNOTINUSE_list_tables by xtc_db_query -> PHP5.3 deprecated
+      //$tables = mysqlNOTINUSE_list_tables(DB_DATABASE);
       // BOF - Tomcraft - 2010-01-20 - Fix errors where database names include a minus
       //$tables = xtc_db_query('SHOW TABLES FROM ' . DB_DATABASE);
       $tables = xtc_db_query('SHOW TABLES FROM `' . DB_DATABASE . '`');
       // EOF - Tomcraft - 2010-01-20 - Fix errors where database names include a minus
-      //EOF - Dokuman - 2009-11-23 - replace mysql_list_tables by xtc_db_query -> PHP5.3 deprecated
-      while($row = mysql_fetch_row($tables)) {
+      //EOF - Dokuman - 2009-11-23 - replace mysqlNOTINUSE_list_tables by xtc_db_query -> PHP5.3 deprecated
+      while($row = mysqli_fetch_row($tables)) {
         if($row[0] == TABLE_PAYPAL) {
           $db_installed=true;
 				break;
@@ -426,7 +426,7 @@
       }
       /// Kein iconv im PHP
       if($t2 == "UTF-8") {
-        // nur als Ersatz für das iconv und nur in eine richtung 1251 to UTF8
+        // nur als Ersatz fÃ¼r das iconv und nur in eine richtung 1251 to UTF8
         //ISO 8859-1 to UTF-8
         if(function_exists('utf8_encode')) {
           return utf8_encode($string);
@@ -443,7 +443,7 @@
           return($string);
         }
       } else {
-        // keine Konvertierung möglich
+        // keine Konvertierung mÃ¶glich
         return($string);
       }
     }

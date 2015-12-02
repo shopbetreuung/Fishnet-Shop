@@ -89,10 +89,6 @@ define('TEXT_DATE_ORDER_LAST_MODIFIED','Last change');
 // BOF - Tomcraft - 2009-11-25 - Added missing definitions for /admin/start.php/
 define('TOTAL_CUSTOMERS','Customers total');
 define('TOTAL_SUBSCRIBERS','Newsletter 	subscriptions');
-define('TOTAL_PRODUCTS_ACTIVE','Active products');
-define('TOTAL_PRODUCTS_INACTIVE','Inactive products');
-define('TOTAL_PRODUCTS','Products total');
-define('TOTAL_SPECIALS','Specials');
 // EOF - Tomcraft - 2009-11-25 - Added missing definitions for /admin/start.php/
 // BOF - Tomcraft - 2009-11-30 - Added missing definitions for /admin/start.php/
 define('UNASSIGNED', 'Unassigned');
@@ -107,25 +103,16 @@ define('TOTAL_TURNOVER', 'Total turnover');
 // BOF - vr 2010-04-01 -  Added missing definitions
 // main heading
 define('HEADING_TITLE', 'Welcome to the Admin Area');
+define('WIDGET_STATUS_NOT_ACTIVE_TEXT', 'Deactivated');
+define('WIDGET_STATUS_ACTIVE_TEXT', 'Activated');
+define('WIDGET_DROPDOW_TEXT', 'Select widget:');
 // users online
 define('TABLE_CAPTION_USERS_ONLINE', 'Users Online');
-define('TABLE_CAPTION_USERS_ONLINE_HINT', '***Please click user name for details***');
 define('TABLE_HEADING_USERS_ONLINE_SINCE', 'Online Since');
 define('TABLE_HEADING_USERS_ONLINE_NAME', 'Name');
 define('TABLE_HEADING_USERS_ONLINE_LAST_CLICK', 'Last Click');
 define('TABLE_HEADING_USERS_ONLINE_INFO', 'Info');
 define('TABLE_CELL_USERS_ONLINE_INFO', 'More...');
-// new customers
-define('TABLE_CAPTION_NEW_CUSTOMERS', 'New Customers');
-define('TABLE_CAPTION_NEW_CUSTOMERS_COMMENT', '(Last 15)');
-define('TABLE_HEADING_NEW_CUSTOMERS_LASTNAME', 'Last Name');
-define('TABLE_HEADING_NEW_CUSTOMERS_FIRSTNAME', 'First Name');
-define('TABLE_HEADING_NEW_CUSTOMERS_REGISTERED', 'Registered');
-define('TABLE_HEADING_NEW_CUSTOMERS_EDIT', 'Edit');
-define('TABLE_HEADING_NEW_CUSTOMERS_ORDERS', 'Orders');
-define('TABLE_CELL_NEW_CUSTOMERS_EDIT', 'Edit...');
-define('TABLE_CELL_NEW_CUSTOMERS_DELETE', 'Delete...');
-define('TABLE_CELL_NEW_CUSTOMERS_ORDERS', 'Show...');
 // new orders
 define('TABLE_CAPTION_NEW_ORDERS', 'New Orders');
 define('TABLE_CAPTION_NEW_ORDERS_COMMENT', '(Last 20)');

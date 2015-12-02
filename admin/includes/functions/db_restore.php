@@ -12,6 +12,7 @@
 defined( '_VALID_XTC' ) or die( 'Direct Access to this location is not allowed.' );
 
 $lang['L_UNKNOWN_SQLCOMMAND']= 'Unbekannter SQL-Befehl';
+$connection = xtc_db_connect();
 
 define('DEBUG',0);
 //if (!defined('MSD_VERSION')) die('No direct access.');
@@ -267,6 +268,7 @@ function get_sqlbefehl()
 
 function submit_create_action($sql)
 {
+    global $connection;
 	//executes a create command
 	$tablename=get_tablename($sql);	
 	
@@ -289,23 +291,23 @@ function submit_create_action($sql)
 	*/
 	
 	if (!RESTORE_TEST) {
-		$res=@mysql_query($sql);
+		$res=@mysqli_query($connection, $sql);
 		if ($res===false)
 		{
 			// erster Versuch fehlgeschlagen -> zweiter Versuch - vielleicht versteht der Server die Inline-Kommentare nicht?
 			$sql=del_inline_comments($sql);
-			$res=@mysql_query(downgrade($sql));
+			$res=@mysqli_query($connection, downgrade($sql));
 			if ($res===false)
 			{
 				// wieder nichts. Ok, haben wir hier einen alten MySQL-Server 3.x oder 4.0.x?			
 				// versuchen wir es mal mit der alten Syntax
-				$res=@mysql_query(downgrade($sql));
+				$res=@mysqli_query($connection, downgrade($sql));
 			}
 		}
 		if ($res===false)
 		{
 			// wenn wir hier angekommen sind hat nichts geklappt -> Fehler ausgeben und abbrechen
-			//SQLError($sql,mysql_error());
+			//SQLError($sql,mysqlNOTINUSE_error());
 			die("<br>Fatal error: Couldn't create table or view `".$tablename."´");
 		}
 	} else protokoll($sql);	
@@ -315,13 +317,14 @@ function submit_create_action($sql)
 
 function get_insert_syntax($table)
 {
+        global $connection;
 	$insert='';
 	$sql='SHOW COLUMNS FROM `'.$table.'`';	
-	$res=mysql_query($sql);
+	$res=mysqli_query($connection, $sql);
 	if ($res)
 	{
 		$insert='INSERT INTO `'.$table.'` (';
-		while ($row=mysql_fetch_object($res))
+		while ($row=mysqli_fetch_object($res))
 		{
 			$insert.='`'.$row->Field.'`,';
 		}
@@ -331,7 +334,7 @@ function get_insert_syntax($table)
 	{
 		global $restore;
 		v($restore);
-		//SQLError($sql,mysql_error());
+		//SQLError($sql,mysqlNOTINUSE_error());
 	}
 	return $insert;
 }

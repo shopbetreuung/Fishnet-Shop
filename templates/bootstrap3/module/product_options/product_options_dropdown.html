@@ -7,7 +7,21 @@
     <td>
 	<select name="id[{$options_data.ID}]" class="form-control">
   {foreach key=key_data item=item_data from=$options_data.DATA}
-  <option value="{$item_data.ID}">&nbsp;{$item_data.TEXT} {if $item_data.PRICE !='' }{$item_data.PREFIX} {$item_data.PRICE}{/if}&nbsp; </option>                   
+  <option value="{$item_data.ID}">
+  
+  		{$item_data.TEXT}
+  		{if $item_data.MSS_VPE_PRICE}
+        {$item_data.MSS_WEIGHT} {$item_data.MSS_VPE_NAME}
+      	({$item_data.MSS_PREIS_PRO_EINHEIT}
+      	pro
+      	{$item_data.MSS_VPE_VALUE} {$item_data.MSS_VPE_NAME} )
+        Preis:
+        {$item_data.MSS_VPE_PRICE}
+        {else}
+           {$item_data.FULL_PRICE}
+        {/if}
+        
+ </option>
 {/foreach}
 </select>
 </td>

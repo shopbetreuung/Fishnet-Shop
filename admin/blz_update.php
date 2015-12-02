@@ -14,6 +14,7 @@
 require('includes/application_top.php');
 
 $blz_file_default_link = 'http://www.bundesbank.de/Redaktion/DE/Downloads/Kerngeschaeftsfelder/Unbarer_Zahlungsverkehr/Bankleitzahlen/2012_12_02/blz_2012_09_03_txt.txt?__blob=publicationFile';
+$connection = xtc_db_connect();
 
 require (DIR_WS_INCLUDES.'head.php');
 ?>
@@ -23,31 +24,18 @@ require (DIR_WS_INCLUDES.'head.php');
     <?php require(DIR_WS_INCLUDES . 'header.php'); ?>
     <!-- header_eof //-->
     <!-- body //-->
-    <table border="0" width="100%" cellspacing="2" cellpadding="2">
-      <tr>
+<div class='row'>
         
-        </td>
+<!-- body_text //-->
         <!-- body_text //-->
-        <td class="boxCenter" width="100%" valign="top">
-          <table border="0" width="100%" cellspacing="0" cellpadding="2">
-            <tr>
-              <td>
-                <table border="0" width="100%" cellspacing="0" cellpadding="0">
-                  <tr>
-                    
-                    <td class="pageHeading"><?php echo HEADING_TITLE; ?></td>
-                  </tr>
-                  <tr>
-                    <td class="main" valign="top">Tools</td>
-                  </tr>
-                </table>
-              </td>
-            </tr>
-            <tr>
-              <td><?php echo xtc_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
-            </tr>
-            <tr>
-              <td class="main">
+        <div class='col-xs-12'>
+            <p class="h2">
+                <?php echo HEADING_TITLE; ?>
+            </p>
+            <p class="main">Tools</p>
+        </div>
+        <div class='col-xs-12'> <br> </div>
+        <div class="col-xs-12 main">
 <?php
   $i ='';
   $button_disabled = '';
@@ -101,7 +89,7 @@ require (DIR_WS_INCLUDES.'head.php');
         }
         foreach ($lines as $line) {
           // to avoid dublettes, the unique flag
-          // "bankleitzahlführender Zahlungsdienstleister" will be queried
+          // "bankleitzahlfÃ¼hrender Zahlungsdienstleister" will be queried
           if (substr($line, 8, 1) == '1') {                //leading payment provider for bank code number (only one per bank code)
             $blz['blz'] = substr($line, 0, 8);             //bank code number(8)
             $blz['bankname'] = trim(substr($line, 9, 58)); //bank name(58)
@@ -136,8 +124,8 @@ require (DIR_WS_INCLUDES.'head.php');
             $sql = sprintf('insert into banktransfer_blz (blz, bankname, prz) values (%s, \'%s\', \'%s\')',
            (int)$rec['blz'], xtc_db_input($rec['bankname']), xtc_db_input($rec['prz']));
             xtc_db_query($sql);
-            if(mysql_affected_rows() != 0) {
-              $j = $j + mysql_affected_rows(); // sum up affected rows
+            if(mysqli_affected_rows($connection) != 0) {
+              $j = $j + mysqli_affected_rows($connection); // sum up affected rows
             }
           }
           echo '<span class="messageStackSuccess">'.$j.BLZ_UPDATE_SUCCESS_TEXT.'</span>';
@@ -170,13 +158,9 @@ require (DIR_WS_INCLUDES.'head.php');
         break;
     }
 ?>
-              </td>
-            </tr>
-          </table>
-        </td>
+</div>
         <!-- body_text_eof //-->
-      </tr>
-    </table>
+</div>
     <!-- body_eof //-->
     <!-- footer //-->
     <?php require(DIR_WS_INCLUDES . 'footer.php'); ?>

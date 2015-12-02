@@ -51,27 +51,17 @@ function getParent($catID) {
 	return $parent_data['parent_id'];
 }
 ?>
-      <tr>
-        <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
-          <tr>
-            <td class="pageHeading"><?php echo CROSS_SELLING.' : '.$article_data['products_name']; ?></td>
-            <td class="pageHeading" align="right"><?php echo xtc_draw_separator('pixel_trans.gif', HEADING_IMAGE_WIDTH, HEADING_IMAGE_HEIGHT); ?></td>
-          </tr>
-          <tr>
-            <td colspan="2">
-            <?php // DokuMan - 2010-09-01 - BUGFIX: #0000271 back button in cross selling not workin on IE6/7
-            /*<a href="<?php echo xtc_href_link(FILENAME_CATEGORIES,'cPath='.$_GET['cpath'].'&pID='.$_GET['current_product_id']); ?>"><input type="submit" class="btn btn-default" value="<?php echo BUTTON_BACK; ?>"></a> */
-            ?>
+        <div class='col-xs-12'>
+            <p class="h3">
+                <?php echo CROSS_SELLING.' : '.$article_data['products_name']; ?>
+            </p>
+        </div>
+        <div class='col-xs-12'> <br> </div>
+        <div class='col-xs-12'> 
             <a class="btn btn-default" onClick="this.blur()" href="<?php echo xtc_href_link(FILENAME_CATEGORIES,'cPath='.$_GET['cpath'].'&pID='.$_GET['current_product_id']); ?>"><?php echo BUTTON_BACK; ?></a>
-            </td>
-          </tr>
-        </table></td>
-      </tr>
-      <tr>
-        <td><?php echo xtc_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
-      </tr>
-	  <tr>
-        <td>
+        </div>
+        <div class='col-xs-12'> <br> </div>
+        <div class='table-responsive col-xs-12'>
 
 <?php
 echo xtc_draw_form('cross_selling', FILENAME_CATEGORIES, '', 'GET', '');
@@ -82,12 +72,12 @@ echo xtc_draw_hidden_field('current_product_id', $_GET['current_product_id']);
 echo xtc_draw_hidden_field('cpath', $_GET['cpath']);
 ?>
 
- <table width="100%" border="0">
+ <table class='table table-bordered'>
   <tr>
-    <td class="dataTableHeadingContent" width="1%"><?php echo HEADING_DEL; ?></td>
+    <td class="dataTableHeadingContent hidden-xs" width="1%"><?php echo HEADING_DEL; ?></td>
     <td class="dataTableHeadingContent" width="4%"><?php echo HEADING_SORTING; ?></td>
     <td class="dataTableHeadingContent" width="5%"><?php echo HEADING_GROUP; ?></td>
-    <td class="dataTableHeadingContent" width="15%"><?php echo HEADING_MODEL; ?></td>
+    <td class="dataTableHeadingContent hidden-xs" width="15%"><?php echo HEADING_MODEL; ?></td>
     <td class="dataTableHeadingContent" width="34%"><?php echo HEADING_NAME; ?></td>
     <td class="dataTableHeadingContent" width="42%"><?php echo HEADING_CATEGORY; ?></td>
   </tr>
@@ -125,27 +115,27 @@ while ($cross_data = xtc_db_fetch_array($cross_query)) {
 ?>
 
   <tr>
-    <td class="categories_view_data"><input type="checkbox" name="ids[]" value="<?php echo $cross_data['ID']; ?>"></td>
+    <td class="categories_view_data hidden-xs"><input type="checkbox" name="ids[]" value="<?php echo $cross_data['ID']; ?>"></td>
     <td class="categories_view_data"><input name="sort[<?php echo $cross_data['ID']; ?>]" type="text" size="3" value="<?php echo $cross_data['sort_order']; ?>"></td>
 
     <td class="categories_view_data" style="text-align: left;"><?php echo xtc_draw_pull_down_menu('group_name['.$cross_data['ID'].']',$cross_sell_groups,$cross_data['products_xsell_grp_name_id']); ?></td>
 
-    <td class="categories_view_data" style="text-align: left;"><?php echo $cross_data['products_model']; ?></td>
+    <td class="categories_view_data hidden-xs" style="text-align: left;"><?php echo $cross_data['products_model']; ?></td>
     <td class="categories_view_data" style="text-align: left;"><?php echo $cross_data['products_name']; ?></td>
     <td class="categories_view_data" style="text-align: left;"><?php echo buildCAT($categorie_data['categories_id']); ?> </td>
   </tr>
 
 <?php } ?>
 </table>
+</div>
+<div class="col-xs-12">
 <input type="submit" class="btn btn-default" value="<?php echo BUTTON_SAVE; ?>" onclick="return confirm('<?php echo SAVE_ENTRY; ?>')">
+</div>
 </form>
-</td>
-</tr>
-<tr>
-<td class="pageHeading"><hr noshade><?php echo CROSS_SELLING_SEARCH; ?>
-<table>
-<br /><br />
-<tr class="dataTableRow">
+<div class="col-xs-12">
+<hr noshade>
+    <div class="col-xs-12"><p class="h4"><?php echo CROSS_SELLING_SEARCH; ?></p></div>
+
 <?php
 	echo xtc_draw_form('product_search', FILENAME_CATEGORIES, '', 'GET');
 	echo xtc_draw_hidden_field('action', 'edit_crossselling');
@@ -153,20 +143,18 @@ while ($cross_data = xtc_db_fetch_array($cross_query)) {
 	echo xtc_draw_hidden_field('current_product_id', $_GET['current_product_id']);
 	echo xtc_draw_hidden_field('cpath', $_GET['cpath']);
 ?>
-<td class="dataTableContent" width="40"><?php echo xtc_draw_input_field('search', '', 'size="30"');?></td>
-<td class="dataTableContent">
+<div class='col-xs-12'>
+<div class="col-sm-3 col-xs-12 dataTableContent"><?php echo xtc_draw_input_field('search', '', 'size="30"');?></div>
+<div class="col-sm-3 col-xs-12 dataTableContent">
 <?php
 	echo '<input type="submit" class="btn btn-default" onclick="this.blur();" value="' . BUTTON_SEARCH . '"/>';
 ?>
-</td>
+</div>
+</div>
 </form>
-</tr>
-</table>
 <hr noshade>
-</td>
-</tr>
-<tr>
-<td>
+</div>
+<div class='col-xs-12'>
 <?php
 	// search results
 	if ($_GET['search']) {
@@ -176,7 +164,7 @@ while ($cross_data = xtc_db_fetch_array($cross_query)) {
 		echo xtc_draw_hidden_field('current_product_id', $_GET['current_product_id']);
 		echo xtc_draw_hidden_field('cpath', $_GET['cpath']);
 ?>
- <table width="100%" border="0">
+ <table class='table table-bordered'>
   <tr>
     <td class="dataTableHeadingContent" width="9%"><?php echo HEADING_ADD; ?></td>
     <td class="dataTableHeadingContent" width="10%"><?php echo HEADING_GROUP; ?></td>
@@ -212,9 +200,7 @@ while ($cross_data = xtc_db_fetch_array($cross_query)) {
 
 <?php		} ?>
 </table>
+</div>
 <input type="submit" class="btn btn-default" value="<?php echo BUTTON_SAVE; ?>" onclick="return confirm('<?php echo SAVE_ENTRY; ?>')">
 </form>
 <?php } ?>
-</td>
-</tr>
-</td>

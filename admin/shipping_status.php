@@ -20,9 +20,29 @@
   switch ($_GET['action']) {
     case 'insert':
     case 'save':
+      $error = array();
       $shipping_status_id = xtc_db_prepare_input($_GET['oID']);
 
       $languages = xtc_get_languages();
+      for ($i = 0, $n = sizeof($languages); $i < $n; $i++) {
+        $shipping_status_name_array = $_POST['shipping_status_name'];
+        $language_id = $languages[$i]['id'];
+
+            $check_if_name_exist = xtc_db_find_database_field_by_language(TABLE_SHIPPING_STATUS, 'shipping_status_name', $shipping_status_name_array[$language_id], $language_id,'language_id');
+            if(!$shipping_status_name_array[$language_id] || $check_if_name_exist){
+                $url_action = 'edit';
+                if($_GET['action'] == 'save'){
+                    if($check_if_name_exist['shipping_status_id'] != $shipping_status_id){
+                        $error[] = ERROR_TEXT_NAME;
+                    }
+                } else {
+                    $url_action = 'new';
+                    $error[] = ERROR_TEXT_NAME;
+                }
+            }
+        }
+      
+      if(empty($error)){  
       for ($i = 0, $n = sizeof($languages); $i < $n; $i++) {
         $shipping_status_name_array = $_POST['shipping_status_name'];
         $language_id = $languages[$i]['id'];
@@ -58,6 +78,12 @@
       }
 
       xtc_redirect(xtc_href_link(FILENAME_SHIPPING_STATUS, 'page=' . $_GET['page'] . '&oID=' . $shipping_status_id));
+      
+        } else {
+            $_SESSION['repopulate_form'] = $_REQUEST;
+            $_SESSION['errors'] = $error;
+            xtc_redirect(xtc_href_link(FILENAME_SHIPPING_STATUS, 'page='.$_GET['page'].'&action='.$url_action.'&errors=1&oID=' . $shipping_status_id));
+        }
       break;
 
     case 'deleteconfirm':
@@ -97,29 +123,22 @@
 <!-- header_eof //-->
 
 <!-- body //-->
-<table border="0" width="100%" cellspacing="2" cellpadding="2">
-  <tr>
-    
+<div class="row">
 <!-- body_text //-->
-    <td class="boxCenter" width="100%" valign="top"><table border="0" width="100%" cellspacing="0" cellpadding="2">
-      <tr>
-        <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
-  <tr>
-    
-    <td class="pageHeading"><?php echo BOX_SHIPPING_STATUS; ?></td>
-  </tr>
-  <tr>
-    <td class="main" valign="top">Configuration</td>
-  </tr>
-</table></td>
-      </tr>
-      <tr>
-        <td valign="top"><table border="0" width="100%" cellspacing="0" cellpadding="0">
-          <tr>
-            <td valign="top"><table border="0" width="100%" cellspacing="0" cellpadding="2">
+    <div class='col-xs-12'>
+        <p class="h2">
+            <?php echo BOX_SHIPPING_STATUS; ?>
+        </p>
+        Configuration
+    </div>
+<?php include DIR_WS_INCLUDES.FILENAME_ERROR_DISPLAY; ?>
+<div class='col-xs-12'><br></div>
+<div class='col-xs-12'>
+    <div id='responsive_table' class='table-responsive pull-left col-sm-12'>
+    <table class="table table-bordered table-striped">
               <tr class="dataTableHeadingRow">
-              <td class="dataTableHeadingContent" width="1"><?php echo TABLE_HEADING_SHIPPING_STATUS; ?></td>
-                <td class="dataTableHeadingContent" width="100%">&nbsp;</td>
+                <td class="dataTableHeadingContent hidden-xs" width="1"><?php echo TABLE_HEADING_SHIPPING_STATUS; ?></td>
+                <td class="dataTableHeadingContent" >&nbsp;</td>
                 <td class="dataTableHeadingContent" align="right"><?php echo TABLE_HEADING_ACTION; ?>&nbsp;</td>
               </tr>
 <?php
@@ -132,13 +151,13 @@
     }
 
     if ( (is_object($oInfo)) && ($shipping_status['shipping_status_id'] == $oInfo->shipping_status_id) ) {
-      echo '                  <tr class="dataTableRowSelected" onmouseover="this.style.cursor=\'pointer\'" onclick="document.location.href=\'' . xtc_href_link(FILENAME_SHIPPING_STATUS, 'page=' . $_GET['page'] . '&oID=' . $oInfo->shipping_status_id . '&action=edit') . '\'">' . "\n";
+      echo '                  <tr class="dataTableRowSelected" onmouseover="this.style.cursor=\'pointer\'" onclick="document.location.href=\'' . xtc_href_link(FILENAME_SHIPPING_STATUS, 'page=' . $_GET['page'] . '&oID=' . $oInfo->shipping_status_id . '&action=edit') . '#edit-box\'">' . "\n";
     } else {
-      echo '                  <tr class="dataTableRow" onmouseover="this.className=\'dataTableRowOver\';this.style.cursor=\'pointer\'" onmouseout="this.className=\'dataTableRow\'" onclick="document.location.href=\'' . xtc_href_link(FILENAME_SHIPPING_STATUS, 'page=' . $_GET['page'] . '&oID=' . $shipping_status['shipping_status_id']) . '\'">' . "\n";
+      echo '                  <tr class="dataTableRow" onmouseover="this.className=\'dataTableRowOver\';this.style.cursor=\'pointer\'" onmouseout="this.className=\'dataTableRow\'" onclick="document.location.href=\'' . xtc_href_link(FILENAME_SHIPPING_STATUS, 'page=' . $_GET['page'] . '&oID=' . $shipping_status['shipping_status_id']) . '#edit-box\'">' . "\n";
     }
 
     if (DEFAULT_SHIPPING_STATUS_ID == $shipping_status['shipping_status_id']) {
-        echo '<td class="dataTableContent" align="left">';
+        echo '<td class="dataTableContent hidden-xs" align="left">';
      if ($shipping_status['shipping_status_image'] != '') {
        echo xtc_image(DIR_WS_ICONS . $shipping_status['shipping_status_image'] , IMAGE_ICON_INFO);
      }
@@ -146,7 +165,7 @@
       echo '                <td class="dataTableContent"><b>' . $shipping_status['shipping_status_name'] . ' (' . TEXT_DEFAULT . ')</b></td>' . "\n";
     } else {
 
-      			echo '<td class="dataTableContent" align="left">';
+      			echo '<td class="dataTableContent hidden-xs" align="left">';
                        if ($shipping_status['shipping_status_image'] != '') {
                            echo xtc_image(DIR_WS_ICONS . $shipping_status['shipping_status_image'] , IMAGE_ICON_INFO);
                            }
@@ -156,32 +175,29 @@
 ?>
 <!-- BOF - Tomcraft - 2009-06-10 - added some missing alternative text on admin icons -->
 <!--
-                <td class="dataTableContent" align="right"><?php if ( (is_object($oInfo)) && ($shipping_status['shipping_status_id'] == $oInfo->shipping_status_id) ) { echo xtc_image(DIR_WS_IMAGES . 'icon_arrow_right.gif', ''); } else { echo '<a href="' . xtc_href_link(FILENAME_SHIPPING_STATUS, 'page=' . $_GET['page'] . '&oID=' . $shipping_status['shipping_status_id']) . '">' . xtc_image(DIR_WS_IMAGES . 'icon_info.gif', IMAGE_ICON_INFO) . '</a>'; } ?>&nbsp;</td>
+                <td class="dataTableContent" align="right"><?php if ( (is_object($oInfo)) && ($shipping_status['shipping_status_id'] == $oInfo->shipping_status_id) ) { echo xtc_image(DIR_WS_IMAGES . 'icon_arrow_right.gif', ''); } else { echo '<a href="' . xtc_href_link(FILENAME_SHIPPING_STATUS, 'page=' . $_GET['page'] . '&oID=' . $shipping_status['shipping_status_id']) . '#edit-box">' . xtc_image(DIR_WS_IMAGES . 'icon_info.gif', IMAGE_ICON_INFO) . '</a>'; } ?>&nbsp;</td>
 -->
-                <td class="dataTableContent" align="right"><?php if ( (is_object($oInfo)) && ($shipping_status['shipping_status_id'] == $oInfo->shipping_status_id) ) { echo xtc_image(DIR_WS_IMAGES . 'icon_arrow_right.gif', ICON_ARROW_RIGHT); } else { echo '<a href="' . xtc_href_link(FILENAME_SHIPPING_STATUS, 'page=' . $_GET['page'] . '&oID=' . $shipping_status['shipping_status_id']) . '">' . xtc_image(DIR_WS_IMAGES . 'icon_info.gif', IMAGE_ICON_INFO) . '</a>'; } ?>&nbsp;</td>
+                <td class="dataTableContent" align="right"><?php if ( (is_object($oInfo)) && ($shipping_status['shipping_status_id'] == $oInfo->shipping_status_id) ) { echo xtc_image(DIR_WS_IMAGES . 'icon_arrow_right.gif', ICON_ARROW_RIGHT); } else { echo '<a href="' . xtc_href_link(FILENAME_SHIPPING_STATUS, 'page=' . $_GET['page'] . '&oID=' . $shipping_status['shipping_status_id']) . '#edit-box">' . xtc_image(DIR_WS_IMAGES . 'icon_info.gif', IMAGE_ICON_INFO) . '</a>'; } ?>&nbsp;</td>
 <!-- EOF - Tomcraft - 2009-06-10 - added some missing alternative text on admin icons -->
               </tr>
 <?php
   }
 ?>
-              <tr>
-                <td colspan="2"><table border="0" width="100%" cellspacing="0" cellpadding="2">
-                  <tr>
-                    <td class="smallText" valign="top"><?php echo $shipping_status_split->display_count($shipping_status_query_numrows, '20', $_GET['page'], TEXT_DISPLAY_NUMBER_OF_SHIPPING_STATUS); ?></td>
-                    <td class="smallText" align="right"><?php echo $shipping_status_split->display_links($shipping_status_query_numrows, '20', MAX_DISPLAY_PAGE_LINKS, $_GET['page']); ?></td>
-                  </tr>
+              </table>
+                  <div class='col-xs-12'>
+                    <div class="smallText col-xs-6"><?php echo $shipping_status_split->display_count($shipping_status_query_numrows, '20', $_GET['page'], TEXT_DISPLAY_NUMBER_OF_SHIPPING_STATUS); ?></div>
+                    <div class="smallText col-xs-6 text-right"><?php echo $shipping_status_split->display_links($shipping_status_query_numrows, '20', MAX_DISPLAY_PAGE_LINKS, $_GET['page']); ?></div>
+                  </div>
 <?php
   if (substr($_GET['action'], 0, 3) != 'new') {
 ?>
-                  <tr>
-                    <td colspan="2" align="right"><?php echo '<a class="btn btn-default" onclick="this.blur();" href="' . xtc_href_link(FILENAME_SHIPPING_STATUS, 'page=' . $_GET['page'] . '&action=new') . '">' . BUTTON_INSERT . '</a>'; ?></td>
-                  </tr>
+                  <div class="col-xs-12 text-right">
+                    <?php echo '<a class="btn btn-default" onclick="this.blur();" href="' . xtc_href_link(FILENAME_SHIPPING_STATUS, 'page=' . $_GET['page'] . '&action=new') . '">' . BUTTON_INSERT . '</a>'; ?>
+                  </div>
 <?php
   }
 ?>
-                </table></td>
-              </tr>
-            </table></td>
+    </div>
 <?php
   $heading = array();
   $contents = array();
@@ -189,13 +205,18 @@
     case 'new':
       $heading[] = array('text' => '<b>' . TEXT_INFO_HEADING_NEW_SHIPPING_STATUS . '</b>');
 
+        if(isset($_SESSION['repopulate_form'])){
+            $ss_name = ($_SESSION['repopulate_form']['shipping_status_name']) ? $_SESSION['repopulate_form']['shipping_status_name'] : '';
+            unset($_SESSION['repopulate_form']);
+        }
+
       $contents = array('form' => xtc_draw_form('status', FILENAME_SHIPPING_STATUS, 'page=' . $_GET['page'] . '&action=insert', 'post', 'enctype="multipart/form-data"'));
       $contents[] = array('text' => TEXT_INFO_INSERT_INTRO);
 
       $shipping_status_inputs_string = '';
       $languages = xtc_get_languages();
       for ($i = 0, $n = sizeof($languages); $i < $n; $i++) {
-        $shipping_status_inputs_string .= '<br />' . xtc_image(DIR_WS_LANGUAGES.$languages[$i]['directory'].'/admin/images/'.$languages[$i]['image']) . '&nbsp;' . xtc_draw_input_field('shipping_status_name[' . $languages[$i]['id'] . ']');
+        $shipping_status_inputs_string .= '<br />' . xtc_image(DIR_WS_LANGUAGES.$languages[$i]['directory'].'/admin/images/'.$languages[$i]['image']) . '&nbsp;' . xtc_draw_input_field('shipping_status_name[' . $languages[$i]['id'] . ']', $ss_name[$languages[$i]['id']]);
       }
       $contents[] = array('text' => '<br />' . TEXT_INFO_SHIPPING_STATUS_IMAGE . '<br />' . xtc_draw_file_field('shipping_status_image'));
       $contents[] = array('text' => '<br />' . TEXT_INFO_SHIPPING_STATUS_NAME . $shipping_status_inputs_string);
@@ -233,7 +254,7 @@
       if (is_object($oInfo)) {
         $heading[] = array('text' => '<b>' . $oInfo->shipping_status_name . '</b>');
 
-        $contents[] = array('align' => 'center', 'text' => '<a class="btn btn-default" onclick="this.blur();" href="' . xtc_href_link(FILENAME_SHIPPING_STATUS, 'page=' . $_GET['page'] . '&oID=' . $oInfo->shipping_status_id . '&action=edit') . '">' . BUTTON_EDIT . '</a> <a class="btn btn-default" onclick="this.blur();" href="' . xtc_href_link(FILENAME_SHIPPING_STATUS, 'page=' . $_GET['page'] . '&oID=' . $oInfo->shipping_status_id . '&action=delete') . '">' . BUTTON_DELETE . '</a>');
+        $contents[] = array('align' => 'center', 'text' => '<a class="btn btn-default" onclick="this.blur();" href="' . xtc_href_link(FILENAME_SHIPPING_STATUS, 'page=' . $_GET['page'] . '&oID=' . $oInfo->shipping_status_id . '&action=edit') . '#edit-box">' . BUTTON_EDIT . '</a> <a class="btn btn-default" onclick="this.blur();" href="' . xtc_href_link(FILENAME_SHIPPING_STATUS, 'page=' . $_GET['page'] . '&oID=' . $oInfo->shipping_status_id . '&action=delete') . '#edit-box">' . BUTTON_DELETE . '</a>');
 
         $shipping_status_inputs_string = '';
         $languages = xtc_get_languages();
@@ -247,21 +268,21 @@
   }
 
   if ( (xtc_not_null($heading)) && (xtc_not_null($contents)) ) {
-    echo '            <td width="25%" valign="top">' . "\n";
+    echo '<div class="col-md-3 col-sm-12 col-xs-12 pull-right edit-box-class">' . "\n";
 
     $box = new box;
     echo $box->infoBox($heading, $contents);
 
-    echo '            </td>' . "\n";
+    echo '</div>' . "\n";
+        ?>
+    <script>
+        //responsive_table
+        $('#responsive_table').addClass('col-md-9');
+    </script>               
+    <?php
   }
 ?>
-          </tr>
-        </table></td>
-      </tr>
-    </table></td>
-<!-- body_text_eof //-->
-  </tr>
-</table>
+</div></div>
 <!-- body_eof //-->
 
 <!-- footer //-->

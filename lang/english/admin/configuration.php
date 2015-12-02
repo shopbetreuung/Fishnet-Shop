@@ -684,10 +684,10 @@ define('GOOGLE_RSS_FEED_REFID_TITLE' , 'Google RSS Feed - refID');
 define('GOOGLE_RSS_FEED_REFID_DESC' , 'Enter your campaign ID here. It will be appended to every link of the Google RSS Feed automaticallyt.');
 // EOF - DokuMan - 2010-08-13 - set Google RSS Feed in admin section
 
-// BOF - web28 - 2010-08-17 -  Bildgrößenberechnung kleinerer Bilder
+// BOF - web28 - 2010-08-17 -  BildgrÃ¶ÃŸenberechnung kleinerer Bilder
 define('PRODUCT_IMAGE_NO_ENLARGE_UNDER_DEFAULT_TITLE','Upscaling low-res images)');
 define('PRODUCT_IMAGE_NO_ENLARGE_UNDER_DEFAULT_DESC','If set to <strong>no</strong>, upscaling of low-res images to default settings for image size is disabled. Set to <strong>yes</strong> to enable upscaling of low-res images. In this case those images will be shown blurry.');
-// EOF - web28 - 2010-08-17 -  Bildgrößenberechnung kleinerer Bilder
+// EOF - web28 - 2010-08-17 -  BildgrÃ¶ÃŸenberechnung kleinerer Bilder
 
 //BOF - hendrik - 2011-05-14 - independent invoice number and date
 define('IBN_BILLNR_TITLE', 'Next invoice number');
@@ -733,7 +733,7 @@ define ('CHECKOUT_SHOW_PRODUCTS_MODEL_DESC', 'on the order confirmation page you
 
 // Billing email attachments
 define ('EMAIL_BILLING_ATTACHMENTS_TITLE', 'Billing - e-mail attachments for orders');
-define ('EMAIL_BILLING_ATTACHMENTS_DESC', 'Example of attachments - the files are in the shop directory <b>pdf</b>, separate multiple attachments with comma and no space:<br /> pdf/agb.pdf,pdf/widerruf.pdf.');
+define ('EMAIL_BILLING_ATTACHMENTS_DESC', 'Example of attachments - the files are in the shop directory <b>/media/pdf</b>, separate multiple attachments with comma and no space:<br /> /media/pdf/agb.pdf,/media/pdf/widerruf.pdf.');
 
 // email images
 define ('SHOW_IMAGES_IN_EMAIL_TITLE', 'Product Images in Order - Insert email');

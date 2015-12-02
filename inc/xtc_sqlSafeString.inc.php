@@ -16,13 +16,6 @@
    ---------------------------------------------------------------------------------------*/
 
   function xtc_sqlSafeString($param) {
-    // Hier wird wg. der grossen Verbreitung auf MySQL eingegangen
-	// BOF - Hetfield - 2009-08-18 - deprecated function mysql_escape_string added mysql_real_escape_string to be ready for PHP >= 5.3
-    if (function_exists('mysql_real_escape_string')) {
-		return (NULL === $param ? "NULL" : '"' . mysql_real_escape_string($param) . '"');
-  	} elseif (function_exists('mysql_escape_string')) {
-  		return (NULL === $param ? "NULL" : '"' . mysql_escape_string($param) . '"');
-  	}
-	// EOF - Hetfield - 2009-08-18 - deprecated function mysql_escape_string added mysql_real_escape_string to be ready for PHP >= 5.3
+		return (NULL === $param ? "NULL" : '"' . mysqli_real_escape_string(xtc_db_connect(),$param) . '"');
   }
 ?>

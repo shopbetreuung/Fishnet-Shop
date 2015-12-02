@@ -41,13 +41,16 @@
   }
 
   class order {
-    var $info, $totals, $products, $customer, $delivery, $content_type;
+
+    var $info, $totals, $products, $downloads, $goods, $customer, $delivery, $content_type;
 
     function order($order_id = '') {
       //global $xtPrice;
       $this->info = array();
       $this->totals = array();
       $this->products = array();
+      $this->downloads = array();
+      $this->goods = array();
       $this->customer = array();
       $this->delivery = array();
 
@@ -226,6 +229,8 @@
                             );
 
       $index = 0;
+      $download_index = 0;
+      $goods_index = 0;
       $orders_products_query = xtc_db_query("SELECT *
                                              FROM " . TABLE_ORDERS_PRODUCTS . "
                                              WHERE orders_id = '" . $order_id . "'");
@@ -250,15 +255,29 @@
                                           WHERE orders_id = '" . $order_id . "'
                                           AND orders_products_id = '" . $orders_products['orders_products_id'] . "'
                                           ORDER BY orders_products_attributes_id"); //ADD - web28 - 2010-06-11 - order by orders_products_attributes_id
+        $download_flag = 0;
         if (xtc_db_num_rows($attributes_query)) {
           while ($attributes = xtc_db_fetch_array($attributes_query)) {
             $this->products[$index]['attributes'][$subindex] = array('option' => $attributes['products_options'],
                                                                      'value' => $attributes['products_options_values'],
                                                                      'prefix' => $attributes['price_prefix'],
                                                                      'price' => $attributes['options_values_price']);
-
+            //if ($attributes['products_options'] == 'Downloads') {
+            if (strtoupper($attributes['products_options']) == 'DOWNLOADS') {
+              $download_flag = 1;
+            }
             $subindex++;
           }
+          if ($download_flag == 1) {
+            $this->downloads[$download_index] = $this->products[$index];
+            $download_index++;
+          }
+          //EOF - Fishnet Services - Added support for downloads	
+        }
+        
+        if ($download_flag == 0) {
+          $this->goods[$goods_index] = $this->products[$index];
+          $goods_index++;
         }
 
         if(!defined('RUN_MODE_ADMIN')) {
@@ -499,6 +518,8 @@
                              'format_id' => $billing_address['address_format_id']);
 
       $index = 0;
+      $download_index = 0;
+      $goods_index = 0;
       // BOF - web28 - 2010-05-06 - PayPal API Modul / Paypal Express Modul
       $this->tax_discount = array ();
       // EOF - web28 - 2010-05-06 - PayPal API Modul / Paypal Express Modul
@@ -532,6 +553,7 @@
                                         'weight' => $products[$i]['weight'],
                                         'id' => $products[$i]['id']);
 
+        $download_flag = 0;
         if ($products[$i]['attributes']) {
           $subindex = 0;
           reset($products[$i]['attributes']);
@@ -545,8 +567,21 @@
                                                                      'price' => $attributes['options_values_price'],
                                                                      'price_formated' => $xtPrice->xtcFormat($attributes['options_values_price'], true)
                                                                      );
+            //if ($attributes['products_options_name'] == 'Downloads') {
+            if (strtoupper($attributes['products_options_name']) == 'DOWNLOADS') {
+              $download_flag = 1;
+            }
             $subindex++;
           }
+          if ($download_flag == 1) {
+            $this->downloads[$download_index] = $this->products[$index];
+            $download_index++;
+          }
+        }
+        
+        if ($download_flag == 0) {
+          $this->goods[$goods_index] = $this->products[$index];
+          $goods_index++;
         }
 
         $shown_price = $this->products[$index]['final_price'];

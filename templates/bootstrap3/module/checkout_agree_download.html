@@ -1,0 +1,93 @@
+{config_load file="$language/lang_$language.conf" section="checkout_agree_download"} 
+{config_load file="$language/lang_$language.conf" section="checkout_navigation"}
+{config_load file="$language/lang_$language.conf" section="duty_info"} 
+
+<div id="checkoutnavigation" class="row">
+  <div class="col-sm-2"><div class="inactive"><span class="number">1.</span> <span class="title">{#title_shipping#}</span><br /><span class="description">{#desc_shipping#}</span></div></div>
+  <div class="col-sm-2"><div class="inactive"><span class="number">2.</span> <span class="title">{#title_payment#}</span><br /><span class="description">{#desc_payment#}</span></div></div>
+  <div class="col-sm-3"><div class="active"><span class="number">3.</span> <span class="title">{#title_agree_download#}</span><br /><span class="description">{#desc_agree_download#}</span></div></div>
+  <div class="col-sm-2"><div class="inactive"><span class="number">4.</span> <span class="title">{#title_confirmation#}</span><br /><span class="description">{#desc_confirmation#}</span></div></div>
+  <div class="col-sm-3"><div class="inactive"><span class="number">5.</span> <span class="title">{#title_success#}</span><br /><span class="description">{#desc_success#}</span></div></div>
+</div>
+<div style="clear:both"></div>
+{if $error!=''}<br /><div class="errormessage">{$error}</div>{/if}
+
+<h1>{#heading_agree_download_explanation#}</h1>
+<p>{#text_agree_download_explanation#}</p>
+{$FORM_ACTION}
+<h1>{#heading_agree_download_downloads#}</h1>
+<p>{#text_agree_download_downloads#}</p>
+
+<div class="highlightbox agreedownloadbox">   
+  {* BOC PRODUCTS TABLE *}
+  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr class="headerrow">
+      <td class="main_header" style="width:50px" align="center" valign="top"><b>{#header_agree_download_qty#}</b></td>
+      <td class="main_header" align="left" valign="top"><b>{#header_agree_download_article#}</b></td>
+    </tr>
+    {foreach name=aussen item=data from=$DOWNLOADS_ARRAY}
+    <tr>
+      <td class="main_row" align="center" valign="top">{$data.qty}&nbsp;x</td>
+      <td class="main_row" align="left" valign="top">
+        {if $smarty.const.CHECKOUT_SHOW_PRODUCTS_IMAGES == 'true'}
+        <div style="width:90px; float:right;">{$data.image}</div>
+        {/if}
+        {$data.link}
+				{if $data.order_description}<div class="small">{$data.order_description}</div>{/if}
+        {if $data.shipping_time}<span class="nobr small">{$smarty.const.SHIPPING_TIME}{$data.shipping_time}</span>{/if}
+      </td>
+    </tr>
+    {/foreach}
+  </table>
+  {* EOC PRODUCTS TABLE *}
+</div>
+<div>{#text_agree_download_radio_info#}</div>
+<div class="highlightbox">
+	<table width="100%" border="0" cellspacing="0" cellpadding="4">
+	  <tr>
+	    <td style="width:50px;" align="center" valign="middle">{$RADIO_AGREE_DOWNLOAD}</td>
+	    <td>{#text_agree_download_radio_agree#}</td>
+	  </tr>
+	</table>
+</div>
+<div class="highlightbox">
+	<table width="100%" border="0" cellspacing="0" cellpadding="4">
+	  <tr>
+	    <td style="width:50px;" align="center" valign="middle">{$RADIO_DISAGREE_DOWNLOAD}</td>
+	    <td>{#text_agree_download_radio_disagree#}</td>
+	  </tr>
+	</table>
+</div>
+&nbsp;
+{if $GOODS_COUNT > 0 }
+<h1>{#heading_agree_download_goods#}</h1>
+<p>{#text_agree_download_goods#}</p>
+
+<div class="highlightbox agreedownloadbox">   
+  {* BOC PRODUCTS TABLE *}
+  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr class="headerrow">
+      <td class="main_header" style="width:50px" align="center" valign="top"><b>{#header_agree_download_qty#}</b></td>
+      <td class="main_header" align="left" valign="top"><b>{#header_agree_download_article#}</b></td>
+    </tr>
+    {foreach name=aussen item=data from=$GOODS_ARRAY}
+    <tr>
+      <td class="main_row" align="center" valign="top">{$data.qty}&nbsp;x</td>
+      <td class="main_row" align="left" valign="top">
+        {if $smarty.const.CHECKOUT_SHOW_PRODUCTS_IMAGES == 'true'}
+        <div style="width:90px; float:right;">{$data.image}</div>
+        {/if}
+        {$data.link}
+				{if $data.order_description}<div class="small">{$data.order_description}</div>{/if}
+        {if $data.shipping_time}<span class="nobr small">{$smarty.const.SHIPPING_TIME}{$data.shipping_time}</span>{/if}
+      </td>
+    </tr>
+    {/foreach}
+  </table>
+  {* EOC PRODUCTS TABLE *}
+</div>
+{/if}
+<h1>{$REVOCATION_TITLE}</h1>
+<p class="checkoutagb">{$REVOCATION}</p>
+<p>{$BUTTON_CONTINUE}</p>
+{$FORM_END}

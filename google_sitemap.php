@@ -109,6 +109,9 @@ $c = 0;
 //BOF - Dokuman - 2009-11-09 - Create "sitemap.xml" instead of "sitemap1.xml"
 //$i = 1; 
 $i = ''; 
+if(isset($_SESSION['language_code'])){
+    $i = "_".$_SESSION['language_code']; 
+}
 //EOF - Dokuman - 2009-11-09 - Create "sitemap.xml" instead of "sitemap1.xml"
 
 $sitemap_filename = 'sitemap'.$i.$file_extension; 
@@ -209,13 +212,33 @@ if (xtc_db_num_rows($product_result) > 0) {
     } 
 } 
 
+# Sitemap add content manager to list
+    $content_query=xtc_db_query("SELECT
+                                        content_id,
+                                        change_date
+                                   FROM ".TABLE_CONTENT_MANAGER."
+                                  WHERE languages_id='".$_SESSION['languages_id']."'
+                                    AND parent_id='0'
+                               ORDER BY content_group,sort_order
+                                 ");
+    if (xtc_db_num_rows($content_query) > 0) { 
+        while ($content_data = xtc_db_fetch_array($content_query)) {
+            
+            $date = strtotime($content_data['change_date']); 
+            
+            $string = sprintf(SITEMAP_ENTRY, xtc_href_link(FILENAME_CONTENT,'coID='.$content_data['content_id']), PRIORITY_PRODUCTS, iso8601_date($date), CHANGEFREQ_CATEGORIES); 
+            
+            $c_cm_total++; 
+            output_entry(); 
+        }
+    }
 
 output(SITEMAP_FOOTER); 
 if ($autogenerate) { 
     $function_close($fp); 
 } 
 
-$main_content .= "<br><br>" . $c_cat_total . " <b>Kategorien</b> und " . $c_prod_total . " <b>Produkte</b> exportiert."; 
+$main_content .= "<br><br>" . $c_cat_total . " <b>Kategorien</b>, " . $c_prod_total . " <b>Produkte</b> und " . $c_cm_total . " <b>Content pages</b>  exportiert."; 
 // generates sitemap-index file 
 if ($autogenerate && $i > 1) { 
     $sitemap_index_file = 'sitemap_index'.$file_extension; 

@@ -27,7 +27,7 @@
   switch ($_GET['action']) {  // actions for datahandling
 
     case 'save': // save newsletter
-
+      $error = array();
       $id=xtc_db_prepare_input((int)$_POST['ID']);
       $status_all=xtc_db_prepare_input($_POST['status_all']);
       if ($newsletter_title=='') $newsletter_title='no title';
@@ -43,9 +43,25 @@
 
       if (xtc_db_prepare_input($_POST['status_all'])=='yes') $rzp.=',all';
 
-      $error=false; // reset error flag
-      if ($error == false) {
-        $sql_data_array = array( 'title'=> xtc_db_prepare_input($_POST['title']),
+    $title = xtc_db_prepare_input($_POST['title']);
+    
+    $check_if_title_exist = xtc_db_find_database_field(TABLE_MODULE_NEWSLETTER, 'title', $title);
+    
+    $url_action = 'new';
+    if(!$title || $check_if_title_exist){
+        if($id != ''){
+            if($id != $check_if_title_exist['newsletter_id']){
+                $url_action = 'edit';
+                $error[] = ERROR_TEXT_TITLE;
+            }
+        } else {
+            $error[] = ERROR_TEXT_TITLE;
+        }     
+    }
+
+    #$error=false; // reset error flag
+    if(empty($error)){
+        $sql_data_array = array( 'title'=> $title,
                                  'status' => '0',
                                  'bc'=>$rzp,
                                  'cc'=>xtc_db_prepare_input($_POST['cc']),
@@ -134,6 +150,10 @@
           }
         }
         xtc_redirect(xtc_href_link(FILENAME_MODULE_NEWSLETTER));
+      } else {
+	$_SESSION['repopulate_form'] = $_REQUEST;
+	$_SESSION['errors'] = $error;
+	xtc_redirect(xtc_href_link(FILENAME_MODULE_NEWSLETTER, '&action='.$url_action.'&errors=1&ID='.$id));
       }
       break;
 
@@ -250,22 +270,16 @@
 ?>
 <!-- header_eof //-->
 <!-- body //-->
-<table border="0" width="100%" cellspacing="2" cellpadding="2">
-  <tr>
+<div class="row">
     
-      <table border="0" width="<?php echo BOX_WIDTH; ?>" cellspacing="1" cellpadding="1" class="columnLeft">
-      <!-- left_navigation //-->
+    <div class='col-xs-12'>
+        <div class="col-xs-2 col-sm-1 text-right"><?php echo xtc_image(DIR_WS_ICONS.'heading_modules.gif'); ?></div>
+        <div class="col-xs-10 col-sm-11"><p class="h2"><?php echo HEADING_TITLE; ?></p> Tools</div>
+        <div class="main col-xs-12 text-center" style="clear:both; border: 1px red solid; padding:5px; background: #FFD6D6;"><?php echo TEXT_NEWSLETTER_INFO; ?></div>
+    </div>
+<?php include DIR_WS_INCLUDES.FILENAME_ERROR_DISPLAY; ?>
+    <div class='col-xs-12'><br></div>
       
-      <!-- left_navigation_eof //-->
-      </table>
-    </td>
-    <!-- body_text //-->
-    <td width="100%" valign="top">
-    <div style="width:900px">
-        <div style="float:left; width:80px;"><?php echo xtc_image(DIR_WS_ICONS.'heading_news.gif'); ?></div>
-        <div class="pageHeading"><?php echo HEADING_TITLE; ?><br /></div>
-        <div class="main" valign="top">Tools</div>
-        <div class="main" style="clear:both; border: 1px red solid; padding:5px; background: #FFD6D6;"><?php echo TEXT_NEWSLETTER_INFO; ?></div>
 
       <?php
       if ($_GET['send']) {
@@ -273,9 +287,6 @@
       }
       ?>
 
-        <table width="100%" border="0">
-          <tr>
-            <td>
             <?php
             // Default seite
             switch ($_GET['action']) {
@@ -304,10 +315,8 @@
                                         'USERS'=>$group_data['count']);
               }
               ?>
-              <br />
-              <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                <tr>
-                  <td>
+    <div class="col-xs-12">
+        <div class="col-xs-12 col-xs-9">
                     <table border="0" width="100%" cellspacing="0" cellpadding="2">
                       <tr class="dataTableHeadingRow">
                         <td class="dataTableHeadingContent" width="150" ><?php echo TITLE_CUSTOMERS; ?></td>
@@ -324,15 +333,13 @@
                       }
                       ?>
                     </table>
-                  </td>
-                  <td width="30%" align="right" valign="top"">
+        </div>
+        <div class="col-xs-12 col-xs-3 text-right">
                   <?php
                   echo '<a class="btn btn-default" href="'.xtc_href_link(FILENAME_MODULE_NEWSLETTER,'action=new').'">'.BUTTON_NEW_NEWSLETTER.'</a>';
                   ?>
-                  </td>
-                </tr>
-              </table>
-              <br />
+        </div>
+    </div>
               <?php
               // get data for newsletter overwiev
               $newsletters_query=xtc_db_query("SELECT
@@ -346,6 +353,7 @@
                                     'title'=>$newsletters_data['title']);
               }
               ?>
+    <div class="col-xs-12">
               <table border="0" width="100%" cellspacing="0" cellpadding="2">
                 <tr class="dataTableHeadingRow">
                   <td class="dataTableHeadingContent" width="30"><?php echo TITLE_DATE; ?></td>
@@ -392,8 +400,8 @@
                       echo TEXT_TITLE.$newsletters_data['title'].'<br />';
 
                       $customers_status=xtc_get_customers_statuses();
-                      for ($i=0,$n=sizeof($customers_status);$i<$n; $i++) {
-                        $newsletters_data['bc']=str_replace($customers_status[$i]['id'],$customers_status[$i]['text'],$newsletters_data['bc']);
+                      for ($j=0,$n=sizeof($customers_status);$j<$n; $j++) {
+                        $newsletters_data['bc']=str_replace($customers_status[$j]['id'],$customers_status[$j]['text'],$newsletters_data['bc']);
                       }
 
                       echo TEXT_TO.$newsletters_data['bc'].'<br />';
@@ -418,7 +426,7 @@
               }
               ?>
               </table>
-              <br /><br />
+</div>
               <?php
               $newsletters_query=xtc_db_query("SELECT
                                                newsletter_id,date,title
@@ -432,6 +440,7 @@
                                  'title'=>$newsletters_data['title']);
               }
               ?>
+    <div class="col-xs-12">
               <table border="0" width="100%" cellspacing="0" cellpadding="2">
                 <tr class="dataTableHeadingRow">
                   <td class="dataTableHeadingContent" width="80%" ><?php echo TITLE_SEND; ?></td>
@@ -455,6 +464,7 @@
               }
               ?>
               </table>
+    </div>
               <?php
               // end default page
               break;
@@ -467,19 +477,30 @@
               case 'safe':
               case 'new':  // action for NEW newsletter!
 
+                $n_title = $newsletters_data['title'];
+                $n_body = $newsletters_data['body']; 
+                $n_cc = $newsletters_data['cc'];
+                $n_bc = $newsletters_data['bc'];
+                if(isset($_SESSION['repopulate_form'])){
+                    $n_title = ($_SESSION['repopulate_form']['title']) ? $_SESSION['repopulate_form']['title'] : $newsletters_data['title'];
+                    $n_body = ($_SESSION['repopulate_form']['body']) ? $_SESSION['repopulate_form']['body'] : $newsletters_data['body'];
+                    $n_cc = ($_SESSION['repopulate_form']['cc']) ? $_SESSION['repopulate_form']['cc'] : $newsletters_data['cc'];
+                    $n_bc = ($_SESSION['repopulate_form']['bc']) ? $_SESSION['repopulate_form']['bc'] : $newsletters_data['bc'];
+                    unset($_SESSION['repopulate_form']);
+                }
+
                 $customers_status=xtc_get_customers_statuses();
                 echo xtc_draw_form('edit_newsletter',FILENAME_MODULE_NEWSLETTER,'action=save','post','enctype="multipart/form-data"').xtc_draw_hidden_field('ID',$_GET['ID']);
                 ?>
 
-                <br /><br />
-                <table class="main" width="100%" border="0">
-                  <tr>
-                    <td width="10%"><?php echo TEXT_TITLE; ?></td>
-                    <td width="90%"><?php echo xtc_draw_input_field('title',$newsletters_data['title'],'size=100'); ?></td>
-                  </tr>
-                  <tr>
-                    <td width="10%"><?php echo TEXT_TO; ?></td>
-                    <td width="90%"><?php
+    <div class="col-xs-12">
+                  <div class="col-xs-12">
+                    <div class="col-xs-12 col-sm-1" ><?php echo TEXT_TITLE; ?></div>
+                    <div class="col-xs-12 col-sm-11" ><?php echo xtc_draw_input_field('title',$n_title,'size=100'); ?></div>
+                  </div>
+                  <div class="col-xs-12">
+                    <div class="col-xs-12 col-sm-1" ><?php echo TEXT_TO; ?></div>
+                    <div class="col-xs-12 col-sm-11" ><?php
                     for ($i=0,$n=sizeof($customers_status);$i<$n; $i++) {
 
                       $group_query=xtc_db_query("SELECT count(*) as count
@@ -493,38 +514,33 @@
                                           WHERE customers_status='".$customers_status[$i]['id']."'");
                       $group_data_all=xtc_db_fetch_array($group_query);
 
-                      $bc_array = explode(',', $newsletters_data['bc']);
+                      $bc_array = explode(',', $n_bc);
                       echo xtc_draw_checkbox_field('status['.$i.']','yes', in_array($customers_status[$i]['id'], $bc_array)).' '.$customers_status[$i]['text'].'  <i>(<b>'.$group_data['count'].'</b>'.TEXT_USERS.$group_data_all['count'].TEXT_CUSTOMERS.'<br />';
                     }
 
                     echo xtc_draw_checkbox_field('status_all', 'yes',in_array('all', $bc_array)).' <b>'.TEXT_NEWSLETTER_ONLY.'</b>';
-                    ?></td>
-                  </tr>
-                  <tr>
-                    <td width="10%"><?php echo TEXT_CC; ?></td>
-                    <td width="90%"><?php echo xtc_draw_input_field('cc',$newsletters_data['cc'],'size=100'); ?></td>
-                  </tr>
-                  <tr>
-                    <td width="10%" valign="top"><?php echo TEXT_BODY; ?></td>
-                    <td width="90%"><?php echo xtc_draw_textarea_field('newsletter_body', 'soft', '150', '45', stripslashes($newsletters_data['body'])); ?></td>
-                  </tr>
-                </table>
+                    ?></div>
+                  </div>
+                  <div class="col-xs-12">
+                    <div class="col-xs-12 col-sm-1" ><?php echo TEXT_CC; ?></div>
+                    <div class="col-xs-12 col-sm-11" ><?php echo xtc_draw_input_field('cc',$n_cc,'size=100'); ?></div>
+                  </div>
+                  <div class="col-xs-12">
+                    <div class="col-xs-12 col-sm-1"><?php echo TEXT_BODY; ?></div>
+                    <div class="col-xs-12 col-sm-11" ><?php echo xtc_draw_textarea_field('newsletter_body', 'soft', '150', '45', stripslashes($n_body)); ?></div>
+                  </div>
+                </div>
+                <div class="col-xs-12">
                   <a class="btn btn-default" onclick="this.blur();" href="<?php echo xtc_href_link(FILENAME_MODULE_NEWSLETTER); ?>"><?php echo BUTTON_BACK; ?></a>
                   <right><?php echo '<input type="submit" class="btn btn-default" onclick="this.blur();" value="' . BUTTON_SAVE . '"/>'; ?></right>
+                </div>
                 </form>
                 <?php
                 // end switch
                 break;
               }
               ?>
-            </td>
-          </tr>
-        </table>
       </div>
-   </td>
-    <!-- body_text_eof //-->
-  </tr>
-</table>
 <!-- body_eof //-->
 <?php if (isset($ajax)) echo $ajax;	?>
 <!-- footer //-->

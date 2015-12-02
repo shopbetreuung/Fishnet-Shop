@@ -86,6 +86,7 @@ define('BOX_HEADING_LOCATION_AND_TAXES', 'Location / Tax');
 define('BOX_HEADING_CATALOG', 'Catalog');
 
 define('BOX_CONTENT','Content Manager');
+define('BOX_EMAIL','Email Manager');
 define('TEXT_ALLOWED', 'Permission');
 define('TEXT_ACCESS', 'Usable Area');
 define('BOX_CONFIGURATION', 'General Options');
@@ -118,8 +119,10 @@ define('BOX_PAYMENT', 'Payment Systems');
 define('BOX_SHIPPING', 'Shipping Methods');
 define('BOX_ORDER_TOTAL', 'Order Total');
 define('BOX_CATEGORIES', 'Categories / Products');
+define('BOX_PRODUCTS_CONTENT', 'Products content');
 define('BOX_PRODUCTS_ATTRIBUTES', 'Product Options');
 define('BOX_MANUFACTURERS', 'Manufacturers');
+define('BOX_WHOLESALERS', 'Wholesalers');
 define('BOX_REVIEWS', 'Product Reviews');
 define('BOX_CAMPAIGNS', 'Campaigns');
 define('BOX_XSELL_PRODUCTS', 'Cross Marketing');
@@ -297,6 +300,7 @@ define('TEXT_DISPLAY_NUMBER_OF_CUSTOMERS', 'Displaying <b>%d</b> to <b>%d</b> (o
 define('TEXT_DISPLAY_NUMBER_OF_CURRENCIES', 'Displaying <b>%d</b> to <b>%d</b> (of <b>%d</b> Currencies)');
 define('TEXT_DISPLAY_NUMBER_OF_LANGUAGES', 'Displaying <b>%d</b> to <b>%d</b> (of <b>%d</b> Languages)');
 define('TEXT_DISPLAY_NUMBER_OF_MANUFACTURERS', 'Displaying <b>%d</b> to <b>%d</b> (of <b>%d</b> Manufacturers)');
+define('TEXT_DISPLAY_NUMBER_OF_WHOLESALERS', 'Displaying <b>%d</b> to <b>%d</b> (of <b>%d</b> Wholesalers)');
 define('TEXT_DISPLAY_NUMBER_OF_NEWSLETTERS', 'Displaying <b>%d</b> to <b>%d</b> (of <b>%d</b> Newsletters)');
 define('TEXT_DISPLAY_NUMBER_OF_ORDERS', 'Displaying <b>%d</b> to <b>%d</b> (of <b>%d</b> Orders)');
 define('TEXT_DISPLAY_NUMBER_OF_ORDERS_STATUS', 'Displaying <b>%d</b> to <b>%d</b> (of <b>%d</b> Orders Status)');
@@ -495,3 +499,28 @@ define ('CONFIG_MAX_VALUE_WARNING', '"% s" WARNING:% s input was ignored [maximu
 define ('CONFIG_MIN_VALUE_WARNING', '"% s" WARNING:% s input was ignored [Minimum:% s]');
 
 define ('WHOS_ONLINE_TIME_LAST_CLICK_INFO', 'Display period in seconds:% s After this time, the entries will be deleted.');
+
+define('LABEL_TRUE', 'yes');
+define('LABEL_FALSE', 'no');
+
+define ('BOX_BASIC_SETTINGS', 'Basic Settings');
+define ('BOX_SERVER_SETTINGS', 'Server Settings');
+define ('BOX_CONFIGURATION_9', 'Warehouse Settings');
+define ('BOX_SHIPPING_AND_PAYMENT', 'Shipping & Payment');
+define ('BOX_MENU_PAYMENT', 'Payment');
+define ('BOX_FRONTEND', 'Frontend');
+define ('BOX_CONFIGURATION_2', 'Customers field lengths');
+define ('BOX_MAINTAINANCE', 'Maintenance');
+define ('BOX_SHOP_ON_OFF', 'Shop online/offline');
+define ('BOX_CLEVER_REACH', 'CleverReach Newsletter');
+define ('BOX_ATTRIBUTES','Attributes');
+define ('BOX_IMPORT_EXPORT','Import / Export');
+define ('BOX_LAW','Disclaimer');
+define ('BOX_HEADING_GV', 'Vouchers');
+
+#Menu main items
+define ('BOX_MENU_CUSTOMERS', 'Customers');
+define ('BOX_MENU_PRODUCTS', 'Products');
+define ('BOX_MENU_CONTENT', 'Content');
+define ('BOX_MENU_MARKETING', 'Marketing & SEO');
+define ('BOX_MENU_CONFIGURATION', 'Configuration');

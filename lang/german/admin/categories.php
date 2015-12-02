@@ -120,6 +120,8 @@ define('TEXT_PRODUCT_NOT_AVAILABLE', 'Deaktiviert');
 // EOF - Hetfield - 2010-01-28 - Changing product available in correctly names for status
 define('TEXT_PRODUCTS_MANUFACTURER', 'Artikelhersteller:');
 define('TEXT_PRODUCTS_MANUFACTURER_MODEL', 'Hersteller Art.Nr.(HAN):');
+define('TEXT_PRODUCTS_WHOLESALER', 'Gro&szlig;h&auml;ndler:');
+define('TEXT_PRODUCTS_WHOLESALER_REORDER', 'Nachbestellen ab x Stück:');
 define('TEXT_PRODUCTS_NAME', 'Artikelname:');
 define('TEXT_PRODUCTS_DESCRIPTION', 'Artikelbeschreibung:');
 define('TEXT_PRODUCTS_QUANTITY', 'Artikelanzahl:');

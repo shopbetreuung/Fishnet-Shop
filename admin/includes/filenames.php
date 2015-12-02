@@ -25,6 +25,7 @@ define('FILENAME_CAMPAIGNS', 'campaigns.php');
 define('FILENAME_CATALOG_ACCOUNT_HISTORY_INFO', 'account_history_info.php');
 define('FILENAME_CATALOG_NEWSLETTER', 'newsletter.php');
 define('FILENAME_CATEGORIES', 'categories.php');
+define('FILENAME_PRODUCTS_CONTENT', 'products_content.php');
 define('FILENAME_CONFIGURATION', 'configuration.php');
 define('FILENAME_COUNTRIES', 'countries.php');
 define('FILENAME_CURRENCIES', 'currencies.php');
@@ -39,6 +40,8 @@ define('FILENAME_GEO_ZONES', 'geo_zones.php');
 define('FILENAME_LANGUAGES', 'languages.php');
 define('FILENAME_MAIL', 'mail.php');
 define('FILENAME_MANUFACTURERS', 'manufacturers.php');
+define('FILENAME_WHOLESALERS', 'wholesalers.php');
+define('FILENAME_WHOLESALER_LIST', 'wholesalers_list.php');
 define('FILENAME_MODULES', 'modules.php');
 define('FILENAME_ORDERS', 'orders.php');
 define('FILENAME_ORDERS_INVOICE', 'invoice.php');
@@ -72,6 +75,8 @@ define('FILENAME_CREATE_ACCOUNT_SUCCESS','create_account_success.php');
 define('FILENAME_CUSTOMER_MEMO','customer_memo.php');
 define('FILENAME_CONTENT_MANAGER','content_manager.php');
 define('FILENAME_CONTENT_PREVIEW','content_preview.php');
+define('FILENAME_EMAIL_MANAGER','email_manager.php');
+define('FILENAME_EMAIL_PREVIEW','email_preview.php');
 define('FILENAME_SECURITY_CHECK','security_check.php');
 define('FILENAME_PRINT_ORDER','print_order.php');
 define('FILENAME_CREDITS','credits.php');
@@ -99,4 +104,5 @@ define('FILENAME_SAFETERMS','safeterms.php'); // Tomcraft - 2013-06-21 - Safeter
 define('FILENAME_EASYMARKETING','easymarketing.php'); // Tomcraft - 2013-08-29 - Added easymarketing
 define('FILENAME_IT_RECHT_KANZLEI','it_recht_kanzlei.php');
 define('FILENAME_IMAGESLIDERS', 'imagesliders.php');  // Imageslider (c)2008 by Hetfield - www.MerZ-IT-SerVice.de
+define('FILENAME_ERROR_DISPLAY', 'error_display.php');
 ?>

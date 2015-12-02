@@ -132,7 +132,7 @@ function print_xml_status ($code, $action, $msg, $mode, $item, $value)
 function table_exists($table_name)
 {
   $Table = xtc_db_query("show tables like '" . $table_name . "'");
-  if(mysql_fetch_row($Table) === false)
+  if(mysqli_fetch_row($Table) === false)
   {
     return(false);
   } else {
@@ -145,7 +145,7 @@ function table_exists($table_name)
 function column_exists($table, $column)
 {
   $Table = xtc_db_query("show columns from $table LIKE '" . $column . "'");
-  if(mysql_fetch_row($Table) === false)
+  if(mysqli_fetch_row($Table) === false)
   {
     return(false);
   } else {
@@ -1194,7 +1194,7 @@ function UpdateTables ()
     }
      else
     {
-      $error = mysql_error();
+      $error = mysqli_error(xtc_db_connect());
       $pos=strpos($error,'Duplicate column name');
 
       if ($pos===false)
@@ -2330,8 +2330,8 @@ function OrderUpdate ()
           $smarty->assign('NOTIFY_COMMENTS',$comments);
           $smarty->assign('ORDER_STATUS',$o_status);
 
-          $html_mail=$smarty->fetch(CURRENT_TEMPLATE . '/admin/mail/'.$check_status['language'].'/change_order_mail.html');
-          $txt_mail=$smarty->fetch(CURRENT_TEMPLATE . '/admin/mail/'.$check_status['language'].'/change_order_mail.txt');
+          $html_mail=$smarty->fetch('db:change_order_mail.html');
+          $txt_mail=$smarty->fetch('db:change_order_mail.txt');
 
           // send mail with html/txt template
           xtc_php_mail(EMAIL_BILLING_ADDRESS,
@@ -2529,8 +2529,8 @@ function CustomersUpdate ()
     $smarty->assign('content', $module_content);
     $smarty->caching = false;
 
-    $html_mail=$smarty->fetch(CURRENT_TEMPLATE . '/admin/mail/'.$Lang_folder.'/create_account_mail.html');
-    $txt_mail=$smarty->fetch(CURRENT_TEMPLATE . '/admin/mail/'.$Lang_folder.'/create_account_mail.txt');
+    $html_mail=$smarty->fetch('db:create_account_mail_admin.html');
+    $txt_mail=$smarty->fetch('db:create_account_mail_admin.txt');
 
     // send mail with html/txt template
     xtc_php_mail(

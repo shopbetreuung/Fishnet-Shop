@@ -32,12 +32,12 @@ if (isset($_POST['products_options_id']) && $_POST['action'] == 'change') {
    include(DIR_WS_MODULES.'new_attributes_change.php');
    xtc_redirect(xtc_href_link(FILENAME_NEW_ATTRIBUTES, 'cpath='. $_POST['cpath'].'&current_product_id='. $_POST['current_product_id'].'&option_order_by='.$_POST['option_order_by'].'&products_options_id=' .$_POST['products_options_id']));
 }
-//nach Abbrechen zurück zur Kategorie
+//nach Abbrechen zurÃ¼ck zur Kategorie
 if (isset($_GET['cPath'])) {
    include(DIR_WS_MODULES.'new_attributes_change.php');
    xtc_redirect(xtc_href_link(FILENAME_CATEGORIES, 'cPath=' . $_GET['cPath'] . '&pID=' . $_GET['current_product_id']));
 }
-//Aufruf über Icon aus Katgorie/Artikelübersicht
+//Aufruf Ã¼ber Icon aus Katgorie/ArtikelÃ¼bersicht
 if (isset($_GET['action']) && !isset($_POST['action'])) {
   $_POST = $_GET;
 }
@@ -52,13 +52,7 @@ require (DIR_WS_INCLUDES.'head.php');
     ?>
     <!-- header_eof //-->
     <!-- body //-->
-    <table border="0" width="100%" cellspacing="2" cellpadding="2">
-      <tr>
-        
-        </td>
-        <!-- body_text //-->
-        <td class="boxCenter" width="100%" valign="top">
-          <table border="0" cellspacing="0" cellpadding="2" style="border: 1px solid #a3a3a3; border-collapse:collapse;">
+    <div class="row">
             <?php
             // BOF - Tomcraft - 2009-11-11 - NEW SORT SELECTION
             if (isset($_GET['option_order_by']) && $_GET['option_order_by'] && !isset($_POST['action'])) {
@@ -100,11 +94,7 @@ require (DIR_WS_INCLUDES.'head.php');
             }
             // EOF - Tomcraft - 2009-11-11 - NEW SORT SELECTION
             ?>
-          </table>
-        </td>
-      </tr>
-      <!-- BOF - Tomcraft - 2009-06-10 - added missing table close tag -->
-    </table>
+    </div>
     <!-- EOF - Tomcraft - 2009-06-10 - added missing table close tag -->
     <!-- body_eof //-->
     <!-- footer //-->

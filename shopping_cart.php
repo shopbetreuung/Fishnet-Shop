@@ -20,7 +20,7 @@
 
    Released under the GNU General Public License
    -----------------------------------------------------------------------------------------
-   ab 15.08.2008 Teile vom Hamburger-Internetdienst geändert
+   ab 15.08.2008 Teile vom Hamburger-Internetdienst geÃ¤ndert
    Hamburger-Internetdienst Support Forums at www.forum.hamburger-internetdienst.de
    Stand 04.03.2012
    ---------------------------------------------------------------------------------------*/

@@ -80,13 +80,6 @@ if (isset($_GET['vorkasse']) && $_GET['vorkasse']=='sofort') {
 }
 //EOF - GTB - 2012-10-10 - include Vorkasse by Sofort
 
-//BOF  - web28 - 2010-03-27 PayPal Bezahl-Link
-if (isset($_SESSION['paypal_link']) && MODULE_PAYMENT_PAYPAL_IPN_USE_CHECKOUT == 'True') {
-	$smarty->assign('PAYPAL_LINK',$_SESSION['paypal_link']);
-    unset ($_SESSION['paypal_link']);    	
-}    
-//EOF  - web28 - 2010-03-27 PayPal Bezahl-Link
-
 // BOF - GTB - 2011-04-12 - changes for Guest Account
 // $smarty->assign('FORM_ACTION', xtc_draw_form('order', xtc_href_link(FILENAME_CHECKOUT_SUCCESS, 'action=update', 'SSL')));
 $smarty->assign('FORM_ACTION', xtc_draw_form('order', xtc_href_link(FILENAME_CHECKOUT_SUCCESS, 'action=update', 'SSL')).xtc_draw_hidden_field('account_type', $_SESSION['account_type']));

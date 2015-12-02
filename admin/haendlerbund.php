@@ -1,6 +1,6 @@
 <?PHP
 /* --------------------------------------------------------------
-   $Id: psapi_import.php
+   $Id: haendlerbund.php
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -39,46 +39,23 @@ if($_GET["api_konfiguration"] == 1) {
 		<?php require(DIR_WS_INCLUDES . 'header.php'); ?>
 		<!-- header_eof //-->
 		<!-- body //-->
-		<table border="0" width="100%" cellspacing="2" cellpadding="2">
-			<tr>
+                <div class='row'>
+                    <div class='col-xs-12'>
+                        	<a href="https://www.haendlerbund.de/" target="_blank"><img src="includes/haendlerbund/images/haendlerbund_logo.png" hspace="0" vspace="0" style="padding:10px" /></a>
+                                <a href="https://www.haendlerbund.de/" target="_blank"><img src="includes/haendlerbund/images/groesster-onlinehandelsverband-europas.png" style="padding:10px" /></a>
 				
-					<table border="0" width="<?php echo BOX_WIDTH; ?>" cellspacing="1" cellpadding="1" class="columnLeft">
-						<!-- left_navigation //-->
 						
-						<!-- left_navigation_eof //-->
-					</table>
-				</td>
-				<!-- body_text //-->
-				<td width="100%" valign="top">
-					<table border="0" width="100%" cellspacing="0" cellpadding="0">
-						<tr>
-							<td>
-								<table border="0" width="100%" cellspacing="0" cellpadding="0">
-									<tr>
-										<td width="237"><a href="https://www.haendlerbund.de/" target="_blank"><img src="includes/haendlerbund/images/haendlerbund_logo.png" hspace="0" vspace="0" style="padding:10px" /></a></td>
-										<td valign="bottom"><a href="https://www.haendlerbund.de/" target="_blank"><img src="includes/haendlerbund/images/groesster-onlinehandelsverband-europas.png" style="padding:10px" /></a></td>
-									</tr>
-								</table>
-							</td>
-						</tr>
-						<tr>
-							<td><div style="background-color:#387CB0; height:5px;"></div></td>
-						</tr>
-						<tr>
-							<td width="100%" valign="top">
+                    </div>
+                    <div class='col-xs-12'><div style="background-color:#387CB0; height:5px;"></div></div>
+                    <div class='col-xs-12'>
 								<br/>
 								<?PHP
 								$contentimporter = new haendlerbund_importer();
 								echo $contentimporter->process(0);
 								echo $contentimporter->getImportForm();
 								?>
-							</td>
-						</tr>
-					</table>
-				</td>
-				<!-- body_text_eof //-->
-			</tr>
-		</table>
+                    </div>
+                </div>          
 		<!-- body_eof //-->
 		<!-- footer //-->
 		<?php require(DIR_WS_INCLUDES . 'footer.php'); ?>

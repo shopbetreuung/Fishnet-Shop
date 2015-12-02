@@ -29,4 +29,6 @@ define('TEXT_INFO_HEADING_EDIT_XSELL_GROUP', 'Gruppenname bearbeiten');
 define('TEXT_INFO_HEADING_DELETE_XSELL_GROUP', 'Gruppenname l&ouml;schen');
 define('ERROR_STATUS_USED_IN_ORDERS', 'Fehler: Diese Gruppe wird zur Zeit noch bei Cross-Marketing Artikeln verwendet.');
 
+define('ERROR_TEXT_HEADING', 'Fehler! Cross-Marketing Gruppe konnte nicht gespeichert werden:');
+define('ERROR_TEXT_NAME', 'Gruppenname ung&uuml;ltig!');
 ?>

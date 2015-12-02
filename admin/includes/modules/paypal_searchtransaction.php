@@ -6,7 +6,7 @@
  * xt:Commerce - Shopsoftware
  * (c) 2003-2007 xt:Commerce (Winger/Zanier), http://www.xt-commerce.com
  *
- * xt:Commerce ist eine geschŸtzte Handelsmarke und wird vertreten durch die xt:Commerce GmbH (Austria)
+ * xt:Commerce ist eine geschÃ¼tzte Handelsmarke und wird vertreten durch die xt:Commerce GmbH (Austria)
  * xt:Commerce is a protected trademark and represented by the xt:Commerce GmbH (Austria)
  *
  * @copyright Copyright 2003-2007 xt:Commerce (Winger/Zanier), www.xt-commerce.com
@@ -22,8 +22,8 @@
  echo xtc_draw_form('transaction_search', FILENAME_PAYPAL, xtc_get_all_get_params(array('action')) . 'action=perform');
 ?>
 <div class="highlightbox">
-	<p class="pageHeading"><?php echo TEXT_PAYPAL_SEARCH_TRANSACTION; ?></p>
-	<table "width="100%"  border="0">
+	<p class="h3"><?php echo TEXT_PAYPAL_SEARCH_TRANSACTION; ?></p>
+	<table width="100%"  border="0">
 		<tr>
 			<td class="main" width="200" valign="top">Suchen nach:</td>
 			<td class="main"><input type="text" name="search_type" value=""></td>
@@ -100,23 +100,23 @@
 	<tr>
 		<td valign="top">
 			<div class="highlightbox">
-				<p class="pageHeading"><?php echo TEXT_PAYPAL_FOUND_TRANSACTION; ?></p>
+				<p class="h3"><?php echo TEXT_PAYPAL_FOUND_TRANSACTION; ?></p>
 				<?php
 				if(isset($paypal->SearchError['code'])) {
 					$messageStack->add($paypal->SearchError['longmessage'],'warning');
 					echo $messageStack->output();
 				}?>
-				<table border="0" width="100%" cellspacing="0" cellpadding="2">
+				<table class="table table-bordered">
 					<tr class="dataTableHeadingRow">
-						<td class="dataTableHeadingContent" width="10">&nbsp;</td>
-						<td class="dataTableHeadingContent"><?php echo TEXT_PAYPAL_PAYMENT_DATE; ?></td>
+						<td class="dataTableHeadingContent hidden-xs" width="10">&nbsp;</td>
+						<td class="dataTableHeadingContent hidden-xs"><?php echo TEXT_PAYPAL_PAYMENT_DATE; ?></td>
 						<td class="dataTableHeadingContent"><?php echo TABLE_HEADING_NAME; ?></td>
-						<td class="dataTableHeadingContent"><?php echo TABLE_HEADING_PAYPAL_ID; ?></td>
-						<td class="dataTableHeadingContent"><?php echo TABLE_HEADING_TXN_TYPE; ?></td>
+						<td class="dataTableHeadingContent hidden-xs"><?php echo TABLE_HEADING_PAYPAL_ID; ?></td>
+						<td class="dataTableHeadingContent hidden-xs"><?php echo TABLE_HEADING_TXN_TYPE; ?></td>
 						<td class="dataTableHeadingContent"><?php echo TABLE_HEADING_PAYMENT_STATUS; ?></td>
 						<td class="dataTableHeadingContent"><?php echo TABLE_HEADING_PAYMENT_AMOUNT; ?></td>
-						<td class="dataTableHeadingContent"><?php echo TEXT_PAYPAL_FEE; ?></td>
-						<td class="dataTableHeadingContent"><?php echo TEXT_PAYPAL_NETTO; ?></td>
+						<td class="dataTableHeadingContent hidden-xs"><?php echo TEXT_PAYPAL_FEE; ?></td>
+						<td class="dataTableHeadingContent hidden-xs"><?php echo TEXT_PAYPAL_NETTO; ?></td>
 						<td class="dataTableHeadingContent" align="right"><?php echo TABLE_HEADING_ACTION; ?>&nbsp;</td>
 					</tr>
 					<?php
@@ -125,15 +125,15 @@
 					} else {
 						foreach($response as $arr) { ?>
 							<tr>
-								<td class="dataTableContent" nowrap><?php echo $paypal->getStatusSymbol($arr['TYPE'],$arr['STATUS']); ?></td>
-								<td class="dataTableContent" nowrap><?php echo $arr['TIMESTAMP']; ?></td>
+								<td class="dataTableContent hidden-xs" nowrap><?php echo $paypal->getStatusSymbol($arr['TYPE'],$arr['STATUS']); ?></td>
+								<td class="dataTableContent hidden-xs" nowrap><?php echo $arr['TIMESTAMP']; ?></td>
 								<td class="dataTableContent" nowrap><?php echo $arr['NAME']; ?></td>
-								<td class="dataTableContent" nowrap><?php echo $arr['TXNID']; ?></td>
-								<td class="dataTableContent" nowrap><?php echo $arr['TYPE']; ?></td>
+								<td class="dataTableContent hidden-xs" nowrap><?php echo $arr['TXNID']; ?></td>
+								<td class="dataTableContent hidden-xs" nowrap><?php echo $arr['TYPE']; ?></td>
 								<td class="dataTableContent" nowrap><?php echo $arr['STATUS']; ?></td>
 								<td class="dataTableContent" nowrap><?php echo $arr['AMT']; ?></td>
-								<td class="dataTableContent" nowrap><?php echo $arr['FEEAMT']; ?></td>
-								<td class="dataTableContent" nowrap><?php echo $arr['NETAMT']; ?></td>
+								<td class="dataTableContent hidden-xs" nowrap><?php echo $arr['FEEAMT']; ?></td>
+								<td class="dataTableContent hidden-xs" nowrap><?php echo $arr['NETAMT']; ?></td>
 								<td class="dataTableContent" nowrap><?php echo '<a href="' . xtc_href_link(FILENAME_PAYPAL, 'view=detail&txn_id='.$arr['TXNID']) . '">' . xtc_image(DIR_WS_ICONS . 'page_find.gif', IMAGE_ICON_INFO) . '</a>'; ?></td>
 							</tr>
 					<?php } }?>

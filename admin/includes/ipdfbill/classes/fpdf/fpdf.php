@@ -642,6 +642,7 @@ function Cell($w, $h=0, $txt='', $border=0, $ln=0, $align='', $fill=false, $link
 		if(strpos($border,'B')!==false)
 			$s .= sprintf('%.2F %.2F m %.2F %.2F l S ',$x*$k,($this->h-($y+$h))*$k,($x+$w)*$k,($this->h-($y+$h))*$k);
 	}
+	$txt = iconv('utf-8', 'cp1252', $txt);
 	if($txt!=='')
 	{
 		if($align=='R')
@@ -1050,9 +1051,6 @@ function _dochecks()
 	// Check mbstring overloading
 	if(ini_get('mbstring.func_overload') & 2)
 		$this->Error('mbstring overloading must be disabled');
-	// Ensure runtime magic quotes are disabled
-	if(get_magic_quotes_runtime())
-		@set_magic_quotes_runtime(0);
 }
 
 function _checkoutput()

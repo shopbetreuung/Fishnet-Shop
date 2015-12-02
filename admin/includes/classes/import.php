@@ -279,18 +279,19 @@ class xtcImport {
 	 **
 	 ****************************************************************************/
 	function getMAN($manufacturer) {
+            
 		if ($manufacturer == '')
 			return;
 		if (isset ($this->mfn[$manufacturer]['id']))
 			return $this->mfn[$manufacturer]['id'];
 		// BOF - vr - 18.04.2010 escape manufacturer
 		// $man_query = xtc_db_query("SELECT manufacturers_id FROM ".TABLE_MANUFACTURERS." WHERE manufacturers_name = '".$manufacturer."'");
-		$man_query = xtc_db_query("SELECT manufacturers_id FROM ".TABLE_MANUFACTURERS." WHERE manufacturers_name = '". mysql_real_escape_string($manufacturer) ."'");
+		$man_query = xtc_db_query("SELECT manufacturers_id FROM ".TABLE_MANUFACTURERS." WHERE manufacturers_name = '". mysqli_real_escape_string(xtc_db_connect(), $manufacturer) ."'");
 		// EOF - vr - 18.04.2010 escape manufacturer
 		if (!xtc_db_num_rows($man_query)) {
 			$manufacturers_array = array ('manufacturers_name' => $manufacturer);
 			xtc_db_perform(TABLE_MANUFACTURERS, $manufacturers_array);
-			$this->mfn[$manufacturer]['id'] = mysql_insert_id();
+			$this->mfn[$manufacturer]['id'] = mysqli_insert_id(xtc_db_connect());
 		} else {
 			$man_data = xtc_db_fetch_array($man_query);
 			$this->mfn[$manufacturer]['id'] = $man_data['manufacturers_id'];
@@ -351,7 +352,7 @@ class xtcImport {
 		if ($mode == 'insert') {
 			$this->counter['prod_new']++;
 			xtc_db_perform(TABLE_PRODUCTS, $products_array);
-			$products_id = mysql_insert_id();
+			$products_id = mysqli_insert_id(xtc_db_connect());
 		} else {
 			$this->counter['prod_upd']++;
 			xtc_db_perform(TABLE_PRODUCTS, $products_array, 'update', 'products_model = \''.addslashes($dataArray['p_model']).'\'');
@@ -495,7 +496,7 @@ class xtcImport {
 						$categorie_data = array ('parent_id' => $parent, 'categories_status' => 1, 'date_added' => 'now()', 'last_modified' => 'now()');
 
 						xtc_db_perform(TABLE_CATEGORIES, $categorie_data);
-						$cat_id = mysql_insert_id();
+						$cat_id = mysqli_insert_id(xtc_db_connect());
 						$this->counter['cat_new']++;
 						$code = '$this->CatTree'.$parTree.'[\''.addslashes($cat[$i]).'\'][\'ID\']='.$cat_id.';';
 						eval ($code);

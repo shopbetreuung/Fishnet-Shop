@@ -59,12 +59,6 @@ if (file_exists(DIR_FS_CATALOG.'export/_error_reporting.all') || file_exists(DIR
   error_reporting(0);
 }
 
-/*
- * turn off magic-quotes support, for both runtime and sybase, as both will cause problems if enabled
- */
-if (version_compare(PHP_VERSION, 5.3, '<') && function_exists('set_magic_quotes_runtime')) set_magic_quotes_runtime(0);
-if (version_compare(PHP_VERSION, 5.4, '<') && @ini_get('magic_quotes_sybase') != 0) @ini_set('magic_quotes_sybase', 0);
-
 // include the list of project filenames
 require (DIR_WS_INCLUDES.'filenames.php');
 if (version_compare(PHP_VERSION, '5.1.0', '>=')) {
@@ -144,6 +138,7 @@ require_once (DIR_FS_INC.'xtc_draw_separator.inc.php');
 require_once (DIR_FS_INC.'xtc_draw_textarea_field.inc.php');
 require_once (DIR_FS_INC.'xtc_image_button.inc.php');
 
+require_once (DIR_FS_INC.'xtc_get_categories_children.inc.php');
 require_once (DIR_FS_INC.'xtc_not_null.inc.php');
 require_once (DIR_FS_INC.'xtc_update_whos_online.inc.php');
 require_once (DIR_FS_INC.'xtc_activate_banners.inc.php');
@@ -151,6 +146,7 @@ require_once (DIR_FS_INC.'xtc_expire_banners.inc.php');
 require_once (DIR_FS_INC.'xtc_expire_specials.inc.php');
 require_once (DIR_FS_INC.'xtc_parse_category_path.inc.php');
 require_once (DIR_FS_INC.'xtc_get_product_path.inc.php');
+require_once (DIR_FS_INC.'xtc_get_product_original_path.inc.php');
 require_once (DIR_FS_INC.'xtc_get_top_level_domain.inc.php');
 require_once (DIR_FS_INC.'xtc_get_category_path.inc.php');
 
@@ -179,7 +175,7 @@ require_once (DIR_FS_INC.'xtc_input_validation.inc.php');
 require_once (DIR_FS_INC.'xtc_js_lang.php');
 require_once (DIR_FS_INC.'html_encoding.php'); //new function for PHP5.4
 // make a connection to the database... now
-xtc_db_connect() or die('Unable to connect to database server!');
+$link = xtc_db_connect() or die('Unable to connect to database server!');
 
 // load configuration
 $configuration_query = xtc_db_query('select configuration_key as cfgKey, configuration_value as cfgValue from '.TABLE_CONFIGURATION);
@@ -231,9 +227,9 @@ $InputFilter = new InputFilter();
 $_GET = $InputFilter->process($_GET);
 $_POST = $InputFilter->process($_POST);
 $_REQUEST = $InputFilter->process($_REQUEST);
-$_GET = $InputFilter->safeSQL($_GET);
-$_POST = $InputFilter->safeSQL($_POST);
-$_REQUEST = $InputFilter->safeSQL($_REQUEST);
+$_GET = $InputFilter->safeSQL($_GET, $link);
+$_POST = $InputFilter->safeSQL($_POST, $link);
+$_REQUEST = $InputFilter->safeSQL($_REQUEST, $link);
 
 
 // set the top level domains

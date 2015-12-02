@@ -43,4 +43,8 @@ define('TEXT_OPTION_NAME', 'Optionsname');
 define('TABLE_HEADING_SORTORDER', 'Sortierung');
 define('TEXT_SORTORDER', 'Sortierung');
 // EOF - Tomcraft - 2009-11-07 - Added sortorder to products_options
+
+define('ERROR_TEXT_HEADING', 'Fehler! Artikelmerkmal konnte nicht gespeichert werden:');
+define('ERROR_TEXT_NAME', 'Artikelmerkmal ung&uuml;ltig!');
+define('ERROR_TEXT_OPTION_VALUE', 'Optionswert ung&uuml;ltig!');
 ?>

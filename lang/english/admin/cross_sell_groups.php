@@ -29,4 +29,6 @@ define('TEXT_INFO_HEADING_EDIT_XSELL_GROUP', 'Edit gruppenname');
 define('TEXT_INFO_HEADING_DELETE_XSELL_GROUP', 'Delete gruppenname');
 define('ERROR_STATUS_USED_IN_ORDERS', 'Error: This group is currently used in cross-sell articles.');
 
+define('ERROR_TEXT_HEADING', 'Cross sell group not saved, fix errors:');
+define('ERROR_TEXT_NAME', 'Name invalid!');
 ?>

@@ -21,6 +21,7 @@ define('TABLE_HEADING_COUNTRY_NAME', 'Country');
 define('TABLE_HEADING_COUNTRY_CODES', 'ISO Codes');
 define('TABLE_HEADING_ACTION', 'Action');
 define('TABLE_HEADING_STATUS', 'Status');
+define('TABLE_HEADING_TOP', 'Top');
 
 define('TEXT_INFO_EDIT_INTRO', 'Please make any necessary changes');
 define('TEXT_INFO_COUNTRY_NAME', 'Name:');
@@ -32,4 +33,11 @@ define('TEXT_INFO_DELETE_INTRO', 'Are you sure you want to delete this country?'
 define('TEXT_INFO_HEADING_NEW_COUNTRY', 'New Country');
 define('TEXT_INFO_HEADING_EDIT_COUNTRY', 'Edit Country');
 define('TEXT_INFO_HEADING_DELETE_COUNTRY', 'Delete Country');
+
+define('ERROR_TEXT_HEADING', 'Country not saved, fix errors:');
+define('ERROR_TEXT_NAME', 'Name invalid!');
+define('ERROR_TEXT_ISO2', 'ISO(2) code invalid!');
+define('ERROR_TEXT_ISO3', 'ISO(3) code invalid!');
+define('ERROR_TEXT_LENGTH_ISO2', 'ISO(2) code lenghth must be 2 characters!');
+define('ERROR_TEXT_LENGTH_ISO3', 'ISO(3) code lenghth must be 3 characters!');
 ?>

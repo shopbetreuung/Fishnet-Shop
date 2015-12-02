@@ -73,12 +73,12 @@ class amoneybookers {
 		if ($this->enabled) {
 
 			$result = xtc_db_query("SELECT mb_currID FROM payment_AMONEYBOOKERS_currencies");
-			while (list ($currID) = mysql_fetch_row($result)) {
+			while (list ($currID) = mysqli_fetch_row($result)) {
 				$this->mbCurrencies[] = $currID;
 			}
 
 			$result = xtc_db_query("SELECT code FROM currencies");
-			while (list ($currID) = mysql_fetch_row($result)) {
+			while (list ($currID) = mysqli_fetch_row($result)) {
 				$this->aCurrencies[] = $currID;
 			}
 
@@ -209,7 +209,7 @@ class amoneybookers {
 		global $order, $xtPrice,$insert_id;
 
 		$result = xtc_db_query("SELECT code FROM languages WHERE languages_id = '" . $_SESSION['languages_id'] . "'");
-		list ($lang_code) = mysql_fetch_row($result);
+		list ($lang_code) = mysqli_fetch_row($result);
 		$mbLanguage = strtoupper($lang_code);
 		if ($mbLanguage == "US") {
 			$mbLanguage = "EN";
@@ -224,7 +224,7 @@ class amoneybookers {
 		}
 
 		$result = xtc_db_query("SELECT mb_cID FROM payment_AMONEYBOOKERS_countries, countries WHERE (xtc_cID = countries_id) AND (countries_id = '{$order->billing['country']['id']}')");
-		list ($mbCountry) = mysql_fetch_row($result);
+		list ($mbCountry) = mysqli_fetch_row($result);
 
 		$this->transaction_id = $this->generate_trid();
 		$result = xtc_db_query("INSERT INTO payment_moneybookers (mb_TRID, mb_DATE) VALUES ('{$this->transaction_id}', NOW())");
@@ -273,7 +273,7 @@ class amoneybookers {
 		
 		$data = '';
         foreach ($params as $key => $value) {          
-          //$value = strtr($value, "áéíóöõúüûÁÉÍÓÖÕÚÜÛ", "aeiooouuuAEIOOOUUU"); //web28 -2011-05-24 - Fix special characters          
+          //$value = strtr($value, "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½", "aeiooouuuAEIOOOUUU"); //web28 -2011-05-24 - Fix special characters          
           if ($key!='status_url') {
             $value=urlencode(utf8_encode($value)); //web28 -2011-05-24 - Fix special characters
           }
@@ -590,12 +590,12 @@ class amoneybookers {
 		xtc_db_query("INSERT INTO payment_AMONEYBOOKERS_currencies VALUES ('ZAR', 'South-African Rand')");
 
 		$result = xtc_db_query("SELECT mb_currID FROM payment_AMONEYBOOKERS_currencies");
-			while (list ($currID) = mysql_fetch_row($result)) {
+			while (list ($currID) = mysqli_fetch_row($result)) {
 				$this->mbCurrencies[] = $currID;
 			}
 
 			$result = xtc_db_query("SELECT code FROM currencies");
-			while (list ($currID) = mysql_fetch_row($result)) {
+			while (list ($currID) = mysqli_fetch_row($result)) {
 				$this->aCurrencies[] = $currID;
 			}
 			
@@ -608,13 +608,13 @@ class amoneybookers {
 			}
 			
 			$mb_installed = false;
-			//BOF - Hetfield - 2010-01-28 - replace mysql_list_tables with query SHOW TABLES -> PHP5.3 deprecated
-			//$tables = mysql_list_tables(DB_DATABASE);
+			//BOF - Hetfield - 2010-01-28 - replace mysqli_list_tables with query SHOW TABLES -> PHP5.3 deprecated
+			//$tables = mysqli_list_tables(DB_DATABASE);
 			$tables = xtc_db_query("SHOW TABLES LIKE 'payment_moneybookers'");			
-			while ($checktables = mysql_fetch_array($tables, MYSQL_NUM)) {
+			while ($checktables = mysqli_fetch_array($tables, MYSQLI_NUM)) {
 				if ($checktables[0] == 'payment_moneybookers')  $mb_installed=true;
 			}
-			//EOF - Hetfield - 2010-01-28 - replace mysql_list_tables with query SHOW TABLES -> PHP5.3 deprecated
+			//EOF - Hetfield - 2010-01-28 - replace mysqli_list_tables with query SHOW TABLES -> PHP5.3 deprecated
 
 		if ($mb_installed==false) {
 		xtc_db_query("CREATE TABLE payment_moneybookers (mb_TRID varchar(255) NOT NULL default '',mb_ERRNO smallint(3) unsigned NOT NULL default '0',mb_ERRTXT varchar(255) NOT NULL default '',mb_DATE datetime NOT NULL default '0000-00-00 00:00:00',mb_MBTID bigint(18) unsigned NOT NULL default '0',mb_STATUS tinyint(1) NOT NULL default '0',mb_ORDERID int(11) unsigned NOT NULL default '0',PRIMARY KEY  (mb_TRID))");
@@ -694,7 +694,7 @@ class amoneybookers {
 			$trid = xtc_create_random_value(16, "digits");
 			$trid = 'XTC' . $trid;
 			$result = xtc_db_query("SELECT mb_TRID FROM payment_moneybookers WHERE mb_TRID = '".$trid."'");
-		} while (mysql_num_rows($result));
+		} while (mysqli_num_rows($result));
 
 		return $trid;
 

@@ -632,7 +632,7 @@ class KlarnaUtils
     private function _handleResponse($option, $result, $country)
     {
         global $order, $customer_id, $sendto, $billto;
-
+        $link_db = xtc_db_connect();
         switch ($option) {
         case KiTT::PART:
             $module = "MODULE_PAYMENT_KLARNA_PARTPAYMENT";
@@ -677,17 +677,17 @@ class KlarnaUtils
         $q = "SELECT address_book_id FROM " . TABLE_ADDRESS_BOOK .
             " WHERE customers_id = '" . (int)$customer_id .
             "' AND entry_firstname = '" .
-            mysql_real_escape_string($order->delivery['firstname']) .
+            mysqli_real_escape_string($link_db, $order->delivery['firstname']) .
             "' AND entry_lastname = '" .
-            mysql_real_escape_string($order->delivery['lastname']) .
+            mysqli_real_escape_string($link_db, $order->delivery['lastname']) .
             "' AND entry_street_address = '" .
-            mysql_real_escape_string($order->delivery['street_address']) .
+            mysqli_real_escape_string($link_db, $order->delivery['street_address']) .
             "' AND entry_postcode = '" .
-            mysql_real_escape_string($order->delivery['postcode']) .
+            mysqli_real_escape_string($link_db, $order->delivery['postcode']) .
             "' AND entry_city = '" .
-            mysql_real_escape_string($order->delivery['city']) .
+            mysqli_real_escape_string($link_db, $order->delivery['city']) .
             "' AND entry_company = '" .
-            mysql_real_escape_string($order->delivery['company']) . "'";
+            mysqli_real_escape_string($link_db, $order->delivery['company']) . "'";
         $check_address_query = $this->_klarnaDB->query($q);
         $check_address = $check_address_query->getArray();
 
@@ -1467,8 +1467,8 @@ class KlarnaUtils
     {
         global $insert_id;
 
-        $orderid = mysql_real_escape_string($insert_id);
-        $refno = mysql_real_escape_string($_SESSION['klarna_refno']);
+        $orderid = mysqli_real_escape_string(xtc_db_connect(), $insert_id);
+        $refno = mysqli_real_escape_string(xtc_db_connect(), $_SESSION['klarna_refno']);
 
         $sql_data_arr = array(
             'orders_id' => $orderid,

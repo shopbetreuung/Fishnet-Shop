@@ -544,3 +544,7 @@ body { padding-top: 120px; }
 	max-width: 100%;
 	margin: 5px 0;
 }
+
+.meta > input{
+	width: 100% !important;
+}

@@ -171,15 +171,16 @@ class HelperFunctions {
 	
 	
 	/**
-	 * escapes the given string via mysql_real_esacpe_string (if function exists & a db-connection is available) or mysql_escape_string
+	 * escapes the given string via mysqlX_real_esacpe_string (if function exists & a db-connection is available) or mysqlX_escape_string
 	 * @param string $string
 	 * @return string $string
 	 */
 	function escapeSql($string) {
-		if (function_exists('mysql_real_escape_string') && mysql_ping()) {
-			return mysql_real_escape_string($string);
+            $connection = xtc_db_connect();
+		if (function_exists('mysqli_real_escape_string') && mysqli_ping($connection)) {
+			return mysqli_real_escape_string($connection, $string);
 		} else {
-			return mysql_escape_string($string);
+			return mysqli_real_escape_string($connection, $string);
 		}
 	}
 	

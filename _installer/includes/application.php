@@ -21,19 +21,6 @@
   
   // Set the level of error reporting
   error_reporting(E_ALL & ~E_NOTICE  & ~E_DEPRECATED);
-  
-  if (INSTALL_CHARSET == 'utf8') {
-    $charset = 'utf-8';
-    $character_set = 'utf8';
-    $collation = 'utf8_general_ci';
-  } else {
-    $charset = 'iso-8859-15';
-    $character_set = 'latin1';
-    $collation = 'latin1_german1_ci'; 
-  }
-  if (!defined('DB_SERVER_CHARSET')) {
-     define('DB_SERVER_CHARSET',$character_set);
-  }
 
   if (version_compare(PHP_VERSION, '5.1.0', '>=')) {
     date_default_timezone_set('Europe/Berlin');
@@ -70,6 +57,8 @@
   define('BOX_BGCOLOR_CONTENTS', '#f8f8f9');
   define('BOX_SHADOW', '#b6b7cb');
 
+  require_once(DIR_FS_CATALOG.'includes/functions/sessions.php');
+
   // include General functions
   require_once(DIR_FS_INC.'xtc_set_time_limit.inc.php');
   require_once(DIR_FS_INC.'xtc_check_agent.inc.php');
@@ -98,6 +87,9 @@
   require_once(DIR_FS_INC.'xtc_draw_box_heading.inc.php');
   require_once(DIR_FS_INC.'xtc_draw_box_contents.inc.php');
   require_once(DIR_FS_INC.'xtc_draw_box_content_bullet.inc.php');
+
+  require_once(DIR_FS_INC . 'xtc_db_query.inc.php');
+  require_once(DIR_FS_INC . 'xtc_db_fetch_array.inc.php');
 
   // include check functions
   require_once(DIR_FS_INC .'xtc_gdlib_check.inc.php');

@@ -174,8 +174,8 @@ class newsletter {
 		// dont allow cache
 		$smarty->caching = false;
 
-		$html_mail = $smarty->fetch(CURRENT_TEMPLATE.'/mail/'.$_SESSION['language'].'/newsletter_mail.html');
-		$txt_mail = $smarty->fetch(CURRENT_TEMPLATE.'/mail/'.$_SESSION['language'].'/newsletter_mail.txt');
+		$html_mail = $smarty->fetch('db:newsletter_mail.html');
+		$txt_mail = $smarty->fetch('db:newsletter_mail.txt');
 		
 		$email_subject = $mailer->subject;
 

@@ -26,49 +26,26 @@ require (DIR_WS_INCLUDES.'head.php');
     <?php require(DIR_WS_INCLUDES . 'header.php'); ?>
     <!-- header_eof //-->
     <!-- body //-->
-    <table border="0" width="100%" cellspacing="2" cellpadding="2">
-      <tr>
+       <div class="row">
         
-          <table border="0" width="<?php echo BOX_WIDTH; ?>" cellspacing="1" cellpadding="1" class="columnLeft">
-            <!-- left_navigation //-->
-            
-            <!-- left_navigation_eof //-->
-          </table>
-        </td>
-        <!-- body_text //-->
-        <td class="boxCenter" width="100%" valign="top">
-          <table border="0" width="100%" cellspacing="0" cellpadding="2">
-            <tr>
-              <td width="100%">
-                <table border="0" width="100%" cellspacing="0" cellpadding="0">
-                  <tr>
-                    <td width="80" rowspan="2"><?php echo xtc_image(DIR_WS_ICONS.'heading_modules.gif'); ?></td>
-                    <td class="pageHeading">janolaw</td>
-                  </tr>
-                  <tr>
-                    <td class="main" valign="top">Modules</td>
-                  </tr>
-                </table>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <table border="0" width="100%" cellspacing="0" cellpadding="0">
-                  <tr>
-                    <td width="250" valign="middle" class="dataTableHeadingContent">
+    <div class='col-xs-12'>
+        <div class="col-xs-3 col-sm-1 text-right"><?php echo xtc_image(DIR_WS_ICONS.'heading_modules.gif'); ?></div>
+        <div class="col-xs-9 col-sm-11"><p class="h2">janolaw</p> Modules</div>
+    </div>
+    <div class='col-xs-12'><br></div>
+    <div class='col-sm-3 col-xs-12 dataTableHeadingContent left_mobile'>
                       AGB Hosting-Service                        
-                    </td>
-                    <td valign="middle" class="dataTableHeadingContent"  style="border-right: 0px;">
+    </div>
+    <div class='col-sm-9 col-xs-12 dataTableHeadingContent left_mobile'>
                       <a href="<?php echo xtc_href_link('module_export.php', 'set=&module=janolaw'); ?>"><u>Einstellungen</u></a>  
-                    </td>
-                  </tr>
-                </table>
-                <table style="border: 1px solid #dddddd" border="0" cellpadding="0" cellspacing="0" width="100%">
-                  <tr style="background-color: #FFFFFF;">
-                    <td style="font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 12px; padding: 0px 10px 11px 10px; text-align: justify">
+    </div>
+        <!-- body_text //-->
+    <div style="background-color: #FFFFFF; border: 1px solid #dddddd; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 12px; padding: 0px 10px 11px 10px; text-align: justify" class='col-xs-12'>
+        
+        <div class='col-xs-12'>
                       <br />
                       <font color="#0099cc"><strong>Sch&uuml;tzen Sie Ihren Shop vor Abmahnungen - dauerhaft, effektiv, automatisch</strong></font><br />
-                      <img src="images/janolaw/janolaw_header_1000x120s.png" />
+                      <img class='img-responsive' src="images/janolaw/janolaw_header_1000x120s.png" />
                       <br />
                       <br />
                       <img src="images/janolaw/agb_hosting_service_trans.png" align="right" />
@@ -96,7 +73,8 @@ require (DIR_WS_INCLUDES.'head.php');
                       <br />
                       Der AGB Hosting-Service von janolaw wird wahlweise f&uuml;r den Verkauf von klassischer Versandware oder Downloadprodukten angeboten.
                       <br /><br />
-                      <img src="images/janolaw/ehi_120x120.png" align="right" width="100px" height="100px" style="position:relative; left:-200px" />
+                      <div class='col-xs-12'>
+                      <div class='col-xs-12 col-sm-9'>
                       <font color="#0099cc">
                       <ul>
                         <li style="list-style-type: circle !important;"><strong>Anwaltlich gepr&uuml;fte Dokumente f&uuml;r Ihren Shop</strong></li>
@@ -107,20 +85,17 @@ require (DIR_WS_INCLUDES.'head.php');
                         <li style="list-style-type: circle !important;"><strong>Dauerhaft 10% Rabatt auf alle Dokumente und Services von janolaw</strong></li>
                       </ul>
                       </font>
+                      </div>
+                          <div class='col-xs-12 col-sm-3'><img src="images/janolaw/ehi_120x120.png"  width="100px" height="100px" style="position:relative; " /></div>
+                      </div>
                       <p align="left">
                         <br />
                         <a href="http://www.janolaw.de/internetrecht/agb/agb-hosting-service/modified/index.html?#menu" target="_blank"><font size="3" color="#893769"><u><strong>Jetzt buchen und Online-Shop dauerhaft rechtssicher gestalten</strong></u></font></a> 
                       </p>
-                    </td>
-                  </tr>
-                </table>
-              </td>
-            </tr>
-          </table>
-        </td>
-        <!-- body_text_eof //-->
-      </tr>
-    </table>
+        </div>
+    </div>
+
+    </div>
     <!-- body_eof //-->
     <!-- footer //-->
     <?php require(DIR_WS_INCLUDES . 'footer.php'); ?>

@@ -53,8 +53,8 @@ if (isset ($_GET['action']) && ($_GET['action'] == 'first_opt_in') && $_POST) {
   $smarty->caching = false;
 
   // create mails
-  $html_mail = $smarty->fetch(CURRENT_TEMPLATE.'/mail/'.$_SESSION['language'].'/password_verification_mail.html');
-  $txt_mail = $smarty->fetch(CURRENT_TEMPLATE.'/mail/'.$_SESSION['language'].'/password_verification_mail.txt');
+  $html_mail = $smarty->fetch('db:password_verification_mail.html');
+  $txt_mail = $smarty->fetch('db:password_verification_mail.txt');
 
     if (!xtc_db_num_rows($check_customer_query)) {
       $case = 'wrong_mail';
@@ -91,8 +91,8 @@ if (isset ($_GET['action']) && ($_GET['action'] == 'verified')) {
     // dont allow cache
     $smarty->caching = false;
     // create mails
-    $html_mail = $smarty->fetch(CURRENT_TEMPLATE.'/mail/'.$_SESSION['language'].'/new_password_mail.html');
-    $txt_mail = $smarty->fetch(CURRENT_TEMPLATE.'/mail/'.$_SESSION['language'].'/new_password_mail.txt');
+    $html_mail = $smarty->fetch('db:new_password_mail.html');
+    $txt_mail = $smarty->fetch('db:new_password_mail.txt');
 
     xtc_php_mail(EMAIL_SUPPORT_ADDRESS, EMAIL_SUPPORT_NAME, $check_customer['customers_email_address'], '', '', EMAIL_SUPPORT_REPLY_ADDRESS, EMAIL_SUPPORT_REPLY_ADDRESS_NAME, '', '', TEXT_EMAIL_PASSWORD_NEW_PASSWORD, $html_mail, $txt_mail);
     if (!isset ($mail_error)) {

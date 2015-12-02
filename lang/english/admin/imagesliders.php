@@ -50,4 +50,15 @@ define('IMAGE_ICON_STATUS_GREEN', 'Active');
 define('IMAGE_ICON_STATUS_GREEN_LIGHT', 'Activate');
 define('IMAGE_ICON_STATUS_RED', 'Not active');
 define('IMAGE_ICON_STATUS_RED_LIGHT', 'Deactivate');
+
+define('TYP_PRODUCT', 'Link to article (please only the article_id at link register)');
+define('TYP_CATEGORIE', 'Link to the category (please only the catID at link register)');
+define('TYP_CONTENT', 'Link to website (please only the ID register with the link address)');
+define('TYP_INTERN', 'Internal Shoplink (account.php or newsletter.php example)');
+define('TYP_EXTERN', 'External link (for example, http://www.externerlink.com)');
+define('TEXT_TYP', 'Link type:');
+define('TEXT_URL', 'Link address:');
+
+define('ERROR_TEXT_HEADING', 'Slide not saved, fix errors:');
+define('ERROR_TEXT_NAME', 'Name for image entry invalid!');
 ?>

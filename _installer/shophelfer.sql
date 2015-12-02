@@ -28,7 +28,7 @@
 #   the mysqldiff perl script located in the extras
 #   directory of the 'catalog' module.
 #   * Comments should be like these, full line comments.
-#   (don`t use inline comments)
+#   (dont use inline comments)
 #  --------------------------------------------------------------
 
 
@@ -125,9 +125,52 @@ CREATE TABLE database_version (
   version VARCHAR(32) NOT NULL
 ) ENGINE=MyISAM;
 
-# Tomcraft - 2009-11-02 - set global customers-group-permissions (customers_group)
-# web28 - 2010-07-07 - set shop_offline parameter
-# Web28 - 2010-11-13 - add missing listproducts
+DROP TABLE IF EXISTS email_manager;
+CREATE TABLE email_manager (
+  em_id int(11) NOT NULL AUTO_INCREMENT,
+  em_name varchar(255) DEFAULT NULL,
+  em_language int(11) DEFAULT NULL,
+  em_body text,
+  em_delete tinyint(1) NOT NULL DEFAULT 0,
+  em_type varchar(255) DEFAULT NULL,
+  em_body_txt text,
+  PRIMARY KEY (em_id)
+) ENGINE=MyISAM;
+
+INSERT INTO email_manager (em_id, em_name, em_language, em_body, em_delete, em_type, em_body_txt) VALUES
+(1,	'change_order_mail',	2,	'<table width=\"100%\" cellspacing=\"0\" cellpadding=\"4\" border=\"0\" align=\"center\">\r\n    <tbody>\r\n        <tr>\r\n            <td style=\"border-bottom: 1px solid; border-color: #cccccc;\">\r\n            <div align=\"right\"><img src=\"{$logo_path}logo.gif\" alt=\"\" /></div>\r\n            </td>\r\n        </tr>\r\n        <tr>\r\n            <td><font size=\"2\" face=\"Verdana, Arial, Helvetica, sans-serif\"><strong>Sehr geehrter Kunde, </strong><br />\r\n            <br />\r\n            Der Status Ihrer Bestellung {if $ORDER_NR}Nr. {$ORDER_NR}{/if} {if $ORDER_DATE}vom       {$ORDER_DATE}{/if} wurde ge&auml;ndert.<br />\r\n            <br />\r\n            {if $ORDER_LINK}Link zur Bestellung:       <a href=\"{$ORDER_LINK}\">hier klicken</a>{/if}<br />\r\n            <br />\r\n            {if $NOTIFY_COMMENTS}<br />\r\n            Anmerkungen und Kommentare zu Ihrer Bestellung:  {$NOTIFY_COMMENTS} <br />\r\n            {/if} <br />\r\n            Neuer Status:  <b>{$ORDER_STATUS}</b><br />\r\n            <br />\r\n            Bei Fragen zu Ihrer Bestellung antworten Sie bitte auf diese E-Mail. <br />\r\n            </font></td>\r\n        </tr>\r\n    </tbody>\r\n</table>',	0,	'mail',	'Sehr geehrter Kunde,\r\n\r\nDer Status Ihrer Bestellung {if $ORDER_NR}Nr. {$ORDER_NR}{/if} {if $ORDER_DATE}vom {$ORDER_DATE}{/if} wurde ge√§ndert.\r\n\r\n{if $ORDER_LINK}Link zur Bestellung:\r\n{$ORDER_LINK} {/if}\r\n\r\n{if $NOTIFY_COMMENTS}Anmerkungen und Kommentare zu Ihrer Bestellung:{$NOTIFY_COMMENTS}{/if}\r\n\r\nNeuer Status: {$ORDER_STATUS}\r\n\r\nBei Fragen zu Ihrer Bestellung antworten Sie bitte auf diese E-Mail.'),
+(2,	'change_order_mail',	1,	'<table  width=\"100%\" border=\"0\" align=\"center\" cellpadding=\"4\" cellspacing=\"0\">\r\n  <tr> \r\n    <td style=\"border-bottom: 1px solid; border-color: #cccccc;\"><div align=\"right\"><img src=\"{$logo_path}logo.gif\"></div></td>\r\n  </tr>\r\n  <tr> \r\n    <td><font size=\"2\" face=\"Verdana, Arial, Helvetica, sans-serif\"><strong>Dear customer, </strong><br />\r\n      <br />\r\n      The status of your order {if $ORDER_NR}No. {$ORDER_NR}{/if} {if $ORDER_DATE}from {$ORDER_DATE}{/if} has been changed.<br /><br /> \r\n      {if $ORDER_LINK}Link to order:\r\n      <a href=\"{$ORDER_LINK}\">click here</a>{/if}<br />\r\n      <br /> \r\n	  {if $NOTIFY_COMMENTS}<br />\r\nNote: \r\n{$NOTIFY_COMMENTS}\r\n<br />\r\n{/if}\r\n<br />\r\nNew status: \r\n<b>{$ORDER_STATUS}</b><br />\r\n<br />\r\nIf you have any questions, please reply to this e-mail. <br /></font></td>\r\n  </tr>\r\n</table>',	0,	'mail',	'Dear customer,\r\n\r\nThe status of your order {if $ORDER_NR}No. {$ORDER_NR}{/if} {if $ORDER_DATE}from {$ORDER_DATE}{/if} has been changed.\r\n\r\n{if $ORDER_LINK}Link to order:\r\n{$ORDER_LINK} {/if}\r\n\r\n{if $NOTIFY_COMMENTS}Note:{$NOTIFY_COMMENTS}{/if}\r\n\r\nNew status: {$ORDER_STATUS}\r\n\r\nIf you have any questions, please reply to this e-mail.'),
+(3,	'change_password_mail',	1,	'<table  width=\"100%\" border=\"0\" align=\"center\" cellpadding=\"4\" cellspacing=\"0\">\r\n  <tr> \r\n    <td style=\"border-bottom: 1px solid; border-color: #cccccc;\"><div align=\"right\"><img src=\"{$logo_path}logo.gif\"></div></td>\r\n  </tr>\r\n  <tr> \r\n    <td><p><font size=\"2\" face=\"Verdana, Arial, Helvetica, sans-serif\"><strong>Dear Customer,</strong></font> </p>\r\n      <p><font size=\"2\" face=\"Verdana, Arial, Helvetica, sans-serif\">Your password was successfully changed.<br />\r\n        <br />\r\n  Your new login data:</font>\r\n      </p>      \r\n      <table width=\"100%\"  border=\"0\" bgcolor=\"f1f1f1\">\r\n    <tr>\r\n      <td> <font size=\"1\" face=\"Verdana, Arial, Helvetica, sans-serif\"><strong>Your e-mail-address:</strong> {$EMAIL}\r\n            <br />\r\n            <strong>Your new password:</strong> {$PASSWORD}\r\n        </font> </td>\r\n    </tr>\r\n  </table></td>\r\n  </tr>\r\n</table>\r\n\r\n 	  	 \r\n',	0,	'mail',	'Dear Customer,\r\n\r\nYour password was successfully changed.\r\n\r\nYour new login data:\r\n      \r\nYour e-mail-address: {$EMAIL}\r\nYour new password: {$PASSWORD}\r\n'),
+(4,	'change_password_mail',	2,	'<table  width=\"100%\" border=\"0\" align=\"center\" cellpadding=\"4\" cellspacing=\"0\">\r\n  <tr> \r\n    <td style=\"border-bottom: 1px solid; border-color: #cccccc;\"><div align=\"right\"><img src=\"{$logo_path}logo.gif\"></div></td>\r\n  </tr>\r\n  <tr> \r\n    <td><p><font size=\"2\" face=\"Verdana, Arial, Helvetica, sans-serif\"><strong>Sehr geehrter Kunde,</strong></font> </p>\r\n      <p><font size=\"2\" face=\"Verdana, Arial, Helvetica, sans-serif\">Ihr Passwort wurde erfolgreich ge&auml;ndert.<br />\r\n        <br />\r\n  Ihre neuen Logindaten:</font>\r\n      </p>      \r\n      <table width=\"100%\"  border=\"0\" bgcolor=\"f1f1f1\">\r\n    <tr>\r\n      <td> <font size=\"1\" face=\"Verdana, Arial, Helvetica, sans-serif\"><strong>Ihre E-Mail-Adresse:</strong> {$EMAIL}\r\n            <br />\r\n            <strong>Ihr neues Passwort:</strong> {$PASSWORD}\r\n        </font> </td>\r\n    </tr>\r\n  </table></td>\r\n  </tr>\r\n</table>',	0,	'mail',	'Sehr geehrter Kunde,\r\n\r\nIhr Passwort wurde erfolgreich ge√§ndert.\r\n\r\nIhre neuen Logindaten:\r\n      \r\nIhre E-Mail-Adresse: {$EMAIL}\r\nIhr neues Passwort: {$PASSWORD}'),
+(5,	'create_account_mail',	1,	'<table  width=\"100%\" border=\"0\" align=\"center\" cellpadding=\"4\" cellspacing=\"0\">\r\n  <tr> \r\n    <td style=\"border-bottom: 1px solid; border-color: #cccccc;\"><div align=\"right\"><img src=\"{$logo_path}logo.gif\"></div></td>\r\n  </tr>\r\n  <tr> \r\n    <td><p><font size=\"2\" face=\"Verdana, Arial, Helvetica, sans-serif\"><strong>Your account has been successfully created!</strong></font> <br />\r\n        <br />\r\n        <font size=\"2\" face=\"Verdana, Arial, Helvetica, sans-serif\">You now have access to the following features:</font><br /> \r\n        <br />\r\n        <font size=\"2\"><b><font face=\"Verdana, Arial, Helvetica, sans-serif\">-Shopping cart</font></b><font face=\"Verdana, Arial, Helvetica, sans-serif\"> - Products placed in the shopping cart will remain there until they\'ve been deleted or purchased.<br />\r\n        <b>-Address book</b> - The address book allows you to save several different shipping destinations.<br />\r\n        <b>-Order history</b> - Your order history is always available for you.<br />\r\n        <b>-Product evaluation</b> - Rate and comment our products!</font></font></p>\r\n      <p>\r\n        <font size=\"2\" face=\"Verdana, Arial, Helvetica, sans-serif\">If this account wasn\'t created by you, please contact us at \r\n        <A HREF=\"mailto:{$content.MAIL_REPLY_ADDRESS}\">{$content.MAIL_REPLY_ADDRESS}</A>\r\n        . <br />\r\n    <br />\r\n    {if $SEND_GIFT==true}\r\n      <br />\r\nAs a thank you for creating your account, you\'ve received a <b>{$GIFT_AMMOUNT}</b> gift voucher!<br />\r\n<br />\r\nRedeem your voucher with the following code <b>{$GIFT_CODE}</b> when placing an order or simply by clicking the following link <a href=\"{$GIFT_LINK}\">[redeem Voucher]</a>.{/if} {if $SEND_COUPON==true} As a thank you for creating your account, you\'ve recieved a discount voucher!<br />\r\nThe voucher details are:<br />\r\n<b>{$COUPON_DESC}</b> <br />\r\nRedeem your voucher by entering the code <b>{$COUPON_CODE}</b> during checkout process, when asked for it.{/if} \r\n<br />If you have any questions, please contact us at <A HREF=\"mailto:{$content.MAIL_REPLY_ADDRESS}\">{$content.MAIL_REPLY_ADDRESS}</A> !\r\n</font></p></td>\r\n  </tr>\r\n</table>',	0,	'mail',	'Your account has been successfully created!\r\n\r\nYou now have access to the following features:\r\n\r\n  SHOPPING CART - Products placed in the shopping cart will remain there until they\'ve been deleted or purchased.\r\n  ADDRESS BOOK - The address book allows you to save several different shipping destinations.\r\n  ORDER HISTORY - Your order history is always available for you.\r\n  PRODUCT EVALUATION - Rate and comment our products!\r\n\r\nIf this account wasn\'t created by you, please contact us at {$content.MAIL_REPLY_ADDRESS}.\r\n\r\n{if $SEND_GIFT==true}\r\nAs a thank you for creating your account, you\'ve received a {$GIFT_AMMOUNT} gift voucher! \r\nRedeem your voucher with the following code - {$GIFT_CODE} - when placing an order or simply by clicking the following link [redeem Voucher].{/if}{if $SEND_COUPON==true}\r\nAs a thank you for creating your account, you\'ve recieved a discount voucher!\r\nThe voucher details are:\r\n{$COUPON_DESC}\r\nRedeem your voucher by entering the code {$COUPON_CODE} during checkout process, when asked for it.{/if} \r\n\r\nIf you have any questions, please contact us at {$content.MAIL_REPLY_ADDRESS}!'),
+(6,	'create_account_mail',	2,	'<table  width=\"100%\" border=\"0\" align=\"center\" cellpadding=\"4\" cellspacing=\"0\">\r\n  <tr> \r\n    <td style=\"border-bottom: 1px solid; border-color: #cccccc;\"><div align=\"right\"><img src=\"{$logo_path}logo.gif\"></div></td>\r\n  </tr>\r\n  <tr> \r\n    <td><font size=\"2\" face=\"Verdana, Arial, Helvetica, sans-serif\"><strong>Sehr geehrter Kunde,</strong></font> <br />\r\n      <br />\r\n      <font size=\"2\" face=\"Verdana, Arial, Helvetica, sans-serif\">Sie haben soeben Ihr Kundenkonto erfolgreich erstellt, als registrierter Kunde haben sie folgende Vorteile in unserem Shop.</font><br /> \r\n      <br />\r\n      <font size=\"2\"><b><font face=\"Verdana, Arial, Helvetica, sans-serif\">-Kundenwarenkorb</font></b><font face=\"Verdana, Arial, Helvetica, sans-serif\"> - Jeder Artikel bleibt registriert bis Sie zur Kasse gehen, oder die Produkte aus dem Warenkorb entfernen.<br />\r\n      <b>-Adressbuch</b> - Wir k&ouml;nnen jetzt die Produkte zu der von Ihnen ausgesuchten Adresse senden. Der perfekte Weg ein Geburtstagsgeschenk zu versenden.<br />\r\n      <b>-Vorherige Bestellungen</b> - Sie k&ouml;nnen jederzeit Ihre vorherigen Bestellungen &uuml;berpr&uuml;fen.<br />\r\n      <b>-Meinungen &uuml;ber Produkte</b> - Teilen Sie Ihre Meinung zu unseren Produkten mit anderen Kunden.<br />      \r\n      </font></font><br />\r\n      <font size=\"2\" face=\"Verdana, Arial, Helvetica, sans-serif\">Falls Sie Fragen zu unserem Kunden-Service haben, wenden Sie sich bitte an: \r\n      {$content.MAIL_REPLY_ADDRESS}\r\n      . <br />\r\n    Achtung: Diese E-Mail-Adresse wurde uns von einem Kunden bekannt gegeben. Falls Sie sich nicht angemeldet haben, senden Sie bitte eine E-Mail an \r\n    {$content.MAIL_REPLY_ADDRESS}\r\n    . <br />\r\n    <br />\r\n	\r\n	\r\n    {if $SEND_GIFT==true}\r\n    <br />\r\n    Als kleines Willkommensgeschenk senden wir Ihnen einen Gutschein &uuml;ber:	<b>{$GIFT_AMMOUNT}</b><br />\r\n    <br />\r\nIhr pers&ouml;nlicher Gutscheincode lautet <b>{$GIFT_CODE}</b>. Sie k&ouml;nnen diese Gutschrift an der Kasse w&auml;hrend des Bestellvorganges verbuchen.<br />\r\n<br />\r\nUm den Gutschein einzul&ouml;sen klicken Sie bitte auf <a href=\"{$GIFT_LINK}\">[Gutschein Einl&ouml;sen]</a>.\r\n{/if}\r\n\r\n{if $SEND_COUPON==true}\r\n Als kleines Willkommensgeschenk senden wir Ihnen einen Kupon.<br />\r\n Kuponbeschreibung: <b>{$COUPON_DESC}</b>\r\n \r\nGeben Sie einfach Ihren pers&ouml;nlichen Code {$COUPON_CODE} w&auml;hrend des Bezahlvorganges ein\r\n\r\n{/if}\r\n\r\n</font></td>\r\n  </tr>\r\n</table>',	0,	'mail',	'Sehr geehrter Kunde,\r\n\r\nSie haben soeben Ihr Kundenkonto erfolgreich erstellt, als registrierter Kunde haben sie folgende Vorteile in unserem Shop. \r\n\r\n-Kundenwarenkorb - Jeder Artikel bleibt registriert bis Sie zur Kasse gehen, oder die Produkte aus dem Warenkorb entfernen.\r\n-Adressbuch - Wir k√∂nnen jetzt die Produkte zu der von Ihnen ausgesuchten Adresse senden. Der perfekte Weg ein Geburtstagsgeschenk zu versenden.\r\n-Vorherige Bestellungen - Sie k√∂nnen jederzeit Ihre vorherigen Bestellungen √ºberpr√ºfen.\r\n-Meinungen √ºber Produkte - Teilen Sie Ihre Meinung zu unseren Produkten mit anderen Kunden.      \r\n\r\nFalls Sie Fragen zu unserem Kunden-Service haben, wenden Sie sich bitte an: {$content.MAIL_REPLY_ADDRESS}\r\n\r\n\r\nAchtung: Diese E-Mail-Adresse wurde uns von einem Kunden bekannt gegeben. Falls Sie sich nicht angemeldet haben, senden Sie bitte eine E-Mail an: {$content.MAIL_REPLY_ADDRESS}\r\n    \r\n{if $SEND_GIFT==true}\r\nAls kleines Willkommensgeschenk senden wir Ihnen einen Gutschein √ºber:	{$GIFT_AMMOUNT}\r\n\r\nIhr pers√∂nlicher Gutscheincode lautet {$GIFT_CODE}. \r\nSie k√∂nnen diese Gutschrift an der Kasse w√§hrend des Bestellvorganges verbuchen.\r\n\r\nUm den Gutschein einzul√∂sen verwenden Sie bitte den folgenden link {$GIFT_LINK}.\r\n{/if}\r\n\r\n{if $SEND_COUPON==true}\r\n Als kleines Willkommensgeschenk senden wir Ihnen einen Kupon.\r\n Kuponbeschreibung: {$COUPON_DESC}\r\n \r\nGeben Sie einfach Ihren pers√∂nlichen Code {$COUPON_CODE} w√§hrend des Bezahlvorganges ein\r\n\r\n{/if}'),
+(7,	'create_account_mail_admin',	2,	'<table width=\"100%\" cellspacing=\"0\" cellpadding=\"4\" border=\"0\" align=\"center\">\r\n    <tbody>\r\n        <tr>\r\n            <td style=\"border-bottom: 1px solid; border-color: #cccccc;\">\r\n            <div align=\"right\"><img src=\"{$logo_path}logo.gif\" alt=\"\" /></div>\r\n            </td>\r\n        </tr>\r\n        <tr>\r\n            <td><font size=\"2\" face=\"Verdana, Arial, Helvetica, sans-serif\"><strong>Sehr geehrter Kunde, </strong></font><font size=\"1\" face=\"Verdana, Arial, Helvetica, sans-serif\"><br />\r\n            <font size=\"2\"><br />\r\n            Es wurde ein Account f&uuml;r Sie eingerichtet, Sie k&ouml;nnen mit folgenden Daten in Unseren Shop einloggen. <br />\r\n            <br />\r\n            {if $COMMENTS} Anmerkungen: {$COMMENTS} <br />\r\n            {/if}         <br />\r\n            <br />\r\n            Ihre Logindaten f&uuml;r unseren Shop:<br />\r\n            <br />\r\n            E-Mail: {$EMAIL} <br />\r\n            Ihr Passwort: {$PASSWORD}          </font></font></td>\r\n        </tr>\r\n    </tbody>\r\n</table>',	0,	'mail',	'Sehr geehrter Kunde, \r\n\r\nEs wurde ein Account f√ºr Sie eingerichtet, Sie k√∂nnen mit folgenden Daten in Unseren Shop einloggen.\r\n\r\n{if $COMMENTS} Anmerkungen: {$COMMENTS}{/if}\r\n\r\nIhre Logindaten f√ºr unseren Shop:\r\n\r\nE-Mail: {$EMAIL}\r\n\r\nIhr Passwort: {$PASSWORD}'),
+(8,	'create_account_mail_admin',	1,	'<table width=\"100%\" cellspacing=\"0\" cellpadding=\"4\" border=\"0\" align=\"center\">\r\n    <tbody>\r\n        <tr>\r\n            <td style=\"border-bottom: 1px solid; border-color: #cccccc;\">\r\n            <div align=\"right\"><img src=\"{$logo_path}logo.gif\" alt=\"\" /></div>\r\n            </td>\r\n        </tr>\r\n        <tr>\r\n            <td><font size=\"2\" face=\"Verdana, Arial, Helvetica, sans-serif\"><strong>Dear customer, </strong></font><font size=\"1\" face=\"Verdana, Arial, Helvetica, sans-serif\"><br />\r\n            <font size=\"2\"><br />\r\n            We\'ve created your customer account. <br />\r\n            <br />\r\n            {if $COMMENTS} Note: {$COMMENTS} <br />\r\n            {/if}         <br />\r\n            <br />\r\n            You can login our store with your e-mail-address and password:<br />\r\n            <br />\r\n            e-mail-address: {$EMAIL} <br />\r\n            Password: {$PASSWORD}          </font></font></td>\r\n        </tr>\r\n    </tbody>\r\n</table>',	0,	'mail',	'Dear customer,\r\n\r\nWe\'ve created your customer account.\r\n\r\n{if $COMMENTS} Note: {$COMMENTS}{/if}\r\n\r\nYou can login our store with your e-mail-address and password:\r\n\r\ne-mail-address:{$EMAIL}\r\n\r\nPassword: {$PASSWORD}'),
+(9,	'gift_accepted',	2,	'<table  width=\"100%\" border=\"0\" align=\"center\" cellpadding=\"4\" cellspacing=\"0\">\r\n  <tr>\r\n    <td style=\"border-bottom: 1px solid; border-color: #cccccc;\"><div align=\"right\"><img src=\"{$logo_path}logo.gif\"></div></td>\r\n  </tr>\r\n  <tr>\r\n    <td><font size=\"1\" face=\"Verdana, Arial, Helvetica, sans-serif\">&nbsp; </font><font size=\"2\" face=\"Verdana, Arial, Helvetica, sans-serif\">\r\n      <strong>Sehr geehrter Kunde,</strong></font> <br />\r\n      <br />\r\n      <font size=\"2\" face=\"Verdana, Arial, Helvetica, sans-serif\">Sie haben k&uuml;rzlich in unserem Online-Shop einen Gutschein bestellt, welcher aus Sicherheitsgr&uuml;nden nicht sofort freigeschaltet wurde. Dieses Guthaben steht Ihnen nun zur Verf&uuml;gung. Sie k&ouml;nnen Ihren Gutschein verbuchen und per E-Mail versenden Der von Ihnen bestellte Gutschein hat einen Wert von {$AMMOUNT}.\r\n      </font></td>\r\n  </tr>\r\n</table>',	0,	'mail',	'Sehr geehrter Kunde,\r\n\r\nSie haben k√ºrzlich in unserem Online-Shop einen Gutschein bestellt,\r\nwelcher aus Sicherheitsgr√ºnden nicht sofort freigeschaltet wurde.\r\nDieses Guthaben steht Ihnen nun zur Verf√ºgung.\r\nSie k√∂nnen Ihren Gutschein verbuchen und per E-Mail versenden Der von Ihnen bestellte Gutschein hat einen Wert von {$AMMOUNT}.'),
+(10,	'gift_accepted',	1,	'<table  width=\"100%\" border=\"0\" align=\"center\" cellpadding=\"4\" cellspacing=\"0\">\r\n  <tr>\r\n    <td style=\"border-bottom: 1px solid; border-color: #cccccc;\"><div align=\"right\"><img src=\"{$logo_path}logo.gif\"></div></td>\r\n  </tr>\r\n  <tr>\r\n    <td><font size=\"1\" face=\"Verdana, Arial, Helvetica, sans-serif\">&nbsp; </font><font size=\"2\" face=\"Verdana, Arial, Helvetica, sans-serif\">\r\n      <strong>Dear customer,</strong></font> <br />\r\n      <br />\r\n      <font size=\"2\" face=\"Verdana, Arial, Helvetica, sans-serif\">The voucher code you purchased has been activated! <br />You may now redeem your voucher and/or send it to someone by e-mail.<br />Your voucher is worth {$AMMOUNT}.\r\n      </font></td>\r\n  </tr>\r\n</table>',	0,	'mail',	'Dear customer,\r\n\r\nThe voucher code you purchased has been activated!\r\nYou may now redeem your voucher and/or send it to someone by e-mail.\r\nYour voucher is worth {$AMMOUNT}.'),
+(11,	'invoice_mail',	1,	'<table width=\"100%\" cellspacing=\"0\" cellpadding=\"4\" border=\"0\" align=\"center\">\r\n    <tbody>\r\n        <tr>\r\n            <td style=\"border-bottom: 1px solid; border-color: #cccccc;\">\r\n            <div align=\"right\"><img src=\"{$logo_path}logo.gif\" alt=\"\" /></div>\r\n            </td>\r\n        </tr>\r\n        <tr>\r\n            <td><font size=\"2\" face=\"Verdana, Arial, Helvetica, sans-serif\"><strong>Sehr geehrter Kunde, </strong><br />\r\n            <br />\r\n            the attachment of this e-Mail includes the invoice of your order from {$ORDER_DATE}.           <br />\r\n            <br />\r\n            The state of your order you can inspect under: <a href=\"{$ORDER_LINK}\">{$ORDER_LINK}</a>.                                                                       <br />\r\n            </font></td>\r\n        </tr>\r\n    </tbody>\r\n</table>',	0,	'mail',	'Dear customer,\r\n\r\nthe attachment of this e-Mail includes the invoice of your order from {$ORDER_DATE}.\r\n\r\nThe state of your order you can inspect under: {$ORDER_LINK}.'),
+(12,	'invoice_mail',	2,	'<table  width=\"100%\" border=\"0\" align=\"center\" cellpadding=\"4\" cellspacing=\"0\">\r\n  <tr> \r\n    <td style=\"border-bottom: 1px solid; border-color: #cccccc;\"><div align=\"right\"><img src=\"{$logo_path}logo.gif\"></div></td>\r\n  </tr>\r\n  <tr> \r\n    <td><font size=\"2\" face=\"Verdana, Arial, Helvetica, sans-serif\"><strong>Sehr geehrter Kunde, </strong><br>\r\n      <br>\r\n\r\nim Anhang dieser E-Mail √ºbermitteln wir Ihnen die Rechnung Ihrer Bestellung vom {$ORDER_DATE}.           <br /> \r\n                                                                                                         <br /> \r\nBei Fragen zu Ihrer Bestellung antworten Sie bitte auf diese eMail. Den Status Ihrer Bestellung k√∂nnen    <br /> \r\nSie einsehen unter: <a href=\"{$ORDER_LINK}\">{$ORDER_LINK}</a>.                                                                       <br /> \r\n\r\n</font></td>\r\n  </tr>\r\n</table>',	0,	'mail',	'Sehr geehrter Kunde,\r\n\r\nim Anhang dieser E-Mail √ºbermitteln wir Ihnen die Rechnung Ihrer Bestellung vom {$ORDER_DATE}.\r\n\r\nBei Fragen zu Ihrer Bestellung antworten Sie bitte auf diese eMail, den Status Ihrer Bestellung k√∂nnen \r\nSie einsehen unter: {$ORDER_LINK}.'),
+(13,	'newsletter_mail',	1,	'<p><font size=\"2\" face=\"Verdana, Arial, Helvetica, sans-serif\"><b>Thank you for subscribing!</b></p>\r\n<p>Please click the following activation link to receive newsletters. If you haven\'t subscribed to this service, please ignore this e-mail!</p>\r\n<dl><dt><b>Your activation link:</b></dt>\r\n<dd><a href=\"{$LINK}\">{$LINK}</a></dd>\r\n</dl>',	0,	'mail',	'Thank you for subscribing!\r\n\r\nPlease click the following activation link to receive newsletters. If you haven\'t subscribed to this service, please ignore this e-mail!\r\n\r\nYour activation link:\r\n{$LINK}'),
+(14,	'newsletter_mail',	2,	'<p><font size=\"2\" face=\"Verdana, Arial, Helvetica, sans-serif\"><b>Vielen Dank f&uuml;r die Anmeldung zu unserem Newsletter.</b></font></p>\r\n<p><font size=\"2\" face=\"Verdana, Arial, Helvetica, sans-serif\">\r\n<p>Sie erhalten diese E-Mail, weil Sie unseren Newsletter empfangen m&ouml;chten. Bitte klicken Sie auf den Aktivierungslink damit Ihre E-Mail-Adresse f&uuml;r den Newsletterempfang freigeschaltet wird. Sollten Sie sich nicht f&uuml;r unseren Newsletter eingetragen haben bzw. den Empfang des Newsletters nicht w&uuml;nschen bitten wir Sie, den Aktivierungslink einfach zu ignorieren.</p>\r\n<dl>\r\n    <dt><b>Ihr Aktivierungslink:</b></dt>\r\n    <dd><a href=\"{$LINK}\">{$LINK}</a></dd>\r\n</dl>\r\n</font></p>',	0,	'mail',	'Vielen Dank f√ºr die Anmeldung zu unserem Newsletter.\r\n\r\nSie erhalten diese E-Mail, weil Sie unseren Newsletter empfangen m√∂chten.\r\nBitte klicken Sie auf den Aktivierungslink, damit Ihre E-Mail-Adresse f√ºr den Newsletterempfang freigeschaltet wird.\r\n\r\nSollten Sie sich nicht f√ºr unseren Newsletter eingetragen haben bzw. den Empfang des Newsletters nicht w√ºnschen\r\nbitten wir Sie, den Aktivierungslink einfach zu ignorieren. \r\n      \r\nIhr Aktivierungslink:\r\n{$LINK}'),
+(15,	'new_password_mail',	1,	'<table  width=\"100%\" border=\"0\" align=\"center\" cellpadding=\"4\" cellspacing=\"0\">\r\n  <tr> \r\n    <td><p><font size=\"2\" face=\"Verdana, Arial, Helvetica, sans-serif\"><b>You\'ve received a new password!</b></p> \r\n      <p>Log in with your new password <b>{$NEW_PASSWORD}</b> in order to change it. Should you have any difficulties, please contact us!\r\n  </tr>\r\n</table>\r\n\r\n 	  	 \r\n',	0,	'mail',	'You\'ve received a new password!\r\n\r\nLog in with your new password - {$NEW_PASSWORD} - in order to change it. Should you have any difficulties, please contact us!'),
+(16,	'new_password_mail',	2,	'<table width=\"100%\" cellspacing=\"0\" cellpadding=\"4\" border=\"0\" align=\"center\">\r\n    <tbody>\r\n        <tr>\r\n            <td>\r\n            <p><font size=\"2\" face=\"Verdana, Arial, Helvetica, sans-serif\"><b>Passwort          ge&auml;ndert!</b></font></p>\r\n            <font size=\"2\" face=\"Verdana, Arial, Helvetica, sans-serif\">\r\n            <p>Sie erhalten diese E-Mail, weil Sie ein neues Passwort eingerichtet          bekommen wollten.<br />\r\n            Bitte loggen Sie sich mit folgendem Passwort und Ihrer E-Mail-Adresse          bei uns ein <br />\r\n            In Ihren Kontoeinstellungen k&ouml;nnen Sie ein neues Passwort vergeben.</p>\r\n            <table width=\"100%\" border=\"0\" bgcolor=\"f1f1f1\">\r\n                <tbody>\r\n                    <tr>\r\n                        <td><b>Ihr neues Passwort:<br />\r\n                        </b>{$NEW_PASSWORD}</td>\r\n                    </tr>\r\n                </tbody>\r\n            </table>\r\n            <p>Wir w&uuml;nschen Ihnen weiterhin viel Spa&szlig; mit unserem Angebot!</p>\r\n            </font></td>\r\n        </tr>\r\n    </tbody>\r\n</table>',	0,	'mail',	'Passwort ge√§ndert!\r\n\r\nSie erhalten diese E-Mail, weil Sie ein neues Passwort eingerichtet bekommen wollten.\r\nBitte loggen Sie sich mit folgendem Passwort und Ihrer E-Mail-Adresse bei uns ein. In Ihren Kontoeinstellungen k√∂nnen Sie ein neues Passwort vergeben.\r\n      \r\nIhr neues Passwort: {$NEW_PASSWORD}\r\n\r\nWir w√ºnschen Ihnen weiterhin viel Spa√ü mit unserem Angebot!'),
+(17,	'order_mail',	1,	'{config_load file=\"$language/lang_$language.conf\" section=\"duty_info\"} \r\n<table width=\"100%\" border=\"0\">\r\n  <tr> \r\n    <td>\r\n      <table width=\"100%\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\">\r\n        <tr> \r\n          <td><font size=\"1\" face=\"Verdana, Arial, Helvetica, sans-serif\">{$address_label_customer}<br />\r\n            <br />\r\n            {if $PAYMENT_METHOD}<strong>Paymentmethod:</strong> {$PAYMENT_METHOD}<br />{/if}\r\n            <strong>Order No.:</strong> {$oID}<br />\r\n            <strong>Orderdate:</strong> {$DATE}<br />\r\n            {if $csID}<strong>Customer ID:</strong> {$csID}<br />{/if}\r\n            <strong>Your e-mail-address:</strong> {$EMAIL}<br />\r\n            </font>\r\n          </td>\r\n          <td width=\"1\"><img src=\"{$logo_path}logo.gif\"></td>\r\n        </tr>\r\n      </table>\r\n      <br /> \r\n      <table style=\"border-top:1px solid; border-bottom:1px solid;\" width=\"100%\" border=\"0\">\r\n        <tr bgcolor=\"#f1f1f1\"> \r\n          <td width=\"50%\"> <p><font size=\"1\"><strong><font face=\"Verdana, Arial, Helvetica, sans-serif\">Shippingaddress<br />\r\n          </font></strong></font></p></td>{if $address_label_payment}\r\n          <td> <p><font size=\"1\"><strong><font face=\"Verdana, Arial, Helvetica, sans-serif\">Paymentaddress<br />\r\n          </font> </strong></font></p></td>{/if}\r\n        </tr>\r\n        <tr> \r\n          <td><font size=\"1\" face=\"Verdana, Arial, Helvetica, sans-serif\">{$address_label_shipping}</font></td>\r\n          {if $address_label_payment}<td><font size=\"1\" face=\"Verdana, Arial, Helvetica, sans-serif\">{$address_label_payment}</font></td>{/if}\r\n        </tr>\r\n      </table>\r\n      <p><font size=\"1\" face=\"Verdana, Arial, Helvetica, sans-serif\"> Dear {$NAME},<br />\r\n        <br />\r\n thank you for your order. <br />\r\n {$PAYMENT_INFO_HTML}</font>\r\n        <br />{if $COMMENTS}<br />\r\n        <strong><font size=\"1\" face=\"Verdana, Arial, Helvetica, sans-serif\">Your Comments:</font></strong><br />\r\n        <font size=\"1\" face=\"Verdana, Arial, Helvetica, sans-serif\">{$COMMENTS}</font><br />\r\n{/if}<br />\r\n      </p></td>\r\n  </tr>\r\n</table>\r\n<table style=\"border-bottom:1px solid;\" width=\"100%\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\">\r\n  <tr> \r\n    <td><font size=\"1\" face=\"Verdana, Arial, Helvetica, sans-serif\"> <strong>Your ordered following products: </strong></font></td>\r\n  </tr>\r\n  <tr> \r\n    <td> <table width=\"100%\" border=\"0\" cellpadding=\"3\" cellspacing=\"0\" bgcolor=\"f1f1f1\">\r\n        <tr> \r\n          <td colspan=\"2\" style=\"border-right: 2px solid; border-bottom: 2px solid; border-color: #ffffff;\"><div align=\"center\"><font size=\"1\" face=\"Verdana, Arial, Helvetica, sans-serif\"><strong><font size=\"1\">\r\n            pcs</font></strong></font></div></td>\r\n          <td style=\"border-right: 2px solid; border-bottom: 2px solid; border-color: #ffffff;\"><font size=\"1\" face=\"Verdana, Arial, Helvetica, sans-serif\"><strong> \r\n          {if $smarty.const.SHOW_IMAGES_IN_EMAIL == \'true\'}\r\n          <td style=\"border-right: 2px solid; border-bottom: 2px solid; border-color: #ffffff;\"><font size=\"1\" face=\"Verdana, Arial, Helvetica, sans-serif\"><strong> \r\n            Picture</strong></font></td>\r\n          {/if}\r\n            Product</strong></font></td>\r\n          <td style=\"border-right: 2px solid; border-bottom: 2px solid; border-color: #ffffff;\"><strong><font size=\"1\" face=\"Verdana, Arial, Helvetica, sans-serif\">Article \r\n            Nr. </font></strong> </td>\r\n          <td style=\"border-right: 2px solid; border-bottom: 2px solid; border-color: #ffffff;\" width=\"150\"><font size=\"1\" face=\"Verdana, Arial, Helvetica, sans-serif\"><strong>Singleprice \r\n            </strong></font></td>\r\n          <td style=\"border-right: 2px solid; border-bottom: 2px solid; border-color: #ffffff;\" width=\"150\"><div align=\"right\"><font size=\"1\" face=\"Verdana, Arial, Helvetica, sans-serif\"><strong><font size=\"1\">Price</font> \r\n              </strong></font></div></td>\r\n        </tr>\r\n        {foreach name=aussen item=order_values from=$order_data} \r\n        <tr> \r\n          <td width=\"20\" style=\"border-right: 2px solid; border-bottom: 2px solid; border-color: #ffffff;\"><div align=\"center\"><font size=\"1\" face=\"Verdana, Arial, Helvetica, sans-serif\">{$order_values.PRODUCTS_QTY}</font></div></td>\r\n          <td width=\"20\" style=\"border-right: 2px solid; border-bottom: 2px solid; border-color: #ffffff;\"><div align=\"center\"><font size=\"1\" face=\"Verdana, Arial, Helvetica, sans-serif\">x</font></div></td>\r\n          {if $smarty.const.SHOW_IMAGES_IN_EMAIL == \'true\'}\r\n          <td style=\"border-right: 2px solid; border-bottom: 2px solid; border-color: #ffffff;\">\r\n            {if $order_values.PRODUCTS_IMAGE neq \'\'}              \r\n                <img src=\"{$img_path}{$order_values.PRODUCTS_IMAGE}\" style=\"{$smarty.const.SHOW_IMAGES_IN_EMAIL_STYLE}\">              \r\n            {/if}\r\n          </td>\r\n          {/if}\r\n          <td style=\"border-right: 2px solid; border-bottom: 2px solid; border-color: #ffffff;\">\r\n            <font size=\"1\" face=\"Verdana, Arial, Helvetica, sans-serif\">\r\n            <strong>{$order_values.PRODUCTS_NAME}</strong>\r\n            {if $order_values.PRODUCTS_ORDER_DESCRIPTION neq \'\'}<br />{$order_values.PRODUCTS_ORDER_DESCRIPTION}{/if}\r\n            {if $order_values.PRODUCTS_SHIPPING_TIME neq \'\'}<br />Shipping time: {$order_values.PRODUCTS_SHIPPING_TIME}{/if}\r\n            {if $order_values.PRODUCTS_ATTRIBUTES neq \'\'}<br /><em>{$order_values.PRODUCTS_ATTRIBUTES}</em>{/if}\r\n            </font>\r\n            </td>\r\n          <td style=\"border-right: 2px solid; border-bottom: 2px solid; border-color: #ffffff;\"><font size=\"1\" face=\"Verdana, Arial, Helvetica, sans-serif\">{$order_values.PRODUCTS_MODEL}<br />\r\n            <em>{$order_values.PRODUCTS_ATTRIBUTES_MODEL}</em></font></td>\r\n          <td style=\"border-right: 2px solid; border-bottom: 2px solid; border-color: #ffffff;\" width=\"150\"><font size=\"1\" face=\"Verdana, Arial, Helvetica, sans-serif\">{$order_values.PRODUCTS_SINGLE_PRICE}</font></td>\r\n          <td style=\"border-right: 2px solid; border-bottom: 2px solid; border-color: #ffffff;\" width=\"150\"><div align=\"right\"><font size=\"1\" face=\"Verdana, Arial, Helvetica, sans-serif\">{$order_values.PRODUCTS_PRICE}</font></div></td>\r\n        </tr>\r\n        {/foreach} \r\n      </table>\r\n    </td>\r\n  </tr>\r\n</table>\r\n{foreach name=aussen item=order_total_values from=$order_total}\r\n<div align=\"right\"><font size=\"1\" face=\"Arial, Helvetica, sans-serif\">{$order_total_values.TITLE}{$order_total_values.TEXT}</font></div>\r\n{/foreach}\r\n\r\n{if $DELIVERY_DUTY_INFO neq \'\'}\r\n<br />\r\n<table style=\"border:1px solid #a3a3a3;\" width=\"100%\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\">\r\n  <tr>\r\n    <td><font size=\"1\" face=\"Arial, Helvetica, sans-serif\">{#text_duty_info#}</font></td>\r\n  </tr>\r\n</table>\r\n<br />\r\n{/if}\r\n\r\n[SIGNATUR]\r\n\r\n{if $REVOCATION_HTML neq \'\'}\r\n<br />\r\n<font size=\"1\" face=\"Arial, Helvetica, sans-serif\">{$REVOCATION_HTML}</font>\r\n<br />\r\n{/if}',	0,	'mail',	'{config_load file=\"$language/lang_$language.conf\" section=\"duty_info\"} \r\n{$address_label_customer}\r\n\r\n{if $PAYMENT_METHOD}Paymentmethod: {$PAYMENT_METHOD}{/if}\r\nOrder No.: {$oID}\r\nDate: {$DATE}\r\n{if $csID}Customer ID: {$csID}{/if}\r\nYour e-mail-address: {$EMAIL}\r\n----------------------------------------------------------------------\r\n\r\n\r\nDear {$NAME},\r\n\r\nthank you for your order.\r\n\r\n{$PAYMENT_INFO_TXT}\r\n\r\n{if $COMMENTS}\r\nYour Comments:\r\n{$COMMENTS}\r\n{/if}\r\n\r\nYour ordered following products\r\n----------------------------------------------------------------------\r\n{foreach name=aussen item=order_values from=$order_data} \r\n{$order_values.PRODUCTS_QTY} x {$order_values.PRODUCTS_NAME} {$order_values.PRODUCTS_PRICE}\r\n{if $order_values.PRODUCTS_ORDER_DESCRIPTION neq \'\'}{$order_values.PRODUCTS_ORDER_DESCRIPTION}{/if}\r\n{if $order_values.PRODUCTS_SHIPPING_TIME neq \'\'}Shipping time: {$order_values.PRODUCTS_SHIPPING_TIME}{/if}\r\n{if $order_values.PRODUCTS_ATTRIBUTES !=\'\'}{$order_values.PRODUCTS_ATTRIBUTES}{/if}\r\n\r\n{/foreach}\r\n\r\n{foreach name=aussen item=order_total_values from=$order_total}\r\n{$order_total_values.TITLE}{$order_total_values.TEXT}\r\n{/foreach}\r\n\r\n\r\n{if $address_label_payment}\r\nPaymentaddress\r\n----------------------------------------------------------------------\r\n{$address_label_payment}\r\n{/if}\r\nShippingaddress \r\n----------------------------------------------------------------------\r\n{$address_label_shipping}\r\n{if $DELIVERY_DUTY_INFO neq \'\'}\r\n\r\n----------------------------------------------------------------------\r\n{#text_duty_info#}\r\n----------------------------------------------------------------------{/if}\r\n\r\n[SIGNATUR]\r\n\r\n{$REVOCATION_TXT}'),
+(18,	'order_mail',	2,	'{config_load file=\"$language/lang_$language.conf\" section=\"checkout_confirmation\"} \r\n{config_load file=\"$language/lang_$language.conf\" section=\"duty_info\"} \r\n<table width=\"100%\" border=\"0\">\r\n  <tr> \r\n    <td>\r\n      <table width=\"100%\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\">\r\n        <tr> \r\n          <td><font size=\"1\" face=\"Verdana, Arial, Helvetica, sans-serif\">{$address_label_customer}<br />\r\n            <br />\r\n            {if $PAYMENT_METHOD}<strong>Zahlungsmethode:</strong> {$PAYMENT_METHOD}<br />{/if}\r\n            <strong>Bestellung Nr:</strong> {$oID}<br />\r\n            <strong>Bestelldatum:</strong> {$DATE}<br />\r\n            {if $csID}<strong>Kundennummer:</strong> {$csID}<br />{/if}\r\n            <strong>Ihre E-Mail-Adresse:</strong> {$EMAIL}<br />\r\n            </font>\r\n          </td>\r\n          <td width=\"1\"><img src=\"{$logo_path}logo.gif\"></td>\r\n        </tr>\r\n      </table>\r\n      <br /> \r\n      <table style=\"border-top:1px solid; border-bottom:1px solid;\" width=\"100%\" border=\"0\">\r\n        <tr bgcolor=\"#f1f1f1\"> \r\n          <td width=\"50%\"> \r\n            <p><font size=\"1\"><strong><font face=\"Verdana, Arial, Helvetica, sans-serif\">Lieferadresse <br /></font></strong></font></p>\r\n          </td>\r\n          {if $address_label_payment}\r\n          <td> \r\n            <p><font size=\"1\"><strong><font face=\"Verdana, Arial, Helvetica, sans-serif\">Rechnungsadresse <br /></font></strong></font></p>\r\n          </td>\r\n          {/if}\r\n        </tr>\r\n        <tr> \r\n          <td><font size=\"1\" face=\"Verdana, Arial, Helvetica, sans-serif\">{$address_label_shipping}</font></td>\r\n          {if $address_label_payment}\r\n          <td><font size=\"1\" face=\"Verdana, Arial, Helvetica, sans-serif\">{$address_label_payment}</font></td>\r\n          {/if}\r\n        </tr>\r\n      </table>\r\n      <p><font size=\"1\" face=\"Verdana, Arial, Helvetica, sans-serif\"> Hallo {$NAME},<br /><br /> vielen Dank f&uuml;r Ihre Bestellung.  \r\n        <br />{$PAYMENT_INFO_HTML}<br />\r\n        {if $COMMENTS}<br />\r\n        <strong>Ihre Anmerkungen:</strong><br />\r\n        {$COMMENTS}<br />\r\n        {/if}\r\n        <br />\r\n        </font>\r\n      </p>\r\n    </td>\r\n  </tr>\r\n</table>\r\n<table style=\"border-bottom:1px solid;\" width=\"100%\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\">\r\n  <tr> \r\n    <td><font size=\"1\" face=\"Verdana, Arial, Helvetica, sans-serif\"> <strong>Ihre bestellten Produkte nochmals zur Kontrolle: </strong></font></td>\r\n  </tr>\r\n  <tr> \r\n    <td> \r\n      <table width=\"100%\" border=\"0\" cellpadding=\"3\" cellspacing=\"0\" bgcolor=\"f1f1f1\">\r\n        <tr> \r\n          <td colspan=\"2\" style=\"border-right: 2px solid; border-bottom: 2px solid; border-color: #ffffff;\"><div align=\"center\"><font size=\"1\" face=\"Verdana, Arial, Helvetica, sans-serif\"><strong> \r\n            Stk. </strong></font></div></td>\r\n          {if $smarty.const.SHOW_IMAGES_IN_EMAIL == \'true\'}\r\n          <td style=\"border-right: 2px solid; border-bottom: 2px solid; border-color: #ffffff;\"><font size=\"1\" face=\"Verdana, Arial, Helvetica, sans-serif\"><strong> \r\n            Bild </strong></font></td>\r\n          {/if}\r\n          <td style=\"border-right: 2px solid; border-bottom: 2px solid; border-color: #ffffff;\"><font size=\"1\" face=\"Verdana, Arial, Helvetica, sans-serif\"><strong> \r\n            Produkt </strong></font></td>\r\n          <td style=\"border-right: 2px solid; border-bottom: 2px solid; border-color: #ffffff;\"><font size=\"1\" face=\"Verdana, Arial, Helvetica, sans-serif\"><strong> \r\n            Artikel Nr. </strong></font></td>\r\n          <td style=\"border-right: 2px solid; border-bottom: 2px solid; border-color: #ffffff;\" width=\"150\"><font size=\"1\" face=\"Verdana, Arial, Helvetica, sans-serif\"><strong>Einzelpreis</strong></font></td>\r\n          <td style=\"border-right: 2px solid; border-bottom: 2px solid; border-color: #ffffff;\" width=\"150\"><div align=\"right\"><font size=\"1\" face=\"Verdana, Arial, Helvetica, sans-serif\"><strong> \r\n            Preis</strong></font><font size=\"1\"> </font></div></td>\r\n        </tr>\r\n        {foreach name=aussen item=order_values from=$order_data} \r\n        <tr> \r\n          <td width=\"20\" style=\"border-right: 2px solid; border-bottom: 2px solid; border-color: #ffffff;\"><div align=\"center\"><font size=\"1\" face=\"Verdana, Arial, Helvetica, sans-serif\">{$order_values.PRODUCTS_QTY}</font></div></td>\r\n          <td width=\"20\" style=\"border-right: 2px solid; border-bottom: 2px solid; border-color: #ffffff;\"><div align=\"center\"><font size=\"1\" face=\"Verdana, Arial, Helvetica, sans-serif\">x</font></div></td>\r\n          {if $smarty.const.SHOW_IMAGES_IN_EMAIL == \'true\'}\r\n          <td style=\"border-right: 2px solid; border-bottom: 2px solid; border-color: #ffffff;\">\r\n            {if $order_values.PRODUCTS_IMAGE neq \'\'}              \r\n                <img src=\"{$img_path}{$order_values.PRODUCTS_IMAGE}\" style=\"{$smarty.const.SHOW_IMAGES_IN_EMAIL_STYLE}\">              \r\n            {/if}\r\n          </td>\r\n          {/if}\r\n          <td style=\"border-right: 2px solid; border-bottom: 2px solid; border-color: #ffffff;\">\r\n            <font size=\"1\" face=\"Verdana, Arial, Helvetica, sans-serif\">\r\n            <strong>{$order_values.PRODUCTS_NAME}</strong>\r\n            {if $order_values.PRODUCTS_ORDER_DESCRIPTION neq \'\'}<br />{$order_values.PRODUCTS_ORDER_DESCRIPTION}{/if}\r\n            {if $order_values.PRODUCTS_ATTRIBUTES neq \'\'}<br /><em>{$order_values.PRODUCTS_ATTRIBUTES}</em>{/if}\r\n            {if $order_values.PRODUCTS_ATTRIBUTES_DOWNLOAD == 0}\r\n                {if $order_values.PRODUCTS_SHIPPING_TIME neq \'\'}<br />&nbsp;<br />Lieferzeit: {$order_values.PRODUCTS_SHIPPING_TIME}{/if}\r\n            {else}\r\n                {if $agree_download == \'agree\'}\r\n                        {if $order_values.PRODUCTS_SHIPPING_TIME neq \'\'}<br />&nbsp;<br />Lieferzeit: {$order_values.PRODUCTS_SHIPPING_TIME}{#text_download_agreed#}{/if}\r\n                {else}\r\n                        {if $order_values.PRODUCTS_SHIPPING_TIME neq \'\'}<br />Lieferzeit: {#text_download_disagreed#}{/if}\r\n                {/if}\r\n            {/if}\r\n            </font>\r\n          </td>\r\n          <td style=\"border-right: 2px solid; border-bottom: 2px solid; border-color: #ffffff;\"><font size=\"1\" face=\"Verdana, Arial, Helvetica, sans-serif\">{$order_values.PRODUCTS_MODEL}<br />\r\n            <em>{$order_values.PRODUCTS_ATTRIBUTES_MODEL}</em></font></td>\r\n		<td style=\"border-right: 2px solid; border-bottom: 2px solid; border-color: #ffffff;\" width=\"150\"><font size=\"1\" face=\"Verdana, Arial, Helvetica, sans-serif\">{$order_values.PRODUCTS_SINGLE_PRICE}<br />&nbsp;</font></td>\r\n		<td style=\"border-right: 2px solid; border-bottom: 2px solid; border-color: #ffffff;\" width=\"150\"><div align=\"right\"><font size=\"1\" face=\"Verdana, Arial, Helvetica, sans-serif\">{$order_values.PRODUCTS_PRICE}<br />&nbsp;</font></div></td>\r\n        </tr>\r\n        {/foreach} \r\n      </table>\r\n    </td>\r\n  </tr>\r\n</table>\r\n{foreach name=aussen item=order_total_values from=$order_total}\r\n<div align=\"right\"><font size=\"1\" face=\"Arial, Helvetica, sans-serif\">{$order_total_values.TITLE}{$order_total_values.TEXT}</font></div>\r\n{/foreach}\r\n\r\n{if $DELIVERY_DUTY_INFO neq \'\'}\r\n<br />\r\n<table style=\"border:1px solid #a3a3a3;\" width=\"100%\" border=\"0\" cellpadding=\"3\" cellspacing=\"0\">\r\n  <tr>\r\n    <td><font size=\"1\" face=\"Arial, Helvetica, sans-serif\">{#text_duty_info#}</font></td>\r\n  </tr>\r\n</table>\r\n<br />\r\n{/if}\r\n\r\n[SIGNATUR]\r\n\r\n{if $REVOCATION_HTML neq \'\'}\r\n<br />\r\n<font size=\"1\" face=\"Arial, Helvetica, sans-serif\">{$REVOCATION_HTML}</font>\r\n<br />\r\n{/if}',	0,	'mail',	'{config_load file=\"$language/lang_$language.conf\" section=\"duty_info\"} \r\n{$address_label_customer}\r\n\r\n{if $PAYMENT_METHOD}Zahlungsmethode: {$PAYMENT_METHOD}{/if}\r\nBestellnummer: {$oID}\r\nDatum: {$DATE}\r\n{if $csID}Kundennummer: {$csID}{/if}\r\nIhre E-Mail-Adresse: {$EMAIL}\r\n----------------------------------------------------------------------\r\n\r\n\r\nHallo {$NAME},\r\n\r\nvielen Dank f√ºr Ihre Bestellung.\r\n\r\n{$PAYMENT_INFO_TXT}\r\n\r\n{if $COMMENTS}\r\nIhre Anmerkungen:\r\n{$COMMENTS}\r\n{/if}\r\n\r\nIhre bestellten Produkte zur Kontrolle\r\n----------------------------------------------------------------------\r\n{foreach name=aussen item=order_values from=$order_data} \r\n{$order_values.PRODUCTS_QTY} x {$order_values.PRODUCTS_NAME} {$order_values.PRODUCTS_PRICE}\r\n{if $order_values.PRODUCTS_ORDER_DESCRIPTION neq \'\'}{$order_values.PRODUCTS_ORDER_DESCRIPTION}{/if}\r\n{if $order_values.PRODUCTS_SHIPPING_TIME neq \'\'}Lieferzeit: {$order_values.PRODUCTS_SHIPPING_TIME}{/if}\r\n{if $order_values.PRODUCTS_ATTRIBUTES !=\'\'}{$order_values.PRODUCTS_ATTRIBUTES}{/if}\r\n\r\n{/foreach}\r\n\r\n{foreach name=aussen item=order_total_values from=$order_total}\r\n{$order_total_values.TITLE}{$order_total_values.TEXT}\r\n{/foreach}\r\n\r\n\r\n{if $address_label_payment}\r\nRechnungsadresse\r\n----------------------------------------------------------------------\r\n{$address_label_payment}\r\n{/if}\r\nVersandadresse \r\n----------------------------------------------------------------------\r\n{$address_label_shipping}\r\n{if $DELIVERY_DUTY_INFO neq \'\'}\r\n\r\n----------------------------------------------------------------------\r\n{#text_duty_info#}\r\n----------------------------------------------------------------------{/if}\r\n\r\n[SIGNATUR]\r\n\r\n{$REVOCATION_TXT}'),
+(19,	'password_verification_mail',	1,	'<table  width=\"100%\" border=\"0\" align=\"center\" cellpadding=\"4\" cellspacing=\"0\">\r\n  <tr> \r\n    <td><p><font size=\"2\" face=\"Verdana, Arial, Helvetica, sans-serif\"><b>Please \r\n        confirm your password request!</b></p>\r\n      <p>To obtain a new password immediately, click the following link <a href=\"{$LINK}\">{$LINK}</a>.<br />\r\n      Ater clicking the link you will receive another e-mail containing a new password which can be changed when you are logged in.\r\n    </td>\r\n  </tr>\r\n</table>\r\n\r\n 	  	 \r\n',	0,	'mail',	'Please confirm your password request!\r\n\r\nTo obtain a new password immediately, click the following link - {$LINK}.\r\n\r\nAter clicking the link you will receive another e-mail containing a new password which can be changed when you are logged in.\r\n'),
+(20,	'password_verification_mail',	2,	'<table width=\"100%\" cellspacing=\"0\" cellpadding=\"4\" border=\"0\" align=\"center\">\r\n    <tbody>\r\n        <tr>\r\n            <td>\r\n            <p><font size=\"2\" face=\"Verdana, Arial, Helvetica, sans-serif\"><b>Bitte best&auml;tigen Sie Ihre Passwortanfrage!</b></font></p>\r\n            <font size=\"2\" face=\"Verdana, Arial, Helvetica, sans-serif\">\r\n            <p>Bitte best&auml;tigen Sie, dass Sie selber ein neues Passwort          angefordert haben. <br />\r\n            Aus diesem Grund haben wir Ihnen diese E-Mail mit einem pers&ouml;nlichen          <br />\r\n            Best&auml;tigungslink geschickt. Wenn Sie den Link best&auml;tigen, indem          Sie ihn <br />\r\n            anklicken, wird Ihnen umgehend ein neues Passwort in einer weiteren          E-Mail <br />\r\n            zur Verf&uuml;gung gestellt.\r\n            <table width=\"100%\" border=\"0\" bgcolor=\"f1f1f1\">\r\n                <tbody>\r\n                    <tr>\r\n                        <td><b>Ihr Best&auml;tigungslink:<br />\r\n                        </b><a href=\"{$LINK}\">{$LINK}</a></td>\r\n                    </tr>\r\n                </tbody>\r\n            </table>\r\n            </p>\r\n            </font></td>\r\n        </tr>\r\n    </tbody>\r\n</table>',	0,	'mail',	'Bitte best√§tigen Sie Ihre Passwortanfrage!\r\n\r\nBitte best√§tigen Sie, dass Sie selber ein neues Passwort angefordert haben. \r\nAus diesem Grund haben wir Ihnen diese E-Mail mit einem pers√∂nlichen \r\nBest√§tigungslink geschickt. Wenn Sie den Link best√§tigen, indem Sie ihn \r\nanklicken, wird Ihnen umgehend ein neues Passwort in einer weiteren E-Mail \r\nzur Verf√ºgung gestellt.\r\n      \r\nIhr Best√§tigungslink:\r\n{$LINK}'),
+(21,	'send_coupon',	2,	'<table  width=\"100%\" border=\"0\" align=\"center\" cellpadding=\"4\" cellspacing=\"0\">\r\n  <tr>\r\n    <td style=\"border-bottom: 1px solid; border-color: #cccccc;\"><div align=\"right\"><img src=\"{$logo_path}logo.gif\"></div></td>\r\n  </tr>\r\n  <tr>\r\n    <td><font size=\"1\" face=\"Verdana, Arial, Helvetica, sans-serif\">&nbsp;\r\n      </font><font size=\"2\" face=\"Verdana, Arial, Helvetica, sans-serif\">\r\n      {$MESSAGE}\r\n      <br />\r\n      <br />\r\nSie k&ouml;nnen den Gutschein bei Ihrer Bestellung einl&ouml;sen. Geben Sie daf&uuml;r Ihren Gutschein-Nummer in das Feld Gutscheine ein. <br />\r\n<br />\r\nIhr Gutschein-Nummer lautet: <strong>\r\n{$COUPON_ID}\r\n</strong><br />\r\n<br />\r\nHeben Sie Ihre Gutschein-Nummer gut auf, nur so k&ouml;nnen Sie von diesem Angebot profitieren <br />\r\n<br />\r\nwenn Sie uns das n&auml;chste mal unter <a href=\"{$WEBSITE}\">{$WEBSITE}</a> besuchen. </font></td>\r\n  </tr>\r\n</table>',	0,	'mail',	'{$MESSAGE}\r\n\r\nSie k&ouml;nnen den Gutschein bei Ihrer Bestellung einl√∂sen. Geben Sie daf√ºr Ihren Gutschein-Nummer in das Feld Gutscheine ein.\r\n\r\nIhr Gutschein-Nummer lautet: {$COUPON_ID}\r\n\r\nHeben Sie Ihre Gutschein-Nummer gut auf, nur so k√∂nnen Sie von diesem Angebot profitieren\r\nwenn Sie uns das n√§chste mal unter {$WEBSITE} besuchen.'),
+(87,	'send_coupon',	1,	'<table  width=\"100%\" border=\"0\" align=\"center\" cellpadding=\"4\" cellspacing=\"0\">\r\n  <tr>\r\n    <td style=\"border-bottom: 1px solid; border-color: #cccccc;\"><div align=\"right\"><img src=\"{$logo_path}logo.gif\"></div></td>\r\n  </tr>\r\n  <tr>\r\n    <td><font size=\"1\" face=\"Verdana, Arial, Helvetica, sans-serif\">&nbsp;\r\n      </font><font size=\"2\" face=\"Verdana, Arial, Helvetica, sans-serif\">\r\n      {$MESSAGE}\r\n      <br />\r\n      <br />\r\nRedeem your voucher by entering the voucher code into the designated input field during checkout. <br />\r\n<br />\r\nYour voucher code is: <strong>\r\n{$COUPON_ID}\r\n</strong><br />\r\n<br />\r\nYou can use the voucher code next time you visit us at <a href=\"{$WEBSITE}\">{$WEBSITE}</a>. </font></td>\r\n  </tr>\r\n</table>',	0,	'mail',	'{$MESSAGE}\r\n\r\nRedeem your voucher by entering the voucher code into the designated input field during checkout.\r\n\r\nYour voucher code is: {$COUPON_ID}\r\n\r\nYou can use the voucher code next time you visit us at {$WEBSITE}.'),
+(23,	'send_gift',	2,	'<table  width=\"100%\" border=\"0\" align=\"center\" cellpadding=\"4\" cellspacing=\"0\">\r\n  <tr>\r\n    <td style=\"border-bottom: 1px solid; border-color: #cccccc;\"><div align=\"right\"><img src=\"{$logo_path}logo.gif\"></div></td>\r\n  </tr>\r\n  <tr>\r\n    <td><font size=\"1\" face=\"Verdana, Arial, Helvetica, sans-serif\">&nbsp; </font><font size=\"2\" face=\"Verdana, Arial, Helvetica, sans-serif\">&nbsp;\r\n      </font>\r\n      <p><font size=\"2\" face=\"Verdana, Arial, Helvetica, sans-serif\">\r\n        {$MESSAGE}\r\n      </font></p>\r\n      <p><font size=\"2\" face=\"Verdana, Arial, Helvetica, sans-serif\">Gutscheinwert: {$AMMOUNT}\r\n      </font></p>\r\n      <p><font size=\"2\" face=\"Verdana, Arial, Helvetica, sans-serif\">Ihr Gutscheincode lautet: {$GIFT_ID}\r\n      </font></p>\r\n      <p><font size=\"2\" face=\"Verdana, Arial, Helvetica, sans-serif\">Um Ihren Gutschein zu verbuchen, klicken Sie auf den nachfolgenden Link - <a href=\"{$GIFT_LINK}\">{$GIFT_LINK}</a>.\r\n      </font></p>\r\n      <p><font size=\"2\" face=\"Verdana, Arial, Helvetica, sans-serif\">Falls es wider Erwarten zu Problemen beim verbuchen kommen sollte, besuchen Sie unsere Webseite <a href=\"{$WEBSITE}\">{$WEBSITE}</a> und geben den Gutschein-Code bitte manuell ein.\r\n      </font></p></td>\r\n  </tr>\r\n</table>\r\n<p>&nbsp;</p>',	0,	'mail',	'{$MESSAGE}\r\n  \r\nGutscheinwert {$AMMOUNT}\r\n\r\nIhr Gutscheincode lautet: {$GIFT_ID}\r\n\r\nUm Ihren Gutschein zu verbuchen, klicken Sie auf den nachfolgenden Link - {$GIFT_LINK}.\r\n\r\nFalls es wider Erwarten zu Problemen beim verbuchen kommen sollte, besuchen Sie unsere Webseite {$WEBSITE} und geben den Gutschein-Code bitte manuell ein.'),
+(24,	'send_gift',	1,	'<table  width=\"100%\" border=\"0\" align=\"center\" cellpadding=\"4\" cellspacing=\"0\">\r\n  <tr>\r\n    <td style=\"border-bottom: 1px solid; border-color: #cccccc;\"><div align=\"right\"><img src=\"{$logo_path}logo.gif\"></div></td>\r\n  </tr>\r\n  <tr>\r\n    <td><font size=\"1\" face=\"Verdana, Arial, Helvetica, sans-serif\">&nbsp; </font><font size=\"2\" face=\"Verdana, Arial, Helvetica, sans-serif\">&nbsp;\r\n      </font>\r\n      <p><font size=\"2\" face=\"Verdana, Arial, Helvetica, sans-serif\">\r\n        {$MESSAGE}\r\n      </font></p>\r\n      <p><font size=\"2\" face=\"Verdana, Arial, Helvetica, sans-serif\">Voucher value: {$AMMOUNT}\r\n      </font></p>\r\n      <p><font size=\"2\" face=\"Verdana, Arial, Helvetica, sans-serif\">Your voucher code is: {$GIFT_ID} </a> \r\n       </font></p>\r\n      <p><font size=\"2\" face=\"Verdana, Arial, Helvetica, sans-serif\">Redeem your voucher by simply clicking the following link - <a href=\"{$GIFT_LINK}\"> {$GIFT_LINK}</a>.\r\n       </font></p>\r\n      <p><font size=\"2\" face=\"Verdana, Arial, Helvetica, sans-serif\">Should you have any difficulties with the link, please visit our website <a href=\"{$WEBSITE}\">{$WEBSITE}</a> and enter the code manually.\r\n       </font></p></td>\r\n  </tr>\r\n</table>\r\n<p>&nbsp;</p>',	0,	'mail',	'{$MESSAGE}\r\n  \r\nVoucher value: {$AMMOUNT}\r\n    \r\nYour voucher code is: {$GIFT_ID}\r\n\r\nRedeem your voucher by simply clicking the following link - {$GIFT_LINK}.\r\n\r\nShould you have any difficulties with the link, please visit our website {$WEBSITE} and enter the code manually.'),
+(25,	'send_gift_to_friend',	1,	'<table  width=\"100%\" border=\"0\" align=\"center\" cellpadding=\"4\" cellspacing=\"0\">\r\n  <tr>\r\n    <td style=\"border-bottom: 1px solid; border-color: #cccccc;\"><div align=\"right\"><img src=\"{$logo_path}logo.gif\"></div></td>\r\n  </tr>\r\n  <tr>\r\n    <td> <p><font size=\"2\" face=\"Verdana, Arial, Helvetica, sans-serif\">---------------------------------------------------------------------------------------- \r\n        <br />\r\n        You\'ve received a <b>{$AMMOUNT}</b> gift voucher ! <br />\r\n        ----------------------------------------------------------------------------------------<br />\r\n        <br />\r\n        This gift voucher was sent to you by: {$FROM_NAME}<br />\r\n        Message: <br />\r\n        <br />\r\n        {$MESSAGE}<br />\r\n        <br />\r\n        Your voucher code is: <strong>{$GIFT_CODE}</strong>.<br /> \r\n        Redeem your voucher when placing an order or simply by clicking the following link <a href=\"{$GIFT_LINK}\">{$GIFT_LINK}</a>. \r\n        <br />\r\n        </font></p>\r\n      </td>\r\n  </tr>\r\n</table>\r\n\r\n 	  	 \r\n',	0,	'mail',	'---------------------------------------------------------------------------------------- \r\nYOU\'VE RECEIVED A {$AMMOUNT} GIFT VOUCHER!\r\n----------------------------------------------------------------------------------------\r\n\r\nThis gift voucher was sent to you by: {$FROM_NAME}\r\n\r\nMessage:\r\n{$MESSAGE}\r\n\r\nYour voucher code is: {$GIFT_CODE}\r\n\r\nRedeem your voucher when placing an order or simply by clicking the following link - {$GIFT_LINK}.'),
+(26,	'send_gift_to_friend',	2,	'<table width=\"100%\" cellspacing=\"0\" cellpadding=\"4\" border=\"0\" align=\"center\">\r\n    <tbody>\r\n        <tr>\r\n            <td style=\"border-bottom: 1px solid; border-color: #cccccc;\">\r\n            <div align=\"right\"><img src=\"{$logo_path}logo.gif\" alt=\"\" /></div>\r\n            </td>\r\n        </tr>\r\n        <tr>\r\n            <td><font size=\"2\" face=\"Verdana, Arial, Helvetica, sans-serif\">---------------------------------------------------------------------------------------- <br />\r\n            Herzlichen Gl&uuml;ckwunsch, Sie haben einen Gutschein &uuml;ber <b>{$AMMOUNT} </b>erhalten ! <br />\r\n            ----------------------------------------------------------------------------------------<br />\r\n            <br />\r\n            Dieser Gutschein wurde Ihnen &uuml;bermittelt von {$FROM_NAME},<br />\r\n            Mit der Nachricht:<br />\r\n            <br />\r\n            {$MESSAGE}<br />\r\n            <br />\r\n            Ihr pers&ouml;nlicher Gutscheincode lautet <strong>{$GIFT_CODE}</strong>. Sie k&ouml;nnen diese Gutschrift entweder w&auml;hrend dem Bestellvorgang verbuchen.<br />\r\n            <br />\r\n            Um den Gutschein einzul&ouml;sen klichen Sie bitte auf <a href=\"{$GIFT_LINK}\">{$GIFT_LINK}</a> <br />\r\n            <br />\r\n            Falls es mit dem obigen Link Probleme beim Einl&ouml;sen kommen sollte, <br />\r\n            k&ouml;nnen Sie den Betrag w&auml;hrend des Bestellvorganges verbuchen. </font></td>\r\n        </tr>\r\n    </tbody>\r\n</table>',	0,	'mail',	'----------------------------------------------------------------------------------------\r\n  Herzlichen Gl√ºckwunsch, Sie haben einen Gutschein √ºber {$AMMOUNT} erhalten !\r\n----------------------------------------------------------------------------------------\r\n\r\nDieser Gutschein wurde Ihnen √ºbermittelt von {$FROM_NAME},\r\nMit der Nachricht:\r\n\r\n{$MESSAGE}\r\n\r\nIhr pers√∂nlicher Gutscheincode lautet {$GIFT_CODE}. Sie k√∂nnen diese Gutschrift entweder w√§hrend dem Bestellvorgang verbuchen.\r\n\r\nUm den Gutschein einzul√∂sen klicken Sie bitte auf {$GIFT_LINK}\r\n\r\nFalls es mit dem obigen Link Probleme beim Einl√∂sen kommen sollte,\r\nk√∂nnen Sie den Betrag w√§hrend des Bestellvorganges verbuchen.'),
+(27,	'sepa_info',	1,	'<p>The invoice amount of {$PAYMENT_BANKTRANSFER_TOTAL} will be collected by using the SEPA Direct Debit with due date {$PAYMENT_BANKTRANSFER_DUE_DATE}<br />\r\nwith mandate {$PAYMENT_BANKTRANSFER_MANDATE_REFERENCE}<br />\r\nand for creditor identifier {$PAYMENT_BANKTRANSFER_CREDITOR_ID}<br />\r\nfrom your account {$PAYMENT_BANKTRANSFER_IBAN}<br />\r\nat {$PAYMENT_BANKTRANSFER_BANKNAME}.</p>\r\n<p>Please ensure that there are sufficient funds on your account to cover the payment.</p>',	0,	'mail',	'The invoice amount of {$PAYMENT_BANKTRANSFER_TOTAL} will be collected by using the SEPA Direct Debit with due date {$PAYMENT_BANKTRANSFER_DUE_DATE}\r\nwith mandate {$PAYMENT_BANKTRANSFER_MANDATE_REFERENCE}\r\nand for creditor identifier {$PAYMENT_BANKTRANSFER_CREDITOR_ID}\r\nfrom your account {$PAYMENT_BANKTRANSFER_IBAN}\r\nat {$PAYMENT_BANKTRANSFER_BANKNAME}.\r\n\r\nPlease ensure that there are sufficient funds on your account to cover the payment.'),
+(28,	'sepa_info',	2,	'<p>Den Rechnungsbetrag von{$PAYMENT_BANKTRANSFER_TOTAL} ziehen wir als SEPA-Lastschrift zum F&auml;lligkeitstag {$PAYMENT_BANKTRANSFER_DUE_DATE}<br />\r\nzu Ihrer Mandatsreferenz {$PAYMENT_BANKTRANSFER_MANDATE_REFERENCE}<br />\r\nund unserer Gl&auml;ubiger-ID {$PAYMENT_BANKTRANSFER_CREDITOR_ID}<br />\r\nvon Ihrem Konto {$PAYMENT_BANKTRANSFER_IBAN}<br />\r\nbei der {$PAYMENT_BANKTRANSFER_BANKNAME} ein.</p>\r\n<p>Bitte stellen Sie sicher, dass gen&uuml;gend Geld f&uuml;r die Zahlung auf dem Konto verf&uuml;gbar ist.</p>',	0,	'mail',	'Den Rechnungsbetrag von{$PAYMENT_BANKTRANSFER_TOTAL} EUR ziehen wir als SEPA-Lastschrift zum F√§lligkeitstag {$PAYMENT_BANKTRANSFER_DUE_DATE}\r\nzu Ihrer Mandatsreferenz {$PAYMENT_BANKTRANSFER_MANDATE_REFERENCE}\r\nund unserer Gl√§ubiger-Identifikationsnummer {$PAYMENT_BANKTRANSFER_CREDITOR_ID}\r\nvon Ihrem Konto {$PAYMENT_BANKTRANSFER_IBAN}\r\nbei der {$PAYMENT_BANKTRANSFER_BANKNAME} ein.\r\n\r\nBitte stellen Sie sicher, dass gen√ºgend Geld f√ºr die Zahlung auf dem Konto verf√ºgbar ist.'),
+(29,	'sepa_mail',	1,	'{config_load file=\"$language/lang_$language.conf\" section=\"duty_info\"} \r\n{$PAYMENT_INFO_HTML}<br />\r\n\r\n[SIGNATUR]',	0,	'mail',	'{config_load file=\"$language/lang_$language.conf\" section=\"duty_info\"} \r\n\r\n{$PAYMENT_INFO_TXT}\r\n\r\n[SIGNATUR]'),
+(30,	'sepa_mail',	2,	'<p>{config_load file=&quot;$language/lang_$language.conf&quot; section=&quot;duty_info&quot;}  {$PAYMENT_INFO_HTML}<br />\r\n[SIGNATUR]</p>',	0,	'mail',	'{config_load file=\"$language/lang_$language.conf\" section=\"duty_info\"} \r\n\r\n{$PAYMENT_INFO_TXT}\r\n\r\n[SIGNATUR]'),
+(31,	'signatur',	1,	'<div><font size=\"1\" face=\"Verdana, Arial, Helvetica, sans-serif\">__________________________________________________________________<br />\r\n<br />\r\n<b>Company</b><br />\r\nAddress<br />\r\nLocation<br />\r\nHomepage<br />\r\nE-mail<br />\r\nPhone:<br />\r\nFax:<br />\r\nCEO:<br />\r\nVAT Reg No: <br /></font></div\r\n',	0,	'mail',	'__________________________________________________________________\r\n\r\nCompany\r\nAddress\r\nLocation\r\nHomepage\r\nE-mail\r\nPhone:\r\nFax:\r\nCEO:\r\nVAT Reg No\r\n'),
+(32,	'signatur',	2,	'<div><font size=\"1\" face=\"Verdana, Arial, Helvetica, sans-serif\">__________________________________________________________________<br />\r\n<br />\r\nFirma<br />\r\nAdresse<br />\r\nOrt<br />\r\nHomepage<br />\r\nE-Mail<br />\r\nFon:<br />\r\nFax:<br />\r\nUSt-IdNr.:<br />\r\nHandelsregister<br />\r\nGesch&auml;ftsf&uuml;hrer:<br />\r\n</font></div>',	0,	'mail',	'__________________________________________________________________\r\n\r\nFirma\r\nAdresse\r\nOrt\r\nHomepage\r\nE-Mail\r\nFon:\r\nFax:\r\nUSt-IdNr.:\r\nHandelsregister\r\nGesch√§ftsf√ºhrer:');
+
 DROP TABLE IF EXISTS admin_access;
 CREATE TABLE admin_access (
   customers_id VARCHAR(32) NOT NULL DEFAULT 0,
@@ -219,9 +262,15 @@ CREATE TABLE admin_access (
   payone_logs INT(1) NOT NULL DEFAULT 0,
   
   imagesliders INT(1) NOT NULL DEFAULT 0,
-  
+  products_content INT(1) NOT NULL DEFAULT 0,
   pdfbill_config INT(1) NOT NULL DEFAULT 0,
   pdfbill_display INT(1) NOT NULL DEFAULT 0,
+  
+  email_manager INT(1) NOT NULL DEFAULT 0,
+  email_preview INT(1) NOT NULL DEFAULT 0,
+  
+  wholesalers INT(1) NOT NULL DEFAULT 0,
+  wholesalers_list INT(1) NOT NULL DEFAULT 0,
   
   PRIMARY KEY (customers_id)
 ) ENGINE=MyISAM;
@@ -353,6 +402,7 @@ CREATE TABLE countries (
   countries_iso_code_3 CHAR(3) NOT NULL,
   address_format_id INT NOT NULL,
   status INT(1) DEFAULT 1 NULL,
+  top tinyint(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (countries_id),
   KEY IDX_COUNTRIES_NAME (countries_name)
 ) ENGINE=MyISAM;
@@ -774,6 +824,8 @@ CREATE TABLE products (
   products_vpe_value DECIMAL(15,4) NOT NULL,
   products_startpage INT(1) NOT NULL DEFAULT 0,
   products_startpage_sort INT(4) NOT NULL DEFAULT 0,
+  wholesaler_id INT(11) NOT NULL DEFAULT 0,
+  wholesaler_reorder INT(4) NOT NULL DEFAULT 0,
   PRIMARY KEY (products_id),
   KEY idx_products_date_added (products_date_added),
   KEY idx_manufacturers_id(manufacturers_id),
@@ -890,6 +942,15 @@ CREATE TABLE products_to_categories (
   KEY idx_categories_id (categories_id)
 ) ENGINE=MyISAM;
 
+DROP TABLE IF EXISTS wholesalers;
+CREATE TABLE wholesalers (
+  wholesaler_id INT NOT NULL AUTO_INCREMENT,
+  wholesaler_name VARCHAR(254) NOT NULL,
+  wholesaler_email VARCHAR(254) NOT NULL,
+  wholesaler_email_template VARCHAR(254) NOT NULL,
+  PRIMARY KEY (wholesaler_id)
+) ENGINE=MyISAM;
+
 DROP TABLE IF EXISTS products_vpe;
 CREATE TABLE products_vpe (
   products_vpe_id INT(11) NOT NULL DEFAULT 0,
@@ -928,7 +989,6 @@ CREATE TABLE sessions (
   KEY idx_expiry(expiry)
 ) ENGINE=MyISAM;
 
-# BOF - web28 - 2010-07-07 - set shop offline
 DROP TABLE IF EXISTS shop_configuration;
 CREATE TABLE shop_configuration (
   configuration_id INT(11) NOT NULL AUTO_INCREMENT,
@@ -940,7 +1000,6 @@ CREATE TABLE shop_configuration (
 
 INSERT INTO shop_configuration (configuration_id, configuration_key, configuration_value) VALUES(NULL, 'SHOP_OFFLINE', '');
 INSERT INTO shop_configuration (configuration_id, configuration_key, configuration_value) VALUES(NULL, 'SHOP_OFFLINE_MSG', '<p style="text-align: center;"><span style="font-size: large;"><font face="Arial">Unser Shop ist aufgrund von Wartungsarbeiten im Moment nicht erreichbar.<br /></font><font face="Arial">Bitte besuchen Sie uns zu einem sp&auml;teren Zeitpunkt noch einmal.<br /><br /><br /><br /></font></span><font><font><a href="login_admin.php"><font color="#808080">Login</font></a></font></font><span style="font-size: large;"><font face="Arial"><br /></font></span></p>');
-# EOF - web28 - 2010-07-07 - set shop offline
 
 DROP TABLE IF EXISTS specials;
 CREATE TABLE specials (
@@ -1032,6 +1091,17 @@ CREATE TABLE whos_online (
   KEY idx_time_last_click(time_last_click)
 ) ENGINE=MyISAM;
 
+DROP TABLE IF EXISTS widgets;
+CREATE TABLE widgets (
+  widgets_id INT(11) NOT NULL AUTO_INCREMENT,
+  widgets_path VARCHAR(255) NOT NULL,
+  customer_id INT(11) DEFAULT NULL,
+  widgets_x INT(11) DEFAULT NULL,
+  widgets_y INT(11) DEFAULT NULL,
+  widgets_active TINYINT(1) NOT NULL DEFAULT 1,
+  PRIMARY KEY (widgets_id)
+) ENGINE=MyISAM;
+
 DROP TABLE IF EXISTS zones;
 CREATE TABLE zones (
   zone_id INT NOT NULL AUTO_INCREMENT,
@@ -1071,6 +1141,8 @@ CREATE TABLE content_manager (
   content_meta_title TEXT,
   content_meta_description TEXT,
   content_meta_keywords TEXT,
+  change_date datetime DEFAULT NULL,
+  content_meta_index tinyint(1) NOT NULL DEFAULT 1,
   PRIMARY KEY (content_id),
   FULLTEXT (content_meta_title,content_meta_description,content_meta_keywords)
 ) ENGINE=MyISAM;
@@ -1222,12 +1294,13 @@ CREATE TABLE pdfbill_profile (
   profile_name varchar(255) NOT NULL default '',
   profile_parameter text NOT NULL,
   profile_categories text NOT NULL,
+  rules text NOT NULL,
   PRIMARY KEY  (profile_id)
 ) ENGINE=MyISAM;
 
-INSERT INTO pdfbill_profile (profile_name, profile_parameter, profile_categories) VALUES ('default', 'bgimage_display=1,bgimage_image=hintergrund.png,headtext_display=1,headtext_text=Muster GBR Unterhaltungselektronik,headtext_font_color=#0000CC,headtext_font_type=arial,headtext_font_style={B;I},headtext_font_size=18,headtext_horizontal=15,headtext_vertical=0,headtext_width=,headtext_height=,addressblock_display=1,addressblock_text=Muster GBR#/K Postfach 4711#/K 12345 Fl¸mme,addressblock_position=L,addressblock_font_color=,addressblock_font_type=arial,addressblock_font_style={B;U},addressblock_font_size=6,addressblock_position2=R,addressblock_font_color2=,addressblock_font_type2=arial,addressblock_font_style2={B;I},addressblock_font_size2=10,addressblock_horizontal=15,addressblock_vertical=15,addressblock_width=50,image_display=1,image_image=muster.jpg,image_horizontal=150,image_vertical=0,image_width=,image_height=,datafields_display=1,datafields_position=L,datafields_font_color=,datafields_font_type=arial,datafields_font_size=10,datafields_position2=R,datafields_font_color2=,datafields_font_type2=arial,datafields_font_style2={B},datafields_font_size2=10,datafields_text_1=Bestelldatum,datafields_value_1=*date_order*,datafields_text_2=Kundennummer,datafields_value_2=*customers_id*,datafields_text_3=Rechnungsnummer,datafields_value_3=*orders_id*,datafields_text_4=Rechnungsdatum,datafields_value_4=*date_invoice*,datafields_text_5=,datafields_value_5=,datafields_text_6=,datafields_value_6=,datafields_horizontal=110,datafields_vertical=80,datafields_width=40#/K30,billhead_display=1,billhead_text=Rechnung Nr: *orders_id*,billhead_position=L,billhead_font_color=,billhead_font_type=arial,billhead_font_style={B;I;U},billhead_font_size=12,billhead_horizontal=15,billhead_vertical=80,billhead_width=,billhead_height=,listhead_display=1,listhead_text=Rechnungspositionen,listhead_font_color=,listhead_font_type=arial,listhead_font_style={B},listhead_font_size=8,listhead_horizontal=15,listhead_vertical=100,listhead_width=,listhead_height=,poslist_font_color=,poslist_font_type=arial,poslist_font_size=6,poslist_head_1=Pos.,poslist_value_1=*pos_nr*,poslist_width_1=5,poslist_align_1=C,poslist_head_2=Art.Nr.,poslist_value_2=*p_model*,poslist_width_2=20,poslist_align_2=C,poslist_head_3=Artikel,poslist_value_3=*p_name*,poslist_width_3=105,poslist_align_3=L,poslist_head_4=Anz.,poslist_value_4=*p_qty*,poslist_width_4=5,poslist_align_4=C,poslist_head_5=Einz.Preis,poslist_value_5=*p_single_price*,poslist_width_5=15,poslist_align_5=R,poslist_head_6=Gesamt,poslist_value_6=*p_price*,poslist_width_6=15,poslist_align_6=R,poslist_head_7=,poslist_value_7=,poslist_width_7=,poslist_align_7=C,poslist_horizontal=15,poslist_vertical=,resumefields_display=1,resumefields_position=L,resumefields_font_color=,resumefields_font_type=arial,resumefields_font_size=8,resumefields_position2=R,resumefields_font_color2=,resumefields_font_type2=arial,resumefields_font_size2=8,resumefields_horizontal=60,resumefields_vertical=5,resumefields_width=80#/K40,subtext_display=1,subtext_text=Die Ware bleibt bis zur vollst‰ndigen Bezahlung Eigentum der Muster GBR ,subtext_font_color=,subtext_font_type=arial,subtext_font_size=8,subtext_horizontal=15,subtext_vertical=25,subtext_width=,subtext_height=,footer_display=1,footer_font_color=,footer_font_type=arial,footer_font_size=6,footer_display_1=1,footer_position_1=L,footer_text_1=Muster GbR Beispielstrasse 123 12345 Fl¸mme,footer_display_2=1,footer_position_2=C,footer_text_2=Konto: 1234567 BLZ 222 333 44 Beispielbank,footer_display_3=1,footer_position_3=R,footer_text_3=HGR 32344424 AmtsG. Fl¸mme StNr. 5545594,footer_position_4=L,footer_text_4=,terms_display=1,terms_formtext=Allgemeine Gesch‰ftsbedingungen (AGB),terms_head_position=L,terms_head_font_style={B},terms_head_font_size=10,terms_font_color=,terms_font_type=arial,terms_font_size=6,default_profile=1,typeofbill=delivnote,languages_code=de', '');
-INSERT INTO pdfbill_profile (profile_name, profile_parameter, profile_categories) VALUES ('profile_de_delivnote', 'bgimage_display=1,bgimage_image=hintergrund.png,headtext_display=1,headtext_text=Muster GBR Unterhaltungselektronik,headtext_font_color=#0000CC,headtext_font_type=arial,headtext_font_style={B;I},headtext_font_size=18,headtext_horizontal=15,headtext_vertical=0,headtext_width=,headtext_height=,addressblock_display=1,addressblock_text=Muster GBR#/K Postfach 4711#/K 12345 Fl¸mme,addressblock_position=L,addressblock_font_color=,addressblock_font_type=arial,addressblock_font_style={B;U},addressblock_font_size=6,addressblock_position2=R,addressblock_font_color2=,addressblock_font_type2=arial,addressblock_font_style2={B;I},addressblock_font_size2=10,addressblock_horizontal=15,addressblock_vertical=15,addressblock_width=50,image_display=1,image_image=muster.jpg,image_horizontal=150,image_vertical=0,image_width=,image_height=,datafields_display=1,datafields_position=L,datafields_font_color=,datafields_font_type=arial,datafields_font_size=10,datafields_position2=R,datafields_font_color2=,datafields_font_type2=arial,datafields_font_style2={B},datafields_font_size2=10,datafields_text_1=Bestelldatum,datafields_value_1=*date_order*,datafields_text_2=Kundennummer,datafields_value_2=*customers_id*,datafields_text_3=Rechnungsnummer,datafields_value_3=*orders_id*,datafields_text_4=Rechnungsdatum,datafields_value_4=*date_invoice*,datafields_text_5=,datafields_value_5=,datafields_text_6=,datafields_value_6=,datafields_horizontal=110,datafields_vertical=80,datafields_width=40#/K30,billhead_display=1,billhead_text=Lieferschein Nr: *orders_id*,billhead_position=L,billhead_font_color=,billhead_font_type=arial,billhead_font_style={B;I;U},billhead_font_size=12,billhead_horizontal=15,billhead_vertical=80,billhead_width=,billhead_height=,listhead_display=1,listhead_text=Lieferpositionen,listhead_font_color=,listhead_font_type=arial,listhead_font_style={B},listhead_font_size=8,listhead_horizontal=15,listhead_vertical=100,listhead_width=,listhead_height=,poslist_font_color=,poslist_font_type=arial,poslist_font_size=6,poslist_head_1=Pos.,poslist_value_1=*pos_nr*,poslist_width_1=5,poslist_align_1=C,poslist_head_2=Art.Nr.,poslist_value_2=*p_model*,poslist_width_2=20,poslist_align_2=C,poslist_head_3=Artikel,poslist_value_3=*p_name*,poslist_width_3=105,poslist_align_3=L,poslist_head_4=Anz.,poslist_value_4=*p_qty*,poslist_width_4=5,poslist_align_4=C,poslist_head_5=Einz.Preis,poslist_value_5=*p_single_price*,poslist_width_5=15,poslist_align_5=R,poslist_head_6=Gesamt,poslist_value_6=*p_price*,poslist_width_6=15,poslist_align_6=R,poslist_head_7=,poslist_value_7=,poslist_width_7=,poslist_align_7=C,poslist_horizontal=15,poslist_vertical=,resumefields_display=1,resumefields_position=L,resumefields_font_color=,resumefields_font_type=arial,resumefields_font_size=8,resumefields_position2=R,resumefields_font_color2=,resumefields_font_type2=arial,resumefields_font_size2=8,resumefields_horizontal=60,resumefields_vertical=5,resumefields_width=80#/K40,subtext_display=1,subtext_text=Die Ware bleibt bis zur vollst‰ndigen Bezahlung Eigentum der Muster GBR ,subtext_font_color=,subtext_font_type=arial,subtext_font_size=8,subtext_horizontal=15,subtext_vertical=25,subtext_width=,subtext_height=,footer_display=1,footer_font_color=,footer_font_type=arial,footer_font_size=6,footer_display_1=1,footer_position_1=L,footer_text_1=Muster GbR Beispielstrasse 123 12345 Fl¸mme,footer_display_2=1,footer_position_2=C,footer_text_2=Konto: 1234567 BLZ 222 333 44 Beispielbank,footer_display_3=1,footer_position_3=R,footer_text_3=HGR 32344424 AmtsG. Fl¸mme StNr. 5545594,footer_position_4=L,footer_text_4=,terms_formtext=Allgemeine Gesch‰ftsbedingungen (AGB),terms_head_position=L,terms_head_font_style={B},terms_head_font_size=10,terms_font_color=,terms_font_type=arial,terms_font_size=6,typeofbill=delivnote,languages_code=de', '');
-INSERT INTO pdfbill_profile (profile_name, profile_parameter, profile_categories) VALUES ('profile_de_invoice', 'bgimage_display=1,bgimage_image=hintergrund.png,headtext_display=1,headtext_text=Muster GBR Unterhaltungselektronik,headtext_font_color=#0000CC,headtext_font_type=arial,headtext_font_style={B;I},headtext_font_size=18,headtext_horizontal=15,headtext_vertical=0,headtext_width=,headtext_height=,addressblock_display=1,addressblock_text=Muster GBR#/K Postfach 4711#/K 12345 Fl¸mme,addressblock_position=L,addressblock_font_color=,addressblock_font_type=arial,addressblock_font_style={B;U},addressblock_font_size=6,addressblock_position2=R,addressblock_font_color2=,addressblock_font_type2=arial,addressblock_font_style2={B;I},addressblock_font_size2=10,addressblock_horizontal=15,addressblock_vertical=15,addressblock_width=50,image_display=1,image_image=muster.jpg,image_horizontal=150,image_vertical=0,image_width=,image_height=,datafields_display=1,datafields_position=L,datafields_font_color=,datafields_font_type=arial,datafields_font_size=10,datafields_position2=R,datafields_font_color2=,datafields_font_type2=arial,datafields_font_style2={B},datafields_font_size2=10,datafields_text_1=Bestelldatum,datafields_value_1=*date_order*,datafields_text_2=Kundennummer,datafields_value_2=*customers_id*,datafields_text_3=Rechnungsnummer,datafields_value_3=*orders_id*,datafields_text_4=Rechnungsdatum,datafields_value_4=*date_invoice*,datafields_text_5=,datafields_value_5=,datafields_text_6=,datafields_value_6=,datafields_horizontal=110,datafields_vertical=80,datafields_width=40#/K30,billhead_display=1,billhead_text=Rechnung Nr: *orders_id*,billhead_position=L,billhead_font_color=,billhead_font_type=arial,billhead_font_style={B;I;U},billhead_font_size=12,billhead_horizontal=15,billhead_vertical=80,billhead_width=,billhead_height=,listhead_display=1,listhead_text=Rechnungspositionen,listhead_font_color=,listhead_font_type=arial,listhead_font_style={B},listhead_font_size=8,listhead_horizontal=15,listhead_vertical=100,listhead_width=,listhead_height=,poslist_font_color=,poslist_font_type=arial,poslist_font_size=6,poslist_head_1=Pos.,poslist_value_1=*pos_nr*,poslist_width_1=5,poslist_align_1=C,poslist_head_2=Art.Nr.,poslist_value_2=*p_model*,poslist_width_2=20,poslist_align_2=C,poslist_head_3=Artikel,poslist_value_3=*p_name*,poslist_width_3=105,poslist_align_3=L,poslist_head_4=Anz.,poslist_value_4=*p_qty*,poslist_width_4=5,poslist_align_4=C,poslist_head_5=Einz.Preis,poslist_value_5=*p_single_price*,poslist_width_5=15,poslist_align_5=R,poslist_head_6=Gesamt,poslist_value_6=*p_price*,poslist_width_6=15,poslist_align_6=R,poslist_head_7=,poslist_value_7=,poslist_width_7=,poslist_align_7=C,poslist_horizontal=15,poslist_vertical=,resumefields_display=1,resumefields_position=L,resumefields_font_color=,resumefields_font_type=arial,resumefields_font_size=8,resumefields_position2=R,resumefields_font_color2=,resumefields_font_type2=arial,resumefields_font_size2=8,resumefields_horizontal=60,resumefields_vertical=5,resumefields_width=80#/K40,subtext_display=1,subtext_text=Die Ware bleibt bis zur vollst‰ndigen Bezahlung Eigentum der Muster GBR ,subtext_font_color=,subtext_font_type=arial,subtext_font_size=8,subtext_horizontal=15,subtext_vertical=25,subtext_width=,subtext_height=,footer_display=1,footer_font_color=,footer_font_type=arial,footer_font_size=6,footer_display_1=1,footer_position_1=L,footer_text_1=Muster GbR Beispielstrasse 123 12345 Fl¸mme,footer_display_2=1,footer_position_2=C,footer_text_2=Konto: 1234567 BLZ 222 333 44 Beispielbank,footer_display_3=1,footer_position_3=R,footer_text_3=HGR 32344424 AmtsG. Fl¸mme StNr. 5545594,footer_position_4=L,footer_text_4=,terms_display=1,terms_formtext=Allgemeine Gesch‰ftsbedingungen (AGB),terms_head_position=L,terms_head_font_style={B},terms_head_font_size=10,terms_font_color=,terms_font_type=arial,terms_font_size=6,typeofbill=invoice,languages_code=de', '');
+INSERT INTO pdfbill_profile (profile_name, profile_parameter, profile_categories) VALUES ('default', 'bgimage_display=1,bgimage_image=hintergrund.png,headtext_display=1,headtext_text=Muster GBR Unterhaltungselektronik,headtext_font_color=#0000CC,headtext_font_type=arial,headtext_font_style={B;I},headtext_font_size=18,headtext_horizontal=15,headtext_vertical=0,headtext_width=,headtext_height=,addressblock_display=1,addressblock_text=Muster GBR#/K Postfach 4711#/K 12345 Fl√ºmme,addressblock_position=L,addressblock_font_color=,addressblock_font_type=arial,addressblock_font_style={B;U},addressblock_font_size=6,addressblock_position2=R,addressblock_font_color2=,addressblock_font_type2=arial,addressblock_font_style2={B;I},addressblock_font_size2=10,addressblock_horizontal=15,addressblock_vertical=15,addressblock_width=50,image_display=1,image_image=muster.jpg,image_horizontal=150,image_vertical=0,image_width=,image_height=,datafields_display=1,datafields_position=L,datafields_font_color=,datafields_font_type=arial,datafields_font_size=10,datafields_position2=R,datafields_font_color2=,datafields_font_type2=arial,datafields_font_style2={B},datafields_font_size2=10,datafields_text_1=Bestelldatum,datafields_value_1=*date_order*,datafields_text_2=Kundennummer,datafields_value_2=*customers_id*,datafields_text_3=Rechnungsnummer,datafields_value_3=*orders_id*,datafields_text_4=Rechnungsdatum,datafields_value_4=*date_invoice*,datafields_text_5=,datafields_value_5=,datafields_text_6=,datafields_value_6=,datafields_horizontal=110,datafields_vertical=80,datafields_width=40#/K30,billhead_display=1,billhead_text=Rechnung Nr: *orders_id*,billhead_position=L,billhead_font_color=,billhead_font_type=arial,billhead_font_style={B;I;U},billhead_font_size=12,billhead_horizontal=15,billhead_vertical=80,billhead_width=,billhead_height=,listhead_display=1,listhead_text=Rechnungspositionen,listhead_font_color=,listhead_font_type=arial,listhead_font_style={B},listhead_font_size=8,listhead_horizontal=15,listhead_vertical=100,listhead_width=,listhead_height=,poslist_font_color=,poslist_font_type=arial,poslist_font_size=6,poslist_head_1=Pos.,poslist_value_1=*pos_nr*,poslist_width_1=5,poslist_align_1=C,poslist_head_2=Art.Nr.,poslist_value_2=*p_model*,poslist_width_2=20,poslist_align_2=C,poslist_head_3=Artikel,poslist_value_3=*p_name*,poslist_width_3=105,poslist_align_3=L,poslist_head_4=Anz.,poslist_value_4=*p_qty*,poslist_width_4=5,poslist_align_4=C,poslist_head_5=Einz.Preis,poslist_value_5=*p_single_price*,poslist_width_5=15,poslist_align_5=R,poslist_head_6=Gesamt,poslist_value_6=*p_price*,poslist_width_6=15,poslist_align_6=R,poslist_head_7=,poslist_value_7=,poslist_width_7=,poslist_align_7=C,poslist_horizontal=15,poslist_vertical=,resumefields_display=1,resumefields_position=L,resumefields_font_color=,resumefields_font_type=arial,resumefields_font_size=8,resumefields_position2=R,resumefields_font_color2=,resumefields_font_type2=arial,resumefields_font_size2=8,resumefields_horizontal=60,resumefields_vertical=5,resumefields_width=80#/K40,subtext_display=1,subtext_text=Die Ware bleibt bis zur vollst√§ndigen Bezahlung Eigentum der Muster GBR ,subtext_font_color=,subtext_font_type=arial,subtext_font_size=8,subtext_horizontal=15,subtext_vertical=25,subtext_width=,subtext_height=,footer_display=1,footer_font_color=,footer_font_type=arial,footer_font_size=6,footer_display_1=1,footer_position_1=L,footer_text_1=Muster GbR Beispielstrasse 123 12345 Fl√ºmme,footer_display_2=1,footer_position_2=C,footer_text_2=Konto: 1234567 BLZ 222 333 44 Beispielbank,footer_display_3=1,footer_position_3=R,footer_text_3=HGR 32344424 AmtsG. Fl√ºmme StNr. 5545594,footer_position_4=L,footer_text_4=,terms_display=1,terms_formtext=Allgemeine Gesch√§ftsbedingungen (AGB),terms_head_position=L,terms_head_font_style={B},terms_head_font_size=10,terms_font_color=,terms_font_type=arial,terms_font_size=6,default_profile=1,typeofbill=delivnote,languages_code=de', '');
+INSERT INTO pdfbill_profile (profile_name, profile_parameter, profile_categories) VALUES ('profile_de_delivnote', 'bgimage_display=1,bgimage_image=hintergrund.png,headtext_display=1,headtext_text=Muster GBR Unterhaltungselektronik,headtext_font_color=#0000CC,headtext_font_type=arial,headtext_font_style={B;I},headtext_font_size=18,headtext_horizontal=15,headtext_vertical=0,headtext_width=,headtext_height=,addressblock_display=1,addressblock_text=Muster GBR#/K Postfach 4711#/K 12345 Fl√ºmme,addressblock_position=L,addressblock_font_color=,addressblock_font_type=arial,addressblock_font_style={B;U},addressblock_font_size=6,addressblock_position2=R,addressblock_font_color2=,addressblock_font_type2=arial,addressblock_font_style2={B;I},addressblock_font_size2=10,addressblock_horizontal=15,addressblock_vertical=15,addressblock_width=50,image_display=1,image_image=muster.jpg,image_horizontal=150,image_vertical=0,image_width=,image_height=,datafields_display=1,datafields_position=L,datafields_font_color=,datafields_font_type=arial,datafields_font_size=10,datafields_position2=R,datafields_font_color2=,datafields_font_type2=arial,datafields_font_style2={B},datafields_font_size2=10,datafields_text_1=Bestelldatum,datafields_value_1=*date_order*,datafields_text_2=Kundennummer,datafields_value_2=*customers_id*,datafields_text_3=Rechnungsnummer,datafields_value_3=*orders_id*,datafields_text_4=Rechnungsdatum,datafields_value_4=*date_invoice*,datafields_text_5=,datafields_value_5=,datafields_text_6=,datafields_value_6=,datafields_horizontal=110,datafields_vertical=80,datafields_width=40#/K30,billhead_display=1,billhead_text=Lieferschein Nr: *orders_id*,billhead_position=L,billhead_font_color=,billhead_font_type=arial,billhead_font_style={B;I;U},billhead_font_size=12,billhead_horizontal=15,billhead_vertical=80,billhead_width=,billhead_height=,listhead_display=1,listhead_text=Lieferpositionen,listhead_font_color=,listhead_font_type=arial,listhead_font_style={B},listhead_font_size=8,listhead_horizontal=15,listhead_vertical=100,listhead_width=,listhead_height=,poslist_font_color=,poslist_font_type=arial,poslist_font_size=6,poslist_head_1=Pos.,poslist_value_1=*pos_nr*,poslist_width_1=5,poslist_align_1=C,poslist_head_2=Art.Nr.,poslist_value_2=*p_model*,poslist_width_2=20,poslist_align_2=C,poslist_head_3=Artikel,poslist_value_3=*p_name*,poslist_width_3=105,poslist_align_3=L,poslist_head_4=Anz.,poslist_value_4=*p_qty*,poslist_width_4=5,poslist_align_4=C,poslist_head_5=Einz.Preis,poslist_value_5=*p_single_price*,poslist_width_5=15,poslist_align_5=R,poslist_head_6=Gesamt,poslist_value_6=*p_price*,poslist_width_6=15,poslist_align_6=R,poslist_head_7=,poslist_value_7=,poslist_width_7=,poslist_align_7=C,poslist_horizontal=15,poslist_vertical=,resumefields_display=1,resumefields_position=L,resumefields_font_color=,resumefields_font_type=arial,resumefields_font_size=8,resumefields_position2=R,resumefields_font_color2=,resumefields_font_type2=arial,resumefields_font_size2=8,resumefields_horizontal=60,resumefields_vertical=5,resumefields_width=80#/K40,subtext_display=1,subtext_text=Die Ware bleibt bis zur vollst√§ndigen Bezahlung Eigentum der Muster GBR ,subtext_font_color=,subtext_font_type=arial,subtext_font_size=8,subtext_horizontal=15,subtext_vertical=25,subtext_width=,subtext_height=,footer_display=1,footer_font_color=,footer_font_type=arial,footer_font_size=6,footer_display_1=1,footer_position_1=L,footer_text_1=Muster GbR Beispielstrasse 123 12345 Fl√ºmme,footer_display_2=1,footer_position_2=C,footer_text_2=Konto: 1234567 BLZ 222 333 44 Beispielbank,footer_display_3=1,footer_position_3=R,footer_text_3=HGR 32344424 AmtsG. Fl√ºmme StNr. 5545594,footer_position_4=L,footer_text_4=,terms_formtext=Allgemeine Gesch√§ftsbedingungen (AGB),terms_head_position=L,terms_head_font_style={B},terms_head_font_size=10,terms_font_color=,terms_font_type=arial,terms_font_size=6,typeofbill=delivnote,languages_code=de', '');
+INSERT INTO pdfbill_profile (profile_name, profile_parameter, profile_categories) VALUES ('profile_de_invoice', 'bgimage_display=1,bgimage_image=hintergrund.png,headtext_display=1,headtext_text=Muster GBR Unterhaltungselektronik,headtext_font_color=#0000CC,headtext_font_type=arial,headtext_font_style={B;I},headtext_font_size=18,headtext_horizontal=15,headtext_vertical=0,headtext_width=,headtext_height=,addressblock_display=1,addressblock_text=Muster GBR#/K Postfach 4711#/K 12345 Fl√ºmme,addressblock_position=L,addressblock_font_color=,addressblock_font_type=arial,addressblock_font_style={B;U},addressblock_font_size=6,addressblock_position2=R,addressblock_font_color2=,addressblock_font_type2=arial,addressblock_font_style2={B;I},addressblock_font_size2=10,addressblock_horizontal=15,addressblock_vertical=15,addressblock_width=50,image_display=1,image_image=muster.jpg,image_horizontal=150,image_vertical=0,image_width=,image_height=,datafields_display=1,datafields_position=L,datafields_font_color=,datafields_font_type=arial,datafields_font_size=10,datafields_position2=R,datafields_font_color2=,datafields_font_type2=arial,datafields_font_style2={B},datafields_font_size2=10,datafields_text_1=Bestelldatum,datafields_value_1=*date_order*,datafields_text_2=Kundennummer,datafields_value_2=*customers_id*,datafields_text_3=Rechnungsnummer,datafields_value_3=*orders_id*,datafields_text_4=Rechnungsdatum,datafields_value_4=*date_invoice*,datafields_text_5=,datafields_value_5=,datafields_text_6=,datafields_value_6=,datafields_horizontal=110,datafields_vertical=80,datafields_width=40#/K30,billhead_display=1,billhead_text=Rechnung Nr: *orders_id*,billhead_position=L,billhead_font_color=,billhead_font_type=arial,billhead_font_style={B;I;U},billhead_font_size=12,billhead_horizontal=15,billhead_vertical=80,billhead_width=,billhead_height=,listhead_display=1,listhead_text=Rechnungspositionen,listhead_font_color=,listhead_font_type=arial,listhead_font_style={B},listhead_font_size=8,listhead_horizontal=15,listhead_vertical=100,listhead_width=,listhead_height=,poslist_font_color=,poslist_font_type=arial,poslist_font_size=6,poslist_head_1=Pos.,poslist_value_1=*pos_nr*,poslist_width_1=5,poslist_align_1=C,poslist_head_2=Art.Nr.,poslist_value_2=*p_model*,poslist_width_2=20,poslist_align_2=C,poslist_head_3=Artikel,poslist_value_3=*p_name*,poslist_width_3=105,poslist_align_3=L,poslist_head_4=Anz.,poslist_value_4=*p_qty*,poslist_width_4=5,poslist_align_4=C,poslist_head_5=Einz.Preis,poslist_value_5=*p_single_price*,poslist_width_5=15,poslist_align_5=R,poslist_head_6=Gesamt,poslist_value_6=*p_price*,poslist_width_6=15,poslist_align_6=R,poslist_head_7=,poslist_value_7=,poslist_width_7=,poslist_align_7=C,poslist_horizontal=15,poslist_vertical=,resumefields_display=1,resumefields_position=L,resumefields_font_color=,resumefields_font_type=arial,resumefields_font_size=8,resumefields_position2=R,resumefields_font_color2=,resumefields_font_type2=arial,resumefields_font_size2=8,resumefields_horizontal=60,resumefields_vertical=5,resumefields_width=80#/K40,subtext_display=1,subtext_text=Die Ware bleibt bis zur vollst√§ndigen Bezahlung Eigentum der Muster GBR ,subtext_font_color=,subtext_font_type=arial,subtext_font_size=8,subtext_horizontal=15,subtext_vertical=25,subtext_width=,subtext_height=,footer_display=1,footer_font_color=,footer_font_type=arial,footer_font_size=6,footer_display_1=1,footer_position_1=L,footer_text_1=Muster GbR Beispielstrasse 123 12345 Fl√ºmme,footer_display_2=1,footer_position_2=C,footer_text_2=Konto: 1234567 BLZ 222 333 44 Beispielbank,footer_display_3=1,footer_position_3=R,footer_text_3=HGR 32344424 AmtsG. Fl√ºmme StNr. 5545594,footer_position_4=L,footer_text_4=,terms_display=1,terms_formtext=Allgemeine Gesch√§ftsbedingungen (AGB),terms_head_position=L,terms_head_font_style={B},terms_head_font_size=10,terms_font_color=,terms_font_type=arial,terms_font_size=6,typeofbill=invoice,languages_code=de', '');
 
 DROP TABLE IF EXISTS personal_offers_by_customers_status_0;
 DROP TABLE IF EXISTS personal_offers_by_customers_status_1;
@@ -1236,7 +1309,7 @@ DROP TABLE IF EXISTS personal_offers_by_customers_status_3;
 DROP TABLE IF EXISTS personal_offers_by_customers_status_4;
 
 #database Version
-INSERT INTO database_version(version) VALUES ('SH_1.1.1');
+INSERT INTO database_version(version) VALUES ('SH_1.2.0');
 
 INSERT INTO cm_file_flags (file_flag, file_flag_name) VALUES ('0', 'information');
 INSERT INTO cm_file_flags (file_flag, file_flag_name) VALUES ('1', 'content');
@@ -1249,51 +1322,40 @@ INSERT INTO shipping_status VALUES (2, 2, '1 Woche', '');
 INSERT INTO shipping_status VALUES (3, 1, '2 Weeks', '');
 INSERT INTO shipping_status VALUES (3, 2, '2 Wochen', '');
 
-# data
-INSERT INTO content_manager VALUES (1, 0, 0, '', 1, 'Shipping &amp; Returns', 'Shipping &amp; Returns', 'Put here your Shipping &amp; Returns information.', 0, 1, '', 1, 1, 0, '', '', '');
-INSERT INTO content_manager VALUES (2, 0, 0, '', 1, 'Privacy Notice', 'Privacy Notice', 'Put here your Privacy Notice information.', 0, 1, '', 1, 2, 0, '', '', '');
-INSERT INTO content_manager VALUES (3, 0, 0, '', 1, 'Conditions of Use', 'Conditions of Use', 'Conditions of Use<br />Put here your Conditions of Use information.<br /><br /><ol><li>Geltungsbereich</li><li>Vertragspartner</li><li>Angebot und Vertragsschluss</li><li>Widerrufsrecht, Widerrufsbelehrung, Widerrufsfolgen</li><li>Preise und Versandkosten</li><li>Lieferung</li><li>Zahlung</li><li>Eigentumsvorbehalt</li><li>Gew&auml;hrleistung</li></ol>Weitere Informationen', 0, 1, '', 1, 3, 0, '', '', '');
-INSERT INTO content_manager VALUES (4, 0, 0, '', 1, 'Imprint', 'Imprint', 'Put here your Company information.<br /><br />DemoShop GmbH<br />Gesch&auml;ftsf&uuml;hrer: Max Muster und Fritz Beispiel<br /><br />Max Muster Stra&szlig;e 21-23<br />D-0815 Musterhausen<br />E-Mail: max.muster@muster.de<br /><br />HRB 123456<br />Amtsgericht Musterhausen<br />UStid-Nr. DE 000 111 222', 0, 1, '', 1, 4, 0, '', '', '');
-INSERT INTO content_manager VALUES (5, 0, 0, '', 1, 'Index', 'Welcome', '<p>{$greeting}<br />\r\n<br />\r\nDies ist eine Grundinstallation vom <span style="color: rgb(55, 116, 227);"><strong>shophelfer</strong></span><span style="color: rgb(74, 74, 82);"><strong>.com</strong></span> Shopsystem. Diese Seite, die Kategorien, Produkte,&nbsp;Dienstleistungen und Angebote dienen nur der Demonstration der Funktionsweise dieses Shopsystemes. Wenn Sie Produkte bestellen, so werden diese weder ausgeliefert, noch in Rechnung gestellt.</p>\r\n<p>Das <span style="color: rgb(55, 116, 227);"><strong>shophelfer</strong></span><span style="color: rgb(74, 74, 82);"><strong>.com</strong></span> Shopsystem ist komplett kostenlos, Open Source und wird durch eine offene Community weiterentwickelt. Alle Informationen zu dem Projekt finden Sie auf unserer Webseite: <a target="_blank" href="http://www.shophelfer.com"><span style="color: rgb(55, 116, 227);"><strong>shophelfer</strong></span><span style="color: rgb(74, 74, 82);"><strong>.com</strong></span></a></p>\r\n<p>Dieser Text kann im Adminbereich unter <b>Inhalte -&gt; Content Manager</b> - Eintrag Index bearbeitet werden.</p>\r\n<p>&nbsp;</p>\r\n<p>Die <span style="color: rgb(55, 116, 227);"><strong>shophelfer</strong></span><span style="color: rgb(74, 74, 82);"><strong>.com </strong></span>Community w&uuml;nscht Ihnen viel Erfolg mit Ihrem neuem Shopsystem!</p>', 0, 1, '', 0, 5, 0, '', '', '');
-INSERT INTO content_manager VALUES (6, 0, 0, '', 2, 'Liefer- und Versandkosten', 'Liefer- und Versandkosten', 'F&uuml;gen Sie hier Ihre Informationen &uuml;ber Liefer- und Versandkosten ein.', 0, 1, '', 1, 1, 0, '', '', '');
-INSERT INTO content_manager VALUES (7, 0, 0, '', 2, 'Privatsph‰re und Datenschutz', 'Privatsph‰re und Datenschutz', 'F&uuml;gen Sie hier Ihre Informationen &uuml;ber Privatsph&auml;re und Datenschutz ein.', 0, 1, '', 1, 2, 0, '', '', '');
-INSERT INTO content_manager VALUES (8, 0, 0, '', 2, 'Unsere AGB', 'Allgemeine Gesch‰ftsbedingungen', '<strong>Allgemeine Gesch&auml;ftsbedingungen<br /></strong><br />F&uuml;gen Sie hier Ihre allgemeinen Gesch&auml;ftsbedingungen ein.<br /><br /><ol><li>Geltungsbereich</li><li>Vertragspartner</li><li>Angebot und Vertragsschluss</li><li>Widerrufsrecht, Widerrufsbelehrung, Widerrufsfolgen</li><li>Preise und Versandkosten</li><li>Lieferung</li><li>Zahlung</li><li>Eigentumsvorbehalt</li><li>Gew&auml;hrleistung</li></ol>Weitere Informationen', 0, 1, '', 1, 3, 0, '', '', '');
-INSERT INTO content_manager VALUES (9, 0, 0, '', 2, 'Impressum', 'Impressum', 'F&uuml;gen Sie hier Ihr Impressum ein.<br /><br />DemoShop GmbH<br />Gesch&auml;ftsf&uuml;hrer: Max Muster und Fritz Beispiel<br /><br />Max Muster Stra&szlig;e 21-23<br />D-0815 Musterhausen<br />E-Mail: max.muster@muster.de<br /><br />HRB 123456<br />Amtsgericht Musterhausen<br />UStid-Nr. DE 000 111 222', 0, 1, '', 1, 4, 0, '', '', '');
-INSERT INTO content_manager VALUES (10, 0, 0, '', 2, 'Index', 'Willkommen', '<p>{$greeting}<br />\r\n<br />\r\nDies ist eine Grundinstallation vom <span style="color: rgb(55, 116, 227);"><strong>shophelfer</strong></span><span style="color: rgb(74, 74, 82);"><strong>.com</strong></span> Shopsystem. Diese Seite, die Kategorien, Produkte,&nbsp;Dienstleistungen und Angebote dienen nur der Demonstration der Funktionsweise dieses Shopsystemes. Wenn Sie Produkte bestellen, so werden diese weder ausgeliefert, noch in Rechnung gestellt.</p>\r\n<p>Das <span style="color: rgb(55, 116, 227);"><strong>shophelfer</strong></span><span style="color: rgb(74, 74, 82);"><strong>.com</strong></span> Shopsystem ist komplett kostenlos, Open Source und wird durch eine offene Community weiterentwickelt. Alle Informationen zu dem Projekt finden Sie auf unserer Webseite: <a target="_blank" href="http://www.shophelfer.com"><span style="color: rgb(55, 116, 227);"><strong>shophelfer</strong></span><span style="color: rgb(74, 74, 82);"><strong>.com</strong></span></a></p>\r\n<p>Dieser Text kann im Adminbereich unter <b>Inhalte -&gt; Content Manager</b> - Eintrag Index bearbeitet werden.</p>\r\n<p>&nbsp;</p>\r\n<p>Die <span style="color: rgb(55, 116, 227);"><strong>shophelfer</strong></span><span style="color: rgb(74, 74, 82);"><strong>.com </strong></span>Community w&uuml;nscht Ihnen viel Erfolg mit Ihrem neuem Shopsystem!</p>', 0, 1, '', 0, 5, 0, '', '', '');
-INSERT INTO content_manager VALUES (11, 0, 0, '', 1, 'Coupons', 'Coupons FAQ', '<table cellSpacing="0" cellPadding="0">\r\n<tbody>\r\n<tr>\r\n<td class="main"><strong>Buy Gift Vouchers/Coupons </strong></td></tr>\r\n<tr>\r\n<td class="main">If the shop provided gift vouchers or coupons, You can buy them alike all other products. As soon as You have bought and payed the coupon, the shop system will activate Your coupon. You will then see the coupon amount in Your shopping cart. Then You can send the coupon via e-mail by clicking the link "Send Coupon". </td></tr></tbody></table>\r\n<table cellSpacing="0" cellPadding="0">\r\n<tbody>\r\n<tr>\r\n<td class="main"><strong>How to dispatch Coupons </strong></td></tr>\r\n<tr>\r\n<td class="main">To dispatch a coupon, please click the link "Send Coupon" in Your shopping cart. To send the coupon to the correct person, we need the following details: Surname and realname of the recipient and a valid e-mail adress of the recipient, and the desired coupon amount (You can also use only parts of Your balance). Please provide also a short message for the recipient. Please check those information again before You click the "Send Coupon" button. You can change all information at any time before clicking the "Send Coupon" button. </td></tr></tbody></table>\r\n<table cellSpacing="0" cellPadding="0">\r\n<tbody>\r\n<tr>\r\n<td class="main"><strong>How to use Coupons to buy products. </strong></td></tr>\r\n<tr>\r\n<td class="main">As soon as You have a balance, You can use it to pay for Your orders. During the checkout process, You can redeem Your coupon. In case Your balance is less than the value of goods You ordered, You would have to choose Your preferred method of payment for the difference amount. In case Your balance is more than the value of goods You ordered, the remaining amount of Your balance will be saved for Your next order. </td></tr></tbody></table>\r\n<table cellSpacing="0" cellPadding="0">\r\n<tbody>\r\n<tr>\r\n<td class="main"><strong>How to redeem Coupons. </strong></td></tr>\r\n<tr>\r\n<td class="main">In case You have received a coupun via e-mail, You can: <br />1. Click on the link provided in the e-mail. If You do not have an account in this shop already, please create a personal account. <br />2. After having added a product to Your shopping cart, You can enter Your coupon code.</td></tr></tbody></table>\r\n<table cellSpacing="0" cellPadding="0">\r\n<tbody>\r\n<tr>\r\n<td class="main"><strong>Problems?</strong></td></tr>\r\n<tr>\r\n<td class="main">If You have trouble or problems in using Your coupons, please check back with us via our e-mail: you@yourdomain.com. Please describe the encountered problem as detailed as possible! We need the following information to process Your request quickly: Your user id, the coupon code, error messages the shop system returned to You, and the name of the web browser You are using (e.g. "Internet Explorer 6" or "Firefox 1.5"). </td></tr></tbody></table>', 0, 1, '', 0, 6, 1, '', '', '');
-INSERT INTO content_manager VALUES (12, 0, 0, '', 2, 'Gutscheine', 'Gutscheine - Fragen und Antworten', '<table cellSpacing="0" cellPadding="0">\r\n<tbody>\r\n<tr>\r\n<td class="main"><strong>Gutscheine kaufen </strong></td></tr>\r\n<tr>\r\n<td class="main">Gutscheine k&ouml;nnen, falls sie im Shop angeboten werden, wie normale Produkte gekauft werden. Sobald Sie einen Gutschein gekauft haben und dieser nach erfolgreicher Zahlung freigeschaltet wurde, erscheint der Betrag unter Ihrem Warenkorb. Nun kˆnnen Sie ¸ber den Link " Gutschein versenden " den gew¸nschten Betrag per E-Mail versenden.</td></tr></tbody></table>\r\n<table cellSpacing="0" cellPadding="0">\r\n<tbody>\r\n<tr>\r\n<td class="main"><strong>Wie man Gutscheine versendet</strong></td></tr>\r\n<tr>\r\n<td class="main">Um einen Gutschein zu versenden, klicken Sie bitte auf den Link "Gutschein versenden" in Ihrem Einkaufskorb. Um einen Gutschein zu versenden, benˆtigen wir folgende Angaben von Ihnen: Vor- und Nachname des Empf‰ngers. Eine g¸ltige E-Mail Adresse des Empf‰ngers. Den gew¸nschten Betrag (Sie kˆnnen auch Teilbetr‰ge Ihres Guthabens versenden). Eine kurze Nachricht an den Empf‰nger. Bitte ¸berpr¸fen Sie Ihre Angaben noch einmal vor dem Versenden. Sie haben vor dem Versenden jederzeit die Mˆglichkeit Ihre Angaben zu korrigieren.</td></tr></tbody></table>\r\n<table cellSpacing="0" cellPadding="0">\r\n<tbody>\r\n<tr>\r\n<td class="main"><strong>Mit Gutscheinen einkaufen.</strong></td></tr>\r\n<tr>\r\n<td class="main">Sobald Sie ¸ber ein Guthaben verf¸gen, kˆnnen Sie dieses zum Bezahlen Ihrer Bestellung verwenden. W‰hrend des Bestellvorganges haben Sie die Mˆglichkeit Ihr Guthaben einzulˆsen. Falls das Guthaben unter dem Warenwert liegt m¸ssen Sie Ihre bevorzugte Zahlungsweise f¸r den Differenzbetrag w‰hlen. ‹bersteigt Ihr Guthaben den Warenwert, steht Ihnen das Restguthaben selbstverst‰ndlich f¸r Ihre n‰chste Bestellung zur Verf¸gung.</td></tr></tbody></table>\r\n<table cellSpacing="0" cellPadding="0">\r\n<tbody>\r\n<tr>\r\n<td class="main"><strong>Gutscheine verbuchen. </strong></td></tr>\r\n<tr>\r\n<td class="main">Wenn Sie einen Gutschein per E-Mail erhalten haben, kˆnnen Sie den Betrag wie folgt verbuchen: <br />1. Klicken Sie auf den in der E-Mail angegebenen Link. Falls Sie noch nicht ¸ber ein persˆnliches Kundenkonto verf¸gen, haben Sie die Mˆglichkeit ein Konto zu erˆffnen. <br />2. Nachdem Sie ein Produkt in den Warenkorb gelegt haben, kˆnnen Sie dort Ihren Gutscheincode eingeben.</td></tr></tbody></table>\r\n<table cellSpacing="0" cellPadding="0">\r\n<tbody>\r\n<tr>\r\n<td class="main"><strong>Falls es zu Problemen kommen sollte:</strong></td></tr>\r\n<tr>\r\n<td class="main">Falls es wider Erwarten zu Problemen mit einem Gutschein kommen sollte, kontaktieren Sie uns bitte per E-Mail: you@yourdomain.com. Bitte beschreiben Sie mˆglichst genau das Problem, wichtige Angaben sind unter anderem: Ihre Kundennummer, der Gutscheincode, Fehlermeldungen des Systems sowie der von Ihnen benutzte Browser (z.B. "Internet Explorer 6" oder "Firefox 1.5"). </td></tr></tbody></table>', 0, 1, '', 0, 6, 1, '', '', '');
-INSERT INTO content_manager VALUES (13, 0, 0, '', 2, 'Kontakt', 'Kontakt', 'Ihre Kontaktinformationen', 0, 1, '', 1, 7, 0, '', '', '');
-INSERT INTO content_manager VALUES (14, 0, 0, '', 1, 'Contact', 'Contact', 'Please enter your contact information.', 0, 1, '', 1, 7, 0, '', '', '');
-INSERT INTO content_manager VALUES (15, 0, 0, '', 1, 'Sitemap', '', '', 0, 0, 'sitemap.php', 1, 8, 0, '', '', '');
-INSERT INTO content_manager VALUES (16, 0, 0, '', 2, 'Sitemap', '', '', 0, 0, 'sitemap.php', 1, 8, 0, '', '', '');
-# BOF - Tomcraft - 2010-06-09 - Added right of revocation
-INSERT INTO content_manager VALUES (17, 0, 0, '', 1, 'Right of revocation', 'Right of revocation', '<p><strong>Right of revocation<br /></strong><br />Add your right of revocation here.</p>', 0, 1, '', 1, 9, 0, '', '', '');
-INSERT INTO content_manager VALUES (18, 0, 0, '', 2, 'Widerrufsrecht', 'Widerrufsrecht', '<p><strong>Widerrufsrecht<br /></strong><br />F&uuml;gen Sie hier das Widerrufsrecht ein.</p>', 0, 1, '', 1, 9, 0, '', '', '');
-# EOF - Tomcraft - 2010-06-09 - Added right of revocation
-# BOF - Tutorial: Umsetzung der EU-Verbraucherrichtlinie vom 13.06.2014
-INSERT INTO content_manager VALUES (19, 0, 0, '', 1, 'Revocation form', 'Revocation form', '<p><strong>Revocation form<br /></strong><br />Add your revocation form here.</p>', 0, 1, '', 1, 10, 0, '', '', '');
-INSERT INTO content_manager VALUES (20, 0, 0, '', 2, 'Muster-Widerrufsformular', 'Muster-Widerrufsformular', '<p><strong>Muster-Widerrufsformular<br /></strong><br />F&uuml;gen Sie hier das Muster-Widerrufsformular ein.</p>', 0, 1, '', 1, 10, 0, '', '', '');
-INSERT INTO content_manager VALUES (21, 0, 0, '', 1, 'Shipping time', 'Shipping time', '<p><strong>Shipping time<br /></strong><br />Add your shipping time informations here.</p>', 0, 1, '', 1, 11, 0, '', '', '');
-INSERT INTO content_manager VALUES (22, 0, 0, '', 2, 'Lieferzeit', 'Lieferzeit', '<p><strong>Lieferzeit<br /></strong><br />F&uuml;gen Sie hier Ihre Angaben zur Lieferzeit ein.</p>', 0, 1, '', 1, 11, 0, '', '', '');
-# EOF - Tutorial: Umsetzung der EU-Verbraucherrichtlinie vom 13.06.2014
-INSERT INTO content_manager VALUES (23, 0, 0, '', 1, 'Template Box 1', 'Shipping', '<p>Hier k&ouml;nnten Informationen zum Versand stehen.</p><p>Diese Box k&ouml;nnen&nbsp;Sie im Adminbereich unter <b>Inhalte -&gt; Content Manager</b> - Eintrag Template Box 1 bearbeiten.</p>', 0, 2, '', 1, 12, 1, '', '', '');
-INSERT INTO content_manager VALUES (24, 0, 0, '', 2, 'Template Box 1', 'Versand', '<p>Hier k&ouml;nnten Informationen zum Versand stehen.</p><p>Diese Box k&ouml;nnen&nbsp;Sie im Adminbereich unter <b>Inhalte -&gt; Content Manager</b> - Eintrag Template Box 1 bearbeiten.</p>', 0, 2, '', 1, 12, 1, '', '', '');
+INSERT INTO content_manager VALUES (1, 0, 0, '', 1, 'Shipping &amp; Returns', 'Shipping &amp; Returns', 'Put here your Shipping &amp; Returns information.', 0, 1, '', 1, 1, 0, '', '', '', NOW(), 1);
+INSERT INTO content_manager VALUES (2, 0, 0, '', 1, 'Privacy Notice', 'Privacy Notice', 'Put here your Privacy Notice information.', 0, 1, '', 1, 2, 0, '', '', '', NOW(), 1);
+INSERT INTO content_manager VALUES (3, 0, 0, '', 1, 'Conditions of Use', 'Conditions of Use', 'Conditions of Use<br />Put here your Conditions of Use information.<br /><br /><ol><li>Geltungsbereich</li><li>Vertragspartner</li><li>Angebot und Vertragsschluss</li><li>Widerrufsrecht, Widerrufsbelehrung, Widerrufsfolgen</li><li>Preise und Versandkosten</li><li>Lieferung</li><li>Zahlung</li><li>Eigentumsvorbehalt</li><li>Gew&auml;hrleistung</li></ol>Weitere Informationen', 0, 1, '', 1, 3, 0, '', '', '', NOW(), 1);
+INSERT INTO content_manager VALUES (4, 0, 0, '', 1, 'Imprint', 'Imprint', 'Put here your Company information.<br /><br />DemoShop GmbH<br />Gesch&auml;ftsf&uuml;hrer: Max Muster und Fritz Beispiel<br /><br />Max Muster Stra&szlig;e 21-23<br />D-0815 Musterhausen<br />E-Mail: max.muster@muster.de<br /><br />HRB 123456<br />Amtsgericht Musterhausen<br />UStid-Nr. DE 000 111 222', 0, 1, '', 1, 4, 0, '', '', '', NOW(), 1);
+INSERT INTO content_manager VALUES (5, 0, 0, '', 1, 'Index', 'Welcome', '<p>{$greeting}<br />\r\n<br />\r\nDies ist eine Grundinstallation vom <span style="color: rgb(55, 116, 227);"><strong>shophelfer</strong></span><span style="color: rgb(74, 74, 82);"><strong>.com</strong></span> Shopsystem. Diese Seite, die Kategorien, Produkte,&nbsp;Dienstleistungen und Angebote dienen nur der Demonstration der Funktionsweise dieses Shopsystemes. Wenn Sie Produkte bestellen, so werden diese weder ausgeliefert, noch in Rechnung gestellt.</p>\r\n<p>Das <span style="color: rgb(55, 116, 227);"><strong>shophelfer</strong></span><span style="color: rgb(74, 74, 82);"><strong>.com</strong></span> Shopsystem ist komplett kostenlos, Open Source und wird durch eine offene Community weiterentwickelt. Alle Informationen zu dem Projekt finden Sie auf unserer Webseite: <a target="_blank" href="http://www.shophelfer.com"><span style="color: rgb(55, 116, 227);"><strong>shophelfer</strong></span><span style="color: rgb(74, 74, 82);"><strong>.com</strong></span></a></p>\r\n<p>Dieser Text kann im Adminbereich unter <b>Inhalte -&gt; Content Manager</b> - Eintrag Index bearbeitet werden.</p>\r\n<p>&nbsp;</p>\r\n<p>Die <span style="color: rgb(55, 116, 227);"><strong>shophelfer</strong></span><span style="color: rgb(74, 74, 82);"><strong>.com </strong></span>Community w&uuml;nscht Ihnen viel Erfolg mit Ihrem neuem Shopsystem!</p>', 0, 1, '', 0, 5, 0, '', '', '', NOW(), 1);
+INSERT INTO content_manager VALUES (6, 0, 0, '', 2, 'Liefer- und Versandkosten', 'Liefer- und Versandkosten', 'F&uuml;gen Sie hier Ihre Informationen &uuml;ber Liefer- und Versandkosten ein.', 0, 1, '', 1, 1, 0, '', '', '', NOW(), 1);
+INSERT INTO content_manager VALUES (7, 0, 0, '', 2, 'Privatsph√§re und Datenschutz', 'Privatsph√§re und Datenschutz', 'F&uuml;gen Sie hier Ihre Informationen &uuml;ber Privatsph&auml;re und Datenschutz ein.', 0, 1, '', 1, 2, 0, '', '', '', NOW(), 1);
+INSERT INTO content_manager VALUES (8, 0, 0, '', 2, 'Unsere AGB', 'Allgemeine Gesch√§ftsbedingungen', '<strong>Allgemeine Gesch&auml;ftsbedingungen<br /></strong><br />F&uuml;gen Sie hier Ihre allgemeinen Gesch&auml;ftsbedingungen ein.<br /><br /><ol><li>Geltungsbereich</li><li>Vertragspartner</li><li>Angebot und Vertragsschluss</li><li>Widerrufsrecht, Widerrufsbelehrung, Widerrufsfolgen</li><li>Preise und Versandkosten</li><li>Lieferung</li><li>Zahlung</li><li>Eigentumsvorbehalt</li><li>Gew&auml;hrleistung</li></ol>Weitere Informationen', 0, 1, '', 1, 3, 0, '', '', '', NOW(), 1);
+INSERT INTO content_manager VALUES (9, 0, 0, '', 2, 'Impressum', 'Impressum', 'F&uuml;gen Sie hier Ihr Impressum ein.<br /><br />DemoShop GmbH<br />Gesch&auml;ftsf&uuml;hrer: Max Muster und Fritz Beispiel<br /><br />Max Muster Stra&szlig;e 21-23<br />D-0815 Musterhausen<br />E-Mail: max.muster@muster.de<br /><br />HRB 123456<br />Amtsgericht Musterhausen<br />UStid-Nr. DE 000 111 222', 0, 1, '', 1, 4, 0, '', '', '', NOW(), 1);
+INSERT INTO content_manager VALUES (10, 0, 0, '', 2, 'Index', 'Willkommen', '<p>{$greeting}<br />\r\n<br />\r\nDies ist eine Grundinstallation vom <span style="color: rgb(55, 116, 227);"><strong>shophelfer</strong></span><span style="color: rgb(74, 74, 82);"><strong>.com</strong></span> Shopsystem. Diese Seite, die Kategorien, Produkte,&nbsp;Dienstleistungen und Angebote dienen nur der Demonstration der Funktionsweise dieses Shopsystemes. Wenn Sie Produkte bestellen, so werden diese weder ausgeliefert, noch in Rechnung gestellt.</p>\r\n<p>Das <span style="color: rgb(55, 116, 227);"><strong>shophelfer</strong></span><span style="color: rgb(74, 74, 82);"><strong>.com</strong></span> Shopsystem ist komplett kostenlos, Open Source und wird durch eine offene Community weiterentwickelt. Alle Informationen zu dem Projekt finden Sie auf unserer Webseite: <a target="_blank" href="http://www.shophelfer.com"><span style="color: rgb(55, 116, 227);"><strong>shophelfer</strong></span><span style="color: rgb(74, 74, 82);"><strong>.com</strong></span></a></p>\r\n<p>Dieser Text kann im Adminbereich unter <b>Inhalte -&gt; Content Manager</b> - Eintrag Index bearbeitet werden.</p>\r\n<p>&nbsp;</p>\r\n<p>Die <span style="color: rgb(55, 116, 227);"><strong>shophelfer</strong></span><span style="color: rgb(74, 74, 82);"><strong>.com </strong></span>Community w&uuml;nscht Ihnen viel Erfolg mit Ihrem neuem Shopsystem!</p>', 0, 1, '', 0, 5, 0, '', '', '', NOW(), 1);
+INSERT INTO content_manager VALUES (11, 0, 0, '', 1, 'Coupons', 'Coupons FAQ', '<table cellSpacing="0" cellPadding="0">\r\n<tbody>\r\n<tr>\r\n<td class="main"><strong>Buy Gift Vouchers/Coupons </strong></td></tr>\r\n<tr>\r\n<td class="main">If the shop provided gift vouchers or coupons, You can buy them alike all other products. As soon as You have bought and payed the coupon, the shop system will activate Your coupon. You will then see the coupon amount in Your shopping cart. Then You can send the coupon via e-mail by clicking the link "Send Coupon". </td></tr></tbody></table>\r\n<table cellSpacing="0" cellPadding="0">\r\n<tbody>\r\n<tr>\r\n<td class="main"><strong>How to dispatch Coupons </strong></td></tr>\r\n<tr>\r\n<td class="main">To dispatch a coupon, please click the link "Send Coupon" in Your shopping cart. To send the coupon to the correct person, we need the following details: Surname and realname of the recipient and a valid e-mail adress of the recipient, and the desired coupon amount (You can also use only parts of Your balance). Please provide also a short message for the recipient. Please check those information again before You click the "Send Coupon" button. You can change all information at any time before clicking the "Send Coupon" button. </td></tr></tbody></table>\r\n<table cellSpacing="0" cellPadding="0">\r\n<tbody>\r\n<tr>\r\n<td class="main"><strong>How to use Coupons to buy products. </strong></td></tr>\r\n<tr>\r\n<td class="main">As soon as You have a balance, You can use it to pay for Your orders. During the checkout process, You can redeem Your coupon. In case Your balance is less than the value of goods You ordered, You would have to choose Your preferred method of payment for the difference amount. In case Your balance is more than the value of goods You ordered, the remaining amount of Your balance will be saved for Your next order. </td></tr></tbody></table>\r\n<table cellSpacing="0" cellPadding="0">\r\n<tbody>\r\n<tr>\r\n<td class="main"><strong>How to redeem Coupons. </strong></td></tr>\r\n<tr>\r\n<td class="main">In case You have received a coupun via e-mail, You can: <br />1. Click on the link provided in the e-mail. If You do not have an account in this shop already, please create a personal account. <br />2. After having added a product to Your shopping cart, You can enter Your coupon code.</td></tr></tbody></table>\r\n<table cellSpacing="0" cellPadding="0">\r\n<tbody>\r\n<tr>\r\n<td class="main"><strong>Problems?</strong></td></tr>\r\n<tr>\r\n<td class="main">If You have trouble or problems in using Your coupons, please check back with us via our e-mail: you@yourdomain.com. Please describe the encountered problem as detailed as possible! We need the following information to process Your request quickly: Your user id, the coupon code, error messages the shop system returned to You, and the name of the web browser You are using (e.g. "Internet Explorer 6" or "Firefox 1.5"). </td></tr></tbody></table>', 0, 1, '', 0, 6, 1, '', '', '', NOW(), 1);
+INSERT INTO content_manager VALUES (12, 0, 0, '', 2, 'Gutscheine', 'Gutscheine - Fragen und Antworten', '<table cellSpacing="0" cellPadding="0">\r\n<tbody>\r\n<tr>\r\n<td class="main"><strong>Gutscheine kaufen </strong></td></tr>\r\n<tr>\r\n<td class="main">Gutscheine k&ouml;nnen, falls sie im Shop angeboten werden, wie normale Produkte gekauft werden. Sobald Sie einen Gutschein gekauft haben und dieser nach erfolgreicher Zahlung freigeschaltet wurde, erscheint der Betrag unter Ihrem Warenkorb. Nun k√∂nnen Sie √ºber den Link " Gutschein versenden " den gew√ºnschten Betrag per E-Mail versenden.</td></tr></tbody></table>\r\n<table cellSpacing="0" cellPadding="0">\r\n<tbody>\r\n<tr>\r\n<td class="main"><strong>Wie man Gutscheine versendet</strong></td></tr>\r\n<tr>\r\n<td class="main">Um einen Gutschein zu versenden, klicken Sie bitte auf den Link "Gutschein versenden" in Ihrem Einkaufskorb. Um einen Gutschein zu versenden, ben√∂tigen wir folgende Angaben von Ihnen: Vor- und Nachname des Empf√§ngers. Eine g√ºltige E-Mail Adresse des Empf√§ngers. Den gew√ºnschten Betrag (Sie k√∂nnen auch Teilbetr√§ge Ihres Guthabens versenden). Eine kurze Nachricht an den Empf√§nger. Bitte √ºberpr√ºfen Sie Ihre Angaben noch einmal vor dem Versenden. Sie haben vor dem Versenden jederzeit die M√∂glichkeit Ihre Angaben zu korrigieren.</td></tr></tbody></table>\r\n<table cellSpacing="0" cellPadding="0">\r\n<tbody>\r\n<tr>\r\n<td class="main"><strong>Mit Gutscheinen einkaufen.</strong></td></tr>\r\n<tr>\r\n<td class="main">Sobald Sie √ºber ein Guthaben verf√ºgen, k√∂nnen Sie dieses zum Bezahlen Ihrer Bestellung verwenden. W√§hrend des Bestellvorganges haben Sie die M√∂glichkeit Ihr Guthaben einzul√∂sen. Falls das Guthaben unter dem Warenwert liegt m√ºssen Sie Ihre bevorzugte Zahlungsweise f√ºr den Differenzbetrag w√§hlen. √úbersteigt Ihr Guthaben den Warenwert, steht Ihnen das Restguthaben selbstverst√§ndlich f√ºr Ihre n√§chste Bestellung zur Verf√ºgung.</td></tr></tbody></table>\r\n<table cellSpacing="0" cellPadding="0">\r\n<tbody>\r\n<tr>\r\n<td class="main"><strong>Gutscheine verbuchen. </strong></td></tr>\r\n<tr>\r\n<td class="main">Wenn Sie einen Gutschein per E-Mail erhalten haben, k√∂nnen Sie den Betrag wie folgt verbuchen: <br />1. Klicken Sie auf den in der E-Mail angegebenen Link. Falls Sie noch nicht √ºber ein pers√∂nliches Kundenkonto verf√ºgen, haben Sie die M√∂glichkeit ein Konto zu er√∂ffnen. <br />2. Nachdem Sie ein Produkt in den Warenkorb gelegt haben, k√∂nnen Sie dort Ihren Gutscheincode eingeben.</td></tr></tbody></table>\r\n<table cellSpacing="0" cellPadding="0">\r\n<tbody>\r\n<tr>\r\n<td class="main"><strong>Falls es zu Problemen kommen sollte:</strong></td></tr>\r\n<tr>\r\n<td class="main">Falls es wider Erwarten zu Problemen mit einem Gutschein kommen sollte, kontaktieren Sie uns bitte per E-Mail: you@yourdomain.com. Bitte beschreiben Sie m√∂glichst genau das Problem, wichtige Angaben sind unter anderem: Ihre Kundennummer, der Gutscheincode, Fehlermeldungen des Systems sowie der von Ihnen benutzte Browser (z.B. "Internet Explorer 6" oder "Firefox 1.5"). </td></tr></tbody></table>', 0, 1, '', 0, 6, 1, '', '', '', NOW(), 1);
+INSERT INTO content_manager VALUES (13, 0, 0, '', 2, 'Kontakt', 'Kontakt', 'Ihre Kontaktinformationen', 0, 1, '', 1, 7, 0, '', '', '', NOW(), 1);
+INSERT INTO content_manager VALUES (14, 0, 0, '', 1, 'Contact', 'Contact', 'Please enter your contact information.', 0, 1, '', 1, 7, 0, '', '', '', NOW(), 1);
+INSERT INTO content_manager VALUES (15, 0, 0, '', 1, 'Sitemap', '', '', 0, 0, 'sitemap.php', 1, 8, 0, '', '', '', NOW(), 1);
+INSERT INTO content_manager VALUES (16, 0, 0, '', 2, 'Sitemap', '', '', 0, 0, 'sitemap.php', 1, 8, 0, '', '', '', NOW(), 1);
+INSERT INTO content_manager VALUES (17, 0, 0, '', 1, 'Right of revocation', 'Right of revocation', '<p><strong>Right of revocation<br /></strong><br />Add your right of revocation here.</p>', 0, 1, '', 1, 9, 0, '', '', '', NOW(), 1);
+INSERT INTO content_manager VALUES (18, 0, 0, '', 2, 'Widerrufsrecht', 'Widerrufsrecht', '<p><strong>Widerrufsrecht<br /></strong><br />F&uuml;gen Sie hier das Widerrufsrecht ein.</p>', 0, 1, '', 1, 9, 0, '', '', '', NOW(), 1);
+INSERT INTO content_manager VALUES (19, 0, 0, '', 1, 'Revocation form', 'Revocation form', '<p><strong>Revocation form<br /></strong><br />Add your revocation form here.</p>', 0, 1, '', 1, 10, 0, '', '', '', NOW(), 1);
+INSERT INTO content_manager VALUES (20, 0, 0, '', 2, 'Muster-Widerrufsformular', 'Muster-Widerrufsformular', '<p><strong>Muster-Widerrufsformular<br /></strong><br />F&uuml;gen Sie hier das Muster-Widerrufsformular ein.</p>', 0, 1, '', 1, 10, 0, '', '', '', NOW(), 1);
+INSERT INTO content_manager VALUES (21, 0, 0, '', 1, 'Shipping time', 'Shipping time', '<p><strong>Shipping time<br /></strong><br />Add your shipping time informations here.</p>', 0, 1, '', 1, 11, 0, '', '', '', NOW(), 1);
+INSERT INTO content_manager VALUES (22, 0, 0, '', 2, 'Lieferzeit', 'Lieferzeit', '<p><strong>Lieferzeit<br /></strong><br />F&uuml;gen Sie hier Ihre Angaben zur Lieferzeit ein.</p>', 0, 1, '', 1, 11, 0, '', '', '', NOW(), 1);
+INSERT INTO content_manager VALUES (23, 0, 0, '', 1, 'Template Box 1', 'Shipping', '<p>Hier k&ouml;nnten Informationen zum Versand stehen.</p><p>Diese Box k&ouml;nnen&nbsp;Sie im Adminbereich unter <b>Inhalte -&gt; Content Manager</b> - Eintrag Template Box 1 bearbeiten.</p>', 0, 2, '', 1, 12, 1, '', '', '', NOW(), 1);
+INSERT INTO content_manager VALUES (24, 0, 0, '', 2, 'Template Box 1', 'Versand', '<p>Hier k&ouml;nnten Informationen zum Versand stehen.</p><p>Diese Box k&ouml;nnen&nbsp;Sie im Adminbereich unter <b>Inhalte -&gt; Content Manager</b> - Eintrag Template Box 1 bearbeiten.</p>', 0, 2, '', 1, 12, 1, '', '', '', NOW(), 1);
 
-# 1 - Default, 2 - USA, 3 - Spain, 4 - Singapore, 5 - Germany , 6 - Taiwan , 7 - China
+# 1 - Default, 2 - USA, 3 - Spain, 4 - Singapore, 5 - Germany , 6 - Taiwan , 7 - China, 8 - Great Britain
 INSERT INTO address_format VALUES (1, '$firstname $lastname$cr$streets$cr$city, $postcode$cr$statecomma$country','$city / $country');
 INSERT INTO address_format VALUES (2, '$firstname $lastname$cr$streets$cr$city, $state    $postcode$cr$country','$city, $state / $country');
 INSERT INTO address_format VALUES (3, '$firstname $lastname$cr$streets$cr$city$cr$postcode - $statecomma$country','$state / $country');
 INSERT INTO address_format VALUES (4, '$firstname $lastname$cr$streets$cr$city ($postcode)$cr$country', '$postcode / $country');
 INSERT INTO address_format VALUES (5, '$firstname $lastname$cr$streets$cr$postcode $city$cr$country','$city / $country');
-# BOF - DokuMan - 2011-03-28 - Added address_format for Taiwan, Ireland, China and Great Britain
 INSERT INTO address_format VALUES (6, '$firstname $lastname$cr$streets$cr$city $state $postcode$cr$country','$country / $city');
 INSERT INTO address_format VALUES (7, '$firstname $lastname$cr$streets, $city$cr$postcode $state$cr$country','$country / $city');
 INSERT INTO address_format VALUES (8, '$firstname $lastname$cr$streets$cr$city$cr$state$cr$postcode$cr$country','$postcode / $country');
-# EOF - DokuMan - 2011-03-28 - Added address_format for Taiwan, Ireland, China and Great Britain
-
-# Web28 - 2010-11-13 - add entry for listproducts
-INSERT INTO admin_access VALUES ( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1);
-INSERT INTO admin_access VALUES ( 'groups', 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 2, 4, 2, 2, 2, 2, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 5, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1);
 
 # configuration_group_id 1, My Shop
 INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'STORE_NAME', 'shophelfer.com Shopsoftware', 1, 1, NULL, NOW(), NULL, NULL);
@@ -1702,257 +1764,257 @@ INSERT INTO configuration_group VALUES (40,'Popup Window Configuration','Popup W
 INSERT INTO configuration_group VALUES (1000,'Adminarea Options','Adminarea Configuration', 1000,1);
 
 #Countries
-INSERT INTO countries VALUES (1,'Afghanistan','AF','AFG',1,1);
-INSERT INTO countries VALUES (2,'Albania','AL','ALB',1,1);
-INSERT INTO countries VALUES (3,'Algeria','DZ','DZA',1,1);
-INSERT INTO countries VALUES (4,'American Samoa','AS','ASM',1,1);
-INSERT INTO countries VALUES (5,'Andorra','AD','AND',1,1);
-INSERT INTO countries VALUES (6,'Angola','AO','AGO',1,1);
-INSERT INTO countries VALUES (7,'Anguilla','AI','AIA',1,1);
-INSERT INTO countries VALUES (8,'Antarctica','AQ','ATA',1,1);
-INSERT INTO countries VALUES (9,'Antigua and Barbuda','AG','ATG',1,1);
-INSERT INTO countries VALUES (10,'Argentina','AR','ARG',1,1);
-INSERT INTO countries VALUES (11,'Armenia','AM','ARM',1,1);
-INSERT INTO countries VALUES (12,'Aruba','AW','ABW',1,1);
-INSERT INTO countries VALUES (13,'Australia','AU','AUD',1,1);
-INSERT INTO countries VALUES (14,'Austria','AT','AUT',5,1);
-INSERT INTO countries VALUES (15,'Azerbaijan','AZ','AZE',1,1);
-INSERT INTO countries VALUES (16,'Bahamas','BS','BHS',1,1);
-INSERT INTO countries VALUES (17,'Bahrain','BH','BHR',1,1);
-INSERT INTO countries VALUES (18,'Bangladesh','BD','BGD',1,1);
-INSERT INTO countries VALUES (19,'Barbados','BB','BRB',1,1);
-INSERT INTO countries VALUES (20,'Belarus','BY','BLR',1,1);
-INSERT INTO countries VALUES (21,'Belgium','BE','BEL',1,1);
-INSERT INTO countries VALUES (22,'Belize','BZ','BLZ',1,1);
-INSERT INTO countries VALUES (23,'Benin','BJ','BEN',1,1);
-INSERT INTO countries VALUES (24,'Bermuda','BM','BMU',1,1);
-INSERT INTO countries VALUES (25,'Bhutan','BT','BTN',1,1);
-INSERT INTO countries VALUES (26,'Bolivia','BO','BOL',1,1);
-INSERT INTO countries VALUES (27,'Bosnia and Herzegowina','BA','BIH',1,1);
-INSERT INTO countries VALUES (28,'Botswana','BW','BWA',1,1);
-INSERT INTO countries VALUES (29,'Bouvet Island','BV','BVT',1,1);
-INSERT INTO countries VALUES (30,'Brazil','BR','BRA',1,1);
-INSERT INTO countries VALUES (31,'British Indian Ocean Territory','IO','IOT',1,1);
-INSERT INTO countries VALUES (32,'Brunei Darussalam','BN','BRN',1,1);
-INSERT INTO countries VALUES (33,'Bulgaria','BG','BGR',1,1);
-INSERT INTO countries VALUES (34,'Burkina Faso','BF','BFA',1,1);
-INSERT INTO countries VALUES (35,'Burundi','BI','BDI',1,1);
-INSERT INTO countries VALUES (36,'Cambodia','KH','KHM',1,1);
-INSERT INTO countries VALUES (37,'Cameroon','CM','CMR',1,1);
-INSERT INTO countries VALUES (38,'Canada','CA','CAN',1,1);
-INSERT INTO countries VALUES (39,'Cape Verde','CV','CPV',1,1);
-INSERT INTO countries VALUES (40,'Cayman Islands','KY','CYM',1,1);
-INSERT INTO countries VALUES (41,'Central African Republic','CF','CAF',1,1);
-INSERT INTO countries VALUES (42,'Chad','TD','TCD',1,1);
-INSERT INTO countries VALUES (43,'Chile','CL','CHL',1,1);
+INSERT INTO countries VALUES (1,'Afghanistan','AF','AFG',1,1,0);
+INSERT INTO countries VALUES (2,'Albania','AL','ALB',1,1,0);
+INSERT INTO countries VALUES (3,'Algeria','DZ','DZA',1,1,0);
+INSERT INTO countries VALUES (4,'American Samoa','AS','ASM',1,1,0);
+INSERT INTO countries VALUES (5,'Andorra','AD','AND',1,1,0);
+INSERT INTO countries VALUES (6,'Angola','AO','AGO',1,1,0);
+INSERT INTO countries VALUES (7,'Anguilla','AI','AIA',1,1,0);
+INSERT INTO countries VALUES (8,'Antarctica','AQ','ATA',1,1,0);
+INSERT INTO countries VALUES (9,'Antigua and Barbuda','AG','ATG',1,1,0);
+INSERT INTO countries VALUES (10,'Argentina','AR','ARG',1,1,0);
+INSERT INTO countries VALUES (11,'Armenia','AM','ARM',1,1,0);
+INSERT INTO countries VALUES (12,'Aruba','AW','ABW',1,1,0);
+INSERT INTO countries VALUES (13,'Australia','AU','AUD',1,1,0);
+INSERT INTO countries VALUES (14,'Austria','AT','AUT',5,1,0);
+INSERT INTO countries VALUES (15,'Azerbaijan','AZ','AZE',1,1,0);
+INSERT INTO countries VALUES (16,'Bahamas','BS','BHS',1,1,0);
+INSERT INTO countries VALUES (17,'Bahrain','BH','BHR',1,1,0);
+INSERT INTO countries VALUES (18,'Bangladesh','BD','BGD',1,1,0);
+INSERT INTO countries VALUES (19,'Barbados','BB','BRB',1,1,0);
+INSERT INTO countries VALUES (20,'Belarus','BY','BLR',1,1,0);
+INSERT INTO countries VALUES (21,'Belgium','BE','BEL',1,1,0);
+INSERT INTO countries VALUES (22,'Belize','BZ','BLZ',1,1,0);
+INSERT INTO countries VALUES (23,'Benin','BJ','BEN',1,1,0);
+INSERT INTO countries VALUES (24,'Bermuda','BM','BMU',1,1,0);
+INSERT INTO countries VALUES (25,'Bhutan','BT','BTN',1,1,0);
+INSERT INTO countries VALUES (26,'Bolivia','BO','BOL',1,1,0);
+INSERT INTO countries VALUES (27,'Bosnia and Herzegowina','BA','BIH',1,1,0);
+INSERT INTO countries VALUES (28,'Botswana','BW','BWA',1,1,0);
+INSERT INTO countries VALUES (29,'Bouvet Island','BV','BVT',1,1,0);
+INSERT INTO countries VALUES (30,'Brazil','BR','BRA',1,1,0);
+INSERT INTO countries VALUES (31,'British Indian Ocean Territory','IO','IOT',1,1,0);
+INSERT INTO countries VALUES (32,'Brunei Darussalam','BN','BRN',1,1,0);
+INSERT INTO countries VALUES (33,'Bulgaria','BG','BGR',1,1,0);
+INSERT INTO countries VALUES (34,'Burkina Faso','BF','BFA',1,1,0);
+INSERT INTO countries VALUES (35,'Burundi','BI','BDI',1,1,0);
+INSERT INTO countries VALUES (36,'Cambodia','KH','KHM',1,1,0);
+INSERT INTO countries VALUES (37,'Cameroon','CM','CMR',1,1,0);
+INSERT INTO countries VALUES (38,'Canada','CA','CAN',1,1,0);
+INSERT INTO countries VALUES (39,'Cape Verde','CV','CPV',1,1,0);
+INSERT INTO countries VALUES (40,'Cayman Islands','KY','CYM',1,1,0);
+INSERT INTO countries VALUES (41,'Central African Republic','CF','CAF',1,1,0);
+INSERT INTO countries VALUES (42,'Chad','TD','TCD',1,1,0);
+INSERT INTO countries VALUES (43,'Chile','CL','CHL',1,1,0);
 #DokuMan - 2011-03-28 - Added address_format for Taiwan, Ireland, China and Great Britain
-INSERT INTO countries VALUES (44,'China','CN','CHN',7,1);
+INSERT INTO countries VALUES (44,'China','CN','CHN',7,1,0);
 #DokuMan - 2011-03-28 - Added address_format for Taiwan, Ireland, China and Great Britain
-INSERT INTO countries VALUES (45,'Christmas Island','CX','CXR',1,1);
-INSERT INTO countries VALUES (46,'Cocos (Keeling) Islands','CC','CCK',1,1);
-INSERT INTO countries VALUES (47,'Colombia','CO','COL',1,1);
-INSERT INTO countries VALUES (48,'Comoros','KM','COM',1,1);
-INSERT INTO countries VALUES (49,'Congo','CG','COG',1,1);
-INSERT INTO countries VALUES (50,'Cook Islands','CK','COK',1,1);
-INSERT INTO countries VALUES (51,'Costa Rica','CR','CRI',1,1);
-INSERT INTO countries VALUES (52,'Cote D\'Ivoire','CI','CIV',1,1);
-INSERT INTO countries VALUES (53,'Croatia','HR','HRV',1,1);
-INSERT INTO countries VALUES (54,'Cuba','CU','CUB',1,1);
-INSERT INTO countries VALUES (55,'Cyprus','CY','CYP',1,1);
-INSERT INTO countries VALUES (56,'Czech Republic','CZ','CZE',1,1);
-INSERT INTO countries VALUES (57,'Denmark','DK','DNK',1,1);
-INSERT INTO countries VALUES (58,'Djibouti','DJ','DJI',1,1);
-INSERT INTO countries VALUES (59,'Dominica','DM','DMA',1,1);
-INSERT INTO countries VALUES (60,'Dominican Republic','DO','DOM',1,1);
-INSERT INTO countries VALUES (61,'East Timor','TP','TMP',1,1);
-INSERT INTO countries VALUES (62,'Ecuador','EC','ECU',1,1);
-INSERT INTO countries VALUES (63,'Egypt','EG','EGY',1,1);
-INSERT INTO countries VALUES (64,'El Salvador','SV','SLV',1,1);
-INSERT INTO countries VALUES (65,'Equatorial Guinea','GQ','GNQ',1,1);
-INSERT INTO countries VALUES (66,'Eritrea','ER','ERI',1,1);
-INSERT INTO countries VALUES (67,'Estonia','EE','EST',1,1);
-INSERT INTO countries VALUES (68,'Ethiopia','ET','ETH',1,1);
-INSERT INTO countries VALUES (69,'Falkland Islands (Malvinas)','FK','FLK',1,1);
-INSERT INTO countries VALUES (70,'Faroe Islands','FO','FRO',1,1);
-INSERT INTO countries VALUES (71,'Fiji','FJ','FJI',1,1);
-INSERT INTO countries VALUES (72,'Finland','FI','FIN',1,1);
-INSERT INTO countries VALUES (73,'France','FR','FRA',1,1);
-INSERT INTO countries VALUES (75,'French Guiana','GF','GUF',1,1);
-INSERT INTO countries VALUES (76,'French Polynesia','PF','PYF',1,1);
-INSERT INTO countries VALUES (77,'French Southern Territories','TF','ATF',1,1);
-INSERT INTO countries VALUES (78,'Gabon','GA','GAB',1,1);
-INSERT INTO countries VALUES (79,'Gambia','GM','GMB',1,1);
-INSERT INTO countries VALUES (80,'Georgia','GE','GEO',1,1);
-INSERT INTO countries VALUES (81,'Germany','DE','DEU',5,1);
-INSERT INTO countries VALUES (82,'Ghana','GH','GHA',1,1);
-INSERT INTO countries VALUES (83,'Gibraltar','GI','GIB',1,1);
-INSERT INTO countries VALUES (84,'Greece','GR','GRC',1,1);
-INSERT INTO countries VALUES (85,'Greenland','GL','GRL',1,1);
-INSERT INTO countries VALUES (86,'Grenada','GD','GRD',1,1);
-INSERT INTO countries VALUES (87,'Guadeloupe','GP','GLP',1,1);
-INSERT INTO countries VALUES (88,'Guam','GU','GUM',1,1);
-INSERT INTO countries VALUES (89,'Guatemala','GT','GTM',1,1);
-INSERT INTO countries VALUES (90,'Guinea','GN','GIN',1,1);
-INSERT INTO countries VALUES (91,'Guinea-bissau','GW','GNB',1,1);
-INSERT INTO countries VALUES (92,'Guyana','GY','GUY',1,1);
-INSERT INTO countries VALUES (93,'Haiti','HT','HTI',1,1);
-INSERT INTO countries VALUES (94,'Heard and Mc Donald Islands','HM','HMD',1,1);
-INSERT INTO countries VALUES (95,'Honduras','HN','HND',1,1);
-INSERT INTO countries VALUES (96,'Hong Kong','HK','HKG',1,1);
-INSERT INTO countries VALUES (97,'Hungary','HU','HUN',1,1);
-INSERT INTO countries VALUES (98,'Iceland','IS','ISL',1,1);
-INSERT INTO countries VALUES (99,'India','IN','IND',1,1);
-INSERT INTO countries VALUES (100,'Indonesia','ID','IDN',1,1);
-INSERT INTO countries VALUES (101,'Iran (Islamic Republic of)','IR','IRN',1,1);
-INSERT INTO countries VALUES (102,'Iraq','IQ','IRQ',1,1);
+INSERT INTO countries VALUES (45,'Christmas Island','CX','CXR',1,1,0);
+INSERT INTO countries VALUES (46,'Cocos (Keeling) Islands','CC','CCK',1,1,0);
+INSERT INTO countries VALUES (47,'Colombia','CO','COL',1,1,0);
+INSERT INTO countries VALUES (48,'Comoros','KM','COM',1,1,0);
+INSERT INTO countries VALUES (49,'Congo','CG','COG',1,1,0);
+INSERT INTO countries VALUES (50,'Cook Islands','CK','COK',1,1,0);
+INSERT INTO countries VALUES (51,'Costa Rica','CR','CRI',1,1,0);
+INSERT INTO countries VALUES (52,'Cote D\'Ivoire','CI','CIV',1,1,0);
+INSERT INTO countries VALUES (53,'Croatia','HR','HRV',1,1,0);
+INSERT INTO countries VALUES (54,'Cuba','CU','CUB',1,1,0);
+INSERT INTO countries VALUES (55,'Cyprus','CY','CYP',1,1,0);
+INSERT INTO countries VALUES (56,'Czech Republic','CZ','CZE',1,1,0);
+INSERT INTO countries VALUES (57,'Denmark','DK','DNK',1,1,0);
+INSERT INTO countries VALUES (58,'Djibouti','DJ','DJI',1,1,0);
+INSERT INTO countries VALUES (59,'Dominica','DM','DMA',1,1,0);
+INSERT INTO countries VALUES (60,'Dominican Republic','DO','DOM',1,1,0);
+INSERT INTO countries VALUES (61,'East Timor','TP','TMP',1,1,0);
+INSERT INTO countries VALUES (62,'Ecuador','EC','ECU',1,1,0);
+INSERT INTO countries VALUES (63,'Egypt','EG','EGY',1,1,0);
+INSERT INTO countries VALUES (64,'El Salvador','SV','SLV',1,1,0);
+INSERT INTO countries VALUES (65,'Equatorial Guinea','GQ','GNQ',1,1,0);
+INSERT INTO countries VALUES (66,'Eritrea','ER','ERI',1,1,0);
+INSERT INTO countries VALUES (67,'Estonia','EE','EST',1,1,0);
+INSERT INTO countries VALUES (68,'Ethiopia','ET','ETH',1,1,0);
+INSERT INTO countries VALUES (69,'Falkland Islands (Malvinas)','FK','FLK',1,1,0);
+INSERT INTO countries VALUES (70,'Faroe Islands','FO','FRO',1,1,0);
+INSERT INTO countries VALUES (71,'Fiji','FJ','FJI',1,1,0);
+INSERT INTO countries VALUES (72,'Finland','FI','FIN',1,1,0);
+INSERT INTO countries VALUES (73,'France','FR','FRA',1,1,0);
+INSERT INTO countries VALUES (75,'French Guiana','GF','GUF',1,1,0);
+INSERT INTO countries VALUES (76,'French Polynesia','PF','PYF',1,1,0);
+INSERT INTO countries VALUES (77,'French Southern Territories','TF','ATF',1,1,0);
+INSERT INTO countries VALUES (78,'Gabon','GA','GAB',1,1,0);
+INSERT INTO countries VALUES (79,'Gambia','GM','GMB',1,1,0);
+INSERT INTO countries VALUES (80,'Georgia','GE','GEO',1,1,0);
+INSERT INTO countries VALUES (81,'Germany','DE','DEU',5,1,0);
+INSERT INTO countries VALUES (82,'Ghana','GH','GHA',1,1,0);
+INSERT INTO countries VALUES (83,'Gibraltar','GI','GIB',1,1,0);
+INSERT INTO countries VALUES (84,'Greece','GR','GRC',1,1,0);
+INSERT INTO countries VALUES (85,'Greenland','GL','GRL',1,1,0);
+INSERT INTO countries VALUES (86,'Grenada','GD','GRD',1,1,0);
+INSERT INTO countries VALUES (87,'Guadeloupe','GP','GLP',1,1,0);
+INSERT INTO countries VALUES (88,'Guam','GU','GUM',1,1,0);
+INSERT INTO countries VALUES (89,'Guatemala','GT','GTM',1,1,0);
+INSERT INTO countries VALUES (90,'Guinea','GN','GIN',1,1,0);
+INSERT INTO countries VALUES (91,'Guinea-bissau','GW','GNB',1,1,0);
+INSERT INTO countries VALUES (92,'Guyana','GY','GUY',1,1,0);
+INSERT INTO countries VALUES (93,'Haiti','HT','HTI',1,1,0);
+INSERT INTO countries VALUES (94,'Heard and Mc Donald Islands','HM','HMD',1,1,0);
+INSERT INTO countries VALUES (95,'Honduras','HN','HND',1,1,0);
+INSERT INTO countries VALUES (96,'Hong Kong','HK','HKG',1,1,0);
+INSERT INTO countries VALUES (97,'Hungary','HU','HUN',1,1,0);
+INSERT INTO countries VALUES (98,'Iceland','IS','ISL',1,1,0);
+INSERT INTO countries VALUES (99,'India','IN','IND',1,1,0);
+INSERT INTO countries VALUES (100,'Indonesia','ID','IDN',1,1,0);
+INSERT INTO countries VALUES (101,'Iran (Islamic Republic of)','IR','IRN',1,1,0);
+INSERT INTO countries VALUES (102,'Iraq','IQ','IRQ',1,1,0);
 #DokuMan - 2011-03-28 - Added address_format for Taiwan, Ireland, China and Great Britain
-INSERT INTO countries VALUES (103,'Ireland','IE','IRL',6,1);
+INSERT INTO countries VALUES (103,'Ireland','IE','IRL',6,1,0);
 #DokuMan - 2011-03-28 - Added address_format for Taiwan, Ireland, China and Great Britain
-INSERT INTO countries VALUES (104,'Israel','IL','ISR',1,1);
-INSERT INTO countries VALUES (105,'Italy','IT','ITA',1,1);
-INSERT INTO countries VALUES (106,'Jamaica','JM','JAM',1,1);
-INSERT INTO countries VALUES (107,'Japan','JP','JPN',1,1);
-INSERT INTO countries VALUES (108,'Jordan','JO','JOR',1,1);
-INSERT INTO countries VALUES (109,'Kazakhstan','KZ','KAZ',1,1);
-INSERT INTO countries VALUES (110,'Kenya','KE','KEN',1,1);
-INSERT INTO countries VALUES (111,'Kiribati','KI','KIR',1,1);
-INSERT INTO countries VALUES (112,'Korea, Democratic People\'s Republic of','KP','PRK',1,1);
-INSERT INTO countries VALUES (113,'Korea, Republic of','KR','KOR',1,1);
-INSERT INTO countries VALUES (114,'Kuwait','KW','KWT',1,1);
-INSERT INTO countries VALUES (115,'Kyrgyzstan','KG','KGZ',1,1);
-INSERT INTO countries VALUES (116,'Lao People\'s Democratic Republic','LA','LAO',1,1);
-INSERT INTO countries VALUES (117,'Latvia','LV','LVA',1,1);
-INSERT INTO countries VALUES (118,'Lebanon','LB','LBN',1,1);
-INSERT INTO countries VALUES (119,'Lesotho','LS','LSO',1,1);
-INSERT INTO countries VALUES (120,'Liberia','LR','LBR',1,1);
-INSERT INTO countries VALUES (121,'Libyan Arab Jamahiriya','LY','LBY',1,1);
-INSERT INTO countries VALUES (122,'Liechtenstein','LI','LIE',1,1);
-INSERT INTO countries VALUES (123,'Lithuania','LT','LTU',1,1);
-INSERT INTO countries VALUES (124,'Luxembourg','LU','LUX',1,1);
-INSERT INTO countries VALUES (125,'Macau','MO','MAC',1,1);
-INSERT INTO countries VALUES (126,'Macedonia, The Former Yugoslav Republic of','MK','MKD',1,1);
-INSERT INTO countries VALUES (127,'Madagascar','MG','MDG',1,1);
-INSERT INTO countries VALUES (128,'Malawi','MW','MWI',1,1);
-INSERT INTO countries VALUES (129,'Malaysia','MY','MYS',1,1);
-INSERT INTO countries VALUES (130,'Maldives','MV','MDV',1,1);
-INSERT INTO countries VALUES (131,'Mali','ML','MLI',1,1);
-INSERT INTO countries VALUES (132,'Malta','MT','MLT',1,1);
-INSERT INTO countries VALUES (133,'Marshall Islands','MH','MHL',1,1);
-INSERT INTO countries VALUES (134,'Martinique','MQ','MTQ',1,1);
-INSERT INTO countries VALUES (135,'Mauritania','MR','MRT',1,1);
-INSERT INTO countries VALUES (136,'Mauritius','MU','MUS',1,1);
-INSERT INTO countries VALUES (137,'Mayotte','YT','MYT',1,1);
-INSERT INTO countries VALUES (138,'Mexico','MX','MEX',1,1);
-INSERT INTO countries VALUES (139,'Micronesia, Federated States of','FM','FSM',1,1);
-INSERT INTO countries VALUES (140,'Moldova, Republic of','MD','MDA',1,1);
-INSERT INTO countries VALUES (141,'Monaco','MC','MCO',1,1);
-INSERT INTO countries VALUES (142,'Mongolia','MN','MNG',1,1);
-INSERT INTO countries VALUES (143,'Montserrat','MS','MSR',1,1);
-INSERT INTO countries VALUES (144,'Morocco','MA','MAR',1,1);
-INSERT INTO countries VALUES (145,'Mozambique','MZ','MOZ',1,1);
-INSERT INTO countries VALUES (146,'Myanmar','MM','MMR',1,1);
-INSERT INTO countries VALUES (147,'Namibia','NA','NAM',1,1);
-INSERT INTO countries VALUES (148,'Nauru','NR','NRU',1,1);
-INSERT INTO countries VALUES (149,'Nepal','NP','NPL',1,1);
-INSERT INTO countries VALUES (150,'Netherlands','NL','NLD',1,1);
-INSERT INTO countries VALUES (151,'Netherlands Antilles','AN','ANT',1,1);
-INSERT INTO countries VALUES (152,'New Caledonia','NC','NCL',1,1);
-INSERT INTO countries VALUES (153,'New Zealand','NZ','NZL',1,1);
-INSERT INTO countries VALUES (154,'Nicaragua','NI','NIC',1,1);
-INSERT INTO countries VALUES (155,'Niger','NE','NER',1,1);
-INSERT INTO countries VALUES (156,'Nigeria','NG','NGA',1,1);
-INSERT INTO countries VALUES (157,'Niue','NU','NIU',1,1);
-INSERT INTO countries VALUES (158,'Norfolk Island','NF','NFK',1,1);
-INSERT INTO countries VALUES (159,'Northern Mariana Islands','MP','MNP',1,1);
-INSERT INTO countries VALUES (160,'Norway','NO','NOR',1,1);
-INSERT INTO countries VALUES (161,'Oman','OM','OMN',1,1);
-INSERT INTO countries VALUES (162,'Pakistan','PK','PAK',1,1);
-INSERT INTO countries VALUES (163,'Palau','PW','PLW',1,1);
-INSERT INTO countries VALUES (164,'Panama','PA','PAN',1,1);
-INSERT INTO countries VALUES (165,'Papua New Guinea','PG','PNG',1,1);
-INSERT INTO countries VALUES (166,'Paraguay','PY','PRY',1,1);
-INSERT INTO countries VALUES (167,'Peru','PE','PER',1,1);
-INSERT INTO countries VALUES (168,'Philippines','PH','PHL',1,1);
-INSERT INTO countries VALUES (169,'Pitcairn','PN','PCN',1,1);
-INSERT INTO countries VALUES (170,'Poland','PL','POL',1,1);
-INSERT INTO countries VALUES (171,'Portugal','PT','PRT',1,1);
-INSERT INTO countries VALUES (172,'Puerto Rico','PR','PRI',1,1);
-INSERT INTO countries VALUES (173,'Qatar','QA','QAT',1,1);
-INSERT INTO countries VALUES (174,'Reunion','RE','REU',1,1);
-INSERT INTO countries VALUES (175,'Romania','RO','ROM',1,1);
-INSERT INTO countries VALUES (176,'Russian Federation','RU','RUS',1,1);
-INSERT INTO countries VALUES (177,'Rwanda','RW','RWA',1,1);
-INSERT INTO countries VALUES (178,'Saint Kitts and Nevis','KN','KNA',1,1);
-INSERT INTO countries VALUES (179,'Saint Lucia','LC','LCA',1,1);
-INSERT INTO countries VALUES (180,'Saint Vincent and the Grenadines','VC','VCT',1,1);
-INSERT INTO countries VALUES (181,'Samoa','WS','WSM',1,1);
-INSERT INTO countries VALUES (182,'San Marino','SM','SMR',1,1);
-INSERT INTO countries VALUES (183,'Sao Tome and Principe','ST','STP',1,1);
-INSERT INTO countries VALUES (184,'Saudi Arabia','SA','SAU',1,1);
-INSERT INTO countries VALUES (185,'Senegal','SN','SEN',1,1);
-INSERT INTO countries VALUES (186,'Seychelles','SC','SYC',1,1);
-INSERT INTO countries VALUES (187,'Sierra Leone','SL','SLE',1,1);
-INSERT INTO countries VALUES (188,'Singapore','SG','SGP', '4','1');
-INSERT INTO countries VALUES (189,'Slovakia (Slovak Republic)','SK','SVK',1,1);
-INSERT INTO countries VALUES (190,'Slovenia','SI','SVN',1,1);
-INSERT INTO countries VALUES (191,'Solomon Islands','SB','SLB',1,1);
-INSERT INTO countries VALUES (192,'Somalia','SO','SOM',1,1);
-INSERT INTO countries VALUES (193,'South Africa','ZA','ZAF',1,1);
-INSERT INTO countries VALUES (194,'South Georgia and the South Sandwich Islands','GS','SGS',1,1);
-INSERT INTO countries VALUES (195,'Spain','ES','ESP','3','1');
-INSERT INTO countries VALUES (196,'Sri Lanka','LK','LKA',1,1);
-INSERT INTO countries VALUES (197,'St. Helena','SH','SHN',1,1);
-INSERT INTO countries VALUES (198,'St. Pierre and Miquelon','PM','SPM',1,1);
-INSERT INTO countries VALUES (199,'Sudan','SD','SDN',1,1);
-INSERT INTO countries VALUES (200,'Suriname','SR','SUR',1,1);
-INSERT INTO countries VALUES (201,'Svalbard and Jan Mayen Islands','SJ','SJM',1,1);
-INSERT INTO countries VALUES (202,'Swaziland','SZ','SWZ',1,1);
-INSERT INTO countries VALUES (203,'Sweden','SE','SWE',1,1);
-INSERT INTO countries VALUES (204,'Switzerland','CH','CHE',5,1);
-INSERT INTO countries VALUES (205,'Syrian Arab Republic','SY','SYR',1,1);
+INSERT INTO countries VALUES (104,'Israel','IL','ISR',1,1,0);
+INSERT INTO countries VALUES (105,'Italy','IT','ITA',1,1,0);
+INSERT INTO countries VALUES (106,'Jamaica','JM','JAM',1,1,0);
+INSERT INTO countries VALUES (107,'Japan','JP','JPN',1,1,0);
+INSERT INTO countries VALUES (108,'Jordan','JO','JOR',1,1,0);
+INSERT INTO countries VALUES (109,'Kazakhstan','KZ','KAZ',1,1,0);
+INSERT INTO countries VALUES (110,'Kenya','KE','KEN',1,1,0);
+INSERT INTO countries VALUES (111,'Kiribati','KI','KIR',1,1,0);
+INSERT INTO countries VALUES (112,'Korea, Democratic People\'s Republic of','KP','PRK',1,1,0);
+INSERT INTO countries VALUES (113,'Korea, Republic of','KR','KOR',1,1,0);
+INSERT INTO countries VALUES (114,'Kuwait','KW','KWT',1,1,0);
+INSERT INTO countries VALUES (115,'Kyrgyzstan','KG','KGZ',1,1,0);
+INSERT INTO countries VALUES (116,'Lao People\'s Democratic Republic','LA','LAO',1,1,0);
+INSERT INTO countries VALUES (117,'Latvia','LV','LVA',1,1,0);
+INSERT INTO countries VALUES (118,'Lebanon','LB','LBN',1,1,0);
+INSERT INTO countries VALUES (119,'Lesotho','LS','LSO',1,1,0);
+INSERT INTO countries VALUES (120,'Liberia','LR','LBR',1,1,0);
+INSERT INTO countries VALUES (121,'Libyan Arab Jamahiriya','LY','LBY',1,1,0);
+INSERT INTO countries VALUES (122,'Liechtenstein','LI','LIE',1,1,0);
+INSERT INTO countries VALUES (123,'Lithuania','LT','LTU',1,1,0);
+INSERT INTO countries VALUES (124,'Luxembourg','LU','LUX',1,1,0);
+INSERT INTO countries VALUES (125,'Macau','MO','MAC',1,1,0);
+INSERT INTO countries VALUES (126,'Macedonia, The Former Yugoslav Republic of','MK','MKD',1,1,0);
+INSERT INTO countries VALUES (127,'Madagascar','MG','MDG',1,1,0);
+INSERT INTO countries VALUES (128,'Malawi','MW','MWI',1,1,0);
+INSERT INTO countries VALUES (129,'Malaysia','MY','MYS',1,1,0);
+INSERT INTO countries VALUES (130,'Maldives','MV','MDV',1,1,0);
+INSERT INTO countries VALUES (131,'Mali','ML','MLI',1,1,0);
+INSERT INTO countries VALUES (132,'Malta','MT','MLT',1,1,0);
+INSERT INTO countries VALUES (133,'Marshall Islands','MH','MHL',1,1,0);
+INSERT INTO countries VALUES (134,'Martinique','MQ','MTQ',1,1,0);
+INSERT INTO countries VALUES (135,'Mauritania','MR','MRT',1,1,0);
+INSERT INTO countries VALUES (136,'Mauritius','MU','MUS',1,1,0);
+INSERT INTO countries VALUES (137,'Mayotte','YT','MYT',1,1,0);
+INSERT INTO countries VALUES (138,'Mexico','MX','MEX',1,1,0);
+INSERT INTO countries VALUES (139,'Micronesia, Federated States of','FM','FSM',1,1,0);
+INSERT INTO countries VALUES (140,'Moldova, Republic of','MD','MDA',1,1,0);
+INSERT INTO countries VALUES (141,'Monaco','MC','MCO',1,1,0);
+INSERT INTO countries VALUES (142,'Mongolia','MN','MNG',1,1,0);
+INSERT INTO countries VALUES (143,'Montserrat','MS','MSR',1,1,0);
+INSERT INTO countries VALUES (144,'Morocco','MA','MAR',1,1,0);
+INSERT INTO countries VALUES (145,'Mozambique','MZ','MOZ',1,1,0);
+INSERT INTO countries VALUES (146,'Myanmar','MM','MMR',1,1,0);
+INSERT INTO countries VALUES (147,'Namibia','NA','NAM',1,1,0);
+INSERT INTO countries VALUES (148,'Nauru','NR','NRU',1,1,0);
+INSERT INTO countries VALUES (149,'Nepal','NP','NPL',1,1,0);
+INSERT INTO countries VALUES (150,'Netherlands','NL','NLD',1,1,0);
+INSERT INTO countries VALUES (151,'Netherlands Antilles','AN','ANT',1,1,0);
+INSERT INTO countries VALUES (152,'New Caledonia','NC','NCL',1,1,0);
+INSERT INTO countries VALUES (153,'New Zealand','NZ','NZL',1,1,0);
+INSERT INTO countries VALUES (154,'Nicaragua','NI','NIC',1,1,0);
+INSERT INTO countries VALUES (155,'Niger','NE','NER',1,1,0);
+INSERT INTO countries VALUES (156,'Nigeria','NG','NGA',1,1,0);
+INSERT INTO countries VALUES (157,'Niue','NU','NIU',1,1,0);
+INSERT INTO countries VALUES (158,'Norfolk Island','NF','NFK',1,1,0);
+INSERT INTO countries VALUES (159,'Northern Mariana Islands','MP','MNP',1,1,0);
+INSERT INTO countries VALUES (160,'Norway','NO','NOR',1,1,0);
+INSERT INTO countries VALUES (161,'Oman','OM','OMN',1,1,0);
+INSERT INTO countries VALUES (162,'Pakistan','PK','PAK',1,1,0);
+INSERT INTO countries VALUES (163,'Palau','PW','PLW',1,1,0);
+INSERT INTO countries VALUES (164,'Panama','PA','PAN',1,1,0);
+INSERT INTO countries VALUES (165,'Papua New Guinea','PG','PNG',1,1,0);
+INSERT INTO countries VALUES (166,'Paraguay','PY','PRY',1,1,0);
+INSERT INTO countries VALUES (167,'Peru','PE','PER',1,1,0);
+INSERT INTO countries VALUES (168,'Philippines','PH','PHL',1,1,0);
+INSERT INTO countries VALUES (169,'Pitcairn','PN','PCN',1,1,0);
+INSERT INTO countries VALUES (170,'Poland','PL','POL',1,1,0);
+INSERT INTO countries VALUES (171,'Portugal','PT','PRT',1,1,0);
+INSERT INTO countries VALUES (172,'Puerto Rico','PR','PRI',1,1,0);
+INSERT INTO countries VALUES (173,'Qatar','QA','QAT',1,1,0);
+INSERT INTO countries VALUES (174,'Reunion','RE','REU',1,1,0);
+INSERT INTO countries VALUES (175,'Romania','RO','ROM',1,1,0);
+INSERT INTO countries VALUES (176,'Russian Federation','RU','RUS',1,1,0);
+INSERT INTO countries VALUES (177,'Rwanda','RW','RWA',1,1,0);
+INSERT INTO countries VALUES (178,'Saint Kitts and Nevis','KN','KNA',1,1,0);
+INSERT INTO countries VALUES (179,'Saint Lucia','LC','LCA',1,1,0);
+INSERT INTO countries VALUES (180,'Saint Vincent and the Grenadines','VC','VCT',1,1,0);
+INSERT INTO countries VALUES (181,'Samoa','WS','WSM',1,1,0);
+INSERT INTO countries VALUES (182,'San Marino','SM','SMR',1,1,0);
+INSERT INTO countries VALUES (183,'Sao Tome and Principe','ST','STP',1,1,0);
+INSERT INTO countries VALUES (184,'Saudi Arabia','SA','SAU',1,1,0);
+INSERT INTO countries VALUES (185,'Senegal','SN','SEN',1,1,0);
+INSERT INTO countries VALUES (186,'Seychelles','SC','SYC',1,1,0);
+INSERT INTO countries VALUES (187,'Sierra Leone','SL','SLE',1,1,0);
+INSERT INTO countries VALUES (188,'Singapore','SG','SGP', 4,1,0);
+INSERT INTO countries VALUES (189,'Slovakia (Slovak Republic)','SK','SVK',1,1,0);
+INSERT INTO countries VALUES (190,'Slovenia','SI','SVN',1,1,0);
+INSERT INTO countries VALUES (191,'Solomon Islands','SB','SLB',1,1,0);
+INSERT INTO countries VALUES (192,'Somalia','SO','SOM',1,1,0);
+INSERT INTO countries VALUES (193,'South Africa','ZA','ZAF',1,1,0);
+INSERT INTO countries VALUES (194,'South Georgia and the South Sandwich Islands','GS','SGS',1,1,0);
+INSERT INTO countries VALUES (195,'Spain','ES','ESP',3,0,0);
+INSERT INTO countries VALUES (196,'Sri Lanka','LK','LKA',1,1,0);
+INSERT INTO countries VALUES (197,'St. Helena','SH','SHN',1,1,0);
+INSERT INTO countries VALUES (198,'St. Pierre and Miquelon','PM','SPM',1,1,0);
+INSERT INTO countries VALUES (199,'Sudan','SD','SDN',1,1,0);
+INSERT INTO countries VALUES (200,'Suriname','SR','SUR',1,1,0);
+INSERT INTO countries VALUES (201,'Svalbard and Jan Mayen Islands','SJ','SJM',1,1,0);
+INSERT INTO countries VALUES (202,'Swaziland','SZ','SWZ',1,1,0);
+INSERT INTO countries VALUES (203,'Sweden','SE','SWE',1,1,0);
+INSERT INTO countries VALUES (204,'Switzerland','CH','CHE',5,1,0);
+INSERT INTO countries VALUES (205,'Syrian Arab Republic','SY','SYR',1,1,0);
 #DokuMan - 2011-03-28 - Added address_format for Taiwan, Ireland, China and Great Britain
-INSERT INTO countries VALUES (206,'Taiwan','TW','TWN',6,1);
+INSERT INTO countries VALUES (206,'Taiwan','TW','TWN',6,1,0);
 #DokuMan - 2011-03-28 - Added address_format for Taiwan, Ireland, China and Great Britain
-INSERT INTO countries VALUES (207,'Tajikistan','TJ','TJK',1,1);
-INSERT INTO countries VALUES (208,'Tanzania, United Republic of','TZ','TZA',1,1);
-INSERT INTO countries VALUES (209,'Thailand','TH','THA',1,1);
-INSERT INTO countries VALUES (210,'Togo','TG','TGO',1,1);
-INSERT INTO countries VALUES (211,'Tokelau','TK','TKL',1,1);
-INSERT INTO countries VALUES (212,'Tonga','TO','TON',1,1);
-INSERT INTO countries VALUES (213,'Trinidad and Tobago','TT','TTO',1,1);
-INSERT INTO countries VALUES (214,'Tunisia','TN','TUN',1,1);
-INSERT INTO countries VALUES (215,'Turkey','TR','TUR',1,1);
-INSERT INTO countries VALUES (216,'Turkmenistan','TM','TKM',1,1);
-INSERT INTO countries VALUES (217,'Turks and Caicos Islands','TC','TCA',1,1);
-INSERT INTO countries VALUES (218,'Tuvalu','TV','TUV',1,1);
-INSERT INTO countries VALUES (219,'Uganda','UG','UGA',1,1);
-INSERT INTO countries VALUES (220,'Ukraine','UA','UKR',1,1);
-INSERT INTO countries VALUES (221,'United Arab Emirates','AE','ARE',1,1);
+INSERT INTO countries VALUES (207,'Tajikistan','TJ','TJK',1,1,0);
+INSERT INTO countries VALUES (208,'Tanzania, United Republic of','TZ','TZA',1,1,0);
+INSERT INTO countries VALUES (209,'Thailand','TH','THA',1,1,0);
+INSERT INTO countries VALUES (210,'Togo','TG','TGO',1,1,0);
+INSERT INTO countries VALUES (211,'Tokelau','TK','TKL',1,1,0);
+INSERT INTO countries VALUES (212,'Tonga','TO','TON',1,1,0);
+INSERT INTO countries VALUES (213,'Trinidad and Tobago','TT','TTO',1,1,0);
+INSERT INTO countries VALUES (214,'Tunisia','TN','TUN',1,1,0);
+INSERT INTO countries VALUES (215,'Turkey','TR','TUR',1,1,0);
+INSERT INTO countries VALUES (216,'Turkmenistan','TM','TKM',1,1,0);
+INSERT INTO countries VALUES (217,'Turks and Caicos Islands','TC','TCA',1,1,0);
+INSERT INTO countries VALUES (218,'Tuvalu','TV','TUV',1,1,0);
+INSERT INTO countries VALUES (219,'Uganda','UG','UGA',1,1,0);
+INSERT INTO countries VALUES (220,'Ukraine','UA','UKR',1,1,0);
+INSERT INTO countries VALUES (221,'United Arab Emirates','AE','ARE',1,1,0);
 #DokuMan - 2011-03-28 - Added address_format for Taiwan, Ireland, China and Great Britain
-INSERT INTO countries VALUES (222,'United Kingdom','GB','GBR',8,1);
+INSERT INTO countries VALUES (222,'United Kingdom','GB','GBR',8,1,0);
 #DokuMan - 2011-03-28 - Added address_format for Taiwan, Ireland, China and Great Britain
-INSERT INTO countries VALUES (223,'United States','US','USA', '2','1');
-INSERT INTO countries VALUES (224,'United States Minor Outlying Islands','UM','UMI',1,1);
-INSERT INTO countries VALUES (225,'Uruguay','UY','URY',1,1);
-INSERT INTO countries VALUES (226,'Uzbekistan','UZ','UZB',1,1);
-INSERT INTO countries VALUES (227,'Vanuatu','VU','VUT',1,1);
-INSERT INTO countries VALUES (228,'Vatican City State (Holy See)','VA','VAT',1,1);
-INSERT INTO countries VALUES (229,'Venezuela','VE','VEN',1,1);
-INSERT INTO countries VALUES (230,'Viet Nam','VN','VNM',1,1);
-INSERT INTO countries VALUES (231,'Virgin Islands (British)','VG','VGB',1,1);
-INSERT INTO countries VALUES (232,'Virgin Islands (U.S.)','VI','VIR',1,1);
-INSERT INTO countries VALUES (233,'Wallis and Futuna Islands','WF','WLF',1,1);
-INSERT INTO countries VALUES (234,'Western Sahara','EH','ESH',1,1);
-INSERT INTO countries VALUES (235,'Yemen','YE','YEM',1,1);
+INSERT INTO countries VALUES (223,'United States','US','USA', 2,1,0);
+INSERT INTO countries VALUES (224,'United States Minor Outlying Islands','UM','UMI',1,1,0);
+INSERT INTO countries VALUES (225,'Uruguay','UY','URY',1,1,0);
+INSERT INTO countries VALUES (226,'Uzbekistan','UZ','UZB',1,1,0);
+INSERT INTO countries VALUES (227,'Vanuatu','VU','VUT',1,1,0);
+INSERT INTO countries VALUES (228,'Vatican City State (Holy See)','VA','VAT',1,1,0);
+INSERT INTO countries VALUES (229,'Venezuela','VE','VEN',1,1,0);
+INSERT INTO countries VALUES (230,'Viet Nam','VN','VNM',1,1,0);
+INSERT INTO countries VALUES (231,'Virgin Islands (British)','VG','VGB',1,1,0);
+INSERT INTO countries VALUES (232,'Virgin Islands (U.S.)','VI','VIR',1,1,0);
+INSERT INTO countries VALUES (233,'Wallis and Futuna Islands','WF','WLF',1,1,0);
+INSERT INTO countries VALUES (234,'Western Sahara','EH','ESH',1,1,0);
+INSERT INTO countries VALUES (235,'Yemen','YE','YEM',1,1,0);
 # BOF - Tomcraft - 2010-07-02 - Deleted Yugoslavia
-#INSERT INTO countries VALUES (236,'Yugoslavia','YU','YUG',1,1);
+#INSERT INTO countries VALUES (236,'Yugoslavia','YU','YUG',1,1,0);
 # EOF - Tomcraft - 2010-07-02 - Deleted Yugoslavia
-INSERT INTO countries VALUES (237,'Zaire','ZR','ZAR',1,1);
-INSERT INTO countries VALUES (238,'Zambia','ZM','ZMB',1,1);
-INSERT INTO countries VALUES (239,'Zimbabwe','ZW','ZWE',1,1);
+INSERT INTO countries VALUES (237,'Zaire','ZR','ZAR',1,1,0);
+INSERT INTO countries VALUES (238,'Zambia','ZM','ZMB',1,1,0);
+INSERT INTO countries VALUES (239,'Zimbabwe','ZW','ZWE',1,1,0);
 # BOF - Tomcraft - 2010-07-02 - Added Serbia & Montenegro
-INSERT INTO countries VALUES (240,'Serbia','RS','SRB',1,1);
-INSERT INTO countries VALUES (241,'Montenegro','ME','MNE',1,1);
+INSERT INTO countries VALUES (240,'Serbia','RS','SRB',1,1,0);
+INSERT INTO countries VALUES (241,'Montenegro','ME','MNE',1,1,0);
 # EOF - Tomcraft - 2010-07-02 - Added Serbia & Montenegro
 
 INSERT INTO currencies VALUES (1,'Euro','EUR','','EUR',',','.','2','1.0000', NOW());
@@ -2052,9 +2114,9 @@ INSERT INTO zones VALUES (77,38,'SK','Saskatchewan');
 INSERT INTO zones VALUES (78,38,'YT','Yukon Territory');
 
 # Germany
-# Dokuman - 2009-08-21 - Bundesl‰nder->ISO-3166-2
+# Dokuman - 2009-08-21 - Bundesl√§nder->ISO-3166-2
 INSERT INTO zones VALUES (79,81,'NI','Niedersachsen');
-INSERT INTO zones VALUES (80,81,'BW','Baden-W¸rttemberg');
+INSERT INTO zones VALUES (80,81,'BW','Baden-W√ºrttemberg');
 INSERT INTO zones VALUES (81,81,'BY','Bayern');
 INSERT INTO zones VALUES (82,81,'BE','Berlin');
 INSERT INTO zones VALUES (83,81,'BR','Brandenburg');
@@ -2068,14 +2130,14 @@ INSERT INTO zones VALUES (90,81,'SL','Saarland');
 INSERT INTO zones VALUES (91,81,'SN','Sachsen');
 INSERT INTO zones VALUES (92,81,'ST','Sachsen-Anhalt');
 INSERT INTO zones VALUES (93,81,'SH','Schleswig-Holstein');
-INSERT INTO zones VALUES (94,81,'TH','Th¸ringen');
+INSERT INTO zones VALUES (94,81,'TH','Th√ºringen');
 
 # Austria
 INSERT INTO zones VALUES (95,14,'WI','Wien');
-INSERT INTO zones VALUES (96,14,'NO','Niederˆsterreich');
-INSERT INTO zones VALUES (97,14,'OO','Oberˆsterreich');
+INSERT INTO zones VALUES (96,14,'NO','Nieder√∂sterreich');
+INSERT INTO zones VALUES (97,14,'OO','Ober√∂sterreich');
 INSERT INTO zones VALUES (98,14,'SB','Salzburg');
-INSERT INTO zones VALUES (99,14,'KN','K‰rnten');
+INSERT INTO zones VALUES (99,14,'KN','K√§rnten');
 INSERT INTO zones VALUES (100,14,'ST','Steiermark');
 INSERT INTO zones VALUES (101,14,'TI','Tirol');
 INSERT INTO zones VALUES (102,14,'BL','Burgenland');
@@ -2091,7 +2153,7 @@ INSERT INTO zones VALUES (109,204,'BS','Basel-Stadt');
 INSERT INTO zones VALUES (110,204,'FR','Freiburg');
 INSERT INTO zones VALUES (111,204,'GE','Genf');
 INSERT INTO zones VALUES (112,204,'GL','Glarus');
-INSERT INTO zones VALUES (113,204,'JU','Graub¸nden');
+INSERT INTO zones VALUES (113,204,'JU','Graub√ºnden');
 INSERT INTO zones VALUES (114,204,'JU','Jura');
 INSERT INTO zones VALUES (115,204,'LU','Luzern');
 INSERT INTO zones VALUES (116,204,'NE','Neuenburg');
@@ -2107,10 +2169,10 @@ INSERT INTO zones VALUES (125,204,'UR','Uri');
 INSERT INTO zones VALUES (126,204,'VD','Waadt');
 INSERT INTO zones VALUES (127,204,'VS','Wallis');
 INSERT INTO zones VALUES (128,204,'ZG','Zug');
-INSERT INTO zones VALUES (129,204,'ZH','Z¸rich');
+INSERT INTO zones VALUES (129,204,'ZH','Z√ºrich');
 
 # Spain
-INSERT INTO zones VALUES (130,195,'A CoruÒa','A CoruÒa');
+INSERT INTO zones VALUES (130,195,'A Coru√±a','A Coru√±a');
 INSERT INTO zones VALUES (131,195,'Alava','Alava');
 INSERT INTO zones VALUES (132,195,'Albacete','Albacete');
 INSERT INTO zones VALUES (133,195,'Alicante','Alicante');
@@ -2192,7 +2254,7 @@ INSERT INTO zones VALUES (204,153,'Nelson','Nelson');
 INSERT INTO zones VALUES (205,153,'Marlborough','Marlborough');
 
 #Brazil
-INSERT INTO zones VALUES ('',30,'SP','S„o Paulo');
+INSERT INTO zones VALUES ('',30,'SP','S√£o Paulo');
 INSERT INTO zones VALUES ('',30,'RJ','Rio de Janeiro');
 INSERT INTO zones VALUES ('',30,'PE','Pernanbuco');
 INSERT INTO zones VALUES ('',30,'BA','Bahia');
@@ -2200,7 +2262,7 @@ INSERT INTO zones VALUES ('',30,'AM','Amazonas');
 INSERT INTO zones VALUES ('',30,'MG','Minas Gerais');
 INSERT INTO zones VALUES ('',30,'ES','Espirito Santo');
 INSERT INTO zones VALUES ('',30,'RS','Rio Grande do Sul');
-INSERT INTO zones VALUES ('',30,'PR','Paran·');
+INSERT INTO zones VALUES ('',30,'PR','Paran√°');
 INSERT INTO zones VALUES ('',30,'SC','Santa Catarina');
 INSERT INTO zones VALUES ('',30,'RG','Rio Grande do Norte');
 INSERT INTO zones VALUES ('',30,'MS','Mato Grosso do Sul');
@@ -2213,27 +2275,27 @@ INSERT INTO zones VALUES ('',30,'AC','Acre');
 INSERT INTO zones VALUES ('',30,'AP','Amapa');
 INSERT INTO zones VALUES ('',30,'RO','Roraima');
 INSERT INTO zones VALUES ('',30,'AL','Alagoas');
-INSERT INTO zones VALUES ('',30,'CE','Cear·');
-INSERT INTO zones VALUES ('',30,'MA','Maranh„o');
-INSERT INTO zones VALUES ('',30,'PA','Par·');
-INSERT INTO zones VALUES ('',30,'PB','ParaÌba');
-INSERT INTO zones VALUES ('',30,'PI','PiauÌ');
+INSERT INTO zones VALUES ('',30,'CE','Cear√°');
+INSERT INTO zones VALUES ('',30,'MA','Maranh√£o');
+INSERT INTO zones VALUES ('',30,'PA','Par√°');
+INSERT INTO zones VALUES ('',30,'PB','Para√≠ba');
+INSERT INTO zones VALUES ('',30,'PI','Piau√≠');
 INSERT INTO zones VALUES ('',30,'SE','Sergipe');
 
 #Chile
-INSERT INTO zones VALUES ('',43,'I','I RegiÛn de Tarapac·');
-INSERT INTO zones VALUES ('',43,'II','II RegiÛn de Antofagasta');
-INSERT INTO zones VALUES ('',43,'III','III RegiÛn de Atacama');
-INSERT INTO zones VALUES ('',43,'IV','IV RegiÛn de Coquimbo');
-INSERT INTO zones VALUES ('',43,'V','V RegiÛn de ValaparaÌso');
-INSERT INTO zones VALUES ('',43,'RM','RegiÛn Metropolitana');
-INSERT INTO zones VALUES ('',43,'VI','VI RegiÛn de L. B. O¥higgins');
-INSERT INTO zones VALUES ('',43,'VII','VII RegiÛn del Maule');
-INSERT INTO zones VALUES ('',43,'VIII','VIII RegiÛn del BÌo BÌo');
-INSERT INTO zones VALUES ('',43,'IX','IX RegiÛn de la AraucanÌa');
-INSERT INTO zones VALUES ('',43,'X','X RegiÛn de los Lagos');
-INSERT INTO zones VALUES ('',43,'XI','XI RegiÛn de AysÈn');
-INSERT INTO zones VALUES ('',43,'XII','XII RegiÛn de Magallanes');
+INSERT INTO zones VALUES ('',43,'I','I Regi√≥n de Tarapac√°');
+INSERT INTO zones VALUES ('',43,'II','II Regi√≥n de Antofagasta');
+INSERT INTO zones VALUES ('',43,'III','III Regi√≥n de Atacama');
+INSERT INTO zones VALUES ('',43,'IV','IV Regi√≥n de Coquimbo');
+INSERT INTO zones VALUES ('',43,'V','V Regi√≥n de Valapara√≠so');
+INSERT INTO zones VALUES ('',43,'RM','Regi√≥n Metropolitana');
+INSERT INTO zones VALUES ('',43,'VI','VI Regi√≥n de L. B. O¬¥higgins');
+INSERT INTO zones VALUES ('',43,'VII','VII Regi√≥n del Maule');
+INSERT INTO zones VALUES ('',43,'VIII','VIII Regi√≥n del B√≠o B√≠o');
+INSERT INTO zones VALUES ('',43,'IX','IX Regi√≥n de la Araucan√≠a');
+INSERT INTO zones VALUES ('',43,'X','X Regi√≥n de los Lagos');
+INSERT INTO zones VALUES ('',43,'XI','XI Regi√≥n de Ays√©n');
+INSERT INTO zones VALUES ('',43,'XII','XII Regi√≥n de Magallanes');
 
 #Columbia
 INSERT INTO zones VALUES ('',47,'AMA','Amazonas');
@@ -2278,39 +2340,39 @@ INSERT INTO zones VALUES ('',73,'03','Allier');
 INSERT INTO zones VALUES ('',73,'04','Alpes de Haute Provence');
 INSERT INTO zones VALUES ('',73,'05','Hautes-Alpes');
 INSERT INTO zones VALUES ('',73,'06','Alpes Maritimes');
-INSERT INTO zones VALUES ('',73,'07','ArdËche');
+INSERT INTO zones VALUES ('',73,'07','Ard√®che');
 INSERT INTO zones VALUES ('',73,'08','Ardennes');
-INSERT INTO zones VALUES ('',73,'09','AriËge');
+INSERT INTO zones VALUES ('',73,'09','Ari√®ge');
 INSERT INTO zones VALUES ('',73,'10','Aube');
 INSERT INTO zones VALUES ('',73,'11','Aude');
 INSERT INTO zones VALUES ('',73,'12','Aveyron');
-INSERT INTO zones VALUES ('',73,'13','Bouches-du-RhÙne');
+INSERT INTO zones VALUES ('',73,'13','Bouches-du-Rh√¥ne');
 INSERT INTO zones VALUES ('',73,'14','Calvados');
 INSERT INTO zones VALUES ('',73,'15','Cantal');
 INSERT INTO zones VALUES ('',73,'16','Charente');
 INSERT INTO zones VALUES ('',73,'17','Charente Maritime');
 INSERT INTO zones VALUES ('',73,'18','Cher');
-INSERT INTO zones VALUES ('',73,'19','CorrËze');
+INSERT INTO zones VALUES ('',73,'19','Corr√®ze');
 INSERT INTO zones VALUES ('',73,'2A','Corse du Sud');
 INSERT INTO zones VALUES ('',73,'2B','Haute Corse');
-INSERT INTO zones VALUES ('',73,'21','CÙte-d\'Or');
-INSERT INTO zones VALUES ('',73,'22','CÙtes-d\'Armor');
+INSERT INTO zones VALUES ('',73,'21','C√¥te-d\'Or');
+INSERT INTO zones VALUES ('',73,'22','C√¥tes-d\'Armor');
 INSERT INTO zones VALUES ('',73,'23','Creuse');
 INSERT INTO zones VALUES ('',73,'24','Dordogne');
 INSERT INTO zones VALUES ('',73,'25','Doubs');
-INSERT INTO zones VALUES ('',73,'26','DrÙme');
+INSERT INTO zones VALUES ('',73,'26','Dr√¥me');
 INSERT INTO zones VALUES ('',73,'27','Eure');
 INSERT INTO zones VALUES ('',73,'28','Eure et Loir');
-INSERT INTO zones VALUES ('',73,'29','FinistËre');
+INSERT INTO zones VALUES ('',73,'29','Finist√®re');
 INSERT INTO zones VALUES ('',73,'30','Gard');
 INSERT INTO zones VALUES ('',73,'31','Haute Garonne');
 INSERT INTO zones VALUES ('',73,'32','Gers');
 INSERT INTO zones VALUES ('',73,'33','Gironde');
-INSERT INTO zones VALUES ('',73,'34','HÈrault');
+INSERT INTO zones VALUES ('',73,'34','H√©rault');
 INSERT INTO zones VALUES ('',73,'35','Ille et Vilaine');
 INSERT INTO zones VALUES ('',73,'36','Indre');
 INSERT INTO zones VALUES ('',73,'37','Indre et Loire');
-INSERT INTO zones VALUES ('',73,'38','IsËre');
+INSERT INTO zones VALUES ('',73,'38','Is√®re');
 INSERT INTO zones VALUES ('',73,'39','Jura');
 INSERT INTO zones VALUES ('',73,'40','Landes');
 INSERT INTO zones VALUES ('',73,'41','Loir et Cher');
@@ -2320,7 +2382,7 @@ INSERT INTO zones VALUES ('',73,'44','Loire Atlantique');
 INSERT INTO zones VALUES ('',73,'45','Loiret');
 INSERT INTO zones VALUES ('',73,'46','Lot');
 INSERT INTO zones VALUES ('',73,'47','Lot et Garonne');
-INSERT INTO zones VALUES ('',73,'48','LozËre');
+INSERT INTO zones VALUES ('',73,'48','Loz√®re');
 INSERT INTO zones VALUES ('',73,'49','Maine et Loire');
 INSERT INTO zones VALUES ('',73,'50','Manche');
 INSERT INTO zones VALUES ('',73,'51','Marne');
@@ -2330,20 +2392,20 @@ INSERT INTO zones VALUES ('',73,'54','Meurthe et Moselle');
 INSERT INTO zones VALUES ('',73,'55','Meuse');
 INSERT INTO zones VALUES ('',73,'56','Morbihan');
 INSERT INTO zones VALUES ('',73,'57','Moselle');
-INSERT INTO zones VALUES ('',73,'58','NiËvre');
+INSERT INTO zones VALUES ('',73,'58','Ni√®vre');
 INSERT INTO zones VALUES ('',73,'59','Nord');
 INSERT INTO zones VALUES ('',73,'60','Oise');
 INSERT INTO zones VALUES ('',73,'61','Orne');
 INSERT INTO zones VALUES ('',73,'62','Pas de Calais');
-INSERT INTO zones VALUES ('',73,'63','Puy-de-DÙme');
-INSERT INTO zones VALUES ('',73,'64','PyrÈnÈes-Atlantiques');
-INSERT INTO zones VALUES ('',73,'65','Hautes-PyrÈnÈes');
-INSERT INTO zones VALUES ('',73,'66','PyrÈnÈes-Orientales');
+INSERT INTO zones VALUES ('',73,'63','Puy-de-D√¥me');
+INSERT INTO zones VALUES ('',73,'64','Pyr√©n√©es-Atlantiques');
+INSERT INTO zones VALUES ('',73,'65','Hautes-Pyr√©n√©es');
+INSERT INTO zones VALUES ('',73,'66','Pyr√©n√©es-Orientales');
 INSERT INTO zones VALUES ('',73,'67','Bas Rhin');
 INSERT INTO zones VALUES ('',73,'68','Haut Rhin');
-INSERT INTO zones VALUES ('',73,'69','RhÙne');
-INSERT INTO zones VALUES ('',73,'70','Haute-SaÙne');
-INSERT INTO zones VALUES ('',73,'71','SaÙne-et-Loire');
+INSERT INTO zones VALUES ('',73,'69','Rh√¥ne');
+INSERT INTO zones VALUES ('',73,'70','Haute-Sa√¥ne');
+INSERT INTO zones VALUES ('',73,'71','Sa√¥ne-et-Loire');
 INSERT INTO zones VALUES ('',73,'72','Sarthe');
 INSERT INTO zones VALUES ('',73,'73','Savoie');
 INSERT INTO zones VALUES ('',73,'74','Haute Savoie');
@@ -2351,13 +2413,13 @@ INSERT INTO zones VALUES ('',73,'75','Paris');
 INSERT INTO zones VALUES ('',73,'76','Seine Maritime');
 INSERT INTO zones VALUES ('',73,'77','Seine et Marne');
 INSERT INTO zones VALUES ('',73,'78','Yvelines');
-INSERT INTO zones VALUES ('',73,'79','Deux-SËvres');
+INSERT INTO zones VALUES ('',73,'79','Deux-S√®vres');
 INSERT INTO zones VALUES ('',73,'80','Somme');
 INSERT INTO zones VALUES ('',73,'81','Tarn');
 INSERT INTO zones VALUES ('',73,'82','Tarn et Garonne');
 INSERT INTO zones VALUES ('',73,'83','Var');
 INSERT INTO zones VALUES ('',73,'84','Vaucluse');
-INSERT INTO zones VALUES ('',73,'85','VendÈe');
+INSERT INTO zones VALUES ('',73,'85','Vend√©e');
 INSERT INTO zones VALUES ('',73,'86','Vienne');
 INSERT INTO zones VALUES ('',73,'87','Haute Vienne');
 INSERT INTO zones VALUES ('',73,'88','Vosges');
@@ -2374,10 +2436,10 @@ INSERT INTO zones VALUES ('',73,'973 (DOM)','Guyane');
 INSERT INTO zones VALUES ('',73,'974 (DOM)','Saint Denis');
 INSERT INTO zones VALUES ('',73,'975 (DOM)','St-Pierre de Miquelon');
 INSERT INTO zones VALUES ('',73,'976 (TOM)','Mayotte');
-INSERT INTO zones VALUES ('',73,'984 (TOM)','Terres australes et Antartiques franÁaises');
-INSERT INTO zones VALUES ('',73,'985 (TOM)','Nouvelle CalÈdonie');
+INSERT INTO zones VALUES ('',73,'984 (TOM)','Terres australes et Antartiques fran√ßaises');
+INSERT INTO zones VALUES ('',73,'985 (TOM)','Nouvelle Cal√©donie');
 INSERT INTO zones VALUES ('',73,'986 (TOM)','Wallis et Futuna');
-INSERT INTO zones VALUES ('',73,'987 (TOM)','PolynÈsie franÁaise');
+INSERT INTO zones VALUES ('',73,'987 (TOM)','Polyn√©sie fran√ßaise');
 # EOF - web28 - 2010-07-07 - FIX special character
 
 #India
@@ -2454,7 +2516,7 @@ INSERT INTO zones VALUES ('',105,'FM','Fermo');
 INSERT INTO zones VALUES ('',105,'FE','Ferrara');
 INSERT INTO zones VALUES ('',105,'FI','Firenze');
 INSERT INTO zones VALUES ('',105,'FG','Foggia');
-INSERT INTO zones VALUES ('',105,'FC','ForlÏ-Cesena');
+INSERT INTO zones VALUES ('',105,'FC','Forl√¨-Cesena');
 INSERT INTO zones VALUES ('',105,'FR','Frosinone');
 INSERT INTO zones VALUES ('',105,'GE','Genova');
 INSERT INTO zones VALUES ('',105,'GO','Gorizia');
@@ -2622,17 +2684,17 @@ INSERT INTO zones VALUES ('',160,'BUS','Buskerud');
 INSERT INTO zones VALUES ('',160,'FIN','Finnmark');
 INSERT INTO zones VALUES ('',160,'HED','Hedmark');
 INSERT INTO zones VALUES ('',160,'HOR','Hordaland');
-INSERT INTO zones VALUES ('',160,'MOR','M¯re og Romsdal');
+INSERT INTO zones VALUES ('',160,'MOR','M√∏re og Romsdal');
 INSERT INTO zones VALUES ('',160,'NOR','Nordland');
-INSERT INTO zones VALUES ('',160,'NTR','Nord-Tr¯ndelag');
+INSERT INTO zones VALUES ('',160,'NTR','Nord-Tr√∏ndelag');
 INSERT INTO zones VALUES ('',160,'OPP','Oppland');
 INSERT INTO zones VALUES ('',160,'ROG','Rogaland');
 INSERT INTO zones VALUES ('',160,'SOF','Sogn og Fjordane');
-INSERT INTO zones VALUES ('',160,'STR','S¯r-Tr¯ndelag');
+INSERT INTO zones VALUES ('',160,'STR','S√∏r-Tr√∏ndelag');
 INSERT INTO zones VALUES ('',160,'TEL','Telemark');
 INSERT INTO zones VALUES ('',160,'TRO','Troms');
 INSERT INTO zones VALUES ('',160,'VEA','Vest-Agder');
-INSERT INTO zones VALUES ('',160,'OST','ÿstfold');
+INSERT INTO zones VALUES ('',160,'OST','√òstfold');
 INSERT INTO zones VALUES ('',160,'SVA','Svalbard');
 
 #Pakistan
@@ -2718,17 +2780,17 @@ INSERT INTO zones VALUES ('',215,'BR', 'Bartin');
 INSERT INTO zones VALUES ('',215,'BM', 'Batman');
 INSERT INTO zones VALUES ('',215,'BB', 'Bayburt');
 INSERT INTO zones VALUES ('',215,'BC', 'Bilecik');
-INSERT INTO zones VALUES ('',215,'BG', 'Bingˆl');
+INSERT INTO zones VALUES ('',215,'BG', 'Bing√∂l');
 INSERT INTO zones VALUES ('',215,'BT', 'Bitlis');
 INSERT INTO zones VALUES ('',215,'BL', 'Bolu' );
 INSERT INTO zones VALUES ('',215,'BD', 'Burdur');
 INSERT INTO zones VALUES ('',215,'BU', 'Bursa');
-INSERT INTO zones VALUES ('',215,'CK', '«anakkale');
-INSERT INTO zones VALUES ('',215,'CI', '«ankiri');
-INSERT INTO zones VALUES ('',215,'CM', '«orum');
+INSERT INTO zones VALUES ('',215,'CK', '√áanakkale');
+INSERT INTO zones VALUES ('',215,'CI', '√áankiri');
+INSERT INTO zones VALUES ('',215,'CM', '√áorum');
 INSERT INTO zones VALUES ('',215,'DN', 'Denizli');
 INSERT INTO zones VALUES ('',215,'DY', 'Diyarbakir');
-INSERT INTO zones VALUES ('',215,'DU', 'D¸zce');
+INSERT INTO zones VALUES ('',215,'DU', 'D√ºzce');
 INSERT INTO zones VALUES ('',215,'ED', 'Edirne');
 INSERT INTO zones VALUES ('',215,'EG', 'Elazig');
 INSERT INTO zones VALUES ('',215,'EN', 'Erzincan');
@@ -2736,7 +2798,7 @@ INSERT INTO zones VALUES ('',215,'EM', 'Erzurum');
 INSERT INTO zones VALUES ('',215,'ES', 'Eskisehir');
 INSERT INTO zones VALUES ('',215,'GA', 'Gaziantep');
 INSERT INTO zones VALUES ('',215,'GI', 'Giresun');
-INSERT INTO zones VALUES ('',215,'GU', 'G¸m¸shane');
+INSERT INTO zones VALUES ('',215,'GU', 'G√ºm√ºshane');
 INSERT INTO zones VALUES ('',215,'HK', 'Hakkari');
 INSERT INTO zones VALUES ('',215,'HT', 'Hatay');
 INSERT INTO zones VALUES ('',215,'IG', 'Igdir');
@@ -2744,7 +2806,7 @@ INSERT INTO zones VALUES ('',215,'IP', 'Isparta');
 INSERT INTO zones VALUES ('',215,'IB', 'Istanbul');
 INSERT INTO zones VALUES ('',215,'IZ', 'Izmir');
 INSERT INTO zones VALUES ('',215,'KM', 'Kahramanmaras');
-INSERT INTO zones VALUES ('',215,'KB', 'Karab¸k');
+INSERT INTO zones VALUES ('',215,'KB', 'Karab√ºk');
 INSERT INTO zones VALUES ('',215,'KR', 'Karaman');
 INSERT INTO zones VALUES ('',215,'KA', 'Kars');
 INSERT INTO zones VALUES ('',215,'KS', 'Kastamonu');
@@ -2755,7 +2817,7 @@ INSERT INTO zones VALUES ('',215,'KL', 'Kirklareli');
 INSERT INTO zones VALUES ('',215,'KH', 'Kirsehir');
 INSERT INTO zones VALUES ('',215,'KC', 'Kocaeli');
 INSERT INTO zones VALUES ('',215,'KO', 'Konya');
-INSERT INTO zones VALUES ('',215,'KU', 'K¸tahya');
+INSERT INTO zones VALUES ('',215,'KU', 'K√ºtahya');
 INSERT INTO zones VALUES ('',215,'ML', 'Malatya');
 INSERT INTO zones VALUES ('',215,'MN', 'Manisa');
 INSERT INTO zones VALUES ('',215,'MR', 'Mardin');
@@ -2786,26 +2848,26 @@ INSERT INTO zones VALUES ('',215,'ZO', 'Zonguldak');
 
 #Venezuela
 INSERT INTO zones VALUES ('',229,'AM','Amazonas');
-INSERT INTO zones VALUES ('',229,'AN','Anzo·tegui');
+INSERT INTO zones VALUES ('',229,'AN','Anzo√°tegui');
 INSERT INTO zones VALUES ('',229,'AR','Aragua');
 INSERT INTO zones VALUES ('',229,'AP','Apure');
 INSERT INTO zones VALUES ('',229,'BA','Barinas');
-INSERT INTO zones VALUES ('',229,'BO','BolÌvar');
+INSERT INTO zones VALUES ('',229,'BO','Bol√≠var');
 INSERT INTO zones VALUES ('',229,'CA','Carabobo');
 INSERT INTO zones VALUES ('',229,'CO','Cojedes');
 INSERT INTO zones VALUES ('',229,'DA','Delta Amacuro');
 INSERT INTO zones VALUES ('',229,'DC','Distrito Capital');
-INSERT INTO zones VALUES ('',229,'FA','FalcÛn');
-INSERT INTO zones VALUES ('',229,'GA','Gu·rico');
+INSERT INTO zones VALUES ('',229,'FA','Falc√≥n');
+INSERT INTO zones VALUES ('',229,'GA','Gu√°rico');
 INSERT INTO zones VALUES ('',229,'GU','Guayana');
 INSERT INTO zones VALUES ('',229,'LA','Lara');
-INSERT INTO zones VALUES ('',229,'ME','MÈrida');
+INSERT INTO zones VALUES ('',229,'ME','M√©rida');
 INSERT INTO zones VALUES ('',229,'MI','Miranda');
 INSERT INTO zones VALUES ('',229,'MO','Monagas');
 INSERT INTO zones VALUES ('',229,'NE','Nueva Esparta');
 INSERT INTO zones VALUES ('',229,'PO','Portuguesa');
 INSERT INTO zones VALUES ('',229,'SU','Sucre');
-INSERT INTO zones VALUES ('',229,'TA','T·chira');
+INSERT INTO zones VALUES ('',229,'TA','T√°chira');
 INSERT INTO zones VALUES ('',229,'TU','Trujillo');
 INSERT INTO zones VALUES ('',229,'VA','Vargas');
 INSERT INTO zones VALUES ('',229,'YA','Yaracuy');

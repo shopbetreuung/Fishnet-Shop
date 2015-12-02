@@ -38,4 +38,7 @@ define('TEXT_CAMPAIGNS_REFID', 'RefID der Kampagne:');
 define('TEXT_DISPLAY_NUMBER_OF_CAMPAIGNS', 'Verfolgte Kampagnen:');
 
 define('TEXT_DELETE_INTRO', 'Sind Sie sicher, dass Sie diese Kampagne l&ouml;schen m&ouml;chten?');
+
+define('ERROR_TEXT_HEADING', 'Fehler! Kampagne nicht gespeichert:');
+define('ERROR_TEXT_NAME', 'Bitte Kampagnennamen eingeben !');
 ?>

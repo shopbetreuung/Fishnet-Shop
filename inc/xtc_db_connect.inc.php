@@ -21,43 +21,28 @@
   function xtc_db_connect($server = DB_SERVER, $username = DB_SERVER_USERNAME, $password = DB_SERVER_PASSWORD, $database = DB_DATABASE, $link = 'db_link') {
     global $$link;
 
-    if (!function_exists('mysql_connect')) {
-      die ('Call to undefined function: mysql_connect(). Please install the MySQL Connector for PHP');
+    if (!function_exists('mysqli_connect')) {
+      die ('Call to undefined function: mysqli_connect(). Please install the MySQL Connector for PHP');
     }
 
     if (USE_PCONNECT == 'true') {
-      $$link = @mysql_pconnect($server, $username, $password);
+      $$link = @mysqli_connect($server, $username, $password, $database);
     } else {
-      $$link = @mysql_connect($server, $username, $password);
+      $$link = @mysqli_connect($server, $username, $password, $database);
     }
 
     //vr - 2010-01-01 - Disable "STRICT" mode for MySQL 5!
-    if(version_compare(@mysql_get_server_info(), '5.0.0', '>=')) {
-      @mysql_query("SET SESSION sql_mode=''");
+    if(version_compare(@mysqli_get_server_info(), '5.0.0', '>=')) {
+      @mysqli_query("SET SESSION sql_mode=''");
     }
 
-    // BOF - Dokuman - 2010-11-23 - revised database connection for error reporting
-    if ($$link) {
-      if (!@mysql_select_db($database, $$link)) {
-        xtc_db_error('', mysql_errno($$link), mysql_error($$link));
-        die();
-      }
-    } else {
-      xtc_db_error('', mysql_errno(), mysql_error());
-      die();
+    if (mysqli_connect_errno()) {
+        echo "Failed to connect to MySQL: " . mysqli_connect_error();
     }
-    // EOF - Dokuman - 2010-11-23 - revised database connection for error reporting
 
-    // set charset defined in configure.php
-    if(!defined('DB_SERVER_CHARSET')) {
-      define('DB_SERVER_CHARSET','latin1');
-    }
-    if(function_exists('mysql_set_charset')) { //requires MySQL 5.0.7 or later
-      mysql_set_charset(DB_SERVER_CHARSET);
-    } else {
-      mysql_query('SET NAMES '.DB_SERVER_CHARSET);
-    }    
-
+    
+    mysqli_set_charset($$link, 'utf8');
+    
     return $$link;
   }
 ?>

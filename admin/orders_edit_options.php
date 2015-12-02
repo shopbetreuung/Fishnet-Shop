@@ -32,7 +32,8 @@
 <?php
   $attributes_query = xtc_db_query("select * from " . TABLE_ORDERS_PRODUCTS_ATTRIBUTES . " where orders_id = '" . (int)$_GET['oID'] . "' and orders_products_id = '" . (int)$_GET['opID'] . "'");
 ?>
-<table border="0" width="100%" cellspacing="0" cellpadding="2">
+<div class='col-xs-12'>
+<table class='table table-striped table-bordered hidden-xs hidden-sm'>
   <tr class="dataTableHeadingRow">
     <td class="dataTableHeadingContent"><b><?php echo TEXT_PRODUCT_OPTION;?></b></td>
     <td class="dataTableHeadingContent"><b><?php echo TEXT_PRODUCT_OPTION_VALUE;?></b></td>
@@ -105,7 +106,7 @@
                                    WHERE products_id = '" . (int)$_GET['pID'] . "'
                                 ORDER BY sortorder");
 ?>
-<table border="0" width="100%" cellspacing="0" cellpadding="2">
+<table class='table table-striped table-bordered hidden-xs hidden-sm'>
   <tr class="dataTableHeadingRow">
     <td class="dataTableHeadingContent"><b><?php echo TEXT_PRODUCT_ID;?></b></td>
     <td class="dataTableHeadingContent"><b><?php echo TEXT_QUANTITY;?></b></td>
@@ -151,5 +152,5 @@
   }
   ?>
 </table>
-<br /><br />
+</div>
 <!-- Artikel Einfügen Ende //-->

@@ -87,10 +87,6 @@
   );
 
 // ---------------------------------------------------------------------------------------
-//      Einzelne Content Seiten mit noindex versehen, kommagetrennte Liste der coID
-// ---------------------------------------------------------------------------------------
-  $content_noIndex = array(7,9);
-// ---------------------------------------------------------------------------------------
 //  Ende Konfiguration
 // ---------------------------------------------------------------------------------------
 
@@ -334,10 +330,15 @@ switch(basename($PHP_SELF)) {
       } else {
         $meta_title = metaTitle($product->data['products_name'],isset($product->data['manufacturers_name'])?$product->data['manufacturers_name']:'',$Page,($addProdShopTitle)?ML_TITLE:'');
       }
+        $category_query = "select p2c.categories_id from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_TO_CATEGORIES . " p2c where p.products_id = '" . (int)$product->data['products_id'] . "' and p.products_status = '1' and p.products_id = p2c.products_id and p2c.categories_id != 0 LIMIT 1";
+        $category_query  = xtDBquery($category_query);
+        if (xtc_db_num_rows($category_query,true)) {
+            $cID = xtc_db_fetch_array($category_query)['categories_id'];
+        }
 
       //-- Canonical-URL
       //-- http://www.linkvendor.com/blog/der-canonical-tag-%E2%80%93-was-kann-man-damit-machen.html
-      $canonical_url = xtc_href_link(FILENAME_PRODUCT_INFO, 'products_id='.$product->data['products_id'],$request_type,false);
+      $canonical_url = xtc_href_link(FILENAME_PRODUCT_INFO, 'products_id='.$product->data['products_id'].'&cPath='.$cID,$request_type,false, true, true, true);
     }
     break;
 // ---------------------------------------------------------------------------------------
@@ -430,10 +431,6 @@ switch(basename($PHP_SELF)) {
 // ---------------------------------------------------------------------------------------
   case FILENAME_CONTENT :
 
-    //  Noindex bei bestimmten Contet Seiten
-    if(in_array(intval($_GET['coID']),$content_noIndex)) {
-      $meta_robots = 'noindex, follow, noodp';
-    }
     $contents_meta_query = xtDBquery("
       select  content_meta_title,
               content_meta_description,
@@ -441,13 +438,21 @@ switch(basename($PHP_SELF)) {
               content_title,
               content_heading,
               content_text,
-              content_file
+              content_file,
+              content_meta_index
       from   ".TABLE_CONTENT_MANAGER."
       where   content_group = '".(int)$_GET['coID']."'
       and   languages_id = '".(int)$_SESSION['languages_id']."'
     ");
     $contents_meta = xtc_db_fetch_array($contents_meta_query,true);
 
+      if($contents_meta['content_meta_index'] == '0'){
+            $ml_index = '<meta name="robots" content="index,follow" />';
+        } elseif($contents_meta['content_meta_index'] == '1'){
+            $ml_index = '<meta name="robots" content="noindex,follow" />';
+        }
+  
+    
     if(count($contents_meta) > 0) {
 
       // NEU! Eingebundene Dateien auslesen
@@ -599,31 +604,31 @@ if (USE_BOOTSTRAP != "true") {
 echo '<meta http-equiv="cache-control" content="no-cache" />'."\n";
 }
 if (metaClean($meta_keyw) != '') {
-  echo '<meta name="keywords" content="'. metaClean($meta_keyw) .'" />'."\n";
+  echo '<meta name="keywords" content="'. utf8_encode(metaClean($meta_keyw)) .'" />'."\n";
 }
 if (metaClean($meta_descr,$metaDesLength) != '') {
-  echo '<meta name="description" content="'. metaClean($meta_descr,$metaDesLength) .'" />'."\n";
+  echo '<meta name="description" content="'. utf8_encode(metaClean($meta_descr,$metaDesLength)) .'" />'."\n";
 }
 if (USE_BOOTSTRAP != "true") {
 if ($_SESSION['language_code'] != '') {
   echo '<meta name="language" content="'. $_SESSION['language_code'] .'" />'."\n";
 }
 }
-if ($meta_robots != '') {
+if ($meta_robots != '' && !isset($ml_index)) {
   echo '<meta name="robots" content="'. $meta_robots .'" />'."\n";
 }
 if (metaClean(META_AUTHOR) != '') {
-  echo '<meta name="author" content="'.metaClean(META_AUTHOR) .'" />'."\n";
+  echo '<meta name="author" content="'.utf8_encode(metaClean(META_AUTHOR)) .'" />'."\n";
 }
 if (metaClean(META_PUBLISHER) != '') {
-  echo '<meta name="publisher" content="'. metaClean(META_PUBLISHER) .'" />'."\n";
+  echo '<meta name="publisher" content="'. utf8_encode(metaClean(META_PUBLISHER)) .'" />'."\n";
 }
 if (metaClean(META_COMPANY) != '') {
-  echo '<meta name="company" content="'. metaClean(META_COMPANY) .'" />'."\n";
+  echo '<meta name="company" content="'. utf8_encode(metaClean(META_COMPANY)) .'" />'."\n";
 }
 if (USE_BOOTSTRAP != "true") {
 if (metaClean(META_TOPIC) != '') {
-  echo '<meta name="page-topic" content="'. metaClean(META_TOPIC) .'" />'."\n";
+  echo '<meta name="page-topic" content="'. utf8_encode(metaClean(META_TOPIC)) .'" />'."\n";
 }
 }
 if (USE_BOOTSTRAP != "true") {
@@ -636,6 +641,10 @@ if (META_REVISIT_AFTER != '0') {
 }
 if(isset($canonical_url)) {
   echo '<link rel="canonical" href="'.$canonical_url.'" />'."\n";
+}
+
+if(isset($ml_index)){
+    echo $ml_index;
 }
 // EOF - h-h-h - 2011-08-22 - show only defined Meta Tags
 ?>

@@ -191,8 +191,7 @@ function order_nr_list() {
   return $ret;
 }
 
-function profile_save( $profile_name, $parameter_arr ) {
-
+function profile_save( $profile_name, $parameter_arr, $checked_ids = '', $rules = '' ) {
   $sql = "select 
             profile_id
           from ".
@@ -209,17 +208,20 @@ function profile_save( $profile_name, $parameter_arr ) {
     $sql = "update ".
               TABLE_PDFBILL_PROFILE."
             set
-              profile_parameter = '$parameter_list'
+              profile_parameter = '$parameter_list',
+              rules = '$rules'
             where 
               profile_id = '".$data['profile_id']."'";
   } else {              // profile not exists
     $sql = "insert into ".
               TABLE_PDFBILL_PROFILE."
             ( profile_name,
-              profile_parameter )
+              profile_parameter,
+              rules)
             values (
               '$profile_name',
-              '$parameter_list' )";
+              '$parameter_list',
+              '$rules')";
   }    
   xtDBquery($sql);
 }
@@ -255,7 +257,7 @@ function profile_load_n( $profile_name ) {
   
 }  
 function profile_list() {
-  $sql = "select profile_id, profile_name from ".TABLE_PDFBILL_PROFILE;    
+  $sql = "select profile_id, profile_name, rules from ".TABLE_PDFBILL_PROFILE;    
   $sql = xtDBquery($sql);
   $ret=array();
   while( $data = xtc_db_fetch_array($sql) ) {
@@ -327,7 +329,7 @@ function default_profile() {
   $profile['headtext_width'] = '';
   $profile['headtext_height'] = '';
   $profile['addressblock_display'] = '1';
-  $profile['addressblock_text'] = 'Muster GBR, Postfach 4711, 12345 Flümme';
+  $profile['addressblock_text'] = 'Muster GBR, Postfach 4711, 12345 FlÃ¼mme';
   $profile['addressblock_position'] = 'L';
   $profile['addressblock_font_color'] = '';
   $profile['addressblock_font_type'] = 'arial';
@@ -433,7 +435,7 @@ function default_profile() {
   $profile['resumefields_vertical'] = '5';
   $profile['resumefields_width'] = '80,40';
   $profile['subtext_display'] = '1';
-  $profile['subtext_text'] = 'Die Ware bleibt bis zur vollständigen Bezahlung Eigentum der Muster GBR ';
+  $profile['subtext_text'] = 'Die Ware bleibt bis zur vollstÃ¤ndigen Bezahlung Eigentum der Muster GBR ';
   $profile['subtext_font_color'] = '';
   $profile['subtext_font_type'] = 'arial';
   $profile['subtext_font_size'] = '8';
@@ -447,17 +449,17 @@ function default_profile() {
   $profile['footer_font_size'] = '6';
   $profile['footer_display_1'] = '1';
   $profile['footer_position_1'] = 'L';
-  $profile['footer_text_1'] = 'Muster GbR Beispielstrasse 123 12345 Flümme';
+  $profile['footer_text_1'] = 'Muster GbR Beispielstrasse 123 12345 FlÃ¼mme';
   $profile['footer_display_2'] = '1';
   $profile['footer_position_2'] = 'C';
   $profile['footer_text_2'] = 'Konto: 1234567 BLZ 222 333 44 Beispielbank';
   $profile['footer_display_3'] = '1';
   $profile['footer_position_3'] = 'R';
-  $profile['footer_text_3'] = 'HGR 32344424 AmtsG. Flümme StNr. 5545594';
+  $profile['footer_text_3'] = 'HGR 32344424 AmtsG. FlÃ¼mme StNr. 5545594';
   $profile['footer_position_4'] = 'L';
   $profile['footer_text_4'] = '';
   $profile['terms_display'] = '1';
-  $profile['terms_formtext'] = 'Allgemeine Geschäftsbedingungen (AGB)';
+  $profile['terms_formtext'] = 'Allgemeine GeschÃ¤ftsbedingungen (AGB)';
   $profile['terms_head_position'] = 'L';
   $profile['terms_head_font_style'] = 'B';
   $profile['terms_head_font_size'] = '10';

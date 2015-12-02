@@ -16,7 +16,7 @@
    Released under the GNU General Public License
 
     v.1.32 - 2012-05-23 (c) by web28 - www.rpa-com.de
-   Korrektur für Nettosumme bei Modulen ohne Steuersatz
+   Korrektur fÃ¼r Nettosumme bei Modulen ohne Steuersatz
 
     v.1.31 - 2012-05-23 (c) by web28 - www.rpa-com.de
     FIX: Preisberechnung Kundengruppenwechsel, Optionspreise bei Sonderpreisen
@@ -28,13 +28,13 @@
     FIX: tax guest account, tax ot_payment, tax cod_fee
 
     v.1.26 - 2011-11-01 (c) by web28 - www.rpa-com.de
-   NEW Länderwechsel -> delivery_country_iso_code_2, billing_country_iso_code_2
+   NEW LÃ¤nderwechsel -> delivery_country_iso_code_2, billing_country_iso_code_2
 
    TODO Attributpreise und Sonderangebote
       Bei Sonderangeboten wird der Attributpreis nicht zum Artikelpreis addiert
-   TODO Lagerbestand Attribute (Produkt löschen, Produkt Anzahl Änderung)
+   TODO Lagerbestand Attribute (Produkt lÃ¶schen, Produkt Anzahl Ã„nderung)
     dazu muss die Tabelle orders_product_attributes um options_id und options_values_id erweitert werden
-    da ansonsten keine eindeutige Zuordnung möglich ist
+    da ansonsten keine eindeutige Zuordnung mÃ¶glich ist
     Anpassung in checkout_process.php
    --------------------------------------------------------------*/
 
@@ -50,7 +50,7 @@ if (!defined('CHECKOUT_USE_PRODUCTS_SHORT_DESCRIPTION')) {
 
 define('FORMAT_NEGATIVE', '<strong><font color="#ff0000">%s</font></strong>');
 
-// Benötigte Funktionen und Klassen Anfang:
+// BenÃ¶tigte Funktionen und Klassen Anfang:
 require ('includes/application_top.php');
 require (DIR_WS_CLASSES.'order.php');
 if (!$_GET['oID']) {
@@ -70,7 +70,7 @@ require_once (DIR_FS_INC.'xtc_oe_customer_infos.inc.php');
 
 require_once (DIR_FS_INC.'xtc_get_countries.inc.php');
 require_once (DIR_FS_INC.'xtc_get_address_format_id.inc.php');
-// Benötigte Funktionen und Klassen Ende
+// BenÃ¶tigte Funktionen und Klassen Ende
 
 $action = (isset($_GET['action']) ? $_GET['action'] : '');
 
@@ -133,7 +133,7 @@ if ($action == 'address_edit') {
 }
 // Adressbearbeitung Ende
 
-// Artikeldaten einfügen / bearbeiten Anfang:
+// Artikeldaten einfÃ¼gen / bearbeiten Anfang:
 
 // Artikel bearbeiten Anfang:
 if ($action == 'product_edit') {
@@ -196,10 +196,10 @@ if ($action == 'product_edit') {
                                      where orders_products_id = '".(int)($_POST['opID'])."'
                                    ");
 
-  //Produktpreise neu berechnen - Steuer hinzufügen
+  //Produktpreise neu berechnen - Steuer hinzufÃ¼gen
   if ($group_addtax) {
     $_POST['products_price'] += $_POST['products_price'] /100 * $product['products_tax'];
-    //Optionspreise neu berechnen  - Steuer hinzufügen  //DEAKTIVIERT Optionspreise werden nur NETTO gespeichert???
+    //Optionspreise neu berechnen  - Steuer hinzufÃ¼gen  //DEAKTIVIERT Optionspreise werden nur NETTO gespeichert???
     while ($products_a = xtc_db_fetch_array($products_a_query)) {
       if ($products_a['options_values_price'] > 0) {
         $products_a['options_values_price'] += $products_a['options_values_price'] /100 * $product['products_tax'];
@@ -250,7 +250,7 @@ if ($action == 'product_edit') {
 }
 // Artikel bearbeiten Ende:
 
-// Artikel einfügen Anfang
+// Artikel einfÃ¼gen Anfang
 if ($action == 'product_ins') {
 
   $lang_query = xtc_db_query("select languages_id from ".TABLE_LANGUAGES." where directory = '".$order->info['language']."'");
@@ -325,7 +325,7 @@ if ($action == 'product_ins') {
   }
   xtc_redirect(xtc_href_link(FILENAME_ORDERS_EDIT, 'edit_action=products&oID='.$_POST['oID']));
 }
-// Artikel einfügen Ende
+// Artikel einfÃ¼gen Ende
 
 // Produkt Optionen bearbeiten Anfang
 if ($action == 'product_option_edit') {
@@ -376,7 +376,7 @@ if ($action == 'product_option_edit') {
   //Gesamtpreis
   $products_price = ($products_old_price + $ov_price);
 
-  //Steuer UND Währungskorrektur
+  //Steuer UND WÃ¤hrungskorrektur
   $tax_rate = $products['products_tax'];
   if ($status['customers_status_show_price_tax'] == 0 && $status['customers_status_add_tax_ot'] == 0) {
     $tax_rate = 0;
@@ -394,7 +394,7 @@ if ($action == 'product_option_edit') {
 }
 // Produkt Optionen bearbeiten Ende
 
-// Produkt Optionen einfügen Anfang
+// Produkt Optionen einfÃ¼gen Anfang
 if ($action == 'product_option_ins') {
 
   $lang_query = xtc_db_query("select languages_id from ".TABLE_LANGUAGES." where directory = '".$order->info['language']."'");
@@ -501,7 +501,7 @@ if ($action == 'product_option_ins') {
   //Gesamtpreis
   $products_price = ($products_old_price + $ov_price);
 
-  //Steuer UND Währungskorrektur
+  //Steuer UND WÃ¤hrungskorrektur
   $tax_rate =$products['products_tax'];
   if ($status['customers_status_show_price_tax'] == 0 && $status['customers_status_add_tax_ot'] == 0) {
     $tax_rate = 0;
@@ -518,9 +518,9 @@ if ($action == 'product_option_ins') {
   xtc_redirect(xtc_href_link(FILENAME_ORDERS_EDIT, 'edit_action=options&oID='.(int)$_POST['oID'].'&pID='.(int)$products['products_id'].'&opID='.(int)$_POST['opID']));
 }
 
-// Produkt Optionen einfügen Ende
+// Produkt Optionen einfÃ¼gen Ende
 
-// Artikeldaten einfügen / bearbeiten Ende:
+// Artikeldaten einfÃ¼gen / bearbeiten Ende:
 
 // Zahlung Anfang
 if ($action == 'payment_edit') {
@@ -639,10 +639,10 @@ if ($action== 'ot_edit') {
 
 if ($action == 'lang_edit') {
 
-  // Daten für Sprache wählen
+  // Daten fÃ¼r Sprache wÃ¤hlen
   $lang_query = xtc_db_query("select languages_id, name, directory from ".TABLE_LANGUAGES." where languages_id = '".$_POST['lang']."'");
   $lang = xtc_db_fetch_array($lang_query);
-  // Daten für Sprache wählen Ende
+  // Daten fÃ¼r Sprache wÃ¤hlen Ende
 
   // Produkte
   $order_products_query = xtc_db_query("select orders_products_id , products_id from ".TABLE_ORDERS_PRODUCTS." where orders_id = '".(int)$_POST['oID']."'");
@@ -682,7 +682,7 @@ if ($action == 'lang_edit') {
 
 // Sprachupdate Ende
 
-// Währungswechsel Anfang
+// WÃ¤hrungswechsel Anfang
 
 if ($action == 'curr_edit') {
 
@@ -748,11 +748,11 @@ if ($action == 'curr_edit') {
   xtc_redirect(xtc_href_link(FILENAME_ORDERS_EDIT, 'edit_action=other&oID='.(int)$_POST['oID']));
 }
 
-// Währungswechsel Ende
+// WÃ¤hrungswechsel Ende
 
-// Löschfunktionen Anfang:
+// LÃ¶schfunktionen Anfang:
 
-// Löschen eines Artikels aus der Bestellung Anfang:
+// LÃ¶schen eines Artikels aus der Bestellung Anfang:
 if ($action == 'product_delete') {
 
   xtc_db_query("delete from ".TABLE_ORDERS_PRODUCTS_ATTRIBUTES." where orders_products_id = '".(int)($_POST['opID'])."'");
@@ -764,9 +764,9 @@ if ($action == 'product_delete') {
 
   xtc_redirect(xtc_href_link(FILENAME_ORDERS_EDIT, 'edit_action=products&oID='.(int)$_POST['oID']));
 }
-// Löschen eines Artikels aus der Bestellung Ende:
+// LÃ¶schen eines Artikels aus der Bestellung Ende:
 
-// Löschen einer Artikeloption aus der Bestellung Anfang:
+// LÃ¶schen einer Artikeloption aus der Bestellung Anfang:
 if ($action == 'product_option_delete') {
 
   xtc_db_query("delete from ".TABLE_ORDERS_PRODUCTS_ATTRIBUTES." where orders_products_attributes_id = '".(int)($_POST['opAID'])."'");
@@ -791,20 +791,20 @@ if ($action == 'product_option_delete') {
 
   xtc_redirect(xtc_href_link(FILENAME_ORDERS_EDIT, 'edit_action=options&oID='.(int)$_POST['oID'].'&pID='.(int)$products['products_id'].'&opID='.(int)$_POST['opID']));
 }
-// Löschen einer Artikeloptions aus der Bestellung Ende:
+// LÃ¶schen einer Artikeloptions aus der Bestellung Ende:
 
-// Löschen eines OT Moduls aus der Bestellung Anfang:
+// LÃ¶schen eines OT Moduls aus der Bestellung Anfang:
 if ($action == 'ot_delete') {
 
   xtc_db_query("delete from ".TABLE_ORDERS_TOTAL." where orders_total_id = '".(int)($_POST['otID'])."'");
 
   xtc_redirect(xtc_href_link(FILENAME_ORDERS_EDIT, 'edit_action=other&oID='.(int)$_POST['oID']));
 }
-// Löschen eines OT Moduls aus der Bestellung Ende:
+// LÃ¶schen eines OT Moduls aus der Bestellung Ende:
 
-// Löschfunktionen Ende
+// LÃ¶schfunktionen Ende
 
-// Rückberechnung Anfang
+// RÃ¼ckberechnung Anfang
 
 if ($action == 'save_order') {
   $lang_query = xtc_db_query("SELECT languages_id
@@ -812,10 +812,10 @@ if ($action == 'save_order') {
                                WHERE directory = '".$order->info['language']."'");
   $lang = xtc_db_fetch_array($lang_query);
 
-  //BOF - Web28 - 2011-01-16 -  Löschen des Zwischenspeichers
+  //BOF - Web28 - 2011-01-16 -  LÃ¶schen des Zwischenspeichers
   xtc_db_query("DELETE FROM ".TABLE_ORDERS_RECALCULATE."
                       WHERE orders_id = '".(int)($_POST['oID'])."'");
-  //EOF - Web28 - 2011-01-16 -  Löschen des Zwischenspeichers
+  //EOF - Web28 - 2011-01-16 -  LÃ¶schen des Zwischenspeichers
 
   //BOF Web28 - 2010-12-06 - read customer status earlier
   $status_query = xtc_db_query("SELECT customers_status_show_price_tax,
@@ -827,14 +827,14 @@ if ($action == 'save_order') {
   $status = xtc_db_fetch_array($status_query);
   //EOF Web28 - 2010-12-06 - read customer status earlier
 
-  // Errechne neue Zwischensumme für Artikel Anfang
+  // Errechne neue Zwischensumme fÃ¼r Artikel Anfang
   $products_query = xtc_db_query("select SUM(final_price) as subtotal_final from ".TABLE_ORDERS_PRODUCTS." where orders_id = '".(int)$_POST['oID']."' ");
   $products = xtc_db_fetch_array($products_query);
   $subtotal_final = $products['subtotal_final'];
   $subtotal_text = $xtPrice->xtcFormat($subtotal_final, true);
 
   xtc_db_query("update ".TABLE_ORDERS_TOTAL." set text = '".$subtotal_text."', value = '".$subtotal_final."' where orders_id = '".(int)$_POST['oID']."' and class = 'ot_subtotal' ");
-  // Errechne neue Zwischensumme für Artikel Ende
+  // Errechne neue Zwischensumme fÃ¼r Artikel Ende
 
   //BOF####### Produkte #######//
   $products_query = xtc_db_query("select final_price, products_tax, allow_tax from ".TABLE_ORDERS_PRODUCTS." where orders_id = '".(int)$_POST['oID']."' ");
@@ -865,7 +865,7 @@ if ($action == 'save_order') {
   }
   //EOF####### Produkte #######//
 
-  //BOF#######  Produkte Steuersätze  #######//
+  //BOF#######  Produkte SteuersÃ¤tze  #######//
   $tax_query = xtc_db_query("SELECT tax_rate, SUM(tax) as tax_value
                                FROM ".TABLE_ORDERS_RECALCULATE."
                               WHERE orders_id = '".(int)$_POST['oID']."'
@@ -882,7 +882,7 @@ if ($action == 'save_order') {
     xtc_db_perform(TABLE_ORDERS_RECALCULATE, $sql_data_array);
 
   }
-  //EOF#######  Produkte Steuersätze  #######//
+  //EOF#######  Produkte SteuersÃ¤tze  #######//
 
   //BOF#######  Module  #######//
   $module_query = xtc_db_query("SELECT value, class
@@ -940,7 +940,7 @@ if ($action == 'save_order') {
     //BOC  web28 - 2012-03-22 - neue anteilige Steuerberechnung Module - ausgenommen bei Versandkosten und Nachnahme ohne Steuer
     if ($module_name != 'shipping' && $module_name != 'cod_fee' && $module_tax_rate == 0) { //web28 - 2012-03-14 - FIX Steuerberechnung
       $module_tax = calculate_tax($module_value['value']);
-      $module_n_price -= $module_tax; //Korrektur für Nettosumme bei Modulen ohne Steuersatz
+      $module_n_price -= $module_tax; //Korrektur fÃ¼r Nettosumme bei Modulen ohne Steuersatz
     }
     //EOC  web28 - 2012-03-22 - neue anteilige Steuerberechnung Module - ausgenommen bei Versandkosten  und Nachnahme ohne Steuer
 
@@ -1039,9 +1039,9 @@ if ($action == 'save_order') {
 
   //BOF#######  MwSt. neu berechnen  #######//
 
-  // Alte UST Löschen ANFANG
+  // Alte UST LÃ¶schen ANFANG
   xtc_db_query("delete from ".TABLE_ORDERS_TOTAL." where orders_id = '".(int)($_POST['oID'])."' and class='ot_tax'");
-  // Alte UST Löschen ENDE
+  // Alte UST LÃ¶schen ENDE
 
   // BOC - web28 - 2011-08-25 -  Neue Abfrage der einzelnen Steuerwerte
   $ust_query = xtc_db_query("
@@ -1058,7 +1058,7 @@ if ($action == 'save_order') {
     $ust_desc_query = xtc_db_query("select tax_description from ".TABLE_TAX_RATES." where tax_rate = '".$ust['tax_rate']."'");
     $ust_desc = xtc_db_fetch_array($ust_desc_query);
 
-    //BOF web28 - 2010-12-04 - "inkl." oder "zzgl." hinzufügen
+    //BOF web28 - 2010-12-04 - "inkl." oder "zzgl." hinzufÃ¼gen
     $title = $ust_desc['tax_description'];
     $tax_info = '';
     if ($status['customers_status_show_price_tax'] == 1)
@@ -1066,7 +1066,7 @@ if ($action == 'save_order') {
     if ($status['customers_status_show_price_tax'] == 0)
       $tax_info = TEXT_NO_TAX;
     $title = $tax_info . $title.':';
-    //EOF web28 - 2010-12-04 - "inkl." oder "zzgl." hinzufügen
+    //EOF web28 - 2010-12-04 - "inkl." oder "zzgl." hinzufÃ¼gen
 
 
     if ($ust['tax_value_new']) {
@@ -1097,7 +1097,7 @@ if ($action == 'save_order') {
 
   //EOF#######    MwSt. neu berechnen  #######//
 
-  //BOF  web28 - 2010-12-04 Errechne neue Gesamtsumme für Artikel
+  //BOF  web28 - 2010-12-04 Errechne neue Gesamtsumme fÃ¼r Artikel
   //Mwst feststellen
   $add_tax = 0;
   $price = 'b_price';
@@ -1122,16 +1122,16 @@ if ($action == 'save_order') {
                        value = '".$total_final."'
                  where orders_id = '".(int)$_POST['oID']."'
                    and class = 'ot_total'");
-  //EOF  web28 - 2010-12-04 Errechne neue Gesamtsumme für Artikel
+  //EOF  web28 - 2010-12-04 Errechne neue Gesamtsumme fÃ¼r Artikel
 
-  // Löschen des Zwischenspeichers Anfang
+  // LÃ¶schen des Zwischenspeichers Anfang
   //EXIT; //DEBUG
   xtc_db_query("delete from ".TABLE_ORDERS_RECALCULATE." where orders_id = '".xtc_db_input($_POST['oID'])."'");
-  // Löschen des Zwischenspeichers Ende
+  // LÃ¶schen des Zwischenspeichers Ende
 
   xtc_redirect(xtc_href_link(FILENAME_ORDERS, 'action=edit&oID='.(int)$_POST['oID']));
 }
-// Rückberechnung Ende
+// RÃ¼ckberechnung Ende
 
 
 //---------------------------------//
@@ -1151,7 +1151,7 @@ function get_customers_taxprice_status() {
 }
 
 //BOF - web28 - 2010-01-15 - Steuersatz Coupon/Rabatt neu berechnen
-//Der Steuersatz muss anhand der Posten mit unterschiedlichen Steuersätzen anteilig berechnet werden
+//Der Steuersatz muss anhand der Posten mit unterschiedlichen SteuersÃ¤tzen anteilig berechnet werden
 function calculate_tax($amount) {
   global $xtPrice, $status;
 
@@ -1167,11 +1167,11 @@ function calculate_tax($amount) {
   if ($sum_total['price'] == 0) return 0;
   $amount_pro = $amount/$sum_total['price'] * 100;
 
-  //Steuersätze alle Produkte der Bestellung feststellen
+  //SteuersÃ¤tze alle Produkte der Bestellung feststellen
   $tax_rate_query = xtc_db_query("select tax_rate from ".TABLE_ORDERS_RECALCULATE." where orders_id = '".(int)$_POST['oID']."' and class = 'ot_tax' GROUP BY tax_rate");
 
   $tod_amount = 0;
-  //Berechnungen pro Steuersatz durchführen
+  //Berechnungen pro Steuersatz durchfÃ¼hren
   while ($tax_rate = xtc_db_fetch_array($tax_rate_query)) {
 
     $tax_query = xtc_db_query("select SUM(tax) as value from ".TABLE_ORDERS_RECALCULATE." where orders_id = '".(int)$_POST['oID']."' and tax_rate = '". $tax_rate['tax_rate']."'and class = 'products'");
@@ -1183,7 +1183,7 @@ function calculate_tax($amount) {
     $new_tax_total = xtc_db_fetch_array($new_tax_query);
     $new_tax = $new_tax_total['value'] + $god_amount; //web29 - 2011-08-25 - Fix negative sign
 
-    //Einzelne Steuersätze neu in Kalkulationstabelle speichern
+    //Einzelne SteuersÃ¤tze neu in Kalkulationstabelle speichern
     xtc_db_query("UPDATE ".TABLE_ORDERS_RECALCULATE."
                      SET tax = '".xtc_db_prepare_input($new_tax)."'
                    WHERE orders_id = '".(int)$_POST['oID']."'
@@ -1243,33 +1243,21 @@ require (DIR_WS_INCLUDES.'head.php');
     <?php require(DIR_WS_INCLUDES . 'header.php'); ?>
     <!-- header_eof //-->
     <!-- body //-->
-    <table border="0" width="100%" cellspacing="2" cellpadding="2">
-      <tr>
-        
-        </td>
+    <div class="row">
         <!-- body_text //-->
-        <td width="100%" valign="top">
-          <table border="0" width="100%" cellspacing="0" cellpadding="0">
-            <tr>
-              <td width="100%" colspan="2">
-                <table border="0" width="100%" cellspacing="0" cellpadding="0">
-                  <tr>
-                    <td class="pageHeading"><?php echo TABLE_HEADING;?></td>
-                    <!--td class="pageHeading" align="right"></td-->
-                  </tr>
-                </table>
-              </td>
-            </tr>
-            <tr>
-              <td  valign="top">
+        <div class='col-xs-12'>
+            <p class="h2">
+                <?php echo TABLE_HEADING; ?>
+            </p>
+        </div>
+    <div class='col-xs-12'><br></div>
+        
                 <!-- Anfang //-->
                 <!--br /><br /-->
                 <?php
                 if ($_GET['text'] == 'address') {
                   ?>
-                  <table border="0" width="100%" cellspacing="0" cellpadding="2">
-                    <tr>
-                      <td class="main">
+                  <div class="col-xs-12">
                         <b>
                           <?php
                           if ($_GET['text'] == 'address') {
@@ -1277,9 +1265,7 @@ require (DIR_WS_INCLUDES.'head.php');
                           }
                           ?>
                         </b>
-                      </td>
-                    </tr>
-                  </table>
+                  </div>
                   <?php
                 }
                 ?>
@@ -1287,17 +1273,15 @@ require (DIR_WS_INCLUDES.'head.php');
                 //BOF -web28- 2010-12-07 - add TEXT_ORDERS_EDIT_INFO
                 if (!isset($_GET['edit_action'])) {
                   ?>
-                  <table border="0" width="100%" cellspacing="0" cellpadding="2" style="border: 1px #a3a3a3 solid; padding:5px;">
-                    <tr>
-                      <td class="main" style="border: 1px red solid; padding:5px; background: #FFD6D6;">
+                      <div class="main col-xs-12" style="border: 1px red solid; padding:5px; background: #FFD6D6;">
                         <?php echo TEXT_ORDERS_EDIT_INFO;?>
-                      </td>
-                    </tr>
-                  </table>
+                      </div>
                   <?php
                 }
                 //EOF -web28- 2010-12-07 - add TEXT_ORDERS_EDIT_INFO
                 ?>
+                <div class="col-xs-12">
+                    <div id='responsive_table' class='pull-left col-sm-9'>
                 <!-- Meldungen Ende //-->
                 <?php
                 if ($_GET['edit_action'] == 'address') {
@@ -1312,9 +1296,8 @@ require (DIR_WS_INCLUDES.'head.php');
                 ?>
                 <!-- Bestellung Sichern Anfang //-->
                 <!--br /><br /-->
-                <table border="0" width="100%" cellspacing="0" cellpadding="2">
-                  <tr class="dataTableRow">
-                    <td class="dataTableContent" align="right">
+                
+                    <div class="col-xs-12">
                       <?php
                       echo TEXT_SAVE_ORDER;
                       echo xtc_draw_form('save_order', FILENAME_ORDERS_EDIT, 'action=save_order', 'post');
@@ -1333,13 +1316,11 @@ require (DIR_WS_INCLUDES.'head.php');
                         //EOF - web28 -2011-06-08 - add back buttons
                         ?>
                       </form>
-                    </td>
-                  </tr>
-                </table>
+                      </div>
+                </div>
                 <!--br /><br /-->
                 <!-- Bestellung Sichern Ende //-->
                 <!-- Ende //-->
-              </td>
               <?php
               $heading = array ();
               $contents = array ();
@@ -1369,18 +1350,19 @@ require (DIR_WS_INCLUDES.'head.php');
                   break;
               }
               if ((xtc_not_null($heading)) && (xtc_not_null($contents))) {
-                echo '            <td width="20%" valign="top">'."\n";
+                echo '<div class="col-md-3 col-sm-12 col-xs-12 pull-right edit-box-class">'."\n";
                 $box = new box;
                 echo $box->infoBox($heading, $contents);
-                echo '            </td>'."\n";
+                echo '            </div>'."\n";
+                                ?>
+                <script>
+                    //responsive_table
+                    $('#responsive_table').addClass('col-md-9');
+                </script>               
+                <?php
               }
               ?>
-            </tr>
-            <!-- body_text_eof //-->
-          </table>
-        </td>
-      </tr>
-    </table>
+</div></div>
     <!-- body_eof //-->
     <!-- footer //-->
     <?php require(DIR_WS_INCLUDES . 'footer.php'); ?>

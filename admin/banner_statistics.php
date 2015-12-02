@@ -64,17 +64,18 @@ require (DIR_WS_INCLUDES.'head.php');
 <!-- header_eof //-->
 
 <!-- body //-->
-<table border="0" width="100%" cellspacing="2" cellpadding="2">
-  <tr>
+<div class='row'>
+
     
 <!-- body_text //-->
-    <td class="boxCenter" width="100%" valign="top"><table border="0" width="100%" cellspacing="0" cellpadding="2">
-      <tr>
-        <td width="100%"><table border="0" width="100%" cellspacing="0" cellpadding="0">
-          <tr><?php echo xtc_draw_form('year', FILENAME_BANNER_STATISTICS, '', 'get'); ?>
-            <td class="pageHeading"><?php echo HEADING_TITLE; ?></td>
-            <td class="pageHeading" align="right"><?php echo xtc_draw_separator('pixel_trans.gif', '1', HEADING_IMAGE_HEIGHT); ?></td>
-            <td class="main" align="right"><?php echo TITLE_TYPE . ' ' . xtc_draw_pull_down_menu('type', $type_array, (($_GET['type']) ? $_GET['type'] : 'daily'), 'onChange="this.form.submit();"'); ?><noscript><input type="submit" value="GO"></noscript><br />
+        <div class='col-xs-12'>
+            <?php echo xtc_draw_form('year', FILENAME_BANNER_STATISTICS, '', 'get'); ?>
+            <div class='col-xs-6'>
+                <p class="h2"><?php echo HEADING_TITLE; ?></p>
+            </div>
+            <div class='col-xs-6 text-right'>
+            <div class='col-xs-12'> <br> </div>
+            <div class="main"><?php echo TITLE_TYPE . ' ' . xtc_draw_pull_down_menu('type', $type_array, (($_GET['type']) ? $_GET['type'] : 'daily'), 'onChange="this.form.submit();"'); ?><noscript><input type="submit" value="GO"></noscript><br />
 <?php
   switch ($_GET['type']) {
     case 'yearly': break;
@@ -87,40 +88,44 @@ require (DIR_WS_INCLUDES.'head.php');
       break;
   }
 ?>
-            </td>
-          <?php echo xtc_draw_hidden_field('page', $_GET['page']) . xtc_draw_hidden_field('bID', $_GET['bID']); ?></form></tr>
-        </table></td>
-      </tr>
-      <tr>
-        <td><?php echo xtc_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
-      </tr>
-      <tr>
-        <td align="center">
+            </div>
+          <?php echo xtc_draw_hidden_field('page', $_GET['page']) . xtc_draw_hidden_field('bID', $_GET['bID']); ?>
+            </form>
+            </div>
+        </div>
+        <div class='col-xs-12'> <br> </div>
+        <div class='col-xs-12 text-center'>
+            <div class='col-xs-12 '>
+                <div class='col-xs-4 col-xs-push-4'>
 <?php
   if ( (function_exists('imagecreate')) && ($dir_ok) && ($banner_extension) ) {
     $banner_id = $_GET['bID'];
     switch ($_GET['type']) {
       case 'yearly':
         include(DIR_WS_INCLUDES . 'graphs/banner_yearly.php');
-        echo xtc_image(DIR_WS_IMAGES . 'graphs/banner_yearly-' . $banner_id . '.' . $banner_extension);
+        echo xtc_image(DIR_WS_IMAGES . 'graphs/banner_yearly-' . $banner_id . '.' . $banner_extension, '', '', '', 'class="img-responsive"');
         break;
       case 'monthly':
         include(DIR_WS_INCLUDES . 'graphs/banner_monthly.php');
-        echo xtc_image(DIR_WS_IMAGES . 'graphs/banner_monthly-' . $banner_id . '.' . $banner_extension);
+        echo xtc_image(DIR_WS_IMAGES . 'graphs/banner_monthly-' . $banner_id . '.' . $banner_extension, '', '', '', 'class="img-responsive"');
         break;
       default:
       case 'daily':
         include(DIR_WS_INCLUDES . 'graphs/banner_daily.php');
-        echo xtc_image(DIR_WS_IMAGES . 'graphs/banner_daily-' . $banner_id . '.' . $banner_extension);
+        echo xtc_image(DIR_WS_IMAGES . 'graphs/banner_daily-' . $banner_id . '.' . $banner_extension, '', '', '', 'class="img-responsive"');
         break;
     }
-?>
-          <table border="0" width="600" cellspacing="0" cellpadding="2">
-            <tr class="dataTableHeadingRow">
+             
+    ?>      </div>
+            </div>
+        <div class='table-responsive col-xs-4 col-xs-push-4 hidden-xs hidden-sm'>
+          <table class='table table-bordered table-striped'>
+            <thead class="dataTableHeadingRow">
              <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_SOURCE; ?></td>
              <td class="dataTableHeadingContent" align="right"><?php echo TABLE_HEADING_VIEWS; ?></td>
              <td class="dataTableHeadingContent" align="right"><?php echo TABLE_HEADING_CLICKS; ?></td>
-           </tr>
+           </thead>
+           <tbody>
 <?php
     for ($i = 0, $n = sizeof($stats); $i < $n; $i++) {
       echo '            <tr class="dataTableRow">' . "\n" .
@@ -130,7 +135,30 @@ require (DIR_WS_INCLUDES.'head.php');
            '            </tr>' . "\n";
     }
 ?>
+          </tbody>
           </table>
+        </div>
+            
+        <div class='table-responsive hidden-lg hidden-md'>
+          <table class='table table-bordered table-striped'>
+            <thead class="dataTableHeadingRow">
+             <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_SOURCE; ?></td>
+             <td class="dataTableHeadingContent" align="right"><?php echo TABLE_HEADING_VIEWS; ?></td>
+             <td class="dataTableHeadingContent" align="right"><?php echo TABLE_HEADING_CLICKS; ?></td>
+           </thead>
+           <tbody>
+<?php
+    for ($i = 0, $n = sizeof($stats); $i < $n; $i++) {
+      echo '            <tr class="dataTableRow">' . "\n" .
+           '              <td class="dataTableContent">' . $stats[$i][0] . '</td>' . "\n" .
+           '              <td class="dataTableContent" align="right">' . number_format($stats[$i][1]) . '</td>' . "\n" .
+           '              <td class="dataTableContent" align="right">' . number_format($stats[$i][2]) . '</td>' . "\n" .
+           '            </tr>' . "\n";
+    }
+?>
+          </tbody>
+          </table>
+        </div>
 <?php
   } else {
     include(DIR_WS_FUNCTIONS . 'html_graphs.php');
@@ -148,20 +176,12 @@ require (DIR_WS_INCLUDES.'head.php');
     }
   }
 ?>
-        </td>
-      </tr>
-      <tr>
-        <td><?php echo xtc_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
-      </tr>
-      <tr>
-        <td class="main" align="right"><?php echo '<a class="btn btn-default" onclick="this.blur();" href="' . xtc_href_link(FILENAME_BANNER_MANAGER, 'page=' . $_GET['page'] . '&bID=' . $_GET['bID']) . '">' . BUTTON_BACK . '</a>'; ?></td>
-      </tr>
-    </table></td>
+      </div>
+        <div class='col-xs-12'> <br> </div>
+        <div class='col-xs-12 text-right'><?php echo '<a class="btn btn-default" onclick="this.blur();" href="' . xtc_href_link(FILENAME_BANNER_MANAGER, 'page=' . $_GET['page'] . '&bID=' . $_GET['bID']) . '">' . BUTTON_BACK . '</a>'; ?></div>
 <!-- body_text_eof //-->
-  </tr>
-</table>
+</div>
 <!-- body_eof //-->
-
 <!-- footer //-->
 <?php require(DIR_WS_INCLUDES . 'footer.php'); ?>
 <!-- footer_eof //-->

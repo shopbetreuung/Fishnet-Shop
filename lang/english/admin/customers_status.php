@@ -92,4 +92,7 @@ define('TEXT_INFO_CUSTOMERS_STATUS_BASE', '<strong>Basis Kundengruppe für Artike
 define('ENTRY_CUSTOMERS_STATUS_BASE', 'wird als Grundlage für die Preise der neuen Kundengruppe gewählt. Wenn Auswahl = Admin werden keine Preise für die neue Kundengruppe angelegt.');
 
 define('IMAGE_ICON_INFO','action');
+
+define('ERROR_TEXT_HEADING', 'Customers group not saved, fix errors:');
+define('ERROR_TEXT_NAME', 'Name invalid!');
 ?>

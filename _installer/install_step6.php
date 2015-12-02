@@ -19,8 +19,6 @@
 
   require_once(DIR_FS_INC . 'xtc_encrypt_password.inc.php');
   require_once(DIR_FS_INC . 'xtc_db_connect.inc.php');
-  require_once(DIR_FS_INC . 'xtc_db_query.inc.php');
-  require_once(DIR_FS_INC . 'xtc_db_fetch_array.inc.php');
   require_once(DIR_FS_INC .'xtc_validate_email.inc.php');
   require_once(DIR_FS_INC .'xtc_db_input.inc.php');
   require_once(DIR_FS_INC .'xtc_db_num_rows.inc.php');
@@ -222,6 +220,17 @@
                                 '".xtc_db_input($country)."',
                                 '".xtc_db_input($zone_id)."'
                                 )");
+                                
+	  // customers_status
+	  xtc_db_query("INSERT INTO " . TABLE_ADMIN_ACCESS . " (`customers_id`) VALUES ('1');");
+	  xtc_db_query("INSERT INTO " . TABLE_ADMIN_ACCESS . " (`customers_id`) VALUES ('groups');");
+	  $aa_spalten_qry = xtc_db_query("SHOW COLUMNS FROM admin_access");
+	  while ($aa_spalten = xtc_db_fetch_array($aa_spalten_qry)) {
+		  if ($aa_spalten['Type'] == 'int(1)') {
+			  xtc_db_query("UPDATE admin_access SET ".$aa_spalten['Field']." = '1' WHERE customers_id = '1'");
+			  xtc_db_query("UPDATE admin_access SET ".$aa_spalten['Field']." = '1' WHERE customers_id = 'groups'");
+		  }
+	  }
 
       xtc_db_query("UPDATE " .TABLE_CONFIGURATION . " SET configuration_value='". ($email_address). "' WHERE configuration_key = 'STORE_OWNER_EMAIL_ADDRESS'");
       xtc_db_query("UPDATE " .TABLE_CONFIGURATION . " SET configuration_value='". ($store_name). "' WHERE configuration_key = 'STORE_NAME'");

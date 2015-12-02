@@ -29,4 +29,7 @@ define('TEXT_INFO_HEADING_EDIT_PRODUCTS_VPE', 'Verpackungseinheit bearbeiten');
 define('TEXT_INFO_HEADING_DELETE_PRODUCTS_VPE', 'Verpackungseinheit l&ouml;schen');
 
 define('ERROR_REMOVE_DEFAULT_PRODUCTS_VPE', 'Fehler: Die Standard-Verpackungseinheit kann nicht gel&ouml;scht werden. Bitte definieren Sie eine neue Standard-VPE und wiederholen Sie den Vorgang.');
+
+define('ERROR_TEXT_HEADING', 'Fehler! Verpackungseinheit konnte nicht gespeichert werden:');
+define('ERROR_TEXT_NAME', 'Name ung&uuml;ltig!');
 ?>

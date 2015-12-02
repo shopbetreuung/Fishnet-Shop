@@ -16,7 +16,7 @@
    Released under the GNU General Public License
    ---------------------------------------------------------------------------------------*/
 
-  function xtc_db_connect_installer($server, $username, $password, $link = 'db_link') {
+  function xtc_db_connect_installer($server, $username, $password, $database, $link = 'db_link') {
     global $$link, $db_error;
 
     $db_error = false;
@@ -26,24 +26,14 @@
       return false;
     }
 
-    $$link = @mysql_connect($server, $username, $password) or $db_error = mysql_error();
+    $$link = @mysqli_connect($server, $username, $password, $database) or $db_error = mysqli_error($$link);
 
     //vr - 2010-01-01 - Disable "STRICT" mode for MySQL 5!
-    if(version_compare(@mysql_get_server_info(), '5.0.0', '>=')) {
-      @mysql_query("SET SESSION sql_mode=''");
+    if(version_compare(@mysqli_get_server_info($$link), '5.0.0', '>=')) {
+      @mysqli_query($$link, "SET SESSION sql_mode=''");
     }
 
-    // set charset defined in configure.php
-    if(!defined('DB_SERVER_CHARSET')) {
-      define('DB_SERVER_CHARSET','latin1');
-    }
- 
-    if(function_exists('mysql_set_charset')) { //requires MySQL 5.0.7 or later
-      mysql_set_charset(DB_SERVER_CHARSET);
-    } else {
-      $collation = DB_SERVER_CHARSET == 'utf8' ? 'utf8_general_ci' : 'latin1_german1_ci';      
-      mysql_query('SET NAMES '.DB_SERVER_CHARSET. ' COLLATE '. $collation );      
-    }
+    mysqli_set_charset($$link, 'utf8');
 
     return $$link;
   }

@@ -21,26 +21,26 @@ $sales_report = xtc_db_fetch_array($sales_report_query);
 <table class="table table-bordered">
 	<tr>
 		 <th><?php echo TURNOVER_TODAY; ?>:</th>
-		 <td align="right"><?php echo $currencies->format($turnover['today']); ?></td>
+		 <td align="right"><?php echo $currencies->format($sales_report['today']); ?></td>
 	</tr>
 	<tr>
 		 <th><?php echo TURNOVER_YESTERDAY; ?>:</th>
-		 <td align="right"><?php echo $currencies->format($turnover['yesterday']); ?></td>
+		 <td align="right"><?php echo $currencies->format($sales_report['yesterday']); ?></td>
 	</tr>
 	<tr>
 		 <th><?php echo TURNOVER_THIS_MONTH; ?>:</th>
-		 <td align="right"><?php echo $currencies->format($turnover['this_month']); ?></td>
+		 <td align="right"><?php echo $currencies->format($sales_report['this_month']); ?></td>
 	</tr>
 	<tr>
 		 <th><?php echo TURNOVER_LAST_MONTH; ?>:</th>
-		 <td align="right"><?php echo $currencies->format($turnover['last_month']); ?></td>
+		 <td align="right"><?php echo $currencies->format($sales_report['last_month']); ?></td>
 	</tr>
 	<tr>
 		 <th><?php echo TURNOVER_LAST_MONTH_PAID; ?>:</th>
-		 <td align="right"><?php echo $currencies->format($turnover['last_month_paid']); ?></td>
+		 <td align="right"><?php echo $currencies->format($sales_report['last_month_paid']); ?></td>
 	</tr>
 	<tr>
 		 <th><?php echo TOTAL_TURNOVER; ?>:</th>
-		 <td align="right"><?php echo $currencies->format($turnover['total']); ?></td>
+		 <td align="right"><?php echo $currencies->format($sales_report['total']); ?></td>
 	</tr>
 </table>

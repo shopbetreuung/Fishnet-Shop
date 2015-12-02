@@ -100,6 +100,7 @@ require ('includes/safeterms/functions.php');
 
 
 	// IF THE API ISN't installed
+        echo "<div class='col-xs-12'>";
 	if ($safeterms_control["API_INSTALLED"]==0 && !$action) {
 		// NEW CUSTOMER TEMPLATE
 		include("includes/safeterms/new_customer.php");
@@ -107,6 +108,7 @@ require ('includes/safeterms/functions.php');
 		// NEW CUSTOMER TEMPLATE
 		include("includes/safeterms/overview.php");
 	}
+        echo "</div>";
 
 ?>
 

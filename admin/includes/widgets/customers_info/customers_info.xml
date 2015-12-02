@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<widget>
+	<name>Customers info</name>
+	<author>Fishnet Services - Milan Niksic</author>
+	<authorEmail>support@fishnet-services.com</authorEmail>
+	<authorUrl>www.fishnet-services.com</authorUrl>
+	<version>1.0.0</version>
+	
+	<runwidget>customers_info/customers_info.php</runwidget>
+	
+	<dimensions>
+		<width>2</width>
+		<height>2</height>
+		<resizable>false</resizable>
+	</dimensions>
+	
+	<defaultPosition>
+		<x>3</x>
+		<y>0</y>
+	</defaultPosition>
+	
+	<languages>
+		<language tag="de"></language>
+	</languages>
+</widget>

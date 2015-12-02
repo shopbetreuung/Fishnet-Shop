@@ -122,13 +122,10 @@ if ($_GET['action'] == 'delete_option_value') {
                         );
   $values_values = xtc_db_fetch_array($values);
 ?>
-                <table border="0" cellspacing="0" cellpadding="2" class="option-values-table">
-                  <tr>
-                    <td colspan="3" class="pageHeading">&nbsp;<?php echo $values_values['products_options_values_name']; ?>&nbsp;</td>
-                  </tr>
-                  <tr>
-                    <td colspan="3"><?php echo xtc_black_line(); ?></td>
-                  </tr>
+                  <div class='col-xs-12'>
+                    <div class='col-xs-12'>
+                      <p class="h3">&nbsp;<?php echo $values_values['products_options_values_name']; ?>&nbsp;</p>
+                    </div>
 <?php
 $products = xtc_db_query("-- products_attributes.php
                           SELECT p.products_id,
@@ -149,6 +146,7 @@ $products = xtc_db_query("-- products_attributes.php
 if (xtc_db_num_rows($products)) {
  //Produkt zugeordnet - Warnung - Optionswert kann nicht gelöscht werden
 ?>
+                  <table class='table table-bordered'>
                         <tr class="dataTableHeadingRow">
                           <td class="dataTableHeadingContent" align="center">&nbsp;<?php echo TABLE_HEADING_ID; ?>&nbsp;</td>
                           <td class="dataTableHeadingContent">&nbsp;<?php echo TABLE_HEADING_PRODUCT; ?>&nbsp;</td>
@@ -174,7 +172,7 @@ if (xtc_db_num_rows($products)) {
                         </tr>
                         <tr>
                           <td class="main" colspan="3>" style="background-color: #d4d4d4;">
-                            <div style="margin:10px 0";>
+                            <div style="margin:10px 0;">
                               <?php echo TEXT_WARNING_OF_DELETE; ?>&nbsp;&nbsp;&nbsp;
                               <?php  //BOF - webkiste - auf der selben Seite bleiben
                               echo xtc_button_link(BUTTON_CANCEL, xtc_href_link(FILENAME_PRODUCTS_ATTRIBUTES, 'value_page=' . $_GET['value_page'], 'NONSSL'));
@@ -185,58 +183,55 @@ if (xtc_db_num_rows($products)) {
                         <tr>
                           <td colspan="3"><?php echo xtc_black_line(); ?></td>
                         </tr>
+                      </table>
 <?php
 } else {
 //Produkt nicht zugeordnet - Ok - Optionswert kann gelöscht werden
 ?>
-                        <tr>
-                          <td class="main" colspan="3>" style="background-color: #d4d4d4;">
-                            <div style="margin:10px 0";>
-                              <?php echo TEXT_OK_TO_DELETE; ?>
+                    <div class='col-xs-12'>
+                        <div style="margin:10px 0;">
+                            <div class='col-xs-12'><?php echo xtc_black_line(); ?></div>
+                            <span class='hidden-sm hidden-md hidden-lg'><?php echo TEXT_OK_TO_DELETE; ?></span>
+                            <div class="col-xs-12">
+                                <span class="hidden-xs"><?php echo TEXT_OK_TO_DELETE; ?></span>
                               <?php //BOF - webkiste - auf der selben Seite bleiben
                               echo xtc_button_link(BUTTON_DELETE, xtc_href_link(FILENAME_PRODUCTS_ATTRIBUTES, 'action=delete_value&value_id=' . $_GET['value_id'] . '&value_page=' . $_GET['value_page'] , 'NONSSL'));
                               echo xtc_button_link(BUTTON_CANCEL, xtc_href_link(FILENAME_PRODUCTS_ATTRIBUTES, 'option_page=' . $option_page . '&value_page=' . $_GET['value_page'] . '&attribute_page=' . $attribute_page , 'NONSSL'));
                               //EOF - webkiste - auf der selben Seite bleiben ?>
                             </div>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td colspan="<3"><?php echo xtc_black_line(); ?></td>
-                        </tr>
+                        <div class='col-xs-12'><?php echo xtc_black_line(); ?></div>
+                        </div>
+                    </div>
 <?php
     }
 ?>
-                      </table>
-
+                        </div>
 <?php
 // ############ EOF DELETE ############ //
   } else {
     $colspan = 4;
 // ############ BOF DEFAULT ############ //
 ?>
-                <table border="0" cellspacing="0" cellpadding="2" class="option-values-table">
-                  <tr>
-                    <td colspan="<?php echo $colspan;?>" class="pageHeading">&nbsp;<?php echo HEADING_TITLE_VAL; ?>&nbsp;&nbsp;&nbsp;
+<div class="col-xs-12">
+                      <div class="col-xs-12"><p class='h2'>&nbsp;<?php echo HEADING_TITLE_VAL; ?>&nbsp;</p></div>
+                      <div class="col-xs-12">
                       <form name="search" action="<?php echo FILENAME_PRODUCTS_ATTRIBUTES; ?>" method="GET">
-                        <span  class="main"><?php  echo  TEXT_SEARCH;  ?></span> <input type="text" name="search_optionsname" size="20" value="<?php echo $_GET['search_optionsname']; ?>">
+                          <span  class="main"><b><?php  echo  TEXT_SEARCH;  ?></b></span> <input type="text" name="search_optionsname" size="20" value="<?php echo $_GET['search_optionsname']; ?>">
                         <input name="<?php echo xtc_session_name(); ?>" type="hidden" value="<?php echo xtc_session_id(); ?>" />
-                      </form
-                    </td>
-                  </tr>
-                  <tr>
-                    <td colspan="<?php echo $colspan;?>" class="smallText"><?php echo $value_pages;?></td>
-                  </tr>
-                  <tr>
-                    <td colspan="<?php echo $colspan;?>"><?php echo xtc_black_line(); ?></td>
-                  </tr>
+                      </form>
+                      </div>
+                      <div class="col-xs-12">
+                          <div class="smallText"><?php echo $value_pages;?></div>
+                      </div>
+                  <div class="col-xs-12">
+                      <?php echo xtc_black_line(); ?>
+                  </div>
+                  <table class='table table-bordered'>
                   <tr class="dataTableHeadingRow">
                     <td class="dataTableHeadingContent">&nbsp;<?php echo TABLE_HEADING_ID; ?>&nbsp;</td>
                     <td class="dataTableHeadingContent">&nbsp;<?php echo TABLE_HEADING_OPT_NAME; ?>&nbsp;</td>
                     <td class="dataTableHeadingContent">&nbsp;<?php echo TABLE_HEADING_OPT_VALUE; ?>&nbsp;</td>
                     <td class="dataTableHeadingContent" align="center">&nbsp;<?php echo TABLE_HEADING_ACTION; ?>&nbsp;</td>
-                  </tr>
-                  <tr>
-                    <td colspan="<?php echo $colspan;?>"><?php echo xtc_black_line(); ?></td>
                   </tr>
 <?php
 // ############ BOF NEW ENTRY ############ //
@@ -254,9 +249,6 @@ if (xtc_db_num_rows($products)) {
       $inputs.= $lang_img . '&nbsp;<input type="text" name="value_name[' . $languages[$i]['id'] . ']" style="width:200px;">&nbsp;<br />';
     }
     ?>
-                  <tr>
-                    <td colspan="<?php echo $colspan;?>"><?php echo xtc_black_line(); ?></td>
-                  </tr>
                   <form name="values" action="<?php echo xtc_href_link(FILENAME_PRODUCTS_ATTRIBUTES, 'action=add_product_option_values&value_page=' . $_GET['value_page'].$option_filter, 'NONSSL');?>" method="post">
                   <tr style="background-color: #d4d4d4;">
                     <td align="center" class="smallText">&nbsp;<?php echo $next_id; ?>&nbsp;</td>
@@ -265,9 +257,6 @@ if (xtc_db_num_rows($products)) {
                     <td align="center" class="smallText">&nbsp;<?php echo xtc_button(BUTTON_INSERT); ?>&nbsp;</td>
                   </tr>
                   </form>
-                  <tr>
-                    <td colspan="<?php echo $colspan;?>"><?php echo xtc_black_line(); ?></td>
-                  </tr>
 
   <?php
   }
@@ -295,9 +284,6 @@ while ($values_values = xtc_db_fetch_array($values)) {
       $inputs .= $lang_img . '&nbsp;<input type="text" name="value_name[' . $languages[$i]['id'] . ']" style="width:200px;" value="' . $value_name['products_options_values_name'] . '">&nbsp;<br />';
     }
 ?>
-                    <tr>
-                      <td colspan="<?php echo $colspan;?>"><?php echo xtc_black_line(); ?></td>
-                    </tr>
                     <form name="values" action="<?php echo xtc_href_link(FILENAME_PRODUCTS_ATTRIBUTES, 'action=update_value&value_page='.$_GET['value_page'].$page_info.$option_id, 'NONSSL');?>" method="post">
                     <tr style="background-color: #d4d4d4;">
                       <td align="center" class="smallText">&nbsp;<?php echo $values_values['products_options_values_id']; ?>
@@ -309,9 +295,6 @@ while ($values_values = xtc_db_fetch_array($values)) {
                       <td align="center" class="smallText update">&nbsp;<?php echo xtc_button(BUTTON_UPDATE); ?>&nbsp;<?php echo xtc_button_link(BUTTON_CANCEL, xtc_href_link(FILENAME_PRODUCTS_ATTRIBUTES, 'value_page='.$_GET['value_page'].$option_filter, 'NONSSL')); ?>&nbsp;</td>
                     </tr>
                     </form>
-                    <tr>
-                      <td colspan="<?php echo $colspan;?>"><?php echo xtc_black_line(); ?></td>
-                    </tr>
 <?php
 // ############ EOF UPDATE ##############//
   } else {
@@ -335,6 +318,7 @@ while ($values_values = xtc_db_fetch_array($values)) {
 }
 ?>
      </table>
+</div>
 <?php
  // ############ EOF DEFAULT ############ //
   }

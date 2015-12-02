@@ -505,7 +505,7 @@ class pdfbill_closed extends PDF_Clipping {
 	}
 
  	/**
- 	 * Seite formatieren und mit Werten aus dem Array data abfüllen
+ 	 * Seite formatieren und mit Werten aus dem Array data abfÃ¼llen
  	 *
  	 */
   function trennlinie() {

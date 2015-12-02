@@ -354,7 +354,7 @@ if (isset($_POST['action']) && ($_POST['action'] == 'process')) {
       if (NEW_SIGNUP_GIFT_VOUCHER_AMOUNT > 0) {
         $coupon_code = create_coupon_code();
         $insert_query = xtc_db_query("INSERT INTO ".TABLE_COUPONS." (coupon_code, coupon_type, coupon_amount, date_created) VALUES ('".$coupon_code."', 'G', '".NEW_SIGNUP_GIFT_VOUCHER_AMOUNT."', now())");
-        $insert_id = xtc_db_insert_id($insert_query);
+        $insert_id = xtc_db_insert_id();
         $insert_query = xtc_db_query("INSERT INTO ".TABLE_COUPON_EMAIL_TRACK." (coupon_id, customer_id_sent, sent_firstname, emailed_to, date_sent) VALUES ('".$insert_id."', '0', 'Admin', '".$email_address."', now() )");
 
         $smarty->assign('SEND_GIFT', 'true');
@@ -379,8 +379,8 @@ if (isset($_POST['action']) && ($_POST['action'] == 'process')) {
 
     // create templates
     $smarty->caching = 0;
-    $html_mail = $smarty->fetch(CURRENT_TEMPLATE.'/mail/'.$_SESSION['language'].'/create_account_mail.html');
-    $txt_mail = $smarty->fetch(CURRENT_TEMPLATE.'/mail/'.$_SESSION['language'].'/create_account_mail.txt');
+    $html_mail = $smarty->fetch('db:create_account_mail.html');
+    $txt_mail = $smarty->fetch('db:create_account_mail.txt');
 
     xtc_php_mail(EMAIL_SUPPORT_ADDRESS, EMAIL_SUPPORT_NAME, $email_address, $name, EMAIL_SUPPORT_FORWARDING_STRING, EMAIL_SUPPORT_REPLY_ADDRESS, EMAIL_SUPPORT_REPLY_ADDRESS_NAME, '', '', EMAIL_SUPPORT_SUBJECT, $html_mail, $txt_mail);
 

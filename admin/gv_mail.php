@@ -88,8 +88,8 @@
 
       $smarty->assign('GIFT_LINK',$link);
 
-      $html_mail=$smarty->fetch(CURRENT_TEMPLATE . '/admin/mail/'.$_SESSION['language'].'/send_gift.html');
-      $txt_mail=$smarty->fetch(CURRENT_TEMPLATE . '/admin/mail/'.$_SESSION['language'].'/send_gift.txt');
+      $html_mail=$smarty->fetch('db:send_gift.html');
+      $txt_mail=$smarty->fetch('db:send_gift.txt');
 
       if ($subject=='') $subject=EMAIL_BILLING_SUBJECT;
       xtc_php_mail(EMAIL_BILLING_ADDRESS,EMAIL_BILLING_NAME, $mail['customers_email_address'] , $mail['customers_firstname'] . ' ' . $mail['customers_lastname'] , '', EMAIL_BILLING_REPLY_ADDRESS, EMAIL_BILLING_REPLY_ADDRESS_NAME, '', '', $subject, $html_mail , $txt_mail);
@@ -129,8 +129,8 @@
     $link = HTTP_SERVER  . DIR_WS_CATALOG . 'gv_redeem.php' . '?gv_no='.$id1;
 //-- SEO ShopStat
       $smarty->assign('GIFT_LINK',$link);
-      $html_mail=$smarty->fetch(CURRENT_TEMPLATE . '/admin/mail/'.$_SESSION['language'].'/send_gift.html');
-      $txt_mail=$smarty->fetch(CURRENT_TEMPLATE . '/admin/mail/'.$_SESSION['language'].'/send_gift.txt');
+      $html_mail=$smarty->fetch('db:send_gift.html');
+      $txt_mail=$smarty->fetch('db:send_gift.txt');
 
       if ($subject == '') $subject = EMAIL_BILLING_SUBJECT; //web28 - 2011-07-07 - Fix email subject
       xtc_php_mail(EMAIL_BILLING_ADDRESS,EMAIL_BILLING_NAME, $_POST['email_to'] , '' , '', EMAIL_BILLING_REPLY_ADDRESS, EMAIL_BILLING_REPLY_ADDRESS_NAME, '', '', $subject, $html_mail , $txt_mail); //web28 - 2011-07-07 - Fix email subject
@@ -170,25 +170,17 @@ if (USE_WYSIWYG=='true' && ($_GET['action'] != 'preview' || $error== true)) {
 <?php require(DIR_WS_INCLUDES . 'header.php'); ?>
 <!-- header_eof //-->
 <!-- body //-->
-<table border="0" width="100%" cellspacing="2" cellpadding="2">
-  <tr>
     
+<div class="row">
 <!-- body_text //-->
-    <td class="boxCenter" width="100%" valign="top">
-    <table border="0" width="100%" cellspacing="0" cellpadding="0">
-      <tr>
-        <td width="100%">
-        <table border="0" width="100%" cellspacing="0" cellpadding="0">
-          <tr>
-            <td class="pageHeading"><?php echo HEADING_TITLE; ?></td>
-            <td class="pageHeading" align="right"><?php echo xtc_draw_separator('pixel_trans.gif', HEADING_IMAGE_WIDTH, HEADING_IMAGE_HEIGHT); ?></td>
-          </tr>
-        </table>
-        </td>
-      </tr>
-      <tr>
-        <td>
-        <table border="0" width="100%" cellspacing="0" cellpadding="2">
+    <div class='col-xs-12'>
+        <p class="h2">
+            <?php echo HEADING_TITLE; ?>
+        </p>
+        Configuration
+    </div>
+<div class='col-xs-12'><br></div>
+
 <?php
   if ( ($_GET['action'] == 'preview') && ($_POST['customers_email_address'] || $_POST['email_to']) ) {
     switch ($_POST['customers_email_address']) {
@@ -206,45 +198,43 @@ if (USE_WYSIWYG=='true' && ($_GET['action'] != 'preview' || $error== true)) {
         break;
     }
 ?>
-          <tr>
           <?php echo xtc_draw_form('mail', FILENAME_GV_MAIL, 'action=send_email_to_user'); ?>
-            <td>
-            <table border="0" width="100%" cellpadding="0" cellspacing="2">
-              <tr>
-                <td><?php echo xtc_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
-              </tr>
-              <tr>
-                <td class="smallText"><b><?php echo TEXT_CUSTOMER; ?></b><br /><?php echo $mail_sent_to; ?></td>
-              </tr>
-              <tr>
-                <td><?php echo xtc_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
-              </tr>
-              <tr>
-                <td class="smallText"><b><?php echo TEXT_FROM; ?></b><br /><?php echo encode_htmlspecialchars(stripslashes($_POST['from'])); ?></td>
-              </tr>
-              <tr>
-                <td><?php echo xtc_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
-              </tr>
-              <tr>
-                <td class="smallText"><b><?php echo TEXT_SUBJECT; ?></b><br /><?php echo encode_htmlspecialchars(stripslashes($_POST['subject'])); ?></td>
-              </tr>
-              <tr>
-                <td><?php echo xtc_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
-              </tr>
-              <tr>
-                <td class="smallText"><b><?php echo TEXT_AMOUNT; ?></b><br /><?php echo nl2br(encode_htmlspecialchars(stripslashes($_POST['amount']))); ?></td>
-              </tr>
-              <tr>
-                <td><?php echo xtc_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
-              </tr>
-              <tr>
-                <td class="smallText"><b><?php echo TEXT_MESSAGE; ?></b><br /><?php echo stripslashes($_POST['message']); ?></td>
-              </tr>
-              <tr>
-                <td><?php echo xtc_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
-              </tr>
-              <tr>
-                <td>
+            <div class="col-xs-12">
+              <div class="col-xs-12">
+                <br>
+              </div>
+              <div class="col-xs-12">
+                <div class="col-xs-12 smallText" ><b><?php echo TEXT_CUSTOMER; ?></b><br /><?php echo $mail_sent_to; ?></div>
+              </div>
+              <div class="col-xs-12">
+                <br>
+              </div>
+              <div class="col-xs-12">
+                <div class="col-xs-12 smallText" ><b><?php echo TEXT_FROM; ?></b><br /><?php echo encode_htmlspecialchars(stripslashes($_POST['from'])); ?></div>
+              </div>
+              <div class="col-xs-12">
+                <br>
+              </div>
+              <div class="col-xs-12">
+                </div> class="smallText"><b><?php echo TEXT_SUBJECT; ?></b><br /><?php echo encode_htmlspecialchars(stripslashes($_POST['subject'])); ?></div>
+              </div>
+              <div class="col-xs-12">
+                <br>
+              </div>
+              <div class="col-xs-12">
+                <div class="col-xs-12 smallText" ><b><?php echo TEXT_AMOUNT; ?></b><br /><?php echo nl2br(encode_htmlspecialchars(stripslashes($_POST['amount']))); ?></div>
+              </div>
+              <div class="col-xs-12">
+                <br>
+              </div>
+              <div class="col-xs-12">
+                <div class="col-xs-12 smallText" ><b><?php echo TEXT_MESSAGE; ?></b><br /><?php echo stripslashes($_POST['message']); ?></div>
+              </div>
+              <div class="col-xs-12">
+                <br>
+              </div>
+              <div class="col-xs-12">
+                <div class="col-xs-12 ">
 <?php
 /* Re-Post all POST'ed variables */
     reset($_POST);
@@ -254,28 +244,19 @@ if (USE_WYSIWYG=='true' && ($_GET['action'] != 'preview' || $error== true)) {
       }
     }
 ?>
-                <table border="0" width="100%" cellpadding="0" cellspacing="2">
-                  <tr>
-                    <td><?php echo '<input type="submit" class="btn btn-default" name="back" onclick="this.blur();" value="' . BUTTON_BACK . '"/>'; ?></td>
-                    <td align="right"><?php echo '<a class="btn btn-default" onclick="this.blur();" href="' . xtc_href_link(FILENAME_GV_MAIL) . '">' . BUTTON_CANCEL . '</a> <input type="submit" class="btn btn-default" onclick="this.blur();" value="' . BUTTON_SEND_EMAIL . '"/>'; ?></td>
-                  </tr>
-                </table>
-                </td>
-              </tr>
-            </table>
-            </td>
+                  <div class="col-xs-12">
+                    <?php echo '<input type="submit" class="btn btn-default" name="back" onclick="this.blur();" value="' . BUTTON_BACK . '"/>'; ?>
+                    <?php echo '<a class="btn btn-default" onclick="this.blur();" href="' . xtc_href_link(FILENAME_GV_MAIL) . '">' . BUTTON_CANCEL . '</a> <input type="submit" class="btn btn-default" onclick="this.blur();" value="' . BUTTON_SEND_EMAIL . '"/>'; ?>
+                  </div>
+                </div>
+              </div>
+            </div>
           </form>
-          </tr>
 <?php
   } else {
 ?>
-          <tr>
           <?php echo xtc_draw_form('mail', FILENAME_GV_MAIL, 'action=preview'); ?>
-            <td>
-            <table border="0" cellpadding="0" cellspacing="2">
-              <tr>
-                <td colspan="2"><?php echo xtc_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
-              </tr>
+            <div class="col-xs-12">
 <?php
     if ($_GET['cID']) {
     $select='where customers_id='.$_GET['cID'];
@@ -292,66 +273,58 @@ if (USE_WYSIWYG=='true' && ($_GET['action'] != 'preview' || $error== true)) {
                            'text' => $customers_values['customers_lastname'] . ', ' . $customers_values['customers_firstname'] . ' (' . $customers_values['customers_email_address'] . ')');
     }
 ?>
-              <tr>
-                <td class="main"><?php echo TEXT_CUSTOMER; ?></td>
-                <td><?php echo xtc_draw_pull_down_menu('customers_email_address', $customers, $_GET['customer']);?></td>
-              </tr>
-              <tr>
-                <td colspan="2"><?php echo xtc_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
-              </tr>
-               <tr>
-                <td class="main"><?php echo TEXT_TO; ?></td>
-                <td><?php echo xtc_draw_input_field('email_to'); ?><?php echo '&nbsp;&nbsp;' . TEXT_SINGLE_EMAIL; ?></td>
-              </tr>
-              <tr>
-                <td colspan="2"><?php echo xtc_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
-              </tr>
-             <tr>
-                <td class="main"><?php echo TEXT_FROM; ?></td>
-                <td><?php echo xtc_draw_input_field('from', EMAIL_FROM); ?></td>
-              </tr>
-              <tr>
-                <td colspan="2"><?php echo xtc_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
-              </tr>
-              <tr>
-                <td class="main"><?php echo TEXT_SUBJECT; ?></td>
-                <td><?php echo xtc_draw_input_field('subject', $_POST['subject']); ?></td>
-              </tr>
-              <tr>
-                <td colspan="2"><?php echo xtc_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
-              </tr>
-              <tr>
-                <td valign="top" class="main"><?php echo TEXT_AMOUNT; ?></td>
-                <td><?php echo xtc_draw_input_field('amount', $_POST['amount']); ?></td>
-              </tr>
-              <tr>
-                <td colspan="2"><?php echo xtc_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
-              </tr>
-              <tr>
-                <td valign="top" class="main"><?php echo TEXT_MESSAGE; ?></td>
-                <td><?php echo xtc_draw_textarea_field('message', 'soft', '100%', '55', $_POST['message']); ?></td>
-              </tr>
-              <tr>
-                <td colspan="2"><?php echo xtc_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
-              </tr>
-              <tr>
-                <td colspan="2" align="right"><?php echo '<input type="submit" class="btn btn-default" onclick="this.blur();" value="' . BUTTON_SEND_EMAIL . '"/>'; ?></td>
-              </tr>
-            </table>
-            </td>
+              <div class="col-xs-12">
+                <div class="col-xs-12 col-sm-2 main"><?php echo TEXT_CUSTOMER; ?></div>
+                <div class="col-xs-12 col-sm-10"><?php echo xtc_draw_pull_down_menu('customers_email_address', $customers, $_GET['customer']);?></div>
+              </div>
+              <div class="col-xs-12">
+                <br>
+              </div>
+               <div class="col-xs-12">
+                <div class="col-xs-12 col-sm-2 main"><?php echo TEXT_TO; ?></div>
+                <div class="col-xs-12 col-sm-10"><?php echo xtc_draw_input_field('email_to'); ?><?php echo '&nbsp;&nbsp;' . TEXT_SINGLE_EMAIL; ?></div>
+              </div>
+              <div class="col-xs-12">
+                <br>
+              </div>
+             <div class="col-xs-12">
+                <div class="col-xs-12 col-sm-2 main"><?php echo TEXT_FROM; ?></div>
+                <div class="col-xs-12 col-sm-10"><?php echo xtc_draw_input_field('from', EMAIL_FROM); ?></div>
+              </div>
+              <div class="col-xs-12">
+                <br>
+              </div>
+              <div class="col-xs-12">
+                <div class="col-xs-12 col-sm-2 main"><?php echo TEXT_SUBJECT; ?></div>
+                <div class="col-xs-12 col-sm-10"><?php echo xtc_draw_input_field('subject', $_POST['subject']); ?></div>
+              </div>
+              <div class="col-xs-12">
+                <br>
+              </div>
+              <div class="col-xs-12">
+                <div class="col-xs-12 col-sm-2 main"><?php echo TEXT_AMOUNT; ?></div>
+                <div class="col-xs-12 col-sm-10"><?php echo xtc_draw_input_field('amount', $_POST['amount']); ?></div>
+              </div>
+              <div class="col-xs-12">
+                <br>
+              </div>
+              <div class="col-xs-12">
+                <div class="col-xs-12 col-sm-2 main"><?php echo TEXT_MESSAGE; ?></div>
+                <div class="col-xs-12 col-sm-10"><?php echo xtc_draw_textarea_field('message', 'soft', '100%', '55', $_POST['message']); ?></div>
+              </div>
+              <div class="col-xs-12">
+                <br>
+              </div>
+              <div class="col-xs-12">
+                <?php echo '<input type="submit" class="btn btn-default" onclick="this.blur();" value="' . BUTTON_SEND_EMAIL . '"/>'; ?>
+              </div>
+            </div>
           </form>
-          </tr>
 <?php
   }
 ?>
 <!-- body_text_eof //-->
-        </table>
-        </td>
-      </tr>
-    </table>
-    </td>
-  </tr>
-</table>
+</div>
 <!-- body_eof //-->
 <!-- footer //-->
 <?php require(DIR_WS_INCLUDES . 'footer.php'); ?>

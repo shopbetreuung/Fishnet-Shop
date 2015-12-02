@@ -16,6 +16,6 @@
    ---------------------------------------------------------------------------------------*/
    
   function xtc_db_free_result($db_query) {
-    return mysql_free_result($db_query);
+    return mysqli_free_result($db_query);
   }
  ?>

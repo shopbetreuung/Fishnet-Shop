@@ -31,4 +31,8 @@ define('TEXT_INFO_DELETE_INTRO', 'Are you sure you want to delete this zone?');
 define('TEXT_INFO_HEADING_NEW_ZONE', 'New Zone');
 define('TEXT_INFO_HEADING_EDIT_ZONE', 'Edit Zone');
 define('TEXT_INFO_HEADING_DELETE_ZONE', 'Delete Zone');
+
+define('ERROR_TEXT_HEADING', 'Zone not saved, fix errors:');
+define('ERROR_TEXT_NAME', 'Zone name invalid!');
+define('ERROR_TEXT_CODE', 'Zone code invalid!');
 ?>

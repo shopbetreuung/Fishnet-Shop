@@ -20,3 +20,14 @@
     echo $logger->timer_stop(DISPLAY_PAGE_PARSE_TIME);
   }
 ?>
+<script>
+$(document).ready(function(){
+    $(window).on('load',function(){
+       var winWidth =  $(window).width();
+       if(winWidth < 768 ){
+          console.log('Window Width: '+ winWidth + 'class used: col-xs');
+          $('.edit-box-class').attr('id', 'edit-box');
+       }
+    });
+});
+</script>

@@ -16,8 +16,6 @@
    Released under the GNU General Public License
    ---------------------------------------------------------------------------------------*/
 
-require_once(DIR_FS_CATALOG . 'includes/classes/nusoap/lib/nusoap.php');
-
 define ('VAT_LIVE_CHECK_URL', 'http://ec.europa.eu/taxation_customs/vies/checkVatService.wsdl');
 
 class vat_validation {
@@ -296,52 +294,49 @@ class vat_validation {
     $vat_id = str_replace($remove, '', $vat_id );
     $vatNumber = substr($vat_id, 2); // alles ab 2 Stellen der VAT (ohne Land)
 
-    $coo_soap_client = new nusoap_client(VAT_LIVE_CHECK_URL, true);
-    $coo_soap_proxy = $coo_soap_client->getProxy();
-
+    $soap_conn = new SoapClient(VAT_LIVE_CHECK_URL);
+    
     // check connection
-    if($coo_soap_client->getError() || !is_object($coo_soap_proxy))
-    {
-      $coo_ekomi_log = new FileLog('vat_validation_errors');
-      $coo_ekomi_log->write(date('Y-m-d H:i:s') . " connection to http://ec.europa.eu/ could not be established. " . print_r($coo_soap_client->getError(), true) . "\n");
-    }
-    else
-    {
-      $params = array('countryCode' => $country_id, 'vatNumber' => $vatNumber);
+    if($soap_conn) {
 
-      $result = $coo_soap_proxy->checkVat($params);
+		$params = array('countryCode' => $country_id, 'vatNumber' => $vatNumber);
+		
+		try{
+			$r = $soap_conn->checkVat($params);
+			if($r->valid == true){
+				return 1;
+			} else {
+				return 0;
+			}
 
-      if(is_array($result) && isset($result['valid']) && $result['valid'] == 'true')
-      {
-        return 1; //valid VAT
-      }
-      elseif(is_array($result) && isset($result['valid']) && $result['valid'] == 'false')
-      {
-        return 0; //invalid VAT
-      }
-      elseif(is_array($result) && isset($result['faultstring']))
-      {
-        switch($result['faultstring'])
-        {
-          case 'INVALID_INPUT':
-            $t_error_code = '94';
-            break;
-          case 'SERVICE_UNAVAILABLE':
-            $t_error_code = '95';
-            break;
-          case 'MS_UNAVAILABLE':
-            $t_error_code = '96';
-            break;
-          case 'TIMEOUT':
-            $t_error_code = '97';
-            break;
-          case 'SERVER_BUSY':
-            $t_error_code = '98';
-            break;
-        }
+			// This foreach shows every single line of the returned information
+			foreach($r as $k=>$prop){
+				echo $k . ': ' . $prop;
+			}
 
-        return $t_error_code;
-      }
+		} catch(SoapFault $e) {
+			
+			switch($e->faultstring)
+			{
+			  case 'INVALID_INPUT':
+				$t_error_code = '94';
+				break;
+			  case 'SERVICE_UNAVAILABLE':
+				$t_error_code = '95';
+				break;
+			  case 'MS_UNAVAILABLE':
+				$t_error_code = '96';
+				break;
+			  case 'TIMEOUT':
+				$t_error_code = '97';
+				break;
+			  case 'SERVER_BUSY':
+				$t_error_code = '98';
+				break;
+			}
+
+			return $t_error_code;
+		}	
 
       return false;
     }
@@ -466,7 +461,7 @@ class vat_validation {
 
       break;
 
-      // d‰nemark
+      // d√§nemark
       case 'dk' :
         $number = str_replace($country, '', strtolower($vat_id));
         if(strlen($vat_id) == 10) {
@@ -715,7 +710,7 @@ class vat_validation {
         }
       break;
 
-      // rum‰nien
+      // rum√§nien
       case 'ro' :
         $number = str_replace($country, '', strtolower($vat_id));
 

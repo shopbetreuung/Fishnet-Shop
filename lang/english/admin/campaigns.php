@@ -38,4 +38,7 @@ define('TEXT_CAMPAIGNS_REFID', 'Campaigns refID:');
 define('TEXT_DISPLAY_NUMBER_OF_CAMPAIGNS', 'Tracked campaigns:');
 
 define('TEXT_DELETE_INTRO', 'Are you sure you want to delete the campaign?');
+
+define('ERROR_TEXT_HEADING', 'Campaign not saved, fix errors:');
+define('ERROR_TEXT_NAME', 'Name invalid!');
 ?>

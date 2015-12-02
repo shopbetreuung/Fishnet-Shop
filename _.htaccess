@@ -1,8 +1,7 @@
 ##-- $Id: .htaccess 3209 2012-07-12 11:51:11Z gtb-modified $
 
 ##-- Default charset
-#AddDefaultCharset UTF-8
-AddDefaultCharset ISO-8859-15
+AddDefaultCharset UTF-8
 
 ##-- Disable the server signature
 ServerSignature Off

@@ -25,6 +25,7 @@ class MasterpaymentActions
 	var $masterpaymentURL;
 	var $masterpaymentLanguages;
 	var $defaultLanguage;
+    var $link;
 	
 	function MasterpaymentActions()
 	{
@@ -37,6 +38,7 @@ class MasterpaymentActions
 		$this->masterpaymentURL = 'https://www.masterpayment.com/{language}/payment/gateway';			
 		$this->masterpaymentLanguages = array('de' => 'german', 'en' => 'english', 'fr' => 'french', 'it' => 'italian', 'es' => 'spanish', 'pl' => 'polish', 'ru' => 'russian');	
 		$this->defaultLanguage = 'EN';			
+                $this->link = xtc_db_connect();
 	}
 	
 	
@@ -89,7 +91,7 @@ class MasterpaymentActions
 				$order_id = $this->getOrderId();
 	
 				$check_query = xtc_db_query('select masterpayment_status from ' . TABLE_ORDERS . ' where orders_id = "' . (int)$order_id . '" limit 1');
-				$num_check = mysql_num_rows($check_query);
+				$num_check = mysqli_num_rows($check_query);
 				
 				if($num_check > 0)
 				{
@@ -134,7 +136,7 @@ class MasterpaymentActions
 			$_order_id = (int)$this->getOrderId();
 			
 			$check_payment = xtc_db_query("select masterpayment_status from " . TABLE_ORDERS . " where orders_id = '".(int)$_order_id."' limit 1");
-			$num_check = mysql_num_rows($check_payment);
+			$num_check = mysqli_num_rows($check_payment);
 			
 			if($num_check < 1)
 			{

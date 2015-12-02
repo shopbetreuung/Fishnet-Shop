@@ -51,12 +51,12 @@ if (isset ($_GET['action']) && ($_GET['action'] == 'process')) {
 	$smarty->caching = false;
 
 	// create mails
-	$html_mail = $smarty->fetch(CURRENT_TEMPLATE.'/mail/'.$_SESSION['language'].'/newsletter_mail.html');
-	$txt_mail = $smarty->fetch(CURRENT_TEMPLATE.'/mail/'.$_SESSION['language'].'/newsletter_mail.txt');
+	$html_mail = $smarty->fetch('db:newsletter_mail.html');
+	$txt_mail = $smarty->fetch('db:newsletter_mail.txt');
 
 	// Check if email exists 
   //BOF - web28 - 2010-02-09: NEWSLETTER ERROR HANDLING
-	if (xtc_validate_email(trim($_POST['email'])) && ($_POST['check'] == 'inp')) {
+	if (xtc_validate_email(trim($_POST['email'])) && (isset($_POST['add']))) {
   //BOF - web28 - 2010-02-09: NEWSLETTER ERROR HANDLING
 
 		$check_mail_query = xtc_db_query("select customers_email_address, mail_status from ".TABLE_NEWSLETTER_RECIPIENTS." where customers_email_address = '".xtc_db_input($_POST['email'])."'");
@@ -99,6 +99,8 @@ if (isset ($_GET['action']) && ($_GET['action'] == 'process')) {
 
 			if ($check_mail['mail_status'] == '0') {
 
+                xtc_db_query("UPDATE ".TABLE_NEWSLETTER_RECIPIENTS." SET mail_key = '".xtc_db_input($vlcode)."' WHERE customers_email_address='".$_POST['email']."'");
+
 				$info_message = TEXT_EMAIL_EXIST_NO_NEWSLETTER;
 
 				if (SEND_EMAILS == true) {
@@ -119,7 +121,7 @@ if (isset ($_GET['action']) && ($_GET['action'] == 'process')) {
 	}
 
   //BOF - web28 - 2010-02-09: NEWSLETTER ERROR HANDLING
-	if (xtc_validate_email(trim($_POST['email'])) && ($_POST['check'] == 'del')) {
+	if (xtc_validate_email(trim($_POST['email'])) && (isset($_POST['delete']))) {
   //EOF - web28 - 2010-02-09: NEWSLETTER ERROR HANDLING
 
 		$check_mail_query = xtc_db_query("select customers_email_address from ".TABLE_NEWSLETTER_RECIPIENTS." where customers_email_address = '".xtc_db_input($_POST['email'])."'");
@@ -189,19 +191,20 @@ $smarty->assign('FORM_ACTION', xtc_draw_form('sign', xtc_href_link(FILENAME_NEWS
 $smarty->assign('INPUT_EMAIL', xtc_draw_input_field('email', ((isset($_GET['email']) && xtc_db_input($_GET['email'])!='') ? xtc_db_input($_GET['email']):((isset($_POST['email']) && xtc_db_input($_POST['email']))?xtc_db_input($_POST['email']):''))));
 //EOF - web28 - 2010-02-09: SHOW EMAIL IN INPUT FIELD
 //BOF - web28 - 2010-02-09: NEWSLETTER ERROR HANDLING
-if(isset($_POST['check']) && $_POST['check'] == 'inp') {$inp = 'true'; $del = '';}
-if(isset($_POST['check']) && $_POST['check'] == 'del') {$inp = ''; $del = 'true';}	
-$smarty->assign('CHECK_INP', xtc_draw_radio_field('check', 'inp', $inp));
+if(isset($_POST['check']) && $_POST['add'] == '') {$inp = 'true'; $del = '';}
+if(isset($_POST['check']) && $_POST['delete'] == '') {$inp = ''; $del = 'true';}	
+#$smarty->assign('CHECK_INP', xtc_draw_radio_field('check', 'inp', $inp));
 //EOF - web28 - 2010-02-09: NEWSLETTER ERROR HANDLING
-$smarty->assign('CHECK_DEL', xtc_draw_radio_field('check', 'del', $del));
-$smarty->assign('BUTTON_SEND', xtc_image_submit('button_send.gif', IMAGE_BUTTON_LOGIN));
+#$smarty->assign('CHECK_DEL', xtc_draw_radio_field('check', 'del', $del));
+
+$smarty->assign('BUTTON_SEND', xtc_image_submit('button_send.gif', IMAGE_BUTTON_LOGIN_NEWSLETTER, "name=add"));
+$smarty->assign('BUTTON_UNSUB', xtc_image_submit('button_delete.gif', IMAGE_BUTTON_UNSUBSCRIBE_NEWSLETTER, "name=delete"));
 $smarty->assign('FORM_END', '</form>');
 
 $smarty->assign('language', $_SESSION['language']);
 $smarty->caching = 0;
 $main_content = $smarty->fetch(CURRENT_TEMPLATE.'/module/newsletter.html');
 $smarty->assign('main_content', $main_content);
-
 $smarty->assign('language', $_SESSION['language']);
 $smarty->caching = 0;
 if (!defined('RM'))

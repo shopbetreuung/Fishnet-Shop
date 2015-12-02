@@ -14,6 +14,7 @@
 
    Released under the GNU General Public License
    ---------------------------------------------------------------------------------------*/
+require_once(DIR_FS_INC . 'xtc_format_price.inc.php');
 
 class product {
 
@@ -366,9 +367,22 @@ class product {
    * @return unknown
    */
   function getVPEtext($product, $price) {
-    global $main;
-    return $main->getVPEtext($product, $price); //change to main class
+		global $xtPrice;
+
+		require_once (DIR_FS_INC.'xtc_get_vpe_name.inc.php');
+
+		if (!is_array($product))
+			$product = $this->data;
+		if ($product['products_vpe_status'] == 1 && $product['products_vpe_value'] != 0.0 && $price > 0) 
+                {
+                    if ($product['products_vpe_value'] > 1  && $this->getAttributesCount() > 0)
+			return $xtPrice->xtcFormat($price * (1 / $product['products_vpe_value'] * $product['products_vpe_value']), true).TXT_PER.xtc_precision($product['products_vpe_value'],0).xtc_get_vpe_name($product['products_vpe']);
+                    else
+			return $xtPrice->xtcFormat($price * (1 / $product['products_vpe_value']), true).TXT_PER.xtc_get_vpe_name($product['products_vpe']);
   }
+		return;
+
+	}
 
   /**
    * buildDataArray

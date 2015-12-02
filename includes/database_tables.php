@@ -38,6 +38,7 @@
   define('TABLE_CONFIGURATION', 'configuration');
   define('TABLE_CONFIGURATION_GROUP', 'configuration_group');
   define('TABLE_CONTENT_MANAGER','content_manager');
+  define('TABLE_EMAILS_MANAGER','email_manager');
   define('TABLE_COUNTER', 'counter');
   define('TABLE_COUNTER_HISTORY', 'counter_history');
   define('TABLE_COUNTRIES', 'countries');
@@ -124,5 +125,7 @@
   define('TABLE_IMAGESLIDERS', 'imagesliders');
   define('TABLE_IMAGESLIDERS_INFO', 'imagesliders_info');
   // Imageslider (c)2008 by Hetfield - www.MerZ-IT-SerVice.de - End
+  define('TABLE_WHOLESALERS', 'wholesalers');
+  define('TABLE_WIDGETS', 'widgets');
 
 ?>

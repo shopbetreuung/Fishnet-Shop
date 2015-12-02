@@ -22,8 +22,35 @@ if( isset($_POST['profile']) ){
   } else {
     $profile_save_name = 'profile_'.$_POST['profile']['languages_code'].'_'.$_POST['profile']['typeofbill'];
   }
+  
+$rules = '';
+if(isset($_POST['rules'])){
+    $rules_build = '';
+    foreach($_POST['rules'] as $rule => $values){
+		$option = str_replace(' ', '', $values['option']);
+        if(isset($values['active']) && !empty($option)){
+            #Operation check
+            $operation = '=';
+            if($values['operation'] == '1'){
+                $operation = '!=';
+            }
+            #Condition check
+            $condition = 'AND';
+            if($values['condition'] == '1'){
+                $condition = 'OR';
+            }
+            $rules_build.= $rule.' '.$operation.' '.$option.' '.$condition.' ';
+        }
+    }
+    #Remove last OR/AND
+    $last_OR_pos = strrpos($rules_build, "OR");
+    $last_AND_pos = strrpos($rules_build, "AND");
+    $rules = ($last_AND_pos > $last_OR_pos) ? substr($rules_build, 0, $last_AND_pos-1) : substr($rules_build, 0, $last_OR_pos-1);
+    #$rules.=';';
+}
+  
 //echo "profile_save_name=$profile_save_name<br>\n";
-  profile_save($profile_save_name, $_POST['profile'], $checked_ids);
+  profile_save($profile_save_name, $_POST['profile'], $checked_ids, $rules);
   $messageStack->add('Profile saved', 'ready');
 }
 
@@ -45,6 +72,26 @@ if( $profile_name=='' ) {
 
 
 $p=profile_load_n($profile_name);
+$rules = $p['rules'];
+if($rules != ''){
+    $rules_array = explode(' ', $rules);
+    $rules_groups = array_chunk($rules_array, 4);
+    $grouped = array();
+    var_dump($rules_array);
+    foreach($rules_groups as $group){
+        $operation = 0;
+        if($group[1] == '!='){
+            $operation = 1;
+        }
+        $condition = 0;
+        if($group[3] == 'OR'){
+            $condition = 1;
+        }
+        $and_or = $group[1];
+        
+        $grouped[$group[0]]=array($operation, $group[2], $condition);     
+    }
+}
 if( $p['profile_parameter_arr']['profile_name']=='' ) {
   $profile=default_profile();
   $profile_name='default';
@@ -133,27 +180,30 @@ function toggle_column() {
   <tr>
    
 <!-- body_text //-->
-    <td class="boxBillCenter" width="100%" valign="top">
-      
-      <table border="0" width="100%" cellspacing="0" cellpadding="2" class="header">
+    <td class="boxCenter" width="100%" valign="top">
+        <table border="0" width="100%" cellspacing="0" cellpadding="2">
         <tr>
-          <td width="100%" style="border:1px solid #666666;">
-            <table border="0" width="100%" cellspacing="0" cellpadding="0" cellspacing="0">
+        <td width="100%"><table border="0" width="100%" cellspacing="0" cellpadding="0">
               <tr>
                 <td class="pageHeadingBill" rowspan="2" width="1%"><img border="0" src="includes/ipdfbill/images/pdf_logo.gif" width="44" height="41" vspace="10"></td>
                 <td class="pageHeadingBill" rowspan="2" >&nbsp;<?php echo $texts['headline'] ?><br />&nbsp;<span class="BillSavedProfiles"><?php echo IPDFBILL_VERSION.' ('.IPDFBILL_DATE.')'; ?></span>&nbsp;</td>
-                <td class="main" align="right"><a target="_blank" href="mailto:h.koch@hen-vm68.com" onFocus="if(this.blur)this.blur()"><img border="0" src="includes/ipdfbill/images/logo.gif" width="230" height="70" hspace="16"></a></td>
+            <td class="pageHeading" align="right"><?php echo xtc_draw_separator('pixel_trans.gif', HEADING_IMAGE_WIDTH, HEADING_IMAGE_HEIGHT); ?></td>
+          </tr>
+        </table></td>
               </tr>
-             </table>
-           </td>
-        </tr>
-      </table>
       
-      <div class="createCat"><a id="HideShowColumn" onFocus="if(this.blur)this.blur()" href="javascript:void(0);" onclick="toggle_column()">Men�</a><div style="float:left;padding-top:4px;font-weight:bold;text-transform:uppercase;letter-spacing: 1px;"><?php echo PDFBILL_LOADED_PROFILE.'</div><div style="padding-top:4px">'.$profile_name ?></div><div style="clear:left"></div>
-  </div>
+      <tr>
+        <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
+          <tr>
+            <td valign="top"><table border="0" width="100%" cellspacing="0" cellpadding="2">
+              <tr class="dataTableHeadingRow">
+                <td class="dataTableHeadingContent"><div class="createCat"><a id="HideShowColumn" onFocus="if(this.blur)this.blur()" href="javascript:void(0);" onclick="toggle_column()" class='btn btn-default'>Men&uuml;</a><div style="float:left;padding-top:4px;font-weight:bold;letter-spacing: 1px;"><?php echo PDFBILL_LOADED_PROFILE.'</div><div style="padding-top:4px">'.$profile_name ?></div><div style="clear:left"></div></div></td>
+        </tr>
+              <tr class="dataTableHeadingRow">
+                
+      
       
 
-      <!-- Options -->  
       <table  width="100%" cellspacing="0" cellpadding="0" class="BillOuterTable">
         <tr><form name="pdfkatalog" <?php echo 'action="' . xtc_href_link('pdfbill_config.php', '', 'NONSSL') . '"'; ?> method="post">
           <td width="90%" class="BillOuterTd">
@@ -173,7 +223,7 @@ function toggle_column() {
       $profile_list = profile_list();
       foreach( $profile_list as $p ) {
         ?>
-            <a id="SelectCat" onFocus="if(this.blur)this.blur()" href="<?php echo $PHP_SELF?>?profile_name=<?php echo $p['profile_name'] ?>">
+            <a id="SelectCat" onFocus="if(this.blur)this.blur()" class='btn btn-default' href="<?php echo $PHP_SELF?>?profile_name=<?php echo $p['profile_name'] ?>">
               <?php echo $p['profile_name'] ?>
             </a>
             
@@ -192,6 +242,28 @@ function toggle_column() {
  </table></tr>
  </table>
     
+</tr>
+<?php
+/*
+  reset($languages_arr);
+  foreach( $languages_arr as $lang ) {
+    echo $lang['name'].'  ';
+  }
+*/    
+?>
+
+    </table></td>
+
+    </tr>
+    </table></td>
+    </tr>
+    </table></td>
+<!-- body_text_eof //-->
+  </tr>
+</table>
+
+     
+    <!--###-->
  <table  border="0" cellspacing="0" cellpadding="0" width="100%">
     <tr>
       <td  class="BillMainOuterTd">
@@ -204,17 +276,14 @@ function toggle_column() {
     <table  border="0" width="100%" cellspacing="0" cellpadding="2">
     <tr align="left">
       <td colspan="4" class="BilldataTableContent">
-        <table border="0" cellpadding="5" cellspacing="0"  class="TopSchema">
-      <tr>
-        <td>
-        <div><img border="0" src="includes/ipdfbill/images/schema_01_top.png" width="190" height="234"></div><div class="gallerycontainerTop"><a class="thumbnail" href="#thumb"><img style="border:0px" src="includes/ipdfbill/images/zoom.gif" border="0" alt="zoom"><span><img src="includes/ipdfbill/images/schema_01_top_big.png" /></span></a></div></td>
-        <td>
-        <div><img border="0" src="includes/ipdfbill/images/schema_02_top.png" width="190" height="234"></div><div class="gallerycontainerTop"><a class="thumbnail" href="#thumb"><img style="border:0px" src="includes/ipdfbill/images/zoom.gif" border="0" alt="zoom"><span><img src="includes/ipdfbill/images/schema_02_top_big.png" /></span></a></div></td>
-        <td>
-        <div><img border="0" src="includes/ipdfbill/images/schema_03_top.png" width="190" height="236"></div><div class="gallerycontainerTop"><a class="thumbnail" href="#thumb"><img style="border:0px" src="includes/ipdfbill/images/zoom.gif" border="0" alt="zoom"><span><img src="includes/ipdfbill/images/schema_03_top_big.png" /></span></a></div></td>
-      </tr>
-    </table>
-&nbsp;</td>
+        <div class='col-xs-12'>
+        <div class='col-xs-12 col-sm-3'><div><img border="0" src="includes/ipdfbill/images/schema_01_top.png" width="190" height="234"></div><div class="gallerycontainerTop"><a class="thumbnail" href="#thumb"><img style="border:0px" src="includes/ipdfbill/images/zoom.gif" border="0" alt="zoom"><span><img src="includes/ipdfbill/images/schema_01_top_big.png" /></span></a></div></div>
+        <div class='hidden-sm hidden-lg hidden-md' style='padding-top:10px; padding-bottom: 10px;'> - - - - - - - - - - - - - - - - - - - - - - - - - - - -  </div>
+        <div class='col-xs-12 col-sm-3'><div><img border="0" src="includes/ipdfbill/images/schema_02_top.png" width="190" height="234"></div><div class="gallerycontainerTop"><a class="thumbnail" href="#thumb"><img style="border:0px" src="includes/ipdfbill/images/zoom.gif" border="0" alt="zoom"><span><img src="includes/ipdfbill/images/schema_02_top_big.png" /></span></a></div></div>
+        <div class='hidden-sm hidden-lg hidden-md' style='padding-top:10px; padding-bottom: 10px;'> - - - - - - - - - - - - - - - - - - - - - - - - - - - -  </div>
+        <div class='col-xs-12 col-sm-3'><div><img border="0" src="includes/ipdfbill/images/schema_03_top.png" width="190" height="236"></div><div class="gallerycontainerTop"><a class="thumbnail" href="#thumb"><img style="border:0px" src="includes/ipdfbill/images/zoom.gif" border="0" alt="zoom"><span><img src="includes/ipdfbill/images/schema_03_top_big.png" /></span></a></div></div>
+        </div>
+       </td>
     </tr>
     
 <?php
@@ -441,7 +510,7 @@ function toggle_column() {
 ?>
     <tr align="left">
       <td colspan="4" class="BilldataTableContent">
-        <div class="OuterDiv"><img src="includes/ipdfbill/images/schema_4.png" border="0" width="150" height="91" alt="Rechnungs�berschrift"></div><div class="gallerycontainer"><a class="thumbnail" href="#thumb"><img src="includes/ipdfbill/images/zoom.gif" border="0" alt="zoom"><span><img src="includes/ipdfbill/images/schema_4_big.png" /></span></a></div>
+        <div class="OuterDiv"><img src="includes/ipdfbill/images/schema_4.png" border="0" width="150" height="91" alt="Rechnungs&uuml;berschrift"></div><div class="gallerycontainer"><a class="thumbnail" href="#thumb"><img src="includes/ipdfbill/images/zoom.gif" border="0" alt="zoom"><span><img src="includes/ipdfbill/images/schema_4_big.png" /></span></a></div>
       
       </td>
     </tr>
@@ -476,7 +545,7 @@ if( FREEE_INFO ) {
 ?>
     <tr align="left">
       <td colspan="4" class="BilldataTableContent">
-        <div class="OuterDiv"><img src="includes/ipdfbill/images/schema_4.png" border="0" width="150" height="91" alt="Rechnungs�berschrift"></div><div class="gallerycontainer"><a class="thumbnail" href="#thumb"><img src="includes/ipdfbill/images/zoom.gif" border="0" alt="zoom"><span><img src="includes/ipdfbill/images/schema_4_big.png" /></span></a></div>
+        <div class="OuterDiv"><img src="includes/ipdfbill/images/schema_4.png" border="0" width="150" height="91" alt="Rechnungs&uuml;berschrift"></div><div class="gallerycontainer"><a class="thumbnail" href="#thumb"><img src="includes/ipdfbill/images/zoom.gif" border="0" alt="zoom"><span><img src="includes/ipdfbill/images/schema_4_big.png" /></span></a></div>
       
       </td>
     </tr>
@@ -721,7 +790,196 @@ if( FREEE_INFO ) {
   tr_font_style(  $fn.'_font_style',      $texts_tmp[$fn.'_font_style'],      $profile[$fn.'_font_style']  );
   tr_font_size(   $fn.'_font_size',       $texts_tmp[$fn.'_font_size'],       $profile[$fn.'_font_size']   );
 
+$conditions = array(
+    array('id'=>'0', 'text'=>'AND'),
+    array('id'=>'1', 'text'=>'OR')
+);
+$operations = array(
+    array('id'=>'0', 'text'=>'EQUAL'),
+    array('id'=>'1', 'text'=>'NOT EQUAL')
+);
 
+
+  ?>
+<tr>
+    <td class="BillHeadLines" colspan="4">Regeln (12)</td>
+</tr>
+    <tr align="left">
+      <td colspan="4" class="BilldataTableContent">
+          <div class="col-xs-12">
+              <p class="h3">Select this invoice profile if:</p>
+          </div>
+        <!--  <div class="col-xs-12 table table-bordered">
+            <div class="col-xs-12 row" style="font-weight:bold;">
+                <div class="col-xs-1">Activate</div>
+                <div class="col-xs-2">Selector</div>
+                <div class="col-xs-3">Operation</div>
+                <div class="col-xs-3">Value</div>
+                <div class="col-xs-3">Conditions</div>
+            </div>
+            <div class="col-xs-12 row">
+                <div class="col-xs-1"><?php /* echo xtc_draw_checkbox_field("rules[country][active]", '',((isset($grouped['country']))? 1 : 0)); ?></div>
+                <div class="col-xs-2">Billing country</div>
+                <div class="col-xs-3"><?php echo xtc_draw_pull_down_menu("rules[country][operation]", $operations,((isset($grouped['country']))? $grouped['country'][0] : 0)); ?></div>
+                <div class="col-xs-3"><?php echo xtc_draw_input_field("rules[country][option]",((isset($grouped['country']))? $grouped['country'][1] : '')); ?></div>
+                <div class="col-xs-3"><?php echo xtc_draw_pull_down_menu("rules[country][condition]", $conditions,((isset($grouped['country']))? $grouped['country'][2] : 0)); ?></div>
+            </div>
+              
+            <div class="col-xs-12 row">
+                <div class="col-xs-1"><?php echo xtc_draw_checkbox_field('rules[shipping][active]', '',((isset($grouped['shipping']))? 1 : 0)); ?></div>
+                <div class="col-xs-2">Shipping method</div>
+                <div class="col-xs-3"><?php echo xtc_draw_pull_down_menu('rules[shipping][operation]', $operations,((isset($grouped['shipping']))? $grouped['shipping'][0] : 0)); ?></div>
+                <div class="col-xs-3"><?php echo xtc_draw_input_field('rules[shipping][option]',((isset($grouped['shipping']))? $grouped['shipping'][1] : '')); ?></div>
+                <div class="col-xs-3"><?php echo xtc_draw_pull_down_menu('rules[shipping][condition]', $conditions,((isset($grouped['shipping']))? $grouped['shipping'][2] : 0)); ?></div>
+            </div>
+              
+            <div class="col-xs-12 row">
+                <div class="col-xs-1"><?php echo xtc_draw_checkbox_field('rules[payment][active]', '',((isset($grouped['payment']))? 1 : 0)); ?></div>
+                <div class="col-xs-2">Payment method</div>
+                <div class="col-xs-3"><?php echo xtc_draw_pull_down_menu('rules[payment][operation]', $operations,((isset($grouped['payment']))? $grouped['payment'][0] : 0)); ?></div>
+                <div class="col-xs-3"><?php echo xtc_draw_input_field('rules[payment][option]',((isset($grouped['payment']))? $grouped['payment'][1] : '')); ?></div>
+                <div class="col-xs-3"><?php echo xtc_draw_pull_down_menu('rules[payment][condition]', $conditions,((isset($grouped['payment']))? $grouped['payment'][2] : 0)); ?></div>
+            </div>
+              
+            <div class="col-xs-12 row">
+                <div class="col-xs-1"><?php echo xtc_draw_checkbox_field('rules[order][active]', '',((isset($grouped['order']))? 1 : 0)); ?></div>
+                <div class="col-xs-2">Order status</div>
+                <div class="col-xs-3"><?php echo xtc_draw_pull_down_menu('rules[order][operation]', $operations,((isset($grouped['order']))? $grouped['order'][0] : 0)); ?></div>
+                <div class="col-xs-3"><?php echo xtc_draw_input_field('rules[order][option]',((isset($grouped['order']))? $grouped['order'][1] : '')); ?></div>
+                <div class="col-xs-3"><?php echo xtc_draw_pull_down_menu('rules[order][condition]', $conditions,((isset($grouped['order']))? $grouped['order'][2] : 0)); ?></div>
+            </div>
+
+            <div class="col-xs-12 row">
+                <div class="col-xs-1"><?php echo xtc_draw_checkbox_field('rules[customer][active]', '',((isset($grouped['customer']))? 1 : 0)); ?></div>
+                <div class="col-xs-2">Customers status</div>
+                <div class="col-xs-3"><?php echo xtc_draw_pull_down_menu('rules[customer][operation]', $operations,((isset($grouped['customer']))? $grouped['customer'][0] : 0)); ?></div>
+                <div class="col-xs-3"><?php echo xtc_draw_input_field('rules[customer][option]',((isset($grouped['customer']))? $grouped['customer'][1] : '')); ?></div>
+                <div class="col-xs-3"><?php echo xtc_draw_pull_down_menu('rules[customer][condition]', $conditions,((isset($grouped['customer']))? $grouped['customer'][2] : 0));*/ ?></div>
+            </div>
+            </div> -->
+          
+            <div class="col-xs-12 table table-bordered">
+            <div class="col-xs-12 col-md-4  row" style="font-weight:bold; border-left:1px solid #bab9b9"  >
+                <div class="col-xs-12">
+                    <div class="col-xs-6 col-sm-2 col-md-5">Activate</div>
+                    <div class="col-xs-6 col-sm-10 col-md-7"><?php echo xtc_draw_checkbox_field("rules[country][active]", '',((isset($grouped['country']))? 1 : 0)); ?></div>
+                </div>
+                <div class="col-xs-12">
+                    <div class="col-xs-6 col-sm-2 col-md-5">Selector</div>
+                    <div class="col-xs-6 col-sm-10 col-md-7">Billing country</div>
+                </div>
+                <div class="col-xs-12">
+                    <div class="col-xs-6 col-sm-2 col-md-5">Operation</div>
+                    <div class="col-xs-6 col-sm-10 col-md-7"><?php echo xtc_draw_pull_down_menu("rules[country][operation]", $operations,((isset($grouped['country']))? $grouped['country'][0] : 0)); ?></div>
+                </div>
+                <div class="col-xs-12">
+                    <div class="col-xs-6 col-sm-2 col-md-5">Value</div>
+                    <div class="col-xs-6 col-sm-10 col-md-7"><?php echo xtc_draw_input_field("rules[country][option]",((isset($grouped['country']))? $grouped['country'][1] : '')); ?></div>
+                </div>
+                <div class="col-xs-12">
+                    <div class="col-xs-6 col-sm-2 col-md-5">Conditions</div>
+                    <div class="col-xs-6 col-sm-10 col-md-7"><?php echo xtc_draw_pull_down_menu("rules[country][condition]", $conditions,((isset($grouped['country']))? $grouped['country'][2] : 0)); ?></div>
+                </div>
+            </div>
+                <div class="col-xs-12 hidden-lg hidden-md" style="border-bottom:1px solid #bab9b9; margin-top:10px; margin-bottom: 10px;"></div> 
+            <div class="col-xs-12 col-md-4 row" style="font-weight:bold; border-left:1px solid #bab9b9">
+                <div class="col-xs-12">
+                    <div class="col-xs-6 col-sm-2 col-md-5">Activate</div>
+                    <div class="col-xs-6 col-sm-10 col-md-7"><?php echo xtc_draw_checkbox_field('rules[shipping][active]', '',((isset($grouped['shipping']))? 1 : 0)); ?></div>
+                </div>
+                <div class="col-xs-12">
+                    <div class="col-xs-6 col-sm-2 col-md-5">Selector</div>
+                    <div class="col-xs-6 col-sm-10 col-md-7">Shipping method</div>
+                </div>
+                <div class="col-xs-12">
+                    <div class="col-xs-6 col-sm-2 col-md-5">Operation</div>
+                    <div class="col-xs-6 col-sm-10 col-md-7"><?php echo xtc_draw_pull_down_menu('rules[shipping][operation]', $operations,((isset($grouped['shipping']))? $grouped['shipping'][0] : 0)); ?></div>
+                </div>
+                <div class="col-xs-12">
+                    <div class="col-xs-6 col-sm-2 col-md-5">Value</div>
+                    <div class="col-xs-6 col-sm-10 col-md-7"><?php echo xtc_draw_input_field('rules[shipping][option]',((isset($grouped['shipping']))? $grouped['shipping'][1] : '')); ?></div>
+                </div>
+                <div class="col-xs-12">
+                    <div class="col-xs-6 col-sm-2 col-md-5">Conditions</div>
+                    <div class="col-xs-6 col-sm-10 col-md-7"><?php echo xtc_draw_pull_down_menu('rules[shipping][condition]', $conditions,((isset($grouped['shipping']))? $grouped['shipping'][2] : 0)); ?></div>
+                </div>
+            </div>
+                <div class="col-xs-12 hidden-lg hidden-md" style="border-bottom:1px solid #bab9b9;margin-top:10px; margin-bottom: 10px;"></div> 
+            <div class="col-xs-12 col-md-4 row" style="font-weight:bold; border-left:1px solid #bab9b9">
+                <div class="col-xs-12">
+                    <div class="col-xs-6 col-sm-2 col-md-5">Activate</div>
+                    <div class="col-xs-6 col-sm-10 col-md-7"><?php echo xtc_draw_checkbox_field('rules[payment][active]', '',((isset($grouped['payment']))? 1 : 0)); ?></div>
+                </div>
+                <div class="col-xs-12">
+                    <div class="col-xs-6 col-sm-2 col-md-5">Selector</div>
+                    <div class="col-xs-6 col-sm-10 col-md-7">Payment method</div>
+                </div>
+                <div class="col-xs-12">
+                    <div class="col-xs-6 col-sm-2 col-md-5">Operation</div>
+                    <div class="col-xs-6 col-sm-10 col-md-7"><?php echo xtc_draw_pull_down_menu('rules[payment][operation]', $operations,((isset($grouped['payment']))? $grouped['payment'][0] : 0)); ?></div>
+                </div>
+                <div class="col-xs-12">
+                    <div class="col-xs-6 col-sm-2 col-md-5">Value</div>
+                    <div class="col-xs-6 col-sm-10 col-md-7"><?php echo xtc_draw_input_field('rules[payment][option]',((isset($grouped['payment']))? $grouped['payment'][1] : '')); ?></div>
+                </div>
+                <div class="col-xs-12">
+                    <div class="col-xs-6 col-sm-2 col-md-5">Conditions</div>
+                    <div class="col-xs-6 col-sm-10 col-md-7"><?php echo xtc_draw_pull_down_menu('rules[payment][condition]', $conditions,((isset($grouped['payment']))? $grouped['payment'][2] : 0)); ?></div>
+                </div>
+            </div>
+                <div class="col-xs-12" style="border-bottom:1px solid #bab9b9;margin-top:10px; margin-bottom: 10px;"></div> 
+            <div class="col-xs-12 col-md-6 row" style="font-weight:bold; border-left:1px solid #bab9b9">
+                <div class="col-xs-12">
+                    <div class="col-xs-6 col-sm-2 col-md-5">Activate</div>
+                    <div class="col-xs-6 col-sm-10 col-md-7"><?php echo xtc_draw_checkbox_field('rules[order][active]', '',((isset($grouped['order']))? 1 : 0)); ?></div>
+                </div>
+                <div class="col-xs-12">
+                    <div class="col-xs-6 col-sm-2 col-md-5">Selector</div>
+                    <div class="col-xs-6 col-sm-10 col-md-7">Order status</div>
+                </div>
+                <div class="col-xs-12">
+                    <div class="col-xs-6 col-sm-2 col-md-5">Operation</div>
+                    <div class="col-xs-6 col-sm-10 col-md-7"><?php echo xtc_draw_pull_down_menu('rules[order][operation]', $operations,((isset($grouped['order']))? $grouped['order'][0] : 0)); ?></div>
+                </div>
+                <div class="col-xs-12">
+                    <div class="col-xs-6 col-sm-2 col-md-5">Value</div>
+                    <div class="col-xs-6 col-sm-10 col-md-7"><?php echo xtc_draw_input_field('rules[order][option]',((isset($grouped['order']))? $grouped['order'][1] : '')); ?></div>
+                </div>
+                <div class="col-xs-12">
+                    <div class="col-xs-6 col-sm-2 col-md-5">Conditions</div>
+                    <div class="col-xs-6 col-sm-10 col-md-7"><?php echo xtc_draw_pull_down_menu('rules[order][condition]', $conditions,((isset($grouped['order']))? $grouped['order'][2] : 0)); ?></div>
+                </div>
+            </div>
+                <div class="col-xs-12 hidden-lg hidden-md" style="border-bottom:1px solid #bab9b9;margin-top:10px; margin-bottom: 10px;"></div> 
+            <div class="col-xs-12 col-md-6 row" style="font-weight:bold; border-left:1px solid #bab9b9">
+                <div class="col-xs-12">
+                    <div class="col-xs-6 col-sm-2 col-md-5">Activate</div>
+                    <div class="col-xs-6 col-sm-10 col-md-7"><?php echo xtc_draw_checkbox_field('rules[customer][active]', '',((isset($grouped['customer']))? 1 : 0)); ?></div>
+                </div>
+                <div class="col-xs-12">
+                    <div class="col-xs-6 col-sm-2 col-md-5">Selector</div>
+                    <div class="col-xs-6 col-sm-10 col-md-7">Customers status</div>
+                </div>
+                <div class="col-xs-12">
+                    <div class="col-xs-6 col-sm-2 col-md-5">Operation</div>
+                    <div class="col-xs-6 col-sm-10 col-md-7"><?php echo xtc_draw_pull_down_menu('rules[customer][operation]', $operations,((isset($grouped['customer']))? $grouped['customer'][0] : 0)); ?></div>
+                </div>
+                <div class="col-xs-12">
+                    <div class="col-xs-6 col-sm-2 col-md-5">Value</div>
+                    <div class="col-xs-6 col-sm-10 col-md-7"><?php echo xtc_draw_input_field('rules[customer][option]',((isset($grouped['customer']))? $grouped['customer'][1] : '')); ?></div>
+                </div>
+                <div class="col-xs-12">
+                    <div class="col-xs-6 col-sm-2 col-md-5">Conditions</div>
+                    <div class="col-xs-6 col-sm-10 col-md-7"><?php echo xtc_draw_pull_down_menu('rules[customer][condition]', $conditions,((isset($grouped['customer']))? $grouped['customer'][2] : 0)); ?></div>
+                </div>
+            </div>
+            </div>
+          <div class="col-xs-12">
+              <p class="small">*multiple option values separate with comma(<b>,</b>).</p>
+          </div>
+      </td>
+    </tr>
+<?php
                                                                                         
 // ------------------------------------------------------------------------------------------------------
 //    profile_save
@@ -750,12 +1008,12 @@ if( FREEE_INFO ) {
   
 ?>
   <tr align="left">
-    <td class="BilldataTableContent">
-      <input type="button" name="saveprofile" id="SelectColor" onclick="pdfkatalog.submit();" value="<?php echo $texts['button_generate'] ?>">
-    </td>
-    <td colspan="3" class="BilldataTableContent">
+     <th class="BilldataTableContent" colspan="4">
+        <div class='col-xs-12'>
+            <div class='col-xs-12 col-sm-1'><input type="button" name="saveprofile" id="SelectColor" class="btn btn-default" onclick="pdfkatalog.submit();" value="<?php echo $texts['button_generate'] ?>"></div>
+            <div class='col-xs-12 col-sm-11'>
       <input type="checkbox" name="preview"><?php echo $texts['preview_at_example'] ?> 
-        <select name="example_order_id">
+                        <select name="example_order_id" class="form-control">
 <?php
   $oid_arr=order_nr_list();
   foreach( $oid_arr as $oid ) {
@@ -782,7 +1040,10 @@ if( FREEE_INFO ) {
   
   
 ?>
-    </td>
+            </div>
+	    <div class='col-xs-12'><br></div>
+        </div>
+      </th>
   </tr>
 </table>
 </td>
@@ -870,10 +1131,13 @@ function tr_display( $fieldname, $text_arr, $check='0' ) {
   }
 ?>
     <tr align="left">
-      <th width="15%" class="BilldataTableContent"><?php echo $text_arr['question']; echo helpwindows_add($text_arr['help']); ?></th>
-      <td colspan="3" class="BilldataTableContent">
-        <input type="checkbox" name="<?php echo n2p($fieldname) ?>" value="1" <?php  echo $checked ?>><?php echo $text_arr['chk_text'] ?>
-      </td>
+      <th class="BilldataTableContent" colspan="4">
+        <div class='col-xs-12'>
+            <div class='col-xs-12 col-sm-1'><?php echo $text_arr['question']; echo helpwindows_add($text_arr['help']); ?></div>
+            <div class='col-xs-12 col-sm-11'><input type="checkbox" name="<?php echo n2p($fieldname) ?>" value="1" <?php  echo $checked ?>><?php echo $text_arr['chk_text'] ?></div>
+            <div class='col-xs-12'><br></div>
+        </div>
+      </th>
     </tr>
 <?php
 }
@@ -896,9 +1160,11 @@ function tr_trennzeile_xxx( $text ) {
 function tr_trennzeile( $text ) {
 ?>
     <tr align="left">
-      <th width="15%" class="BilldataTableContent">&nbsp;</th>
-      <td colspan="3" class="BilldataTableContent">
+      <td class="BilldataTableContent" colspan="4">
+        <div class='col-xs-12'>
         ---------------------- <?php echo $text; ?> ------------------------------
+	    <div class='col-xs-12'><br></div>
+        </div>
       </td>
     </tr>
 <?php
@@ -908,9 +1174,9 @@ function tr_trennzeile( $text ) {
 /*
   tr_align( 'product_names_position',
             array( 'question' => 'Ausrichtung:',
-                   'chk_text_l' => 'Linksb�ndig',
+                   'chk_text_l' => 'Linksb&uuml;ndig',
                    'chk_text_c' => 'Zentriert',
-                   'chk_text_r' => 'Rechtsb�ndig',
+                   'chk_text_r' => 'Rechtsb&uuml;ndig',
               ),
             $profile_product_names_position 
             );
@@ -927,22 +1193,25 @@ function tr_align(  $fieldname, $text_arr, $check ) {
   }
 ?>
     <tr align="left">
-      <th width="15%" class="BilldataTableContent"><?php echo $text_arr['question'] ?></th>
-      <td width="10%" class="BilldataTableContent">
-        <input type="radio" name="<?php echo n2p($fieldname) ?>" value="L"
+      <th class="BilldataTableContent" colspan="4">
+        <div class='col-xs-12'>
+            <div class='col-xs-12 col-sm-1'><?php echo $text_arr['question'] ?></div>
+            <div class='col-xs-12 col-sm-11'>
+                <input type="radio" class="radio-inline" name="<?php echo n2p($fieldname) ?>" value="L"
           <?php  echo $chk_l ?>>
           <?php echo $text_arr['chk_text_l'] ?>
-      </td>
-      <td width="10%" class="BilldataTableContent">
-        <input type="radio" name="<?php echo n2p($fieldname) ?>" value="C"
+                
+                <input type="radio" class="radio-inline" name="<?php echo n2p($fieldname) ?>" value="C"
           <?php  echo $chk_c ?>>
           <?php echo $text_arr['chk_text_c'] ?>
-      </td>
-      <td class="BilldataTableContent">
-        <input type="radio" name="<?php echo n2p($fieldname) ?>" value="R"
+                
+                <input type="radio" class="radio-inline" name="<?php echo n2p($fieldname) ?>" value="R"
           <?php  echo $chk_r ?>>
           <?php echo $text_arr['chk_text_r'] ?>
-      </td>
+            </div>
+	    <div class='col-xs-12'><br></div>
+        </div>
+      </th>
     </tr>
 <?php
 }
@@ -961,17 +1230,17 @@ function tr_align4(  $fieldname, $text_arr, $check ) {
 ?>
     <tr align="left">
       <th width="15%" class="BilldataTableContent"><?php echo $text_arr['question'] ?></th>
-      <td width="10%" class="BilldataTableContent">
+      <td width="10%" class="BilldataTableContent radio-inline">
         <input type="radio" name="<?php echo n2p($fieldname) ?>" value="L"
           <?php  echo $chk_l ?>>
           <?php echo $text_arr['chk_text_l'] ?>
       </td>
-      <td width="10%" class="BilldataTableContent">
+      <td width="10%" class="BilldataTableContent radio-inline">
         <input type="radio" name="<?php echo n2p($fieldname) ?>" value="C"
           <?php  echo $chk_c ?>>
           <?php echo $text_arr['chk_text_c'] ?>
       </td>
-      <td class="BilldataTableContent">
+      <td class="BilldataTableContent radio-inline">
         <input type="radio" name="<?php echo n2p($fieldname) ?>" value="R"
           <?php  echo $chk_r ?>>
           <?php echo $text_arr['chk_text_r'] ?>
@@ -990,7 +1259,7 @@ function tr_align4(  $fieldname, $text_arr, $check ) {
 /*
   tr_color( 'product_names_color',
             array( 'question'        => 'Schriftfarbe:',
-                   'button_text'     => 'Ausw�hlen' ),
+                   'button_text'     => 'Ausw&auml;hlen' ),
             $profile_product_names 
             );
 */
@@ -1002,8 +1271,10 @@ function tr_color( $fieldname, $text_arr, $check ) {
   $js_colorfields[] = $fieldname;
 ?>
     <tr align="left">
-      <th width="15%" class="BilldataTableContent"><?php echo $text_arr['question'] ?></th>
-      <td colspan="3" class="BilldataTableContent">
+      <th class="BilldataTableContent" colspan="4">
+        <div class='col-xs-12'>
+            <div class='col-xs-12 col-sm-1'><?php echo $text_arr['question'] ?></div>
+            <div class='col-xs-12 col-sm-11'>
         <div style="float:left;width:148px">
           <input type="button" id="SelectColor" value="<?php echo $text_arr['button_text'] ?>" 
             onclick="showColorPicker(this,document.forms['pdfkatalog'].<?php echo $fieldname ?>,'hex_'+'<?php echo $fieldname ?>')">
@@ -1019,7 +1290,10 @@ function tr_color( $fieldname, $text_arr, $check ) {
             onfocus="product_hex_farbe_zeigen(document.forms['pdfkatalog'].<?php echo $fieldname ?>.value, '<?php echo $fieldname ?>')" 
             onchange="product_hex_farbe_zeigen(document.forms['pdfkatalog'].<?php echo $fieldname ?>.value, '<?php echo $fieldname ?>')">
         </div>
-      </td>
+            </div>
+	    <div class='col-xs-12'><br></div>
+        </div>
+      </th>
     </tr>
 <?php
 }
@@ -1043,14 +1317,19 @@ function tr_font_type( $fieldname, $text_arr, $check ) {
   }
 ?>
     <tr align="left">
-      <th width="15%" class="BilldataTableContent"><?php echo $text_arr['question'] ?></th>
-      <td colspan="3" class="BilldataTableContent">
-        <select id="font" name="<?php echo n2p($fieldname) ?>" size="1">
+      <th class="BilldataTableContent" colspan="4">
+        <div class='col-xs-12'>
+            <div class='col-xs-12 col-sm-1'><?php echo $text_arr['question'] ?></div>
+            <div class='col-xs-12 col-sm-11'>
+              <select id="font" name="<?php echo n2p($fieldname) ?>" size="1" class="form-control">
            <option <?php  echo $chk_1 ?> value="arial">Arial</option>
            <option <?php  echo $chk_2 ?> value="times">Times New Roman</option>
            <option <?php  echo $chk_3 ?> value="helvetica">Helvetica</option>
          </select>
-      </td>
+            </div>
+	    <div class='col-xs-12'><br></div>
+        </div>
+      </th>
     </tr>
 <?php
 }
@@ -1074,19 +1353,22 @@ function tr_font_style( $fieldname, $text_arr, $check ) {
   if (strpos($check, "U") !== false)     $chk_u = 'checked';
 ?>
     <tr align="left">
-      <th width="15%" class="BilldataTableContent"><?php echo $text_arr['question'] ?></th>
-      <td width="10%" class="BilldataTableContent">
+        <th class="BilldataTableContent" colspan="4">
+            <div class='col-xs-12'>
+                <div class='col-xs-12 col-sm-1'><?php echo $text_arr['question'] ?></div>
+                <div class='col-xs-12 col-sm-11'>
         <input type="checkbox" name="<?php echo n2p($fieldname) ?>[0]" value="B" <?php  echo $chk_b ?>>
         <?php echo $text_arr['text_bold'] ?>
-      </td>
-      <td width="10%" class="BilldataTableContent">
+                    
         <input type="checkbox" name="<?php echo n2p($fieldname) ?>[1]" value="I" <?php  echo $chk_i ?>>
         <?php echo $text_arr['text_italic'] ?>
-      </td>
-      <td class="BilldataTableContent">
+                    
         <input type="checkbox" name="<?php echo n2p($fieldname) ?>[2]" value="U" <?php  echo $chk_u ?>>
         <?php echo $text_arr['text_underlined'] ?>
-      </td>
+                </div>
+                <div class='col-xs-12'><br></div>
+            </div>
+        </th>
     </tr>
 <?php
 }
@@ -1096,16 +1378,19 @@ function tr_font_style( $fieldname, $text_arr, $check ) {
 
 /*
   tr_font_size( 'product_names_font_size',
-                 array( 'question'        => 'Schriftgr��e:' ),
+                 array( 'question'        => 'Schriftgr&ouml;&szlig;e:' ),
                  $profile_product_names_font_size 
             );
 */
 function tr_font_size( $fieldname, $text_arr, $value ) {
 ?>
     <tr align="left">
-      <th width="15%" class="BilldataTableContent"><?php echo $text_arr['question'] ?></th>
-      <td colspan="3" class="BilldataTableContent"> 
-        <select id="FontSize" name="<?php echo n2p($fieldname) ?>" size="1">
+        <th class="BilldataTableContent" colspan="4">
+        <div class='col-xs-12'>
+            <div class='col-xs-12 col-sm-1'><?php echo $text_arr['question'] ?></div>
+            <div class='col-xs-12 col-sm-11'>
+                
+            <select id="FontSize" name="<?php echo n2p($fieldname) ?>" size="1" class="form-control">
 <?php
   for($i=6; $i<=20; $i+=2 ) {
     $sel= $i==$value?'selected':'';
@@ -1113,7 +1398,10 @@ function tr_font_size( $fieldname, $text_arr, $value ) {
   }
 ?>
         </select>
-      </td>
+            </div>
+	    <div class='col-xs-12'><br></div>
+        </div>
+      </th>
     </tr>
 <?php
 }
@@ -1141,9 +1429,11 @@ function tr_image_select( $fieldname, $text, $default_file ) {
   
 ?>
     <tr align="left">
-      <th width="15%" class="BilldataTableContent"><?php echo $text ?></th>
-      <td colspan="3" class="BilldataTableContent"> 
-        <select name="<?php echo n2p($fieldname) ?>" size="1">
+      <th colspan='4' class="BilldataTableContent">
+    <div class='col-xs-12'>
+        <div class='col-xs-12 col-sm-1'><?php echo $text ?></div>
+        <div class='col-xs-12 col-sm-11'>
+          <select name="<?php echo n2p($fieldname) ?>" size="1" class="form-control">
 <?php
   foreach( $files as $f) {
     $sel= $f['id']==$default_file?'selected':'';
@@ -1151,7 +1441,10 @@ function tr_image_select( $fieldname, $text, $default_file ) {
   }
 ?>
         </select>
-      </td>
+        </div>
+        <div class='col-xs-12'><br></div>
+    </div>
+        </th>
     </tr>
 <?php
 }
@@ -1224,8 +1517,10 @@ function tr_dimensions( $fieldname_x,
                         $width, $height, $xywh='XYWH' ) {
 ?>
     <tr align="left">
-      <th width="15%" class="BilldataTableContent"><?php echo $text_arr['question']; echo helpwindows_add($text_arr['help']); ?></th>
-      <td colspan="3" class="BilldataTableContent"> 
+      <th class="BilldataTableContent" colspan="4">
+        <div class='col-xs-12'>
+            <div class='col-xs-12 col-sm-1'><?php echo $text_arr['question']; echo helpwindows_add($text_arr['help']); ?></div>
+            <div class='col-xs-12 col-sm-11'>
         <div style="float:left;width:145px">
 <?php if(strpos($xywh, 'X')!==false) {  ?>
           <input class="bill" type="text" size="2" value="<?php echo $pos_x ?>" name="<?php echo n2p($fieldname_x) ?>"> 
@@ -1250,7 +1545,10 @@ function tr_dimensions( $fieldname_x,
           <?php echo $text_arr['height'] ?>
 <?php }  ?>&nbsp;
         </div>
-      </td>
+            </div>
+	    <div class='col-xs-12'><br></div>
+        </div>
+      </th>
     </tr>
 <?php
 }
@@ -1298,13 +1596,18 @@ function tr_radio2( $fieldname, $text_arr, $check, $values=array(1,0) ) {
   else                             {    $chk_0 = 'checked'; }
 ?>
     <tr align="left">
-      <th width="15%" class="BilldataTableContent"><?php echo $text_arr['question'] ?></th>
-      <td colspan="3" class="BilldataTableContent">
-        <input type="radio" name="<?php echo n2p($fieldname) ?>" value="<?php echo $values[0] ?>" <?php echo $chk_0 ?>>
+      <th class="BilldataTableContent" colspan="4">
+        <div class='col-xs-12'>
+            <div class='col-xs-12 col-sm-1'><?php echo $text_arr['question'] ?></div>
+            <div class='col-xs-12 col-sm-11'>
+                <input type="radio" class='radio-inline' name="<?php echo n2p($fieldname) ?>" value="<?php echo $values[0] ?>" <?php echo $chk_0 ?>>
         <?php echo $text_arr['text_1'] ?>
-        <input type="radio" name="<?php echo n2p($fieldname) ?>" value="<?php echo $values[1] ?>" <?php echo $chk_1 ?>>
+                <input type="radio" class='radio-inline' name="<?php echo n2p($fieldname) ?>" value="<?php echo $values[1] ?>" <?php echo $chk_1 ?>>
         <?php echo $text_arr['text_2'] ?>
-      </td>
+            </div>
+	    <div class='col-xs-12'><br></div>
+        </div>
+      </th>
     </tr>
 <?php
 }
@@ -1326,17 +1629,22 @@ function tr_radio_n( $fieldname, $text_arr, $check, $values=array() ) {
 
 ?>
     <tr align="left">
-      <th width="15%" class="BilldataTableContent"><?php echo $text_arr['question'] ?></th>
-      <td colspan="3" class="BilldataTableContent">
+      <th class="BilldataTableContent" colspan="4">
+        <div class='col-xs-12'>
+            <div class='col-xs-12 col-sm-1'><?php echo $text_arr['question'] ?></div>
+            <div class='col-xs-12 col-sm-11'>
 <?php
   for( $i=0; $i<sizeof($values); $i++ ) {
 ?>
-        <input type="radio" name="<?php echo n2p($fieldname) ?>" value="<?php echo $values[$i] ?>" <?php echo $chk[$i] ?>>
+                          <input type="radio" class='radio-inline' name="<?php echo n2p($fieldname) ?>" value="<?php echo $values[$i] ?>" <?php echo $chk[$i] ?>>
         <?php echo $text_arr['text_'.($i+1)]; ?>
 <?php
   }
 ?>
-      </td>
+            </div>
+	    <div class='col-xs-12'><br></div>
+        </div>
+      </th>
     </tr>
 <?php
 }
@@ -1354,11 +1662,17 @@ function tr_radio_n( $fieldname, $text_arr, $check, $values=array() ) {
 function tr_textarea( $fieldname, $text_arr, $value='', $size=2 ) {
 ?>
     <tr align="left">
-      <th width="15%" class="BilldataTableContent"><?php echo $text_arr['question']; ?></th>
-      <td colspan="3" class="BilldataTableContent">
-        <textarea class="billarea" name="<?php echo n2p($fieldname) ?>" cols="<?php echo $size ?>" rows="4"><?php echo $value ?></textarea>
+      <th class="BilldataTableContent" colspan="4">
+        <div class='col-xs-12'>
+            <div class='col-xs-12 col-sm-1'><?php echo $text_arr['question']; ?></div>
+            <div class='col-xs-12 col-sm-11'>
+                <textarea class="billarea form-control" name="<?php echo n2p($fieldname) ?>" cols="<?php echo $size ?>" rows="4"><?php echo $value ?></textarea>
         <?php echo $text_arr['fieldtext'] ?>
-      </td>
+                
+            </div>
+            <div class='col-xs-12'><br></div>
+        </div>
+      </th>
     </tr>
 <?php
 }
@@ -1382,11 +1696,16 @@ function tr_input( $fieldname, $text_arr, $value='', $size=2 ) {
   if ( $check == $values[1] )     $chk_1 = 'checked';
 ?>
     <tr align="left">
-      <th width="15%" class="BilldataTableContent"><?php echo $text_arr['question'].$hw; ?></th>
-      <td colspan="3" class="BilldataTableContent">
+      <th class="BilldataTableContent" colspan="4">
+        <div class='col-xs-12'>
+            <div class='col-xs-12 col-sm-1'><?php echo $text_arr['question'].$hw; ?></div>
+            <div class='col-xs-12 col-sm-11'>
         <input class="bill" type="text" size="<?php echo $size ?>" name="<?php echo n2p($fieldname) ?>" value="<?php echo $value ?>">
         <?php echo $text_arr['fieldtext'] ?>
-      </td>
+            </div>
+	    <div class='col-xs-12'><br></div>
+        </div>
+      </th>
     </tr>
 <?php
 }
@@ -1407,14 +1726,19 @@ function tr_input( $fieldname, $text_arr, $value='', $size=2 ) {
 function tr_input_2l( $fieldname, $text_arr, $value=array(), $size=array() ) {
 ?>
     <tr align="left">
-      <th width="15%" class="BilldataTableContent"><?php echo $text_arr['question']; echo helpwindows_add($text_arr['help']); ?></th>
-      <td colspan="3" class="BilldataTableContent">
+      <th class="BilldataTableContent" colspan="4">
+        <div class='col-xs-12'>
+            <div class='col-xs-12 col-sm-1'><?php echo $text_arr['question']; echo helpwindows_add($text_arr['help']); ?></div>
+            <div class='col-xs-12 col-sm-11'>
         <input class="bill" type="text" size="<?php echo $size[0] ?>" name="<?php echo n2p($fieldname[0]) ?>" value="<?php echo $value['value_1'] ?>">
         <?php echo $text_arr['fieldtext_1'] ?>
 
         <input class="bill" type="text" size="<?php echo $size[1] ?>" name="<?php echo n2p($fieldname[1]) ?>" value="<?php echo $value['value_2'] ?>">
         <?php echo $text_arr['fieldtext_2'] ?>
-      </td>
+            </div>
+	    <div class='col-xs-12'><br></div>
+        </div>
+      </th>
     </tr>
 <?php
 }
@@ -1459,9 +1783,11 @@ function tr_input_3s_ml( $fieldname_arr_arr, $text_arr, $value_arr_arr=array(), 
     
     ?>
     <tr align="left">
-    <th width="15%" class="BilldataTableContent"><?php echo $text_arr['question'].' '.($i+1); echo helpwindows_add($text_arr['help']);?></th>
-      <td colspan="3" class="BilldataTableContent">
 
+      <th class="BilldataTableContent" colspan="4">
+        <div class='col-xs-12'>
+            <div class='col-xs-12 col-sm-1'><?php echo $text_arr['question'].' '.($i+1); echo helpwindows_add($text_arr['help']);?></div>
+            <div class='col-xs-12 col-sm-11'>
         <input class="bill" type="text" size="<?php echo $size_arr[0] ?>" name="<?php echo n2p($fieldname_arr_arr[$i][0]) ?>" value="<?php echo $value_arr_arr[$i][0] ?>">
         <?php echo $text_arr['text_a'] ?>&nbsp;
       
@@ -1470,15 +1796,19 @@ function tr_input_3s_ml( $fieldname_arr_arr, $text_arr, $value_arr_arr=array(), 
 
         <input class="bill" type="text" size="<?php echo $size_arr[2] ?>" name="<?php echo n2p($fieldname_arr_arr[$i][2]) ?>" value="<?php echo $value_arr_arr[$i][2] ?>">
         <?php echo $text_arr['text_c'] ?>&nbsp;&nbsp;
-
-        <input type="radio" name="<?php echo n2p($fieldname_arr_arr[$i][3]) ?>" value="L"  <?php  echo $chk_l ?>>
+                <br class='hidden-sm hidden-md hidden-lg'>
+                <input type="radio" class="radio-inline" name="<?php echo n2p($fieldname_arr_arr[$i][3]) ?>" value="L"  <?php  echo $chk_l ?>>
         <?php echo $text_arr['pos_left'] ?>
-        <input type="radio" name="<?php echo n2p($fieldname_arr_arr[$i][3]) ?>" value="C"  <?php  echo $chk_c ?>>
+                <br class='hidden-sm hidden-md hidden-lg'>
+                <input type="radio" class="radio-inline" name="<?php echo n2p($fieldname_arr_arr[$i][3]) ?>" value="C"  <?php  echo $chk_c ?>>
         <?php echo $text_arr['pos_center'] ?>
-        <input type="radio" name="<?php echo n2p($fieldname_arr_arr[$i][3]) ?>" value="R"  <?php  echo $chk_r ?>>
+                <br class='hidden-sm hidden-md hidden-lg'>
+                <input type="radio" class="radio-inline" name="<?php echo n2p($fieldname_arr_arr[$i][3]) ?>" value="R"  <?php  echo $chk_r ?>>
         <?php echo $text_arr['pos_right'] ?>
-        
-      </td>
+            </div>
+	    <div class='col-xs-12'><br></div>
+        </div>
+      </th>        
   </tr>
 <?php } 
 
@@ -1541,7 +1871,7 @@ function tr_single_customersstatus( $fieldname, $text, $value ) {
 ?>
     <tr align="left">
       <td colspan="4" width="15%" class="BilldataTableContent">
-        <select name="<?php echo n2p($fieldname) ?>" size="1">
+          <select name="<?php echo n2p($fieldname) ?>" size="1" class="form-control">
 <?php
   foreach( $c_status_arr as $c_status ) {
     $sel= $c_status['id']==$value?'selected':'';
@@ -1582,7 +1912,7 @@ function tr_single_language( $fieldname, $text, $value ) {
 ?>
     <tr align="left">
       <td colspan="4" width="15%" class="BilldataTableContent">
-        <select name="<?php echo n2p($fieldname) ?>" size="1">
+          <select name="<?php echo n2p($fieldname) ?>" size="1" class="form-control">
 <?php
   foreach( $lang_arr as $lang ) {
     $sel= $lang['id']==$value?'selected':'';
@@ -1623,7 +1953,7 @@ function tr_single_currencie( $fieldname, $text, $value ) {
 ?>
     <tr align="left">
       <td colspan="4" width="15%" class="BilldataTableContent">
-        <select name="<?php echo n2p($fieldname) ?>" size="1">
+          <select name="<?php echo n2p($fieldname) ?>" size="1" class="form-control">
 <?php
   foreach( $curr_arr as $curr ) {
     $sel= $curr['code']==$value?'selected':'';
@@ -1653,8 +1983,14 @@ function tr_singlecheck( $fieldname, $text, $check ) {
 ?>
     <tr align="left">
       <td colspan="4" width="15%" class="BilldataTableContent">
+        <div class='col-xs-12'>
+            <div class='col-xs-12 col-sm-3'>
+                <?php echo $text ?>
+            </div>
+            <div class='col-xs-12 col-sm-1'>
         <input type="checkbox" name="<?php echo n2p($fieldname) ?>" value="1" <?php echo $check ?>>
-        <?php echo $text ?>
+            </div>
+        </div>
       </td>
     </tr>
 <?php

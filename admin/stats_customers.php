@@ -29,26 +29,14 @@
 <!-- header_eof //-->
 
 <!-- body //-->
-<table border="0" width="100%" cellspacing="2" cellpadding="2">
-  <tr>
-    
-<!-- body_text //-->
-    <td class="boxCenter" width="100%" valign="top"><table border="0" width="100%" cellspacing="0" cellpadding="2">
-      <tr>
-        <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
-  <tr>
-    <td width="80" rowspan="2"><?php echo xtc_image(DIR_WS_ICONS.'heading_statistic.gif'); ?></td>
-    <td class="pageHeading"><?php echo HEADING_TITLE; ?></td>
-  </tr>
-  <tr>
-    <td class="main" valign="top">Statistics</td>
-  </tr>
-</table></td>
-      </tr>
-      <tr>
-        <td><table border="0" width="100%" cellspacing="0" cellpadding="2">
-          <tr>
-            <td valign="top"><table border="0" width="100%" cellspacing="0" cellpadding="2">
+<div class='row'>
+                <div class='col-xs-12'>
+                    <div class="col-xs-3 col-sm-1 text-right"><?php echo xtc_image(DIR_WS_ICONS.'heading_statistic.gif'); ?></div>
+                    <div class="col-xs-9 col-sm-11"><p class="h2"><?php echo HEADING_TITLE; ?></p> Statistics</div>
+                </div>
+                <div class='col-xs-12'><br></div>
+                <div class='table-responsive col-xs-12'>
+<table class='table table-bordered'>
               <tr class="dataTableHeadingRow">
                 <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_NUMBER; ?></td>
                 <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_CUSTOMERS; ?></td>
@@ -78,22 +66,13 @@
 <?php
   }
 ?>
-            </table></td>
-          </tr>
-          <tr>
-            <td colspan="3"><table border="0" width="100%" cellspacing="0" cellpadding="2">
-              <tr>
-                <td class="smallText" valign="top"><?php echo $customers_split->display_count($customers_query_numrows, '20', $_GET['page'], TEXT_DISPLAY_NUMBER_OF_CUSTOMERS); ?></td>
-                <td class="smallText" align="right"><?php echo $customers_split->display_links($customers_query_numrows, '20', MAX_DISPLAY_PAGE_LINKS, $_GET['page']); ?>&nbsp;</td>
-              </tr>
-            </table></td>
-          </tr>
-        </table></td>
-      </tr>
-    </table></td>
-<!-- body_text_eof //-->
-  </tr>
 </table>
+        </div>
+              <div class='col-xs-12'>
+                <div class="smallText col-xs-6" ><?php echo $customers_split->display_count($customers_query_numrows, '20', $_GET['page'], TEXT_DISPLAY_NUMBER_OF_CUSTOMERS); ?></div>
+                <div class="smallText col-xs-6 text-right" ><?php echo $customers_split->display_links($customers_query_numrows, '20', MAX_DISPLAY_PAGE_LINKS, $_GET['page']); ?>&nbsp;</div>
+              </div>
+</div>
 <!-- body_eof //-->
 
 <!-- footer //-->

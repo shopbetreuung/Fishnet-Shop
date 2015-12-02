@@ -85,6 +85,7 @@ define('BOX_HEADING_CATALOG', 'Katalog');
 define('BOX_MODULE_NEWSLETTER','Newsletter');
 
 define('BOX_CONTENT','Content Manager');
+define('BOX_EMAIL','E-Mail Manager');
 define('TEXT_ALLOWED', 'Erlaubnis');
 define('TEXT_ACCESS', 'Zugriffsbereich');
 define('BOX_CONFIGURATION', 'Grundeinstellungen');
@@ -119,8 +120,10 @@ define('BOX_PAYMENT', 'Zahlungsoptionen');
 define('BOX_SHIPPING', 'Versandart');
 define('BOX_ORDER_TOTAL', 'Bestellzusammenfassung');
 define('BOX_CATEGORIES', 'Kategorien / Artikel');
+define('BOX_PRODUCTS_CONTENT', 'Artikel Content');
 define('BOX_PRODUCTS_ATTRIBUTES', 'Attribute anlegen');
 define('BOX_MANUFACTURERS', 'Hersteller');
+define('BOX_WHOLESALERS', 'Gro&szlig;h&auml;ndler');
 define('BOX_REVIEWS', 'Artikelbewertungen');
 define('BOX_CAMPAIGNS', 'Kampagnen');
 define('BOX_XSELL_PRODUCTS', 'Cross Marketing');
@@ -302,6 +305,7 @@ define('TEXT_DISPLAY_NUMBER_OF_CUSTOMERS', 'Angezeigt werden <b>%d</b> bis <b>%d
 define('TEXT_DISPLAY_NUMBER_OF_CURRENCIES', 'Angezeigt werden <b>%d</b> bis <b>%d</b> (von insgesamt <b>%d</b> W&auml;hrungen)');
 define('TEXT_DISPLAY_NUMBER_OF_LANGUAGES', 'Angezeigt werden <b>%d</b> bis <b>%d</b> (von insgesamt <b>%d</b> Sprachen)');
 define('TEXT_DISPLAY_NUMBER_OF_MANUFACTURERS', 'Angezeigt werden <b>%d</b> bis <b>%d</b> (von insgesamt <b>%d</b> Herstellern)');
+define('TEXT_DISPLAY_NUMBER_OF_WHOLESALERS', 'Angezeigt werden <b>%d</b> bis <b>%d</b> (von insgesamt <b>%d</b> Großhändler)');
 define('TEXT_DISPLAY_NUMBER_OF_NEWSLETTERS', 'Angezeigt werden <b>%d</b> bis <b>%d</b> (von insgesamt <b>%d</b> Newslettern)');
 define('TEXT_DISPLAY_NUMBER_OF_ORDERS', 'Angezeigt werden <b>%d</b> bis <b>%d</b> (von insgesamt <b>%d</b> Bestellungen)');
 define('TEXT_DISPLAY_NUMBER_OF_ORDERS_STATUS', 'Angezeigt werden <b>%d</b> bis <b>%d</b> (von insgesamt <b>%d</b> Bestellstatus)');
@@ -504,3 +508,21 @@ define('WHOS_ONLINE_TIME_LAST_CLICK_INFO', 'Anzeigezeitraum in Sek.: %s. Nach di
 
 define('LABEL_TRUE', 'Ja');
 define('LABEL_FALSE', 'Nein');
+
+define ('BOX_BASIC_SETTINGS', 'Grundeinstellungen');
+define ('BOX_SERVER_SETTINGS', 'Servereinstellungen');
+define ('BOX_CONFIGURATION_9', 'Lagereinstellungen');
+define ('BOX_SHIPPING_AND_PAYMENT', 'Versand & Zahlung');
+define ('BOX_MENU_PAYMENT', 'Zahlarten');
+define ('BOX_FRONTEND', 'Shopansicht');
+define ('BOX_CONFIGURATION_2', 'Kunden Feldl&auml;ngen');
+define ('BOX_MAINTAINANCE', 'Wartung');
+define ('BOX_SHOP_ON_OFF', 'Shop online/offline');
+define ('BOX_CLEVER_REACH', 'CleverReach Newsletter');
+
+#Menu main items
+define ('BOX_MENU_CUSTOMERS', 'Kunden');
+define ('BOX_MENU_PRODUCTS', 'Produkte');
+define ('BOX_MENU_CONTENT', 'Inhalte');
+define ('BOX_MENU_MARKETING', 'Marketing & SEO');
+define ('BOX_MENU_CONFIGURATION', 'Konfiguration');

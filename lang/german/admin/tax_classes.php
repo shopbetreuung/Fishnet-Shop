@@ -30,4 +30,7 @@ define('TEXT_INFO_DELETE_INTRO', 'Sind Sie sicher, dass Sie diese Steuerklasse l
 define('TEXT_INFO_HEADING_NEW_TAX_CLASS', 'neue Steuerklasse');
 define('TEXT_INFO_HEADING_EDIT_TAX_CLASS', 'Steuerklasse bearbeiten');
 define('TEXT_INFO_HEADING_DELETE_TAX_CLASS', 'Steuerklasse l&ouml;schen');
+
+define('ERROR_TEXT_HEADING', 'Fehler! Steuerklasse konnte nicht gespeichert werden:');
+define('ERROR_TEXT_NAME', 'Name der Steuerklasse ung&uuml;ltig!');
 ?>

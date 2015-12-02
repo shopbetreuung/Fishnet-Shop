@@ -167,7 +167,6 @@ class fcnt_moneybookers {
 		
 		$data = '';
         foreach ($params as $key => $value) {
-          //$value = strtr($value, "áéíóöõúüûÁÉÍÓÖÕÚÜÛ", "aeiooouuuAEIOOOUUU"); //web28 -2011-05-24 - Fix special characters          
           if ($key!='status_url') {
             $value=urlencode(utf8_encode($value)); //web28 -2011-05-24 - Fix special characters
           }
@@ -249,7 +248,7 @@ class fcnt_moneybookers {
 			$trid = xtc_create_random_value(16, "digits");
 			$trid =  chr(88).chr(84).chr(67) . $trid;
 			$result = xtc_db_query("SELECT mb_TRID FROM payment_moneybookers WHERE mb_TRID = '".$trid."'");
-		} while (mysql_num_rows($result));
+		} while (mysqli_num_rows($result));
 
 		return $trid;
 
@@ -284,13 +283,13 @@ class fcnt_moneybookers {
 		
 		//
 		$mb_installed = false;
-		//BOF - Hetfield - 2010-01-28 - replace mysql_list_tables with query SHOW TABLES -> PHP5.3 deprecated
-		//$tables = mysql_list_tables(DB_DATABASE);
+		//BOF - Hetfield - 2010-01-28 - replace mysqli_list_tables with query SHOW TABLES -> PHP5.3 deprecated
+		//$tables = mysqli_list_tables(DB_DATABASE);
 		$tables = xtc_db_query("SHOW TABLES LIKE 'payment_moneybookers'");			
-		while ($checktables = mysql_fetch_array($tables, MYSQL_NUM)) {
+		while ($checktables = mysqli_fetch_array($tables, MYSQLI_NUM)) {
 			if ($checktables[0] == 'payment_moneybookers')  $mb_installed=true;
 		}
-		//EOF - Hetfield - 2010-01-28 - replace mysql_list_tables with query SHOW TABLES -> PHP5.3 deprecated
+		//EOF - Hetfield - 2010-01-28 - replace mysqli_list_tables with query SHOW TABLES -> PHP5.3 deprecated
 
 		if ($mb_installed==false) {
 		xtc_db_query("CREATE TABLE payment_moneybookers (mb_TRID varchar(255) NOT NULL default '',mb_ERRNO smallint(3) unsigned NOT NULL default '0',mb_ERRTXT varchar(255) NOT NULL default '',mb_DATE datetime NOT NULL default '0000-00-00 00:00:00',mb_MBTID bigint(18) unsigned NOT NULL default '0',mb_STATUS tinyint(1) NOT NULL default '0',mb_ORDERID int(11) unsigned NOT NULL default '0',PRIMARY KEY  (mb_TRID))");

@@ -23,6 +23,7 @@ define('TABLE_HEADING_FIRSTNAME', 'Vorname');
 define('TABLE_HEADING_LASTNAME', 'Nachname');
 define('TABLE_HEADING_ACCOUNT_CREATED', 'Zugang erstellt am');
 define('TABLE_HEADING_ACTION', 'Aktion');
+define('TABLE_COUPON_AMOUNT', 'Guthaben');
 
 define('TEXT_DATE_ACCOUNT_CREATED', 'Zugang erstellt am:');
 define('TEXT_DATE_ACCOUNT_LAST_MODIFIED', 'letzte &Auml;nderung:');

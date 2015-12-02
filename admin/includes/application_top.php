@@ -30,7 +30,7 @@
    --------------------------------------------------------------*/
 
 // DB version, used for updates (_installer)
-define('DB_VERSION', 'SH_1.1.1');
+define('DB_VERSION', 'SH_1.2.0');
 //Run Mode
 define('RUN_MODE_ADMIN',true);
 
@@ -71,12 +71,6 @@ if (file_exists(DIR_FS_CATALOG.'export/_error_reporting.all') || file_exists(DIR
 } else {
   error_reporting(0);
 }
-
-/*
- * turn off magic-quotes support, for both runtime and sybase, as both will cause problems if enabled
- */
-if (version_compare(PHP_VERSION, 5.3, '<') && function_exists('set_magic_quotes_runtime')) set_magic_quotes_runtime(0);
-if (version_compare(PHP_VERSION, 5.4, '<') && @ini_get('magic_quotes_sybase') != 0) @ini_set('magic_quotes_sybase', 0);
 
 // solve compatibility issues
 require_once (DIR_WS_FUNCTIONS.'compatibility.php');
@@ -140,6 +134,9 @@ require_once(DIR_FS_INC . 'xtc_product_link.inc.php');
 require_once(DIR_FS_INC . 'xtc_cleanName.inc.php');
 require_once(DIR_FS_INC . 'xtc_get_top_level_domain.inc.php');
 require_once(DIR_FS_INC . 'html_encoding.php'); //new function for PHP5.4
+require_once(DIR_FS_INC . 'xtc_db_find_database_field.inc.php');
+require_once(DIR_FS_INC . 'xtc_db_find_database_field_by_language.inc.php');
+require_once(DIR_FS_INC . 'xtc_db_find_by_multiple.inc.php');
 
 // design layout (wide of boxes in pixels) (default: 125)
 define('BOX_WIDTH', 125);
@@ -297,7 +294,7 @@ if (!isset($_SESSION['language']) || isset($_GET['language'])) {
   }
   $_SESSION['language'] = $lng->language['directory'];
   $_SESSION['languages_id'] = $lng->language['id'];
-  $_SESSION['language_charset'] = $lng->language['language_charset']; //web28 - 2012-04-29 - add $_SESSION['language_charset']
+  $_SESSION['language_charset'] = 'utf-8';
   $_SESSION['language_code'] = $lng->language['code']; //web28 - 2010-09-05 - add $_SESSION['language_code']
 }
 

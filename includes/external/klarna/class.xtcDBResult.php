@@ -26,18 +26,18 @@ class XtcDBResult implements KlarnaDBResult
 {
 
     /**
-     * @var mysql_result
+     * @var mysqli_result
      */
     private $_result;
 
     /**
      * Create a reslut object
      *
-     * @param mysql_result $mysql_result result of a database query
+     * @param mysqli_result $mysqli_result result of a database query
      */
-    public function __construct($mysql_result)
+    public function __construct($mysqli_result)
     {
-        $this->_result = $mysql_result;
+        $this->_result = $mysqli_result;
     }
 
     /**

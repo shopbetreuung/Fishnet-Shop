@@ -32,8 +32,11 @@
 $module_smarty = new Smarty;
 
 $module_smarty->assign('tpl_path', 'templates/'.CURRENT_TEMPLATE.'/');
-include_once(DIR_WS_INCLUDES.'modules/payment/klarna/display_klarna_cart.php');
 
+$payment_modules = explode(";", MODULE_PAYMENT_INSTALLED);
+if(in_array('klarna_invoice.php', $payment_modules) || in_array('klarna_partPayment.php', $payment_modules) || in_array('klarna_SpecCamp.php', $payment_modules)) {
+	include_once(DIR_WS_INCLUDES.'modules/payment/klarna/display_klarna_cart.php');
+}
 
 // include needed functions
 require_once (DIR_FS_INC.'xtc_check_stock.inc.php');
@@ -86,9 +89,9 @@ for ($i = 0, $n = sizeof($products); $i < $n; $i ++) {
                                 'LINK_DELETE' => $del_link,                  
                                 'PRODUCTS_PRICE' => $xtPrice->xtcFormat($products[$i]['price'] * $products[$i]['quantity'], true), 
                                 'PRODUCTS_SINGLE_PRICE' =>$xtPrice->xtcFormat($products[$i]['price'], true), 
+                                'PRODUCTS_VPE' =>$products[$i]['vpe'],
                                 'PRODUCTS_SHORT_DESCRIPTION' => xtc_get_short_description($products[$i]['id']), 
                                 'ATTRIBUTES' => '');
-
   //products attributes
   if (isset ($products[$i]['attributes']) && is_array($products[$i]['attributes'])) {
     $subindex = 0;

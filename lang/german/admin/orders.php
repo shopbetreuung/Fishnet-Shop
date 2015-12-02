@@ -25,8 +25,8 @@ define( 'BUTTON_PDFBILL_SEND_INVOICE_MAIL',       'PDF Rechnung senden');       
 define( 'BUTTON_PDFBILL_SEND_INVOICE_MAIL2',      'PDF Rechnung erneut senden');    // pdfbill
 define( 'BUTTON_BILL',                            'Fakturieren');                   // ibillnr
 define( 'PDFBILL_INVOICE_WORD' ,                  'rechnung' );                     // used for pdf e-mail 
-define( 'PDFBILL_MSG_INVOICEMAIL_SENT' ,          'E-Mail wurde übermittelt' );      
-define( 'PDFBILL_MSG_DELINFO_PDF' ,               '<br /><br />Eine PDF-Rechnung wurde bereits erstellt und wird ebenfalls gelöscht.' );      
+define( 'PDFBILL_MSG_INVOICEMAIL_SENT' ,          'E-Mail wurde Ã¼bermittelt' );      
+define( 'PDFBILL_MSG_DELINFO_PDF' ,               '<br /><br />Eine PDF-Rechnung wurde bereits erstellt und wird ebenfalls gelÃ¶scht.' );      
 define( 'PDFBILL_TXT_DELIVERYDATE' ,              'Lieferdatum:' );      
 define( 'PDFBILL_TXT_BILLPROFILE' ,               'Rechnung:' );      
 define( 'PDFBILL_TXT_DELIVNOTEPROFILE' ,          'Lieferschein:' );
@@ -137,7 +137,7 @@ define('ENTRY_CUSTOMERS_VAT_ID','USt-IdNr.:');
 define('TEXT_VALIDATING','Nicht best&auml;tigt');
 
 // BOF - Tomcraft - 2009-10-03 - Paypal Express Modul
-define('TEXT_INFO_PAYPAL_DELETE', 'PayPal Transaktions Daten auch löschen.');
+define('TEXT_INFO_PAYPAL_DELETE', 'PayPal Transaktions Daten auch lÃ¶schen.');
 // EOF - Tomcraft - 2009-10-03 - Paypal Express Modul
 
 // BOF - Tomcraft - 2010-04-22 - Added a missing language definition
@@ -145,7 +145,7 @@ define('TEXT_PRODUCTS', 'Artikel');
 // EOF - Tomcraft - 2010-04-22 - Added a missing language definition
 
 //BOF - web28 - 2010-03-20 - Send Order by Admin
-define('COMMENT_SEND_ORDER_BY_ADMIN' , 'Auftragsbestätigung gesendet'); //ACHTUNG hier  keine HTML-Entities verwenden
+define('COMMENT_SEND_ORDER_BY_ADMIN' , 'AuftragsbestÃ¤tigung gesendet'); //ACHTUNG hier  keine HTML-Entities verwenden
 define('BUTTON_ORDER_CONFIRMATION', 'Auftragsbest&auml;tigung senden');
 define('SUCCESS_ORDER_SEND', 'Auftragsbest&auml;tigung erfolgreich gesendet');
 //EOF - web28 - 2010-03-20 - Send Order by Admin

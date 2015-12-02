@@ -500,6 +500,9 @@ define ('CONFIG_MIN_VALUE_WARNING', '"% s" WARNING:% s input was ignored [Minimu
 
 define ('WHOS_ONLINE_TIME_LAST_CLICK_INFO', 'Display period in seconds:% s After this time, the entries will be deleted.');
 
+define('LABEL_TRUE', 'yes');
+define('LABEL_FALSE', 'no');
+
 define ('BOX_BASIC_SETTINGS', 'Basic Settings');
 define ('BOX_SERVER_SETTINGS', 'Server Settings');
 define ('BOX_CONFIGURATION_9', 'Warehouse Settings');

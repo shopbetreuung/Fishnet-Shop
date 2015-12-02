@@ -54,7 +54,7 @@
                 $category_query_check = "select p2c.categories_id from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_TO_CATEGORIES . " p2c where p.products_id = '" . (int)$products_id . "' and p.products_status = '1' and p.products_id = p2c.products_id and p2c.categories_id != 0 and p2c.categories_id = '".$linked_cat."'";
                 $category_query_check  = xtDBquery($category_query_check);
                 if (xtc_db_num_rows($category_query_check,true)) {
-                    $category = (xtc_db_fetch_array($category_query_check)['categories_id']);
+                    $category = xtc_db_fetch_array($category_query_check);
                     break;
                 }
             }

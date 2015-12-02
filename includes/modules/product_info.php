@@ -125,12 +125,7 @@ if (!is_object($product) || !$product->isProduct()) {
   $info_smarty->assign('PRODUCTS_PRICE', $products_price['formated']);
 
   //get products vpe
-			if ($product->data['products_vpe_value'] > 1 && $product->getAttributesCount() > 0)	{
-				$info_smarty->assign('PRODUCTS_VPE', $xtPrice->xtcFormat($products_price['plain'] * (1 / $product->data['products_vpe_value'] * $product->data['products_vpe_value']), true).TXT_PER.xtc_precision($product->data['products_vpe_value'],0).xtc_get_vpe_name($product->data['products_vpe']));
-			} else if ($product->data['products_vpe_value'] > 1) {
-				$info_smarty->assign('PRODUCTS_VPE', $xtPrice->xtcFormat($products_price['plain'] * (1 / $product->data['products_vpe_value']), true).TXT_PER.xtc_get_vpe_name($product->data['products_vpe']));
-			}
-// EOF - Tomcraft - 2010-06-14 - Grundpreismodul hinzugefügt
+  $info_smarty->assign('PRODUCTS_VPE',$main->getVPEtext($product->data, $products_price['plain'])); //web28 - 2012-04-17 - use classes function getVPEtext() 
   
   // products id
   $info_smarty->assign('PRODUCTS_ID', $product->data['products_id']);

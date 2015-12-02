@@ -1,39 +1,41 @@
 {config_load file="$language/lang_$language.conf" section="checkout_new_address"}
 {config_load file="$language/lang_$language.conf" section="shopping_cart"}
 <table class="table">
-  <tr class="headerrow">
+<thead>
+  <tr>
     <th class="hidden-xs text-center">{#text_qty#}</th>
     <th class="hidden-xs" style="width: 100px;"></th>
     <th style="width: 100%">{#text_article#}</th>
     <th class="hidden-xs text-center">{#text_single#}</th>
-    <th class="hidden-xs text-center">{#text_base#}</th>
     <th class="text-center">{#text_total#}</th>
     <th class="hidden-xs text-center">{#text_remove#}</th>
   </tr>
+  </thead>
+  <tbody>
   {foreach name=aussen item=module_data from=$module_content} 
   <tr>
     <td class="hidden-xs quantity" style="vertical-align: center;">{$module_data.PRODUCTS_QTY}</td>
 	<td class="quantity hidden-xs">{if $module_data.PRODUCTS_IMAGE}<img src="{$module_data.PRODUCTS_IMAGE}" style="max-width: 100px; max-height: 100px;" />{/if}</td>
     <td class="productname">
 		<strong><a href="{$module_data.PRODUCTS_LINK}">{$module_data.PRODUCTS_NAME}</a></strong>
-		{if $module_data.PRODUCTS_MODEL}<br /><br />{$module_data.PRODUCTS_MODEL}{/if}
+		{if $module_data.PRODUCTS_MODEL}<br /><strong>{#text_model#}:</strong> {$module_data.PRODUCTS_MODEL}{/if}
 		{if $module_data.ATTRIBUTES!=''} 
-      		<table class="productattributes" width="100%" border="0" cellspacing="0" cellpadding="0">
+      		<table border="0" cellspacing="0" cellpadding="0">
         	{foreach key=key_data item=item_data from=$module_data.ATTRIBUTES} 
         	<tr> 
-          		<td class="attribute"><strong>{$item_data.NAME}:</strong></td>
-          		<td class="value">{$item_data.VALUE_NAME}</td>
+          		<td><strong>{$item_data.NAME}:</strong></td>
+          		<td>{$item_data.VALUE_NAME}</td>
         	</tr>
         	{/foreach} 
       		</table>
        {/if}
+       {if $module_data.PRODUCTS_VPE}<br /><strong>{#text_base#}:</strong> {$module_data.PRODUCTS_VPE}{/if}
 	   <div class="visible-xs" style="margin-top: 10px;">
 		   <strong>{#text_single#}:</strong> {$module_data.PRODUCTS_SINGLE_PRICE} <br />
 		    <strong>{#text_remove#}:</strong> {$module_data.BUTTON_DELETE}
 	   </div>
 	</td>
     <td class="hidden-xs text-right text-nowrap">{$module_data.PRODUCTS_SINGLE_PRICE}</td>
-    <td class="hidden-xs text-right text-nowrap">{$module_data.PRODUCTS_VPE}</td>
     <td class="text-right text-nowrap">{$module_data.PRODUCTS_PRICE}</td>    
     <td class="hidden-xs text-center">{$module_data.BUTTON_DELETE}</td>
   </tr>
@@ -53,4 +55,5 @@
     </td>
     <td>&nbsp;</td>
  </tr>
+ </tbody>
 </table>

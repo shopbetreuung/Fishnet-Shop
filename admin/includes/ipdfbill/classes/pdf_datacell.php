@@ -98,7 +98,7 @@ class cell_cluster_end extends cell_cluster {
 }
 
 /* --------------------------------------------------------------------------------------------------
-     class cell_cluster           - Verwaltungsobjekt zusammengehörender data_cell-Objekte
+     class cell_cluster           - Verwaltungsobjekt zusammengehÃ¶render data_cell-Objekte
    -------------------------------------------------------------------------------------------------- */
 class cell_cluster {
    var $products_data,

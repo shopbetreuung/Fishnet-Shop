@@ -167,6 +167,17 @@ if ($_POST['cpath'] != '') {
             }
             echo '</td>'. PHP_EOL;
             echo '</tr>'. PHP_EOL;
+			
+            // Download function start
+            if(strtoupper($current_product_option_name) == 'DOWNLOADS') {
+              echo '<tr>'. PHP_EOL;
+             // echo '<td colspan="2">File: <input type="file" name="' . $current_value_id . "_download_file"></td>';
+              echo '<td class="main" colspan="'.$colspan .'" style="white-space: nowrap; background: #ccc; padding: 4px;">'.xtc_draw_pull_down_menu($current_value_id . '_download_file', xtc_getDownloads(), (isset($attr_dl_array['products_attributes_filename'])?$attr_dl_array['products_attributes_filename']:''), ''). PHP_EOL;
+              echo '&nbsp;&nbsp;&nbsp;'.DL_COUNT.' <input type="text" name="' . $current_value_id . '_download_count" value="' . (isset($attr_dl_array['products_attributes_maxcount'])?$attr_dl_array['products_attributes_maxcount']:'') . '" size="6">'. PHP_EOL;
+              echo '&nbsp;&nbsp;&nbsp;'.DL_EXPIRE.' <input type="text" name="' . $current_value_id . '_download_expire" value="' . (isset($attr_dl_array['products_attributes_maxdays'])?$attr_dl_array['products_attributes_maxdays']:'') . '" size="6"></td>'. PHP_EOL;
+              echo '</tr>'. PHP_EOL;
+            }
+            // Download function end
           }
           if ($i == $matches2 ) $i = 0;
         }
@@ -315,6 +326,7 @@ if ($_POST['cpath'] != '') {
               echo '&nbsp;&nbsp;&nbsp;'.DL_EXPIRE.' <input type="text" name="' . $current_value_id . '_download_expire" value="' . (isset($attr_dl_array['products_attributes_maxdays'])?$attr_dl_array['products_attributes_maxdays']:'') . '" size="6"></td>'. PHP_EOL;
               echo '</tr>'. PHP_EOL;
             }
+			// Download function end
             echo '<tr class="' . $rowClass . ' hidden-lg hidden-md">'. PHP_EOL;#hidden-lg hidden-md
             echo '<td colspan="2" class="main" style="width:150px"><hr></td>'. PHP_EOL;
             echo '</tr>';

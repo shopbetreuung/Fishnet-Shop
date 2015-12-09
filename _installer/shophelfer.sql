@@ -174,7 +174,7 @@ INSERT INTO email_manager (em_id, em_name, em_language, em_body, em_delete, em_t
 DROP TABLE IF EXISTS admin_access;
 CREATE TABLE admin_access (
   customers_id VARCHAR(32) NOT NULL DEFAULT 0,
-  configuration INT(1) NOT NULL DEFAULT 0,
+   INT(1) NOT NULL DEFAULT 0,
   modules INT(1) NOT NULL DEFAULT 0,
   countries INT(1) NOT NULL DEFAULT 0,
   currencies INT(1) NOT NULL DEFAULT 0,
@@ -1734,6 +1734,25 @@ INSERT INTO configuration (configuration_id, configuration_key, configuration_va
 INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES (NULL, 'WHOS_ONLINE_IP_WHOIS_SERVICE', 'http://www.utrace.de/?query=', '1000', '62', NULL, NOW(), NULL, NULL);
 INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES (NULL, 'CONFIRM_SAVE_ENTRY', 'true', '1000', '70', NULL, NOW(), NULL, 'xtc_cfg_select_option(array(\'true\', \'false\'),');
 
+# Coupon
+INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) VALUES ('', 'MODULE_ORDER_TOTAL_COUPON_STATUS', 'true', '6', '1','xtc_cfg_select_option(array(\'true\', \'false\'), ', NOW());
+INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, date_added) VALUES ('', 'MODULE_ORDER_TOTAL_COUPON_SORT_ORDER', '25', '6', '2', NOW());
+INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, set_function ,date_added) VALUES ('', 'MODULE_ORDER_TOTAL_COUPON_INC_SHIPPING', 'false', '6', '5', 'xtc_cfg_select_option(array(\'true\', \'false\'), ', NOW());
+INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, set_function ,date_added) VALUES ('', 'MODULE_ORDER_TOTAL_COUPON_INC_TAX', 'true', '6', '6','xtc_cfg_select_option(array(\'true\', \'false\'), ', NOW());
+INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, set_function ,date_added) VALUES ('', 'MODULE_ORDER_TOTAL_COUPON_CALC_TAX', 'Standard', '6', '7','xtc_cfg_select_option(array(\'None\', \'Standard\'), ', NOW());
+INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, use_function, set_function, date_added) VALUES ('', 'MODULE_ORDER_TOTAL_COUPON_TAX_CLASS', '0', '6', '0', 'xtc_get_tax_class_title', 'xtc_cfg_pull_down_tax_classes(', NOW());
+INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, set_function ,date_added) VALUES ('', 'MODULE_ORDER_TOTAL_COUPON_SPECIAL_PRICES', 'false', '6', '5', 'xtc_cfg_select_option(array(\'true\', \'false\'), ', NOW());
+
+# GV
+INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) VALUES ('', 'MODULE_ORDER_TOTAL_GV_STATUS', 'true', '6', '1','xtc_cfg_select_option(array(\'true\', \'false\'), ', NOW());
+INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, date_added) VALUES ('', 'MODULE_ORDER_TOTAL_GV_SORT_ORDER', '80', '6', '2', NOW());
+INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) VALUES ('', 'MODULE_ORDER_TOTAL_GV_QUEUE', 'true', '6', '3','xtc_cfg_select_option(array(\'true\', \'false\'), ', NOW());
+INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, set_function ,date_added) VALUES ('', 'MODULE_ORDER_TOTAL_GV_INC_SHIPPING', 'true', '6', '5', 'xtc_cfg_select_option(array(\'true\', \'false\'), ', NOW());
+INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, set_function ,date_added) VALUES ('', 'MODULE_ORDER_TOTAL_GV_INC_TAX', 'true', '6', '6','xtc_cfg_select_option(array(\'true\', \'false\'), ', NOW());
+INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, set_function ,date_added) VALUES ('', 'MODULE_ORDER_TOTAL_GV_CALC_TAX', 'None', '6', '7','xtc_cfg_select_option(array(\'None\', \'Standard\', \'Credit Note\'), ', NOW());
+INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, use_function, set_function, date_added) VALUES ('', 'MODULE_ORDER_TOTAL_GV_TAX_CLASS', '0', '6', '0', 'xtc_get_tax_class_title', 'xtc_cfg_pull_down_tax_classes(', NOW());
+INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, set_function ,date_added) VALUES ('', 'MODULE_ORDER_TOTAL_GV_CREDIT_TAX', 'false', '6', '8','xtc_cfg_select_option(array(\'true\', \'false\'), ', NOW());
+
 INSERT INTO configuration_group VALUES (1,'My Store','General information about my store',1,1);
 INSERT INTO configuration_group VALUES (2,'Minimum Values','The minimum values for functions / data',2,1);
 INSERT INTO configuration_group VALUES (3,'Maximum Values','The maximum values for functions / data',3,1);
@@ -1762,6 +1781,9 @@ INSERT INTO configuration_group VALUES (24,'PIWIK &amp; Google Analytics Trackin
 INSERT INTO configuration_group VALUES (31,'Moneybookers','Moneybookers System',31,1);
 INSERT INTO configuration_group VALUES (40,'Popup Window Configuration','Popup Window Parameters',40,1);
 INSERT INTO configuration_group VALUES (1000,'Adminarea Options','Adminarea Configuration', 1000,1);
+
+
+
 
 #Countries
 INSERT INTO countries VALUES (1,'Afghanistan','AF','AFG',1,1,0);

@@ -517,7 +517,6 @@ define ('BOX_FRONTEND', 'Shopansicht');
 define ('BOX_CONFIGURATION_2', 'Kunden Feldl&auml;ngen');
 define ('BOX_MAINTAINANCE', 'Wartung');
 define ('BOX_SHOP_ON_OFF', 'Shop online/offline');
-define ('BOX_CLEVER_REACH', 'CleverReach Newsletter');
 
 #Menu main items
 define ('BOX_MENU_CUSTOMERS', 'Kunden');

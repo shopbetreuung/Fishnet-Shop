@@ -259,13 +259,7 @@
 											"is_main"	=> true,
 											"link" 		=> xtc_href_link(FILENAME_MODULE_NEWSLETTER, '', 'NONSSL'),
 											"access"	=> "module_newsletter",
-											"check"		=> true);																						
-											
-	$menu_items['marketingseo'][] = array(	"name" 		=> BOX_CLEVER_REACH,
-											"is_main"	=> true,
-											"link" 		=> xtc_href_link('cleverreach.php', '', 'NONSSL'),
-											"access"	=> "cleverreach",
-											"check"		=> true);			
+											"check"		=> true);																																
 											
 	$menu_items['marketingseo'][] = array(	"name" 		=> BOX_CONFIGURATION_16,
 											"is_main"	=> true,

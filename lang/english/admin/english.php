@@ -511,7 +511,6 @@ define ('BOX_FRONTEND', 'Frontend');
 define ('BOX_CONFIGURATION_2', 'Customers field lengths');
 define ('BOX_MAINTAINANCE', 'Maintenance');
 define ('BOX_SHOP_ON_OFF', 'Shop online/offline');
-define ('BOX_CLEVER_REACH', 'CleverReach Newsletter');
 define ('BOX_ATTRIBUTES','Attributes');
 define ('BOX_IMPORT_EXPORT','Import / Export');
 define ('BOX_LAW','Disclaimer');

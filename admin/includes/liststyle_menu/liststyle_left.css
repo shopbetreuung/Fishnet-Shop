@@ -54,9 +54,3 @@ td.fastmenu img{
 	border-top: 5px solid #b40076;
 }
 /* EOF - web28 - 2010-04-10 - added ADMIN SERACH BAR */
-
-/*FIX FÜR ECONDA & CLEVERREACH*/
-li{
-	list-style-type: none;
-	margin-left:0px;
-}

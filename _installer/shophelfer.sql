@@ -256,7 +256,6 @@ CREATE TABLE admin_access (
   janolaw INT(1) NOT NULL DEFAULT 0,
   haendlerbund INT(1) NOT NULL DEFAULT 0,
   safeterms INT(1) NOT NULL DEFAULT 0,
-  easymarketing INT(1) NOT NULL DEFAULT 0,
   it_recht_kanzlei INT(1) NOT NULL DEFAULT 0,
   payone_config INT(1) NOT NULL DEFAULT 0,
   payone_logs INT(1) NOT NULL DEFAULT 0,

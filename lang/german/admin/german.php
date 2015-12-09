@@ -180,7 +180,6 @@ define('BOX_REMOVEOLDPICS','Alte Bilder l&ouml;schen'); // Remove old pictures -
 define('BOX_JANOLAW','janolaw AGB Hosting'); // Tomcraft - 2011-06-17 - Added janolaw AGB hosting service
 define('BOX_HAENDLERBUND','H&auml;ndlerbund AGB Service'); // Tomcraft - 2012-12-08 - Added haendlerbund AGB interface
 define('BOX_SAFETERMS','Safeterms - AGB Service'); // Tomcraft - 2013-06-21 - Safeterms AGB interface
-define('BOX_EASYMARKETING','EASYMARKETING AG'); // Tomcraft - 2013-08-29 - Added easymarketing
 define('BOX_IT_RECHT_KANZLEI', 'IT Recht Kanzlei');
 define('BOX_LAW','Rechtliches');
 

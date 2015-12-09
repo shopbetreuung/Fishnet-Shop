@@ -247,14 +247,7 @@
 											"is_main"	=> true,
 											"link" 		=> xtc_href_link(FILENAME_BANNER_MANAGER, '', 'NONSSL'),
 											"access"	=> "banner_manager",
-											"check"		=> true);	
-											
-	$menu_items['marketingseo'][] = array(	"name" 		=> BOX_EASYMARKETING,
-											"is_main"	=> true,
-											"link" 		=> xtc_href_link(FILENAME_EASYMARKETING, '', 'NONSSL'),
-											"access"	=> "easymarketing",
-											"check"		=> true);											
- 
+											"check"		=> true);							
 											
 	$menu_items['marketingseo'][] = array(	"name" 		=> BOX_GOOGLE_SITEMAP,
 											"is_main"	=> true,

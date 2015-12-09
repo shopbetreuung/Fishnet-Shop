@@ -654,11 +654,6 @@ define('PAYPAL_INVOICE_TITLE','Shop-Kenner f&uuml;r PayPal Rg.Nr.');
 define('PAYPAL_INVOICE_DESC','Buchstabe(n), die vor die Order-Nr. als Shop-Kenner gesetzt werden und als Rechnungs-Nr. von PayPal benutzt werden.<br />Durch unterschiedliche Shop-Kenner k&ouml;nnen mehrere Shops mit einem PayPal Konto arbeiten, ohne dass es bei gleichen Order-Nummern zu gleichen Rechnungs-Nummern im PayPal Konto kommt.');
 // EOF - Tomcraft - 2009-10-03 - Paypal Express Modul
 
-// BOF - Tomcraft - 2009-11-02 - New admin top menu
-define('USE_ADMIN_TOP_MENU_TITLE' , 'Admin Top Navigation');
-define('USE_ADMIN_TOP_MENU_DESC' , 'Admin Top Navigation aktivieren? Ansonsten wird das Men&uuml; am linken Rand angezeigt (klassisch)');
-// EOF - Tomcraft - 2009-11-02 - New admin top menu
-
 // BOF - Tomcraft - 2009-11-02 - Admin language tabs
 define('USE_ADMIN_LANG_TABS_TITLE' , 'Sprachtabs bei Kategorien/Artikel');
 define('USE_ADMIN_LANG_TABS_DESC' , 'Sprachtabs bei den Eingabefeldern f&uuml;r Kategorien/Artikel aktivieren?');

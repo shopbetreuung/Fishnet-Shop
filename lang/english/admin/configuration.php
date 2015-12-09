@@ -652,11 +652,6 @@ define('PAYPAL_INVOICE_TITLE','Shop connoisseur for PayPal Invoice-No.');
 define('PAYPAL_INVOICE_DESC','Letter(s) before the Order-No. as Shop connoisseurs to be set and as Invoice-No. of PayPal to be used. By different Shop connoisseurs several shops with a PayPal account can work, without which it comes with same order-numbers to same invoice-numbers in the PayPal account.');
 // EOF - Tomcraft - 2009-10-03 - Paypal Express Modul
 
-// BOF - Tomcraft - 2009-11-02 - New admin top menu
-define('USE_ADMIN_TOP_MENU_TITLE' , 'Admin Top Navigation');
-define('USE_ADMIN_TOP_MENU_DESC' , 'Activate Admin Top Navigation? Otherwise the menu will be displayed on the left (classic view)');
-// EOF - Tomcraft - 2009-11-02 - New admin top menu
-
 // BOF - Tomcraft - 2009-11-02 - Admin language tabs
 define('USE_ADMIN_LANG_TABS_TITLE' , 'Language Tabs with Categories / Articles');
 define('USE_ADMIN_LANG_TABS_DESC' , 'Use language tabs with categories / articles?');

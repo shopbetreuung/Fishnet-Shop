@@ -182,15 +182,6 @@ require (DIR_WS_INCLUDES.'head.php');
 		<!-- body //-->
 		<table border="0" width="100%" cellspacing="2" cellpadding="2">
       <tr>
-        <?php //left_navigation
-        if (USE_ADMIN_TOP_MENU == 'false') {
-          echo '<td class="columnLeft2">'.PHP_EOL;
-          echo '<!-- left_navigation //-->'.PHP_EOL;       
-          
-          echo '<!-- left_navigation eof //-->'.PHP_EOL; 
-          echo '</td>'.PHP_EOL;      
-        }
-        ?>
         <!-- body_text //-->
 				<td class="boxCenter" width="100%" valign="top">
 					<table border="0" width="100%" cellspacing="0" cellpadding="0" class="">

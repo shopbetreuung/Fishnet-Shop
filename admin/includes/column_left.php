@@ -278,6 +278,12 @@
 											"link" 		=> false,
 											"access"	=> false,
 											"check"		=> true);	
+	
+	$menu_items['marketingseo'][] = array(	"name" 		=> BOX_WHOS_ONLINE,
+											"is_main"	=> false,
+											"link" 		=> xtc_href_link(FILENAME_WHOS_ONLINE, '', 'NONSSL'),
+											"access"	=> "whos_online",
+											"check"		=> true);
 											
 	$menu_items['marketingseo'][] = array(	"name" 		=> BOX_PRODUCTS_VIEWED,
 											"is_main"	=> false,
@@ -313,12 +319,6 @@
 											"is_main"	=> false,
 											"link" 		=> xtc_href_link(FILENAME_STATS_STOCK_WARNING, '', 'NONSSL'),
 											"access"	=> "stats_stock_warning",
-											"check"		=> true);
-	
-	$menu_items['marketingseo'][] = array(	"name" 		=> BOX_WHOS_ONLINE,
-											"is_main"	=> true,
-											"link" 		=> xtc_href_link(FILENAME_WHOS_ONLINE, '', 'NONSSL'),
-											"access"	=> "whos_online",
 											"check"		=> true);
 
 	$menu_items['marketingseo'][] = array(	"name" 		=> BOX_CONFIGURATION_24,

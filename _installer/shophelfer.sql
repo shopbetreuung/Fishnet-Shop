@@ -174,7 +174,7 @@ INSERT INTO email_manager (em_id, em_name, em_language, em_body, em_delete, em_t
 DROP TABLE IF EXISTS admin_access;
 CREATE TABLE admin_access (
   customers_id VARCHAR(32) NOT NULL DEFAULT 0,
-   INT(1) NOT NULL DEFAULT 0,
+  configuration INT(1) NOT NULL DEFAULT 0,
   modules INT(1) NOT NULL DEFAULT 0,
   countries INT(1) NOT NULL DEFAULT 0,
   currencies INT(1) NOT NULL DEFAULT 0,

@@ -19,7 +19,7 @@
 	var MSIE = navigator.userAgent.indexOf('MSIE')>=0?true:false;
 	var navigatorVersion = navigator.appVersion.replace(/.*?MSIE (\d\.\d).*/g,'$1')/1;
 	
-	var form_widget_amount_slider_handle = 'images/pdfbill/slider_handle.gif';
+	var form_widget_amount_slider_handle = 'includes/ipdfbill/images/slider_handle.gif';
 	var slider_handle_image_obj = false;
 	var sliderObjectArray = new Array();
 	var slider_counter = 0;
@@ -227,14 +227,14 @@
 					this.className='colorPickerTab_active';
 					this.style.zIndex = 50;
 					var img = this.getElementsByTagName('IMG')[0];
-					img.src = "images/pdfbill/tab_right_active.gif"
+					img.src = "includes/ipdfbill/images/tab_right_active.gif"
 					img.src = img.src.replace(/inactive/,'active');							
 					contentDiv.style.display='block';
 					self.status = counter;					
 				}else{
 					subDiv.className = 'colorPickerTab_inactive';	
 					var img = subDiv.getElementsByTagName('IMG')[0];
-					img.src = "images/pdfbill/tab_right_inactive.gif"
+					img.src = "includes/ipdfbill/images/tab_right_inactive.gif"
 					self.status = img.src;
 					subDiv.style.zIndex = counter;
 					contentDiv.style.display='none';
@@ -279,7 +279,7 @@
 			tabSpan.innerHTML = tabs[no];
 			tabDiv.appendChild(tabSpan);
 			var tabImg = document.createElement('IMG');
-			tabImg.src = "images/pdfbill/tab_right_" + suffix + ".gif";
+			tabImg.src = "includes/ipdfbill/images/tab_right_" + suffix + ".gif";
 			tabDiv.appendChild(tabImg);
 			div.appendChild(tabDiv);
 			if(navigatorVersion<6 && MSIE){	/* Lower IE version fix */
@@ -512,6 +512,7 @@
 	function chooseColor()
 	{
 		color_picker_form_field.value = this.getAttribute('rgbColor');
+		document.getElementById(color_picker_display_field).style.backgroundColor=this.getAttribute('rgbColor');
     chooseColor_display_color();
 /*
     alert('xxx'); 
@@ -570,6 +571,7 @@
 	  }
 	  if (A.length == 6) {
       document.getElementById(color_picker_display_field).style.backgroundColor=A;
+	  
     }
 
 		color_picker_div.style.display='none';		

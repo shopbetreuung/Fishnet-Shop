@@ -476,10 +476,10 @@ define('YOUR_PRICE','your price ');
 // BOF - Tomcraft - 2009-10-09 - Added text-constant for unit price
 define('UNIT_PRICE','unit price ');
 // EOF - Tomcraft - 2009-10-09 - Added text-constant for unit price
-define('ONLY',' Now only ');// DokuMan - Werbung mit durchgestrichenen Statt-Preisen ist zul‰ssig
+define('ONLY',' Now only ');// DokuMan - Werbung mit durchgestrichenen Statt-Preisen ist zul√§ssig
 define('FROM','from ');
 define('YOU_SAVE','you save ');
-define('INSTEAD','Our previous price ');// DokuMan - Werbung mit durchgestrichenen Statt-Preisen ist zul‰ssig
+define('INSTEAD','Our previous price ');// DokuMan - Werbung mit durchgestrichenen Statt-Preisen ist zul√§ssig
 define('TXT_PER',' per ');
 define('TAX_INFO_INCL','%s VAT incl.');
 define('TAX_INFO_EXCL','%s VAT excl.');
@@ -519,7 +519,7 @@ define('PAYPAL_GS','Coupon');
 define('PAYPAL_TAX','Tax');
 define('PAYPAL_EXP_WARN','Note! Possibly resulting forwarding expenses are only computed in the shop finally.');
 define('PAYPAL_EXP_VORL','Provisional forwarding expenses');
-define('PAYPAL_EXP_VERS','12.90');
+define('PAYPAL_EXP_VERS','0.00');
 // 09.01.11
 define('PAYPAL_ADRESSE','The country in your PayPal dispatch address is not registered in our shop.<br />Please contact us.<br />Thanks for you understanding.<br />From PayPal received country: ');
 // 17.09.11
@@ -527,7 +527,7 @@ define('PAYPAL_AMMOUNT_NULL','The order sum which can be expected (without dispa
 // EOF - web28 - 2010-05-07 - PayPal API Modul
 
 define('BASICPRICE_VPE_TEXT','in this volume only '); // Hetfield - 2009-11-26 - Added language definition for vpe at graduated prices
-//web - 2010-07-11 - Preisanzeige bei Staffelpreisen (grˆﬂte Staffel)
+//web - 2010-07-11 - Preisanzeige bei Staffelpreisen (gr√∂√üte Staffel)
 define('GRADUATED_PRICE_MAX_VALUE', 'from');
 
 //web28 - 2010-08-20 - VERSANDKOSTEN WARENKORB

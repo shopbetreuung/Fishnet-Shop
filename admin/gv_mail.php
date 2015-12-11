@@ -204,31 +204,31 @@ if (USE_WYSIWYG=='true' && ($_GET['action'] != 'preview' || $error== true)) {
                 <br>
               </div>
               <div class="col-xs-12">
-                <div class="col-xs-12 smallText" ><b><?php echo TEXT_CUSTOMER; ?></b><br /><?php echo $mail_sent_to; ?></div>
+                <div class="col-xs-12 smallText"><b><?php echo TEXT_CUSTOMER; ?></b><br /><?php echo $mail_sent_to; ?></div>
               </div>
               <div class="col-xs-12">
                 <br>
               </div>
               <div class="col-xs-12">
-                <div class="col-xs-12 smallText" ><b><?php echo TEXT_FROM; ?></b><br /><?php echo encode_htmlspecialchars(stripslashes($_POST['from'])); ?></div>
+                <div class="col-xs-12 smallText"><b><?php echo TEXT_FROM; ?></b><br /><?php echo encode_htmlspecialchars(stripslashes($_POST['from'])); ?></div>
               </div>
               <div class="col-xs-12">
                 <br>
               </div>
               <div class="col-xs-12">
-                </div> class="smallText"><b><?php echo TEXT_SUBJECT; ?></b><br /><?php echo encode_htmlspecialchars(stripslashes($_POST['subject'])); ?></div>
+                <div class="col-xs-12 smallText"><b><?php echo TEXT_SUBJECT; ?></b><br /><?php echo encode_htmlspecialchars(stripslashes($_POST['subject'])); ?></div>
               </div>
               <div class="col-xs-12">
                 <br>
               </div>
               <div class="col-xs-12">
-                <div class="col-xs-12 smallText" ><b><?php echo TEXT_AMOUNT; ?></b><br /><?php echo nl2br(encode_htmlspecialchars(stripslashes($_POST['amount']))); ?></div>
+                <div class="col-xs-12 smallText"><b><?php echo TEXT_AMOUNT; ?></b><br /><?php echo nl2br(encode_htmlspecialchars(stripslashes($_POST['amount']))); ?></div>
               </div>
               <div class="col-xs-12">
                 <br>
               </div>
               <div class="col-xs-12">
-                <div class="col-xs-12 smallText" ><b><?php echo TEXT_MESSAGE; ?></b><br /><?php echo stripslashes($_POST['message']); ?></div>
+                <div class="col-xs-12 smallText"><b><?php echo TEXT_MESSAGE; ?></b><br /><?php echo stripslashes($_POST['message']); ?></div>
               </div>
               <div class="col-xs-12">
                 <br>

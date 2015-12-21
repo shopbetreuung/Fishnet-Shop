@@ -57,6 +57,8 @@ define('HEADING_TITLE_SEARCH', 'Order ID:');
 define('HEADING_TITLE_STATUS', 'Status:');
 define('HEADING_CHOOSE_PAYMENT', 'Payment');
 
+define('TABLE_HEADING_TRACKING', 'Package tracking');
+
 define('TABLE_HEADING_COMMENTS', 'Comments');
 define('TABLE_HEADING_CUSTOMERS', 'Customers');
 define('TABLE_HEADING_ORDER_TOTAL', 'Order Total');
@@ -159,5 +161,9 @@ define('TEXT_SHIPPING_TO', 'Shipping to');
 define('TEXT_SHIPPING_LANG', 'Language');
 
 define('TABLE_HEADING_COMMENTS_SENT', 'Comment is sent');
+
+define('TABLE_HEADING_CARRIER', 'Carrier');
+define('TABLE_HEADING_PARCEL_LINK', 'Parcel link');
+define('TABLE_HEADING_REMOVE_LINK', 'delete link');
 
 ?>

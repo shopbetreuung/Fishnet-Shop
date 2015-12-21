@@ -82,6 +82,7 @@ define('FILENAME_PRINT_ORDER','print_order.php');
 define('FILENAME_CREDITS','credits.php');
 define('FILENAME_PRINT_PACKINGSLIP','print_packingslip.php');
 define('FILENAME_MODULE_NEWSLETTER','module_newsletter.php');
+define('FILENAME_PARCEL_CARRIERS','parcel_carriers.php');
 define('FILENAME_GV_QUEUE', 'gv_queue.php');
 define('FILENAME_GV_MAIL', 'gv_mail.php');
 define('FILENAME_GV_SENT', 'gv_sent.php');

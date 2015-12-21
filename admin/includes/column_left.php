@@ -494,7 +494,13 @@
 											"is_main"	=> false,
 											"link" 		=> xtc_href_link(FILENAME_CONFIGURATION, 'gID=7', 'NONSSL'),
 											"access"	=> "configuration",
-											"check"		=> true);;
+											"check"		=> true);
+	
+	$menu_items['configuration'][] = array(	"name" 		=> BOX_PARCEL_CARRIERS,
+											"is_main"	=> false,
+											"link" 		=> xtc_href_link(FILENAME_PARCEL_CARRIERS, '', 'NONSSL'),
+											"access"	=> "parcel_carriers",
+											"check"		=> true);
 														
 	$menu_items['configuration'][] = array(	"name" 		=> BOX_PAYMENT,
 											"is_main"	=> false,

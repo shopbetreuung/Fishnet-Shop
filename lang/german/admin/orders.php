@@ -60,6 +60,8 @@ define('HEADING_TITLE_SEARCH', 'Bestell-Nr.:');
 define('HEADING_TITLE_STATUS', 'Status:');
 define('HEADING_CHOOSE_PAYMENT', 'Zahlart');
 
+define('TABLE_HEADING_TRACKING', 'Paketverfolgung');
+
 define('TABLE_HEADING_COMMENTS', 'Kommentar');
 define('TABLE_HEADING_CUSTOMERS', 'Kunden');
 define('TABLE_HEADING_ORDER_TOTAL', 'Gesamtwert');
@@ -160,4 +162,8 @@ define('TABLE_HEADING_ORDERS_ID', 'Best.Nr.');
 define('TEXT_SHIPPING_TO', 'Versand nach');
 
 define('TABLE_HEADING_COMMENTS_SENT', 'Kommentar versandt');
+
+define('TABLE_HEADING_CARRIER', 'Transporteur');
+define('TABLE_HEADING_PARCEL_LINK', 'Statuslink');
+define('TABLE_HEADING_REMOVE_LINK', 'Link entfernen');
 ?>

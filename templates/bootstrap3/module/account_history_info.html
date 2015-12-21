@@ -75,6 +75,13 @@
   	<p>{$downloads_content}</p>
 	{/if}
 </div>
+{if $TRACKING_LINKS|is_array && $TRACKING_LINKS|count}
+  <br />
+  {#label_tracking#}
+  {foreach item=tracking_link from=$TRACKING_LINKS}
+    <a href="{$tracking_link.href}" target="_blank">{$tracking_link.carrier} ({$tracking_link.number})</a>&nbsp;
+  {/foreach}
+{/if}
 {if $text_print!=''}
 <h2>{#title_print#}</h2>
 <p>{#text_print#}</p> 

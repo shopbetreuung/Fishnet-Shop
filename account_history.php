@@ -75,6 +75,8 @@ if (($orders_total = xtc_count_customer_orders()) > 0) {
 							   'page='.(empty($_GET['page']) ? "1" : (int)$_GET['page']) .'&order_id='.$history['orders_id'],
 							   'SSL').'">'.xtc_image_button('small_view.gif', SMALL_IMAGE_BUTTON_VIEW).'</a>');
 
+		require_once DIR_FS_INC . 'xtc_get_tracking_link.php';
+    	$module_content[count($module_content) - 1]['TRACKING_LINKS'] = xtc_get_tracking_link($history['orders_id']);	
 	}
 }
 

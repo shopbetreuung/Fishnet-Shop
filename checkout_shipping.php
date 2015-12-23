@@ -69,6 +69,27 @@ if ($_SESSION['cart']->show_total() > 0 ) {
 }
 //EOF - Dokuman - 2009-06-06 - checkout only if minimum order value is reached
 
+// Stock Check
+if (STOCK_CHECK == 'true' && STOCK_ALLOW_CHECKOUT != 'true') {
+	$any_out_of_stock = false;
+	$products = $_SESSION['cart']->get_products();
+	for ($i = 0, $n = sizeof($products); $i < $n; $i++) {
+		if (xtc_check_stock($products[$i]['id'], $products[$i]['quantity'])) {
+			$any_out_of_stock = true;
+		} else if(ATTRIBUTE_STOCK_CHECK == 'true' && is_array($products[$i]['attributes'])) {
+			foreach ($products[$i]['attributes'] as $option_id=>$value_id) {
+				if (xtc_check_stock_attributes($products[$i]['id'], $option_id, $value_id, $products[$i]['quantity']) === false) {
+					$any_out_of_stock = true;
+				}
+			}
+		}
+	}
+	// Out of Stock
+	if ($any_out_of_stock === true) {
+		xtc_redirect(xtc_href_link(FILENAME_SHOPPING_CART));
+	}		
+}
+
 // if no shipping destination address was selected, use the customers own address as default
 if (!isset ($_SESSION['sendto'])) {
 	$_SESSION['sendto'] = $_SESSION['customer_default_address_id'];

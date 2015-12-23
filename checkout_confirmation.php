@@ -111,17 +111,23 @@ require (DIR_WS_CLASSES . 'shipping.php');
 $shipping_modules = new shipping($_SESSION['shipping']);
 
 // Stock Check
-$any_out_of_stock = false;
-if (STOCK_CHECK == 'true') {
-  for ($i = 0, $n = sizeof($order->products); $i < $n; $i++) {
-    if (xtc_check_stock($order->products[$i]['id'], $order->products[$i]['qty'])) {
-      $any_out_of_stock = true;
-   }
-  }
-  // Out of Stock
-  if ((STOCK_ALLOW_CHECKOUT != 'true') && ($any_out_of_stock == true)) {
-    xtc_redirect(xtc_href_link(FILENAME_SHOPPING_CART));
-  }
+if (STOCK_CHECK == 'true' && STOCK_ALLOW_CHECKOUT != 'true') {
+	$any_out_of_stock = false;
+	for ($i = 0, $n = sizeof($order->products); $i < $n; $i++) {
+		if (xtc_check_stock($order->products[$i]['id'], $order->products[$i]['qty'])) {
+			$any_out_of_stock = true;
+		} else if(ATTRIBUTE_STOCK_CHECK == 'true' && is_array($order->products[$i]['attributes'])) {
+			foreach ($order->products[$i]['attributes'] as $check_attr_stock) {
+				if (xtc_check_stock_attributes($order->products[$i]['id'], $check_attr_stock['option_id'], $check_attr_stock['value_id'], $order->products[$i]['qty']) === false) {
+					$any_out_of_stock = true;
+				}
+			}
+		}
+	}
+	// Out of Stock
+	if ($any_out_of_stock === true) {
+		xtc_redirect(xtc_href_link(FILENAME_SHOPPING_CART));
+	}		
 }
 
 if (SHOW_IP_LOG == 'true') {

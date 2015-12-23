@@ -539,4 +539,7 @@ define('ERROR_SQL_DB_QUERY_REDIRECT','You will be redirected back to our home pa
 // EOF - DokuMan - 2011-09-20 - E-Mail SQL errors
 
 define('TEXT_AGB_CHECKOUT','Please take note of our General Terms & Conditions %s and Cancellation Policy %s');
+
+define('_SHIPPING_FREE','Download');
+
 ?>

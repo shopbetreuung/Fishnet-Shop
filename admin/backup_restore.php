@@ -19,6 +19,9 @@
   // ?file=dbd_mod105sp1b-20111123170925.sql.gz&action=restorenow
 
   define ('_VALID_XTC', true);
+  
+  // no error reporting
+  error_reporting(0);
 
   // Set the local configuration parameters - mainly for developers or the main-configure
   if (file_exists('includes/local/configure.php')) {
@@ -87,9 +90,6 @@
   $info_wait = '<img src="images/loading.gif"> '. TEXT_INFO_WAIT ;
   $button_back = '';
 
-  //aktiviert die Ausgabepufferung
-  if (!@ob_start("ob_gzhandler")) @ob_start();
-
   //#### RESTORE ANFANG ########
   if (isset($_SESSION['restore'])) {
     $restore=$_SESSION['restore'];
@@ -110,10 +110,12 @@
       @mysqli_query($connection, "SET SESSION sql_mode=''");
     }
     //EOF Disable "STRICT" mode!
+	$_GET['file'] = isset($_GET['file']) ? basename($_GET['file']) : '';
+    $_GET['file'] = preg_replace('/[^0-9a-zA-Z._-]/','',$_GET['file']);
     $restore['file'] = DIR_FS_BACKUP . $_GET['file'];
 
     //Testen ob Backupdatei existiert, bei nein Abbruch
-    if (!file_exists($restore['file'])) {
+    if (!is_file($restore['file'])) {
       die('Direct Access to this location is not allowed.');
     }
 
@@ -124,7 +126,7 @@
     } else {
       $protdatei = $restore['file'] . '.log';
     }
-    if (RESTORE_TEST && file_exists($protdatei) ) {
+    if (RESTORE_TEST && is_file($protdatei) ) {
       unlink ($protdatei);
     }
     $extension = substr($_GET['file'], -3);
@@ -140,7 +142,7 @@
   }
 
   //Testen ob Backupdatei existiert, bei nein Abbruch
-  if (!file_exists($restore['file'])) {
+  if (!is_file($restore['file'])) {
     die('Direct Access to this location is not allowed.');
   }
 
@@ -258,7 +260,3 @@ require (DIR_WS_INCLUDES.'head.php');
     ?>
   </body>
 </html>
-<?php
-  //Pufferinhalte an den Client ausgeben
-  ob_end_flush();
-?>

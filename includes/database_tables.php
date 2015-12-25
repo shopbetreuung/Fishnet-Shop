@@ -111,7 +111,7 @@
   define('TABLE_PAYMENT_AMONEYBOOKERS_CURRENCIES','payment_AMONEYBOOKERS_currencies');
   define('TABLE_PAYMENT_AMONEYBOOKERS_COUNTRIES','payment_AMONEYBOOKERS_countries');
 
-  // Sofortüberweisung
+  // SofortÃ¼berweisung
   define('TABLE_PAYMENT_IPAYMENT', 'payment_ipayment');
   define('TABLE_PAYMENT_IPAYMENT_LOG', 'payment_ipayment_log');
   // EOF - 2010-01-20 vr - revised unified version based on database_tables.php and admin/incudes/application_top.php
@@ -127,5 +127,8 @@
   // Imageslider (c)2008 by Hetfield - www.MerZ-IT-SerVice.de - End
   define('TABLE_WHOLESALERS', 'wholesalers');
   define('TABLE_WIDGETS', 'widgets');
+  
+  define('TABLE_CARRIERS', 'carriers');
+  define('TABLE_ORDERS_TRACKING', 'orders_tracking');
 
 ?>

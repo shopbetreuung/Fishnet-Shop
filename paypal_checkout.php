@@ -14,7 +14,7 @@
    @copyright based on Copyright 2003 nextcommerce; www.nextcommerce.org
    @license http://www.xt-commerce.com.com/license/2_0.txt GNU Public License V2.0
 
-   ab 15.08.2008 Teile vom Hamburger-Internetdienst geändert
+   ab 15.08.2008 Teile vom Hamburger-Internetdienst geÃ¤ndert
    Hamburger-Internetdienst Support Forums at www.forum.hamburger-internetdienst.de
    Stand 12.06.2012
 
@@ -112,19 +112,24 @@ if(isset($_SESSION['credit_covers']))
   unset($_SESSION['credit_covers']); //ICW ADDED FOR CREDIT CLASS SYSTEM
 
 // Stock Check
-if((STOCK_CHECK == 'true') && (STOCK_ALLOW_CHECKOUT != 'true')) {
-  $products = $_SESSION['cart']->get_products();
-  $any_out_of_stock = 0;
-  //BOF - DokuMan - 2011-12-19 - precount for performance
-  //for($i = 0, $n = sizeof($products); $i < $n; $i++) {
-  $n=sizeof($products);
-  for ($i=0; $i<$n; $i++) {
-  //EOF - DokuMan - 2011-12-19 - precount for performance
-    if(xtc_check_stock($products[$i]['id'], $products[$i]['quantity']))
-      $any_out_of_stock = 1;
-  }
-  if($any_out_of_stock == 1)
-    xtc_redirect(xtc_href_link(FILENAME_SHOPPING_CART));
+if (STOCK_CHECK == 'true' && STOCK_ALLOW_CHECKOUT != 'true') {
+	$any_out_of_stock = false;
+	$products = $_SESSION['cart']->get_products();
+	for ($i = 0, $n = sizeof($products); $i < $n; $i++) {
+		if (xtc_check_stock($products[$i]['id'], $products[$i]['quantity'])) {
+			$any_out_of_stock = true;
+		} else if(ATTRIBUTE_STOCK_CHECK == 'true' && is_array($products[$i]['attributes'])) {
+			foreach ($products[$i]['attributes'] as $option_id=>$value_id) {
+				if (xtc_check_stock_attributes($products[$i]['id'], $option_id, $value_id, $products[$i]['quantity']) === false) {
+					$any_out_of_stock = true;
+				}
+			}
+		}
+	}
+	// Out of Stock
+	if ($any_out_of_stock === true) {
+		xtc_redirect(xtc_href_link(FILENAME_SHOPPING_CART));
+	}		
 }
 
 // if no shipping destination address was selected, use the customers own address as default

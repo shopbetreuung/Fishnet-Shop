@@ -95,6 +95,10 @@ if (xtc_count_customer_orders() > 0) {
 			$order_country = $orders['billing_country'];
 		}
 		$order_content[] = array ('ORDER_ID' => $orders['orders_id'], 'ORDER_DATE' => xtc_date_short($orders['date_purchased']), 'ORDER_STATUS' => $orders['orders_status_name'], 'ORDER_TOTAL' => $orders['order_total'], 'ORDER_LINK' => xtc_href_link(FILENAME_ACCOUNT_HISTORY_INFO, 'order_id='.$orders['orders_id'], 'SSL'), 'ORDER_BUTTON' => '<a href="'.xtc_href_link(FILENAME_ACCOUNT_HISTORY_INFO, 'order_id='.$orders['orders_id'], 'SSL').'">'.xtc_image_button('small_view.gif', SMALL_IMAGE_BUTTON_VIEW).'</a>');
+	
+		require_once DIR_FS_INC . 'xtc_get_tracking_link.php';
+    	$order_content[count($order_content) - 1]['TRACKING_LINKS'] = xtc_get_tracking_link($orders['orders_id']);
+		
 	}
 
 }

@@ -40,6 +40,10 @@ $_GET['inc_subcat'] = isset($_GET['inc_subcat']) && xtc_not_null($_GET['inc_subc
 // reset error
 $errorno = 0;
 
+// Convert comma to point
+$pfrom = str_replace(",", ".", $pfrom);
+$pto = str_replace(",", ".", $pto);
+
 // error check
 if ($keywords && strlen($keywords) < 3 && strlen($keywords) > 0) {
   $errorno += 1;

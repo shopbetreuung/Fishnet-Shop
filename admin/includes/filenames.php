@@ -82,6 +82,7 @@ define('FILENAME_PRINT_ORDER','print_order.php');
 define('FILENAME_CREDITS','credits.php');
 define('FILENAME_PRINT_PACKINGSLIP','print_packingslip.php');
 define('FILENAME_MODULE_NEWSLETTER','module_newsletter.php');
+define('FILENAME_PARCEL_CARRIERS','parcel_carriers.php');
 define('FILENAME_GV_QUEUE', 'gv_queue.php');
 define('FILENAME_GV_MAIL', 'gv_mail.php');
 define('FILENAME_GV_SENT', 'gv_sent.php');
@@ -101,7 +102,6 @@ define('FILENAME_REMOVEOLDPICS', 'removeoldpics.php');
 define('FILENAME_JANOLAW','janolaw.php');
 define('FILENAME_HAENDLERBUND', 'haendlerbund.php'); //Tomcraft - 2012-12-08 - Added haendlerbund AGB interface
 define('FILENAME_SAFETERMS','safeterms.php'); // Tomcraft - 2013-06-21 - Safeterms AGB interface
-define('FILENAME_EASYMARKETING','easymarketing.php'); // Tomcraft - 2013-08-29 - Added easymarketing
 define('FILENAME_IT_RECHT_KANZLEI','it_recht_kanzlei.php');
 define('FILENAME_IMAGESLIDERS', 'imagesliders.php');  // Imageslider (c)2008 by Hetfield - www.MerZ-IT-SerVice.de
 define('FILENAME_ERROR_DISPLAY', 'error_display.php');

@@ -180,9 +180,9 @@ define('BOX_REMOVEOLDPICS','Alte Bilder l&ouml;schen'); // Remove old pictures -
 define('BOX_JANOLAW','janolaw AGB Hosting'); // Tomcraft - 2011-06-17 - Added janolaw AGB hosting service
 define('BOX_HAENDLERBUND','H&auml;ndlerbund AGB Service'); // Tomcraft - 2012-12-08 - Added haendlerbund AGB interface
 define('BOX_SAFETERMS','Safeterms - AGB Service'); // Tomcraft - 2013-06-21 - Safeterms AGB interface
-define('BOX_EASYMARKETING','EASYMARKETING AG'); // Tomcraft - 2013-08-29 - Added easymarketing
 define('BOX_IT_RECHT_KANZLEI', 'IT Recht Kanzlei');
 define('BOX_LAW','Rechtliches');
+define('BOX_PARCEL_CARRIERS', 'Paketdienstleister');
 
 define('TXT_GROUPS','<b>Gruppen</b>:');
 define('TXT_SYSTEM','System');
@@ -518,7 +518,6 @@ define ('BOX_FRONTEND', 'Shopansicht');
 define ('BOX_CONFIGURATION_2', 'Kunden Feldl&auml;ngen');
 define ('BOX_MAINTAINANCE', 'Wartung');
 define ('BOX_SHOP_ON_OFF', 'Shop online/offline');
-define ('BOX_CLEVER_REACH', 'CleverReach Newsletter');
 
 #Menu main items
 define ('BOX_MENU_CUSTOMERS', 'Kunden');

@@ -1280,7 +1280,7 @@ function tr_color( $fieldname, $text_arr, $check ) {
             onclick="showColorPicker(this,document.forms['pdfkatalog'].<?php echo $fieldname ?>,'hex_'+'<?php echo $fieldname ?>')">
         </div>
          <div style="float:left;width:142px;padding-top:1px">
-          <img src="includes/ipdfbill/images/spacer.gif" id="hex_<?php echo $fieldname ?>" width="80" height="16" style="border:1px solid #818181">
+          <img src="includes/ipdfbill/images/spacer.gif" id="hex_<?php echo $fieldname ?>" width="80" height="20" style="border:1px solid #818181; background-color: <?php echo $check; ?>">
         </div>
          <div>
           <input type="text" class="bill" style="width:80px" size="8" value="<?php echo $check ?>" 

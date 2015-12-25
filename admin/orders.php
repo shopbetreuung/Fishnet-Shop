@@ -403,6 +403,16 @@ while ($payment_method = xtc_db_fetch_array($payment_methods_query)) {
   $payment_methods_array[$payment_method['payment_method']] = get_payment_name($payment_method['payment_method']);
 }
 
+$carriers = array();
+$carriers_query = xtc_db_query("-- /admin/orders.php
+								select carrier_id,
+									   carrier_name
+								  from ".TABLE_CARRIERS."
+							  order by carrier_sort_order asc");
+while ($carrier = xtc_db_fetch_array($carriers_query)) {
+  $carriers[] = array('id' => $carrier['carrier_id'], 'text' => $carrier['carrier_name']);
+}
+
 switch ($action) {
   //BOF - web28 - 2010-03-20 - Send Order by Admin
   case 'send':
@@ -476,6 +486,29 @@ switch ($action) {
         $smarty->assign('ORDER_DATE', xtc_date_long($check_status['date_purchased']));
         $smarty->assign('NOTIFY_COMMENTS', nl2br($notify_comments));
         $smarty->assign('ORDER_STATUS', $orders_status_array[$status]);
+		$parcel_count = 0;
+		$parcel_link ='';
+		$tracking_links_query = xtc_db_query("-- /admin/orders.php
+											 SELECT ortra.ortra_id,
+													ortra.ortra_parcel_id,
+													carriers.carrier_name,
+													carriers.carrier_tracking_link
+											   FROM ".TABLE_ORDERS_TRACKING." ortra,
+													".TABLE_CARRIERS." carriers
+											  WHERE ortra_order_id = '".$oID."'
+												AND ortra.ortra_carrier_id = carriers.carrier_id");
+		if (xtc_db_num_rows($tracking_links_query)) {
+		  $parcel_count = xtc_db_num_rows($tracking_links_query);
+		  while ($tracking_link = xtc_db_fetch_array($tracking_links_query)) {
+			//$tracking_link['carrier_tracking_link'] = str_replace('$2',$lang_code,$tracking_link['carrier_tracking_link']); //TODO
+			$parcel_link = str_replace('$1',$tracking_link['ortra_parcel_id'],$tracking_link['carrier_tracking_link']);
+			$parcel_link_html .= '<a href="'.$parcel_link.'" target="_blank">'.$parcel_link.'</a><br />';
+			$parcel_link_txt .= $parcel_link."\n\n";
+		  }
+		}
+		$smarty->assign('PARCEL_COUNT', $parcel_count);
+		$smarty->assign('PARCEL_LINK_HTML', $parcel_link_html);
+		$smarty->assign('PARCEL_LINK_TXT', $parcel_link_txt);
         $html_mail = $smarty->fetch('db:change_order_mail.html');
         $txt_mail = $smarty->fetch('db:change_order_mail.txt');
         $order_subject_search = array('{$nr}', '{$date}', '{$lastname}', '{$firstname}');
@@ -646,6 +679,23 @@ switch ($action) {
     include (DIR_WS_MODULES.'easybill.action.php');
 		xtc_redirect( xtc_href_link(FILENAME_ORDERS, xtc_get_all_get_params(array('action')).'action=edit'));
 		break;
+	
+	case 'inserttracking' :
+      $carrierID = xtc_db_prepare_input($_POST['carrierID']);
+      $parcel_number = xtc_db_prepare_input($_POST['parcel_number']);
+      if ($parcel_number) {
+        xtc_db_query("-- /admin/orders.php
+                      INSERT INTO ".TABLE_ORDERS_TRACKING." (ortra_order_id, ortra_carrier_id, ortra_parcel_id)
+                      VALUES ('".$oID."','".xtc_db_input($carrierID)."','".xtc_db_input($parcel_number)."')");
+      }
+      xtc_redirect(xtc_href_link(FILENAME_ORDERS, 'oID='.$oID.'&action=edit'));
+      break;
+
+    case 'deletetracking' :
+      $tracking_id = xtc_db_prepare_input($_GET['trackingid']);
+      xtc_db_query("DELETE FROM ".TABLE_ORDERS_TRACKING." WHERE ortra_id='".xtc_db_input($tracking_id)."'");
+      xtc_redirect(xtc_href_link(FILENAME_ORDERS, 'oID='.$oID.'&action=edit'));
+      break;
 }
 
   require (DIR_WS_INCLUDES.'head.php');
@@ -951,6 +1001,52 @@ require (DIR_WS_INCLUDES.'header.php');
       </table>
       </div>
       <!-- EOC ORDER BLOCK -->
+	  
+      <!-- BOC ORDER PARCEL BLOCK -->
+	  <div class='col-xs-12'>
+        <div class="heading"><?php echo TABLE_HEADING_TRACKING; ?></div>
+        <table cellspacing="0" cellpadding="2" class="table">
+          <tr>
+            <td class="main">
+              <table border="1" cellspacing="0" cellpadding="5">
+                <tr>
+                  <td class="smallText" align="center"><strong><?php echo TABLE_HEADING_CARRIER; ?></strong></td>
+                  <td class="smallText" align="center"><strong><?php echo TABLE_HEADING_PARCEL_LINK; ?></strong></td>
+                  <td class="smallText" align="center"><strong><?php echo TABLE_HEADING_REMOVE_LINK; ?></strong></td>
+                </tr>
+                <?php
+                $tracking_links_query = xtc_db_query("-- /admin/orders.php
+                                                     SELECT ortra.ortra_id,
+                                                            ortra.ortra_parcel_id,
+                                                            carriers.carrier_name,
+                                                            carriers.carrier_tracking_link
+                                                       FROM ".TABLE_ORDERS_TRACKING." ortra,
+                                                            ".TABLE_CARRIERS." carriers
+                                                      WHERE ortra_order_id = '".$oID."'
+                                                        AND ortra.ortra_carrier_id = carriers.carrier_id");
+                if (xtc_db_num_rows($tracking_links_query)) {
+                  while ($tracking_link = xtc_db_fetch_array($tracking_links_query)) {
+                    echo '          <tr>'.PHP_EOL.'            <td class="smallText" align="left">'.$tracking_link['carrier_name'].'</td>'.PHP_EOL.'            <td class="smallText" align="left">';
+                    echo '            <a href="'.str_replace('$1',$tracking_link['ortra_parcel_id'],$tracking_link['carrier_tracking_link']).'" target="_blank"><b>'.$tracking_link['ortra_parcel_id'].'</b></a></td>'.PHP_EOL.'            <td class="smallText" align="center">';
+                    echo '            <a href="'.xtc_href_link(FILENAME_ORDERS, 'oID='.$oID.'&trackingid='.$tracking_link['ortra_id'].'&action=deletetracking').'">'.xtc_image(DIR_WS_ICONS.'cross.gif', ICON_CROSS)."</td>".PHP_EOL;
+                    echo '          <tr>'.PHP_EOL;
+                  }
+                }
+                ?>
+                <tr><?php echo xtc_draw_form('carriers', FILENAME_ORDERS, xtc_get_all_get_params(array('action')) . 'action=inserttracking'); ?>
+                  <td class="smallText" align="center">
+                    <?php echo xtc_draw_pull_down_menu('carrierID', $carriers, $carriers[0]); ?>
+                  </td>
+                  <td class="smallText" align="center"><input name="parcel_number"></td>
+                  <td class="smallText" align="center"><input type="submit" value="<?php echo BUTTON_UPDATE; ?>"></td>
+                  </form>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </table>
+	  </div>
+      <!-- EOC ORDER PARCEL BLOCK -->
 
       <!-- BOC ORDER HISTORY BLOCK -->
       <div class='col-xs-12'>

@@ -87,6 +87,9 @@ $smarty->assign('HISTORY_BLOCK', $history_block);
 // Download-Products
 if (DOWNLOAD_ENABLED == 'true') include (DIR_WS_MODULES.'downloads.php');
 
+require_once DIR_FS_INC . 'xtc_get_tracking_link.php';
+$smarty->assign('TRACKING_LINKS', xtc_get_tracking_link($order->info['order_id']));
+
 // --- bof -- ipdfbill -------- 
 require('admin/includes/ipdfbill/pdfbill_lib.php');                            // pdfbill
 $pdffile = 'admin/'.PDFBILL_FOLDER.PDFBILL_PREFIX.($_GET['order_id'].'.pdf');

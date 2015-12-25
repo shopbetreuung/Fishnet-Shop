@@ -275,8 +275,8 @@ define('ERROR_CHECKOUT_SHIPPING_NO_MODULE', 'Es ist keine Versandart vorhanden.'
 
 //  conditions check
 
-define('ERROR_CONDITIONS_NOT_ACCEPTED', '* Sofern Sie unsere Allgemeinen Gesch&auml;ftsbedingungen nicht akzeptieren,\n k&ouml;nnen wir Ihre Bestellung bedauerlicherweise nicht entgegennehmen!\n\n');
-define('ERROR_AGREE_DOWNLOAD_NOT_ACCEPTED', '* Sofern Sie keine Angaben zum gew&uuml;nschten Beginn der Vertragsausf&uuml;hrung bei den Downloads machen,\n k&ouml;nnen wir Ihre Bestellung bedauerlicherweise nicht entgegennehmen!\n\n');
+define('ERROR_CONDITIONS_NOT_ACCEPTED', '* Sofern Sie unsere Allgemeinen Geschäftsbedingungen nicht akzeptieren,\n können wir Ihre Bestellung bedauerlicherweise nicht entgegennehmen!\n\n');
+define('ERROR_AGREE_DOWNLOAD_NOT_ACCEPTED', '* Sofern Sie keine Angaben zum gewünschten Beginn der Vertragsausführung bei den Downloads machen,\n können wir Ihre Bestellung bedauerlicherweise nicht entgegennehmen!\n\n');
 
 define('SUB_TITLE_OT_DISCOUNT','Rabatt:');
 
@@ -339,36 +339,36 @@ define('ERROR_INVALID_PRODUCT', 'Der von Ihnen gew&auml;hlte Artikel wurde nicht
 
 define('NAVBAR_TITLE_ACCOUNT', 'Ihr Konto');
 define('NAVBAR_TITLE_1_ACCOUNT_EDIT', 'Ihr Konto');
-define('NAVBAR_TITLE_2_ACCOUNT_EDIT', 'Ihre pers&ouml;nliche Daten &auml;ndern');
+define('NAVBAR_TITLE_2_ACCOUNT_EDIT', 'Ihre persönliche Daten ändern');
 define('NAVBAR_TITLE_1_ACCOUNT_HISTORY', 'Ihr Konto');
-define('NAVBAR_TITLE_2_ACCOUNT_HISTORY', 'Ihre get&auml;tigten Bestellungen');
+define('NAVBAR_TITLE_2_ACCOUNT_HISTORY', 'Ihre getätigten Bestellungen');
 define('NAVBAR_TITLE_1_ACCOUNT_HISTORY_INFO', 'Ihr Konto');
-define('NAVBAR_TITLE_2_ACCOUNT_HISTORY_INFO', 'Get&auml;tigte Bestellung');
+define('NAVBAR_TITLE_2_ACCOUNT_HISTORY_INFO', 'Getätigte Bestellung');
 define('NAVBAR_TITLE_3_ACCOUNT_HISTORY_INFO', 'Bestellnummer %s');
 define('NAVBAR_TITLE_1_ACCOUNT_PASSWORD', 'Ihr Konto');
-define('NAVBAR_TITLE_2_ACCOUNT_PASSWORD', 'Passwort &auml;ndern');
+define('NAVBAR_TITLE_2_ACCOUNT_PASSWORD', 'Passwort ändern');
 define('NAVBAR_TITLE_1_ADDRESS_BOOK', 'Ihr Konto');
 define('NAVBAR_TITLE_2_ADDRESS_BOOK', 'Adressbuch');
 define('NAVBAR_TITLE_1_ADDRESS_BOOK_PROCESS', 'Ihr Konto');
 define('NAVBAR_TITLE_2_ADDRESS_BOOK_PROCESS', 'Adressbuch');
 define('NAVBAR_TITLE_ADD_ENTRY_ADDRESS_BOOK_PROCESS', 'Neuer Eintrag');
-define('NAVBAR_TITLE_MODIFY_ENTRY_ADDRESS_BOOK_PROCESS', 'Eintrag &auml;ndern');
-define('NAVBAR_TITLE_DELETE_ENTRY_ADDRESS_BOOK_PROCESS', 'Eintrag l&ouml;schen');
+define('NAVBAR_TITLE_MODIFY_ENTRY_ADDRESS_BOOK_PROCESS', 'Eintrag ändern');
+define('NAVBAR_TITLE_DELETE_ENTRY_ADDRESS_BOOK_PROCESS', 'Eintrag löschen');
 define('NAVBAR_TITLE_ADVANCED_SEARCH', 'Erweiterte Suche');
 define('NAVBAR_TITLE1_ADVANCED_SEARCH', 'Erweiterte Suche');
 define('NAVBAR_TITLE2_ADVANCED_SEARCH', 'Suchergebnisse');
 define('NAVBAR_TITLE_1_CHECKOUT_AGREE_DOWNLOAD', 'Kasse');
 define('NAVBAR_TITLE_2_CHECKOUT_AGREE_DOWNLOAD', 'Digitale Inhalte');
 define('NAVBAR_TITLE_1_CHECKOUT_CONFIRMATION', 'Kasse');
-define('NAVBAR_TITLE_2_CHECKOUT_CONFIRMATION', 'Best&auml;tigung');
+define('NAVBAR_TITLE_2_CHECKOUT_CONFIRMATION', 'Bestätigung');
 define('NAVBAR_TITLE_1_CHECKOUT_PAYMENT', 'Kasse');
 define('NAVBAR_TITLE_2_CHECKOUT_PAYMENT', 'Zahlungsweise');
 define('NAVBAR_TITLE_1_PAYMENT_ADDRESS', 'Kasse');
-define('NAVBAR_TITLE_2_PAYMENT_ADDRESS', 'Rechnungsadresse &auml;ndern');
+define('NAVBAR_TITLE_2_PAYMENT_ADDRESS', 'Rechnungsadresse ändern');
 define('NAVBAR_TITLE_1_CHECKOUT_SHIPPING', 'Kasse');
 define('NAVBAR_TITLE_2_CHECKOUT_SHIPPING', 'Versandinformationen');
 define('NAVBAR_TITLE_1_CHECKOUT_SHIPPING_ADDRESS', 'Kasse');
-define('NAVBAR_TITLE_2_CHECKOUT_SHIPPING_ADDRESS', 'Versandadresse &auml;ndern');
+define('NAVBAR_TITLE_2_CHECKOUT_SHIPPING_ADDRESS', 'Versandadresse ändern');
 define('NAVBAR_TITLE_1_CHECKOUT_SUCCESS', 'Kasse');
 define('NAVBAR_TITLE_2_CHECKOUT_SUCCESS', 'Erfolg');
 define('NAVBAR_TITLE_CREATE_ACCOUNT', 'Konto erstellen');
@@ -520,7 +520,7 @@ define('PAYPAL_GS','Gutschein/Coupon');
 define('PAYPAL_TAX','MwSt.');
 define('PAYPAL_EXP_WARN','Achtung! Eventuell anfallende Versandkosten werden erst im Shop endg&uuml;ltig berechnet.');
 define('PAYPAL_EXP_VORL','Vorl&auml;ufige Versandkosten');
-define('PAYPAL_EXP_VERS','6.90');
+define('PAYPAL_EXP_VERS','0.00');
 // 09.01.11
 define('PAYPAL_ADRESSE','Das Land in Ihrer PayPal-Versand-Adresse ist in unserem Shop nicht eingetragen.<br />Bitte nehmen Sie mit uns Kontakt auf.<br />Danke f&uuml;r Ihr Verst&auml;ndnis.<br />Von PayPal empfangenes Land: ');
 // 17.09.11
@@ -539,4 +539,7 @@ define('ERROR_SQL_DB_QUERY_REDIRECT','Sie werden in %s Sekunden auf unsere Homep
 // EOF - DokuMan - 2011-09-20 - E-Mail SQL errors
 
 define('TEXT_AGB_CHECKOUT','Bitte nehmen Sie unsere AGB und Kundeninformation %s sowie unsere Widerrufsbelehrung %s zur Kenntnis.');
+
+define('_SHIPPING_FREE','Download');
+
 ?>

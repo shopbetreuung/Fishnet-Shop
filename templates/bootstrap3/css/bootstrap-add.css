@@ -11,6 +11,10 @@ a {outline: none !important;}
 	margin: 5px 0;
 }
 
+.lead small, .lead del{
+	font-size:12px;
+}
+
 @media screen and (max-width: 767px) {
   .row-offcanvas {
     position: relative;
@@ -134,3 +138,7 @@ a {outline: none !important;}
 
 .navbar-brand-admin{float:left;height:50px;padding:15px 15px;font-size:18px;line-height:20px;color: #3774E3;}
 .img-center {margin:0 auto;}
+
+.btn-fullwidth{
+	width: 100%;
+}

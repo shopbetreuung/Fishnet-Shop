@@ -112,6 +112,22 @@ CREATE TABLE campaigns_ip (
   campaign VARCHAR(32) NOT NULL
 ) ENGINE=MyISAM;
 
+DROP TABLE IF EXISTS carriers;
+CREATE TABLE IF NOT EXISTS carriers (
+  carrier_id int(11) NOT NULL AUTO_INCREMENT,
+  carrier_name varchar(80) NOT NULL,
+  carrier_tracking_link varchar(512) NOT NULL,
+  carrier_sort_order int(11) NOT NULL,
+  carrier_date_added DATETIME NOT NULL,
+  carrier_last_modified DATETIME NOT NULL,
+  PRIMARY KEY (carrier_id)
+);
+
+INSERT INTO carriers (carrier_name, carrier_tracking_link, carrier_sort_order) VALUES
+('DHL', 'http://nolp.dhl.de/nextt-online-public/set_identcodes.do?lang=de&idc=$1', 20),
+('DPD', 'https://extranet.dpd.de/cgi-bin/delistrack?pknr=$1+&typ=1&lang=de', 30),
+('GLS', 'http://www.gls-group.eu/276-I-PORTAL-WEB/content/GLS/DE03/DE/5004.htm?txtRefNo=$1&txtAction=71000', 40);
+
 DROP TABLE IF EXISTS address_format;
 CREATE TABLE address_format (
   address_format_id INT NOT NULL AUTO_INCREMENT,
@@ -138,8 +154,8 @@ CREATE TABLE email_manager (
 ) ENGINE=MyISAM;
 
 INSERT INTO email_manager (em_id, em_name, em_language, em_body, em_delete, em_type, em_body_txt) VALUES
-(1,	'change_order_mail',	2,	'<table width=\"100%\" cellspacing=\"0\" cellpadding=\"4\" border=\"0\" align=\"center\">\r\n    <tbody>\r\n        <tr>\r\n            <td style=\"border-bottom: 1px solid; border-color: #cccccc;\">\r\n            <div align=\"right\"><img src=\"{$logo_path}logo.gif\" alt=\"\" /></div>\r\n            </td>\r\n        </tr>\r\n        <tr>\r\n            <td><font size=\"2\" face=\"Verdana, Arial, Helvetica, sans-serif\"><strong>Sehr geehrter Kunde, </strong><br />\r\n            <br />\r\n            Der Status Ihrer Bestellung {if $ORDER_NR}Nr. {$ORDER_NR}{/if} {if $ORDER_DATE}vom       {$ORDER_DATE}{/if} wurde ge&auml;ndert.<br />\r\n            <br />\r\n            {if $ORDER_LINK}Link zur Bestellung:       <a href=\"{$ORDER_LINK}\">hier klicken</a>{/if}<br />\r\n            <br />\r\n            {if $NOTIFY_COMMENTS}<br />\r\n            Anmerkungen und Kommentare zu Ihrer Bestellung:  {$NOTIFY_COMMENTS} <br />\r\n            {/if} <br />\r\n            Neuer Status:  <b>{$ORDER_STATUS}</b><br />\r\n            <br />\r\n            Bei Fragen zu Ihrer Bestellung antworten Sie bitte auf diese E-Mail. <br />\r\n            </font></td>\r\n        </tr>\r\n    </tbody>\r\n</table>',	0,	'mail',	'Sehr geehrter Kunde,\r\n\r\nDer Status Ihrer Bestellung {if $ORDER_NR}Nr. {$ORDER_NR}{/if} {if $ORDER_DATE}vom {$ORDER_DATE}{/if} wurde geändert.\r\n\r\n{if $ORDER_LINK}Link zur Bestellung:\r\n{$ORDER_LINK} {/if}\r\n\r\n{if $NOTIFY_COMMENTS}Anmerkungen und Kommentare zu Ihrer Bestellung:{$NOTIFY_COMMENTS}{/if}\r\n\r\nNeuer Status: {$ORDER_STATUS}\r\n\r\nBei Fragen zu Ihrer Bestellung antworten Sie bitte auf diese E-Mail.'),
-(2,	'change_order_mail',	1,	'<table  width=\"100%\" border=\"0\" align=\"center\" cellpadding=\"4\" cellspacing=\"0\">\r\n  <tr> \r\n    <td style=\"border-bottom: 1px solid; border-color: #cccccc;\"><div align=\"right\"><img src=\"{$logo_path}logo.gif\"></div></td>\r\n  </tr>\r\n  <tr> \r\n    <td><font size=\"2\" face=\"Verdana, Arial, Helvetica, sans-serif\"><strong>Dear customer, </strong><br />\r\n      <br />\r\n      The status of your order {if $ORDER_NR}No. {$ORDER_NR}{/if} {if $ORDER_DATE}from {$ORDER_DATE}{/if} has been changed.<br /><br /> \r\n      {if $ORDER_LINK}Link to order:\r\n      <a href=\"{$ORDER_LINK}\">click here</a>{/if}<br />\r\n      <br /> \r\n	  {if $NOTIFY_COMMENTS}<br />\r\nNote: \r\n{$NOTIFY_COMMENTS}\r\n<br />\r\n{/if}\r\n<br />\r\nNew status: \r\n<b>{$ORDER_STATUS}</b><br />\r\n<br />\r\nIf you have any questions, please reply to this e-mail. <br /></font></td>\r\n  </tr>\r\n</table>',	0,	'mail',	'Dear customer,\r\n\r\nThe status of your order {if $ORDER_NR}No. {$ORDER_NR}{/if} {if $ORDER_DATE}from {$ORDER_DATE}{/if} has been changed.\r\n\r\n{if $ORDER_LINK}Link to order:\r\n{$ORDER_LINK} {/if}\r\n\r\n{if $NOTIFY_COMMENTS}Note:{$NOTIFY_COMMENTS}{/if}\r\n\r\nNew status: {$ORDER_STATUS}\r\n\r\nIf you have any questions, please reply to this e-mail.'),
+(1, 'change_order_mail', 2, '<table cellspacing=\"0\" cellpadding=\"4\" border=\"0\" align=\"center\" width=\"100%\">\r\n    <tbody>\r\n        <tr>\r\n            <td style=\"border-bottom: 1px solid; border-color: #cccccc;\">\r\n            <div align=\"right\"><img alt=\"\" src=\"{$logo_path}logo.gif\" /></div>\r\n            </td>\r\n        </tr>\r\n        <tr>\r\n            <td><font face=\"Verdana, Arial, Helvetica, sans-serif\" size=\"2\"><strong>Sehr geehrter Kunde, </strong><br />\r\n            <br />\r\n            Der Status Ihrer Bestellung {if $ORDER_NR}Nr. {$ORDER_NR}{/if} {if $ORDER_DATE}vom       {$ORDER_DATE}{/if} wurde ge&auml;ndert.<br />\r\n            <br />\r\n            {if $ORDER_LINK}Link zur Bestellung:       <a href=\"{$ORDER_LINK}\">hier klicken</a>{/if}<br />\r\n            <br />\r\n            {if $NOTIFY_COMMENTS}<br />\r\n            Anmerkungen und Kommentare zu Ihrer Bestellung:  {$NOTIFY_COMMENTS} <br />\r\n            {/if} <br />\r\n            Neuer Status:  <b>{$ORDER_STATUS}</b><br />\r\n            <br />\r\n        {if $PARCEL_COUNT}\r\n          Die Sendung besteht aus {$PARCEL_COUNT} Paket(en).<br />\r\n        {/if}\r\n        {if $PARCEL_LINK_HTML}\r\n          <br />Sie k&ouml;nnen sich &uuml;ber den Zustellstatus durch einen Klick auf die nachstende(n) Paketnummer(n) informieren:<br />\r\n          {$PARCEL_LINK_HTML}<br />\r\n        {/if}\r\n            Bei Fragen zu Ihrer Bestellung antworten Sie bitte auf diese E-Mail. <br />\r\n            </font></td>\r\n        </tr>\r\n    </tbody>\r\n</table>', 0, 'mail', 'Sehr geehrter Kunde,\r\n\r\nDer Status Ihrer Bestellung {if $ORDER_NR}Nr. {$ORDER_NR}{/if} {if $ORDER_DATE}vom {$ORDER_DATE}{/if} wurde geändert.\r\n\r\n{if $ORDER_LINK}Link zur Bestellung:\r\n{$ORDER_LINK} {/if}\r\n\r\n{if $NOTIFY_COMMENTS}Anmerkungen und Kommentare zu Ihrer Bestellung:{$NOTIFY_COMMENTS}{/if}\r\n\r\nNeuer Status: {$ORDER_STATUS}\r\n\r\n{if $PARCEL_COUNT}\r\nDie Sendung besteht aus {$PARCEL_COUNT} Paket(en).{/if}\r\n\r\n{if $PARCEL_LINK_TXT}\r\nSie können sich über den Zustellstatus durch einen Klick auf die nachstende(n) Paketnummer(n) informieren:\r\n{$PARCEL_LINK_TXT}{/if}\r\n\r\nBei Fragen zu Ihrer Bestellung antworten Sie bitte auf diese E-Mail.'),
+(2, 'change_order_mail', 1, '<table cellspacing=\"0\" cellpadding=\"4\" border=\"0\" align=\"center\" width=\"100%\">\r\n    <tbody>\r\n        <tr>\r\n            <td style=\"border-bottom: 1px solid; border-color: #cccccc;\">\r\n            <div align=\"right\"><img src=\"{$logo_path}logo.gif\" alt=\"\" /></div>\r\n            </td>\r\n        </tr>\r\n        <tr>\r\n            <td><font face=\"Verdana, Arial, Helvetica, sans-serif\" size=\"2\"><strong>Dear customer, </strong><br />\r\n            <br />\r\n            The status of your order {if $ORDER_NR}No. {$ORDER_NR}{/if} {if $ORDER_DATE}from {$ORDER_DATE}{/if} has been changed.<br />\r\n            <br />\r\n            {if $ORDER_LINK}Link to order:       <a href=\"{$ORDER_LINK}\">click here</a>{/if}<br />\r\n            <br />\r\n            {if $NOTIFY_COMMENTS}<br />\r\n            Note:  {$NOTIFY_COMMENTS} <br />\r\n            {/if} <br />\r\n            New status:  <b>{$ORDER_STATUS}</b><br />\r\n            <br />\r\n        {if $PARCEL_COUNT}\r\n          Your shipment consists of {$PARCEL_COUNT} parcel(s).<br />\r\n        {/if}\r\n        {if $PARCEL_LINK_HTML}\r\n          <br />You can inform yourself about the delivery status with a click on the following package number(s):<br />\r\n        {$PARCEL_LINK_HTML}<br />\r\n        {/if}\r\n            If you have any questions, please reply to this e-mail. <br />\r\n            </font></td>\r\n        </tr>\r\n    </tbody>\r\n</table>', 0, 'mail', 'Dear customer,\r\n\r\nThe status of your order {if $ORDER_NR}No. {$ORDER_NR}{/if} {if $ORDER_DATE}from {$ORDER_DATE}{/if} has been changed.\r\n\r\n{if $ORDER_LINK}Link to order:\r\n{$ORDER_LINK} {/if}\r\n\r\n{if $NOTIFY_COMMENTS}Note:{$NOTIFY_COMMENTS}{/if}\r\n\r\nNew status: {$ORDER_STATUS}\r\n\r\n{if $PARCEL_COUNT}\r\nYour shipment consists of {$PARCEL_COUNT} parcel(s).{/if}\r\n\r\n{if $PARCEL_LINK_TXT}\r\nYou can inform yourself about the delivery status with a click on the following package number(s):\r\n{$PARCEL_LINK_TXT}{/if}\r\n\r\nIf you have any questions, please reply to this e-mail.'),
 (3,	'change_password_mail',	1,	'<table  width=\"100%\" border=\"0\" align=\"center\" cellpadding=\"4\" cellspacing=\"0\">\r\n  <tr> \r\n    <td style=\"border-bottom: 1px solid; border-color: #cccccc;\"><div align=\"right\"><img src=\"{$logo_path}logo.gif\"></div></td>\r\n  </tr>\r\n  <tr> \r\n    <td><p><font size=\"2\" face=\"Verdana, Arial, Helvetica, sans-serif\"><strong>Dear Customer,</strong></font> </p>\r\n      <p><font size=\"2\" face=\"Verdana, Arial, Helvetica, sans-serif\">Your password was successfully changed.<br />\r\n        <br />\r\n  Your new login data:</font>\r\n      </p>      \r\n      <table width=\"100%\"  border=\"0\" bgcolor=\"f1f1f1\">\r\n    <tr>\r\n      <td> <font size=\"1\" face=\"Verdana, Arial, Helvetica, sans-serif\"><strong>Your e-mail-address:</strong> {$EMAIL}\r\n            <br />\r\n            <strong>Your new password:</strong> {$PASSWORD}\r\n        </font> </td>\r\n    </tr>\r\n  </table></td>\r\n  </tr>\r\n</table>\r\n\r\n 	  	 \r\n',	0,	'mail',	'Dear Customer,\r\n\r\nYour password was successfully changed.\r\n\r\nYour new login data:\r\n      \r\nYour e-mail-address: {$EMAIL}\r\nYour new password: {$PASSWORD}\r\n'),
 (4,	'change_password_mail',	2,	'<table  width=\"100%\" border=\"0\" align=\"center\" cellpadding=\"4\" cellspacing=\"0\">\r\n  <tr> \r\n    <td style=\"border-bottom: 1px solid; border-color: #cccccc;\"><div align=\"right\"><img src=\"{$logo_path}logo.gif\"></div></td>\r\n  </tr>\r\n  <tr> \r\n    <td><p><font size=\"2\" face=\"Verdana, Arial, Helvetica, sans-serif\"><strong>Sehr geehrter Kunde,</strong></font> </p>\r\n      <p><font size=\"2\" face=\"Verdana, Arial, Helvetica, sans-serif\">Ihr Passwort wurde erfolgreich ge&auml;ndert.<br />\r\n        <br />\r\n  Ihre neuen Logindaten:</font>\r\n      </p>      \r\n      <table width=\"100%\"  border=\"0\" bgcolor=\"f1f1f1\">\r\n    <tr>\r\n      <td> <font size=\"1\" face=\"Verdana, Arial, Helvetica, sans-serif\"><strong>Ihre E-Mail-Adresse:</strong> {$EMAIL}\r\n            <br />\r\n            <strong>Ihr neues Passwort:</strong> {$PASSWORD}\r\n        </font> </td>\r\n    </tr>\r\n  </table></td>\r\n  </tr>\r\n</table>',	0,	'mail',	'Sehr geehrter Kunde,\r\n\r\nIhr Passwort wurde erfolgreich geändert.\r\n\r\nIhre neuen Logindaten:\r\n      \r\nIhre E-Mail-Adresse: {$EMAIL}\r\nIhr neues Passwort: {$PASSWORD}'),
 (5,	'create_account_mail',	1,	'<table  width=\"100%\" border=\"0\" align=\"center\" cellpadding=\"4\" cellspacing=\"0\">\r\n  <tr> \r\n    <td style=\"border-bottom: 1px solid; border-color: #cccccc;\"><div align=\"right\"><img src=\"{$logo_path}logo.gif\"></div></td>\r\n  </tr>\r\n  <tr> \r\n    <td><p><font size=\"2\" face=\"Verdana, Arial, Helvetica, sans-serif\"><strong>Your account has been successfully created!</strong></font> <br />\r\n        <br />\r\n        <font size=\"2\" face=\"Verdana, Arial, Helvetica, sans-serif\">You now have access to the following features:</font><br /> \r\n        <br />\r\n        <font size=\"2\"><b><font face=\"Verdana, Arial, Helvetica, sans-serif\">-Shopping cart</font></b><font face=\"Verdana, Arial, Helvetica, sans-serif\"> - Products placed in the shopping cart will remain there until they\'ve been deleted or purchased.<br />\r\n        <b>-Address book</b> - The address book allows you to save several different shipping destinations.<br />\r\n        <b>-Order history</b> - Your order history is always available for you.<br />\r\n        <b>-Product evaluation</b> - Rate and comment our products!</font></font></p>\r\n      <p>\r\n        <font size=\"2\" face=\"Verdana, Arial, Helvetica, sans-serif\">If this account wasn\'t created by you, please contact us at \r\n        <A HREF=\"mailto:{$content.MAIL_REPLY_ADDRESS}\">{$content.MAIL_REPLY_ADDRESS}</A>\r\n        . <br />\r\n    <br />\r\n    {if $SEND_GIFT==true}\r\n      <br />\r\nAs a thank you for creating your account, you\'ve received a <b>{$GIFT_AMMOUNT}</b> gift voucher!<br />\r\n<br />\r\nRedeem your voucher with the following code <b>{$GIFT_CODE}</b> when placing an order or simply by clicking the following link <a href=\"{$GIFT_LINK}\">[redeem Voucher]</a>.{/if} {if $SEND_COUPON==true} As a thank you for creating your account, you\'ve recieved a discount voucher!<br />\r\nThe voucher details are:<br />\r\n<b>{$COUPON_DESC}</b> <br />\r\nRedeem your voucher by entering the code <b>{$COUPON_CODE}</b> during checkout process, when asked for it.{/if} \r\n<br />If you have any questions, please contact us at <A HREF=\"mailto:{$content.MAIL_REPLY_ADDRESS}\">{$content.MAIL_REPLY_ADDRESS}</A> !\r\n</font></p></td>\r\n  </tr>\r\n</table>',	0,	'mail',	'Your account has been successfully created!\r\n\r\nYou now have access to the following features:\r\n\r\n  SHOPPING CART - Products placed in the shopping cart will remain there until they\'ve been deleted or purchased.\r\n  ADDRESS BOOK - The address book allows you to save several different shipping destinations.\r\n  ORDER HISTORY - Your order history is always available for you.\r\n  PRODUCT EVALUATION - Rate and comment our products!\r\n\r\nIf this account wasn\'t created by you, please contact us at {$content.MAIL_REPLY_ADDRESS}.\r\n\r\n{if $SEND_GIFT==true}\r\nAs a thank you for creating your account, you\'ve received a {$GIFT_AMMOUNT} gift voucher! \r\nRedeem your voucher with the following code - {$GIFT_CODE} - when placing an order or simply by clicking the following link [redeem Voucher].{/if}{if $SEND_COUPON==true}\r\nAs a thank you for creating your account, you\'ve recieved a discount voucher!\r\nThe voucher details are:\r\n{$COUPON_DESC}\r\nRedeem your voucher by entering the code {$COUPON_CODE} during checkout process, when asked for it.{/if} \r\n\r\nIf you have any questions, please contact us at {$content.MAIL_REPLY_ADDRESS}!'),
@@ -247,7 +263,6 @@ CREATE TABLE admin_access (
 
   fck_wrapper INT(1) NOT NULL DEFAULT 0,
   econda INT(1) NOT NULL DEFAULT 0,
-  cleverreach INT(1) NOT NULL DEFAULT 0,
   sofortueberweisung_install INT(1) NOT NULL DEFAULT 0,
   shop_offline INT(1) NOT NULL DEFAULT 0,
   xajax INT(1) NOT NULL DEFAULT 0,
@@ -256,7 +271,6 @@ CREATE TABLE admin_access (
   janolaw INT(1) NOT NULL DEFAULT 0,
   haendlerbund INT(1) NOT NULL DEFAULT 0,
   safeterms INT(1) NOT NULL DEFAULT 0,
-  easymarketing INT(1) NOT NULL DEFAULT 0,
   it_recht_kanzlei INT(1) NOT NULL DEFAULT 0,
   payone_config INT(1) NOT NULL DEFAULT 0,
   payone_logs INT(1) NOT NULL DEFAULT 0,
@@ -271,6 +285,8 @@ CREATE TABLE admin_access (
   
   wholesalers INT(1) NOT NULL DEFAULT 0,
   wholesalers_list INT(1) NOT NULL DEFAULT 0,
+
+  parcel_carriers INT(1) NOT NULL DEFAULT 0,
   
   PRIMARY KEY (customers_id)
 ) ENGINE=MyISAM;
@@ -778,6 +794,16 @@ CREATE TABLE orders_total (
   PRIMARY KEY (orders_total_id),
   KEY idx_orders_total_orders_id (orders_id)
 ) ENGINE=MyISAM;
+
+DROP TABLE IF EXISTS orders_tracking;
+CREATE TABLE IF NOT EXISTS orders_tracking (
+  ortra_id int(11) NOT NULL AUTO_INCREMENT,
+  ortra_order_id int(11) NOT NULL,
+  ortra_carrier_id int(11) NOT NULL,
+  ortra_parcel_id varchar(80) NOT NULL,
+  PRIMARY KEY (ortra_id),
+  KEY ortra_order_id (ortra_order_id)
+);
 
 DROP TABLE IF EXISTS orders_recalculate;
 CREATE TABLE orders_recalculate (
@@ -1309,7 +1335,7 @@ DROP TABLE IF EXISTS personal_offers_by_customers_status_3;
 DROP TABLE IF EXISTS personal_offers_by_customers_status_4;
 
 #database Version
-INSERT INTO database_version(version) VALUES ('SH_1.2.0');
+INSERT INTO database_version(version) VALUES ('SH_1.3.0');
 
 INSERT INTO cm_file_flags (file_flag, file_flag_name) VALUES ('0', 'information');
 INSERT INTO cm_file_flags (file_flag, file_flag_name) VALUES ('1', 'content');
@@ -1403,11 +1429,11 @@ INSERT INTO configuration (configuration_id, configuration_key, configuration_va
 
 # configuration_group_id 3, Maximum Values
 INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'MAX_ADDRESS_BOOK_ENTRIES', '5', 3, 1, NULL, NOW(), NULL, NULL);
-INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'MAX_DISPLAY_SEARCH_RESULTS', '20', 3, 2, NULL, NOW(), NULL, NULL);
+INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'MAX_DISPLAY_SEARCH_RESULTS', '12', 3, 2, NULL, NOW(), NULL, NULL);
 INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'MAX_DISPLAY_PAGE_LINKS', '5', 3, 3, NULL, NOW(), NULL, NULL);
 INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'MAX_DISPLAY_SPECIAL_PRODUCTS', '9', 3, 4, NULL, NOW(), NULL, NULL);
-INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'MAX_DISPLAY_NEW_PRODUCTS', '9', 3, 5, NULL, NOW(), NULL, NULL);
-INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'MAX_DISPLAY_UPCOMING_PRODUCTS', '10', 3, 6, NULL, NOW(), NULL, NULL);
+INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'MAX_DISPLAY_NEW_PRODUCTS', '3', 3, 5, NULL, NOW(), NULL, NULL);
+INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'MAX_DISPLAY_UPCOMING_PRODUCTS', '6', 3, 6, NULL, NOW(), NULL, NULL);
 INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'MAX_DISPLAY_MANUFACTURERS_IN_A_LIST', '0', 3, 7, NULL, NOW(), NULL, NULL);
 INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'MAX_MANUFACTURERS_LIST', '1', 3, 7, NULL, NOW(), NULL, NULL);
 INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'MAX_DISPLAY_MANUFACTURER_NAME_LEN', '15', 3, 8, NULL, NOW(), NULL, NULL);
@@ -1416,7 +1442,7 @@ INSERT INTO configuration (configuration_id, configuration_key, configuration_va
 INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'MAX_RANDOM_SELECT_NEW', '10', 3, 11, NULL, NOW(), NULL, NULL);
 INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'MAX_RANDOM_SELECT_SPECIALS', '10', 3, 12, NULL, NOW(), NULL, NULL);
 INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'MAX_DISPLAY_CATEGORIES_PER_ROW', '3', 3, 13, NULL, NOW(), NULL, NULL);
-INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'MAX_DISPLAY_PRODUCTS_NEW', '10', 3, 14, NULL, NOW(), NULL, NULL);
+INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'MAX_DISPLAY_PRODUCTS_NEW', '12', 3, 14, NULL, NOW(), NULL, NULL);
 INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'MAX_DISPLAY_BESTSELLERS', '10', 3, 15, NULL, NOW(), NULL, NULL);
 INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'MAX_DISPLAY_ALSO_PURCHASED', '6', 3, 16, NULL, NOW(), NULL, NULL);
 INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'MAX_DISPLAY_PRODUCTS_IN_ORDER_HISTORY_BOX', '6', 3, 17, NULL, NOW(), NULL, NULL);
@@ -1427,13 +1453,13 @@ INSERT INTO configuration (configuration_id, configuration_key, configuration_va
 
 # configuration_group_id 4, Images Options
 INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'CONFIG_CALCULATE_IMAGE_SIZE', 'true', 4, 1, NULL, NOW(), NULL, 'xtc_cfg_select_option(array(\'true\', \'false\'),');
-INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'IMAGE_QUALITY', '100', 4, 2, NULL, NOW(), NULL, NULL);
-INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'PRODUCT_IMAGE_THUMBNAIL_WIDTH', '120', 4, 7, NULL, NOW(), NULL, NULL);
-INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'PRODUCT_IMAGE_THUMBNAIL_HEIGHT', '80', 4, 8, NULL, NOW(), NULL, NULL);
-INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'PRODUCT_IMAGE_INFO_WIDTH', '200', 4, 9, NULL, NOW(), NULL, NULL);
-INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'PRODUCT_IMAGE_INFO_HEIGHT', '160', 4, 10, NULL, NOW(), NULL, NULL);
-INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'PRODUCT_IMAGE_POPUP_WIDTH', '800', 4, 11, NULL, NOW(), NULL, NULL);
-INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'PRODUCT_IMAGE_POPUP_HEIGHT', '640', 4, 12, NULL, NOW(), NULL, NULL);
+INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'IMAGE_QUALITY', '80', 4, 2, NULL, NOW(), NULL, NULL);
+INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'PRODUCT_IMAGE_THUMBNAIL_WIDTH', '250', 4, 7, NULL, NOW(), NULL, NULL);
+INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'PRODUCT_IMAGE_THUMBNAIL_HEIGHT', '187', 4, 8, NULL, NOW(), NULL, NULL);
+INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'PRODUCT_IMAGE_INFO_WIDTH', '320', 4, 9, NULL, NOW(), NULL, NULL);
+INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'PRODUCT_IMAGE_INFO_HEIGHT', '240', 4, 10, NULL, NOW(), NULL, NULL);
+INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'PRODUCT_IMAGE_POPUP_WIDTH', '1000', 4, 11, NULL, NOW(), NULL, NULL);
+INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'PRODUCT_IMAGE_POPUP_HEIGHT', '750', 4, 12, NULL, NOW(), NULL, NULL);
 INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'PRODUCT_IMAGE_THUMBNAIL_BEVEL', '', 4, 13, NULL, NOW(), NULL, NULL);
 INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'PRODUCT_IMAGE_THUMBNAIL_GREYSCALE', '', 4, 14, NULL, NOW(), NULL, NULL);
 INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'PRODUCT_IMAGE_THUMBNAIL_ELLIPSE', '', 4, 15, NULL, NOW(), NULL, NULL);
@@ -1519,10 +1545,10 @@ INSERT INTO configuration (configuration_id, configuration_key, configuration_va
 INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'STOCK_CHECK', 'true', 9, 1, NULL, NOW(), NULL, 'xtc_cfg_select_option(array(\'true\', \'false\'),');
 INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'ATTRIBUTE_STOCK_CHECK', 'true', 9, 2, NULL, NOW(), NULL, 'xtc_cfg_select_option(array(\'true\', \'false\'),');
 INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'STOCK_LIMITED', 'true', 9, 3, NULL, NOW(), NULL, 'xtc_cfg_select_option(array(\'true\', \'false\'),');
-INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'STOCK_ALLOW_CHECKOUT', 'true', 9, 4, NULL, NOW(), NULL, 'xtc_cfg_select_option(array(\'true\', \'false\'),');
+INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'STOCK_ALLOW_CHECKOUT', 'false', 9, 4, NULL, NOW(), NULL, 'xtc_cfg_select_option(array(\'true\', \'false\'),');
 INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'STOCK_MARK_PRODUCT_OUT_OF_STOCK', '<span style="color:red">***</span>', 9, 5, NULL, NOW(), NULL, NULL);
 INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'STOCK_REORDER_LEVEL', '5', 9, 6, NULL, NOW(), NULL, NULL);
-INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'STOCK_CHECKOUT_UPDATE_PRODUCTS_STATUS', 'true', 9, 20, NULL, NOW(), NULL, 'xtc_cfg_select_option(array(\'true\', \'false\'),');
+INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'STOCK_CHECKOUT_UPDATE_PRODUCTS_STATUS', 'false', 9, 20, NULL, NOW(), NULL, 'xtc_cfg_select_option(array(\'true\', \'false\'),');
 
 # configuration_group_id 10, Logging
 INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'STORE_PAGE_PARSE_TIME', 'false', 10, 1, NULL, NOW(), NULL, 'xtc_cfg_select_option(array(\'true\', \'false\'),');
@@ -1721,7 +1747,6 @@ INSERT INTO configuration (configuration_id, configuration_key, configuration_va
 
 # configuration_group_id 1000, Adminarea Options
 INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'PRICE_IS_BRUTTO', 'false', 1000, 10, NULL, NOW(), NULL, 'xtc_cfg_select_option(array(\'true\', \'false\'),');
-INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'USE_ADMIN_TOP_MENU', 'true', 1000, 20, NULL, NOW(), NULL, 'xtc_cfg_select_option(array(\'true\', \'false\'),');
 INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'USE_ADMIN_LANG_TABS', 'true', 1000, 21, NULL, NOW(), NULL, 'xtc_cfg_select_option(array(\'true\', \'false\'),');
 INSERT INTO configuration (configuration_id ,configuration_key ,configuration_value ,configuration_group_id ,sort_order ,last_modified ,date_added ,use_function ,set_function) VALUES (NULL, 'MAX_DISPLAY_ORDER_RESULTS', '30', '1000', '30', NULL , NOW(), NULL , NULL);
 INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES (NULL, 'USE_ADMIN_THUMBS_IN_LIST', 'true', 1000, 32, NULL, NOW(), NULL, 'xtc_cfg_select_option(array(\'true\', \'false\'),');
@@ -1733,6 +1758,25 @@ INSERT INTO configuration (configuration_id, configuration_key, configuration_va
 INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES (NULL, 'WHOS_ONLINE_TIME_LAST_CLICK', '900', '1000', '60', NULL, NOW(), NULL, NULL);
 INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES (NULL, 'WHOS_ONLINE_IP_WHOIS_SERVICE', 'http://www.utrace.de/?query=', '1000', '62', NULL, NOW(), NULL, NULL);
 INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES (NULL, 'CONFIRM_SAVE_ENTRY', 'true', '1000', '70', NULL, NOW(), NULL, 'xtc_cfg_select_option(array(\'true\', \'false\'),');
+
+# Coupon
+INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) VALUES ('', 'MODULE_ORDER_TOTAL_COUPON_STATUS', 'true', '6', '1','xtc_cfg_select_option(array(\'true\', \'false\'), ', NOW());
+INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, date_added) VALUES ('', 'MODULE_ORDER_TOTAL_COUPON_SORT_ORDER', '25', '6', '2', NOW());
+INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, set_function ,date_added) VALUES ('', 'MODULE_ORDER_TOTAL_COUPON_INC_SHIPPING', 'false', '6', '5', 'xtc_cfg_select_option(array(\'true\', \'false\'), ', NOW());
+INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, set_function ,date_added) VALUES ('', 'MODULE_ORDER_TOTAL_COUPON_INC_TAX', 'true', '6', '6','xtc_cfg_select_option(array(\'true\', \'false\'), ', NOW());
+INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, set_function ,date_added) VALUES ('', 'MODULE_ORDER_TOTAL_COUPON_CALC_TAX', 'Standard', '6', '7','xtc_cfg_select_option(array(\'None\', \'Standard\'), ', NOW());
+INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, use_function, set_function, date_added) VALUES ('', 'MODULE_ORDER_TOTAL_COUPON_TAX_CLASS', '0', '6', '0', 'xtc_get_tax_class_title', 'xtc_cfg_pull_down_tax_classes(', NOW());
+INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, set_function ,date_added) VALUES ('', 'MODULE_ORDER_TOTAL_COUPON_SPECIAL_PRICES', 'false', '6', '5', 'xtc_cfg_select_option(array(\'true\', \'false\'), ', NOW());
+
+# GV
+INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) VALUES ('', 'MODULE_ORDER_TOTAL_GV_STATUS', 'true', '6', '1','xtc_cfg_select_option(array(\'true\', \'false\'), ', NOW());
+INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, date_added) VALUES ('', 'MODULE_ORDER_TOTAL_GV_SORT_ORDER', '80', '6', '2', NOW());
+INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) VALUES ('', 'MODULE_ORDER_TOTAL_GV_QUEUE', 'true', '6', '3','xtc_cfg_select_option(array(\'true\', \'false\'), ', NOW());
+INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, set_function ,date_added) VALUES ('', 'MODULE_ORDER_TOTAL_GV_INC_SHIPPING', 'true', '6', '5', 'xtc_cfg_select_option(array(\'true\', \'false\'), ', NOW());
+INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, set_function ,date_added) VALUES ('', 'MODULE_ORDER_TOTAL_GV_INC_TAX', 'true', '6', '6','xtc_cfg_select_option(array(\'true\', \'false\'), ', NOW());
+INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, set_function ,date_added) VALUES ('', 'MODULE_ORDER_TOTAL_GV_CALC_TAX', 'None', '6', '7','xtc_cfg_select_option(array(\'None\', \'Standard\', \'Credit Note\'), ', NOW());
+INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, use_function, set_function, date_added) VALUES ('', 'MODULE_ORDER_TOTAL_GV_TAX_CLASS', '0', '6', '0', 'xtc_get_tax_class_title', 'xtc_cfg_pull_down_tax_classes(', NOW());
+INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, set_function ,date_added) VALUES ('', 'MODULE_ORDER_TOTAL_GV_CREDIT_TAX', 'false', '6', '8','xtc_cfg_select_option(array(\'true\', \'false\'), ', NOW());
 
 INSERT INTO configuration_group VALUES (1,'My Store','General information about my store',1,1);
 INSERT INTO configuration_group VALUES (2,'Minimum Values','The minimum values for functions / data',2,1);
@@ -1762,6 +1806,9 @@ INSERT INTO configuration_group VALUES (24,'PIWIK &amp; Google Analytics Trackin
 INSERT INTO configuration_group VALUES (31,'Moneybookers','Moneybookers System',31,1);
 INSERT INTO configuration_group VALUES (40,'Popup Window Configuration','Popup Window Parameters',40,1);
 INSERT INTO configuration_group VALUES (1000,'Adminarea Options','Adminarea Configuration', 1000,1);
+
+
+
 
 #Countries
 INSERT INTO countries VALUES (1,'Afghanistan','AF','AFG',1,1,0);

@@ -247,14 +247,7 @@
 											"is_main"	=> true,
 											"link" 		=> xtc_href_link(FILENAME_BANNER_MANAGER, '', 'NONSSL'),
 											"access"	=> "banner_manager",
-											"check"		=> true);	
-											
-	$menu_items['marketingseo'][] = array(	"name" 		=> BOX_EASYMARKETING,
-											"is_main"	=> true,
-											"link" 		=> xtc_href_link(FILENAME_EASYMARKETING, '', 'NONSSL'),
-											"access"	=> "easymarketing",
-											"check"		=> true);											
- 
+											"check"		=> true);							
 											
 	$menu_items['marketingseo'][] = array(	"name" 		=> BOX_GOOGLE_SITEMAP,
 											"is_main"	=> true,
@@ -266,13 +259,7 @@
 											"is_main"	=> true,
 											"link" 		=> xtc_href_link(FILENAME_MODULE_NEWSLETTER, '', 'NONSSL'),
 											"access"	=> "module_newsletter",
-											"check"		=> true);																						
-											
-	$menu_items['marketingseo'][] = array(	"name" 		=> BOX_CLEVER_REACH,
-											"is_main"	=> true,
-											"link" 		=> xtc_href_link('cleverreach.php', '', 'NONSSL'),
-											"access"	=> "cleverreach",
-											"check"		=> true);			
+											"check"		=> true);																																
 											
 	$menu_items['marketingseo'][] = array(	"name" 		=> BOX_CONFIGURATION_16,
 											"is_main"	=> true,
@@ -285,6 +272,12 @@
 											"link" 		=> false,
 											"access"	=> false,
 											"check"		=> true);	
+	
+	$menu_items['marketingseo'][] = array(	"name" 		=> BOX_WHOS_ONLINE,
+											"is_main"	=> false,
+											"link" 		=> xtc_href_link(FILENAME_WHOS_ONLINE, '', 'NONSSL'),
+											"access"	=> "whos_online",
+											"check"		=> true);
 											
 	$menu_items['marketingseo'][] = array(	"name" 		=> BOX_PRODUCTS_VIEWED,
 											"is_main"	=> false,
@@ -320,12 +313,6 @@
 											"is_main"	=> false,
 											"link" 		=> xtc_href_link(FILENAME_STATS_STOCK_WARNING, '', 'NONSSL'),
 											"access"	=> "stats_stock_warning",
-											"check"		=> true);
-	
-	$menu_items['marketingseo'][] = array(	"name" 		=> BOX_WHOS_ONLINE,
-											"is_main"	=> true,
-											"link" 		=> xtc_href_link(FILENAME_WHOS_ONLINE, '', 'NONSSL'),
-											"access"	=> "whos_online",
 											"check"		=> true);
 
 	$menu_items['marketingseo'][] = array(	"name" 		=> BOX_CONFIGURATION_24,
@@ -507,7 +494,13 @@
 											"is_main"	=> false,
 											"link" 		=> xtc_href_link(FILENAME_CONFIGURATION, 'gID=7', 'NONSSL'),
 											"access"	=> "configuration",
-											"check"		=> true);;
+											"check"		=> true);
+	
+	$menu_items['configuration'][] = array(	"name" 		=> BOX_PARCEL_CARRIERS,
+											"is_main"	=> false,
+											"link" 		=> xtc_href_link(FILENAME_PARCEL_CARRIERS, '', 'NONSSL'),
+											"access"	=> "parcel_carriers",
+											"check"		=> true);
 														
 	$menu_items['configuration'][] = array(	"name" 		=> BOX_PAYMENT,
 											"is_main"	=> false,

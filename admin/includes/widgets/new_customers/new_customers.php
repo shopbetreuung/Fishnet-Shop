@@ -34,12 +34,12 @@
 			<td><?php  echo $row["customers_firstname"]; ?></td>
 			<td><?php  echo $row["customers_date_added"]; ?> </td>
 			<td>
-				<a href="customers.php?page=1&cID=<?php  echo $row-> customers_id; ?>&action=edit">
+				<a href="customers.php?page=1&cID=<?php echo $row["customers_id"]; ?>&action=edit">
 					<?php echo TABLE_CELL_NEW_CUSTOMERS_EDIT; ?>
 				</a>
 			</td>
 			<td>
-				<a href="orders.php?cID=<?php  echo $row-> customers_id; ?>">
+				<a href="orders.php?cID=<?php echo $row["customers_id"]; ?>">
 					<?php echo TABLE_CELL_NEW_CUSTOMERS_ORDERS; ?>
 				</a>
 			</td>

@@ -78,7 +78,7 @@
 				$CurrentLink = preg_replace("/([^\?]*)(\?.*)/","$1",$_SERVER['REQUEST_URI']);
 				
 				// 301er-Weiterleitung mit Unterscheidung SSL / kein SSL
-				if(strpos($ProductLink, $CurrentLink) === false) {
+				if(strpos(urldecode($ProductLink), urldecode($CurrentLink)) === false) {
 				    //BOF - web28 - 2010-08-16 - New SSL  handling  defined by $request_type
 					//if ( (ENABLE_SSL == true) && (getenv('HTTPS') == 'on' || getenv('HTTPS') == '1') ) { // Bei aktivem SSL 
 					if ( (ENABLE_SSL == true) && ($request_type == 'SSL') ) { // We are loading an SSL page

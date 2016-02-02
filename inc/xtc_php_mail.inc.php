@@ -50,19 +50,18 @@ function xtc_php_mail($from_email_address, $from_email_name,
   $mail->PluginDir = DIR_FS_DOCUMENT_ROOT.'includes/classes/';
 
   if (isset ($_SESSION['language_charset'])) {
-    $mail->CharSet = $_SESSION['language_charset'];
     $mail->SetLanguage($_SESSION['language_code'], DIR_WS_CLASSES);
-    $charset = $_SESSION['language_charset']; // web28 - 2010-07-15 - needed for html_entity_decode
     $lang_code = $_SESSION['language_code'];
   } else {
     $lang_query = "SELECT * FROM ".TABLE_LANGUAGES." WHERE code = '".DEFAULT_LANGUAGE."'";
     $lang_query = xtc_db_query($lang_query);
     $lang_data = xtc_db_fetch_array($lang_query);
-    $mail->CharSet = 'utf-8';
     $mail->SetLanguage(DEFAULT_LANGUAGE, DIR_WS_CLASSES);
-    $charset = 'utf-8';
     $lang_code = DEFAULT_LANGUAGE;
   }
+  
+  $mail->CharSet = 'utf-8';
+  $charset = 'utf-8';
 
   if (EMAIL_TRANSPORT == 'smtp') {
     $mail->IsSMTP();

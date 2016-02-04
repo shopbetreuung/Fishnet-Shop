@@ -63,6 +63,13 @@ if (!isset ($_SESSION['shipping']))
 if (isset ($_POST['payment']))
   $_SESSION['payment'] = xtc_db_prepare_input($_POST['payment']);
 
+if (isset($_POST['payment']) && $_POST['payment'] == 'banktransfer') {
+	$_SESSION['banktransfer']['banktransfer_owner'] = xtc_db_prepare_input($_POST['banktransfer_owner']);
+	$_SESSION['banktransfer']['banktransfer_number'] = xtc_db_prepare_input($_POST['banktransfer_number']);
+	$_SESSION['banktransfer']['banktransfer_blz'] = xtc_db_prepare_input($_POST['banktransfer_blz']);
+	$_SESSION['banktransfer']['banktransfer_bankname'] = xtc_db_prepare_input($_POST['banktransfer_bankname']);
+	$_SESSION['banktransfer']['banktransfer_owner_email'] = xtc_db_prepare_input($_POST['banktransfer_owner_email']);
+}
 if ($_POST['comments_added'] != '')
   $_SESSION['comments'] = xtc_db_prepare_input($_POST['comments']);
 

@@ -81,6 +81,14 @@ require_once (DIR_WS_CLASSES . 'payment.php');
 if (isset ($_SESSION['credit_covers']) || !isset($_SESSION['payment'])) { //DokuMan - 2010-10-14 - check that payment is not yet set
   $_SESSION['payment'] = 'no_payment'; // GV Code Start/End ICW added for CREDIT CLASS
 }
+
+if (isset($_SESSION['banktransfer'])) {
+	foreach ($_SESSION['banktransfer'] as $banktransfer_data_name => $banktransfer_data_value) {
+		$_POST[$banktransfer_data_name] = $banktransfer_data_value;
+		unset($_SESSION['banktransfer'][$banktransfer_data_name]);
+	}
+}
+
 $payment_modules = new payment($_SESSION['payment']);
 
 // GV Code ICW ADDED FOR CREDIT CLASS SYSTEM

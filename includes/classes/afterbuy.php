@@ -44,6 +44,11 @@ class xtc_afterbuy_functions
 	{
 		$this->order_id = $order_id;
 	}
+	
+	public function url_encode($string)
+	{
+		return urlencode(utf8_decode($string));
+	}
 
 	public function setOrder_id($order_id)
 	{
@@ -149,14 +154,14 @@ class xtc_afterbuy_functions
 		// modified FT (Neuer Parameter Übergabe der 2.Adresszeile)
 
 		$customer['id'] = $oData['customers_id'];
-		$customer['firma'] = urlencode($oData['billing_company']);
-		$customer['vorname'] = urlencode($oData['billing_firstname']);
-		$customer['nachname'] = urlencode($oData['billing_lastname']);
-		$customer['strasse'] = urlencode($oData['billing_street_address']);
-		$customer['strasse2'] = urlencode($oData['billing_suburb']);
-		$customer['plz'] = urlencode($oData['billing_postcode']);
-		$customer['ort'] = urlencode($oData['billing_city']);
-		$customer['tel'] = urlencode($oData['customers_telephone']);
+		$customer['firma'] = $this->url_encode($oData['billing_company']);
+		$customer['vorname'] = $this->url_encode($oData['billing_firstname']);
+		$customer['nachname'] = $this->url_encode($oData['billing_lastname']);
+		$customer['strasse'] = $this->url_encode($oData['billing_street_address']);
+		$customer['strasse2'] = $this->url_encode($oData['billing_suburb']);
+		$customer['plz'] = $this->url_encode($oData['billing_postcode']);
+		$customer['ort'] = $this->url_encode($oData['billing_city']);
+		$customer['tel'] = $this->url_encode($oData['customers_telephone']);
 		$customer['fax'] = "";
 		$customer['mail'] = $oData['customers_email_address'];
 		// get ISO code
@@ -190,13 +195,13 @@ class xtc_afterbuy_functions
 		// ############ DELIVERY ADRESS ################
 		// modified FT (Neuer Parameter Übergabe der 2.Adresszeile)
 
-		$customer['d_firma'] = urlencode($oData['delivery_company']);
-		$customer['d_vorname'] = urlencode($oData['delivery_firstname']);
-		$customer['d_nachname'] = urlencode($oData['delivery_lastname']);
-		$customer['d_strasse'] = urlencode($oData['delivery_street_address']);
-		$customer['d_strasse2'] = urlencode($oData['delivery_suburb']);
-		$customer['d_plz'] = urlencode($oData['delivery_postcode']);
-		$customer['d_ort'] = urlencode($oData['delivery_city']);
+		$customer['d_firma'] = $this->url_encode($oData['delivery_company']);
+		$customer['d_vorname'] = $this->url_encode($oData['delivery_firstname']);
+		$customer['d_nachname'] = $this->url_encode($oData['delivery_lastname']);
+		$customer['d_strasse'] = $this->url_encode($oData['delivery_street_address']);
+		$customer['d_strasse2'] = $this->url_encode($oData['delivery_suburb']);
+		$customer['d_plz'] = $this->url_encode($oData['delivery_postcode']);
+		$customer['d_ort'] = $this->url_encode($oData['delivery_city']);
 		// get ISO code
 		$ctr_query=xtc_db_query("SELECT countries_iso_code_2 FROM ".TABLE_COUNTRIES." WHERE  countries_name='".$oData['delivery_country']."'");
 		$crt_data=xtc_db_fetch_array($ctr_query);
@@ -393,7 +398,7 @@ class xtc_afterbuy_functions
 			$this->afterbuyString .= "Artikelnr_".$nr."=".$artnr."&";
 			$this->afterbuyString .= "AlternArtikelNr1_".$nr."=".$alter_artnr."&";
 			$this->afterbuyString .= "ArtikelStammID_" . $nr . "=" . $afterbuy_products_id . "&";
-			$this->afterbuyString .= "Artikelname_".$nr."=".urlencode($pDATA['products_name'])."&";
+			$this->afterbuyString .= "Artikelname_".$nr."=".$this->url_encode($pDATA['products_name'])."&";
 
 			// ############# PREISÜBERGABE BRUTTO/NETTO NACH KUNDENGRUPPE #############
 			// Kundengruppen müssen jeweilige Zuordnung inkl/excl. Anzeige im Admin XT haben
@@ -434,8 +439,8 @@ class xtc_afterbuy_functions
 			
 			while ($aDATA = xtc_db_fetch_array($a_query)) 
 			{
-				$aDATA['products_options_values'] = urlencode($aDATA['products_options_values']);
-				$aDATA['products_options'] = urlencode($aDATA['products_options']);
+				$aDATA['products_options_values'] = $this->url_encode($aDATA['products_options_values']);
+				$aDATA['products_options'] = $this->url_encode($aDATA['products_options']);
 				if ($options == '') {
 					$options = $aDATA['products_options'].":".$aDATA['products_options_values'];
 				} else {
@@ -635,7 +640,7 @@ class xtc_afterbuy_functions
 		if ($ts_schutz_flag) {
 			$nr++;
 			$this->afterbuyString .= "Artikelnr_" . $nr . "=99999995&";
-			$this->afterbuyString .= "Artikelname_" . $nr . "=".urlencode('Käuferschutz')."&";
+			$this->afterbuyString .= "Artikelname_" . $nr . "=".$this->url_encode('Käuferschutz')."&";
 			$value_ot_total = $this->get_ot_total_fee($customers_status_show_price_tax, $tax_rate, $xt_currency, $ts_schutz );
 			
 			$this->afterbuyString .= "ArtikelEPreis_".$nr."=".$value_ot_total."&";
@@ -666,10 +671,10 @@ class xtc_afterbuy_functions
 		//$s_method = explode('_', $oData['shipping_class']);
 		$s_method = explode('(', $oData['shipping_method']);
 		$s_method = $s_method[0];
-		$this->afterbuyString .= "Versandart=".urlencode($s_method)."&";
+		$this->afterbuyString .= "Versandart=".$this->url_encode($s_method)."&";
 		//$this->getShipment($s_method[0]);
-		$this->afterbuyString .= "kommentar=".urlencode($oData['comments'])."&";
-		//$this->afterbuyString .= "Versandart=".urlencode($this->shipment_name)."&";
+		$this->afterbuyString .= "kommentar=".$this->url_encode($oData['comments'])."&";
+		//$this->afterbuyString .= "Versandart=".$this->url_encode($this->shipment_name)."&";
 		$this->afterbuyString .= "NoVersandCalc=".$versandermittlung_ab."&";
         $this->afterbuyString .= "VID=".$this->order_id."&";
 		if ($afterbuysperre_bereitsvorhandene_Bestellungen == 1)
@@ -679,7 +684,7 @@ class xtc_afterbuy_functions
 		//$this->afterbuyString .= "ZahlartenAufschlag=". $this->change_dec_separator( $zahlartenaufschlag). "&";
 
 		$this->getPayment($oData['payment_method']);
-		$this->afterbuyString .= "Zahlart=".urlencode($this->payment_name). "&";
+		$this->afterbuyString .= "Zahlart=".$this->url_encode($this->payment_name). "&";
 		$this->afterbuyString .= "ZFunktionsID=".$this->payment_id. "&";
 		
 		/*if ($oData['payment_method'] == 'paypal_gambio' OR $oData['payment_method'] == 'paypa_ipn') {
@@ -693,15 +698,15 @@ class xtc_afterbuy_functions
 			if ($_GET['oID']) {
 				$b_query = xtc_db_query("SELECT * FROM banktransfer WHERE orders_id='".(int)$_GET['oID']."'");
 				$b_data=xtc_db_fetch_array($b_query);
-				$this->afterbuyString .= "Bankname=".urlencode($b_data['banktransfer_bankname'])."&";
+				$this->afterbuyString .= "Bankname=".$this->url_encode($b_data['banktransfer_bankname'])."&";
 				$this->afterbuyString .= "BLZ=".$b_data['banktransfer_blz']."&";
 				$this->afterbuyString .= "Kontonummer=".$b_data['banktransfer_number']."&";
-				$this->afterbuyString .= "Kontoinhaber=".urlencode($b_data['banktransfer_owner'])."&";
+				$this->afterbuyString .= "Kontoinhaber=".$this->url_encode($b_data['banktransfer_owner'])."&";
 			} else {
-				$this->afterbuyString .= "Bankname=".urlencode($_POST['banktransfer_bankname'])."&";
+				$this->afterbuyString .= "Bankname=".$this->url_encode($_POST['banktransfer_bankname'])."&";
 				$this->afterbuyString .= "BLZ=".$_POST['banktransfer_blz']."&";
 				$this->afterbuyString .= "Kontonummer=".$_POST['banktransfer_number']."&";
-				$this->afterbuyString .= "Kontoinhaber=".urlencode($_POST['banktransfer_owner'])."&";
+				$this->afterbuyString .= "Kontoinhaber=".$this->url_encode($_POST['banktransfer_owner'])."&";
 			}	
 		}
 		

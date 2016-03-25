@@ -18,7 +18,7 @@ define('TABLE_HEADING_PAYMENT_AMOUNT','Summe');
 define('TABLE_HEADING_ORDERS_ID','Bestellnr.');
 define('TABLE_HEADING_ORDERS_STATUS','Bestellstatus');
 define('TABLE_HEADING_ACTION','Aktion');
-define('TEXT_PAYPAL_TRANSACTION_HISTORY','Tranksaktionsverlauf');
+define('TEXT_PAYPAL_TRANSACTION_HISTORY','Transaktionsverlauf');
 define('TEXT_PAYPAL_PENDING_REASON','Grund');
 define('TEXT_PAYPAL_CAPTURE_TRANSACTION','Make Capture');
 define('TEXT_PAYPAL_TRANSACTION_DETAIL','Transaktionsdetails');

@@ -39,7 +39,7 @@
         $discount_price = $xtPrice->xtcFormat($order->info['subtotal'], false) / 100 * $_SESSION['customers_status']['customers_status_ot_discount']*-1;
         $this->output[] = array('title' => $this->title . ':',
                                 'text' => '<font color="#ff0000">'.$xtPrice->xtcFormat($discount_price,true).'</font>',
-                                'value' => $discount_price);
+                                'value' => $xtPrice->xtcFormat($discount_price, false));
       }
     }
 

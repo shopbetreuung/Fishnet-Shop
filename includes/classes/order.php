@@ -544,9 +544,9 @@
                                         'tax_class_id'=> $products[$i]['tax_class_id'],
                                         'tax' => xtc_get_tax_rate($products[$i]['tax_class_id'], $tax_address['entry_country_id'], $tax_address['entry_zone_id']),
                                         'tax_description' => xtc_get_tax_description($products[$i]['tax_class_id'], $tax_address['entry_country_id'], $tax_address['entry_zone_id']),
-                                        'price' =>  $products_price,
+                                        'price' =>  $xtPrice->xtcFormat($products_price, false),
                                         'price_formated' => $xtPrice->xtcFormat($products_price,true),
-                                        'final_price' => $products_price*$products[$i]['quantity'],
+                                        'final_price' => $xtPrice->xtcFormat($products_price*$products[$i]['quantity'], false),
                                         'final_price_formated' => $xtPrice->xtcFormat($products_price*$products[$i]['quantity'],true),
                                         'vpe' => $products[$i]['vpe'],
                                         'shipping_time'=>$products[$i]['shipping_time'],
@@ -587,7 +587,7 @@
         $shown_price = $this->products[$index]['final_price'];
         $this->info['subtotal'] += $shown_price;
         if ($_SESSION['customers_status']['customers_status_ot_discount_flag'] == 1){
-          $shown_price_tax = $shown_price-($shown_price/100 * $_SESSION['customers_status']['customers_status_ot_discount']);
+          $shown_price_tax = $shown_price-$xtPrice->xtcFormat(($shown_price/100 * $_SESSION['customers_status']['customers_status_ot_discount']), false);
         }
 
         $products_tax = $this->products[$index]['tax'];
@@ -598,11 +598,11 @@
             $this->info['tax_groups'][$tax_index] = 0;
           }
           if ($_SESSION['customers_status']['customers_status_ot_discount_flag'] == 1) {
-            $this->info['tax'] += $shown_price_tax - ($shown_price_tax / (($products_tax < 10) ? "1.0" . str_replace('.', '', $products_tax) : "1." . str_replace('.', '', $products_tax)));
-            $this->info['tax_groups'][$tax_index] += (($shown_price_tax /(100+$products_tax)) * $products_tax);
+            $this->info['tax'] += $xtPrice->xtcFormat($shown_price_tax - ($shown_price_tax / (($products_tax < 10) ? "1.0" . str_replace('.', '', $products_tax) : "1." . str_replace('.', '', $products_tax))),false);
+            $this->info['tax_groups'][$tax_index] += $xtPrice->xtcFormat((($shown_price_tax /(100+$products_tax)) * $products_tax),false);
           } else {
-            $this->info['tax'] += $shown_price - ($shown_price / (($products_tax < 10) ? "1.0" . str_replace('.', '', $products_tax) : "1." . str_replace('.', '', $products_tax)));
-            $this->info['tax_groups'][$tax_index] += (($shown_price /(100+$products_tax)) * $products_tax);
+            $this->info['tax'] += $xtPrice->xtcFormat($shown_price - ($shown_price / (($products_tax < 10) ? "1.0" . str_replace('.', '', $products_tax) : "1." . str_replace('.', '', $products_tax))),false);;
+            $this->info['tax_groups'][$tax_index] += $xtPrice->xtcFormat((($shown_price /(100+$products_tax)) * $products_tax),false);
           }
         } else {
           $tax_index = TAX_NO_TAX.$products_tax_description;
@@ -610,34 +610,30 @@
             $this->info['tax_groups'][$tax_index] = 0;
           }
           if ($_SESSION['customers_status']['customers_status_ot_discount_flag'] == 1) {
-            // BOF - web28 - 2010-05-06 - PayPal API Modul / Paypal Express Modul
-            // $this->info['tax'] += ($shown_price_tax/100) * ($products_tax);
-            $this->tax_discount[$products[$i]['tax_class_id']]+=($shown_price_tax/100) * $products_tax;
-            // EOF - web28 - 2010-05-06 - PayPal API Modul / Paypal Express Modul
-            $this->info['tax_groups'][$tax_index] += ($shown_price_tax/100) * ($products_tax);
+            $this->tax_discount[$products[$i]['tax_class_id']]+=$xtPrice->xtcFormat(($shown_price_tax/100) * $products_tax,false);
+            $this->info['tax_groups'][$tax_index] += $xtPrice->xtcFormat(($shown_price_tax/100) * ($products_tax),false);
           } else {
-            $this->info['tax'] += ($shown_price/100) * ($products_tax);
-            $this->info['tax_groups'][$tax_index] += ($shown_price/100) * ($products_tax);
+            $this->info['tax'] += $xtPrice->xtcFormat(($shown_price/100) * ($products_tax),false);
+            $this->info['tax_groups'][$tax_index] += $xtPrice->xtcFormat(($shown_price/100) * ($products_tax),false);
           }
         }
         $index++;
       }
       // BOF - web28 - 2010-05-06 - PayPal API Modul / Paypal Express Modul
       foreach ($this->tax_discount as $value) {
-        //$this->info['tax']+=round($value, $xtPrice->get_decimal_places($order->info['currency']));
-        $this->info['tax']+=round($value, $xtPrice->get_decimal_places('')); //web28: parameter in get_decimal_places isn't used
+        $this->info['tax']+=$xtPrice->xtcFormat($value, false);
       }
       // EOF - web28 - 2010-05-06 - PayPal API Modul / Paypal Express Modul
       //$this->info['shipping_cost']=0;
       if ($_SESSION['customers_status']['customers_status_show_price_tax'] == '0') {
         $this->info['total'] = $this->info['subtotal']  + $xtPrice->xtcFormat($this->info['shipping_cost'], false,0,true);
         if ($_SESSION['customers_status']['customers_status_ot_discount_flag'] == '1') {
-          $this->info['total'] -= ($this->info['subtotal'] /100 * $_SESSION['customers_status']['customers_status_ot_discount']);
+          $this->info['total'] -= $xtPrice->xtcFormat(($this->info['subtotal'] /100 * $_SESSION['customers_status']['customers_status_ot_discount']), false);
         }
       } else {
         $this->info['total'] = $this->info['subtotal']  + $xtPrice->xtcFormat($this->info['shipping_cost'],false,0,true);
         if ($_SESSION['customers_status']['customers_status_ot_discount_flag'] == '1') {
-          $this->info['total'] -= ($this->info['subtotal'] /100 * $_SESSION['customers_status']['customers_status_ot_discount']);
+          $this->info['total'] -= $xtPrice->xtcFormat(($this->info['subtotal'] /100 * $_SESSION['customers_status']['customers_status_ot_discount']), false);
         }
       }
     }

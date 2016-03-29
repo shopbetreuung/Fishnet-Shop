@@ -286,7 +286,7 @@ function xtc_output_string($string, $translate = false, $protected = false) {
     $hour = (int) substr($raw_date, 11, 2);
     $minute = (int) substr($raw_date, 14, 2);
     $second = (int) substr($raw_date, 17, 2);
-    return strftime(DATE_FORMAT_LONG, mktime($hour, $minute, $second, $month, $day, $year));
+    return utf8_encode(strftime(DATE_FORMAT_LONG, mktime($hour, $minute, $second, $month, $day, $year)));
   }
 
 // Output a raw date string in the selected locale date format

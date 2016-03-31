@@ -87,7 +87,7 @@ if (isset ($_POST['payment']))
 	// GV Code line changed
 	if(isset($_SESSION['payment']) && $_SESSION['payment'] == 'no_payment') { //web28 - 2012-04-27 - fix for coupon amount == order total
 	  if ((is_array($payment_modules->modules) && (sizeof($payment_modules->modules) > 1) && (!is_object($$_SESSION['payment'])) && (!isset ($_SESSION['credit_covers']))) || (is_object($$_SESSION['payment']) && ($$_SESSION['payment']->enabled == false))) {
-		xtc_redirect(xtc_href_link(FILENAME_CHECKOUT_PAYMENT, 'error_message=' . urlencode(ERROR_NO_PAYMENT_MODULE_SELECTED), 'SSL'));
+		xtc_redirect(xtc_href_link(FILENAME_CHECKOUT_PAYMENT, 'error_message=' . urlencode(utf8_decode(ERROR_NO_PAYMENT_MODULE_SELECTED)), 'SSL'));
 	  }
 	}
 
@@ -107,7 +107,7 @@ if (DISPLAY_CONDITIONS_ON_CHECKOUT == 'true') {
   	$_SESSION['conditions'] = true;
 	}
   if ((!isset($_POST['conditions']) || $_POST['conditions'] == false) && (!isset($_SESSION['conditions']))) {
-    $error = str_replace('\n', '<br />', ERROR_CONDITIONS_NOT_ACCEPTED);
+    $error = str_replace('\n', '<br />', utf8_decode(ERROR_CONDITIONS_NOT_ACCEPTED));
     xtc_redirect(xtc_href_link(FILENAME_CHECKOUT_PAYMENT, 'error_message=' . urlencode($error), 'SSL', true, false));
   }
 }

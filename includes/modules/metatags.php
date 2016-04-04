@@ -103,11 +103,11 @@
 
 
 // ---------------------------------------------------------------------------------------
-//  noindex, nofollow bei "unwichtigen" Seiten
+//  noindex, follow bei "unwichtigen" Seiten
 // ---------------------------------------------------------------------------------------
   $meta_robots = META_ROBOTS;
-  if($noIndexUnimportant && !in_array(basename($PHP_SELF),$pagesToShow)) {
-    $meta_robots = 'noindex, follow, noodp';
+  if($noIndexUnimportant && (!in_array(basename($PHP_SELF),$pagesToShow) || $listing_split->current_page_number > 1)) {
+    $meta_robots = 'noindex, follow';
   }
 // ---------------------------------------------------------------------------------------
 
@@ -647,4 +647,18 @@ if(isset($ml_index)){
     echo $ml_index;
 }
 // EOF - h-h-h - 2011-08-22 - show only defined Meta Tags
+if ($listing_split->number_of_pages > 1) {
+
+	$tmp_meta_parameters = xtc_get_all_get_params(array ('page', 'info', 'x', 'y', 'keywords')).(isset($_GET['keywords'])?'&keywords='. urlencode($_GET['keywords']):'');
+	if ($listing_split->current_page_number == 2) {
+		echo '<link rel="prev" href="'.xtc_href_link(basename($PHP_SELF), $tmp_meta_parameters, $request_type).'" />'."\n";
+	} else if ($listing_split->current_page_number > 2) {
+		echo '<link rel="prev" href="'.xtc_href_link(basename($PHP_SELF), $tmp_meta_parameters . 'page=' . ($listing_split->current_page_number - 1), $request_type).'" />'."\n";
+	}
+	if ($listing_split->current_page_number < $listing_split->number_of_pages) {
+		echo '<link rel="next" href="'.xtc_href_link(basename($PHP_SELF), $tmp_meta_parameters . 'page=' . ($listing_split->current_page_number + 1), $request_type).'" />'."\n";
+	}
+	unset($tmp_meta_parameters);
+
+}
 ?>

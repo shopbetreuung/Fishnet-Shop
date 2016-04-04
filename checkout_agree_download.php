@@ -63,14 +63,38 @@ if (!isset ($_SESSION['shipping']))
 if (isset ($_POST['payment']))
   $_SESSION['payment'] = xtc_db_prepare_input($_POST['payment']);
 
-if (isset($_POST['payment']) && $_POST['payment'] == 'banktransfer') {
-	$_SESSION['banktransfer']['banktransfer_owner'] = xtc_db_prepare_input($_POST['banktransfer_owner']);
-	$_SESSION['banktransfer']['banktransfer_number'] = xtc_db_prepare_input($_POST['banktransfer_number']);
-	$_SESSION['banktransfer']['banktransfer_blz'] = xtc_db_prepare_input($_POST['banktransfer_blz']);
-	$_SESSION['banktransfer']['banktransfer_bankname'] = xtc_db_prepare_input($_POST['banktransfer_bankname']);
-	$_SESSION['banktransfer']['banktransfer_owner_email'] = xtc_db_prepare_input($_POST['banktransfer_owner_email']);
-}
-if ($_POST['comments_added'] != '')
+	// load the selected payment module
+	require_once (DIR_WS_CLASSES . 'payment.php');
+	if (isset ($_SESSION['credit_covers']) || !isset($_SESSION['payment'])) { //DokuMan - 2010-10-14 - check that payment is not yet set
+	  $_SESSION['payment'] = 'no_payment'; // GV Code Start/End ICW added for CREDIT CLASS
+	}
+	
+	$payment_modules = new payment($_SESSION['payment']);
+
+	// GV Code ICW ADDED FOR CREDIT CLASS SYSTEM
+	require_once (DIR_WS_CLASSES . 'order_total.php');
+	require_once (DIR_WS_CLASSES . 'order.php');
+	$order = new order();
+
+	$payment_modules->update_status();
+
+	// GV Code Start
+	$order_total_modules = new order_total();
+	$order_total_modules->collect_posts();
+	$order_total_modules->pre_confirmation_check();
+	// GV Code End
+
+	// GV Code line changed
+	if(isset($_SESSION['payment']) && $_SESSION['payment'] == 'no_payment') { //web28 - 2012-04-27 - fix for coupon amount == order total
+	  if ((is_array($payment_modules->modules) && (sizeof($payment_modules->modules) > 1) && (!is_object($$_SESSION['payment'])) && (!isset ($_SESSION['credit_covers']))) || (is_object($$_SESSION['payment']) && ($$_SESSION['payment']->enabled == false))) {
+		xtc_redirect(xtc_href_link(FILENAME_CHECKOUT_PAYMENT, 'error_message=' . urlencode(utf8_decode(ERROR_NO_PAYMENT_MODULE_SELECTED)), 'SSL'));
+	  }
+	}
+
+	if (is_array($payment_modules->modules)) {
+	  $payment_modules->pre_confirmation_check();
+	}
+
   $_SESSION['comments'] = xtc_db_prepare_input($_POST['comments']);
 
 //-- TheMedia Begin check if display conditions on checkout page is true
@@ -83,13 +107,13 @@ if (DISPLAY_CONDITIONS_ON_CHECKOUT == 'true') {
   	$_SESSION['conditions'] = true;
 	}
   if ((!isset($_POST['conditions']) || $_POST['conditions'] == false) && (!isset($_SESSION['conditions']))) {
-    $error = str_replace('\n', '<br />', ERROR_CONDITIONS_NOT_ACCEPTED);
+    $error = str_replace('\n', '<br />', utf8_decode(ERROR_CONDITIONS_NOT_ACCEPTED));
     xtc_redirect(xtc_href_link(FILENAME_CHECKOUT_PAYMENT, 'error_message=' . urlencode($error), 'SSL', true, false));
   }
 }
 
 // build list of products in cart
-require (DIR_WS_CLASSES . 'order.php');
+require_once (DIR_WS_CLASSES . 'order.php');
 $order = new order();
 
 // redirect to checkout_confirmation if no downloads in the cart

@@ -82,13 +82,6 @@ if (isset ($_SESSION['credit_covers']) || !isset($_SESSION['payment'])) { //Doku
   $_SESSION['payment'] = 'no_payment'; // GV Code Start/End ICW added for CREDIT CLASS
 }
 
-if (isset($_SESSION['banktransfer'])) {
-	foreach ($_SESSION['banktransfer'] as $banktransfer_data_name => $banktransfer_data_value) {
-		$_POST[$banktransfer_data_name] = $banktransfer_data_value;
-		unset($_SESSION['banktransfer'][$banktransfer_data_name]);
-	}
-}
-
 $payment_modules = new payment($_SESSION['payment']);
 
 // GV Code ICW ADDED FOR CREDIT CLASS SYSTEM
@@ -111,9 +104,6 @@ if(isset($_SESSION['payment']) && $_SESSION['payment'] != 'no_payment') { //web2
   }
 }
 
-if (is_array($payment_modules->modules)) {
-  $payment_modules->pre_confirmation_check();
-}
 // load the selected shipping module
 require (DIR_WS_CLASSES . 'shipping.php');
 $shipping_modules = new shipping($_SESSION['shipping']);

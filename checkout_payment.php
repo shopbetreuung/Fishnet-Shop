@@ -161,6 +161,11 @@ if ($order_total > 0) {
     $smarty->assign('error', $_SESSION['reshash']['FORMATED_ERRORS']);
   }
   // EOF - Tomcraft - 2009-10-03 - Paypal Express Modul
+  
+  if (isset($_GET['error_message']) && xtc_not_null($_GET['error_message'])) {
+	$smarty->assign('error', utf8_encode(urldecode($_GET['error_message'])));
+}
+  
   $selection = $payment_modules->selection();
 
   $radio_buttons = 0;

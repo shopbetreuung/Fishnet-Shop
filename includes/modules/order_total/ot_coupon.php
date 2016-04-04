@@ -327,7 +327,7 @@ class ot_coupon {
       $this->tax_info =  ' ('. trim(str_replace(array(' %s',','), array('',''),TAX_INFO_EXCL)) .')';
     }
 
-    return $od_amount;
+    return $xtPrice->xtcFormat($od_amount, false);
   }
 
 ///////////////////////////////////////////////////////////////////////
@@ -335,8 +335,9 @@ class ot_coupon {
 ///////////////////////////////////////////////////////////////////////
 
   function new_calculate_tax_deduction($od_amount, $order_total) {
-    global $order;
+    global $order, $xtPrice;
 
+	
     //Wenn der Kupon ohne Steuer definiert wurde, muss die Bestellsumme korrigiert werden
     if ($this->include_tax == 'false'){
       $order_total = $order_total + $order->info['tax'];
@@ -352,11 +353,11 @@ class ot_coupon {
       $t_flag = true;
       if ($t_flag) {
         if ($_SESSION['customers_status']['customers_status_show_price_tax'] != '1') { //NETTO Preise
-            $god_amount = $order->info['tax_groups'][$key] - $order->info['tax_groups'][$key] * $od_amount_pro / 100;
+            $god_amount = $order->info['tax_groups'][$key] - $xtPrice->xtcFormat($order->info['tax_groups'][$key] / 100 * $od_amount_pro, false);
             $order->info['tax_groups'][$key] = $god_amount; //bei NETTO Preisen ersetzen
         } else { //BRUTTO Preise
-          $god_amount = $order->info['tax_groups'][$key] * $od_amount_pro / 100;
-          $order->info['tax_groups'][$key] = $order->info['tax_groups'][$key] - $god_amount; //bei BRUTTO Preisen abziehen
+          $god_amount = $xtPrice->xtcFormat($order->info['tax_groups'][$key] / 100 * $od_amount_pro, false);
+          $order->info['tax_groups'][$key] -= $god_amount; //bei BRUTTO Preisen abziehen
         }
         //echo $god_amount . '<br>';
         $tod_amount += $god_amount; //hier wird die Steuer aufaddiert
@@ -367,7 +368,7 @@ class ot_coupon {
     if ($_SESSION['customers_status']['customers_status_show_price_tax'] != '1') {
       $order->info['tax'] = $tod_amount; //bei NETTO Preisen ersetzen
     }
-
+		
   }
 
 ///////////////////////////////////////////////////////////////////////

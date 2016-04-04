@@ -354,10 +354,10 @@ $smarty->assign('checkout',xtc_href_link(FILENAME_CHECKOUT_SHIPPING, '', 'SSL'))
 $smarty->assign('store_name', encode_htmlspecialchars(TITLE));
 
 if (isset($_GET['error_message']) && xtc_not_null($_GET['error_message'])) {
-	$smarty->assign('error','<p class="errormessage alert alert-error"">'. encode_htmlspecialchars(urldecode($_GET['error_message'])).'</p>');
+	$smarty->assign('error','<p class="errormessage alert alert-danger">'.utf8_encode(urldecode($_GET['error_message'])).'</p>');
 }
 if (isset($_GET['info_message']) && xtc_not_null($_GET['info_message'])) {
-	$smarty->assign('error','<p class="errormessage alert alert-error"">'.encode_htmlspecialchars($_GET['info_message']).'</p>');
+	$smarty->assign('error','<p class="errormessage alert alert-warning">'.utf8_encode($_GET['info_message']).'</p>');
 }
 
 include(DIR_WS_INCLUDES.FILENAME_BANNER);

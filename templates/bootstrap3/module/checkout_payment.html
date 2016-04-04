@@ -9,7 +9,7 @@
 </div>
 
 <br />
-{if $error!=''}<div class="errormessage">{$error}</div>{/if}
+{if $error!=''}<div class="alert alert-danger">{$error}</div>{/if}
 {if $step2!='true'}
 <h1>{#title_address#}</h1>
 {$FORM_ACTION}
@@ -27,7 +27,7 @@
 <table width="100%" border="0" cellspacing="0" cellpadding="4">
   <tr>
     <td>{$AGB_checkbox}</td>
-    <td width="100%"><strong>{#text_accept_agb#}</strong></td>
+    <td width="100%">&nbsp;<strong>{#text_accept_agb#}</strong></td>
   </tr>
 </table>
 {/if}

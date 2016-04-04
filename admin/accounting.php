@@ -157,6 +157,7 @@ function set_checkbox (set) {
       $admin_access = xtc_db_fetch_array($admin_access_query);
     }
 
+$admin_access_columns_query = xtc_db_query("select * from " . TABLE_ADMIN_ACCESS);
 $fields = mysqli_fetch_fields($admin_access_columns_query);
 $columns = mysqli_num_fields($admin_access_columns_query);
 

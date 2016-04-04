@@ -22,7 +22,9 @@
 	{if $module_data.PRODUCTS_BUTTON_BUY_NOW}
 	<div class="col-sm-6 col-md-4">
 		<div class="thumbnail">
-			{if $module_data.PRODUCTS_IMAGE!=''}<a href="{$module_data.PRODUCTS_LINK}"><img src="{$module_data.PRODUCTS_IMAGE}" alt="{$module_data.PRODUCTS_NAME}" class="img-responsive" /></a>{/if}
+			<div class="equalize products_image_block">
+				{if $module_data.PRODUCTS_IMAGE!=''}<a href="{$module_data.PRODUCTS_LINK}"><img src="{$module_data.PRODUCTS_IMAGE}" alt="{$module_data.PRODUCTS_NAME}" class="img-responsive" /></a>{/if}
+			</div>
 			<div class="caption" data-col="{$smarty.foreach.aussen.iteration}">
 				<div class="equalize products_name_block">
 					<h2 class="h4"><a href="{$module_data.PRODUCTS_LINK}">{$module_data.PRODUCTS_NAME}</a></h2>

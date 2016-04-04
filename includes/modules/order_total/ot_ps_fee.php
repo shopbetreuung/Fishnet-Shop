@@ -10,7 +10,7 @@
    based on:
    (c) 2000-2001 The Exchange Project  (earlier name of osCommerce)
    (c) 2002-2003 osCommerce(ot_ps_fee.php,v 1.02 2003/02/24); www.oscommerce.com
-   (C) 2001 - 2003 TheMedia, Dipl.-Ing Thomas Pl‰nkers ; http://www.themedia.at & http://www.oscommerce.at
+   (C) 2001 - 2003 TheMedia, Dipl.-Ing Thomas Pl√§nkers ; http://www.themedia.at & http://www.oscommerce.at
 
    Released under the GNU General Public License
    -----------------------------------------------------------------------------------------
@@ -141,7 +141,7 @@
     function install() {
       xtc_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) values ('MODULE_ORDER_TOTAL_PS_FEE_STATUS', 'true', '6', '0', 'xtc_cfg_select_option(array(\'true\', \'false\'), ', now())");
 
-      xtc_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_key, configuration_value, configuration_group_id, sort_order, date_added) values ('MODULE_ORDER_TOTAL_PS_FEE_SORT_ORDER', '35', '6', '0', now())");
+      xtc_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_key, configuration_value, configuration_group_id, sort_order, date_added) values ('MODULE_ORDER_TOTAL_PS_FEE_SORT_ORDER', '36', '6', '0', now())");
 
       xtc_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_key, configuration_value, configuration_group_id, sort_order, date_added) values ('MODULE_ORDER_TOTAL_PS_FEE_FLAT', 'AT:3.00,DE:3.58,00:9.99', '6', '0', now())");
 

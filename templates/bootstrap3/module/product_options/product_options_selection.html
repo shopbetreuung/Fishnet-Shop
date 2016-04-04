@@ -1,27 +1,17 @@
 {if $options!=''}
-
-<table width="100%" border="0" cellspacing="0" cellpadding="0">
-  {foreach name=outer item=options_data from=$options} 
-  <tr>
-    <td valign="top" class="text-nowrap" width="1%"><b>{$options_data.NAME}:</b>&nbsp;</td>
-    <td class="main" width="99%">
-  {foreach key=key_data name=key_data item=item_data from=$options_data.DATA}
-    <input type="radio" name="id[{$options_data.ID}]" value="{$item_data.ID}" {if $smarty.foreach.key_data.first}checked="checked" {/if} />
- 		{$item_data.TEXT}
-       	{if $item_data.MSS_VPE_PRICE}
-        {$item_data.MSS_WEIGHT} {$item_data.MSS_VPE_NAME}
-       	({$item_data.MSS_PREIS_PRO_EINHEIT}
-      	pro 
-      	{$item_data.MSS_VPE_VALUE} {$item_data.MSS_VPE_NAME} )
-        Preis: 
-        {$item_data.MSS_VPE_PRICE}
-    <br /> 
-        {else}
-           {$item_data.FULL_PRICE}
-        {/if}
-  {/foreach}
-</td>
-  </tr>
-  {/foreach} 
-</table>
+	<table width="100%" border="0" cellspacing="0" cellpadding="0">
+		{foreach name=outer item=options_data from=$options} 
+			<tr>
+				<td valign="top" class="text-nowrap" width="1%"><b>{$options_data.NAME}:</b>&nbsp;</td>
+				<td class="main" width="99%">
+					{foreach key=key_data name=key_data item=item_data from=$options_data.DATA}
+						<input type="radio" name="id[{$options_data.ID}]" value="{$item_data.ID}" {if $smarty.foreach.key_data.first}checked="checked" {/if} />
+						{$item_data.TEXT}
+						{$item_data.FULL_PRICE}
+						{if $item_data.VPE !='' } ({$item_data.VPE}){/if}
+					{/foreach}
+				</td>
+			</tr>
+		{/foreach} 
+	</table>
 {/if}

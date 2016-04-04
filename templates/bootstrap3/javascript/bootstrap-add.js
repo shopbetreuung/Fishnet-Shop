@@ -1,9 +1,3 @@
-$(document).ready(function () {
-  $('[data-toggle="offcanvas"]').click(function () {
-    $('.row-offcanvas').toggleClass('active')
-  });
-});
-
 function getRowSize() {
 	
 	if ($(window).width() < 768) {
@@ -49,8 +43,16 @@ function resizeProductBoxes() {
 	}); 	
 }
 
-$(document).ready(function() {
-   resizeProductBoxes();		
+jQuery(window).load(function() {
+   resizeProductBoxes();	
+    
+	$('[data-toggle="offcanvas"]').click(function () {
+		$('.row-offcanvas').toggleClass('active')
+	});
+	
+    $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+        resizeProductBoxes();
+    });
 }); 
 
 $(window).resize(function() {

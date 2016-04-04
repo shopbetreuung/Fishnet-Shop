@@ -496,7 +496,7 @@ class xtcImport {
 						$categorie_data = array ('parent_id' => $parent, 'categories_status' => 1, 'date_added' => 'now()', 'last_modified' => 'now()');
 
 						xtc_db_perform(TABLE_CATEGORIES, $categorie_data);
-						$cat_id = mysqli_insert_id(xtc_db_connect());
+						$cat_id = xtc_db_insert_id();
 						$this->counter['cat_new']++;
 						$code = '$this->CatTree'.$parTree.'[\''.addslashes($cat[$i]).'\'][\'ID\']='.$cat_id.';';
 						eval ($code);

@@ -204,6 +204,7 @@
                 <?php
               } // end sr_exp
               ?>
+
 <div class='row'>
                 <div class='col-xs-12'>
                     <div class="col-xs-3 col-sm-1 text-right"><?php echo xtc_image(DIR_WS_ICONS.'heading_statistic.gif'); ?></div>
@@ -213,7 +214,8 @@
                   <?php
                   if ($srExp < 1) {
                     ?>
-        <div class='col-xs-12' style="border: 1px solid; border-color: #cccccc; background-color: #fcfcfc;">   
+        <?php echo xtc_draw_form('stats_sales_report', FILENAME_SALES_REPORT, '', 'get'); ?> 
+        <div class='col-xs-12' style="border: 1px solid; border-color: #cccccc; background-color: #fcfcfc;">         
             <div class='col-xs-12'><br></div>
             <div class='col-xs-12 col-sm-4 col-md-2 '>
                                 <input type="radio" name="report" value="1" <?php if ($srView == 1) echo "checked"; ?>><?php echo REPORT_TYPE_YEARLY; ?><br />
@@ -247,7 +249,7 @@
                                   }
                                   for ($i = 1; $i < 13; $i++) {
                                     ?>
-                                    <option<?php if ($m == $i) echo " selected"; ?> value="<?php echo $i; ?>"><?php echo strftime("%B", mktime(0, 0, 0, $i, 1)); ?></option>
+                                    <option<?php if ($m == $i) echo " selected"; ?> value="<?php echo $i; ?>"><?php echo utf8_encode(strftime("%B", mktime(0, 0, 0, $i, 1))); ?></option>
                                     <?php
                                   }
                                   ?>
@@ -291,7 +293,7 @@
                                   }
                                   for ($i = 1; $i < 13; $i++) {
                                     ?>
-                                    <option<?php if ($m == $i) echo " selected"; ?> value="<?php echo $i; ?>"><?php echo strftime("%B", mktime(0, 0, 0, $i, 1)); ?></option>
+                                    <option<?php if ($m == $i) echo " selected"; ?> value="<?php echo $i; ?>"><?php echo utf8_encode(strftime("%B", mktime(0, 0, 0, $i, 1))); ?></option>
                                     <?php
                                   }
                                   ?>

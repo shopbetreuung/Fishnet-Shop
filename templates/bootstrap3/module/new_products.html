@@ -7,12 +7,14 @@
 	{if $module_data.PRODUCTS_BUTTON_BUY_NOW}
 	<div class="col-sm-6 col-md-4">
 		<div class="thumbnail">
-			{if $module_data.PRODUCTS_IMAGE!=''}<a href="{$module_data.PRODUCTS_LINK}"><img src="{$module_data.PRODUCTS_IMAGE}" alt="{$module_data.PRODUCTS_NAME}" class="img-responsive" /></a>{/if}
+			<div class="equalize products_image_block">
+				{if $module_data.PRODUCTS_IMAGE!=''}<a href="{$module_data.PRODUCTS_LINK}"><img src="{$module_data.PRODUCTS_IMAGE}" alt="{$module_data.PRODUCTS_NAME}" class="img-responsive" /></a>{/if}
+			</div>
 			<div class="caption" data-col="{$smarty.foreach.aussen.iteration}">
 				<div class="equalize products_name_block">
 					<h2 class="h4"><a href="{$module_data.PRODUCTS_LINK}">{$module_data.PRODUCTS_NAME}</a></h2>
 				</div>
-				{if $module_data.PRODUCTS_SHORT_DESCRIPTION}<div class="products_short_description_block equalize"><p>{$module_data.PRODUCTS_SHORT_DESCRIPTION}</p></div>{/if}
+				<div class="equalize products_short_description_block">{if $module_data.PRODUCTS_SHORT_DESCRIPTION}<p>{$module_data.PRODUCTS_SHORT_DESCRIPTION}</p>{/if}</div>
 				
 				<div class="equalize products_info_block">
 					<p>
@@ -40,19 +42,20 @@
 	{else}
 	<div class="col-sm-6 col-md-4">
 		<div class="thumbnail">
-			{if $module_data.PRODUCTS_IMAGE!=''}<a href="{$module_data.PRODUCTS_LINK}"><img src="{$module_data.PRODUCTS_IMAGE}" alt="{$module_data.PRODUCTS_NAME}" class="img-responsive" /></a>{/if}
+			<div class="equalize products_image_block">
+				{if $module_data.PRODUCTS_IMAGE!=''}<a href="{$module_data.PRODUCTS_LINK}"><img src="{$module_data.PRODUCTS_IMAGE}" alt="{$module_data.PRODUCTS_NAME}" class="img-responsive" /></a>{/if}
+			</div>
 			<div class="caption" data-col="{$smarty.foreach.aussen.iteration}">
 				<div class="equalize products_name_block">
 					<h2 class="h4"><a href="{$module_data.PRODUCTS_LINK}">{$module_data.PRODUCTS_NAME}</a></h2>
 				</div>
-				{if $module_data.PRODUCTS_SHORT_DESCRIPTION}<div class="products_short_description_block equalize"><p>{$module_data.PRODUCTS_SHORT_DESCRIPTION}</p></div>{/if}
+				<div class="equalize products_short_description_block">{if $module_data.PRODUCTS_SHORT_DESCRIPTION}<p>{$module_data.PRODUCTS_SHORT_DESCRIPTION}</p>{/if}</div>
 				
 				<div class="equalize products_price_block">
 					<p>
 						<br /><span class="lead">{$module_data.PRODUCTS_PRICE}</span>
 					</p>				
 				</div>
-				
 			</div> 
 			<div style="text-align: center;">{$module_data.PRODUCTS_BUTTON_DETAILS|replace:"btn btn-default":"btn btn-default btn-fullwidth"}</div>
 			<div style="clear: both;"></div>

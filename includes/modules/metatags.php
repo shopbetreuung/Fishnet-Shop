@@ -604,10 +604,10 @@ if (USE_BOOTSTRAP != "true") {
 echo '<meta http-equiv="cache-control" content="no-cache" />'."\n";
 }
 if (metaClean($meta_keyw) != '') {
-  echo '<meta name="keywords" content="'. utf8_encode(metaClean($meta_keyw)) .'" />'."\n";
+  echo '<meta name="keywords" content="'. metaClean($meta_keyw) .'" />'."\n";
 }
 if (metaClean($meta_descr,$metaDesLength) != '') {
-  echo '<meta name="description" content="'. utf8_encode(metaClean($meta_descr,$metaDesLength)) .'" />'."\n";
+  echo '<meta name="description" content="'. metaClean($meta_descr,$metaDesLength) .'" />'."\n";
 }
 if (USE_BOOTSTRAP != "true") {
 if ($_SESSION['language_code'] != '') {
@@ -618,17 +618,17 @@ if ($meta_robots != '' && !isset($ml_index)) {
   echo '<meta name="robots" content="'. $meta_robots .'" />'."\n";
 }
 if (metaClean(META_AUTHOR) != '') {
-  echo '<meta name="author" content="'.utf8_encode(metaClean(META_AUTHOR)) .'" />'."\n";
+  echo '<meta name="author" content="'.metaClean(META_AUTHOR) .'" />'."\n";
 }
 if (metaClean(META_PUBLISHER) != '') {
-  echo '<meta name="publisher" content="'. utf8_encode(metaClean(META_PUBLISHER)) .'" />'."\n";
+  echo '<meta name="publisher" content="'. metaClean(META_PUBLISHER) .'" />'."\n";
 }
 if (metaClean(META_COMPANY) != '') {
-  echo '<meta name="company" content="'. utf8_encode(metaClean(META_COMPANY)) .'" />'."\n";
+  echo '<meta name="company" content="'. metaClean(META_COMPANY) .'" />'."\n";
 }
 if (USE_BOOTSTRAP != "true") {
 if (metaClean(META_TOPIC) != '') {
-  echo '<meta name="page-topic" content="'. utf8_encode(metaClean(META_TOPIC)) .'" />'."\n";
+  echo '<meta name="page-topic" content="'. metaClean(META_TOPIC) .'" />'."\n";
 }
 }
 if (USE_BOOTSTRAP != "true") {

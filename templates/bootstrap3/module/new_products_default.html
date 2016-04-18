@@ -7,7 +7,7 @@
 {foreach name=aussen item=module_data from=$module_content}
 	{if $module_data.PRODUCTS_BUTTON_BUY_NOW}
 	<div class="col-sm-6 col-md-4">
-		<div class="thumbnail">
+		<div class="thumbnail" data-col="{$smarty.foreach.aussen.iteration}">
 			<div class="equalize products_image_block">
 				{if $module_data.PRODUCTS_IMAGE!=''}<a href="{$module_data.PRODUCTS_LINK}"><img src="{$module_data.PRODUCTS_IMAGE}" alt="{$module_data.PRODUCTS_NAME}" class="img-responsive" /></a>{/if}
 			</div>
@@ -15,7 +15,7 @@
 				<div class="equalize products_name_block">
 					<h2 class="h4"><a href="{$module_data.PRODUCTS_LINK}">{$module_data.PRODUCTS_NAME}</a></h2>
 				</div>
-				<div class="equalize products_short_description_block">{$module_data.PRODUCTS_SHORT_DESCRIPTION}</div>>
+				<div class="equalize products_short_description_block">{$module_data.PRODUCTS_SHORT_DESCRIPTION}</div>
 				
 				<div class="equalize products_info_block">
 					<p>
@@ -42,7 +42,7 @@
 	</div>
 	{else}
 	<div class="col-sm-6 col-md-4">
-		<div class="thumbnail">
+		<div class="thumbnail" data-col="{$smarty.foreach.aussen.iteration}">
 			<div class="equalize products_image_block">
 				{if $module_data.PRODUCTS_IMAGE!=''}<a href="{$module_data.PRODUCTS_LINK}"><img src="{$module_data.PRODUCTS_IMAGE}" alt="{$module_data.PRODUCTS_NAME}" class="img-responsive" /></a>{/if}
 			</div>
@@ -50,7 +50,7 @@
 				<div class="equalize products_name_block">
 					<h2 class="h4"><a href="{$module_data.PRODUCTS_LINK}">{$module_data.PRODUCTS_NAME}</a></h2>
 				</div>
-				<div class="equalize products_short_description_block">{$module_data.PRODUCTS_SHORT_DESCRIPTION}</div>>
+				<div class="equalize products_short_description_block">{$module_data.PRODUCTS_SHORT_DESCRIPTION}</div>
 				
 				<div class="equalize products_price_block">
 					<p>

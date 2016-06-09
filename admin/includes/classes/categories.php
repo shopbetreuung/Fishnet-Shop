@@ -35,7 +35,11 @@ Beispiel neueTabellenfelder in der Tabelle products: products_manufacturer_model
 define('ADD_PRODUCTS_FIELDS','products_manufacturer_model,products_shipping_class');
 */
 
-define('ADD_PRODUCTS_FIELDS','products_manufacturers_model');
+// define('ADD_PRODUCTS_FIELDS','products_manufacturers_model');
+// BOF - Fishnet Services - Nicolas Gemsjaeger
+// Modul: Alt and Title Text for product images	 - 23.08.2013
+define('ADD_PRODUCTS_FIELDS','products_manufacturers_model,products_image_title,products_image_alt');
+// EOF - Fishnet Services - Nicolas Gemsjaeger
 define('ADD_PRODUCTS_DESCRIPTION_FIELDS','products_order_description'); //products_order_description
 
 define('ADD_CATEGORIES_FIELDS','');
@@ -602,8 +606,12 @@ class categories {
         }
         @ xtc_del_image_file($products_image_name);
         rename(DIR_FS_CATALOG_ORIGINAL_IMAGES.'/'.$pIMG->filename, DIR_FS_CATALOG_ORIGINAL_IMAGES.'/'.$products_image_name);
-        //get data & write to table
-        $mo_img = array ('products_id' => xtc_db_prepare_input($products_id), 'image_nr' => xtc_db_prepare_input($img +1), 'image_name' => xtc_db_prepare_input($products_image_name));
+		//get data & write to table
+		// $mo_img = array ('products_id' => xtc_db_prepare_input($products_id), 'image_nr' => xtc_db_prepare_input($img +1), 'image_name' => xtc_db_prepare_input($products_image_name));
+		// BOF - Fishnet Services - Nicolas Gemsjaeger
+		// Modul: Alt and Title Text for product images	 - 23.08.2013
+		$mo_img = array ('products_id' => xtc_db_prepare_input($products_id), 'image_nr' => xtc_db_prepare_input($img +1), 'image_name' => xtc_db_prepare_input($products_image_name), 'image_title' => xtc_db_prepare_input($products_data['image_title'][$img+1]), 'image_alt' => xtc_db_prepare_input($products_data['image_alt'][$img+1]));
+		// EOF - Fishnet Services - Nicolas Gemsjaeger
         if ($action == 'insert') {
           xtc_db_perform(TABLE_PRODUCTS_IMAGES, $mo_img);
         } elseif ($action == 'update' && $products_data['products_previous_image_'. ($img +1)]) {
@@ -624,8 +632,40 @@ class categories {
         require (DIR_WS_INCLUDES.'product_popup_images.php');
         //set file rights
         $this->set_products_images_file_rights($products_image_name);
-      }
+      } else {
+	  	// save, when wo no upload an image
+		$mo_img = array('image_title' => xtc_db_prepare_input($products_data['image_title'][$img+1]), 'image_alt' => xtc_db_prepare_input($products_data['image_alt'][$img+1]));
+		
+		if ($action == 'update' && $products_data['products_previous_image_'. ($img +1)]) {
+          if ($products_data['del_mo_pic']) {
+            foreach ($products_data['del_mo_pic'] AS $dummy => $val) {
+              if ($val == $products_data['products_previous_image_'. ($img +1)])
+                xtc_db_perform(TABLE_PRODUCTS_IMAGES, $mo_img);
+              break;
+            }
+          }
+          xtc_db_perform(TABLE_PRODUCTS_IMAGES, $mo_img, 'update', 'image_name = \''.xtc_db_input($products_data['products_previous_image_'. ($img +1)]).'\'');
+        } elseif (!$products_data['products_previous_image_'. ($img +1)]) {
+          xtc_db_perform(TABLE_PRODUCTS_IMAGES, $mo_img);
+        }
+	  }
     }
+	  
+	// BOF - Fishnet Services - Nicolas Gemsjaeger
+	// Modul: Alt and Title Text for product images	 - 23.08.2013
+	if (is_array($products_data['image_title'])) {
+		foreach ($products_data['image_title'] as $it_image_nr=>$it_image_title) {
+			$mo_img = array ('image_title' => xtc_db_prepare_input($it_image_title));
+			xtc_db_perform(TABLE_PRODUCTS_IMAGES, $mo_img, 'update', 'image_nr = \''.xtc_db_prepare_input($it_image_nr+1).'\' AND products_id = \''.xtc_db_prepare_input($products_id).'\'');	
+		}
+	}
+	if (is_array($products_data['image_alt'])) {
+		foreach ($products_data['image_alt'] as $ia_image_nr=>$ia_image_title) {
+			$mo_img = array ('image_alt' => xtc_db_prepare_input($ia_image_title));
+			xtc_db_perform(TABLE_PRODUCTS_IMAGES, $mo_img, 'update', 'image_nr = \''.xtc_db_prepare_input($ia_image_nr+1).'\' AND products_id = \''.xtc_db_prepare_input($products_id).'\'');	
+		}
+	}
+	// EOF - Fishnet Services - Nicolas Gemsjaeger
 
     if (isset ($products_data['products_image']) && xtc_not_null($products_data['products_image']) && ($products_data['products_image'] != 'none')) {
       $sql_data_array['products_image'] = xtc_db_prepare_input($products_data['products_image']);
@@ -865,6 +905,8 @@ class categories {
         xtc_db_query("INSERT INTO ".TABLE_PRODUCTS_IMAGES."
                                            SET products_id = '".$dup_products_id."',
                                                image_nr    = '".$mo_img['image_nr']."',
+											  image_title    = '".$mo_img['image_title']."',
+											  image_alt    = '".$mo_img['image_alt']."',
                                                image_name  = '".$dup_products_image_name."'");
       }
     }

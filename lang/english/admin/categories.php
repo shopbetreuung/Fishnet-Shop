@@ -220,4 +220,10 @@ define('TEXT_PRODUCTS_ORDER_DESCRIPTION','Order description');
 
 define('TEXT_HOW_TO_LINK', '<b>Page view after copying / link</b>');
 define('TEXT_HOW_TO_LINK_INFO', 'Item entry screen <br/> (For multiple items to last in the list)');
+
+// BOF - Fishnet Services - Nicolas Gemsjaeger
+// Modul: Alt and Title Text for product images	 - 23.08.2013
+define('TEXT_PRODUCTS_IMAGE_TITLE', 'Title (Titel text for the image, for example, the text that is displayed when you hover your mouse over the image): ');
+define('TEXT_PRODUCTS_IMAGE_ALT', 'Alt (Alternative text of the image, that is displayed if the image fails to load): ');
+// EOF - Fishnet Services - Nicolas Gemsjaeger
 ?>

@@ -379,6 +379,11 @@ class product {
    */
   function buildDataArray(&$array,$image='thumbnail') {
     global $xtPrice,$main;
+	  
+	// BOF - Fishnet Services - Nicolas Gemsjaeger
+	// Modul: Alt and Title Text for product images	 - 23.08.2013
+	$img_data = mysql_fetch_array(mysql_query("SELECT products_image_title, products_image_alt FROM ".TABLE_PRODUCTS." WHERE products_id = '".$array['products_id']."' LIMIT 1"));
+	// EOF - Fishnet Services - Nicolas Gemsjaeger
 
     //get tax rate
     $tax_rate = isset($xtPrice->TAX[$array['products_tax_class_id']]) ? $xtPrice->TAX[$array['products_tax_class_id']] : 0; //DokuMan: set Undefined index
@@ -434,7 +439,12 @@ class product {
                           'PRODUCTS_VPE' => $main->getVPEtext($array, $products_price['plain']),
                           'PRODUCTS_IMAGE' => $products_image,
                           'PRODUCTS_IMAGE_SIZE' => $img_attr,
-                          'PRODUCTS_IMAGE_TITLE' => str_replace('"','',$array['products_name']),
+						  // 'PRODUCTS_IMAGE_TITLE' => str_replace('"','',$array['products_name']),
+						  // BOF - Fishnet Services - Nicolas Gemsjaeger
+						  // Modul: Alt and Title Text for product images	 - 23.08.2013
+						  'PRODUCTS_IMAGE_TITLE'=>!empty($img_data['products_image_title'])?$img_data['products_image_title']:str_replace('"','',$array['products_name']),
+						  'PRODUCTS_IMAGE_ALT'=>!empty($img_data['products_image_alt'])?$img_data['products_image_alt']:str_replace('"','',$array['products_name']),
+						  // EOF - Fishnet Services - Nicolas Gemsjaeger
                           'PRODUCTS_LINK' => xtc_href_link(FILENAME_PRODUCT_INFO, xtc_product_link($array['products_id'], $array['products_name'])),
                           'PRODUCTS_PRICE' => $products_price['formated'],
                           'PRODUCTS_TAX_INFO' => $main->getTaxInfo($tax_rate),

@@ -1,40 +1,40 @@
 <?PHP
 /*-----------------------------------------------------------------------
     $Id: shopstat_functions.inc.php 2522 2011-12-14 13:45:11Z dokuman $
-    xtC-SEO-Module by www.ShopStat.com (Hartmut KÃ¶nig)
+    xtC-SEO-Module by www.ShopStat.com (Hartmut König)
     http://www.shopstat.com
     info@shopstat.com
-    Â© 2004 ShopStat.com
+    © 2004 ShopStat.com
     All Rights Reserved.
 
    Version 1.07 rev.06(c) by web28  - www.rpa-com.de
 ------------------------------------------------------------------------*/
 //#################################
 
-//-- Einstellungen fÃ¼r die Trennzeichen -   Doppelpunkt oder Minuszeichen
-//-- Bei Minuszeichen wird eine spezielle htaccess Datei benÃ¶tigt
+//-- Einstellungen für die Trennzeichen -   Doppelpunkt oder Minuszeichen
+//-- Bei Minuszeichen wird eine spezielle htaccess Datei benötigt
 define('SEO_SEPARATOR',':');
 //define('SEO_SEPARATOR','-'); //.htaccess Datei entsprechend anpassen
 
 //Sonderzeichen
-define('SPECIAL_CHAR_FR', true);  //FranzÃ¶sische Sonderzeichen
-define('SPECIAL_CHAR_ES', true);  //Spanische/Italienische/Portugisische Sonderzeichen (nur aktivieren wenn auch franzÃ¶siche Sonderzeichen aktiviert sind)
+define('SPECIAL_CHAR_FR', true);  //Französische Sonderzeichen
+define('SPECIAL_CHAR_ES', true);  //Spanische/Italienische/Portugisische Sonderzeichen (nur aktivieren wenn auch französiche Sonderzeichen aktiviert sind)
 define('SPECIAL_CHAR_MORE', true);  //Weitere Sonderzeichen
 
-//-- Kategorienamen in Artikellink hinzufÃ¼gen - Standard true
+//-- Kategorienamen in Artikellink hinzufügen - Standard true
 //-- false verbessert die Performance bei Shops mit sehr vielen Kategorien
 //-- false erzeugt eindeutige Artikellinks bei verlinkten Artikeln
 define('ADD_CAT_NAMES_TO_PRODUCT_LINK', true); // true false
 
 //#################################
 
-//BOF - web28 - 2010-08-18 -- Definition fÃ¼r die Trennzeichen
+//BOF - web28 - 2010-08-18 -- Definition für die Trennzeichen
 define('CAT_DIVIDER',SEO_SEPARATOR.SEO_SEPARATOR.SEO_SEPARATOR); //Kategorie ':::'
 define('ART_DIVIDER',SEO_SEPARATOR.SEO_SEPARATOR);               //Artikel '::'
 define('CNT_DIVIDER',SEO_SEPARATOR.'_'.SEO_SEPARATOR);           //Content ':_:'
 define('MAN_DIVIDER',SEO_SEPARATOR.'.'.SEO_SEPARATOR);           //Hersteller ':.:'
 define('PAG_DIVIDER',SEO_SEPARATOR);                             //Seitennummer ':'
-//EOF - web28 - 2010-08-18 -- Definition fÃ¼r die Trennzeichen
+//EOF - web28 - 2010-08-18 -- Definition für die Trennzeichen
 
 if (file_exists(DIR_FS_INC . 'search_replace_'.strtolower($_SESSION['language_charset']) .'.php')) {
   include (DIR_FS_INC . 'search_replace_'.strtolower($_SESSION['language_charset']) .'.php');
@@ -61,7 +61,7 @@ function shopstat_getSEO($page='', $parameters='', $connection='NONSSL', $add_se
   }
 
   //-- XTC
-  (!isset($languages_id)) ? $languages_id = $_SESSION['languages_id'] : false;
+  (!isset($languages_id)) ? $languages_id = (int)$_SESSION['languages_id'] : false;
 
   //BOF - web28 - 2010-08-18 -- Die Parameter aufspalten
   $pararray = array();
@@ -80,6 +80,9 @@ function shopstat_getSEO($page='', $parameters='', $connection='NONSSL', $add_se
   $lang       = (isset($pararray['language']))?$pararray['language']:'';
   $sort       = (isset($pararray['sort']))?$pararray['sort']:'';
   $filter_id  = (isset($pararray['filter_id']))?$pararray['filter_id']:'';
+  $viewmode   = (isset($pararray['viewmode']))?$pararray['viewmode']:'';
+  $view_mode  = (isset($pararray['viewmode']))?$pararray['view_mode']:'';
+  $prllset    = (isset($pararray['prllset']))?$pararray['prllset']:'';
   $action     = (isset($pararray['action']))?$pararray['action']:'';
 
   //EOF - web28 - 2010-08-18 -- Die Parameter aufspalten
@@ -94,19 +97,25 @@ function shopstat_getSEO($page='', $parameters='', $connection='NONSSL', $add_se
   } elseif (strlen($filter_id)>0) {
     //-- Sortieren der Herstellerprodukte
     $go = false;
-  } elseif (strlen($action)>0) {
+  } elseif (strlen($view_mode)>0) {
+    $go = false;
+  } elseif (strlen($viewmode)>0) {
+    $go = false;
+  } elseif (strlen($prllset)>0) {
+    $go = false;
+  }  elseif (strlen($action)>0) {
     //-- Andere Aktion
     $go = false;
   }
 
-  //BOF web28 - 2010-08-18 -- Falls eine Sprache Ã¼bergeben wurde, wird diese als 'Linksprache' definiert
+  //BOF web28 - 2010-08-18 -- Falls eine Sprache übergeben wurde, wird diese als 'Linksprache' definiert
   if (strlen($lang)>0) {
     $seolng  = new language;
     $lang_id = $seolng->catalog_languages[$lang]['id'];
   } else {
     $lang_id    = $languages_id;
   }
-  //EOF- web28 - 2010-08-18 -- Falls eine Sprache Ã¼bergeben wurde, wird diese als 'Linksprache' definiert
+  //EOF- web28 - 2010-08-18 -- Falls eine Sprache übergeben wurde, wird diese als 'Linksprache' definiert
 
   if ($go && (xtc_not_null($maid) || xtc_not_null($cPath) || xtc_not_null($prodid) || xtc_not_null($coid))) {
     if ($connection == 'SSL') {
@@ -156,7 +165,7 @@ function shopstat_getSEO($page='', $parameters='', $connection='NONSSL', $add_se
     //-- Concat the lang-var
     //-- Check parameters and given language, just concat
     //-- if the language is different
-    //web28 - 2010-08-18 -- Parameter fÃ¼r die Sprachumschaltung
+    //web28 - 2010-08-18 -- Parameter für die Sprachumschaltung
     if (strlen($lang)>0 && $lang_id != $languages_id) {
       $link .= $separator.'language='. $lang;
     }
@@ -174,7 +183,7 @@ function shopstat_getRealPath($cPath, $delimiter = '/', $language = '') {
     return;
   }
   if(empty($language)){
-    $language = $_SESSION['languages_id'];
+    $language = (int)$_SESSION['languages_id'];
   }
 
   $path       = explode("_",$cPath);
@@ -274,7 +283,7 @@ function shopstat_hrefSmallmask($string) {
   //web28 - 2010-08-17 - Eurozeichen ersetzen
   $newstring  = str_replace("&euro;", "-EUR-",$newstring);
 
-  //web28 -2011-0812 - GeschÃ¼tztes Leerzeichen entfernen - VOR html_entity_decode
+  //web28 -2011-0812 - Geschütztes Leerzeichen entfernen - VOR html_entity_decode
   $newstring  = str_replace("&nbsp;", "-",$newstring);
 
   //web28 - 2010-08-18 -HTML-Codierung entfernen (&uuml; etc.)
@@ -286,14 +295,14 @@ function shopstat_hrefSmallmask($string) {
   //-- HTML entfernen
   $newstring  = strip_tags($newstring);
 
-  //-- SchrÃ¤gstriche entfernen
+  //-- Schrägstriche entfernen
   $newstring  = preg_replace("/\s\/\s/","+",$newstring);
 
   //-- Definierte Zeichen entfernen
   $newstring  = preg_replace($search,$replace,$newstring);
 
-  //--AnfÃ¼hrungszeichen weg.
-  $newstring  = preg_replace("/'|\"|Â´|`/","",$newstring);
+  //--Anführungszeichen weg.
+  $newstring  = preg_replace("/'|\"|´|`/","",$newstring);
 
   //--| weg.
   $newstring  = preg_replace("/\|/","",$newstring);
@@ -301,7 +310,7 @@ function shopstat_hrefSmallmask($string) {
   //-- Die nun noch (komisch aussehenden) doppelten Bindestriche entfernen
   $newstring  = preg_replace("/(-){2,}/","-",$newstring);
 
-  //web28 - 2010-08-18 - MÃ¶gliches rechtstehendes Minuszeichen entfernen - wichtig fÃ¼r Minus Trennzeichen
+  //web28 - 2010-08-18 - Mögliches rechtstehendes Minuszeichen entfernen - wichtig für Minus Trennzeichen
   $newstring = rtrim($newstring,"-");
 
   //if($_REQUEST['test']){print $newstring."<hr>";}
@@ -320,7 +329,7 @@ function shopstat_hrefMask($string) {
   //web28 - 2010-08-17 - Eurozeichen ersetzen
   $newstring  = str_replace("&euro;","-EUR-",$newstring);
 
-  //web28 -2011-0812 - GeschÃ¼tztes Leerzeichen entfernen  - VOR html_entity_decode
+  //web28 -2011-0812 - Geschütztes Leerzeichen entfernen  - VOR html_entity_decode
   $newstring  = str_replace("&nbsp;", "-",$newstring);
 
   //web28 - 2010-08-18 -HTML-Codierung entfernen (&uuml; etc.)
@@ -332,14 +341,14 @@ function shopstat_hrefMask($string) {
   //-- HTML entfernen
   $newstring  = strip_tags($newstring);
 
-  //-- SchrÃ¤gstriche entfernen
+  //-- Schrägstriche entfernen
   $newstring  = preg_replace("/\//","-",$newstring);
 
   //-- Definierte Zeichen entfernen
   $newstring  = preg_replace($search,$replace,$newstring);
 
-  //--AnfÃ¼hrungszeichen weg.
-  $newstring  = preg_replace("/'|\"|Â´|`/","",$newstring);
+  //--Anführungszeichen weg.
+  $newstring  = preg_replace("/'|\"|´|`/","",$newstring);
 
   //-- String URL-codieren
   $newstring  = urlencode($newstring);
@@ -347,7 +356,7 @@ function shopstat_hrefMask($string) {
   //-- Die nun noch (komisch aussehenden) doppelten Bindestriche entfernen
   $newstring  = preg_replace("/(-){2,}/","-",$newstring);
 
-  //web28 - 2010-08-13 - MÃ¶gliches rechtstehendes Minuszeichen entfernen - wichtig fÃ¼r Minus Trennzeichen
+  //web28 - 2010-08-13 - Mögliches rechtstehendes Minuszeichen entfernen - wichtig für Minus Trennzeichen
   $newstring = rtrim($newstring,"-");
 
  //if($_REQUEST['test']){print $newstring."<hr>";}

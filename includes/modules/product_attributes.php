@@ -21,7 +21,6 @@
    Cross-Sell (X-Sell) Admin 1                          Autor: Joshua Dechant (dreamscape)
    Released under the GNU General Public License
    ---------------------------------------------------------------------------------------*/
-require_once(DIR_FS_INC . 'xtc_format_price.inc.php');
 
 if ($product->getAttributesCount() > 0) {
 
@@ -54,107 +53,38 @@ if ($product->getAttributesCount() > 0) {
                                           'DATA' => ''
                                           );
 
-		$products_options_query = xtDBquery("SELECT pov.products_options_values_id,
-		                                            pov.products_options_values_name,
-		                                            pa.attributes_model,
-		                                            pa.options_values_price,
-		                                            pa.price_prefix,
-		                                            pa.attributes_stock,
-		                                            pa.attributes_model,
-		                                            pa.options_values_weight,
-		                                            p.products_vpe,
-		                                            p.products_vpe_value,
-		                                            p.products_price,
-		                                            pvpe.products_vpe_name
-		                                       FROM ".TABLE_PRODUCTS." p,
-		                                            ".TABLE_PRODUCTS_VPE." pvpe,
-		                                            ".TABLE_PRODUCTS_ATTRIBUTES." pa,
-		                                            ".TABLE_PRODUCTS_OPTIONS_VALUES." pov
-		                                      WHERE pa.products_id = '".$product->data['products_id']."'
-		                                        AND p.products_id = '".$product->data['products_id']."'
-		                                        AND pa.options_id = '".$products_options_name['products_options_id']."'
-		                                        AND pa.options_values_id = pov.products_options_values_id
-		                                        AND pvpe.products_vpe_id = p.products_vpe
-		                                        AND pov.language_id = '".(int) $_SESSION['languages_id']."'
-		                                        AND pvpe.language_id = '".(int) $_SESSION['languages_id']."'
-		                                   ORDER BY pa.sortorder, pa.options_values_id");
-		
-		if (xtc_db_num_rows($products_options_query) == 0)
-		{		
-				$products_options_query = xtDBquery("SELECT pov.products_options_values_id,
-		                                                            pov.products_options_values_name,
-		                                                            pa.attributes_model,
-		                                                            pa.options_values_price,
-		                                                            pa.price_prefix,
-		                                                            pa.attributes_stock,
-		                                                            pa.attributes_model,
-		                                                            p.products_price
-		                                                       FROM ".TABLE_PRODUCTS." p, ".TABLE_PRODUCTS_ATTRIBUTES." pa,
-		                                                            ".TABLE_PRODUCTS_OPTIONS_VALUES." pov
-		                                                      WHERE pa.products_id = '".$product->data['products_id']."'
-								        AND p.products_id = '".$product->data['products_id']."'
-		                                                        AND pa.options_id = '".$products_options_name['products_options_id']."'
-		                                                        AND pa.options_values_id = pov.products_options_values_id
-		                                                        AND pov.language_id = '".(int) $_SESSION['languages_id']."'
-		                                                   ORDER BY pa.sortorder, pa.options_values_id");
-		}
-		$col = 0;
-		while ($products_options = xtc_db_fetch_array($products_options_query,true)) {
-			$price = '';
-			if ($_SESSION['customers_status']['customers_status_show_price'] != '0')
-			{
-				if ($products_options['options_values_weight'] > 0 && $products_options['products_vpe_value'] > 0)
-				{
-					if ($products_options['price_prefix'] == "+")
-						$mss_gesamt_preis =  $xtPrice->xtcFormat(($products_options['products_price'] + $products_options['options_values_price']),false,$product->data['products_tax_class_id']);
-					else
-						$mss_gesamt_preis =  $xtPrice->xtcFormat(($products_options['products_price'] - $products_options['options_values_price']),false,$product->data['products_tax_class_id']);
-					$mss_preis_pro_vpe =$mss_gesamt_preis / $products_options['products_vpe_value'];
-					$mss_preis_pro_einheit = $mss_gesamt_preis / $products_options['options_values_weight'];
-
-
-					if ($products_options['products_vpe_value'] > 1)
-					{
-						$mss_preis_pro_vpe = $mss_preis_pro_vpe * $products_options['products_vpe_value'];
-						$mss_preis_pro_einheit = $mss_preis_pro_einheit * $products_options['products_vpe_value'];
-
-					}
-					$mss_preis_pro_vpe = xtc_format_price($mss_preis_pro_vpe,1,1,1);
-					$mss_preis_pro_einheit = xtc_format_price($mss_preis_pro_einheit,1,1,1);
-					$mss_weight = xtc_precision($products_options['options_values_weight'],2);
-
-					$products_options_data[$row]['DATA'][$col] = array ('ID' => $products_options['products_options_values_id'],
-                                                                                            'TEXT' => $products_options['products_options_values_name'],
-                                                                                            'MODEL' => $products_options['attributes_model'],
-                                                                                            'PRICE' => '',
-                                                                                            'FULL_PRICE' => '',
-                                                                                            'PREFIX' => $products_options['price_prefix'],
-                                                                                            'MSS_WEIGHT' => $mss_weight,
-                                                                                            'MSS_VPE_NAME' => $products_options['products_vpe_name'],
-                                                                                            'MSS_VPE_VALUE' => xtc_precision($products_options['products_vpe_value'],0),
-                                                                                            'MSS_PRODUCT_PRICE' =>  $products_options['products_price'],
-                                                                                            'MSS_VPE_PRICE' => $mss_preis_pro_vpe,
-                                                                                            'MSS_PREIS_PRO_EINHEIT' => $mss_preis_pro_einheit);
-				}
-				else
-				{
-					if ($products_options['price_prefix'] == "+")
-						$mss_gesamt_preis =  $xtPrice->xtcFormat(($products_options['products_price'] + $products_options['options_values_price']),false,$product->data['products_tax_class_id']);
-					else
-						$mss_gesamt_preis =  $xtPrice->xtcFormat(($products_options['products_price'] - $products_options['options_values_price']),false,$product->data['products_tax_class_id']);
-					$mss_gesamt_preis = xtc_format_price($mss_gesamt_preis,1,1,1);
-    					$products_options_data[$row]['DATA'][$col] = array ('ID' => $products_options['products_options_values_id'],
-                                                                                            'TEXT' => $products_options['products_options_values_name'],
-                                                                                            'MODEL' => $products_options['attributes_model'],
-                                                                                            'PRICE' => '',
-                                                                                            'FULL_PRICE' => $mss_gesamt_preis,
-                                                                                            'PREFIX' => $products_options['price_prefix']);
-				}
-
-			}
-			else
-			{
-
+    $products_options_query = xtDBquery("SELECT pov.products_options_values_id,
+                                                pov.products_options_values_name,
+                                                pa.*,
+												p.products_vpe,
+												p.products_vpe_status,
+		                                        p.products_vpe_value
+                                           FROM ".TABLE_PRODUCTS_ATTRIBUTES." pa,
+                                                ".TABLE_PRODUCTS_OPTIONS_VALUES." pov,
+												".TABLE_PRODUCTS." p
+                                          WHERE 
+											p.products_id = '".$product->data['products_id']."'
+											AND p.products_id = pa.products_id
+                                            AND pa.options_id = '".$products_options_name['products_options_id']."'
+                                            AND pa.options_values_id = pov.products_options_values_id
+                                            AND pov.language_id = '".(int) $_SESSION['languages_id']."'
+                                       ORDER BY pa.sortorder, pa.options_values_id
+                                        ");
+    $col = 0;
+    while ($products_options = xtc_db_fetch_array($products_options_query,true)) {
+      $price = '';
+      if ($_SESSION['customers_status']['customers_status_show_price'] == '0') {
+        $products_options_data[$row]['DATA'][$col] = array ('ID' => $products_options['products_options_values_id'],
+                                                            'TEXT' => $products_options['products_options_values_name'],
+                                                            'MODEL' => $products_options['attributes_model'],
+                                                            'PRICE' => '',
+                                                            'FULL_PRICE' => '',
+                                                            'PLAIN_PRICE' => '',
+                                                            'STOCK' => $products_options['attributes_stock'],
+                                                            'SORTORDER' => $products_options['sortorder'],
+                                                            'PREFIX' => $products_options['price_prefix']
+                                                            );
+      } else {
         if ($products_options['options_values_price'] != '0.00') {
           $CalculateCurr = ($product->data['products_tax_class_id'] == 0) ? true : false; //FIX several currencies on product attributes
           $price = $xtPrice->xtcFormat($products_options['options_values_price'], false, $product->data['products_tax_class_id'],$CalculateCurr);
@@ -182,18 +112,13 @@ if ($product->getAttributesCount() > 0) {
                                                             'PLAIN_PRICE' => $xtPrice->xtcFormat($price,false),
                                                             'STOCK' => $products_options['attributes_stock'],
                                                             'SORTORDER' => $products_options['sortorder'],
-                                                            'PREFIX' => $products_options['price_prefix']
+                                                            'PREFIX' => $products_options['price_prefix'],
+															'VPE' => trim($main->getVPEtext($products_options, $xtPrice->xtcFormat($full, false)))
                                                             );
 
         //if PRICE for option is 0 we don't need to display it
         if ($price == 0) {
           unset ($products_options_data[$row]['DATA'][$col]['PRICE']);
-          //BOF - Tomcraft - 2012-09-14 - Partly revoked r2356 to have FULL_PRICE and PLAIN_PRICE available in options template file for the first option, if the options price is 0
-          /*
-          unset ($products_options_data[$row]['DATA'][$col]['FULL_PRICE']);
-          unset ($products_options_data[$row]['DATA'][$col]['PLAIN_PRICE']);
-          */
-          //EOF - Tomcraft - 2012-09-14 - Partly revoked r2356 to have FULL_PRICE and PLAIN_PRICE available in options template file for the first option, if the options price is 0
           unset ($products_options_data[$row]['DATA'][$col]['PREFIX']);
         }
 

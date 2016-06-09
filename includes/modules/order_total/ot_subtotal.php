@@ -35,17 +35,17 @@
       if ($_SESSION['customers_status']['customers_status_show_price_tax'] == 0 && $_SESSION['customers_status']['customers_status_add_tax_ot'] == 0) {
         $this->output[] = array('title' => MODULE_ORDER_TOTAL_SUBTOTAL_TITLE_NO_TAX . ':',
                                 'text' => $xtPrice->xtcFormat($order->info['subtotal'],true),
-                                'value' => $order->info['subtotal']);
+                                'value' => $xtPrice->xtcFormat($order->info['subtotal'], false));
       }
       if ($_SESSION['customers_status']['customers_status_show_price_tax'] == 0 && $_SESSION['customers_status']['customers_status_add_tax_ot'] == 1) {
         $this->output[] = array('title' => $this->title . ':',
                                 'text' => $xtPrice->xtcFormat($order->info['subtotal'],true),
-                                'value' => $order->info['subtotal']);
+                                'value' => $xtPrice->xtcFormat($order->info['subtotal'], false));
       } 
       if ($_SESSION['customers_status']['customers_status_show_price_tax'] != 0) {
         $this->output[] = array('title' => $this->title . ':',
                                 'text' => $xtPrice->xtcFormat($order->info['subtotal'],true),
-                                'value' => $order->info['subtotal']);
+                                'value' => $xtPrice->xtcFormat($order->info['subtotal'], false));
       }
 
 
@@ -66,7 +66,7 @@
 
     function install() {
       xtc_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) values ('MODULE_ORDER_TOTAL_SUBTOTAL_STATUS', 'true', '6', '1','xtc_cfg_select_option(array(\'true\', \'false\'), ', now())");
-      xtc_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_key, configuration_value, configuration_group_id, sort_order, date_added) values ('MODULE_ORDER_TOTAL_SUBTOTAL_SORT_ORDER', '1', '6', '2', now())");
+      xtc_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_key, configuration_value, configuration_group_id, sort_order, date_added) values ('MODULE_ORDER_TOTAL_SUBTOTAL_SORT_ORDER', '10', '6', '2', now())");
     }
 
     function remove() {

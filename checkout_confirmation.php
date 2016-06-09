@@ -62,17 +62,37 @@ if (isset ($_SESSION['cart']->cartID) && isset ($_SESSION['cartID'])) {
 if (!isset ($_SESSION['shipping']))
   xtc_redirect(xtc_href_link(FILENAME_CHECKOUT_SHIPPING, '', 'SSL'));
 
-if(($_SESSION['cart']->get_content_type() == 'mixed') || ($_SESSION['cart']->get_content_type() == 'virtual')) {
-        if (isset($_POST['agree_download']) && is_string($_POST['agree_download'])) {
-                if ($_POST['agree_download'] == 'agree_download') {
-                        $_SESSION['agree_download'] = 'agree';
-                } else {
-                        $_SESSION['agree_download'] = 'disagree';
-                }
-        } else {
-                $error = str_replace('\n', '<br />', ERROR_AGREE_DOWNLOAD_NOT_ACCEPTED);
-    xtc_redirect(xtc_href_link(FILENAME_CHECKOUT_AGREE_DOWNLOAD, 'error_message=' . urlencode($error), 'SSL', true, false));
+//check if display conditions on checkout page is true
+
+if (isset ($_POST['payment']))
+  $_SESSION['payment'] = xtc_db_prepare_input($_POST['payment']);
+
+if ($_POST['comments_added'] != '')
+  $_SESSION['comments'] = xtc_db_prepare_input($_POST['comments']);
+
+//-- TheMedia Begin check if display conditions on checkout page is true
+if (isset ($_POST['cot_gv']))
+  $_SESSION['cot_gv'] = true;
+
+// if conditions are not accepted, redirect the customer to the payment method selection page
+if (DISPLAY_CONDITIONS_ON_CHECKOUT == 'true') {
+  if ((!isset($_POST['conditions']) || $_POST['conditions'] == false) && !isset($_GET['conditions'])) {
+    $error = str_replace('\n', '<br />', ERROR_CONDITIONS_NOT_ACCEPTED);
+    xtc_redirect(xtc_href_link(FILENAME_CHECKOUT_PAYMENT, 'error_message=' . urlencode(utf8_decode($error)), 'SSL', true, false));
   }
+}
+
+if(($_SESSION['cart']->get_content_type() == 'mixed') || ($_SESSION['cart']->get_content_type() == 'virtual')) {
+	if (isset($_POST['agree_download']) && is_string($_POST['agree_download'])) {
+		if ($_POST['agree_download'] == 'agree_download') {
+			$_SESSION['agree_download'] = 'agree';
+		} else {
+			$_SESSION['agree_download'] = 'disagree';
+		}
+	} else {
+		$error = str_replace('\n', '<br />', ERROR_AGREE_DOWNLOAD_NOT_ACCEPTED);
+		xtc_redirect(xtc_href_link(FILENAME_CHECKOUT_PAYMENT, 'error_message=' . urlencode(utf8_decode($error)), 'SSL', true, false));
+	}
 }
 $smarty->assign('agree_download', $_SESSION['agree_download']);
 

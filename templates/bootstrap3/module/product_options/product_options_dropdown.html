@@ -1,31 +1,20 @@
 {if $options!=''}
-
-<table width="100" border="0" cellspacing="0" cellpadding="0">
-  {foreach name=outer item=options_data from=$options} 
-  <tr>
-    <td class="text-nowrap"><b>{$options_data.NAME}:</b>&nbsp;</td>
-    <td>
-	<select name="id[{$options_data.ID}]" class="form-control">
-  {foreach key=key_data item=item_data from=$options_data.DATA}
-  <option value="{$item_data.ID}">
-  
-  		{$item_data.TEXT}
-  		{if $item_data.MSS_VPE_PRICE}
-        {$item_data.MSS_WEIGHT} {$item_data.MSS_VPE_NAME}
-      	({$item_data.MSS_PREIS_PRO_EINHEIT}
-      	pro
-      	{$item_data.MSS_VPE_VALUE} {$item_data.MSS_VPE_NAME} )
-        Preis:
-        {$item_data.MSS_VPE_PRICE}
-        {else}
-           {$item_data.FULL_PRICE}
-        {/if}
-        
- </option>
-{/foreach}
-</select>
-</td>
-  </tr>
-  {/foreach} 
-</table>
+	<table width="100" border="0" cellspacing="0" cellpadding="0">
+		{foreach name=outer item=options_data from=$options} 
+			<tr>
+				<td class="text-nowrap"><b>{$options_data.NAME}:</b>&nbsp;</td>
+				<td>
+					<select name="id[{$options_data.ID}]" class="form-control">
+						{foreach key=key_data item=item_data from=$options_data.DATA}
+							<option value="{$item_data.ID}">
+							{$item_data.TEXT}
+							{$item_data.FULL_PRICE}
+							{if $item_data.VPE !='' } ({$item_data.VPE}){/if}
+							</option>
+						{/foreach}
+					</select>
+				</td>
+			</tr>
+		{/foreach} 
+	</table>
 {/if}

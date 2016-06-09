@@ -46,7 +46,6 @@ require_once (DIR_FS_INC . 'xtc_get_address_format_id.inc.php');
 require_once (DIR_FS_INC . 'xtc_check_stock.inc.php');
 unset ($_SESSION['tmp_oID']);
 unset ($_SESSION['transaction_id']); //Dokuman - 2009-10-02 - added moneybookers payment module version 2.4
-unset ($_SESSION['conditions']);
 
 // if the customer is not logged on, redirect them to the login page
 if (!isset ($_SESSION['customer_id'])) {
@@ -143,7 +142,7 @@ $order_total_modules->process();
 $breadcrumb->add(NAVBAR_TITLE_1_CHECKOUT_PAYMENT, xtc_href_link(FILENAME_CHECKOUT_SHIPPING, '', 'SSL'));
 $breadcrumb->add(NAVBAR_TITLE_2_CHECKOUT_PAYMENT, xtc_href_link(FILENAME_CHECKOUT_PAYMENT, '', 'SSL'));
 
-$smarty->assign('FORM_ACTION', xtc_draw_form('checkout_agree_download', xtc_href_link(FILENAME_CHECKOUT_AGREE_DOWNLOAD, '', 'SSL'), 'post', 'onSubmit="return check_form();"'));
+$smarty->assign('FORM_ACTION', xtc_draw_form('checkout_payment', xtc_href_link(FILENAME_CHECKOUT_CONFIRMATION, '', 'SSL'), 'post', 'onSubmit="return check_form();"'));
 $smarty->assign('ADDRESS_LABEL', xtc_address_label($_SESSION['customer_id'], $_SESSION['billto'], true, ' ', '<br />'));
 $smarty->assign('BUTTON_ADDRESS', '<a href="' . xtc_href_link(FILENAME_CHECKOUT_PAYMENT_ADDRESS, '', 'SSL') . '">' . xtc_image_button('button_change_address.gif', IMAGE_BUTTON_CHANGE_ADDRESS) . '</a>');
 $smarty->assign('BUTTON_CONTINUE', xtc_image_submit('button_continue.gif', IMAGE_BUTTON_CONTINUE));
@@ -190,12 +189,13 @@ if ($order_total > 0) {
   $module_smarty->assign('module_content', $selection);
 } else {
   $smarty->assign('GV_COVER', 'true');
-  if (isset ($_GET['error_message']) ) {
-    $smarty->assign('error', utf8_encode($_GET['error_message']));
-  }
   if (isset ($_SESSION['payment'])){
     unset ($_SESSION['payment']); //web28 - 2012-04-27 -  Fix for order_total <= 0
   }
+}
+
+if (isset ($_GET['error_message']) ) {
+  $smarty->assign('error', utf8_encode($_GET['error_message']));
 }
 
 // BOF - Tomcraft - 2009-10-03 - Paypal Express Modul
@@ -223,6 +223,15 @@ if (DISPLAY_CONDITIONS_ON_CHECKOUT == 'true') {
   } else {
     $smarty->assign('AGB_checkbox', '<input type="checkbox" value="conditions" name="conditions" id="conditions" />');
   }
+}
+
+// downloads withdrawl
+if (count($order->downloads) > 0) {
+	$smarty->assign('DOWNLOADS_ARRAY', $order->downloads);
+	$smarty->assign('GOODS_ARRAY', $order->goods);
+	$smarty->assign('GOODS_COUNT', count($order->goods));
+	$smarty->assign('RADIO_AGREE_DOWNLOAD', '<input type="radio" value="agree_download" name="agree_download" id="agree_download" />');
+	$smarty->assign('RADIO_DISAGREE_DOWNLOAD', '<input type="radio" value="disagree_download" name="agree_download" id="disagree_download" />');	
 }
 
 //BOF - Dokuman - 2012-06-19 - BILLSAFE payment module

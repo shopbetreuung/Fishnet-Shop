@@ -25,7 +25,7 @@
     $category_query  = xtDBquery($category_query);
     if (xtc_db_num_rows($category_query,true)) {
         #Default category( first picked from table)
-      $category = xtc_db_fetch_array($category_query);
+        $category = xtc_db_fetch_array($category_query);
         $p_path_full = $_SERVER['REQUEST_URI'];
         $p_path = $_SERVER['QUERY_STRING'];
         
@@ -37,7 +37,7 @@
                 $cat_name_slug = shopstat_hrefSmallmask($cat_name);
                 $p_path_full_array = explode('/', $p_path_full);
                 if($p_path_full_array[count($p_path_full_array)-2] === $cat_name_slug){
-                    $category = $categoryies['categories_id'];
+                    $category = $categoryies;
                     break;
                 }
              }

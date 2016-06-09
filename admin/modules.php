@@ -112,7 +112,7 @@ require (DIR_WS_INCLUDES.'head.php');
 						$user_country_iso = $country['countries_iso_code_2'];
 						$klarna_supported_countries = array('SE', 'NO', 'DK', 'FI', 'DE', 'NL', 'SWE', 'NOR', 'DNK', 'FIN', 'DEU', 'NLD');
                         ##MN##
-                        $directory_array = array();
+                        $directory_array = array(0 => array(), 1 => array());
                         if ($dir = @dir($module_directory)) {
 							while ($file = $dir->read()) {
 							if(($file == 'klarna_invoice.php' || $file == 'klarna_SpecCamp.php' || $file == 'klarna_partPayment.php') && !in_array($user_country_iso, $klarna_supported_countries)){

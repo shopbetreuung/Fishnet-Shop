@@ -20,7 +20,7 @@ define('TABLE_HEADING_PAYMENT_AMOUNT','Amount');
 define('TABLE_HEADING_ORDERS_ID','Order ID');
 define('TABLE_HEADING_ORDERS_STATUS','Orderstatus');
 define('TABLE_HEADING_ACTION','Aktion');
-define('TEXT_PAYPAL_TRANSACTION_HISTORY','Tranksaktionsprocess');
+define('TEXT_PAYPAL_TRANSACTION_HISTORY','Transaktionsprocess');
 define('TEXT_PAYPAL_PENDING_REASON','Manner');
 define('TEXT_PAYPAL_CAPTURE_TRANSACTION','Make Capture');
 define('TEXT_PAYPAL_TRANSACTION_DETAIL','Transaktionsdetails');

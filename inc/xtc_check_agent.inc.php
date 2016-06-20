@@ -239,6 +239,8 @@ if (CHECK_CLIENT_AGENT=='true') {
    "shoutcast",
    "sift",
    "simbot",
+   "sistrix",
+   "SISTRIX Crawler",
    "sitegrabber",
    "sitetech",
    "site-valet",

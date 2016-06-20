@@ -6,7 +6,7 @@
 	
 	<div class="col-sm-6 col-md-5">
 		{if $PRODUCTS_IMAGE!=''}
-			<a data-toggle="lightbox" data-gallery="multiimages" data-title="{$PRODUCTS_NAME}"" href="{$PRODUCTS_IMAGE|replace:"info_images":"popup_images"}"><img src="{$PRODUCTS_IMAGE}" alt="{$PRODUCTS_NAME}" class="img-responsive" />{if $PRODUCTS_POPUP_LINK!=''}<br/>{#text_zoom#}{/if}</a>
+			<a data-toggle="lightbox" data-gallery="multiimages" data-title="{$PRODUCTS_NAME}" href="{$PRODUCTS_IMAGE|replace:"info_images":"popup_images"}"><img src="{$PRODUCTS_IMAGE}" alt="{$PRODUCTS_IMAGE_ALT}" title="{$PRODUCTS_IMAGE_TITLE}" class="img-responsive" />{if $PRODUCTS_POPUP_LINK!=''}<br/>{#text_zoom#}{/if}</a>
 		{/if}
 	</div>
 	
@@ -67,7 +67,7 @@
 	<!-- More Pictures -->
 	<div class="morepics">
 	{foreach item=more_images_data from=$more_images} 
-		<a data-toggle="lightbox" data-gallery="multiimages" data-title="{$PRODUCTS_NAME}" href="{$more_images_data.PRODUCTS_IMAGE|replace:"info_images":"popup_images"}"><img align="left" src="{$more_images_data.PRODUCTS_IMAGE}" alt="{$PRODUCTS_NAME}" /></a>                          
+		<a data-toggle="lightbox" data-gallery="multiimages" data-title="{$PRODUCTS_NAME}" href="{$more_images_data.PRODUCTS_IMAGE|replace:"info_images":"popup_images"}"><img align="left" src="{$more_images_data.PRODUCTS_IMAGE}" alt="{$more_images_data.IMAGE_ALT}" title="{$more_images_data.IMAGE_TITLE}" /></a>                          
 	{/foreach}
 	</div>
 	<div style="clear:both;"></div>

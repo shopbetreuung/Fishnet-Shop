@@ -30,6 +30,8 @@ if ($_GET['action'] == 'new_product') {
   } else {
     echo '</td></tr>';
   }
+	echo '<tr><td colspan="4" class="main">'.TEXT_PRODUCTS_IMAGE_TITLE.xtc_draw_input_field('products_image_title', $pInfo->products_image_title, 'style="width: 100% !important;"').'</td></tr>';
+	echo '<tr><td colspan="4" class="main">'.TEXT_PRODUCTS_IMAGE_ALT.xtc_draw_input_field('products_image_alt', $pInfo->products_image_alt, 'style="width: 100% !important;"').'</td></tr>';
 
   // display MO PICS
   if (MO_PICS > 0) {
@@ -48,6 +50,8 @@ if ($_GET['action'] == 'new_product') {
       } else {
         echo '</td></tr>';
       }
+		echo '<tr><td colspan="4" class="main">'.TEXT_PRODUCTS_IMAGE_TITLE.xtc_draw_input_field('image_title['.$i.']', $mo_images[$i]["image_title"], 'style="width: 100% !important;"').'</td></tr>';
+		echo '<tr><td colspan="4" class="main">'.TEXT_PRODUCTS_IMAGE_ALT.xtc_draw_input_field('image_alt['.$i.']', $mo_images[$i]["image_alt"], 'style="width: 100% !important;"').'</td></tr>';
     }
   }
 

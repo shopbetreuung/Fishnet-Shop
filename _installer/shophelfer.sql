@@ -831,6 +831,8 @@ CREATE TABLE products (
   group_permission_4 TINYINT(1) NOT NULL,
   products_sort INT(4) NOT NULL DEFAULT 0,
   products_image VARCHAR(64),
+  products_image_title VARCHAR(255) NOT NULL,
+  products_image_alt VARCHAR(255) NOT NULL,
   products_price DECIMAL(15,4) NOT NULL,
   products_discount_allowed DECIMAL(4,2) DEFAULT 0.00 NOT NULL,
   products_date_added DATETIME NOT NULL,
@@ -913,6 +915,8 @@ CREATE TABLE products_images (
   products_id INT NOT NULL,
   image_nr SMALLINT NOT NULL,
   image_name VARCHAR(254) NOT NULL,
+  image_title VARCHAR(255) NOT NULL,
+  image_alt VARCHAR(255) NOT NULL,
   PRIMARY KEY (image_id),
   KEY idx_image_nr(image_nr)
 ) ENGINE=MyISAM;

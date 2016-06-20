@@ -220,4 +220,7 @@ define('TEXT_PRODUCTS_ORDER_DESCRIPTION','Bestellbeschreibung - Anzeige am Ende 
 
 define('TEXT_HOW_TO_LINK', '<b>Seitenaufruf nach dem Kopieren/Verlinken</b>');
 define('TEXT_HOW_TO_LINK_INFO', 'Artikeleingabemaske<br/ >(Bei mehreren Artikel zum Letzten in der Liste)');
+
+define('TEXT_PRODUCTS_IMAGE_TITLE', 'Title (Titel des Bildes, z.B. wenn man mit der Maus &uuml;ber das Bild geht oder für Suchmaschinenoptimierung): ');
+define('TEXT_PRODUCTS_IMAGE_ALT', 'Alt (Alternative zum Bild, wenn man Bilder ausgeschaltet hat oder für Blinde): ');
 ?>

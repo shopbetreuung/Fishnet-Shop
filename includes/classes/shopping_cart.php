@@ -389,15 +389,15 @@ class shoppingCart {
           }
         }
 
-        // $this->total hat netto * StÃ¼ck in der 1. Runde
-        // Artikel Rabatt berÃ¼cksichtigt
+        // $this->total hat netto * Stück in der 1. Runde
+        // Artikel Rabatt berücksichtigt
         // Gesamt Rabatt auf Bestellung nicht
         // Nur weiterrechnen, falls Product nicht ohne Steuer
         // $this->total + $this->tax wird berechnet
         if ($product['products_tax_class_id'] != 0) {
 
           if ($_SESSION['customers_status']['customers_status_ot_discount_flag'] == 1) {
-            // Rabatt fÃ¼r die Steuerberechnung
+            // Rabatt für die Steuerberechnung
             // der eigentliche Rabatt wird im order-details_cart abgezogen
             $products_price_tax = $products_price - ($products_price / 100 * $_SESSION['customers_status']['customers_status_ot_discount']);
             $attribute_price_tax = $attribute_price - ($attribute_price / 100 * $_SESSION['customers_status']['customers_status_ot_discount']);
@@ -511,12 +511,12 @@ class shoppingCart {
                           'order_description' => $products['products_order_description'],
                           'model' => $products['products_model'],
                           'image' => $products['products_image'],
-                          'price' => $products_price + $this->attributes_price($products_id),
+                          'price' => ($products_price + $this->attributes_price($products_id)),
                           'vpe' => $main->getVPEtext($products, $products_price),
                           'quantity' => $this->contents[$products_id]['qty'],
                           'weight' => $products['products_weight'],
                           'shipping_time' =>(ACTIVATE_SHIPPING_STATUS == 'true') ? $main->getShippingStatusName($products['products_shippingtime']) : null,
-                          'final_price' => ($products_price + $this->attributes_price($products_id)),
+                          'final_price' => (($products_price + $this->attributes_price($products_id)) * $this->contents[$products_id]['qty']),
                           'tax_class_id' => $products['products_tax_class_id'],
                           'tax' => isset($xtPrice->TAX[$products['products_tax_class_id']]) ? $xtPrice->TAX[$products['products_tax_class_id']] : 0,
                           'attributes' => isset($this->contents[$products_id]['attributes']) ? $this->contents[$products_id]['attributes'] : null

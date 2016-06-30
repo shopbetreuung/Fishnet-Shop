@@ -76,6 +76,18 @@
         }
         xtc_redirect(xtc_href_link(FILENAME_MODULES, 'set=' . $set . '&module=' . $class));
         break;
+      case 'edit':
+        $class = basename($_GET['module']);
+        if ($class == 'paypalcart'
+            || $class == 'paypalclassic'
+            || $class == 'paypallink'
+            || $class == 'paypalplus'
+            || $class == 'paypalpluslink'
+            ) 
+        {
+          xtc_redirect(xtc_href_link('paypal_module.php', 'action=edit&module=' . $class));
+        }
+        break;
     }
   }
 
@@ -321,7 +333,7 @@ require (DIR_WS_INCLUDES.'head.php');
                             $contents[] = array('align' => 'center', 'text' => '<a class="btn btn-default" onclick="this.blur();" href="' . xtc_href_link(FILENAME_MODULES, 'set=' . $set . '&module=' . $mInfo->code . '&action=remove') . '">' . BUTTON_MODULE_REMOVE . '</a> <a class="btn btn-default" onclick="this.blur();" href="' . xtc_href_link(FILENAME_MODULES, 'set=' . $set . '&module=' . $mInfo->code . '&action=edit') . '">' . BUTTON_EDIT . '</a>');
                             $contents[] = array('text' => '<br />' . $mInfo->description);
                             if (isset($mInfo->extended_description) && $mInfo->extended_description != '') {
-                              if (($mInfo->code == "paypal" || $mInfo->code == "paypalexpress") && PAYPAL_API_USER == '') {
+                              if (strpos($mInfo->code, 'paypal') !== false) {
                                 // Special text in paypal and paypalexpress if API_USER not defined
                                 $contents[] = array('text' => '<br />' . $mInfo->extended_description);
                               }

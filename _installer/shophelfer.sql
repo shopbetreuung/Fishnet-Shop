@@ -831,6 +831,8 @@ CREATE TABLE products (
   group_permission_4 TINYINT(1) NOT NULL,
   products_sort INT(4) NOT NULL DEFAULT 0,
   products_image VARCHAR(64),
+  products_image_title VARCHAR(255) NOT NULL,
+  products_image_alt VARCHAR(255) NOT NULL,
   products_price DECIMAL(15,4) NOT NULL,
   products_discount_allowed DECIMAL(4,2) DEFAULT 0.00 NOT NULL,
   products_date_added DATETIME NOT NULL,
@@ -913,6 +915,8 @@ CREATE TABLE products_images (
   products_id INT NOT NULL,
   image_nr SMALLINT NOT NULL,
   image_name VARCHAR(254) NOT NULL,
+  image_title VARCHAR(255) NOT NULL,
+  image_alt VARCHAR(255) NOT NULL,
   PRIMARY KEY (image_id),
   KEY idx_image_nr(image_nr)
 ) ENGINE=MyISAM;
@@ -1335,7 +1339,7 @@ DROP TABLE IF EXISTS personal_offers_by_customers_status_3;
 DROP TABLE IF EXISTS personal_offers_by_customers_status_4;
 
 #database Version
-INSERT INTO database_version(version) VALUES ('SH_1.4.1');
+INSERT INTO database_version(version) VALUES ('SH_1.5.0');
 
 INSERT INTO cm_file_flags (file_flag, file_flag_name) VALUES ('0', 'information');
 INSERT INTO cm_file_flags (file_flag, file_flag_name) VALUES ('1', 'content');
@@ -1486,10 +1490,18 @@ INSERT INTO configuration (configuration_id, configuration_key, configuration_va
 INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'PRODUCT_IMAGE_POPUP_MOTION_BLUR', '', 4, 36, NULL, NOW(), NULL, NULL);
 INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'MO_PICS', '5', '4', '3', NULL, NOW(), NULL, NULL);
 INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'IMAGE_MANIPULATOR', 'image_manipulator_GD2.php', '4', '3', NULL, NOW(), NULL, 'xtc_cfg_select_option(array(\'image_manipulator_GD2.php\', \'image_manipulator_GD2_advanced.php\', \'image_manipulator_GD1.php\'),');
-
-# BOF - Web28 - 2011-03-27 - Option no enlarge product image under default
 INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'PRODUCT_IMAGE_NO_ENLARGE_UNDER_DEFAULT', 'false', 4, 6, NULL, NOW(), NULL, 'xtc_cfg_select_option(array(''true'', ''false''), ');
-# EOF - Web28 - 2011-03-27 - Option no enlarge product image under default
+INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'CATEGORY_IMAGE_WIDTH', '160', 4, '6', NULL, NOW(), NULL, NULL);
+INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'CATEGORY_IMAGE_HEIGHT', '160', 4, '6', NULL, NOW(), NULL, NULL);
+INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'CATEGORY_IMAGE_BEVEL', '', 4, '12', NULL, NOW(), NULL, NULL);
+INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'CATEGORY_IMAGE_GREYSCALE', '', 4, '12', NULL, NOW(), NULL, NULL);
+INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'CATEGORY_IMAGE_ELLIPSE', '', 4, '12', NULL, NOW(), NULL, NULL);
+INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'CATEGORY_IMAGE_ROUND_EDGES', '', 4, '12', NULL, NOW(), NULL, NULL);
+INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'CATEGORY_IMAGE_MERGE', '', 4, '12', NULL, NOW(), NULL, NULL);
+INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'CATEGORY_IMAGE_FRAME', '', 4, '12', NULL, NOW(), NULL, NULL);
+INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'CATEGORY_IMAGE_DROP_SHADDOW', '', 4, '12', NULL, NOW(), NULL, NULL);
+INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'CATEGORY_IMAGE_MOTION_BLUR', '', 4, '12', NULL, NOW(), NULL, NULL);
+
 
 # configuration_group_id 5, Customer Details
 INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'ACCOUNT_GENDER', 'true', 5, 10, NULL, NOW(), NULL, 'xtc_cfg_select_option(array(\'true\', \'false\'),');

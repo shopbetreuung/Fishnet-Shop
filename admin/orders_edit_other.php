@@ -137,7 +137,7 @@ defined( '_VALID_XTC' ) or die( 'Direct Access to this location is not allowed.'
   //EOF - web28 - 2011-06-08 - FIX for no installed payment modules
   echo xtc_draw_form('payment_edit', FILENAME_ORDERS_EDIT, 'action=payment_edit', 'post');
     ?>
-    <tr class="dataTableRow hidden-xs hidden-sm">
+    <tr class="dataTableRow">
       <td class="dataTableContent" align="left" width="30%">
         <?php
         echo TEXT_ACTUAL . $order_payment_text;
@@ -148,29 +148,6 @@ defined( '_VALID_XTC' ) or die( 'Direct Access to this location is not allowed.'
         echo TEXT_NEW . xtc_draw_pull_down_menu('payment', $payment_array, $order_payment); //web28 - 2011-06-10 add default entry
         ?>
       </td>
-      <td class="dataTableContent" align="left">
-        <?php
-        echo xtc_draw_hidden_field('oID', $_GET['oID']);
-        echo '<input type="submit" class="btn btn-default" onclick="this.blur();" value="' . BUTTON_SAVE . '"/>';
-        ?>
-      </td>
-    </tr>
-    
-    <tr class="dataTableRow hidden-lg hidden-md">
-      <td class="dataTableContent" align="left" width="30%">
-        <?php
-        echo TEXT_ACTUAL . $order_payment_text;
-        ?>
-      </td>
-    </tr>
-    <tr class="dataTableRow hidden-lg hidden-md">
-      <td class="dataTableContent" align="left" width="30%">
-        <?php
-        echo TEXT_NEW . xtc_draw_pull_down_menu('payment', $payment_array, $order_payment); //web28 - 2011-06-10 add default entry
-        ?>
-      </td>
-    </tr> 
-    <tr class="dataTableRow hidden-lg hidden-md">
       <td class="dataTableContent" align="left">
         <?php
         echo xtc_draw_hidden_field('oID', $_GET['oID']);

@@ -144,6 +144,8 @@ if (!is_object($product) || !$product->isProduct()) {
 
   $info_smarty->assign('PRODUCTS_MODEL', $product->data['products_model']);
   $info_smarty->assign('PRODUCTS_EAN', $product->data['products_ean']);
+  $info_smarty->assign('PRODUCTS_IMAGE_TITLE', !empty($product->data['products_image_title'])?$product->data['products_image_title']:str_replace('"','',$product->data['products_name']));
+  $info_smarty->assign('PRODUCTS_IMAGE_ALT', !empty($product->data['products_image_alt'])?$product->data['products_image_alt']:str_replace('"','',$product->data['products_name']));
   $info_smarty->assign('PRODUCTS_MANUFACTURERS_MODEL', $product->data['products_manufacturers_model']);
   $info_smarty->assign('PRODUCTS_QUANTITY', $product->data['products_quantity']);
   $info_smarty->assign('PRODUCTS_WEIGHT', $product->data['products_weight']);
@@ -166,7 +168,9 @@ if (!is_object($product) || !$product->isProduct()) {
     $more_images_data = array();
     foreach ($mo_images as $img) {
       $mo_img = $product->productImage($img['image_name'], 'info');
-      $more_images_data[] = array ('PRODUCTS_IMAGE' => $mo_img, 
+      $more_images_data[] = array ('PRODUCTS_IMAGE' => $mo_img,
+								  'IMAGE_TITLE' => !empty($img['image_title'])?$img['image_title']:str_replace('"','',$product->data['products_name']),
+								  'IMAGE_ALT' => !empty($img['image_alt'])?$img['image_alt']:str_replace('"','',$product->data['products_name']),
                                    'PRODUCTS_POPUP_LINK' => 'javascript:popupWindow(\''.xtc_href_link(FILENAME_POPUP_IMAGE, 
                                    'pID='.$product->data['products_id'].'&imgID='.$img['image_nr']).'\')'
                                    );
@@ -204,6 +208,9 @@ if (!is_object($product) || !$product->isProduct()) {
   } elseif ($product->data['products_date_added'] != '0000-00-00 00:00:00') {
     $info_smarty->assign('PRODUCTS_ADDED', sprintf(TEXT_DATE_ADDED, xtc_date_long($product->data['products_date_added'])));
   }
+
+  ## PayPal
+  include(DIR_FS_EXTERNAL.'paypal/modules/product_info.php');
 
   // get default product_info template
   if ($product->data['product_template'] == '' || $product->data['product_template'] == 'default') {

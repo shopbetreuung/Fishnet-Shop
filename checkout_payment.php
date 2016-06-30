@@ -162,6 +162,29 @@ if ($order_total > 0) {
   // EOF - Tomcraft - 2009-10-03 - Paypal Express Modul
   $selection = $payment_modules->selection();
 
+  ## PayPal
+  if (defined('MODULE_PAYMENT_PAYPAL_PLUS_THIRDPARTY_PAYMENT')
+      && defined('MODULE_PAYMENT_PAYPALPLUS_STATUS')
+      &&  MODULE_PAYMENT_PAYPALPLUS_STATUS == 'True'
+      && isset($GLOBALS['paypalplus'])
+      && is_object($GLOBALS['paypalplus'])
+      && $GLOBALS['paypalplus']->enabled === true
+      && (!isset($credit_selection) || count($credit_selection) < 1)
+      )
+  {
+    $hide_payment_ppp = explode(';', MODULE_PAYMENT_PAYPAL_PLUS_THIRDPARTY_PAYMENT);
+    for ($i = 0, $n = sizeof($selection); $i < $n; $i++) {
+      if (in_array($selection[$i]['id'], $hide_payment_ppp)) {
+        if (isset($_SESSION['payment']) && $selection[$i]['id'] == $_SESSION['payment']) {
+          $_SESSION['payment'] = 'paypalplus';
+        }
+        unset($selection[$i]);
+        continue;
+      }
+    }
+    $selection = array_values($selection);
+  }
+
   $radio_buttons = 0;
   for ($i = 0, $n = sizeof($selection); $i < $n; $i++) {
     //ot_payment Anzeige Zahlungsrabatt bei Zahlungsauswahl
@@ -176,9 +199,10 @@ if ($order_total > 0) {
     }
 
     if (sizeof($selection) > 1) {
-      $selection[$i]['selection'] = xtc_draw_radio_field('payment', $selection[$i]['id'], ($selection[$i]['checked']), 'id="'.($i+1).'"'); //web28 - 2010-11-23 - FIX pre-selection the first payment option
+      $selection[$i]['selection'] = xtc_draw_radio_field('payment', $selection[$i]['id'], ($selection[$i]['checked']), 'id="rd-'.($i+1).'"'); // pre-selection the first payment option
     } else {
-      $selection[$i]['selection'] = xtc_draw_hidden_field('payment', $selection[$i]['id']);
+      //$selection[$i]['selection'] = xtc_draw_hidden_field('payment', $selection[$i]['id']);
+      $selection[$i]['selection'] = xtc_draw_radio_field('payment', $selection[$i]['id'], 1, 'id="rd-'.($i+1).'"');
     }
 
     if (!isset ($selection[$i]['error'])) {
@@ -194,7 +218,7 @@ if ($order_total > 0) {
   }
 }
 
-if (isset ($_GET['error_message']) ) {
+if (isset ($_GET['error_message']) && xtc_not_null($_GET['error_message'])) {
   $smarty->assign('error', utf8_encode($_GET['error_message']));
 }
 

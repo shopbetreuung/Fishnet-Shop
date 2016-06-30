@@ -61,7 +61,7 @@
   $metaMinLength   =  5;     // Mindestlänge eines Keywords
   $metaMaxLength   =  18;    // Maximallänge eines Keywords
   $metaMaxKeywords =  15;    // Maximall Anzahl der Keywords
-  $metaDesLength   =  156;   // maximale Länge der "description" (in Buchstaben)
+  $metaDesLength   =  175;   // maximale Länge der "description" (in Buchstaben)
 // ---------------------------------------------------------------------------------------
   $addPagination        =   true;   // Seiten-Nummern anzeigen, ja/nein?
 // ---------------------------------------------------------------------------------------

@@ -117,6 +117,10 @@ if (xtc_not_null($action)) {
         }
         $_SESSION['cart']->add_cart((int)$_POST['products_id'], $cart_quantity, isset($_POST['id'])?$_POST['id']:''); //DokuMan - 2012-06-11 - added isset-check for $_POST['id']
       }
+
+      ## PayPal
+      include(DIR_FS_EXTERNAL.'paypal/modules/cart_action.php');
+      
       xtc_redirect(xtc_href_link($goto, 'products_id=' . (int)$_POST['products_id'] . '&' . xtc_get_all_get_params($parameters)));
       break;
 
@@ -239,6 +243,17 @@ if (xtc_not_null($action)) {
       xtc_redirect($o_paypal->payPalURL);
       break;
     // EOF - Tomcraft - 2011-02-01 - Paypal Express Modul
+
+    ## Paypal
+    case 'paypal_cart_checkout':
+      if (defined('MODULE_PAYMENT_PAYPALCART_STATUS')
+          && MODULE_PAYMENT_PAYPALCART_STATUS == 'True')
+      {
+        require_once(DIR_FS_EXTERNAL.'paypal/classes/PayPalPayment.php');
+        $paypal_cart = new PayPalPayment('paypalcart');
+        $paypal_cart->payment_redirect(true);
+      }
+      break;
   }
 }
 ?>

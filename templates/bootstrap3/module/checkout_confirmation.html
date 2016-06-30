@@ -89,13 +89,13 @@
 	<div class="checkoutNav2Boxes ">
     <h2>{#text_payment_info#}</h2>
     <table style="clear:both">
+      {foreach name=aussen item=data from=$PAYMENT_INFORMATION}
       <tr>
-        {foreach name=aussen item=data from=$PAYMENT_INFORMATION}    
-          <td class="main">{$data.title|stripslashes}</td>
+          <td class="main">{if $data.title != ''}{$data.title|stripslashes}{else}&nbsp;{/if}</td>
           <td>&nbsp;</td>
-          <td class="main">{if $data.field}{$data.field|stripslashes}{else}&nbsp;{/if}</td>    
+          <td class="main">{if $data.field != ''}{$data.field|stripslashes}{else}&nbsp;{/if}</td>
+        </tr>
         {/foreach}
-      </tr>
     </table>
     </div>
     </div>

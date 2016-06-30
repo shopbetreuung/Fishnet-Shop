@@ -168,6 +168,11 @@ define('MAX_PRODUCTS_QTY_DESC', 'Maximum quantity per product in cart');
 define('MAX_DISPLAY_NEW_PRODUCTS_DAYS_TITLE' , 'Maximum Age (days) for New Products');
 define('MAX_DISPLAY_NEW_PRODUCTS_DAYS_DESC' , 'Maximum age (in days) for products to be displayed as "new products"');
 
+define('CATEGORY_IMAGE_WIDTH_TITLE' , 'Width of Category Images');
+define('CATEGORY_IMAGE_WIDTH_DESC' , 'Maximal Width of Category Images in Pixel (Standard: 150)');
+define('CATEGORY_IMAGE_HEIGHT_TITLE' , 'Height of Category Images');
+define('CATEGORY_IMAGE_HEIGHT_DESC' , 'Maximal Height of Category Images in Pixel (Standard: 150)');
+
 define('PRODUCT_IMAGE_THUMBNAIL_WIDTH_TITLE' , 'Width of Product Thumbnails');
 define('PRODUCT_IMAGE_THUMBNAIL_WIDTH_DESC' , 'Maximum width of product thumbnails (in pixels) (Standard: 250).');
 define('PRODUCT_IMAGE_THUMBNAIL_HEIGHT_TITLE' , 'Height of Product Thumbnails');
@@ -206,6 +211,25 @@ define('IMAGE_REQUIRED_DESC' , 'Enable to display broken images. Good for develo
 
 define('MO_PICS_TITLE','Number of product images');
 define('MO_PICS_DESC','if this number is set > 0 , you will be able to upload/display more images per product');
+
+// Category Image
+
+define('CATEGORY_IMAGE_BEVEL_TITLE' , 'Categories-Images:Bevel');
+define('CATEGORY_IMAGE_BEVEL_DESC' , 'Categories-Images:Bevel<br /><br />Default-values: (8,FFCCCC,330000)<br /><br />shaded bevelled edges<br />Usage:<br />(edge width, hex light colour, hex dark colour)');
+define('CATEGORY_IMAGE_GREYSCALE_TITLE' , 'Categories-Images:Greyscale');
+define('CATEGORY_IMAGE_GREYSCALE_DESC' , 'Categories-Images:Greyscale<br /><br />Default-values: (32,22,22)<br /><br />basic black n white<br />Usage:<br />(int red, int green, int blue)');
+define('CATEGORY_IMAGE_ELLIPSE_TITLE' , 'Categories-Images:Ellipse');
+define('CATEGORY_IMAGE_ELLIPSE_DESC' , 'Categories-Images:Ellipse<br /><br />Default-values: (FFFFFF)<br /><br />ellipse on bg colour<br />Usage:<br />(hex background colour)');
+define('CATEGORY_IMAGE_ROUND_EDGES_TITLE' , 'Categories-Images:Round-edges');
+define('CATEGORY_IMAGE_ROUND_EDGES_DESC' , 'Categories-Images:Round-edges<br /><br />Default-values: (5,FFFFFF,3)<br /><br />corner trimming<br />Usage:<br />( edge_radius, background colour, anti-alias width)');
+define('CATEGORY_IMAGE_MERGE_TITLE' , 'Categories-Images:Merge');
+define('CATEGORY_IMAGE_MERGE_DESC' , 'Categories-Images:Merge<br /><br />Default-values: (overlay.gif,10,-50,60,FF0000)<br /><br />overlay merge image<br />Usage:<br />(merge image,x start [neg = from right],y start [neg = from base],opacity,transparent colour on merge image)');
+define('CATEGORY_IMAGE_FRAME_TITLE' , 'Categories-Images:Frame');
+define('CATEGORY_IMAGE_FRAME_DESC' , 'Categories-Images:Frame<br /><br />Default-values: (FFFFFF,000000,3,EEEEEE)<br /><br />plain raised border<br />Usage:<br />(hex light colour,hex dark colour,int width of mid bit,hex frame colour [optional - defaults to half way between light and dark edges])');
+define('CATEGORY_IMAGE_DROP_SHADDOW_TITLE' , 'Categories-Images:Drop-Shadow');
+define('CATEGORY_IMAGE_DROP_SHADDOW_DESC' , 'Categories-Images:Drop-Shadow<br /><br />Default-values: (3,333333,FFFFFF)<br /><br />more like a dodgy motion blur [semi buggy]<br />Usage:<br />(shadow width,hex shadow colour,hex background colour)');
+define('CATEGORY_IMAGE_MOTION_BLUR_TITLE' , 'Categories-Images:Motion-Blur');
+define('CATEGORY_IMAGE_MOTION_BLUR_DESC' , 'Categories-Images:Motion-Blur<br /><br />Default-values: (4,FFFFFF)<br /><br />fading parallel lines<br />Usage:<br />(int number of lines,hex background colour)');
 
 //This is for the Images showing your products for preview. All the small stuff.
 

@@ -35,6 +35,7 @@
                                           'images',
                                           'images/banner',
                                           'images/categories',
+                                          'images/categories_org',
                                           'images/content',
                                           'images/imagesliders',
                                           'images/imagesliders/english',

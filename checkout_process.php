@@ -447,6 +447,11 @@ if (isset ($_SESSION['tmp_oID']) && is_numeric($_SESSION['tmp_oID'])) { // Dokum
 if (!$tmp) {
   // NEW EMAIL configuration !
   $order_totals = $order_total_modules->apply_credit();
+  
+  // load the before_send_order function from the payment modules
+  $payment_modules->before_send_order();
+  
+  // send order mail
   include ('send_order.php');
 
   /* easyBill */

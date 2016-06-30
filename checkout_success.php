@@ -66,19 +66,26 @@ $breadcrumb->add(NAVBAR_TITLE_2_CHECKOUT_SUCCESS);
 require (DIR_WS_INCLUDES.'header.php');
 
 $orders_query = xtc_db_query("select orders_id,
-                                     orders_status
+                                     orders_status,
+                                     payment_class
                               from ".TABLE_ORDERS."
                               where customers_id = '".$_SESSION['customer_id']."'
                               order by orders_id desc limit 1");
 $orders = xtc_db_fetch_array($orders_query);
 $last_order = $orders['orders_id'];
 $order_status = $orders['orders_status'];
+$payment_class = $orders['payment_class'];
 
 //BOF - GTB - 2012-10-10 - include Vorkasse by Sofort
 if (isset($_GET['vorkasse']) && $_GET['vorkasse']=='sofort') {
   include (DIR_WS_MODULES.'sofort_vorkasse.php');
 }
 //EOF - GTB - 2012-10-10 - include Vorkasse by Sofort
+
+// load the selected payment module
+require_once (DIR_WS_CLASSES . 'payment.php');
+$payment_modules = new payment($payment_class);
+$smarty->assign('PAYMENT_INFO', $payment_modules->success());
 
 // BOF - GTB - 2011-04-12 - changes for Guest Account
 // $smarty->assign('FORM_ACTION', xtc_draw_form('order', xtc_href_link(FILENAME_CHECKOUT_SUCCESS, 'action=update', 'SSL')));

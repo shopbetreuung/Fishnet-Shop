@@ -133,7 +133,7 @@
       if (ACCOUNT_STATE == 'true') {
         if ($zone_id > 0) {
           $sql_data_array['entry_zone_id'] = $zone_id;
-          $sql_data_array['entry_state'] = '';
+          $sql_data_array['entry_state'] = $state;
         } else {
           $sql_data_array['entry_zone_id'] = '0';
           $sql_data_array['entry_state'] = $state;
@@ -146,14 +146,14 @@
       switch ($checkout_page) {
         case 'shipping':
           $_SESSION['sendto'] = xtc_db_insert_id();
-          xtc_redirect(xtc_href_link($link_checkout_shipping, '', 'SSL'));
+          xtc_redirect(xtc_href_link($link_checkout_shipping, $params, 'SSL'));
           break;
         case 'payment':
           $_SESSION['billto'] = xtc_db_insert_id();
-          if (isset ($_SESSION['payment'])) {
+          if (isset ($_SESSION['payment']) && !isset($_SESSION['paypal']['PayerID'])) {
             unset ($_SESSION['payment']);
           } 
-          xtc_redirect(xtc_href_link($link_checkout_payment, '', 'SSL'));          
+          xtc_redirect(xtc_href_link($link_checkout_payment, $params, 'SSL'));          
           break;      
       }       
     }

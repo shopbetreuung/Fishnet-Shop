@@ -523,3 +523,9 @@ define ('BOX_MENU_PRODUCTS', 'Products');
 define ('BOX_MENU_CONTENT', 'Content');
 define ('BOX_MENU_MARKETING', 'Marketing & SEO');
 define ('BOX_MENU_CONFIGURATION', 'Configuration');
+
+define('TEXT_PAYPAL_TAB_CONFIG', 'PayPal Configuration');
+define('TEXT_PAYPAL_TAB_PROFILE', 'PayPal Profile');
+define('TEXT_PAYPAL_TAB_WEBHOOK', 'PayPal Webhook');
+define('TEXT_PAYPAL_TAB_MODULE', 'PayPal Module');
+define('TEXT_PAYPAL_TAB_TRANSACTIONS', 'PayPal Transactions');

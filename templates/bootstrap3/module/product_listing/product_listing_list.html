@@ -26,7 +26,7 @@
 	<div class="col-xs-8 col-sm-9">
 		<h2><a href="{$module_data.PRODUCTS_LINK}">{$module_data.PRODUCTS_NAME}</a></h2>
 		<p>{$module_data.PRODUCTS_SHORT_DESCRIPTION}</p>
-		{if $module_data.PRODUCTS_WEIGHT}<p><strong>{#weight#}</strong> {$module_data.PRODUCTS_WEIGHT|string_format:"%.2f"|replace:".":","} kg</p>{/if}
+		{if $module_data.PRODUCTS_WEIGHT && $module_data.PRODUCTS_WEIGHT!='' && $module_data.PRODUCTS_WEIGHT!='0.00'}<p><strong>{#weight#}</strong> {$module_data.PRODUCTS_WEIGHT|string_format:"%.2f"|replace:".":","} kg</p>{/if}
 		<p class="price">{$module_data.PRODUCTS_PRICE}</p><p class="taxandshippinginfo">( {$module_data.PRODUCTS_TAX_INFO}{$module_data.PRODUCTS_SHIPPING_LINK} )</p>
 		{if $module_data.PRODUCTS_VPE}<p class="vpe">{$module_data.PRODUCTS_VPE}</p>{/if}
 		{if $module_data.PRODUCTS_SHIPPING_NAME}<p class="shippingtime">{#text_shippingtime#}{if $module_data.PRODUCTS_SHIPPING_IMAGE}<img src="{$module_data.PRODUCTS_SHIPPING_IMAGE}" alt="{$module_data.PRODUCTS_SHIPPING_NAME}" />{/if}

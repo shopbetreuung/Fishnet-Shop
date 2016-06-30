@@ -11,7 +11,7 @@
 
 	    <table border="0" width="98%" cellspacing="0" cellpadding="0">
         <?php        
-        $feed = get_external_content('http://www.shophelfer.com/index.php?action=.xml;type=rss&board=23.0', 2);    
+        $feed = get_external_content('https://www.shophelfer.com/index.php?action=.xml;type=rss&board=23.0', 2);    
         if ($feed && class_exists('SimpleXmlElement')) {
           $rss = new SimpleXmlElement($feed, LIBXML_NOCDATA);
           $rss->addAttribute('encoding', 'UTF-8');

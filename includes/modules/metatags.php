@@ -447,9 +447,9 @@ switch(basename($PHP_SELF)) {
     $contents_meta = xtc_db_fetch_array($contents_meta_query,true);
 
       if($contents_meta['content_meta_index'] == '0'){
-            $ml_index = '<meta name="robots" content="index,follow" />';
-        } elseif($contents_meta['content_meta_index'] == '1'){
             $ml_index = '<meta name="robots" content="noindex,follow" />';
+        } elseif($contents_meta['content_meta_index'] == '1'){
+            $ml_index = '<meta name="robots" content="index,follow" />';
         }
   
     

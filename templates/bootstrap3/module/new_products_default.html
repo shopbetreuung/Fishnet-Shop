@@ -19,7 +19,7 @@
 				
 				<div class="equalize products_info_block">
 					<p>
-					{if $module_data.PRODUCTS_WEIGHT}<br /><strong>{#weight#}</strong> {$module_data.PRODUCTS_WEIGHT|string_format:"%.2f"|replace:".":","} kg{/if}
+					{if $module_data.PRODUCTS_WEIGHT && $module_data.PRODUCTS_WEIGHT!='' && $module_data.PRODUCTS_WEIGHT!='0.00'}<br /><strong>{#weight#}</strong> {$module_data.PRODUCTS_WEIGHT|string_format:"%.2f"|replace:".":","} kg{/if}
 					{if $module_data.PRODUCTS_VPE}<br /><strong>{#vpe#}</strong> {$module_data.PRODUCTS_VPE}{/if}
 					{if $module_data.PRODUCTS_SHIPPING_NAME}<br /><strong>{#text_shippingtime#}</strong> {$module_data.PRODUCTS_SHIPPING_NAME_LINK}{/if}
 					</p>

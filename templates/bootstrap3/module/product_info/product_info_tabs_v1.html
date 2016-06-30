@@ -22,7 +22,7 @@
 		{if $PRODUCTS_EXPIRES}<p class="taxandshippinginfo">{#text_expires_date#} {$PRODUCTS_EXPIRES}</p>{/if}
 		{if $MANUFACTURER}<br /><strong>{#manufacturer#}</strong> <a href="{$MANUFACTURER_LINK}">{$MANUFACTURER}</a>{/if}
 		{if $PRODUCTS_MODEL!=''}<br /><strong>{#model#}</strong> {$PRODUCTS_MODEL}{/if}
-		{if PRODUCTS_WEIGHT!=''}<br /><strong>{#weight#}</strong> {$PRODUCTS_WEIGHT|string_format:"%.2f"|replace:".":","} kg{/if}
+		{if $PRODUCTS_WEIGHT!='' && $PRODUCTS_WEIGHT!='0.00'}<br /><strong>{#weight#}</strong> {$PRODUCTS_WEIGHT|string_format:"%.2f"|replace:".":","} kg{/if}
 		{if $PRODUCTS_URL != ''}
 		<div style="padding-top:5px;">{$PRODUCTS_URL}</div>
 		{/if} <br />

@@ -825,3 +825,9 @@ define('SHIPPING_STATUS_INFOS_DESC', 'Content ID f&uuml;r Lieferzeiten Hinweis')
 
 define('ENABLE_PDFBILL_TITLE', 'PDF Rechnungsmodul');
 define('ENABLE_PDFBILL_DESC', 'Wollen Sie das PDF Rechnungsmodul nutzen?');
+
+define('SHOW_COOKIE_NOTE_TITLE', 'Zeige Cookie Hinweis?');
+define('SHOW_COOKIE_NOTE_DESC', '');
+
+define('COOKIE_NOTE_CONTENT_ID_TITLE', 'Verlinke Cookie Hinweis auf content id:');
+define('COOKIE_NOTE_CONTENT_ID_DESC', '');

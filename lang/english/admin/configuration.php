@@ -813,3 +813,9 @@ define('STOCK_CHECKOUT_UPDATE_PRODUCTS_STATUS_DESC', 'If a sold-out items (stock
 
 define('SHIPPING_STATUS_INFOS_TITLE', 'Shippingtime ID');
 define('SHIPPING_STATUS_INFOS_DESC', 'Content ID for Shippingtime');
+
+define('SHOW_COOKIE_NOTE_TITLE', 'Show Cookie note?');
+define('SHOW_COOKIE_NOTE_DESC', '');
+
+define('COOKIE_NOTE_CONTENT_ID_TITLE', 'Link cookie note to content id:');
+define('COOKIE_NOTE_CONTENT_ID_DESC', '');

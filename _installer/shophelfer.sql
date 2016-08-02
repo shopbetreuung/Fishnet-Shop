@@ -1790,6 +1790,9 @@ INSERT INTO configuration (configuration_id, configuration_key, configuration_va
 INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, use_function, set_function, date_added) VALUES ('', 'MODULE_ORDER_TOTAL_GV_TAX_CLASS', '0', '6', '0', 'xtc_get_tax_class_title', 'xtc_cfg_pull_down_tax_classes(', NOW());
 INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, set_function ,date_added) VALUES ('', 'MODULE_ORDER_TOTAL_GV_CREDIT_TAX', 'false', '6', '8','xtc_cfg_select_option(array(\'true\', \'false\'), ', NOW());
 
+INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, date_added, use_function, set_function) VALUES ('', 'SHOW_COOKIE_NOTE', 'false', '25', '1', NOW(), NULL, 'xtc_cfg_select_option(array(''true'', ''false''),');
+INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, date_added, use_function, set_function) VALUES ('', 'COOKIE_NOTE_CONTENT_ID', '0', '25', '2', NOW(), NULL, NULL);
+
 INSERT INTO configuration_group VALUES (1,'My Store','General information about my store',1,1);
 INSERT INTO configuration_group VALUES (2,'Minimum Values','The minimum values for functions / data',2,1);
 INSERT INTO configuration_group VALUES (3,'Maximum Values','The maximum values for functions / data',3,1);
@@ -1815,6 +1818,7 @@ INSERT INTO configuration_group VALUES (22,'Search Options','Additional Options 
 #franky_n - 2010-12-24 - added configuration_group entries for econda and moneybookers
 INSERT INTO configuration_group VALUES (23,'Econda Tracking','Econda Tracking System',23,1);
 INSERT INTO configuration_group VALUES (24,'PIWIK &amp; Google Analytics Tracking','Settings for PIWIK &amp; Google Analytics Tracking',24,1); #Dokuman - 2012-08-27 - added entries for new google analytics & piwik tracking
+INSERT INTO configuration_group VALUES (25, 'Legal', 'Legal Options', 25, 1);
 INSERT INTO configuration_group VALUES (31,'Moneybookers','Moneybookers System',31,1);
 INSERT INTO configuration_group VALUES (40,'Popup Window Configuration','Popup Window Parameters',40,1);
 INSERT INTO configuration_group VALUES (1000,'Adminarea Options','Adminarea Configuration', 1000,1);

@@ -1,22 +1,38 @@
 {config_load file="$language/lang_$language.conf" section="reverse_cross_selling"}
 <h6 class="h5">{#heading_text#}</h6>
 
-{foreach name=aussen item=module_data from=$module_content}
 <div class="row">
-
-	<div class="col-xs-4 col-sm-3">
-		{if $module_data.PRODUCTS_IMAGE!=''}<a href="{$module_data.PRODUCTS_LINK}"><img src="{$module_data.PRODUCTS_IMAGE}" alt="{$module_data.PRODUCTS_IMAGE_ALT}" title="{$module_data.PRODUCTS_IMAGE_TITLE}" class="img-responsive" /></a>{else}&nbsp;{/if}
+{foreach name=aussen item=module_data from=$module_content}
+	<div class="col-sm-6 col-md-4">
+		<div class="thumbnail" data-col="{$smarty.foreach.aussen.iteration}">
+			<div class="equalize products_image_block">
+				{if $module_data.PRODUCTS_IMAGE!=''}<a href="{$module_data.PRODUCTS_LINK}"><img src="{$module_data.PRODUCTS_IMAGE}" alt="{$module_data.PRODUCTS_IMAGE_ALT}" title="{$module_data.PRODUCTS_IMAGE_TITLE}" class="img-responsive" /></a>{/if}
+			</div>
+		
+			<div class="caption" data-col="{$smarty.foreach.aussen.iteration}">
+				<div class="equalize products_name_block">
+					<h4 class="h2"><a href="{$module_data.PRODUCTS_LINK}">{$module_data.PRODUCTS_NAME}</a></h4>
+				</div>
+				<div class="equalize products_short_description_block">{$module_data.PRODUCTS_SHORT_DESCRIPTION}</div>
+				<div class="equalize products_info_block">
+				{if $module_data.PRODUCTS_VPE}<p class="vpe">{$module_data.PRODUCTS_VPE}</p>{/if}
+				{if $module_data.PRODUCTS_SHIPPING_NAME}<p class="shippingtime">{#text_shippingtime#}{if $module_data.PRODUCTS_SHIPPING_IMAGE}<img src="{$module_data.PRODUCTS_SHIPPING_IMAGE}" alt="{$module_data.PRODUCTS_SHIPPING_NAME}" />{/if}
+					{$module_data.PRODUCTS_SHIPPING_NAME_LINK}</p>
+				{/if}
+				</div>
+				<div class="equalize products_price_block">
+					<p>
+						<br /><span class="lead">{$module_data.PRODUCTS_PRICE}</span>
+						<br /><small>({$module_data.PRODUCTS_TAX_INFO}{$module_data.PRODUCTS_SHIPPING_LINK})</small>
+					</p>				
+				</div>
+			</div>
+			<div class="visible-lg col-lg-4" style="padding:0;">{$module_data.PRODUCTS_BUTTON_DETAILS}</div>
+			<div class="visible-lg col-lg-8" style="padding:0; text-align: right;">{$module_data.PRODUCTS_BUTTON_BUY_NOW}</div>
+			<div class="hidden-lg col-xs-12" style="padding:0;">{$module_data.PRODUCTS_BUTTON_DETAILS|replace:"btn btn-default":"btn btn-default btn-fullwidth"}</div>
+			<div class="hidden-lg col-xs-12" style="padding:0;">{$module_data.PRODUCTS_BUTTON_BUY_NOW|replace:"btn btn-primary":"btn btn-primary btn-fullwidth"}</div>
+			<div style="clear: both;"></div>	
+		</div>
 	</div>
-	<div class="col-xs-8 col-sm-9">
-		<h4 class="h2"><a href="{$module_data.PRODUCTS_LINK}">{$module_data.PRODUCTS_NAME}</a></h4>
-		<p>{$module_data.PRODUCTS_SHORT_DESCRIPTION}</p>
-		<p class="price">{$module_data.PRODUCTS_PRICE}</p><p class="taxandshippinginfo">( {$module_data.PRODUCTS_TAX_INFO}{$module_data.PRODUCTS_SHIPPING_LINK} )</p>
-		{if $module_data.PRODUCTS_VPE}<p class="vpe">{$module_data.PRODUCTS_VPE}</p>{/if}
-		{if $module_data.PRODUCTS_SHIPPING_NAME}<p class="shippingtime">{#text_shippingtime#}{if $module_data.PRODUCTS_SHIPPING_IMAGE}<img src="{$module_data.PRODUCTS_SHIPPING_IMAGE}" alt="{$module_data.PRODUCTS_SHIPPING_NAME}" />{/if}
-			{$module_data.PRODUCTS_SHIPPING_NAME_LINK}</p>
-		{/if}
-		<p>{$module_data.PRODUCTS_BUTTON_DETAILS}&nbsp;{$module_data.PRODUCTS_BUTTON_BUY_NOW}</p>	
-	</div>
-
-</div>
 {/foreach}
+</div>

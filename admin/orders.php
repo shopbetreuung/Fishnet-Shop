@@ -1358,14 +1358,10 @@ elseif ($action == 'custom_action') {
                   </form>
                     </div>
                     <div class='col-xs-12'>
-                  <?php echo xtc_draw_form('status', FILENAME_ORDERS, '', 'get'); ?>
-                  <?php echo HEADING_TITLE_STATUS . ' ' . xtc_draw_pull_down_menu('status', array_merge(array(array('id' => '', 'text' => TEXT_ALL_ORDERS)),array(array('id' => '0', 'text' => TEXT_VALIDATING)), $orders_statuses),(isset($_GET['status']) && xtc_not_null($_GET['status']) ? (int)$_GET['status'] : ''),'onchange="this.form.submit();"').xtc_draw_hidden_field(xtc_session_name(), xtc_session_id()); ?>
+                  <?php echo xtc_draw_form('payment_method_status', FILENAME_ORDERS, '', 'get'); ?>
+                  <?php echo HEADING_TITLE_STATUS . ' ' . xtc_draw_pull_down_menu('status', array_merge(array(array('id' => '', 'text' => TEXT_ALL_ORDERS)),array(array('id' => '0', 'text' => TEXT_VALIDATING)), $orders_statuses),(isset($_GET['status']) && xtc_not_null($_GET['status']) ? (int)$_GET['status'] : ''),'onchange="this.form.submit();"'); ?> <br />
+                  <?php echo HEADING_CHOOSE_PAYMENT. ' ' . xtc_draw_pull_down_menu('payment_method', array_merge(array(array('id' => '', 'text' => TEXT_ALL_PAYMENT_METHODS)), $payment_methods),(isset($_GET['payment_method']) && xtc_not_null($_GET['payment_method']) ? $_GET['payment_method'] : ''),'onchange="this.form.submit();"').xtc_draw_hidden_field(xtc_session_name(), xtc_session_id()); ?>
                   </form>
-                    </div>
-                    <div class='col-xs-12'>
-                        <?php echo xtc_draw_form('payment_method', FILENAME_ORDERS, '', 'get'); ?>
-                        <?php echo HEADING_CHOOSE_PAYMENT. ' ' . xtc_draw_pull_down_menu('payment_method', array_merge(array(array('id' => '', 'text' => TEXT_ALL_PAYMENT_METHODS)), $payment_methods),(isset($_GET['payment_method']) && xtc_not_null($_GET['payment_method']) ? $_GET['payment_method'] : ''),'onchange="this.form.submit();"').xtc_draw_hidden_field(xtc_session_name(), xtc_session_id()); ?>
-                        </form>
                     </div>
                 </div>
             </div>
@@ -1415,8 +1411,19 @@ elseif ($action == 'custom_action') {
                                                  AND ot.class = 'ot_total'
                                             ORDER BY o.orders_id DESC";
 
-                    } elseif (isset($_GET['status']) && xtc_not_null($_GET['status'])) { //web28 - 2012-04-14  - FIX xtc_not_null($_GET['status'])
-                        $status = xtc_db_prepare_input($_GET['status']);
+                    } elseif ((isset($_GET['status']) && xtc_not_null($_GET['status'])) || (isset($_GET['payment_method']) && xtc_not_null($_GET['payment_method']))) { //web28 - 2012-04-14  - FIX xtc_not_null($_GET['status'])
+                        $status_query_string = "";
+                        if (isset($_GET['status']) && xtc_not_null($_GET['status'])) {
+                          $status = xtc_db_prepare_input($_GET['status']);
+                          $status_query_string = "AND s.orders_status_id = '".xtc_db_input($status)."' ";
+                        }
+                            
+                        $payment_method_query_string = "";   
+                        if (isset($_GET['payment_method']) && xtc_not_null($_GET['payment_method'])) {
+                          $payment_method = xtc_db_prepare_input($_GET['payment_method']);
+                          $payment_method_query_string = "AND o.payment_method = '".xtc_db_input($payment_method)."' ";                        
+                        }
+                      
                         $orders_query_raw = "-- /admin/orders.php
                                              SELECT ".$order_select_fields.",
                                                     s.orders_status_name
@@ -1424,20 +1431,8 @@ elseif ($action == 'custom_action') {
                                           LEFT JOIN (".TABLE_ORDERS_TOTAL." ot, ".TABLE_ORDERS_STATUS." s)
                                                  ON (o.orders_id = ot.orders_id AND o.orders_status = s.orders_status_id)
                                                WHERE s.language_id = '".(int)$_SESSION['languages_id']."'
-                                                 AND s.orders_status_id = '".xtc_db_input($status)."'
-                                                 AND ot.class = 'ot_total'
-                                            ORDER BY o.orders_id DESC";
-                    #MN: If payment method is selected $_GET['payment_method']
-                    } elseif (isset($_GET['payment_method']) && xtc_not_null($_GET['payment_method'])) { 
-                        $p_method = xtc_db_prepare_input($_GET['payment_method']);
-                        $orders_query_raw = "-- /admin/orders.php
-                                             SELECT ".$order_select_fields.",
-                                                    s.orders_status_name
-                                               FROM ".TABLE_ORDERS." o
-                                          LEFT JOIN (".TABLE_ORDERS_TOTAL." ot, ".TABLE_ORDERS_STATUS." s)
-                                                 ON (o.orders_id = ot.orders_id AND o.orders_status = s.orders_status_id)
-                                               WHERE s.language_id = '".(int)$_SESSION['languages_id']."'
-                                                 AND o.payment_method = '".xtc_db_input($p_method)."'
+                                                 " . $status_query_string . "
+                                                 " . $payment_method_query_string . "
                                                  AND ot.class = 'ot_total'
                                             ORDER BY o.orders_id DESC";
                     } elseif ($action == 'search' && $oID) {

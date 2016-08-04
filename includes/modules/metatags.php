@@ -603,9 +603,9 @@ if ($_SESSION['language_code'] != '') {
 if (USE_BOOTSTRAP != "true") {
 echo '<meta http-equiv="cache-control" content="no-cache" />'."\n";
 }
-if (metaClean($meta_keyw) != '') {
+/*if (metaClean($meta_keyw) != '') {
   echo '<meta name="keywords" content="'. metaClean($meta_keyw) .'" />'."\n";
-}
+}*/
 if (metaClean($meta_descr,$metaDesLength) != '') {
   echo '<meta name="description" content="'. metaClean($meta_descr,$metaDesLength) .'" />'."\n";
 }

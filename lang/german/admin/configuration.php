@@ -831,3 +831,7 @@ define('SHOW_COOKIE_NOTE_DESC', '');
 
 define('COOKIE_NOTE_CONTENT_ID_TITLE', 'Verlinke Cookie Hinweis auf content id:');
 define('COOKIE_NOTE_CONTENT_ID_DESC', '');
+
+define('CONTACT_FORM_CONSENT_TITLE', 'Kontaktformular Zustimmung');
+define('CONTACT_FORM_CONSENT_DESC', 'Kontaktformular bedarf der Zustimmung zur Datenverarbeitung.');
+

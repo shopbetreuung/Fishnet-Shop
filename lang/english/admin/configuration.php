@@ -819,3 +819,6 @@ define('SHOW_COOKIE_NOTE_DESC', '');
 
 define('COOKIE_NOTE_CONTENT_ID_TITLE', 'Link cookie note to content id:');
 define('COOKIE_NOTE_CONTENT_ID_DESC', '');
+
+define('CONTACT_FORM_CONSENT_TITLE', 'Contact form consent');
+define('CONTACT_FORM_CONSENT_DESC', 'Contact form requires the consent to data processing.');

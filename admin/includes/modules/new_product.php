@@ -323,8 +323,8 @@
               <?php echo xtc_draw_input_field('products_meta_title[' . $languages[$i]['id'] . ']',(isset($products_meta_title[$languages[$i]['id']]) ? stripslashes($products_meta_title[$languages[$i]['id']]) : $products_desc_fields['products_meta_title']), 'style="width:100%" maxlength="70"'); ?><br/>
               <?php echo $lng_image. '&nbsp;'. TEXT_META_DESCRIPTION. ' (max. 175 '. TEXT_CHARACTERS .')'; ?> <br/>
               <?php echo xtc_draw_input_field('products_meta_description[' . $languages[$i]['id'] . ']',(isset($products_meta_description[$languages[$i]['id']]) ? stripslashes($products_meta_description[$languages[$i]['id']]) : $products_desc_fields['products_meta_description']), 'style="width:100%" maxlength="175"'); ?><br/>
-              <?php echo $lng_image. '&nbsp;'. TEXT_META_KEYWORDS. ' (max. 180 '. TEXT_CHARACTERS .')'; ?> <br/>
-              <?php echo xtc_draw_input_field('products_meta_keywords[' . $languages[$i]['id'] . ']', (isset($products_meta_keywords[$languages[$i]['id']]) ? stripslashes($products_meta_keywords[$languages[$i]['id']]) : $products_desc_fields['products_meta_keywords']), 'style="width:100%" maxlength="180"'); ?>
+              <?php // echo $lng_image. '&nbsp;'. TEXT_META_KEYWORDS. ' (max. 180 '. TEXT_CHARACTERS .')'; ?> <br/>
+              <?php // echo xtc_draw_input_field('products_meta_keywords[' . $languages[$i]['id'] . ']', (isset($products_meta_keywords[$languages[$i]['id']]) ? stripslashes($products_meta_keywords[$languages[$i]['id']]) : $products_desc_fields['products_meta_keywords']), 'style="width:100%" maxlength="180"'); ?>
           </div>
           <?php
           echo ('</div>');

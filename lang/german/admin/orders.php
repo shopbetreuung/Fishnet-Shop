@@ -17,9 +17,9 @@
    --------------------------------------------------------------*/
    
 // --- bof -- ipdfbill --------
-define( 'BUTTON_PDFBILL_CREATE',                  'PDF-Rechung generieren');        // pdfbill
+define( 'BUTTON_PDFBILL_CREATE',                  'PDF-Rechnung generieren');       // pdfbill
 define( 'BUTTON_PDFDELIVNOTE_CREATE',             'PDF-Lieferschein generieren');   // pdfbill
-define( 'BUTTON_PDFBILL_RECREATE',                'PDF-Rechung aktualisieren');     // pdfbill
+define( 'BUTTON_PDFBILL_RECREATE',                'PDF-Rechnung aktualisieren');    // pdfbill
 define( 'BUTTON_PDFBILL_DISPLAY',                 'PDF-anzeigen');                  // pdfbill
 define( 'BUTTON_PDFBILL_SEND_INVOICE_MAIL',       'PDF Rechnung senden');           // pdfbill
 define( 'BUTTON_PDFBILL_SEND_INVOICE_MAIL2',      'PDF Rechnung erneut senden');    // pdfbill

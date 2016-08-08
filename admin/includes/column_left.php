@@ -584,6 +584,12 @@
 											"link" 		=> xtc_href_link(FILENAME_CONFIGURATION, 'gID=22', 'NONSSL'),
 											"access"	=> "configuration",
 											"check"		=> true);
+    
+  $menu_items['configuration'][] = array(	"name" 		=> BOX_CONFIGURATION_25,
+											"is_main"	=> false,
+											"link" 		=> xtc_href_link(FILENAME_CONFIGURATION, 'gID=25', 'NONSSL'),
+											"access"	=> "configuration",
+											"check"		=> true);   
 											
 	$menu_items['configuration'][] = array(	"name" 		=> BOX_CONFIGURATION_19,
 											"is_main"	=> true,

@@ -26,7 +26,7 @@
 		$cookie_content_link = NULL;
 	}
 ?>
-<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/1.0.10/cookieconsent.min.js"></script>
+<script src="<?php echo 'templates/'.CURRENT_TEMPLATE; ?>/javascript/cookieconsent.min.js"></script>
 <script type="text/javascript">
     window.cookieconsent_options = {"message":"<?php echo COOKIE_NOTE_TEXT; ?>","dismiss":"<?php echo COOKIE_NOTE_DISMISS_TEXT; ?>","learnMore":"<?php echo COOKIE_NOTE_MORE_TEXT; ?>","link":"<?php echo $cookie_content_link; ?>","theme":"light-top"};
 </script>

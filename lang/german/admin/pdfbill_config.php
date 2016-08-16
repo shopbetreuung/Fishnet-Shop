@@ -591,5 +591,21 @@ function texts_html( $texts ) {
 
 $texts = texts_html($texts);             
 
-             
+define('TEXT_SELECT_INVOICE_PROFILE', 'Dieses Rechnungsprofil benutzen wenn:');
+define('TEXT_ACTIVATE', 'Auswahl');
+define('TEXT_SELECTOR', 'Aktivieren');
+define('TEXT_OPERATION', 'Operator');
+define('TEXT_VALUE', 'Wert');
+define('TEXT_CONDITIONS', 'Bedingung');
+define('TEXT_BILLING_COUNTRY', 'Rechnungsland');
+define('TEXT_SHIPPING_METHOD', 'Versandart');
+define('TEXT_PAYMENT_METHOD', 'Zahlungsart');
+define('TEXT_ORDER_STATUS', 'Bestellstatus');
+define('TEXT_CUSTOMERS_STATUS', 'Kundengruppe');
+define('TEXT_MULTIPLE_OPTIONS', '* mehrere Werte bitte mit Komma (<b>,</b>) trennen.');
+define('TEXT_AND', 'UND');
+define('TEXT_OR', 'ODER');
+define('TEXT_EQUAL', 'IST GLEICH');
+define('TEXT_NOT_EQUAL', 'IST NICHT');
+
 ?>

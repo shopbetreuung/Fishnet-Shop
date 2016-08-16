@@ -30,6 +30,7 @@
   // install_step2,5.php
   define('TEXT_CONNECTION_ERROR','Eine Testverbindung zur Datenbank war nicht erfolgreich.');
   define('TEXT_CONNECTION_SUCCESS','Eine Testverbindung zur Datenbank war erfolgreich.');
+  define('TEXT_DB_DATA_NOT_CORRECT', 'Die Verbindung zur Datenbank war nicht erfolgreich, &uuml;berpr&uuml;fen Sie bitte Ihre Daten');
   define('TEXT_DB_ERROR','Folgender Fehler wurde zur&uuml;ckgegeben:');
   define('TEXT_DB_ERROR_1','Bitte klicken Sie auf <i>Back</i> um Ihre Datenbankeinstellungen zu &uuml;berpr&uuml;fen.');
   define('TEXT_DB_ERROR_2','Wenn Sie Hilfe zu Ihrer Datenbank ben&ouml;tigen, wenden Sie sich bitte an Ihren Provider.');
@@ -76,12 +77,18 @@
 
   // index.php
   define('TITLE_SELECT_LANGUAGE','W&auml;hlen Sie eine Sprache aus!');
+  define('TEXT_WELCOME', 'Willkommen');
   define('TEXT_WELCOME_INDEX','<b>Willkommen zur shophelfer.com Shopsoftware</b><br /><br />Die shophelfer.com Shopsoftware ist eine Open-Source e-commerce L&ouml;sung, die st&auml;ndig von der shophelfer.com Community weiterentwickelt wird.<br /> Seine out-of-the-box Installation erlaubt es dem Shop-Besitzer seinen Online-Shop mit einem Minimum an Aufwand und Kosten zu installieren, zu betreiben und zu verwalten.<br /><br />Die shophelfer.com Shopsoftware ist auf jedem System lauff&auml;hig, welches eine PHP Umgebung (ab PHP 5.0) und MySQL zur Verf&uuml;gung stellt, wie zum Beispiel Linux, Solaris, BSD, und Microsoft Windows.<br /><br />Die shophelfer.com Shopsoftware ist ein OpenSource-Community-Projekt &ndash; &uuml;ber Hilfe freuen wir uns immer.');
+  define('TEXT_WELCOME_REQUIREMENTS_STEP', '<b>Bedarf</b>');
+  define('TEXT_WELCOME_DBCONNECTION_STEP', 'Datenbank-Verbindung');
+  define('TEXT_WELCOME_PERMISSIONS_STEP', 'Berechtigungen prüfen');
   define('TEXT_WELCOME_STEP1','<b>Datenbank- und Webservereinstellungen</b><br /><br />Der Installer ben&ouml;tigt hier einige Informationen bez&uuml;glich Ihrer Datenbank und Ihrer Verzeichnisstruktur.');
   define('TEXT_WELCOME_STEP2','<b>Datenbank Installation</b><br /><br />Der shophelfer.com Shopsoftware Installer installiert automatisch die shophelfer.com Shopsoftware Datenbank.');
   // BOF - web28 - 2010.02.20 - NEW STEP2-4 Handling
   define('TEXT_WELCOME_STEP2A','<b>Datenbank Installation wurde deaktiviert</b><br /><br />Die Installation der shophelfer.com Shopsoftware Datenbank in Step3 wird &uuml;bersprungen!.');
   // EOF - web28 - 2010.02.20 - NEW STEP2-4 Handling
+  define('TEXT_WELCOME_ADMIN', 'Admin-Konto Konfiguration');
+  define('TEXT_WELCOME_ADD_ADMIN', 'Zusätzliche admins');
   define('TEXT_WELCOME_STEP3','<b>Datenbank Import.</b><br /><br />Die Daten der shophelfer.com Shopsoftware Datenbank werden automatisch in die Datenbank importiert.');
   define('TEXT_WELCOME_STEP4','<b>Erstellen der shophelfer.com Shopsoftware Konfigurations-Dateien</b><br /><br /><b>Wenn bereits configure Dateien aus einer fr&uuml;heren Installation vorhanden sind, wird die shophelfer.com Shopsoftware diese L&ouml;schen.</b><br /><br />Der Installer schreibt automatisch die Konfigurationsdateien f&uuml;r die Dateistruktur und die Datenbankanbindung.<br /><br />Sie k&ouml;nnen zwischen verschiedenen Session-Handling_systemen w&auml;hlen.');
   define('TEXT_WELCOME_STEP5','<b>Webserver Konfiguration</b><br /><br />');
@@ -103,8 +110,16 @@
     Kundengruppe 3 -> ein spezielle Gruppenpreis f&uuml;r Produkt Y<br />
     Kundengruppe 4 -> Nettopreis f&uuml;r Produkt Y<br />
   ');
-  define('TEXT_WELCOME_FINISHED','<b>Die shophelfer.com Shopsoftware Installation war erfolgreich!</b><br /><br />Der Installer hat nun die Grundfunktionen Ihres Shops eingerichtet. Melden Sie sich im Shop mit Ihrem Admin-Account an und wechseln in den Adminbereich, um die komplette Konfiguration Ihres Shops vorzunehmen.');
-
+  define('TEXT_WELCOME_FINISHED1','<b>Die shophelfer.com Shopsoftware Installation war erfolgreich!</b>');
+  define('TEXT_WELCOME_FINISHED2', 'Der Installer hat nun die Grundfunktionen Ihres Shops eingerichtet. Melden Sie sich im Shop mit Ihrem Admin-Account an und wechseln in den Adminbereich, um die komplette Konfiguration Ihres Shops vorzunehmen.');
+  define('TEXT_CONTINUE_BUTTON','Fortfahren');
+  define('TEXT_CANCEL_BUTTON', 'Stornieren');
+  define('TEXT_NO', 'Nein');
+  define('TEXT_YES','Ja');
+  define('TITLE_INSTALLATION_PROCESS','Der Installationsprozess');
+  define('TEXT_COMPLETE','Komplett');
+  define('TEXT_ADD_ADDITIONAL_ADMINS', 'Möchten Sie weitere Administratoren zu Ihrem Geschäft hinzufügen?');
+  
   // install_step1.php
   define('TITLE_CUSTOM_SETTINGS','Installations Optionen');
   define('TEXT_IMPORT_DB','shophelfer.com Shopsoftware Datenbank Installation');
@@ -135,6 +150,8 @@
   define('TITLE_WEBSERVER_INFO','Die vorgegebenen Pfade sind nur in Ausnahmef&auml;llen zu &auml;ndern!');
   define('TEXT_WS_ROOT_INFO','Der Pfad wird automatisch ermittelt!');
   //EOF WEBSERVER INFO
+  define('TEXT_RECHECK_REQUIREMENTS', 'ReCheck Anforderungen');
+  define('TEXT_RECHECK_PERMISSIONS', 'ReCheck Berechtigungen');
 
   // install_step2.php
   define('TEXT_PROCESS_1','Bitte setzten Sie die Installation nun fort, um die Datenbank zu Importieren.');
@@ -179,6 +196,9 @@
   // install_step6.php
   define('TITLE_ADMIN_CONFIG','Administrator Konfiguration');
   define('TEXT_REQU_INFORMATION','* erforderliche Information');
+  define('TEXT_GENDER', 'Geschlecht:');
+  define('TEXT_MALE', 'Mann');
+  define('TEXT_FEMALE', 'Frau');
   define('TEXT_FIRSTNAME','Vorname:');
   define('TEXT_LASTNAME','Nachname:');
   define('TEXT_EMAIL','E-Mail Adresse:');
@@ -204,6 +224,7 @@
   define('TEXT_ZONE_NO','Nein');
   define('TEXT_ZONE_YES','Ja');
   define('TEXT_COMPANY','Firmenname');
+  define('ENTRY_GENDER_ERROR', 'Bitte w&auml;hlen Sie Geschlecht f&uuml;r diese Admin');
   define('ENTRY_FIRST_NAME_ERROR','Vorname ist zu kurz');
   define('ENTRY_LAST_NAME_ERROR','Nachname ist zu kurz');
   define('ENTRY_EMAIL_ADDRESS_ERROR','E-Mail Adresse ist zu kurz');
@@ -258,7 +279,8 @@
   // install_fnished.php
   define('TEXT_SHOP_CONFIG_SUCCESS','Die <strong>shophelfer.com Shopsoftware</strong> Konfiguration war erfolgreich');
   define('TEXT_TEAM','Vielen Dank, dass Sie sich f&uuml;r die shophelfer.com Shopsoftware entschieden haben. Besuchen Sie uns in der <a href="http://www.shophelfer.com">shophelfer.com Community</a>.<br /><br />Alles Gute und viel Erfolg w&uuml;nscht Ihnen die gesamte shophelfer.com Community.');
-
+  define('TEXT_VISIT_SHOP', 'Besuchen Sie Ihren neuen Shophelfer Shop');
+  
   // BOC flth new permission change system
   define('FTP_CHANGE_PERM_EXPLAIN', 'Um die Datei- und Verzeichnisrechte zu setzen, benutzen Sie entweder Ihr FTP-Programm oder geben Sie Ihre FTP-Daten hier ein, um die ben&ouml;tigten Dateirechte automatisch setzen zu lassen.');
           //Je nach Serverkonfiguration k&ouml;nnen Sie es auch direkt &uuml;ber PHP probieren, klicken Sie dazu bitte <a href="index.php?action=fixperms">hier</a>.<br />

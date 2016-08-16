@@ -10,8 +10,8 @@
    
   /*######################################*/
   
-  define('DIR_MODIFIED_INSTALLER', '_installer');
-  define('MODIFIED_SQL', 'shophelfer.sql');
+  define('DIR_SHOPHELFER_INSTALLER', '_installer');
+  define('SHOPHELFER_SQL', 'shophelfer.sql');
   define('DISABLE_PATH_CHECK', false); //default false
   
   /*######################################*/  

@@ -27,7 +27,7 @@
 //        '<br />Sort Code: ' . MODULE_PAYMENT_EUTRANSFER_SORTCODE .
           '<br /><br />Your order will not be shipped until we receive your payment in the above account.<br />');
 
-  define('MODULE_PAYMENT_EUTRANSFER_TEXT_INFO','Please transfer the invoice total to your bank account. You will receive the account data by e-mail when your order has been confirmed.');
+  define('MODULE_PAYMENT_EUTRANSFER_TEXT_INFO','Please advance the total due amount to our bank account. You will receive the account data by e-mail when your order has been confirmed.');
   define('MODULE_PAYMENT_EUTRANSFER_STATUS_TITLE','Allow Bank Transfer Payment');
   define('MODULE_PAYMENT_EUTRANSFER_STATUS_DESC','Do you want to accept bank transfer order payments?');
   define('MODULE_PAYMENT_EUTRANSFER_TEXT_INFO','');

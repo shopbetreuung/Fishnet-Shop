@@ -22,7 +22,6 @@
           '<br />Bank Name: ' . MODULE_PAYMENT_EUTRANSFER_BANKNAM .
           '<br />Branch: ' . MODULE_PAYMENT_EUTRANSFER_BRANCH .
           '<br />Account Name: ' . MODULE_PAYMENT_EUTRANSFER_ACCNAM .
-          '<br />Account No.: ' . MODULE_PAYMENT_EUTRANSFER_ACCNUM .
           '<br />IBAN:: ' . MODULE_PAYMENT_EUTRANSFER_ACCIBAN .
           '<br />BIC/SWIFT: ' . MODULE_PAYMENT_EUTRANSFER_BANKBIC .
 //        '<br />Sort Code: ' . MODULE_PAYMENT_EUTRANSFER_SORTCODE .
@@ -40,9 +39,6 @@
 
   define('MODULE_PAYMENT_EUTRANSFER_ACCNAM_TITLE','Bank Account Name');
   define('MODULE_PAYMENT_EUTRANSFER_ACCNAM_DESC','The name associated with the account.');
-
-  define('MODULE_PAYMENT_EUTRANSFER_ACCNUM_TITLE','Bank Account No.');
-  define('MODULE_PAYMENT_EUTRANSFER_ACCNUM_DESC','Your account number.');
 
   define('MODULE_PAYMENT_EUTRANSFER_ACCIBAN_TITLE','Bank Account IBAN');
   define('MODULE_PAYMENT_EUTRANSFER_ACCIBAN_DESC','International account id.<br />(ask your bank if you don\'t know it)');

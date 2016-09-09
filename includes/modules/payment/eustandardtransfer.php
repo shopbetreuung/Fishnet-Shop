@@ -25,7 +25,7 @@ class eustandardtransfer {
 		$this->description = MODULE_PAYMENT_EUTRANSFER_TEXT_DESCRIPTION;
 		$this->sort_order = MODULE_PAYMENT_EUTRANSFER_SORT_ORDER;
 		$this->info = MODULE_PAYMENT_EUTRANSFER_TEXT_INFO;
-		$this->enabled = ((MODULE_PAYMENT_EUTRANSFER_STATUS == 'True') ? true : false);
+		$this->enabled = ((MODULE_PAYMENT_EUTRANSFER_STATUS == 'true') ? true : false);
 	}
 	// class methods
 	function javascript_validation() {
@@ -83,7 +83,7 @@ class eustandardtransfer {
 
 	function install() {
 		xtc_db_query("insert into ".TABLE_CONFIGURATION." ( configuration_key, configuration_value,  configuration_group_id, sort_order, date_added) values ('MODULE_PAYMENT_EUSTANDARDTRANSFER_ALLOWED', '', '6', '0', now())");
-		xtc_db_query("insert into ".TABLE_CONFIGURATION." (configuration_key, configuration_value,configuration_group_id, sort_order, set_function, date_added) values ('MODULE_PAYMENT_EUTRANSFER_STATUS', 'True', '6', '3', 'xtc_cfg_select_option(array(\'True\', \'False\'), ', now());");
+		xtc_db_query("insert into ".TABLE_CONFIGURATION." (configuration_key, configuration_value,configuration_group_id, sort_order, set_function, date_added) values ('MODULE_PAYMENT_EUTRANSFER_STATUS', 'true', '6', '3', 'xtc_cfg_select_option(array(\'true\', \'false\'), ', now());");
 		xtc_db_query("insert into ".TABLE_CONFIGURATION." (configuration_key, configuration_value,configuration_group_id, sort_order, date_added) values ('MODULE_PAYMENT_EUTRANSFER_BANKNAM', '---',  '6', '1', now());");
 		xtc_db_query("insert into ".TABLE_CONFIGURATION." (configuration_key, configuration_value,configuration_group_id, sort_order, date_added) values ('MODULE_PAYMENT_EUTRANSFER_BRANCH', '---', '6', '1', now());");
 		xtc_db_query("insert into ".TABLE_CONFIGURATION." (configuration_key, configuration_value,configuration_group_id, sort_order, date_added) values ('MODULE_PAYMENT_EUTRANSFER_ACCNAM', '---',  '6', '1', now());");

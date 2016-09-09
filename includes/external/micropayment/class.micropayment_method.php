@@ -36,7 +36,7 @@ class micropayment_method
 
     function check_enabled()
     {
-        $check_query = xtc_db_query("SELECT `configuration_value` FROM " . TABLE_CONFIGURATION . " WHERE `configuration_key` = 'MODULE_PAYMENT_" . strtoupper($this->code) . "_STATUS' AND configuration_value = 'True'");
+        $check_query = xtc_db_query("SELECT `configuration_value` FROM " . TABLE_CONFIGURATION . " WHERE `configuration_key` = 'MODULE_PAYMENT_" . strtoupper($this->code) . "_STATUS' AND configuration_value = 'true'");
         $check = xtc_db_num_rows($check_query);
         $this->enabled = ($check != 0) ? true : false;
         return $this->enabled;
@@ -177,7 +177,7 @@ class micropayment_method
             xtc_db_query("INSERT INTO " . TABLE_ORDERS_STATUS . " (`orders_status_id`,`language_id`,`orders_status_name`) VALUES ('" . $lastStatusId . "',1,'Cancelled')");
             xtc_db_query("INSERT INTO " . TABLE_ORDERS_STATUS . " (`orders_status_id`,`language_id`,`orders_status_name`) VALUES ('" . $lastStatusId . "',2,'Storniert')");
 
-            xtc_db_query("INSERT INTO " . TABLE_CONFIGURATION . " ( `configuration_key`, `configuration_value`, `configuration_group_id`, `sort_order`, `set_function`, `date_added`) VALUES ('MODULE_PAYMENT_MCP_SERVICE_STATUS', 'False', '6', '1', 'xtc_cfg_select_option(array(\'True\', \'False\'), ', NOW())");
+            xtc_db_query("INSERT INTO " . TABLE_CONFIGURATION . " ( `configuration_key`, `configuration_value`, `configuration_group_id`, `sort_order`, `set_function`, `date_added`) VALUES ('MODULE_PAYMENT_MCP_SERVICE_STATUS', 'false', '6', '1', 'xtc_cfg_select_option(array(\'true\', \'false\'), ', NOW())");
             xtc_db_query("INSERT INTO " . TABLE_CONFIGURATION . " ( `configuration_key`, `configuration_value`, `configuration_group_id`, `sort_order`, `date_added`) VALUES ('MODULE_PAYMENT_MCP_SERVICE_ACCOUNT_ID', '', '6', '0', NOW())");
             xtc_db_query("INSERT INTO " . TABLE_CONFIGURATION . " ( `configuration_key`, `configuration_value`, `configuration_group_id`, `sort_order`, `date_added`) VALUES ('MODULE_PAYMENT_MCP_SERVICE_ACCESS_KEY', '', '6', '0', NOW())");
             xtc_db_query("INSERT INTO " . TABLE_CONFIGURATION . " ( `configuration_key`, `configuration_value`, `configuration_group_id`, `sort_order`, `date_added`) VALUES ('MODULE_PAYMENT_MCP_SERVICE_PROJECT_CODE', '', '6', '0', NOW())");

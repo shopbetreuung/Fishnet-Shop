@@ -53,7 +53,7 @@ class worldpay {
 		$this->title = MODULE_PAYMENT_WORLDPAY_TEXT_TITLE;
 		$this->description = MODULE_PAYMENT_WORLDPAY_TEXT_DESC;
 		$this->sort_order = MODULE_PAYMENT_WORLDPAY_SORT_ORDER;
-		$this->enabled = ((MODULE_PAYMENT_WORLDPAY_STATUS == 'True') ? true : false);
+		$this->enabled = ((MODULE_PAYMENT_WORLDPAY_STATUS == 'true') ? true : false);
 		$this->info = MODULE_PAYMENT_WORLDPAY_TEXT_INFO;
 		if ((int) MODULE_PAYMENT_WORLDPAY_ORDER_STATUS_ID > 0) {
 			$this->order_status = MODULE_PAYMENT_WORLDPAY_ORDER_STATUS_ID;
@@ -116,7 +116,7 @@ class worldpay {
 		$process_button_string = xtc_draw_hidden_field('instId', MODULE_PAYMENT_WORLDPAY_ID).xtc_draw_hidden_field('currency', $_SESSION['currency']).xtc_draw_hidden_field('desc', 'Purchase from '.STORE_NAME).xtc_draw_hidden_field('cartId', $worldpay_url).xtc_draw_hidden_field('amount', $total);
 
 		// Pre Auth Mod 3/1/2002 - Graeme Conkie
-		if (MODULE_PAYMENT_WORLDPAY_USEPREAUTH == 'True')
+		if (MODULE_PAYMENT_WORLDPAY_USEPREAUTH == 'true')
 			$process_button_string .= xtc_draw_hidden_field('authMode', MODULE_PAYMENT_WORLDPAY_PREAUTH);
 
 		// Ian-san: Create callback and language links here 6/4/2003:
@@ -164,7 +164,7 @@ class worldpay {
 	}
 
 	function install() {
-		xtc_db_query("insert into ".TABLE_CONFIGURATION." (configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) values ('MODULE_PAYMENT_WORLDPAY_STATUS', 'True', '6', '1', 'xtc_cfg_select_option(array(\'True\', \'False\'), ', now())");
+		xtc_db_query("insert into ".TABLE_CONFIGURATION." (configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) values ('MODULE_PAYMENT_WORLDPAY_STATUS', 'true', '6', '1', 'xtc_cfg_select_option(array(\'true\', \'false\'), ', now())");
 		xtc_db_query("insert into ".TABLE_CONFIGURATION." (configuration_key, configuration_value, configuration_group_id, sort_order, date_added) values ('MODULE_PAYMENT_WORLDPAY_ID', '00000', '6', '2', now())");
 		xtc_db_query("insert into ".TABLE_CONFIGURATION." (configuration_key, configuration_value, configuration_group_id, sort_order, date_added) values ('MODULE_PAYMENT_WORLDPAY_MODE', '100', '6', '5', now())");
 		xtc_db_query("insert into ".TABLE_CONFIGURATION." (configuration_key, configuration_value,  configuration_group_id, sort_order, date_added) values ('MODULE_PAYMENT_WORLDPAY_ALLOWED', '', '6', '0', now())");
@@ -174,7 +174,7 @@ class worldpay {
 
 		// Pre Auth Mod - Graeme Conkie 13/1/2003
 		xtc_db_query("insert into ".TABLE_CONFIGURATION." (configuration_key, configuration_value, configuration_group_id, sort_order, date_added) values ('MODULE_PAYMENT_WORLDPAY_SORT_ORDER', '0', '6', '0', now())");
-		xtc_db_query("insert into ".TABLE_CONFIGURATION." (configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) values ('MODULE_PAYMENT_WORLDPAY_USEPREAUTH', 'False', '6', '3', 'xtc_cfg_select_option(array(\'True\', \'False\'), ', now())");
+		xtc_db_query("insert into ".TABLE_CONFIGURATION." (configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) values ('MODULE_PAYMENT_WORLDPAY_USEPREAUTH', 'false', '6', '3', 'xtc_cfg_select_option(array(\'true\', \'false\'), ', now())");
 		xtc_db_query("insert into ".TABLE_CONFIGURATION." (configuration_key, configuration_value, configuration_group_id, sort_order, set_function, use_function, date_added) values ('MODULE_PAYMENT_WORLDPAY_ORDER_STATUS_ID', '0', '6', '0', 'xtc_cfg_pull_down_order_statuses(', 'xtc_get_order_status_name', now())");
 		xtc_db_query("insert into ".TABLE_CONFIGURATION." (configuration_key, configuration_value, configuration_group_id, sort_order, date_added) values ('MODULE_PAYMENT_WORLDPAY_PREAUTH', 'A', '6', '4', now())");
 		// Paulz zone control 04/04/2004        

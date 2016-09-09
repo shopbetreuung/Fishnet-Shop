@@ -50,7 +50,7 @@ class billsafe_2 {
     }
     $this->description = MODULE_PAYMENT_BILLSAFE_2_TEXT_DESCRIPTION;
     $this->sort_order = MODULE_PAYMENT_BILLSAFE_2_SORT_ORDER;
-    $this->enabled = ((MODULE_PAYMENT_BILLSAFE_2_STATUS == 'True') ? true : false);
+    $this->enabled = ((MODULE_PAYMENT_BILLSAFE_2_STATUS == 'true') ? true : false);
     $this->application_version = $ini['applicationVersion'];
     $this->applicationSignature = $ini['applicationSignature'];
     $this->api_version = '2.0';
@@ -103,7 +103,7 @@ class billsafe_2 {
     }
     require_once (DIR_FS_CATALOG.'includes/external/billsafe/classes/billsafe_2/billsafe_2.php');//DokuMan - 2012-06-19 - move billsafe to external directory
     $bs = new Billsafe_Sdk(DIR_FS_CATALOG.'includes/external/billsafe/classes/billsafe_2/ini.php');//DokuMan - 2012-06-19 - move billsafe to external directory
-    if (MODULE_PAYMENT_BILLSAFE_2_LOG == 'True') {
+    if (MODULE_PAYMENT_BILLSAFE_2_LOG == 'true') {
       if (MODULE_PAYMENT_BILLSAFE_2_LOG_TYPE == 'Echo') {
         require_once DIR_FS_CATALOG.'includes/external/billsafe/classes/billsafe_2/LoggerEcho.php';//DokuMan - 2012-06-19 - move billsafe to external directory
         $bs->setLogger(new Billsafe_LoggerEcho());
@@ -208,7 +208,7 @@ class billsafe_2 {
     global $order;
     $payment_type = $this->title;
     $process_button_string = xtc_draw_hidden_field('paymentType', $payment_type);
-    if (MODULE_PAYMENT_BILLSAFE_2_LAYER == 'True') {
+    if (MODULE_PAYMENT_BILLSAFE_2_LAYER == 'true') {
       if (MODULE_PAYMENT_BILLSAFE_2_SERVER == 'Live') {
         $lisb = 'false';
       } else {
@@ -242,7 +242,7 @@ class billsafe_2 {
     if (empty($_GET['token'])) {
       require_once (DIR_FS_CATALOG.'includes/external/billsafe/classes/billsafe_2/billsafe_2.php');//DokuMan - 2012-06-19 - move billsafe to external directory
       $bs = new Billsafe_Sdk(DIR_FS_CATALOG.'includes/external/billsafe/classes/billsafe_2/ini.php');//DokuMan - 2012-06-19 - move billsafe to external directory
-      if (MODULE_PAYMENT_BILLSAFE_2_LOG == 'True') {
+      if (MODULE_PAYMENT_BILLSAFE_2_LOG == 'true') {
         if (MODULE_PAYMENT_BILLSAFE_2_LOG_TYPE == 'Echo') {
           require_once DIR_FS_CATALOG.'includes/external/billsafe/classes/billsafe_2/LoggerEcho.php';//DokuMan - 2012-06-19 - move billsafe to external directory
           $bs->setLogger(new Billsafe_LoggerEcho());
@@ -442,7 +442,7 @@ class billsafe_2 {
       if (!empty($customer['customers_dob']) && $customer['customers_dob'] != '0000-00-00') $params['customer']['dateOfBirth'] = $customer['customers_dob'];
       $response = $bs->callMethod('prepareOrder', $params);
       if ($response->ack == 'OK') {
-        if (MODULE_PAYMENT_BILLSAFE_2_LAYER == 'True') {
+        if (MODULE_PAYMENT_BILLSAFE_2_LAYER == 'true') {
           $bs->callPaymentLayer($response->token);
         } else {
           $bs->redirectToPaymentGateway($response->token);
@@ -602,11 +602,11 @@ class billsafe_2 {
     $logo_url = HTTPS_CATALOG_SERVER.DIR_WS_CATALOG.'templates/'.CURRENT_TEMPLATE.'/img/top_logo.jpg';
     $billsafe_logo = 'https://images.billsafe.de/image/image/id/2120806d6053';
     $check_query = xtc_db_query('SHOW COLUMNS FROM '.TABLE_CONFIGURATION.' like "MODULE_PAYMENT_BILLSAFE_2_STATUS"');
-    if (xtc_db_num_rows($check_query) == 0) xtc_db_query('INSERT INTO '.TABLE_CONFIGURATION.' (configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) VALUES ("MODULE_PAYMENT_BILLSAFE_2_STATUS", "False", "6", "1", "xtc_cfg_select_option(array(\'True\', \'False\'), ", now())');
+    if (xtc_db_num_rows($check_query) == 0) xtc_db_query('INSERT INTO '.TABLE_CONFIGURATION.' (configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) VALUES ("MODULE_PAYMENT_BILLSAFE_2_STATUS", "false", "6", "1", "xtc_cfg_select_option(array(\'true\', \'false\'), ", now())');
     $check_query = xtc_db_query('SHOW COLUMNS FROM '.TABLE_CONFIGURATION.' like "MODULE_PAYMENT_BILLSAFE_2_LAYER"');
-    if (xtc_db_num_rows($check_query) == 0) xtc_db_query('INSERT INTO '.TABLE_CONFIGURATION.' (configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) VALUES ("MODULE_PAYMENT_BILLSAFE_2_LAYER", "True", "6", "1", "xtc_cfg_select_option(array(\'True\', \'False\'), ", now())');
+    if (xtc_db_num_rows($check_query) == 0) xtc_db_query('INSERT INTO '.TABLE_CONFIGURATION.' (configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) VALUES ("MODULE_PAYMENT_BILLSAFE_2_LAYER", "true", "6", "1", "xtc_cfg_select_option(array(\'true\', \'false\'), ", now())');
     $check_query = xtc_db_query('SHOW COLUMNS FROM '.TABLE_CONFIGURATION.' like "MODULE_PAYMENT_BILLSAFE_2_LOG"');
-    if (xtc_db_num_rows($check_query) == 0) xtc_db_query('INSERT INTO '.TABLE_CONFIGURATION.' (configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) VALUES ("MODULE_PAYMENT_BILLSAFE_2_LOG", "False", "6", "1", "xtc_cfg_select_option(array(\'True\', \'False\'), ", now())');
+    if (xtc_db_num_rows($check_query) == 0) xtc_db_query('INSERT INTO '.TABLE_CONFIGURATION.' (configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) VALUES ("MODULE_PAYMENT_BILLSAFE_2_LOG", "false", "6", "1", "xtc_cfg_select_option(array(\'true\', \'talse\'), ", now())');
     $check_query = xtc_db_query('SHOW COLUMNS FROM '.TABLE_CONFIGURATION.' like "MODULE_PAYMENT_BILLSAFE_2_LOG_TYPE"');
     if (xtc_db_num_rows($check_query) == 0) xtc_db_query('INSERT INTO '.TABLE_CONFIGURATION.' (configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) VALUES ("MODULE_PAYMENT_BILLSAFE_2_LOG_TYPE", "False", "6", "1", "xtc_cfg_select_option(array(\'Echo\', \'Mail\', \'File\'), ", now())');
     $check_query = xtc_db_query('SHOW COLUMNS FROM '.TABLE_CONFIGURATION.' like "MODULE_PAYMENT_BILLSAFE_2_LOG_ADDR"');

@@ -60,7 +60,7 @@ class fcnt_moneybookers {
 		
 		if (defined('MODULE_PAYMENT_MONEYBOOKERS_'.strtoupper($code).'_STATUS')) {
 			$this->sort_order = constant('MODULE_PAYMENT_MONEYBOOKERS_'.strtoupper($code).'_SORT_ORDER');
-			$this->enabled = ((constant('MODULE_PAYMENT_MONEYBOOKERS_'.strtoupper($code).'_STATUS') == 'True') ? true : false);
+			$this->enabled = ((constant('MODULE_PAYMENT_MONEYBOOKERS_'.strtoupper($code).'_STATUS') == 'true') ? true : false);
 			$this->tmpStatus = constant('_PAYMENT_MONEYBOOKERS_TMP_STATUS_ID');
 		}
 
@@ -295,7 +295,7 @@ class fcnt_moneybookers {
 		xtc_db_query("CREATE TABLE payment_moneybookers (mb_TRID varchar(255) NOT NULL default '',mb_ERRNO smallint(3) unsigned NOT NULL default '0',mb_ERRTXT varchar(255) NOT NULL default '',mb_DATE datetime NOT NULL default '0000-00-00 00:00:00',mb_MBTID bigint(18) unsigned NOT NULL default '0',mb_STATUS tinyint(1) NOT NULL default '0',mb_ORDERID int(11) unsigned NOT NULL default '0',PRIMARY KEY  (mb_TRID))");
 		}
 
-		xtc_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_key, configuration_value,  configuration_group_id, sort_order, set_function, date_added) values ('MODULE_PAYMENT_MONEYBOOKERS_".strtoupper($this->module)."_STATUS', 'True',  '6', '0', 'xtc_cfg_select_option(array(\'True\', \'False\'), ', now())");
+		xtc_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_key, configuration_value,  configuration_group_id, sort_order, set_function, date_added) values ('MODULE_PAYMENT_MONEYBOOKERS_".strtoupper($this->module)."_STATUS', 'true',  '6', '0', 'xtc_cfg_select_option(array(\'true\', \'false\'), ', now())");
 		xtc_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_key, configuration_value,  configuration_group_id, sort_order, date_added) values ('MODULE_PAYMENT_MONEYBOOKERS_".strtoupper($this->module)."_SORT_ORDER', '0',  '6', '4', now())");
 		xtc_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_key, configuration_value,  configuration_group_id, sort_order, use_function, set_function, date_added) values ('MODULE_PAYMENT_MONEYBOOKERS_".strtoupper($this->module)."_ZONE', '0',  '6', '7', 'xtc_get_zone_class_title', 'xtc_cfg_pull_down_zone_classes(', now())");
 		xtc_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_key, configuration_value,  configuration_group_id, sort_order, date_added) values ('MODULE_PAYMENT_MONEYBOOKERS_".strtoupper($this->module)."_ALLOWED', '".$this->allowed."', '6', '0', now())");

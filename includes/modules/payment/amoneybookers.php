@@ -39,7 +39,7 @@ class amoneybookers {
 		$this->title = MODULE_PAYMENT_AMONEYBOOKERS_TEXT_TITLE;
 		$this->description = MODULE_PAYMENT_AMONEYBOOKERS_TEXT_DESCRIPTION;
 		$this->sort_order = MODULE_PAYMENT_AMONEYBOOKERS_SORT_ORDER;
-		$this->enabled = ((MODULE_PAYMENT_AMONEYBOOKERS_STATUS == 'True') ? true : false);
+		$this->enabled = ((MODULE_PAYMENT_AMONEYBOOKERS_STATUS == 'true') ? true : false);
 		$this->info = MODULE_PAYMENT_AMONEYBOOKERS_TEXT_INFO;
 		$this->logo = xtc_image(DIR_WS_ICONS . 'logo_moneybookers.jpg');
 		$this->landingPage = 'http://www.moneybookers.com/ecommerce_btc/de/index.html';
@@ -620,7 +620,7 @@ class amoneybookers {
 		xtc_db_query("CREATE TABLE payment_moneybookers (mb_TRID varchar(255) NOT NULL default '',mb_ERRNO smallint(3) unsigned NOT NULL default '0',mb_ERRTXT varchar(255) NOT NULL default '',mb_DATE datetime NOT NULL default '0000-00-00 00:00:00',mb_MBTID bigint(18) unsigned NOT NULL default '0',mb_STATUS tinyint(1) NOT NULL default '0',mb_ORDERID int(11) unsigned NOT NULL default '0',PRIMARY KEY  (mb_TRID))");
 		}
 
-		xtc_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_key, configuration_value,  configuration_group_id, sort_order, set_function, date_added) values ('MODULE_PAYMENT_AMONEYBOOKERS_STATUS', 'True',  '6', '0', 'xtc_cfg_select_option(array(\'True\', \'False\'), ', now())");
+		xtc_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_key, configuration_value,  configuration_group_id, sort_order, set_function, date_added) values ('MODULE_PAYMENT_AMONEYBOOKERS_STATUS', 'true',  '6', '0', 'xtc_cfg_select_option(array(\'true\', \'false\'), ', now())");
 		xtc_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_key, configuration_value,  configuration_group_id, sort_order, date_added) values ('MODULE_PAYMENT_AMONEYBOOKERS_EMAILID', '', '6', '1', now())");
 		xtc_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_key, configuration_value,  configuration_group_id, sort_order, date_added) values ('MODULE_PAYMENT_AMONEYBOOKERS_PWD', '',  '6', '2', now())");
 		xtc_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_key, configuration_value,  configuration_group_id, sort_order, date_added) values ('MODULE_PAYMENT_AMONEYBOOKERS_MERCHANTID', '', '6', '3', now())");

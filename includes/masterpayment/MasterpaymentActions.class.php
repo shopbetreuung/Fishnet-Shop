@@ -57,7 +57,7 @@ class MasterpaymentActions
 	
 	function getActionURL()
 	{	
-		if(MODULE_PAYMENT_MASTERPAYMENT_CONFIG_INFRAME == 'True') {            
+		if(MODULE_PAYMENT_MASTERPAYMENT_CONFIG_INFRAME == 'true') {            
       		return $this->getShopURL() . 'checkout_masterpayment.php?' . session_name() . '=' . session_id();		
 	  	} else {
 	  		return $this->getShopURL() . 'checkout_masterpayment.php?action=request&' . session_name() . '=' . session_id();
@@ -84,7 +84,7 @@ class MasterpaymentActions
 	
 	function deleteTempOrder()
 	{		
-		if(MODULE_PAYMENT_MASTERPAYMENT_CONFIG_DELETE_TEMP_ORDER == 'True')
+		if(MODULE_PAYMENT_MASTERPAYMENT_CONFIG_DELETE_TEMP_ORDER == 'true')
 		{		
 			if($this->getOrderId()) 
 			{				

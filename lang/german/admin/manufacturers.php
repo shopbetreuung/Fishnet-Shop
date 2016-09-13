@@ -47,4 +47,10 @@ define('ERROR_DIRECTORY_DOES_NOT_EXIST', 'Fehler: Das Verzeichnis %s existiert n
 
 define('ERROR_TEXT_HEADING', 'Fehler! Hersteller nicht gespeichert:');
 define('ERROR_TEXT_NAME', 'Herstellername ung&uuml;ltig!');
+
+define('TEXT_MANUFACTURERS_DESC', 'Hersteller Beschreibung - oben:');
+define('TEXT_MANUFACTURERS_MORE_DESC', 'Hersteller Beschreibung - weiterlesen:');
+define('TEXT_MANUFACTURERS_SHORT_DESC', 'Hersteller Beschreibung - unten:');
+define('TEXT_MANUFACTURERS_META_TITLE', 'Hersteller Meta Titel:');
+define('TEXT_MANUFACTURERS_META_DESCRIPTION', 'Hersteller Meta Beschreibung:');
 ?>

@@ -71,7 +71,13 @@ if ($listing_split->number_of_rows > 0) {
 
   }
   //EOF -web28- 2010-08-06 - BUGFIX no manufacturers image displayed
-
+  if (isset ($_GET['manufacturers_id']) && $_GET['manufacturers_id'] > 0) {
+	  $manufacturers_data_qry = xtDBquery("SELECT m.*, mi.* FROM ".TABLE_MANUFACTURERS." m, ".TABLE_MANUFACTURERS_INFO." mi WHERE m.manufacturers_id = '".(int) $_GET['manufacturers_id']."' AND m.manufacturers_id = mi.manufacturers_id AND mi.languages_id = '".(int)$_SESSION["languages_id"]."'");
+	  $manufacturers_data = xtc_db_fetch_array($manufacturers_data_qry,true);
+	  $category['categories_name'] = $manufacturers_data['manufacturers_name'];
+	  $category['categories_description'] = $manufacturers_data['manufacturers_description'];
+	  $module_smarty->assign('MANUFACTURERS', $manufacturers_data);
+  }
   $module_smarty->assign('CATEGORIES_NAME', $category['categories_name']);
   $module_smarty->assign('CATEGORIES_HEADING_TITLE', $category['categories_heading_title']);
   $module_smarty->assign('CATEGORIES_IMAGE', $image);

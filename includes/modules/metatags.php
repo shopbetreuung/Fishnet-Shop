@@ -389,6 +389,9 @@ switch(basename($PHP_SELF)) {
       $manu_name = xtc_db_fetch_array($manu_name_query,true);
       is_array($manu_name) ? $manu_name = implode('',$manu_name) :  $manu_name = '';
       $metaGoWords .= ','.$manu_name; // <-- zu GoWords hinzufügen
+	  $manu_meta_query = xtDBquery("SELECT manufacturers_meta_title, manufacturers_meta_description FROM ".TABLE_MANUFACTURERS_INFO." WHERE manufacturers_id = '".(int)$manu_id."' AND languages_id = '".(int)$_SESSION['languages_id']."'");
+	  $manu_meta = xtc_db_fetch_array($manu_meta_query);
+	  $meta_descr = $manu_meta['manufacturers_meta_description'];		
     }
 
     // KeyWords ...
@@ -412,7 +415,9 @@ switch(basename($PHP_SELF)) {
     if(!empty($categories_meta['categories_meta_title'])) {
       // Meta-Titel, ggf. Herstellername, ggf. Seiten-Nummer, ggf. Shop-Titel
       $meta_title = $categories_meta['categories_meta_title'].(($manu_name)?' - '.$manu_name:'').(($Page)?' - '.$Page:'').(($addCatShopTitle)?' - '.ML_TITLE:'');
-    } else{
+    } else if (!empty($manu_meta['manufacturers_meta_title'])){
+	  $meta_title = $manu_meta['manufacturers_meta_title'];
+	} else{	
       $meta_title = metaTitle($categories_meta['categories_name'],$manu_name,$Page,($addCatShopTitle)?ML_TITLE:'');
     }
 

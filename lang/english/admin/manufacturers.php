@@ -47,4 +47,10 @@ define('ERROR_DIRECTORY_DOES_NOT_EXIST', 'Error: Directory does not exist: %s');
 
 define('ERROR_TEXT_HEADING', 'Manufacturer not saved, fix errors:');
 define('ERROR_TEXT_NAME', 'Name invalid!');
+
+define('TEXT_MANUFACTURERS_DESC', 'Manufacturer description - top:');
+define('TEXT_MANUFACTURERS_MORE_DESC', 'Manufacturer description - more:');
+define('TEXT_MANUFACTURERS_SHORT_DESC', 'Manufacturer description - below:');
+define('TEXT_MANUFACTURERS_META_TITLE', 'Manufacturers Meta Title:');
+define('TEXT_MANUFACTURERS_META_DESCRIPTION', 'Manufacturers Meta Description:');
 ?>

@@ -783,11 +783,12 @@ require (DIR_WS_INCLUDES.'header.php');
             if ($order->delivery['name'] != $order->customer['name'] ||
                 $order->delivery['postcode'] != $order->customer['postcode'] ||
                 $order->delivery['city'] != $order->customer['city'] ||
-                $order->delivery['street_address'] != $order->customer['street_address']) {
-              $address_bgcolor = ' bgcolor="#FFCC33"';
+                $order->delivery['street_address'] != $order->customer['street_address'] ||
+                $order->delivery['street_address'] != $order->billing['street_address']) {
+              $address_bgcolor = 'background-color: #FFCC33;';
             }
             ?>
-          <div class="col-sm-3 main" valign="top" style="border-right: 1px solid #a3a3a3;"<?php if (isset($address_bgcolor)) echo $address_bgcolor; ?>>
+          <div class="col-sm-3 main" valign="top" style="border-right: 1px solid #a3a3a3;<?php if (isset($address_bgcolor)) echo $address_bgcolor; ?>">
             <b><?php echo ENTRY_SHIPPING_ADDRESS; ?></b><br />
              <?php echo xtc_address_format($order->delivery['format_id'], $order->delivery, 1, '', '<br />'); ?>
           </div>

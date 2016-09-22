@@ -258,9 +258,28 @@ if (isset($_POST['action']) && ($_POST['action'] == 'process'))
                 if ($aa_spalten['Type'] == 'int(1)')
                 {
                     xtc_db_query("UPDATE admin_access SET " . $aa_spalten['Field'] . " = '1' WHERE customers_id = '1'");
-                    xtc_db_query("UPDATE admin_access SET " . $aa_spalten['Field'] . " = '1' WHERE customers_id = 'groups'");
+                    xtc_db_query("UPDATE admin_access SET " . $aa_spalten['Field'] . " = '2' WHERE customers_id = 'groups'");
                 }
             }
+            // groups
+            $groups1_array = ['configuration', 'modules', 'countries', 'currencies', 'zones', 'geo_zones', 'tax_classes', 'tax_rates', 'accounting', 'backup', 'server_info', 'whos_online', 'languages', 'define_language', 'orders_status', 'shipping_status', 'module_export'];
+            $groups3_array = ['orders', 'campaigns', 'print_packingslip', 'print_order', 'popup_memo', 'coupon_admin', 'listproducts', 'listcategories'];
+            $groups4_array = ['gv_queue', 'gv_mail', 'gv_sent', 'validproducts', 'mail'];
+            
+            xtc_db_query("UPDATE admin_access SET cache = '0' WHERE customers_id = 'groups'");
+            
+            foreach ($groups1_array as $group1) {
+                xtc_db_query("UPDATE admin_access SET " . $group1 . " = '1' WHERE customers_id = 'groups'");    
+            }
+            
+            foreach ($groups3_array as $group3) {
+                xtc_db_query("UPDATE admin_access SET " . $group3 . " = '3' WHERE customers_id = 'groups'");    
+            }
+            
+            foreach ($groups4_array as $group4) {
+                xtc_db_query("UPDATE admin_access SET " . $group4 . " = '4' WHERE customers_id = 'groups'");    
+            }
+            
             xtc_redirect(xtc_href_link('install_additional_admins.php', '', 'NONSSL'));
         }
     }

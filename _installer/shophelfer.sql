@@ -466,6 +466,7 @@ CREATE TABLE customers (
   refferers_id VARCHAR(32) DEFAULT '0' NOT NULL,
   customers_date_added DATETIME DEFAULT '0000-00-00 00:00:00',
   customers_last_modified DATETIME DEFAULT '0000-00-00 00:00:00',
+  customers_symbol INT(11) DEFAULT 0 NOT NULL,
   PRIMARY KEY (customers_id)
 ) ENGINE=MyISAM;
 

@@ -413,6 +413,8 @@ while ($carrier = xtc_db_fetch_array($carriers_query)) {
   $carriers[] = array('id' => $carrier['carrier_id'], 'text' => $carrier['carrier_name']);
 }
 
+$symbol_array = array(0 => array('value' => 0, 'image' => NULL), 1 => array('value' => 1, 'image' => '01-smiley.png'), 2 => array('value' => 2, 'image' => '02-smiley.png'), 3 => array('value' => 3, 'image' => '03-smiley.png'), 4 => array('value' => 4, 'image' => '04-smiley.png'), 5 => array('value' => 5, 'image' => 'vip.png'));
+
 switch ($action) {
   //BOF - web28 - 2010-03-20 - Send Order by Admin
   case 'send':
@@ -1491,8 +1493,14 @@ elseif ($action == 'custom_action') {
                       } else {
                         $orders_action_image = '<a href="' . xtc_href_link(FILENAME_ORDERS, xtc_get_all_get_params(array('oID')) . 'oID=' . $orders['orders_id']) . '">' . xtc_image(DIR_WS_IMAGES . 'icon_info.gif', IMAGE_ICON_INFO) . '</a>';
                       }
+                      
+                      $customers_symbol_query = xtc_db_query("SELECT customers_symbol FROM " . TABLE_CUSTOMERS . " WHERE customers_id = '" . $orders['customers_id'] . "'");
+                      while ($customers_symbol_array = xtc_db_fetch_array($customers_symbol_query)) {
+                        $customers_symbol = $customers_symbol_array['customers_symbol'];
+                      }
+                      
                       ?>
-                      <td class="dataTableContent"><?php echo '<a href="' . $orders_link . '">' . $orders_image_preview . '</a>&nbsp;' . $orders['customers_name']; ?></td>
+                      <td class="dataTableContent"><?php echo '<a href="' . $orders_link . '">' . $orders_image_preview . '</a>&nbsp;' . ($symbol_array[$customers_symbol]['image'] ? xtc_image(DIR_WS_ADMIN.'images/' . $symbol_array[$customers_symbol]['image'], $symbol_array[$customers_symbol]['value'], 25, 25) : '') . '&nbsp;' . $orders['customers_name']; ?></td>
                       <td class="dataTableContent" align="right"><?php echo $orders['orders_id']; ?></td>
                       <!-- // --- bof -- ipdfbill -------- --> 
                       <td class="dataTableContent hidden-xs" align="right"><?php echo $pdfgen.$fakt ?></td>   <!-- ibillnr -->

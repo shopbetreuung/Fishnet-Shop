@@ -8,3 +8,5 @@ ALTER TABLE `manufacturers_info`
 ADD `manufacturers_description` text COLLATE 'latin1_german1_ci' NOT NULL AFTER `manufacturers_url`,
 ADD `manufacturers_description_more` text COLLATE 'latin1_german1_ci' NOT NULL AFTER `manufacturers_description`,
 ADD `manufacturers_short_description` text COLLATE 'latin1_german1_ci' NOT NULL AFTER `manufacturers_description_more`;
+
+ALTER TABLE `customers` ADD `customers_symbol` INT(11) DEFAULT 0 NOT NULL ;

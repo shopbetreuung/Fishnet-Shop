@@ -253,6 +253,7 @@
       $customers_newsletter = (isset($_POST['customers_newsletter']) ? xtc_db_prepare_input($_POST['customers_newsletter']) : '');
       $customers_gender = xtc_db_prepare_input($_POST['customers_gender']);
       $customers_dob = xtc_db_prepare_input($_POST['customers_dob']);
+      $customers_symbol = xtc_db_prepare_input($_POST['customers_symbol']);   
       $default_address_id = xtc_db_prepare_input($_POST['default_address_id']);
       $address_book_id = xtc_db_prepare_input($_POST['address_book_id']);
       $entry_street_address = xtc_db_prepare_input($_POST['entry_street_address']);
@@ -486,6 +487,7 @@
                                   'customers_email_address' => $customers_email_address,
                                   'customers_telephone' => $customers_telephone,
                                   'customers_fax' => $customers_fax,
+                                  'customers_symbol' => $customers_symbol,
                                   'payment_unallowed' => $payment_unallowed,
                                   'shipping_unallowed' => $shipping_unallowed,
                                   'customers_newsletter' => $customers_newsletter,
@@ -598,6 +600,7 @@
              c.customers_telephone,
              c.customers_fax,
              c.customers_newsletter,
+             c.customers_symbol,
              c.payment_unallowed, # Tomcraft 2011-03-18 - Added missing payment_unallowed
              c.shipping_unallowed, # Tomcraft 2011-03-18 - Added missing payment_unallowed
              a.entry_company,
@@ -764,6 +767,7 @@ function check_form() {
                                                     c.customers_telephone,
                                                     c.customers_fax,
                                                     c.customers_newsletter,
+                                                    c.customers_symbol,
                                                     c.member_flag,
                                                     c.payment_unallowed,
                                                     c.shipping_unallowed,
@@ -925,6 +929,23 @@ function check_form() {
                   echo xtc_draw_input_field('customers_email_address', $cInfo->customers_email_address, 'maxlength="96"', true);
                 }
                 ?>
+            </div>
+            <div class="main col-xs-12 col-sm-2"><?php echo ENTRY_SYMBOL; ?></div>
+            <div class="main col-xs-12 col-sm-10">
+              <?php
+                $symbol_array = array(0 => array('value' => 0, 'image' => NULL), 1 => array('value' => 1, 'image' => '01-smiley.png'), 2 => array('value' => 2, 'image' => '02-smiley.png'), 3 => array('value' => 3, 'image' => '03-smiley.png'), 4 => array('value' => 4, 'image' => '04-smiley.png'), 5 => array('value' => 5, 'image' => 'vip.png'));
+                foreach ($symbol_array as $symbols) {
+                  $symbol_selected = false;
+                  if ($cInfo->customers_symbol == $symbols['value']) {
+                    $symbol_selected = true;
+                  }
+                  if ($symbols['value'] == 0) {
+                    echo xtc_draw_radio_field('customers_symbol', $symbols['value'], $symbol_selected) . ' ' . NO_SYMBOL . ' ';
+                  } else {
+                    echo xtc_draw_radio_field('customers_symbol', $symbols['value'], $symbol_selected) . ' ' . xtc_image(DIR_WS_ADMIN.'images/' . $symbols['image'], $symbols['value'], 25, 25) . ' ';
+                  }
+                }
+              ?>
             </div>
             </div>
           </div>

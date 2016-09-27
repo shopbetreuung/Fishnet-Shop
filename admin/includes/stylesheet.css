@@ -130,3 +130,24 @@ min-width:800px;
 /* --- bof -- ipdfbill -------- */ 
 .help-text { +  font-family:Arial,Verdana, Geneva, Helvetica, sans-serif; +  font-size: 11px; +  color: #333333; +  } +.help-headline { +  font-family:Arial,Verdana, Geneva, Helvetica, sans-serif; +  font-size: 12px; +  font-weight: bold; +  color: #333333;   +}
 /* --- eof -- ipdfbill -------- */ 
+
+.feedbackbutton {
+    color: #777;
+    position: relative;
+    display: inline-block;
+    padding: 15px 15px !important;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    line-height: 20px;
+}
+
+.feedbackbutton:hover {
+    color: #333;
+    background-color: transparent;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.feedbacksent {
+    padding: 15px;
+}

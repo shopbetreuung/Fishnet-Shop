@@ -530,3 +530,5 @@ define('TEXT_PAYPAL_TAB_PROFILE', 'PayPal Profile');
 define('TEXT_PAYPAL_TAB_WEBHOOK', 'PayPal Webhook');
 define('TEXT_PAYPAL_TAB_MODULE', 'PayPal Module');
 define('TEXT_PAYPAL_TAB_TRANSACTIONS', 'PayPal Transactions');
+
+define('FEEDBACK_SENT', 'Feedback Sent');

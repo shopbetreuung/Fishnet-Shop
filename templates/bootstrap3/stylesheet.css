@@ -679,3 +679,7 @@ BASIC Template for AGB Hosting Content
     color: #23527c !important;
     text-decoration: underline !important;
 }
+
+.catimglink {
+	display: inline-block;
+}

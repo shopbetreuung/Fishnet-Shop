@@ -199,7 +199,42 @@ function xtc_wysiwyg($type, $lang, $langID = '') {
                }
              </script>';
       break;
-
+	case 'manufacturers_description':
+		$val ='var oFCKeditor = new FCKeditor( \'manufacturers_description['.$langID.']\', \'100%\', \'300\' ) ;
+				   oFCKeditor.BasePath = "'.$path.'" ;
+				   oFCKeditor.Config["LinkBrowserURL"] = "'.$filemanager.$file_path.'" ;
+				   oFCKeditor.Config["ImageBrowserURL"] = "'.$filemanager.$image_path.'" ;
+				   oFCKeditor.Config["FlashBrowserURL"] = "'.$filemanager.$flash_path.'" ;
+				   oFCKeditor.Config["MediaBrowserURL"] = "'.$filemanager.$media_path.'" ;
+				   oFCKeditor.Config["AutoDetectLanguage"] = false ;
+				   oFCKeditor.Config["DefaultLanguage"] = "'.$lang.'" ;
+				   oFCKeditor.ReplaceTextarea() ;
+				   ';
+		break;	
+	case 'manufacturers_description_more':
+		$val ='var oFCKeditor = new FCKeditor( \'manufacturers_description_more['.$langID.']\', \'100%\', \'300\' ) ;
+				   oFCKeditor.BasePath = "'.$path.'" ;
+				   oFCKeditor.Config["LinkBrowserURL"] = "'.$filemanager.$file_path.'" ;
+				   oFCKeditor.Config["ImageBrowserURL"] = "'.$filemanager.$image_path.'" ;
+				   oFCKeditor.Config["FlashBrowserURL"] = "'.$filemanager.$flash_path.'" ;
+				   oFCKeditor.Config["MediaBrowserURL"] = "'.$filemanager.$media_path.'" ;
+				   oFCKeditor.Config["AutoDetectLanguage"] = false ;
+				   oFCKeditor.Config["DefaultLanguage"] = "'.$lang.'" ;
+				   oFCKeditor.ReplaceTextarea() ;
+				   ';
+		break;		
+	case 'manufacturers_short_description':
+		$val ='var oFCKeditor = new FCKeditor( \'manufacturers_short_description['.$langID.']\', \'100%\', \'300\' ) ;
+				   oFCKeditor.BasePath = "'.$path.'" ;
+				   oFCKeditor.Config["LinkBrowserURL"] = "'.$filemanager.$file_path.'" ;
+				   oFCKeditor.Config["ImageBrowserURL"] = "'.$filemanager.$image_path.'" ;
+				   oFCKeditor.Config["FlashBrowserURL"] = "'.$filemanager.$flash_path.'" ;
+				   oFCKeditor.Config["MediaBrowserURL"] = "'.$filemanager.$media_path.'" ;
+				   oFCKeditor.Config["AutoDetectLanguage"] = false ;
+				   oFCKeditor.Config["DefaultLanguage"] = "'.$lang.'" ;
+				   oFCKeditor.ReplaceTextarea() ;
+				   ';
+		break;
   }
   return $val;
 }

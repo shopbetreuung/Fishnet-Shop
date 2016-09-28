@@ -42,6 +42,13 @@
     define('DIR_WS_BASE',''); //web28 - 2010-12-13 - FIX for $messageStack icons //moved to application.php
   }
 
+define('HTTP_SERVER', '');
+define('HTTPS_SERVER', '');
+if (!strpos($_SERVER['PHP_SELF'], 'congratulations')) {
+    define('DIR_WS_CATALOG', '');
+}
+define('DIR_WS_BASE', '');
+  
   //require('../includes/functions/validations.php');
   require_once(DIR_FS_CATALOG.'includes/classes/boxes.php');
   require_once(DIR_FS_CATALOG.'includes/classes/message_stack.php');
@@ -143,7 +150,7 @@
       $domain = str_replace($tmp[0].'.','',$domain);
     }
     $document_root = str_replace($_SERVER["PHP_SELF"],'',$_SERVER["SCRIPT_FILENAME"]);
-    //Prüfen ob Domain im Pfad enthalten ist, wenn nein Pfad Stratopfad erzeugen: /home/strato/www/ersten zwei_buchstaben/www.wunschname.de/htdocs/
+    //Prï¿½fen ob Domain im Pfad enthalten ist, wenn nein Pfad Stratopfad erzeugen: /home/strato/www/ersten zwei_buchstaben/www.wunschname.de/htdocs/
     if(stristr($document_root, $domain) === FALSE) {
       //Erste 2 Buchstaben der Domain ermittlen
       $domain2 = substr($tmp[count($tmp)-2], 0, 2);
@@ -197,7 +204,7 @@
     if (strpos($urltest, '//') !== false)
       return false;
     //Auf falsches Installer Verzeichnis testen
-    if (strpos($urltest, DIR_MODIFIED_INSTALLER) !== false)
+    if (strpos($urltest, DIR_SHOPHELFER_INSTALLER) !== false)
       return false;
 
     if (!preg_match("=://=", $url))

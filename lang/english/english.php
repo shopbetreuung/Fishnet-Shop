@@ -542,4 +542,8 @@ define('TEXT_AGB_CHECKOUT','Please take note of our General Terms & Conditions %
 
 define('_SHIPPING_FREE','Download');
 
+define('COOKIE_NOTE_TEXT', 'This website uses cookies to ensure you get the best experience on our website.');
+define('COOKIE_NOTE_MORE_TEXT', 'More info');
+define('COOKIE_NOTE_DISMISS_TEXT', 'Got it!');
+
 ?>

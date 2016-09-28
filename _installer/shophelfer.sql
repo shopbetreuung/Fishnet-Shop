@@ -466,6 +466,7 @@ CREATE TABLE customers (
   refferers_id VARCHAR(32) DEFAULT '0' NOT NULL,
   customers_date_added DATETIME DEFAULT '0000-00-00 00:00:00',
   customers_last_modified DATETIME DEFAULT '0000-00-00 00:00:00',
+  customers_symbol INT(11) DEFAULT 0 NOT NULL,
   PRIMARY KEY (customers_id)
 ) ENGINE=MyISAM;
 
@@ -586,6 +587,9 @@ CREATE TABLE manufacturers_info (
   manufacturers_meta_description VARCHAR(255) NOT NULL,
   manufacturers_meta_keywords VARCHAR(255) NOT NULL,
   manufacturers_url VARCHAR(255) NOT NULL,
+  manufacturers_description TEXT NOT NULL
+  manufacturers_description_more TEXT NOT NULL
+  manufacturers_short_description TEXT NOT NULL
   url_clicked INT(5) NOT NULL DEFAULT 0,
   date_last_click DATETIME NULL,
   PRIMARY KEY (manufacturers_id, languages_id)
@@ -1339,7 +1343,7 @@ DROP TABLE IF EXISTS personal_offers_by_customers_status_3;
 DROP TABLE IF EXISTS personal_offers_by_customers_status_4;
 
 #database Version
-INSERT INTO database_version(version) VALUES ('SH_1.5.0');
+INSERT INTO database_version(version) VALUES ('SH_1.6.0');
 
 INSERT INTO cm_file_flags (file_flag, file_flag_name) VALUES ('0', 'information');
 INSERT INTO cm_file_flags (file_flag, file_flag_name) VALUES ('1', 'content');
@@ -1507,9 +1511,9 @@ INSERT INTO configuration (configuration_id, configuration_key, configuration_va
 INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'ACCOUNT_GENDER', 'true', 5, 10, NULL, NOW(), NULL, 'xtc_cfg_select_option(array(\'true\', \'false\'),');
 INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'ACCOUNT_DOB', 'false', 5, 20, NULL, NOW(), NULL, 'xtc_cfg_select_option(array(\'true\', \'false\'),');
 INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'ACCOUNT_COMPANY', 'true', 5, 30, NULL, NOW(), NULL, 'xtc_cfg_select_option(array(\'true\', \'false\'),');
-INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'ACCOUNT_SUBURB', 'true', 5, 50, NULL, NOW(), NULL, 'xtc_cfg_select_option(array(\'true\', \'false\'),');
+INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'ACCOUNT_SUBURB', 'false', 5, 50, NULL, NOW(), NULL, 'xtc_cfg_select_option(array(\'true\', \'false\'),');
 INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'ACCOUNT_STATE', 'false', 5, 60, NULL, NOW(), NULL, 'xtc_cfg_select_option(array(\'true\', \'false\'),');
-INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'ACCOUNT_OPTIONS', 'account', 5, 100, NULL, NOW(), NULL, 'xtc_cfg_select_option(array(\'account\', \'guest\', \'both\'),');
+INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'ACCOUNT_OPTIONS', 'both', 5, 100, NULL, NOW(), NULL, 'xtc_cfg_select_option(array(\'account\', \'guest\', \'both\'),');
 INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'DELETE_GUEST_ACCOUNT', 'true', 5, 110, NULL, NOW(), NULL, 'xtc_cfg_select_option(array(\'true\', \'false\'),');
 
 # configuration_group_id 6, Module Options
@@ -1542,9 +1546,9 @@ INSERT INTO configuration (configuration_id, configuration_key, configuration_va
 # configuration_group_id 7, Shipping/Packaging
 INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'SHIPPING_ORIGIN_COUNTRY', '81', 7, 1, NULL, NOW(), 'xtc_get_country_name', 'xtc_cfg_pull_down_country_list(');
 INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'SHIPPING_ORIGIN_ZIP', '', 7, 2, NULL, NOW(), NULL, NULL);
-INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'SHIPPING_MAX_WEIGHT', '50', 7, 3, NULL, NOW(), NULL, NULL);
-INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'SHIPPING_BOX_WEIGHT', '3', 7, 4, NULL, NOW(), NULL, NULL);
-INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'SHIPPING_BOX_PADDING', '10', 7, 5, NULL, NOW(), NULL, NULL);
+INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'SHIPPING_MAX_WEIGHT', '9999', 7, 3, NULL, NOW(), NULL, NULL);
+INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'SHIPPING_BOX_WEIGHT', '0', 7, 4, NULL, NOW(), NULL, NULL);
+INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'SHIPPING_BOX_PADDING', '0', 7, 5, NULL, NOW(), NULL, NULL);
 INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'SHOW_SHIPPING', 'true', 7, 6, NULL, NOW(), NULL, 'xtc_cfg_select_option(array(\'true\', \'false\'),');
 INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'SHIPPING_INFOS', '1', 7, 5, NULL, NOW(), NULL, NULL);
 #INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'SHIPPING_DEFAULT_TAX_CLASS_METHOD', '1', 7, 7, NULL, NOW(), 'xtc_get_default_tax_class_method_name', 'xtc_cfg_pull_down_default_tax_class_methods(');
@@ -1676,7 +1680,7 @@ INSERT INTO configuration (configuration_id, configuration_key, configuration_va
 # BOF - Tomcraft - 2010-06-09 - predefined revocation_id
 INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'REVOCATION_ID', '9', 17, 14, NULL, NOW(), NULL, NULL);
 # EOF - Tomcraft - 2010-06-09 - predefined revocation_id
-INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'ENABLE_PDFBILL', 'true', 17, 15, NULL, NOW(), NULL, 'xtc_cfg_select_option(array(\'true\', \'false\'),');
+INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'ENABLE_PDFBILL', 'false', 17, 15, NULL, NOW(), NULL, 'xtc_cfg_select_option(array(\'true\', \'false\'),');
 
 # BOF - DokuMan - 2010-08-13 - Google RSS Feed REFID configuration
 INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'GOOGLE_RSS_FEED_REFID', '', 17, 15, NULL, NOW(), NULL, NULL);
@@ -1790,6 +1794,11 @@ INSERT INTO configuration (configuration_id, configuration_key, configuration_va
 INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, use_function, set_function, date_added) VALUES ('', 'MODULE_ORDER_TOTAL_GV_TAX_CLASS', '0', '6', '0', 'xtc_get_tax_class_title', 'xtc_cfg_pull_down_tax_classes(', NOW());
 INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, set_function ,date_added) VALUES ('', 'MODULE_ORDER_TOTAL_GV_CREDIT_TAX', 'false', '6', '8','xtc_cfg_select_option(array(\'true\', \'false\'), ', NOW());
 
+# Legal
+INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, date_added, use_function, set_function) VALUES ('', 'SHOW_COOKIE_NOTE', 'false', '25', '1', NOW(), NULL, 'xtc_cfg_select_option(array(''true'', ''false''),');
+INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, date_added, use_function, set_function) VALUES ('', 'COOKIE_NOTE_CONTENT_ID', '0', '25', '2', NOW(), NULL, NULL);
+INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, date_added, use_function, set_function) VALUES ('', 'CONTACT_FORM_CONSENT', 'false', '25', '3', NOW(), NULL, 'xtc_cfg_select_option(array(''true'', ''false''),');
+
 INSERT INTO configuration_group VALUES (1,'My Store','General information about my store',1,1);
 INSERT INTO configuration_group VALUES (2,'Minimum Values','The minimum values for functions / data',2,1);
 INSERT INTO configuration_group VALUES (3,'Maximum Values','The maximum values for functions / data',3,1);
@@ -1815,11 +1824,32 @@ INSERT INTO configuration_group VALUES (22,'Search Options','Additional Options 
 #franky_n - 2010-12-24 - added configuration_group entries for econda and moneybookers
 INSERT INTO configuration_group VALUES (23,'Econda Tracking','Econda Tracking System',23,1);
 INSERT INTO configuration_group VALUES (24,'PIWIK &amp; Google Analytics Tracking','Settings for PIWIK &amp; Google Analytics Tracking',24,1); #Dokuman - 2012-08-27 - added entries for new google analytics & piwik tracking
+INSERT INTO configuration_group VALUES (25, 'Legal', 'Legal Options', 25, 1);
 INSERT INTO configuration_group VALUES (31,'Moneybookers','Moneybookers System',31,1);
 INSERT INTO configuration_group VALUES (40,'Popup Window Configuration','Popup Window Parameters',40,1);
 INSERT INTO configuration_group VALUES (1000,'Adminarea Options','Adminarea Configuration', 1000,1);
 
-
+# Status Admin
+INSERT INTO customers_status VALUES ('0', '2', 'Admin', 1, NULL, NULL, 'admin_status.gif', '0.00', '1', '0.00', '1', '1', '1', 0, '', '', 0, 1, 1, 1, 1);
+INSERT INTO customers_status VALUES ('0', '1', 'Admin', 1, NULL, NULL, 'admin_status.gif', '0.00', '1', '0.00', '1', '1', '1', 0, '', '', 0, 1, 1, 1, 1);
+# Status guest
+INSERT INTO customers_status VALUES ('1', '2', 'Gast', 1, NULL, NULL, 'guest_status.gif', '0.00', '1', '0.00', '1', '1', '1', 0, '', '', 0, 1, 1, 0, 1);
+INSERT INTO customers_status VALUES ('1', '1', 'Guest', 1, NULL, NULL, 'guest_status.gif', '0.00', '1', '0.00', '1', '1', '1', 0, '', '', 0, 1, 1, 0, 1);
+# Status new customer
+INSERT INTO customers_status VALUES('2', '2', 'Neuer Kunde', 1, NULL, NULL, 'customer_status.gif', '0.00', '1', '0.00', '1', '1', '1', 0, '', '', 0, 1, 1, 1, 1);
+INSERT INTO customers_status VALUES('2', '1', 'New Customer', 1, NULL, NULL, 'customer_status.gif', '0.00', '1', '0.00', '1', '1', '1', 0, '', '', 0, 1, 1, 1, 1);
+# Status merchant
+INSERT INTO customers_status VALUES('3', '2', 'H&auml;ndler', 1, NULL, NULL, 'merchant_status.gif', '0.00', '0', '0.00', '1', 1, 0, 1, '', '', 0, 1, 1, 1, 1);
+INSERT INTO customers_status VALUES('3', '1', 'Merchant', 1, NULL, NULL, 'merchant_status.gif', '0.00', '0', '0.00', '1', 1, 0, 1, '', '', 0, 1, 1, 1, 1);
+# Status merchant foreign Countries                                              
+INSERT INTO customers_status VALUES('4', '1', 'Merchant foreign Countries', 1, NULL, NULL, 'merchant_status.gif', '0.00', '0', '0.00', '1', 1, 0, 0, '', '', 0, 1, 1, 1, 1);
+INSERT INTO customers_status VALUES('4', '2', 'H&auml;ndler Ausland', 1, NULL, NULL, 'merchant_status.gif', '0.00', '0', '0.00', '1', 1, 0, 0, '', '', 0, 1, 1, 1, 1);                                                   
+# create Group prices (Admin wont get own status!)
+CREATE TABLE personal_offers_by_customers_status_1 (price_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,products_id int NOT NULL,quantity int, personal_offer decimal(15,4));
+CREATE TABLE personal_offers_by_customers_status_2 (price_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,products_id int NOT NULL,quantity int, personal_offer decimal(15,4));
+CREATE TABLE personal_offers_by_customers_status_0 (price_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,products_id int NOT NULL,quantity int, personal_offer decimal(15,4));
+CREATE TABLE personal_offers_by_customers_status_3 (price_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,products_id int NOT NULL,quantity int, personal_offer decimal(15,4));
+CREATE TABLE personal_offers_by_customers_status_4 (price_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,products_id int NOT NULL,quantity int, personal_offer decimal(15,4));
 
 
 #Countries

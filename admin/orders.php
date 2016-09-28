@@ -413,6 +413,8 @@ while ($carrier = xtc_db_fetch_array($carriers_query)) {
   $carriers[] = array('id' => $carrier['carrier_id'], 'text' => $carrier['carrier_name']);
 }
 
+$symbol_array = array(0 => array('value' => 0, 'image' => NULL), 1 => array('value' => 1, 'image' => '01-smiley.png'), 2 => array('value' => 2, 'image' => '02-smiley.png'), 3 => array('value' => 3, 'image' => '03-smiley.png'), 4 => array('value' => 4, 'image' => '04-smiley.png'), 5 => array('value' => 5, 'image' => 'vip.png'));
+
 switch ($action) {
   //BOF - web28 - 2010-03-20 - Send Order by Admin
   case 'send':
@@ -1358,14 +1360,10 @@ elseif ($action == 'custom_action') {
                   </form>
                     </div>
                     <div class='col-xs-12'>
-                  <?php echo xtc_draw_form('status', FILENAME_ORDERS, '', 'get'); ?>
-                  <?php echo HEADING_TITLE_STATUS . ' ' . xtc_draw_pull_down_menu('status', array_merge(array(array('id' => '', 'text' => TEXT_ALL_ORDERS)),array(array('id' => '0', 'text' => TEXT_VALIDATING)), $orders_statuses),(isset($_GET['status']) && xtc_not_null($_GET['status']) ? (int)$_GET['status'] : ''),'onchange="this.form.submit();"').xtc_draw_hidden_field(xtc_session_name(), xtc_session_id()); ?>
+                  <?php echo xtc_draw_form('payment_method_status', FILENAME_ORDERS, '', 'get'); ?>
+                  <?php echo HEADING_TITLE_STATUS . ' ' . xtc_draw_pull_down_menu('status', array_merge(array(array('id' => '', 'text' => TEXT_ALL_ORDERS)),array(array('id' => '0', 'text' => TEXT_VALIDATING)), $orders_statuses),(isset($_GET['status']) && xtc_not_null($_GET['status']) ? (int)$_GET['status'] : ''),'onchange="this.form.submit();"'); ?> <br />
+                  <?php echo HEADING_CHOOSE_PAYMENT. ' ' . xtc_draw_pull_down_menu('payment_method', array_merge(array(array('id' => '', 'text' => TEXT_ALL_PAYMENT_METHODS)), $payment_methods),(isset($_GET['payment_method']) && xtc_not_null($_GET['payment_method']) ? $_GET['payment_method'] : ''),'onchange="this.form.submit();"').xtc_draw_hidden_field(xtc_session_name(), xtc_session_id()); ?>
                   </form>
-                    </div>
-                    <div class='col-xs-12'>
-                        <?php echo xtc_draw_form('payment_method', FILENAME_ORDERS, '', 'get'); ?>
-                        <?php echo HEADING_CHOOSE_PAYMENT. ' ' . xtc_draw_pull_down_menu('payment_method', array_merge(array(array('id' => '', 'text' => TEXT_ALL_PAYMENT_METHODS)), $payment_methods),(isset($_GET['payment_method']) && xtc_not_null($_GET['payment_method']) ? $_GET['payment_method'] : ''),'onchange="this.form.submit();"').xtc_draw_hidden_field(xtc_session_name(), xtc_session_id()); ?>
-                        </form>
                     </div>
                 </div>
             </div>
@@ -1415,8 +1413,19 @@ elseif ($action == 'custom_action') {
                                                  AND ot.class = 'ot_total'
                                             ORDER BY o.orders_id DESC";
 
-                    } elseif (isset($_GET['status']) && xtc_not_null($_GET['status'])) { //web28 - 2012-04-14  - FIX xtc_not_null($_GET['status'])
-                        $status = xtc_db_prepare_input($_GET['status']);
+                    } elseif ((isset($_GET['status']) && xtc_not_null($_GET['status'])) || (isset($_GET['payment_method']) && xtc_not_null($_GET['payment_method']))) { //web28 - 2012-04-14  - FIX xtc_not_null($_GET['status'])
+                        $status_query_string = "";
+                        if (isset($_GET['status']) && xtc_not_null($_GET['status'])) {
+                          $status = xtc_db_prepare_input($_GET['status']);
+                          $status_query_string = "AND s.orders_status_id = '".xtc_db_input($status)."' ";
+                        }
+                            
+                        $payment_method_query_string = "";   
+                        if (isset($_GET['payment_method']) && xtc_not_null($_GET['payment_method'])) {
+                          $payment_method = xtc_db_prepare_input($_GET['payment_method']);
+                          $payment_method_query_string = "AND o.payment_method = '".xtc_db_input($payment_method)."' ";                        
+                        }
+                      
                         $orders_query_raw = "-- /admin/orders.php
                                              SELECT ".$order_select_fields.",
                                                     s.orders_status_name
@@ -1424,20 +1433,8 @@ elseif ($action == 'custom_action') {
                                           LEFT JOIN (".TABLE_ORDERS_TOTAL." ot, ".TABLE_ORDERS_STATUS." s)
                                                  ON (o.orders_id = ot.orders_id AND o.orders_status = s.orders_status_id)
                                                WHERE s.language_id = '".(int)$_SESSION['languages_id']."'
-                                                 AND s.orders_status_id = '".xtc_db_input($status)."'
-                                                 AND ot.class = 'ot_total'
-                                            ORDER BY o.orders_id DESC";
-                    #MN: If payment method is selected $_GET['payment_method']
-                    } elseif (isset($_GET['payment_method']) && xtc_not_null($_GET['payment_method'])) { 
-                        $p_method = xtc_db_prepare_input($_GET['payment_method']);
-                        $orders_query_raw = "-- /admin/orders.php
-                                             SELECT ".$order_select_fields.",
-                                                    s.orders_status_name
-                                               FROM ".TABLE_ORDERS." o
-                                          LEFT JOIN (".TABLE_ORDERS_TOTAL." ot, ".TABLE_ORDERS_STATUS." s)
-                                                 ON (o.orders_id = ot.orders_id AND o.orders_status = s.orders_status_id)
-                                               WHERE s.language_id = '".(int)$_SESSION['languages_id']."'
-                                                 AND o.payment_method = '".xtc_db_input($p_method)."'
+                                                 " . $status_query_string . "
+                                                 " . $payment_method_query_string . "
                                                  AND ot.class = 'ot_total'
                                             ORDER BY o.orders_id DESC";
                     } elseif ($action == 'search' && $oID) {
@@ -1496,8 +1493,14 @@ elseif ($action == 'custom_action') {
                       } else {
                         $orders_action_image = '<a href="' . xtc_href_link(FILENAME_ORDERS, xtc_get_all_get_params(array('oID')) . 'oID=' . $orders['orders_id']) . '">' . xtc_image(DIR_WS_IMAGES . 'icon_info.gif', IMAGE_ICON_INFO) . '</a>';
                       }
+                      
+                      $customers_symbol_query = xtc_db_query("SELECT customers_symbol FROM " . TABLE_CUSTOMERS . " WHERE customers_id = '" . $orders['customers_id'] . "'");
+                      while ($customers_symbol_array = xtc_db_fetch_array($customers_symbol_query)) {
+                        $customers_symbol = $customers_symbol_array['customers_symbol'];
+                      }
+                      
                       ?>
-                      <td class="dataTableContent"><?php echo '<a href="' . $orders_link . '">' . $orders_image_preview . '</a>&nbsp;' . $orders['customers_name']; ?></td>
+                      <td class="dataTableContent"><?php echo '<a href="' . $orders_link . '">' . $orders_image_preview . '</a>&nbsp;' . ($symbol_array[$customers_symbol]['image'] ? xtc_image(DIR_WS_ADMIN.'images/' . $symbol_array[$customers_symbol]['image'], $symbol_array[$customers_symbol]['value'], 25, 25) : '') . '&nbsp;' . $orders['customers_name']; ?></td>
                       <td class="dataTableContent" align="right"><?php echo $orders['orders_id']; ?></td>
                       <!-- // --- bof -- ipdfbill -------- --> 
                       <td class="dataTableContent hidden-xs" align="right"><?php echo $pdfgen.$fakt ?></td>   <!-- ibillnr -->

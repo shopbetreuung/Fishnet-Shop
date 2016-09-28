@@ -111,6 +111,7 @@ define('BOX_CONFIGURATION_18', 'VAT Reg No');
 define('BOX_CONFIGURATION_19', 'Partner');
 define('BOX_CONFIGURATION_22', 'Search-Options');
 define('BOX_CONFIGURATION_24', 'PIWIK &amp; Google Analytics');
+define('BOX_CONFIGURATION_25', 'Legal');
 define('BOX_CONFIGURATION_40', 'Popup Window Options');
 define('BOX_CONFIGURATION_1000', 'My Admin');
 
@@ -529,3 +530,5 @@ define('TEXT_PAYPAL_TAB_PROFILE', 'PayPal Profile');
 define('TEXT_PAYPAL_TAB_WEBHOOK', 'PayPal Webhook');
 define('TEXT_PAYPAL_TAB_MODULE', 'PayPal Module');
 define('TEXT_PAYPAL_TAB_TRANSACTIONS', 'PayPal Transactions');
+
+define('FEEDBACK_SENT', 'Feedback Sent');

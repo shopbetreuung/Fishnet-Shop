@@ -14,6 +14,28 @@
 	{if $MANUFACTURER_DROPDOWN}{$MANUFACTURER_DROPDOWN}<br />{/if}
 {/if}
 
+{if $MANUFACTURERS.manufacturers_description_more}
+{literal}
+<script type="text/javascript">
+  $(document).ready(function() {
+             $(".clickable").click(function() {
+                $(this).siblings(".box").slideToggle('slow');
+                if($(this).html()=="{/literal}{#manufacturers_read_less#}{literal}") {
+                    $(this).html("[{/literal}{#manufacturers_read_more#}{literal}...]");
+                  } else {
+                    $(this).html("{/literal}{#manufacturers_read_less#}{literal}");
+                  }
+             });
+  });
+</script>
+<style type="text/css">
+    .clickable {cursor: pointer;font-weight: bold; color: #62350E;}
+    .box {display: none}
+</style>
+{/literal}
+<div class="box">{$MANUFACTURERS.manufacturers_description_more}</div><p class="clickable">[{#manufacturers_read_more#}...]</p>
+{/if}
+
 {$NAVIGATION}
 <div class="hrproductpreview"></div>
 

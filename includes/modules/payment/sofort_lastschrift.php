@@ -30,13 +30,13 @@ class sofort_lastschrift extends sofort{
 		$this->title_extern = MODULE_PAYMENT_SOFORT_LASTSCHRIFT_TEXT_TITLE;
 		$this->paymentMethod = 'LS';
 
-		if (MODULE_PAYMENT_SOFORT_LS_RECOMMENDED_PAYMENT == 'True') {
+		if (MODULE_PAYMENT_SOFORT_LS_RECOMMENDED_PAYMENT == 'true') {
 			$this->title_extern .= ' ' . MODULE_PAYMENT_SOFORT_LS_RECOMMENDED_PAYMENT_TEXT ;
 		}
 
 		$this->description = MODULE_PAYMENT_SOFORT_LS_TEXT_DESCRIPTION.'<br />'.MODULE_PAYMENT_SOFORT_MULTIPAY_VERSIONNUMBER.': '.HelperFunctions::getSofortmodulVersion();
 		$this->sort_order = MODULE_PAYMENT_SOFORT_LS_SORT_ORDER;
-		$this->enabled = ((MODULE_PAYMENT_SOFORT_LS_STATUS == 'True') ? true : false);
+		$this->enabled = ((MODULE_PAYMENT_SOFORT_LS_STATUS == 'true') ? true : false);
 		$this->icons_available = '';
 		
 		if (is_object($order)) {
@@ -186,9 +186,9 @@ class sofort_lastschrift extends sofort{
 		$sofortStatuses = $this->_insertAndReturnSofortStatus();
 		$confirmedStatus = 	(isset($sofortStatuses['confirmed'])&& !empty($sofortStatuses['confirmed']))? $sofortStatuses['confirmed'] : '';
 
-		xtc_db_query("INSERT INTO " . HelperFunctions::escapeSql(TABLE_CONFIGURATION) . " ( configuration_key, configuration_value,  configuration_group_id, sort_order, set_function, date_added) values ('MODULE_PAYMENT_SOFORT_LS_STATUS', 'False', '6', '1', 'xtc_cfg_select_option(array(\'True\', \'False\'), ', now())");
+		xtc_db_query("INSERT INTO " . HelperFunctions::escapeSql(TABLE_CONFIGURATION) . " ( configuration_key, configuration_value,  configuration_group_id, sort_order, set_function, date_added) values ('MODULE_PAYMENT_SOFORT_LS_STATUS', 'false', '6', '1', 'xtc_cfg_select_option(array(\'true\', \'false\'), ', now())");
 		xtc_db_query("INSERT INTO " . HelperFunctions::escapeSql(TABLE_CONFIGURATION) . " ( configuration_key, configuration_value,  configuration_group_id, sort_order, date_added) values ('MODULE_PAYMENT_SOFORT_LS_SORT_ORDER', '0', '6', '20', now())");
-		xtc_db_query("INSERT INTO " . HelperFunctions::escapeSql(TABLE_CONFIGURATION) . " ( configuration_key, configuration_value,  configuration_group_id, sort_order, set_function, date_added) values ('MODULE_PAYMENT_SOFORT_LS_RECOMMENDED_PAYMENT', 'False', '6', '1', 'xtc_cfg_select_option(array(\'True\', \'False\'), ', now())");
+		xtc_db_query("INSERT INTO " . HelperFunctions::escapeSql(TABLE_CONFIGURATION) . " ( configuration_key, configuration_value,  configuration_group_id, sort_order, set_function, date_added) values ('MODULE_PAYMENT_SOFORT_LS_RECOMMENDED_PAYMENT', 'false', '6', '1', 'xtc_cfg_select_option(array(\'true\', \'false\'), ', now())");
 		xtc_db_query("INSERT INTO " . HelperFunctions::escapeSql(TABLE_CONFIGURATION) . " ( configuration_key, configuration_value,  configuration_group_id, sort_order, set_function, use_function, date_added) values ('MODULE_PAYMENT_SOFORT_LS_ORDER_STATUS_ID', '".HelperFunctions::escapeSql($confirmedStatus)."',  '6', '10', 'xtc_cfg_pull_down_order_statuses(', 'xtc_get_order_status_name', now())");
 		xtc_db_query("INSERT INTO " . HelperFunctions::escapeSql(TABLE_CONFIGURATION) . " ( configuration_key, configuration_value,  configuration_group_id, sort_order, date_added) values ('MODULE_PAYMENT_SOFORT_LASTSCHRIFT_ALLOWED', '', '6', '0', now())");
 		xtc_db_query("INSERT INTO " . HelperFunctions::escapeSql(TABLE_CONFIGURATION) . " ( configuration_key, configuration_value,  configuration_group_id, sort_order, use_function, set_function, date_added) values ('MODULE_PAYMENT_SOFORT_LS_ZONE', '0', '6', '2', 'xtc_get_zone_class_title', 'xtc_cfg_pull_down_zone_classes(', now())");

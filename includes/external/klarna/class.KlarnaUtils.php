@@ -1421,7 +1421,7 @@ class KlarnaUtils
         // Add the session ID when moving from different HTTP and HTTPS servers,
         // or when SID is defined
         if ( ($add_session_id == true) && ($session_started == true)
-            && (SESSION_FORCE_COOKIE_USE == 'False')
+            && (SESSION_FORCE_COOKIE_USE == 'false')
         ) {
             if (xtc_not_null($SID)) {
                 $_sid = $SID;

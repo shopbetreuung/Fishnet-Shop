@@ -31,13 +31,13 @@ class sofort_sofortrechnung extends sofort{
 		$this->title_extern = MODULE_PAYMENT_SOFORT_SOFORTRECHNUNG_TEXT_TITLE;
 		$this->paymentMethod = 'SR';
 
-		if (MODULE_PAYMENT_SOFORT_SR_RECOMMENDED_PAYMENT == 'True') {
+		if (MODULE_PAYMENT_SOFORT_SR_RECOMMENDED_PAYMENT == 'true') {
 			$this->title_extern .= ' ' . MODULE_PAYMENT_SOFORT_SR_RECOMMENDED_PAYMENT_TEXT;
 		}
 
 		$this->description = MODULE_PAYMENT_SOFORT_SR_TEXT_DESCRIPTION.'<br />'.MODULE_PAYMENT_SOFORT_MULTIPAY_VERSIONNUMBER.': '.HelperFunctions::getSofortmodulVersion();
 		$this->sort_order = MODULE_PAYMENT_SOFORT_SR_SORT_ORDER;
-		$this->enabled = ((MODULE_PAYMENT_SOFORT_SR_STATUS == 'True') ? true : false);
+		$this->enabled = ((MODULE_PAYMENT_SOFORT_SR_STATUS == 'true') ? true : false);
 		$this->icons_available = '';
 		
 		if (is_object($order)) {
@@ -386,9 +386,9 @@ class sofort_sofortrechnung extends sofort{
 		$confirmedStatus = 	(isset($sofortStatuses['invoice_confirmed']) 	&& !empty($sofortStatuses['invoice_confirmed']))	? $sofortStatuses['invoice_confirmed'] : '';
 		$canceledStatus = 	(isset($sofortStatuses['canceled']) 	&& !empty($sofortStatuses['canceled']))		? $sofortStatuses['canceled'] : '';
 		
-		xtc_db_query("INSERT INTO " . HelperFunctions::escapeSql(TABLE_CONFIGURATION) . " ( configuration_key, configuration_value,  configuration_group_id, sort_order, set_function, date_added) values ('MODULE_PAYMENT_SOFORT_SR_STATUS', 'False', '6', '1', 'xtc_cfg_select_option(array(\'True\', \'False\'), ', now())");
+		xtc_db_query("INSERT INTO " . HelperFunctions::escapeSql(TABLE_CONFIGURATION) . " ( configuration_key, configuration_value,  configuration_group_id, sort_order, set_function, date_added) values ('MODULE_PAYMENT_SOFORT_SR_STATUS', 'false', '6', '1', 'xtc_cfg_select_option(array(\'true\', \'false\'), ', now())");
 		xtc_db_query("INSERT INTO " . HelperFunctions::escapeSql(TABLE_CONFIGURATION) . " ( configuration_key, configuration_value,  configuration_group_id, sort_order, date_added) values ('MODULE_PAYMENT_SOFORT_SR_SORT_ORDER', '0', '6', '20', now())");
-		xtc_db_query("INSERT INTO " . HelperFunctions::escapeSql(TABLE_CONFIGURATION) . " ( configuration_key, configuration_value,  configuration_group_id, sort_order, set_function, date_added) values ('MODULE_PAYMENT_SOFORT_SR_RECOMMENDED_PAYMENT', 'False', '6', '1', 'xtc_cfg_select_option(array(\'True\', \'False\'), ', now())");
+		xtc_db_query("INSERT INTO " . HelperFunctions::escapeSql(TABLE_CONFIGURATION) . " ( configuration_key, configuration_value,  configuration_group_id, sort_order, set_function, date_added) values ('MODULE_PAYMENT_SOFORT_SR_RECOMMENDED_PAYMENT', 'false', '6', '1', 'xtc_cfg_select_option(array(\'true\', \'false\'), ', now())");
 		xtc_db_query("INSERT INTO " . HelperFunctions::escapeSql(TABLE_CONFIGURATION) . " ( configuration_key, configuration_value,  configuration_group_id, sort_order, set_function, use_function, date_added) values ('MODULE_PAYMENT_SOFORT_SR_ORDER_STATUS_ID', '".HelperFunctions::escapeSql($confirmedStatus)."',  '6', '10', 'xtc_cfg_pull_down_order_statuses(', 'xtc_get_order_status_name', now())");
 		xtc_db_query("INSERT INTO " . HelperFunctions::escapeSql(TABLE_CONFIGURATION) . " ( configuration_key, configuration_value,  configuration_group_id, sort_order, set_function, use_function, date_added) values ('MODULE_PAYMENT_SOFORT_SR_UNCONFIRMED_STATUS_ID', '".HelperFunctions::escapeSql($unconfirmedStatus)."', '6', '8', 'xtc_cfg_pull_down_order_statuses(', 'xtc_get_order_status_name', now())");
 		xtc_db_query("INSERT INTO " . HelperFunctions::escapeSql(TABLE_CONFIGURATION) . " ( configuration_key, configuration_value,  configuration_group_id, sort_order, set_function, use_function, date_added) values ('MODULE_PAYMENT_SOFORT_SR_CANCEL_STATUS_ID', '".HelperFunctions::escapeSql($canceledStatus)."',  '6', '8', 'xtc_cfg_pull_down_order_statuses(', 'xtc_get_order_status_name', now())");

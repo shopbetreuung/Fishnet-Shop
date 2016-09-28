@@ -51,7 +51,7 @@
     }
 
     function quote($method = '') {
-      global $order, $shipping_weight;
+      global $order, $shipping_weight, $shipping_num_boxes;
 	  	$gew = 0;
 
 		foreach($order->products as $prod)
@@ -75,9 +75,9 @@
 			$price_id++;
 		}
 		if($order->delivery['country']['iso_code_2'] == 'DE')
-			$stitle = MODULE_SHIPPING_HERMES_TEXT_WAY_DE . $shipping_weight . ' ' . MODULE_SHIPPING_HERMES_TEXT_UNITS;
+			$stitle = MODULE_SHIPPING_HERMES_TEXT_WAY_DE . $shipping_num_boxes * $shipping_weight . ' ' . MODULE_SHIPPING_HERMES_TEXT_UNITS;
 		else
-			$stitle = MODULE_SHIPPING_HERMES_TEXT_WAY_EU . $shipping_weight . ' ' . MODULE_SHIPPING_HERMES_TEXT_UNITS;
+			$stitle = MODULE_SHIPPING_HERMES_TEXT_WAY_EU . $shipping_num_boxes * $shipping_weight . ' ' . MODULE_SHIPPING_HERMES_TEXT_UNITS;
 
       $this->quotes = array('id' => $this->code,
                             'module' => MODULE_SHIPPING_HERMES_TEXT_TITLE,

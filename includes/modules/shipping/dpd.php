@@ -68,7 +68,7 @@
 
 
     function quote($method = '') {
-      global $shipping_quote_dpd, $shipping_quote_all, $shipping_weight, $shipping_quoted, $shipping_dpd_cost, $shipping_dpd_method, $order;
+      global $shipping_quote_dpd, $shipping_quote_all, $shipping_weight, $shipping_quoted, $shipping_dpd_cost, $shipping_dpd_method, $order, $shipping_num_boxes;
 
         $error = false;
         $dest_country = $order->delivery['country']['iso_code_2'];
@@ -131,7 +131,7 @@
       for ($i = 0; $i < count($dpd_table); $i ++) {
         if ( ($shipping_weight > $dpd_table[$i]) && ($shipping_weight <= $dpd_table[$n]) ) {
           $shipping = $dpd_table[$y];
-          $shipping_dpd_method = MODULE_SHIPPING_DPD_TEXT_WAY . ' ' . $dest_country . " : " . $shipping_weight . ' ' . MODULE_SHIPPING_DPD_TEXT_UNITS;
+          $shipping_dpd_method = MODULE_SHIPPING_DPD_TEXT_WAY . ' ' . $dest_country . " : " . $shipping_num_boxes * $shipping_weight . ' ' . MODULE_SHIPPING_DPD_TEXT_UNITS;
           break;
         }
         $i = $i + 2;
@@ -165,7 +165,7 @@
 //              print('Sub Order: ' . $order->info['subtotal'] . ' Cost: ' . $dpd_cost['dpd_free_shipping_over']);
             //shipping is subsidized
             $shipping_dpd_cost = (($shipping + MODULE_SHIPPING_DPD_HANDLING + SHIPPING_HANDLING)-$dpd_cost['dpd_shipping_subsidized']);
-            $shipping_dpd_method = MODULE_SHIPPING_DPD_SUBSIDIZED_SHIPPING . ' ' .MODULE_SHIPPING_DPD_TEXT_WAY . ' ' . $dest_country . " : " . $shipping_weight . ' ' .             MODULE_SHIPPING_DPD_TEXT_UNITS;
+            $shipping_dpd_method = MODULE_SHIPPING_DPD_SUBSIDIZED_SHIPPING . ' ' .MODULE_SHIPPING_DPD_TEXT_WAY . ' ' . $dest_country . " : " . $shipping_num_boxes * $shipping_weight . ' ' . MODULE_SHIPPING_DPD_TEXT_UNITS;
           } else {
 //              print('Sub Else Order: ' . $order->info['subtotal'] . ' Cost: ' . $dpd_cost['dpd_free_shipping_over']);
             //charge for shipping

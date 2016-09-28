@@ -33,7 +33,7 @@ require_once(DIR_FS_CATALOG . 'includes/masterpayment/MasterpaymentActions.class
       $this->description 	= MODULE_PAYMENT_MASTERPAYMENT_FINANZIERUNG_TEXT_DESCRIPTION;
 	  $this->info			= MODULE_PAYMENT_MASTERPAYMENT_FINANZIERUNG_TEXT_INFO;
       $this->sort_order 	= MODULE_PAYMENT_MASTERPAYMENT_FINANZIERUNG_SORT_ORDER;
-      $this->enabled 		= ((MODULE_PAYMENT_MASTERPAYMENT_FINANZIERUNG_STATUS == 'True') ? true : false);
+      $this->enabled 		= ((MODULE_PAYMENT_MASTERPAYMENT_FINANZIERUNG_STATUS == 'true') ? true : false);
 	
       $this->tmpOrders = true;
 	  $this->order_status = MODULE_PAYMENT_MASTERPAYMENT_CONFIG_ORDER_STATUS_ID_TEMP;
@@ -71,7 +71,7 @@ require_once(DIR_FS_CATALOG . 'includes/masterpayment/MasterpaymentActions.class
     }
 
     function selection() {	  
-	  	if(MODULE_PAYMENT_MASTERPAYMENT_FINANZIERUNG_ICON == 'True') {	  
+	  	if(MODULE_PAYMENT_MASTERPAYMENT_FINANZIERUNG_ICON == 'true') {	  
 	  		$content = array();
 			$content = array_merge($content, array (
 				array (
@@ -138,13 +138,13 @@ require_once(DIR_FS_CATALOG . 'includes/masterpayment/MasterpaymentActions.class
     }	
 
     function install() {
-      xtc_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) values ('MODULE_PAYMENT_MASTERPAYMENT_FINANZIERUNG_STATUS', 'False', '6', '1', 'xtc_cfg_select_option(array(\'True\', \'False\'), ', now());");
+      xtc_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) values ('MODULE_PAYMENT_MASTERPAYMENT_FINANZIERUNG_STATUS', 'false', '6', '1', 'xtc_cfg_select_option(array(\'true\', \'false\'), ', now());");
 	  xtc_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_key, configuration_value, configuration_group_id, sort_order, date_added) values ('MODULE_PAYMENT_MASTERPAYMENT_FINANZIERUNG_INSTALLMENTS_COUNT', '6', '6', '1', now());");
 	  xtc_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_key, configuration_value, configuration_group_id, sort_order, date_added) values ('MODULE_PAYMENT_MASTERPAYMENT_FINANZIERUNG_INSTALLMENTS_FREQ', '30', '6', '1', now());");	   	
 	  xtc_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) values ('MODULE_PAYMENT_MASTERPAYMENT_FINANZIERUNG_INSTALLMENTS_PERIOD', 'monthly', '6', '1', 'xtc_cfg_select_option(array(\'monthly\', \'end_of_month\'), ', now());");	     
       xtc_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_key, configuration_value, configuration_group_id, sort_order, date_added) values ('MODULE_PAYMENT_MASTERPAYMENT_FINANZIERUNG_SORT_ORDER', '16', '6', '0', now())");
 	  xtc_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_key, configuration_value, configuration_group_id, sort_order, date_added) values ('MODULE_PAYMENT_MASTERPAYMENT_FINANZIERUNG_ALLOWED', '', '6', '0', now())");
-	  xtc_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) values ('MODULE_PAYMENT_MASTERPAYMENT_FINANZIERUNG_ICON', 'False', '6', '1', 'xtc_cfg_select_option(array(\'True\', \'False\'), ', now());");
+	  xtc_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) values ('MODULE_PAYMENT_MASTERPAYMENT_FINANZIERUNG_ICON', 'false', '6', '1', 'xtc_cfg_select_option(array(\'true\', \'false\'), ', now());");
     }
 
     function remove() {

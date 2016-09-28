@@ -165,7 +165,7 @@ class MasterpaymentCallback extends MasterpaymentActions
 	
 	function deleteTempOrder() 
 	{		
-		if(MODULE_PAYMENT_MASTERPAYMENT_CONFIG_DELETE_TEMP_ORDER == 'True')
+		if(MODULE_PAYMENT_MASTERPAYMENT_CONFIG_DELETE_TEMP_ORDER == 'true')
 		{
 			
 			if (STOCK_LIMITED == 'true') 
@@ -250,7 +250,7 @@ class MasterpaymentCallback extends MasterpaymentActions
 	
 	function writeCallbackLog()
     {
-		if(MODULE_PAYMENT_MASTERPAYMENT_CONFIG_SAVE_LOGS == 'True')
+		if(MODULE_PAYMENT_MASTERPAYMENT_CONFIG_SAVE_LOGS == 'true')
 		{
 			$logfile = @fopen(DIR_FS_CATALOG . 'includes/masterpayment/logs/callbacks.log', 'a+');
 			@fwrite($logfile, "------------------------------------------------------------------------\n");	

@@ -92,7 +92,7 @@
         for ($i=0; $i<sizeof($ap_table); $i+=2) {
           if ($shipping_weight <= $ap_table[$i]) {
             $shipping = $ap_table[$i+1];
-            $shipping_method = MODULE_SHIPPING_AP_TEXT_WAY . ' ' . $dest_country . ' : ' . $shipping_weight . ' ' . MODULE_SHIPPING_AP_TEXT_UNITS;
+            $shipping_method = MODULE_SHIPPING_AP_TEXT_WAY . ' ' . $dest_country . ' : ' . $shipping_num_boxes * $shipping_weight . ' ' . MODULE_SHIPPING_AP_TEXT_UNITS;
             break;
           }
         }
@@ -108,7 +108,7 @@
       $this->quotes = array('id' => $this->code,
                             'module' => MODULE_SHIPPING_AP_TEXT_TITLE,
                             'methods' => array(array('id' => $this->code,
-                                                     'title' => $shipping_method . ' (' . $shipping_num_boxes . ' x ' . $shipping_weight . ' ' . MODULE_SHIPPING_AP_TEXT_UNITS .')',
+                                                     'title' => $shipping_method,
                                                      'cost' => $shipping_cost * $shipping_num_boxes)));
 
       if ($this->tax_class > 0) {

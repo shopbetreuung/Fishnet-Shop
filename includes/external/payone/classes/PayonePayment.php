@@ -43,7 +43,7 @@ class PayonePayment {
 		$this->title = @constant('MODULE_PAYMENT_'.strtoupper($this->code).'_TEXT_TITLE'); 
 		$this->description = @constant('MODULE_PAYMENT_'.strtoupper($this->code).'_TEXT_DESCRIPTION').((defined('_VALID_XTC')) ? MODULE_PAYMENT_PAYONE_LP : ''); 
 		$this->sort_order = @constant('MODULE_PAYMENT_'.strtoupper($this->code).'_SORT_ORDER');
-		$this->enabled = ((@constant('MODULE_PAYMENT_'.strtoupper($this->code).'_STATUS') == 'True') ? true : false);
+		$this->enabled = ((@constant('MODULE_PAYMENT_'.strtoupper($this->code).'_STATUS') == 'true') ? true : false);
 		$this->info = @constant('MODULE_PAYMENT_'.strtoupper($this->code).'_TEXT_INFO'); 
 		$this->order_status = $this->config['orders_status']['paid'];
 
@@ -434,8 +434,8 @@ class PayonePayment {
 	function _configuration() {
 		$config = array(
 			'STATUS' => array(
-				'configuration_value' => 'True',
-				'set_function' => 'xtc_cfg_select_option(array(\'True\', \'False\'), ',
+				'configuration_value' => 'true',
+				'set_function' => 'xtc_cfg_select_option(array(\'true\', \'false\'), ',
 			),
 			'ALLOWED' => array(
 				'configuration_value' => '',

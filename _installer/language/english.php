@@ -29,7 +29,6 @@
   // install_step2,5.php
   define('TEXT_CONNECTION_ERROR','The test connect to the database was NOT successful.');
   define('TEXT_CONNECTION_SUCCESS','The test connect to the database was successful.');
-  define('TEXT_DB_DATA_NOT_CORRECT', 'The connection to the database was not successful, please check your data');
   define('TEXT_DB_ERROR','The error message returned is:');
   define('TEXT_DB_ERROR_1','Please click on the <i>Back</i> graphic to review your database server settings.');
   define('TEXT_DB_ERROR_2','If you require help with your database server settings, please consult your hosting company.');
@@ -44,7 +43,6 @@
   define('TEXT_DB_CLIENT_VERSION_WARNING','Your MySQL version is too old. The shop requires at least version: 4.1.2 </br></br>You can continue the installation.</br>If the installation can not be correctly carried out, ask your provider for an update!');
   define('TEXT_DB_CLIENT_VERSION','Your MySQL version: ');
   // EOF - vr - 2010-01-14 - check MySQL *client* version
-  define('TEXT_DB_DATA_NOT_ENTERED_ERROR', 'Please enter all database data');
   // BOF - web28 - 2010-02-1014 - check FILE PATH
   define('TEXT_PATH_ERROR','<h1>Invalid path</h1>');
   define('TEXT_PATH_ERROR2','Regard! You have entered an invalid file path!');
@@ -76,19 +74,13 @@
   // EOF - DokuMan - 2010-08-16 - language dependent definitions for index.php
 
   // index.php
-  define('TITLE_SELECT_LANGUAGE','Select your language :');
-  define('TEXT_WELCOME','Welcome');
+  define('TITLE_SELECT_LANGUAGE','Select your language!');
   define('TEXT_WELCOME_INDEX','<b>Welcome to shophelfer.com Shopsoftware</b><br /><br />The shophelfer.com Shopsoftware is an open source e-commerce solution under on going development by the shophelfer.com Shopsoftware community.<br /> Its feature packed out-of-the-box installation allows store owners to setup, run, and maintain their online stores with minimum effort and with no costs involved.<br />The shophelfer.com Shopsoftware combines open source solutions to provide a free and open development platform, which includes the powerful PHP web scripting language, the stable Apache web server, and the fast MySQL database server.<br /><br />With no restrictions or special requirements, the shophelfer.com Shopsoftware can be installed on on any environment that supports PHP 5.0 and MySQL, which includes Linux, Solaris, BSD, and Microsoft Windows environments.<br /><br />The shophelfer.com Shopsoftware is an open source community project, join our community and help us!');
-  define('TEXT_WELCOME_REQUIREMENTS_STEP', '<b>Requirements</b>');
-  define('TEXT_WELCOME_DBCONNECTION_STEP', 'Database Connection');
-  define('TEXT_WELCOME_PERMISSIONS_STEP', 'Permissions check');
   define('TEXT_WELCOME_STEP1','<b>Main database and webserver settings</b><br /><br />Please enter your Database and webserver settings.<br />');
   define('TEXT_WELCOME_STEP2','<b>Install database</b><br /><br />The shophelfer.com Shopsoftware installer will automatically install the shophelfer.com Shopsoftware database.');
   // BOF - web28 - 2010.02.20 - NEW STEP2-4 Handling
   define('TEXT_WELCOME_STEP2A','<b>Database installation has been disabled</b><br /><br />The installation of the shophelfer.com Shopsoftware database in Step3 is skipped.');
   // EOF - web28 - 2010.02.20 - NEW STEP2-4 Handling
-  define('TEXT_WELCOME_ADMIN', 'Admin account configuration');
-  define('TEXT_WELCOME_ADD_ADMIN', 'Additional admins');
   define('TEXT_WELCOME_STEP3','<b>Database import.</b><br /><br />');
   define('TEXT_WELCOME_STEP4','<b>Configure shophelfer.com Shopsoftware main files</b><br /><br /><b>If there are old configure files from a further installation, the shophelfer.com Shopsoftware will delete them</b><br /><br />The installer will set up the configuration files with the main parameters for database and file structur.<br /><br />You can choose between different session handling systems.');
   define('TEXT_WELCOME_STEP5','<b>Webserver Configuration</b><br /><br />');
@@ -108,19 +100,12 @@
     user group 3 -> a special group price on product Y<br />
     user group 4 -> netto price on product Y<br />
   ');
-  define('TEXT_WELCOME_FINISHED1','<b>The shophelfer.com Shopsoftware installation was successful!</b>');
-  define('TEXT_CONTINUE_BUTTON','Continue');
-  define('TEXT_CANCEL_BUTTON', 'Cancel');
-  define('TEXT_NO', 'No');
-  define('TEXT_YES','Yes');
-  define('TITLE_INSTALLATION_PROCESS','Installation process');
-  define('TEXT_COMPLETE','Complete');
-  define('TEXT_ADD_ADDITIONAL_ADMINS', 'Do you want to add additional admins to your shop?');
+  define('TEXT_WELCOME_FINISHED','<b>The shophelfer.com Shopsoftware installation was successful!</b>');
 
   // install_step1.php
   define('TITLE_CUSTOM_SETTINGS','Custom Settings');
   define('TEXT_IMPORT_DB','Install the shophelfer.com Shopsoftware Database');
-  define('TEXT_IMPORT_DB_LONG','Install the shophelfer.com Shopsoftware database structure which includes tables and sample data. <b>(Mandatory on initial setup!)</b>');
+  define('TEXT_IMPORT_DB_LONG','Install the shophelfer.com Shopsoftware database structure which includes tables and sample data. <b>(Mandatory on initial setup!</b>');
   define('TEXT_AUTOMATIC','Automatic Configuration');
   define('TEXT_AUTOMATIC_LONG','The information you submit regarding the web server and database server will be automatically saved into both shophelfer.com Shopsoftware and Administration Tool configuration files.');
   define('TITLE_DATABASE_SETTINGS','Database Settings');
@@ -147,8 +132,6 @@
   define('TITLE_WEBSERVER_INFO','The default paths should be altered only in exceptional cases!');
   define('TEXT_WS_ROOT_INFO','The path is automatically determined');
   //EOF WEBSERVER INFO
-  define('TEXT_RECHECK_REQUIREMENTS', 'ReCheck Requirements');
-  define('TEXT_RECHECK_PERMISSIONS', 'ReCheck Permissions');
 
   // install_step2.php
   define('TEXT_PROCESS_1','Please continue the installation process to execute the database import procedure.');
@@ -193,9 +176,6 @@
   // install_step6.php
   define('TITLE_ADMIN_CONFIG','Administrator configuration');
   define('TEXT_REQU_INFORMATION','* required information');
-  define('TEXT_GENDER', 'Gender:');
-  define('TEXT_MALE', 'Male');
-  define('TEXT_FEMALE', 'Female');
   define('TEXT_FIRSTNAME','First Name:');
   define('TEXT_LASTNAME','Last Name:');
   define('TEXT_EMAIL','E-Mail Address:');
@@ -221,21 +201,20 @@
   define('TEXT_ZONE_NO','No');
   define('TEXT_ZONE_YES','Yes');
   define('TEXT_COMPANY','Company name');
-  define('ENTRY_GENDER_ERROR', 'Please select gender for this admin');
-  define('ENTRY_FIRST_NAME_ERROR','Firstname too short');
-  define('ENTRY_LAST_NAME_ERROR','Lastname too short');
-  define('ENTRY_EMAIL_ADDRESS_ERROR','Email too short');
+  define('ENTRY_FIRST_NAME_ERROR','Firstname to short');
+  define('ENTRY_LAST_NAME_ERROR','Lastname to short');
+  define('ENTRY_EMAIL_ADDRESS_ERROR','Email to short');
   define('ENTRY_EMAIL_ADDRESS_CHECK_ERROR','Check Email Format');
-  define('ENTRY_STREET_ADDRESS_ERROR','Street too short');
-  define('ENTRY_POST_CODE_ERROR','Post Code too short');
-  define('ENTRY_CITY_ERROR','City too short');
+  define('ENTRY_STREET_ADDRESS_ERROR','Street to short');
+  define('ENTRY_POST_CODE_ERROR','Post Code to short');
+  define('ENTRY_CITY_ERROR','City to short');
   define('ENTRY_COUNTRY_ERROR','Check Country');
   define('ENTRY_STATE_ERROR','Check State');
-  define('ENTRY_TELEPHONE_NUMBER_ERROR','Telephone number too short');
+  define('ENTRY_TELEPHONE_NUMBER_ERROR','Telephone number to short');
   define('ENTRY_PASSWORD_ERROR','Check Password');
-  define('ENTRY_STORE_NAME_ERROR','Store name too short');
-  define('ENTRY_COMPANY_NAME_ERROR','Company name too short');
-  define('ENTRY_EMAIL_ADDRESS_FROM_ERROR','Email-From too short');
+  define('ENTRY_STORE_NAME_ERROR','Store name to short');
+  define('ENTRY_COMPANY_NAME_ERROR','Company name to short');
+  define('ENTRY_EMAIL_ADDRESS_FROM_ERROR','Email-From to short');
   define('ENTRY_EMAIL_ADDRESS_FROM_CHECK_ERROR','Check Email-From Format');
   define('SELECT_ZONE_SETUP_ERROR','Select Zone setup');
 
@@ -273,10 +252,9 @@
   define('SELECT_PRICE_ERROR2','Show Price -Default');
   define('SELECT_TAX_ERROR2','Show Tax -Default');
 
-  // install_finished.php
+  // install_fnished.php
   define('TEXT_SHOP_CONFIG_SUCCESS','The <strong>shophelfer.com Shopsoftware</strong> Shop configuration was successful.');
   define('TEXT_TEAM','Thank you for chosing the shophelfer.com Shopsoftware. Please visit the <a href="http://www.shophelfer.com">shophelfer.com Shopsoftware Community</a>.');
-  define('TEXT_VISIT_SHOP', 'Visit your new Shophelfer shop');
 
   // BOC flth new permission change system
   define ('FTP_CHANGE_PERM_EXPLAIN', 'To set the file and directory permissions, you can either use your FTP program or enter your FTP information here to have set the required access permissions automatically.');
@@ -286,8 +264,8 @@
   define ('CHMOD_WAS_NOT_SUCCESSFUL', 'Change the directory permissions was NOT successful');
   define ('FTP_HOST', 'FTP host (automatically detected) ');
   define ('FTP_PORT', 'FTP port (default: 21)');
-  define ('FTP_PATH', 'FTP path (usually / public_html or / htdocs, possibly sub-directory)');
-  define ('FTP_LOGIN', 'FTP username');
+  define ('ftp_path', 'FTP path (usually / public_html or / htdocs, possibly sub-directory)');
+  define ('ftp_login', 'FTP username');
   define ('FTP_PASSWORD', 'FTP password');
   define ('CONNECT_FTP', 'FTP connect');
   // EOC flth new permission change system

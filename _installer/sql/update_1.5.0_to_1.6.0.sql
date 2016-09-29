@@ -10,3 +10,5 @@ ADD `manufacturers_description_more` text COLLATE 'latin1_german1_ci' NOT NULL A
 ADD `manufacturers_short_description` text COLLATE 'latin1_german1_ci' NOT NULL AFTER `manufacturers_description_more`;
 
 ALTER TABLE `customers` ADD `customers_symbol` INT(11) DEFAULT 0 NOT NULL ;
+
+UPDATE database_version SET version = 'SH_1.6.0';

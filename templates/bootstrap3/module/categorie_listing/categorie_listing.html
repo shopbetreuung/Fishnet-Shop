@@ -4,7 +4,7 @@
 {else}
 	<h1>{$CATEGORIES_NAME}</h1>
 {/if}
-{if $CATEGORIES_IMAGE}<img src="{$CATEGORIES_IMAGE}" alt="{$CATEGORIES_NAME}" class="img-responsive" />{/if}
+{if $CATEGORIES_IMAGE}<a data-toggle="lightbox" data-title="{$CATEGORIES_NAME}" href="{$CATEGORIES_IMAGE}" class="catimglink"><img src="{$CATEGORIES_IMAGE}" alt="{$CATEGORIES_NAME}" class="img-responsive" /></a><br />{/if}
 {if $CATEGORIES_DESCRIPTION}<p>{$CATEGORIES_DESCRIPTION}</p>{/if}
 
 {if $module_content !=''}

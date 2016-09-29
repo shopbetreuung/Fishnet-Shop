@@ -17,5 +17,6 @@
  //contact-form error messages
 define('ERROR_EMAIL','<p><b>Your e-mail address:</b> None or invalid input!</p>');
 define('ERROR_MSG_BODY','<p><b>Your message:</b> No input!</p>');
+define('ERROR_CHECKBOX', '<p><b>Checkbox:</b> Checkbox must be confirmed!</p>');
    
 ?>

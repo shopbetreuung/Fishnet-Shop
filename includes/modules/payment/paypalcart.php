@@ -148,7 +148,7 @@ class paypalcart extends PayPalPayment {
     $shipping_modules = new shipping;
 
     // add unallowed payment / shipping
-    if (defined('MODULE_EXCLUDE_PAYMENT_STATUS') && MODULE_EXCLUDE_PAYMENT_STATUS == 'True') {
+    if (defined('MODULE_EXCLUDE_PAYMENT_STATUS') && MODULE_EXCLUDE_PAYMENT_STATUS == 'true') {
       for ($i=1; $i<=MODULE_EXCLUDE_PAYMENT_NUMBER; $i++) {
         $payment_exclude = explode(',', constant('MODULE_EXCLUDE_PAYMENT_PAYMENT_'.$i));
         

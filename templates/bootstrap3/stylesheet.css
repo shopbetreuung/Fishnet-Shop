@@ -647,3 +647,39 @@ BASIC Template for AGB Hosting Content
   position: absolute;
   bottom:0px;
 }
+
+.cc_container {
+	border: solid #d9d9d9 1px !important;
+	background: #f8f8f8 !important;
+	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif !important;
+	font-size: 15px !important;
+	padding: 5px 30px 5px !important;
+}
+
+.cc_container .cc_btn, .cc_container .cc_btn:visited {
+	color: #fff !important;
+    background-color: #337ab7 !important;
+    border-color: #2e6da4 !important;
+	transition: none !important;
+	-webkit-transition: none !important;
+}
+
+.cc_container .cc_btn:hover {
+    color: #fff !important;
+    background-color: #286090 !important;
+    border-color: #204d74 !important;
+}
+
+.cc_container a, .cc_container a:visited {
+    color: #337ab7 !important;
+    text-decoration: none !important;
+}
+
+.cc_container a:focus, .cc_container a:hover {
+    color: #23527c !important;
+    text-decoration: underline !important;
+}
+
+.catimglink {
+	display: inline-block;
+}

@@ -101,7 +101,7 @@ $cross_query = xtc_db_query($cross_query);
 if (!xtc_db_num_rows($cross_query)) {
 ?>
   <tr>
-    <td class="categories_view_data" colspan="5">- NO ENRTY -</td>
+    <td class="categories_view_data" colspan="5">- NO ENTRY -</td>
   </tr>
 <?php
 }

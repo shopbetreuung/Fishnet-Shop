@@ -66,4 +66,7 @@ define('TABLE_HEADING_EMAIL','Email');
 define('TEXT_INFO_HEADING_ADRESS_BOOK', 'Addressbook');
 define('TEXT_INFO_DELETE', '<b>Delete this address book entry?</b>');
 define('TEXT_INFO_DELETE_DEFAULT', '<b>The address book entry can not be deleted!</b>'); 
+
+define('ENTRY_SYMBOL', 'Symbol');
+define('NO_SYMBOL', 'No Symbol');
 ?>

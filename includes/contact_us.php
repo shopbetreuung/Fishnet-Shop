@@ -28,6 +28,9 @@
     if (!xtc_validate_email(trim($_POST['email']))) $err_msg .= ERROR_EMAIL;
 	if (!empty($_POST['email2_FT7ughj521dfdf'])) $err_msg .= ERROR_HONEYPOT;
     if (trim($_POST['message_body']) == '') $err_msg .= ERROR_MSG_BODY;
+	if (CONTACT_FORM_CONSENT == 'true') {  
+		if (!isset($_POST['checkbox'])) $err_msg .= ERROR_CHECKBOX;
+	}  
     //EOF error handling
 
     $smarty->assign('error_message', ERROR_MAIL . $err_msg);
@@ -190,6 +193,9 @@
     $smarty->assign('INPUT_POSTCODE', xtc_draw_input_field('postcode', ($error ? $_POST['postcode'] : $postcode), 'size="30"'));
     $smarty->assign('INPUT_CITY', xtc_draw_input_field('city', ($error ? $_POST['city'] : $city), 'size="30"'));
     $smarty->assign('INPUT_FAX', xtc_draw_input_field('fax', ($error ? $_POST['fax'] : $fax), 'size="30"'));
+	if (CONTACT_FORM_CONSENT == 'true') {  
+		$smarty->assign('CHECKBOX', xtc_draw_checkbox_field('checkbox'));
+	}  
     // EOF - Tomcraft - 2009-11-05 - Advanced contact form (additional fields)
     // BOF - Tomcraft - 2009-09-29 - fixed word-wrap in contact-form
     //$smarty->assign('INPUT_TEXT', xtc_draw_textarea_field('message_body', 'soft', 50, 15, ($error ? xtc_db_input($_POST['message_body']) : $first_name)));

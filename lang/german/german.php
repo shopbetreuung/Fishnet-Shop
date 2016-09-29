@@ -542,4 +542,8 @@ define('TEXT_AGB_CHECKOUT','Bitte nehmen Sie unsere AGB und Kundeninformation %s
 
 define('_SHIPPING_FREE','Download');
 
+define('COOKIE_NOTE_TEXT', 'Mit Ihrem Besuch auf unserer Website stimmen Sie der Verwendung von Cookies zu. So können wir den Service für Sie weiter verbessern.');
+define('COOKIE_NOTE_MORE_TEXT', 'Mehr Infos');
+define('COOKIE_NOTE_DISMISS_TEXT', 'Verstanden');
+
 ?>

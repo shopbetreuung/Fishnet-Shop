@@ -19,6 +19,21 @@
 <script src="<?php echo 'templates/'.CURRENT_TEMPLATE; ?>/javascript/bootstrap-add.js" type="text/javascript"></script>
 <script src="<?php echo 'templates/'.CURRENT_TEMPLATE; ?>/javascript/ekko-lightbox.min.js" type="text/javascript"></script>
 
+<?php if (SHOW_COOKIE_NOTE == 'true') {
+	if (is_numeric(COOKIE_NOTE_CONTENT_ID) && COOKIE_NOTE_CONTENT_ID != 0) {
+		$cookie_content_link = xtc_href_link(FILENAME_CONTENT, 'coID='.COOKIE_NOTE_CONTENT_ID);
+	} else {
+		$cookie_content_link = NULL;
+	}
+?>
+<script src="<?php echo 'templates/'.CURRENT_TEMPLATE; ?>/javascript/cookieconsent.min.js"></script>
+<script type="text/javascript">
+    window.cookieconsent_options = {"message":"<?php echo COOKIE_NOTE_TEXT; ?>","dismiss":"<?php echo COOKIE_NOTE_DISMISS_TEXT; ?>","learnMore":"<?php echo COOKIE_NOTE_MORE_TEXT; ?>","link":"<?php echo $cookie_content_link; ?>","theme":"light-top"};
+</script>
+<?php
+   }
+?>
+
 <?php
 if (strstr($PHP_SELF, FILENAME_PRODUCT_INFO ) && 1==2) {
 ?>

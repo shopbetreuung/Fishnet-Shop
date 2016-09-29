@@ -17,6 +17,33 @@
 
   require('includes/application_top.php');
 
+  require_once(DIR_FS_INC . 'xtc_wysiwyg.inc.php');
+  function xtc_get_manufacturers_meta_title($manufacturers_id, $language_id) {
+	  $manufacturers_query = xtc_db_query("select manufacturers_meta_title from ".TABLE_MANUFACTURERS_INFO." where manufacturers_id = '".$manufacturers_id."' and languages_id = '".$language_id."'");
+	  $manufacturers = xtc_db_fetch_array($manufacturers_query);	
+	  return $manufacturers['manufacturers_meta_title'];
+  }
+  function xtc_get_manufacturers_meta_description($manufacturers_id, $language_id) {
+	  $manufacturers_query = xtc_db_query("select manufacturers_meta_description from ".TABLE_MANUFACTURERS_INFO." where manufacturers_id = '".$manufacturers_id."' and languages_id = '".$language_id."'");
+	  $manufacturers = xtc_db_fetch_array($manufacturers_query);	
+	  return $manufacturers['manufacturers_meta_description'];
+  }
+  function xtc_get_manufacturers_description($manufacturers_id, $language_id) {
+	  $manufacturers_query = xtc_db_query("select manufacturers_description from ".TABLE_MANUFACTURERS_INFO." where manufacturers_id = '".$manufacturers_id."' and languages_id = '".$language_id."'");
+	  $manufacturers = xtc_db_fetch_array($manufacturers_query);	
+	  return $manufacturers['manufacturers_description'];
+  }
+  function xtc_get_manufacturers_description_more($manufacturers_id, $language_id) {
+	  $manufacturers_query = xtc_db_query("select manufacturers_description_more from ".TABLE_MANUFACTURERS_INFO." where manufacturers_id = '".$manufacturers_id."' and languages_id = '".$language_id."'");
+	  $manufacturers = xtc_db_fetch_array($manufacturers_query);	
+	  return $manufacturers['manufacturers_description_more'];
+  }
+  function xtc_get_manufacturers_short_description($manufacturers_id, $language_id) {
+	  $manufacturers_query = xtc_db_query("select manufacturers_short_description from ".TABLE_MANUFACTURERS_INFO." where manufacturers_id = '".$manufacturers_id."' and languages_id = '".$language_id."'");
+	  $manufacturers = xtc_db_fetch_array($manufacturers_query);	
+	  return $manufacturers['manufacturers_short_description'];
+  }
+
   switch ($_GET['action']) {
     case 'insert':
     case 'save':
@@ -71,9 +98,19 @@
       $languages = xtc_get_languages();
       for ($i = 0, $n = sizeof($languages); $i < $n; $i++) {
         $manufacturers_url_array = $_POST['manufacturers_url'];
+		$manufacturers_meta_title_array = $_POST['manufacturers_meta_title'];
+		$manufacturers_meta_description_array = $_POST['manufacturers_meta_description'];  
+        $manufacturers_description_array = $_POST['manufacturers_description'];
+        $manufacturers_description_array_more = $_POST['manufacturers_description_more'];
+		$manufacturers_short_description_array = $_POST['manufacturers_short_description'];
         $language_id = $languages[$i]['id'];
 
-        $sql_data_array = array('manufacturers_url' => xtc_db_prepare_input($manufacturers_url_array[$language_id]));
+		$sql_data_array = array('manufacturers_url' => xtc_db_prepare_input($manufacturers_url_array[$language_id]),
+						'manufacturers_meta_title' => xtc_db_prepare_input($manufacturers_meta_title_array[$language_id]),
+						'manufacturers_meta_description' => xtc_db_prepare_input($manufacturers_meta_description_array[$language_id]),
+						'manufacturers_description' => xtc_db_prepare_input($manufacturers_description_array[$language_id]),
+						'manufacturers_description_more' => xtc_db_prepare_input($manufacturers_description_array_more[$language_id]),
+						'manufacturers_short_description' => xtc_db_prepare_input($manufacturers_short_description_array[$language_id]));
 
         if ($_GET['action'] == 'insert') {
           $insert_sql_data = array('manufacturers_id' => $manufacturers_id,
@@ -135,9 +172,36 @@
   }
 
 require (DIR_WS_INCLUDES.'head.php');
+if (USE_WYSIWYG == 'true') {
+	$query = xtc_db_query("SELECT code FROM ".TABLE_LANGUAGES." WHERE languages_id='".$_SESSION['languages_id']."'");
+	$data = xtc_db_fetch_array($query);
+	$languages = xtc_get_languages();
+	?>
+	<script type="text/javascript" src="includes/modules/fckeditor/fckeditor.js"></script>
+	<script type="text/javascript">
+		window.onload = function()
+			{<?php
+		// generate editor for categories
+		if ($_GET['action'] == 'new' || $_GET['action'] == 'edit') {
+			for ($i = 0; $i < sizeof($languages); $i ++) {
+				echo xtc_wysiwyg('manufacturers_description', $data['code'], $languages[$i]['id']);
+				echo xtc_wysiwyg('manufacturers_description_more', $data['code'], $languages[$i]['id']);
+				echo xtc_wysiwyg('manufacturers_short_description', $data['code'], $languages[$i]['id']);
+			}
+		}
+	?>}
+	</script>
+	<?php
+}	
 ?>
 </head>
-<body marginwidth="0" marginheight="0" topmargin="0" bottommargin="0" leftmargin="0" rightmargin="0" bgcolor="#FFFFFF" onload="SetFocus();">
+<?php
+if (USE_WYSIWYG=='true' && $_GET['action']) {
+	echo '<body marginwidth="0" marginheight="0" topmargin="0" bottommargin="0" leftmargin="0" rightmargin="0" bgcolor="#FFFFFF">';
+} else {
+	echo '<body marginwidth="0" marginheight="0" topmargin="0" bottommargin="0" leftmargin="0" rightmargin="0" bgcolor="#FFFFFF" onLoad="SetFocus();">';
+}
+?>	
 <!-- header //-->
 <?php require(DIR_WS_INCLUDES . 'header.php'); ?>
 <!-- header_eof //-->
@@ -223,13 +287,30 @@ require (DIR_WS_INCLUDES.'head.php');
       $contents[] = array('text' => '<br />' . TEXT_MANUFACTURERS_NAME . '<br />' . xtc_draw_input_field('manufacturers_name', $m_name));
       $contents[] = array('text' => '<br />' . TEXT_MANUFACTURERS_IMAGE . '<br />' . xtc_draw_file_field('manufacturers_image'));
 
+	  $manufacturers_meta_title_string = '';
+	  $manufacturers_meta_description_string = '';	  
       $manufacturer_inputs_string = '';
       $languages = xtc_get_languages();
       for ($i = 0, $n = sizeof($languages); $i < $n; $i++) {
         $manufacturer_inputs_string .= '<br />' . xtc_image(DIR_WS_LANGUAGES . $languages[$i]['directory'] . '/admin/images/' . $languages[$i]['image'], $languages[$i]['name']) . '&nbsp;' . xtc_draw_input_field('manufacturers_url[' . $languages[$i]['id'] . ']', $m_url[$languages[$i]['id']]);
-      }
+      	$manufacturers_meta_title_string .= '<br />' . xtc_image(DIR_WS_LANGUAGES . $languages[$i]['directory'] . '/admin/images/' . $languages[$i]['image'], $languages[$i]['name']) . '&nbsp;' . xtc_draw_input_field('manufacturers_meta_title[' . $languages[$i]['id'] . ']');
+		$manufacturers_meta_description_string .= '<br />' . xtc_image(DIR_WS_LANGUAGES . $languages[$i]['directory'] . '/admin/images/' . $languages[$i]['image'], $languages[$i]['name']) . '&nbsp;' . xtc_draw_input_field('manufacturers_meta_description[' . $languages[$i]['id'] . ']');
+	  }
 
+	  $contents[] = array('text' => '<br />' . TEXT_MANUFACTURERS_META_TITLE . $manufacturers_meta_title_string);
+	  $contents[] = array('text' => '<br />' . TEXT_MANUFACTURERS_META_DESCRIPTION . $manufacturers_meta_description_string);
       $contents[] = array('text' => '<br />' . TEXT_MANUFACTURERS_URL . $manufacturer_inputs_string);
+      $manufacturers_description_string = '';
+      $manufacturers_description_more_string = '';
+	  $manufacturers_short_description_string = '';
+	  for ($i = 0, $n = sizeof($languages); $i < $n; $i++) {
+        $manufacturers_description_string .= '<table width="600px"><tr><td class="infoBoxContent" width="1%" valign="top">' . xtc_image(DIR_WS_LANGUAGES . $languages[$i]['directory'] . '/admin/images/' . $languages[$i]['image'], $languages[$i]['name']) . '</td><td>' . xtc_draw_textarea_field('manufacturers_description['.$languages[$i]['id'].']', 'soft', '70', '25', '', 'style="width: 99%;"').'</td></tr></table>'; 
+		$manufacturers_description_more_string .= '<table width="600px"><tr><td class="infoBoxContent" width="1%" valign="top">' . xtc_image(DIR_WS_LANGUAGES . $languages[$i]['directory'] . '/admin/images/' . $languages[$i]['image'], $languages[$i]['name']) . '</td><td>' . xtc_draw_textarea_field('manufacturers_description_more['.$languages[$i]['id'].']', 'soft', '70', '25', '', 'style="width: 99%;"').'</td></tr></table>'; 
+		$manufacturers_short_description_string .= '<table width="600px"><tr><td class="infoBoxContent" width="1%" valign="top">' . xtc_image(DIR_WS_LANGUAGES . $languages[$i]['directory'] . '/admin/images/' . $languages[$i]['image'], $languages[$i]['name']) . '</td><td>' . xtc_draw_textarea_field('manufacturers_short_description['.$languages[$i]['id'].']', 'soft', '70', '25', '', 'style="width: 99%;"').'</td></tr></table>'; 
+	  }
+	  $contents[] = array('text' => '<br />' . TEXT_MANUFACTURERS_DESC  .  $manufacturers_description_string);
+	  $contents[] = array('text' => '<br />' . TEXT_MANUFACTURERS_MORE_DESC  .  $manufacturers_description_more_string);
+	  $contents[] = array('text' => '<br />' . TEXT_MANUFACTURERS_SHORT_DESC  .  $manufacturers_short_description_string);		  
       $contents[] = array('align' => 'center', 'text' => '<br />' . xtc_button(BUTTON_SAVE) . '&nbsp;' . xtc_button_link(BUTTON_CANCEL, xtc_href_link(FILENAME_MANUFACTURERS, 'page=' . $_GET['page'] . '&mID=' . $_GET['mID'])));
       break;
 
@@ -242,12 +323,27 @@ require (DIR_WS_INCLUDES.'head.php');
       $contents[] = array('text' => '<br />' . TEXT_MANUFACTURERS_IMAGE . '<br />' . xtc_draw_file_field('manufacturers_image') . '<br />' . $mInfo->manufacturers_image);
 
       $manufacturer_inputs_string = '';
+	  $manufacturers_meta_title_string = '';
+	  $manufacturers_meta_description_string = '';
       $languages = xtc_get_languages();
       for ($i = 0, $n = sizeof($languages); $i < $n; $i++) {
         $manufacturer_inputs_string .= '<br />' . xtc_image(DIR_WS_LANGUAGES . $languages[$i]['directory'] . '/admin/images/' . $languages[$i]['image'], $languages[$i]['name']) . '&nbsp;' . xtc_draw_input_field('manufacturers_url[' . $languages[$i]['id'] . ']', xtc_get_manufacturer_url($mInfo->manufacturers_id, $languages[$i]['id']));
-      }
+      	$manufacturers_meta_title_string .= '<br />' . xtc_image(DIR_WS_LANGUAGES . $languages[$i]['directory'] . '/admin/images/' . $languages[$i]['image'], $languages[$i]['name']) . '&nbsp;' . xtc_draw_input_field('manufacturers_meta_title[' . $languages[$i]['id'] . ']', xtc_get_manufacturers_meta_title($mInfo->manufacturers_id, $languages[$i]['id']));
+		$manufacturers_meta_description_string .= '<br />' . xtc_image(DIR_WS_LANGUAGES . $languages[$i]['directory'] . '/admin/images/' . $languages[$i]['image'], $languages[$i]['name']) . '&nbsp;' . xtc_draw_input_field('manufacturers_meta_description[' . $languages[$i]['id'] . ']', xtc_get_manufacturers_meta_description($mInfo->manufacturers_id, $languages[$i]['id']));
+	  }
 
       $contents[] = array('text' => '<br />' . TEXT_MANUFACTURERS_URL . $manufacturer_inputs_string);
+	  $manufacturers_description_string = '';	 
+      $manufacturers_description_more_string = '';	  
+	  $manufacturers_short_description_string = '';	  
+	  for ($i = 0, $n = sizeof($languages); $i < $n; $i++) {
+        $manufacturers_description_string .= '<table width="600px"><tr><td class="infoBoxContent" width="1%" valign="top">' . xtc_image(DIR_WS_LANGUAGES . $languages[$i]['directory'] . '/admin/images/' . $languages[$i]['image'], $languages[$i]['name']) . '</td><td>' . xtc_draw_textarea_field('manufacturers_description['.$languages[$i]['id'].']', 'soft', '70', '25', (($manufacturers_description[$languages[$i]['id']]) ? stripslashes($manufacturers_description[$languages[$i]['id']]) : xtc_get_manufacturers_description($mInfo->manufacturers_id, $languages[$i]['id'])), 'style="width: 99%;"').'</td></tr></table>'; 
+		$manufacturers_description_more_string .= '<table width="600px"><tr><td class="infoBoxContent" width="1%" valign="top">' . xtc_image(DIR_WS_LANGUAGES . $languages[$i]['directory'] . '/admin/images/' . $languages[$i]['image'], $languages[$i]['name']) . '</td><td>' . xtc_draw_textarea_field('manufacturers_description_more['.$languages[$i]['id'].']', 'soft', '70', '25', (($manufacturers_description_more[$languages[$i]['id']]) ? stripslashes($manufacturers_description_more[$languages[$i]['id']]) : xtc_get_manufacturers_description_more($mInfo->manufacturers_id, $languages[$i]['id'])), 'style="width: 99%;"').'</td></tr></table>'; 
+		$manufacturers_short_description_string .= '<table width="600px"><tr><td class="infoBoxContent" width="1%" valign="top">' . xtc_image(DIR_WS_LANGUAGES . $languages[$i]['directory'] . '/admin/images/' . $languages[$i]['image'], $languages[$i]['name']) . '</td><td>' . xtc_draw_textarea_field('manufacturers_short_description['.$languages[$i]['id'].']', 'soft', '70', '25', (($manufacturers_short_description[$languages[$i]['id']]) ? stripslashes($manufacturers_short_description[$languages[$i]['id']]) : xtc_get_manufacturers_short_description($mInfo->manufacturers_id, $languages[$i]['id'])), 'style="width: 99%;"').'</td></tr></table>'; 
+	  }
+	  $contents[] = array('text' => '<br />' . TEXT_MANUFACTURERS_DESC  .  $manufacturers_description_string);
+	  $contents[] = array('text' => '<br />' . TEXT_MANUFACTURERS_MORE_DESC  .  $manufacturers_description_more_string);
+	  $contents[] = array('text' => '<br />' . TEXT_MANUFACTURERS_SHORT_DESC  .  $manufacturers_short_description_string);	  
       $contents[] = array('align' => 'center', 'text' => '<br />' . xtc_button(BUTTON_SAVE) . '&nbsp;' . xtc_button_link(BUTTON_CANCEL, xtc_href_link(FILENAME_MANUFACTURERS, 'page=' . $_GET['page'] . '&mID=' . $mInfo->manufacturers_id)));
       break;
 

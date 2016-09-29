@@ -61,7 +61,7 @@
 
 
     function quote($method = '') {
-      global $shipping_quote_gls, $shipping_quote_all, $shipping_weight, $shipping_quoted, $shipping_gls_cost, $shipping_gls_method, $order;
+      global $shipping_quote_gls, $shipping_quote_all, $shipping_weight, $shipping_quoted, $shipping_gls_cost, $shipping_gls_method, $order, $shipping_num_boxes;
 
         $error = false;
         $dest_country = $order->delivery['country']['iso_code_2'];
@@ -124,7 +124,7 @@
       for ($i = 0; $i < count($gls_table); $i ++) {
         if ( ($shipping_weight > $gls_table[$i]) && ($shipping_weight <= $gls_table[$n]) ) {
           $shipping = $gls_table[$y];
-          $shipping_gls_method = MODULE_SHIPPING_GLS_TEXT_WAY . ' ' . $dest_country . " : " . $shipping_weight . ' ' . MODULE_SHIPPING_GLS_TEXT_UNITS;
+          $shipping_gls_method = MODULE_SHIPPING_GLS_TEXT_WAY . ' ' . $dest_country . " : " . $shipping_num_boxes * $shipping_weight . ' ' . MODULE_SHIPPING_GLS_TEXT_UNITS;
           break;
         }
         $i = $i + 2;
@@ -158,7 +158,7 @@
 //              print('Sub Order: ' . $order->info['subtotal'] . ' Cost: ' . $gls_cost['gls_free_shipping_over']);
             //shipping is subsidized
             $shipping_gls_cost = (($shipping + MODULE_SHIPPING_GLS_HANDLING + SHIPPING_HANDLING)-$gls_cost['gls_shipping_subsidized']);
-            $shipping_gls_method = MODULE_SHIPPING_GLS_SUBSIDIZED_SHIPPING . ' ' .MODULE_SHIPPING_GLS_TEXT_WAY . ' ' . $dest_country . " : " . $shipping_weight . ' ' .             MODULE_SHIPPING_GLS_TEXT_UNITS;
+            $shipping_gls_method = MODULE_SHIPPING_GLS_SUBSIDIZED_SHIPPING . ' ' .MODULE_SHIPPING_GLS_TEXT_WAY . ' ' . $dest_country . " : " . $shipping_num_boxes * $shipping_weight . ' ' .             MODULE_SHIPPING_GLS_TEXT_UNITS;
           } else {
 //              print('Sub Else Order: ' . $order->info['subtotal'] . ' Cost: ' . $gls_cost['gls_free_shipping_over']);
             //charge for shipping

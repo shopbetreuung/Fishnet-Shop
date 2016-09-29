@@ -304,18 +304,26 @@ class xtc_afterbuy_functions
 		$anzahl = 0;
 		while ($pDATA = xtc_db_fetch_array($p_query)) {
 			$nr ++;
+			      
+			$check_query = xtc_db_query('SHOW COLUMNS FROM products like "ab_productsid"');
+      
+			if (xtc_db_num_rows($check_query) == 1) {
 
-			$select_ab_products_id = xtc_db_query("SELECT ab_productsid FROM products WHERE products_id = '".$pDATA['products_id']."'");
-			$ab_products_id = xtc_db_fetch_array($select_ab_products_id);
-			$afterbuy_products_id = $ab_products_id['ab_productsid'];
-			
+				$select_ab_products_id = xtc_db_query("SELECT ab_productsid FROM products WHERE products_id = '".$pDATA['products_id']."'");
+				$ab_products_id = xtc_db_fetch_array($select_ab_products_id);
+				$afterbuy_products_id = $ab_products_id['ab_productsid'];
+				
+			} else {
+				$afterbuy_products_id = 0;
+			}
+				
 			if ($verwende_shop_artikelnummer == 1)
 			{
 				$artnr = $pDATA['products_id'];
 				if ($artnr == '')
 					$artnr = "99999";
 			}
-			elseif ($verwende_shop_artikelnummer == 2)
+			elseif ($verwende_shop_artikelnummer == 2 && $afterbuy_products_id != 0)
 			{
 				$select_ab_products_id = xtc_db_query("SELECT ab_productsid FROM products WHERE products_id = '".$pDATA['products_id']."'");
 				$ab_products_id = xtc_db_fetch_array($select_ab_products_id);
@@ -333,14 +341,14 @@ class xtc_afterbuy_functions
 			{
 				$artnr = $pDATA['products_model'];
 			}
-			
+		
 			if ($AlternArtikelNr == 1)
 			{
 				$alter_artnr = $pDATA['products_id'];
 				if ($alter_artnr == '')
 					$alter_artnr = "99999";
 			}
-			elseif ($AlternArtikelNr == 2)
+			elseif ($AlternArtikelNr == 2 && $afterbuy_products_id != 0)
 			{
 				$select_ab_products_id = xtc_db_query("SELECT ab_productsid FROM products WHERE products_id = '".$pDATA['products_id']."'");
 				$ab_products_id = xtc_db_fetch_array($select_ab_products_id);
@@ -369,7 +377,7 @@ class xtc_afterbuy_functions
 					if ((int)$attribute_model >0)
 						$artnr = $attribute_model;
 				}
-				elseif ($verwende_shop_artikelnummer == 2)
+				elseif ($verwende_shop_artikelnummer == 2 && $afterbuy_products_id != 0)
 				{
 					$attribute_model = $this->xtc_get_attributes_ab_productsid($pDATA['products_id'], $aDATA['products_options_values'], $aDATA['products_options']);
 					if ((int)$attribute_model >0)

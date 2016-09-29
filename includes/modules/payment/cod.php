@@ -27,7 +27,7 @@ class cod {
 		$this->title = MODULE_PAYMENT_COD_TEXT_TITLE;
 		$this->description = MODULE_PAYMENT_COD_TEXT_DESCRIPTION;
 		$this->sort_order = MODULE_PAYMENT_COD_SORT_ORDER;
-		$this->enabled = ((MODULE_PAYMENT_COD_STATUS == 'True') ? true : false);
+		$this->enabled = ((MODULE_PAYMENT_COD_STATUS == 'true') ? true : false);
 		$this->info = MODULE_PAYMENT_COD_TEXT_INFO;
 		$this->cost = '';
 
@@ -188,7 +188,7 @@ class cod {
 	}
 
 	function install() {
-		xtc_db_query("insert into ".TABLE_CONFIGURATION." ( configuration_key, configuration_value,  configuration_group_id, sort_order, set_function, date_added) values ('MODULE_PAYMENT_COD_STATUS', 'True',  '6', '1', 'xtc_cfg_select_option(array(\'True\', \'False\'), ', now())");
+		xtc_db_query("insert into ".TABLE_CONFIGURATION." ( configuration_key, configuration_value,  configuration_group_id, sort_order, set_function, date_added) values ('MODULE_PAYMENT_COD_STATUS', 'true',  '6', '1', 'xtc_cfg_select_option(array(\'true\', \'false\'), ', now())");
 		xtc_db_query("insert into ".TABLE_CONFIGURATION." ( configuration_key, configuration_value,  configuration_group_id, sort_order, date_added) values ('MODULE_PAYMENT_COD_ALLOWED', '', '6', '0', now())");
 		xtc_db_query("insert into ".TABLE_CONFIGURATION." ( configuration_key, configuration_value,  configuration_group_id, sort_order, use_function, set_function, date_added) values ('MODULE_PAYMENT_COD_ZONE', '0', '6', '2', 'xtc_get_zone_class_title', 'xtc_cfg_pull_down_zone_classes(', now())");
 		xtc_db_query("insert into ".TABLE_CONFIGURATION." ( configuration_key, configuration_value,  configuration_group_id, sort_order, date_added) values ('MODULE_PAYMENT_COD_SORT_ORDER', '0',  '6', '0', now())");

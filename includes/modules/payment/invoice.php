@@ -27,7 +27,7 @@ class invoice {
 		$this->description = MODULE_PAYMENT_INVOICE_TEXT_DESCRIPTION;
 		$this->min_order = MODULE_PAYMENT_INVOICE_MIN_ORDER;
 		$this->sort_order = MODULE_PAYMENT_INVOICE_SORT_ORDER;
-		$this->enabled = ((MODULE_PAYMENT_INVOICE_STATUS == 'True') ? true : false);
+		$this->enabled = ((MODULE_PAYMENT_INVOICE_STATUS == 'true') ? true : false);
 		$this->info = MODULE_PAYMENT_INVOICE_TEXT_INFO;
 		if ((int) MODULE_PAYMENT_INVOICE_ORDER_STATUS_ID > 0) {
 			$this->order_status = MODULE_PAYMENT_INVOICE_ORDER_STATUS_ID;
@@ -117,7 +117,7 @@ class invoice {
 	}
 
 	function install() {
-		xtc_db_query("insert into ".TABLE_CONFIGURATION." ( configuration_key, configuration_value,  configuration_group_id, sort_order, set_function, date_added) values ('MODULE_PAYMENT_INVOICE_STATUS', 'True',  '6', '1', 'xtc_cfg_select_option(array(\'True\', \'False\'), ', now())");
+		xtc_db_query("insert into ".TABLE_CONFIGURATION." ( configuration_key, configuration_value,  configuration_group_id, sort_order, set_function, date_added) values ('MODULE_PAYMENT_INVOICE_STATUS', 'true',  '6', '1', 'xtc_cfg_select_option(array(\'true\', \'false\'), ', now())");
 		xtc_db_query("insert into ".TABLE_CONFIGURATION." ( configuration_key, configuration_value,  configuration_group_id, sort_order, date_added) values ('MODULE_PAYMENT_INVOICE_ALLOWED', '', '6', '0', now())");
 		xtc_db_query("insert into ".TABLE_CONFIGURATION." ( configuration_key, configuration_value,  configuration_group_id, sort_order, use_function, set_function, date_added) values ('MODULE_PAYMENT_INVOICE_ZONE', '0',  '6', '2', 'xtc_get_zone_class_title', 'xtc_cfg_pull_down_zone_classes(', now())");
 		xtc_db_query("insert into ".TABLE_CONFIGURATION." ( configuration_key, configuration_value,  configuration_group_id, sort_order, date_added) values ('MODULE_PAYMENT_INVOICE_SORT_ORDER', '0',  '6', '0', now())");

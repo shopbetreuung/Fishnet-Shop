@@ -37,7 +37,7 @@ class paypalexpress {
     }else{
       $this->sort_order = 3;
     }
-    $this->enabled = ((MODULE_PAYMENT_PAYPALEXPRESS_STATUS == 'True') ? true : false);
+    $this->enabled = ((MODULE_PAYMENT_PAYPALEXPRESS_STATUS == 'true') ? true : false);
     $this->info = MODULE_PAYMENT_PAYPALEXPRESS_TEXT_INFO;
     $this->order_status_success = PAYPAL_ORDER_STATUS_SUCCESS_ID;
     $this->order_status_rejected = PAYPAL_ORDER_STATUS_REJECTED_ID;
@@ -162,7 +162,7 @@ class paypalexpress {
     }
     $m_fields=' ( configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function ) ';
     // Grund Install des Express
-    xtc_db_query("insert into ".TABLE_CONFIGURATION.$m_fields."values ('MODULE_PAYMENT_PAYPALEXPRESS_STATUS', 'True', '6', '3', NULL, now(), '', 'xtc_cfg_select_option(array(\'True\', \'False\'),' )");
+    xtc_db_query("insert into ".TABLE_CONFIGURATION.$m_fields."values ('MODULE_PAYMENT_PAYPALEXPRESS_STATUS', 'true', '6', '3', NULL, now(), '', 'xtc_cfg_select_option(array(\'true\', \'false\'),' )");
     xtc_db_query("insert into ".TABLE_CONFIGURATION.$m_fields."values ('MODULE_PAYMENT_PAYPALEXPRESS_SORT_ORDER', '0', '6', '0', NULL, now(), '', '')");
     // muss sein wegen constante in modules/payment
     xtc_db_query("insert into ".TABLE_CONFIGURATION.$m_fields."values ('MODULE_PAYMENT_PAYPALEXPRESS_ALLOWED', '', '6', '0', NULL, now(), '', '')");
@@ -209,8 +209,8 @@ class paypalexpress {
     //API Version auf jeden Fall erneuern
     xtc_db_query("update ".TABLE_CONFIGURATION." SET configuration_value='84.0' where configuration_key='PAYPAL_API_VERSION'");
     //Session setzen
-    xtc_db_query("update ".TABLE_CONFIGURATION." SET configuration_value='False' where configuration_key='SESSION_CHECK_USER_AGENT'");
-    xtc_db_query("update ".TABLE_CONFIGURATION." SET configuration_value='False' where configuration_key='SESSION_CHECK_IP_ADDRESS'");
+    xtc_db_query("update ".TABLE_CONFIGURATION." SET configuration_value='false' where configuration_key='SESSION_CHECK_USER_AGENT'");
+    xtc_db_query("update ".TABLE_CONFIGURATION." SET configuration_value='false' where configuration_key='SESSION_CHECK_IP_ADDRESS'");
     $check_query = xtc_db_query("select configuration_group_title from ".TABLE_CONFIGURATION_GROUP." where configuration_group_title = 'PayPal'");
     if(xtc_db_num_rows($check_query)==0):
       $m_fields=' ( configuration_group_id, configuration_group_title, configuration_group_description, sort_order, visible ) ';

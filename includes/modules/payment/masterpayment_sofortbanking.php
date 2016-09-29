@@ -33,7 +33,7 @@ require_once(DIR_FS_CATALOG . 'includes/masterpayment/MasterpaymentActions.class
       $this->description 	= MODULE_PAYMENT_MASTERPAYMENT_SOFORTBANKING_TEXT_DESCRIPTION;
 	  $this->info			= MODULE_PAYMENT_MASTERPAYMENT_SOFORTBANKING_TEXT_INFO;
       $this->sort_order 	= MODULE_PAYMENT_MASTERPAYMENT_SOFORTBANKING_SORT_ORDER;
-      $this->enabled 		= ((MODULE_PAYMENT_MASTERPAYMENT_SOFORTBANKING_STATUS == 'True') ? true : false);
+      $this->enabled 		= ((MODULE_PAYMENT_MASTERPAYMENT_SOFORTBANKING_STATUS == 'true') ? true : false);
 	
       $this->tmpOrders = true;
 	  $this->order_status = MODULE_PAYMENT_MASTERPAYMENT_CONFIG_ORDER_STATUS_ID_TEMP;
@@ -71,7 +71,7 @@ require_once(DIR_FS_CATALOG . 'includes/masterpayment/MasterpaymentActions.class
     }
 
     function selection() {	  
-	  	if(MODULE_PAYMENT_MASTERPAYMENT_SOFORTBANKING_ICON == 'True') {	  
+	  	if(MODULE_PAYMENT_MASTERPAYMENT_SOFORTBANKING_ICON == 'true') {	  
 	  		$content = array();
 			$content = array_merge($content, array (
 				array (
@@ -138,10 +138,10 @@ require_once(DIR_FS_CATALOG . 'includes/masterpayment/MasterpaymentActions.class
     }	
 
     function install() {
-      xtc_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) values ('MODULE_PAYMENT_MASTERPAYMENT_SOFORTBANKING_STATUS', 'False', '6', '1', 'xtc_cfg_select_option(array(\'True\', \'False\'), ', now());");
+      xtc_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) values ('MODULE_PAYMENT_MASTERPAYMENT_SOFORTBANKING_STATUS', 'false', '6', '1', 'xtc_cfg_select_option(array(\'true\', \'false\'), ', now());");
       xtc_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_key, configuration_value, configuration_group_id, sort_order, date_added) values ('MODULE_PAYMENT_MASTERPAYMENT_SOFORTBANKING_SORT_ORDER', '16', '6', '0', now())");
 	  xtc_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_key, configuration_value, configuration_group_id, sort_order, date_added) values ('MODULE_PAYMENT_MASTERPAYMENT_SOFORTBANKING_ALLOWED', '', '6', '0', now())");
-	  xtc_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) values ('MODULE_PAYMENT_MASTERPAYMENT_SOFORTBANKING_ICON', 'False', '6', '1', 'xtc_cfg_select_option(array(\'True\', \'False\'), ', now());");	  
+	  xtc_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) values ('MODULE_PAYMENT_MASTERPAYMENT_SOFORTBANKING_ICON', 'false', '6', '1', 'xtc_cfg_select_option(array(\'true\', \'false\'), ', now());");	  
     }
 
     function remove() {

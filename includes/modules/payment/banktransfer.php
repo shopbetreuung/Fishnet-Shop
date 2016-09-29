@@ -32,7 +32,7 @@
       $this->description = MODULE_PAYMENT_BANKTRANSFER_TEXT_DESCRIPTION;
       $this->sort_order = MODULE_PAYMENT_BANKTRANSFER_SORT_ORDER;
       $this->min_order = MODULE_PAYMENT_BANKTRANSFER_MIN_ORDER;
-      $this->enabled = ((MODULE_PAYMENT_BANKTRANSFER_STATUS == 'True') ? true : false);
+      $this->enabled = ((MODULE_PAYMENT_BANKTRANSFER_STATUS == 'true') ? true : false);
       $this->info=MODULE_PAYMENT_BANKTRANSFER_TEXT_INFO;
       if ((int)MODULE_PAYMENT_BANKTRANSFER_ORDER_STATUS_ID > 0) {
         $this->order_status = MODULE_PAYMENT_BANKTRANSFER_ORDER_STATUS_ID;
@@ -131,9 +131,9 @@
                                                  'field' => MODULE_PAYMENT_BANKTRANSFER_TEXT_BANK_INFO),
                                            array('title' => MODULE_PAYMENT_BANKTRANSFER_TEXT_BANK_OWNER,
                                                  'field' => isset($_GET['banktransfer_owner'])? xtc_draw_input_field('banktransfer_owner', $_GET['banktransfer_owner'], 'size="40" maxlength="64"') : xtc_draw_input_field('banktransfer_owner', $order->billing['firstname'] . ' ' . $order->billing['lastname'], 'size="40" maxlength="64"')), //DokuMan - 2012-08-29 - preset banktransfer_owner with customer only if no value was entered
-                                           array('title' => ((MODULE_PAYMENT_BANKTRANSFER_IBAN_ONLY == 'False') ? MODULE_PAYMENT_BANKTRANSFER_TEXT_BANK_NUMBER : MODULE_PAYMENT_BANKTRANSFER_TEXT_BANK_IBAN),
+                                           array('title' => ((MODULE_PAYMENT_BANKTRANSFER_IBAN_ONLY == 'false') ? MODULE_PAYMENT_BANKTRANSFER_TEXT_BANK_NUMBER : MODULE_PAYMENT_BANKTRANSFER_TEXT_BANK_IBAN),
                                                  'field' => xtc_draw_input_field('banktransfer_number', (isset($_GET['banktransfer_number'])) ? $_GET['banktransfer_number'] : ((isset($_SESSION['banktransfer_info']['banktransfer_number'])) ? $_SESSION['banktransfer_info']['banktransfer_number'] : ''), 'size="40" maxlength="40"')),
-                                           array('title' => ((MODULE_PAYMENT_BANKTRANSFER_IBAN_ONLY == 'False') ? MODULE_PAYMENT_BANKTRANSFER_TEXT_BANK_BLZ : MODULE_PAYMENT_BANKTRANSFER_TEXT_BANK_BIC),
+                                           array('title' => ((MODULE_PAYMENT_BANKTRANSFER_IBAN_ONLY == 'false') ? MODULE_PAYMENT_BANKTRANSFER_TEXT_BANK_BLZ : MODULE_PAYMENT_BANKTRANSFER_TEXT_BANK_BIC),
                                                  'field' => xtc_draw_input_field('banktransfer_blz', (isset($_GET['banktransfer_blz'])) ? $_GET['banktransfer_blz'] : ((isset($_SESSION['banktransfer_info']['banktransfer_blz'])) ? $_SESSION['banktransfer_info']['banktransfer_blz'] : ''), 'size="40" maxlength="11"')),
                                            array('title' => MODULE_PAYMENT_BANKTRANSFER_TEXT_BANK_NAME,
                                                  'field' => xtc_draw_input_field('banktransfer_bankname', (isset($_GET['banktransfer_bankname'])) ? $_GET['banktransfer_bankname'] : ((isset($_SESSION['banktransfer_info']['banktransfer_bankname'])) ? $_SESSION['banktransfer_info']['banktransfer_bankname'] : ''), 'size="40" maxlength="64"')),
@@ -158,7 +158,7 @@
 
         // iban / classic?
         $number = preg_replace('/[^a-zA-Z0-9]/', '', $_POST['banktransfer_number']);
-        if (ctype_digit($number) && MODULE_PAYMENT_BANKTRANSFER_IBAN_ONLY == 'False') {
+        if (ctype_digit($number) && MODULE_PAYMENT_BANKTRANSFER_IBAN_ONLY == 'false') {
           // classic
           $banktransfer_validation = new AccountCheck;
           $banktransfer_result = $banktransfer_validation->CheckAccount($number, $_POST['banktransfer_blz']);
@@ -408,7 +408,7 @@
     }
 
     function install() {
-      xtc_db_query("insert into " . TABLE_CONFIGURATION . " ( configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) values ('MODULE_PAYMENT_BANKTRANSFER_STATUS', 'True', '6', '1', 'xtc_cfg_select_option(array(\'True\', \'False\'), ', now())");
+      xtc_db_query("insert into " . TABLE_CONFIGURATION . " ( configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) values ('MODULE_PAYMENT_BANKTRANSFER_STATUS', 'true', '6', '1', 'xtc_cfg_select_option(array(\'true\', \'false\'), ', now())");
       xtc_db_query("insert into " . TABLE_CONFIGURATION . " ( configuration_key, configuration_value, configuration_group_id, sort_order, use_function, set_function, date_added) values ('MODULE_PAYMENT_BANKTRANSFER_ZONE', '0',  '6', '2', 'xtc_get_zone_class_title', 'xtc_cfg_pull_down_zone_classes(', now())");
       xtc_db_query("insert into " . TABLE_CONFIGURATION . " ( configuration_key, configuration_value, configuration_group_id, sort_order, date_added) values ('MODULE_PAYMENT_BANKTRANSFER_ALLOWED', '', '6', '0', now())");
       xtc_db_query("insert into " . TABLE_CONFIGURATION . " ( configuration_key, configuration_value, configuration_group_id, sort_order, date_added) values ('MODULE_PAYMENT_BANKTRANSFER_SORT_ORDER', '0', '6', '0', now())");
@@ -421,7 +421,7 @@
       xtc_db_query("insert into " . TABLE_CONFIGURATION . " ( configuration_key, configuration_value, configuration_group_id, sort_order, date_added) values ('MODULE_PAYMENT_BANKTRANSFER_CI', '', '6', '0', now())");
       xtc_db_query("insert into " . TABLE_CONFIGURATION . " ( configuration_key, configuration_value, configuration_group_id, sort_order, date_added) values ('MODULE_PAYMENT_BANKTRANSFER_REFERENCE_PREFIX', '', '6', '0', now())");
       xtc_db_query("insert into " . TABLE_CONFIGURATION . " ( configuration_key, configuration_value, configuration_group_id, sort_order, date_added) values ('MODULE_PAYMENT_BANKTRANSFER_DUE_DELAY', '1', '6', '0', now())");
-      xtc_db_query("insert into " . TABLE_CONFIGURATION . " ( configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) values ('MODULE_PAYMENT_BANKTRANSFER_IBAN_ONLY', 'True', '6', '1', 'xtc_cfg_select_option(array(\'True\', \'False\'), ', now())");
+      xtc_db_query("insert into " . TABLE_CONFIGURATION . " ( configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) values ('MODULE_PAYMENT_BANKTRANSFER_IBAN_ONLY', 'true', '6', '1', 'xtc_cfg_select_option(array(\'true\', \'false\'), ', now())");
     }
 
     function remove() {

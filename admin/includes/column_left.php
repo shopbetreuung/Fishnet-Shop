@@ -86,19 +86,19 @@
 											"is_main"	=> true,
 											"link" 		=> false,
 											"access"	=> false,
-											"check"		=> true);
-																														
-	$menu_items['products'][] = array(		"name" 		=> BOX_ATTRIBUTES_MANAGER,
-											"is_main"	=> false,
-											"link" 		=> xtc_href_link(FILENAME_NEW_ATTRIBUTES, '', 'NONSSL'),
-											"access"	=> "new_attributes",
-											"check"		=> true);									
+											"check"		=> true);								
 										
 	$menu_items['products'][] = array(		"name" 		=> BOX_PRODUCTS_ATTRIBUTES,
 											"is_main"	=> false,
 											"link" 		=> xtc_href_link(FILENAME_PRODUCTS_ATTRIBUTES, '', 'NONSSL'),
 											"access"	=> "products_attributes",
-											"check"		=> true);			
+											"check"		=> true);	
+    
+	$menu_items['products'][] = array(		"name" 		=> BOX_ATTRIBUTES_MANAGER,
+											"is_main"	=> false,
+											"link" 		=> xtc_href_link(FILENAME_NEW_ATTRIBUTES, '', 'NONSSL'),
+											"access"	=> "new_attributes",
+											"check"		=> true);	    
 											
 	$menu_items['products'][] = array(		"name" 		=> BOX_CONFIGURATION_13,
 											"is_main"	=> true,

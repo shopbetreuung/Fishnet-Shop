@@ -95,7 +95,7 @@ class MasterpaymentRequest extends MasterpaymentActions
   		$params['currency'] = $order->info['currency'];
   		$params['language'] = $this->getCustomerLanguage();
 		
-		if(MODULE_PAYMENT_MASTERPAYMENT_CONFIG_SEND_CUSTOMER_DATA == 'True')
+		if(MODULE_PAYMENT_MASTERPAYMENT_CONFIG_SEND_CUSTOMER_DATA == 'true')
 		{
 			$params['userId'] = $_SESSION['customer_id'];
 			$params['sex'] = $this->getCustomerGender();
@@ -507,7 +507,7 @@ class MasterpaymentRequest extends MasterpaymentActions
 	*/	
 	function writeRequestLog($_url, $_txID, $_requestString)
     {
-		if(MODULE_PAYMENT_MASTERPAYMENT_CONFIG_SAVE_LOGS == 'True')
+		if(MODULE_PAYMENT_MASTERPAYMENT_CONFIG_SAVE_LOGS == 'true')
 		{
 			$logfile = @fopen(DIR_FS_CATALOG . 'includes/masterpayment/logs/requests.log', 'a+');
 			@fwrite($logfile, "------------------------------------------------------------------------\n\r");	

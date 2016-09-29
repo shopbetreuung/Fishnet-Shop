@@ -791,12 +791,12 @@ if( FREEE_INFO ) {
   tr_font_size(   $fn.'_font_size',       $texts_tmp[$fn.'_font_size'],       $profile[$fn.'_font_size']   );
 
 $conditions = array(
-    array('id'=>'0', 'text'=>'AND'),
-    array('id'=>'1', 'text'=>'OR')
+    array('id'=>'0', 'text'=> TEXT_AND),
+    array('id'=>'1', 'text'=> TEXT_OR)
 );
 $operations = array(
-    array('id'=>'0', 'text'=>'EQUAL'),
-    array('id'=>'1', 'text'=>'NOT EQUAL')
+    array('id'=>'0', 'text'=> TEXT_EQUAL),
+    array('id'=>'1', 'text'=> TEXT_NOT_EQUAL)
 );
 
 
@@ -807,7 +807,7 @@ $operations = array(
     <tr align="left">
       <td colspan="4" class="BilldataTableContent">
           <div class="col-xs-12">
-              <p class="h3">Select this invoice profile if:</p>
+              <p class="h3"><?php echo TEXT_SELECT_INVOICE_PROFILE; ?></p>
           </div>
         <!--  <div class="col-xs-12 table table-bordered">
             <div class="col-xs-12 row" style="font-weight:bold;">
@@ -861,121 +861,121 @@ $operations = array(
             <div class="col-xs-12 table table-bordered">
             <div class="col-xs-12 col-md-4  row" style="font-weight:bold; border-left:1px solid #bab9b9"  >
                 <div class="col-xs-12">
-                    <div class="col-xs-6 col-sm-2 col-md-5">Activate</div>
+                    <div class="col-xs-6 col-sm-2 col-md-5"><?php echo TEXT_ACTIVATE; ?></div>
                     <div class="col-xs-6 col-sm-10 col-md-7"><?php echo xtc_draw_checkbox_field("rules[country][active]", '',((isset($grouped['country']))? 1 : 0)); ?></div>
                 </div>
                 <div class="col-xs-12">
-                    <div class="col-xs-6 col-sm-2 col-md-5">Selector</div>
-                    <div class="col-xs-6 col-sm-10 col-md-7">Billing country</div>
+                    <div class="col-xs-6 col-sm-2 col-md-5"><?php echo TEXT_SELECTOR; ?></div>
+                    <div class="col-xs-6 col-sm-10 col-md-7"><?php echo TEXT_BILLING_COUNTRY; ?></div>
                 </div>
                 <div class="col-xs-12">
-                    <div class="col-xs-6 col-sm-2 col-md-5">Operation</div>
+                    <div class="col-xs-6 col-sm-2 col-md-5"><?php echo TEXT_OPERATION; ?></div>
                     <div class="col-xs-6 col-sm-10 col-md-7"><?php echo xtc_draw_pull_down_menu("rules[country][operation]", $operations,((isset($grouped['country']))? $grouped['country'][0] : 0)); ?></div>
                 </div>
                 <div class="col-xs-12">
-                    <div class="col-xs-6 col-sm-2 col-md-5">Value</div>
+                    <div class="col-xs-6 col-sm-2 col-md-5"><?php echo TEXT_VALUE; ?></div>
                     <div class="col-xs-6 col-sm-10 col-md-7"><?php echo xtc_draw_input_field("rules[country][option]",((isset($grouped['country']))? $grouped['country'][1] : '')); ?></div>
                 </div>
                 <div class="col-xs-12">
-                    <div class="col-xs-6 col-sm-2 col-md-5">Conditions</div>
+                    <div class="col-xs-6 col-sm-2 col-md-5"><?php echo TEXT_CONDITIONS; ?></div>
                     <div class="col-xs-6 col-sm-10 col-md-7"><?php echo xtc_draw_pull_down_menu("rules[country][condition]", $conditions,((isset($grouped['country']))? $grouped['country'][2] : 0)); ?></div>
                 </div>
             </div>
                 <div class="col-xs-12 hidden-lg hidden-md" style="border-bottom:1px solid #bab9b9; margin-top:10px; margin-bottom: 10px;"></div> 
             <div class="col-xs-12 col-md-4 row" style="font-weight:bold; border-left:1px solid #bab9b9">
                 <div class="col-xs-12">
-                    <div class="col-xs-6 col-sm-2 col-md-5">Activate</div>
+                    <div class="col-xs-6 col-sm-2 col-md-5"><?php echo TEXT_ACTIVATE; ?></div>
                     <div class="col-xs-6 col-sm-10 col-md-7"><?php echo xtc_draw_checkbox_field('rules[shipping][active]', '',((isset($grouped['shipping']))? 1 : 0)); ?></div>
                 </div>
                 <div class="col-xs-12">
-                    <div class="col-xs-6 col-sm-2 col-md-5">Selector</div>
-                    <div class="col-xs-6 col-sm-10 col-md-7">Shipping method</div>
+                    <div class="col-xs-6 col-sm-2 col-md-5"><?php echo TEXT_SELECTOR; ?></div>
+                    <div class="col-xs-6 col-sm-10 col-md-7"><?php echo TEXT_SHIPPING_METHOD; ?></div>
                 </div>
                 <div class="col-xs-12">
-                    <div class="col-xs-6 col-sm-2 col-md-5">Operation</div>
+                    <div class="col-xs-6 col-sm-2 col-md-5"><?php echo TEXT_OPERATION; ?></div>
                     <div class="col-xs-6 col-sm-10 col-md-7"><?php echo xtc_draw_pull_down_menu('rules[shipping][operation]', $operations,((isset($grouped['shipping']))? $grouped['shipping'][0] : 0)); ?></div>
                 </div>
                 <div class="col-xs-12">
-                    <div class="col-xs-6 col-sm-2 col-md-5">Value</div>
+                    <div class="col-xs-6 col-sm-2 col-md-5"><?php echo TEXT_VALUE; ?></div>
                     <div class="col-xs-6 col-sm-10 col-md-7"><?php echo xtc_draw_input_field('rules[shipping][option]',((isset($grouped['shipping']))? $grouped['shipping'][1] : '')); ?></div>
                 </div>
                 <div class="col-xs-12">
-                    <div class="col-xs-6 col-sm-2 col-md-5">Conditions</div>
+                    <div class="col-xs-6 col-sm-2 col-md-5"><?php echo TEXT_CONDITIONS; ?></div>
                     <div class="col-xs-6 col-sm-10 col-md-7"><?php echo xtc_draw_pull_down_menu('rules[shipping][condition]', $conditions,((isset($grouped['shipping']))? $grouped['shipping'][2] : 0)); ?></div>
                 </div>
             </div>
                 <div class="col-xs-12 hidden-lg hidden-md" style="border-bottom:1px solid #bab9b9;margin-top:10px; margin-bottom: 10px;"></div> 
             <div class="col-xs-12 col-md-4 row" style="font-weight:bold; border-left:1px solid #bab9b9">
                 <div class="col-xs-12">
-                    <div class="col-xs-6 col-sm-2 col-md-5">Activate</div>
+                    <div class="col-xs-6 col-sm-2 col-md-5"><?php echo TEXT_ACTIVATE; ?></div>
                     <div class="col-xs-6 col-sm-10 col-md-7"><?php echo xtc_draw_checkbox_field('rules[payment][active]', '',((isset($grouped['payment']))? 1 : 0)); ?></div>
                 </div>
                 <div class="col-xs-12">
-                    <div class="col-xs-6 col-sm-2 col-md-5">Selector</div>
-                    <div class="col-xs-6 col-sm-10 col-md-7">Payment method</div>
+                    <div class="col-xs-6 col-sm-2 col-md-5"><?php echo TEXT_SELECTOR; ?></div>
+                    <div class="col-xs-6 col-sm-10 col-md-7"><?php echo TEXT_PAYMENT_METHOD; ?></div>
                 </div>
                 <div class="col-xs-12">
-                    <div class="col-xs-6 col-sm-2 col-md-5">Operation</div>
+                    <div class="col-xs-6 col-sm-2 col-md-5"><?php echo TEXT_OPERATION; ?></div>
                     <div class="col-xs-6 col-sm-10 col-md-7"><?php echo xtc_draw_pull_down_menu('rules[payment][operation]', $operations,((isset($grouped['payment']))? $grouped['payment'][0] : 0)); ?></div>
                 </div>
                 <div class="col-xs-12">
-                    <div class="col-xs-6 col-sm-2 col-md-5">Value</div>
+                    <div class="col-xs-6 col-sm-2 col-md-5"><?php echo TEXT_VALUE; ?></div>
                     <div class="col-xs-6 col-sm-10 col-md-7"><?php echo xtc_draw_input_field('rules[payment][option]',((isset($grouped['payment']))? $grouped['payment'][1] : '')); ?></div>
                 </div>
                 <div class="col-xs-12">
-                    <div class="col-xs-6 col-sm-2 col-md-5">Conditions</div>
+                    <div class="col-xs-6 col-sm-2 col-md-5"><?php echo TEXT_CONDITIONS; ?></div>
                     <div class="col-xs-6 col-sm-10 col-md-7"><?php echo xtc_draw_pull_down_menu('rules[payment][condition]', $conditions,((isset($grouped['payment']))? $grouped['payment'][2] : 0)); ?></div>
                 </div>
             </div>
                 <div class="col-xs-12" style="border-bottom:1px solid #bab9b9;margin-top:10px; margin-bottom: 10px;"></div> 
             <div class="col-xs-12 col-md-6 row" style="font-weight:bold; border-left:1px solid #bab9b9">
                 <div class="col-xs-12">
-                    <div class="col-xs-6 col-sm-2 col-md-5">Activate</div>
+                    <div class="col-xs-6 col-sm-2 col-md-5"><?php echo TEXT_ACTIVATE; ?></div>
                     <div class="col-xs-6 col-sm-10 col-md-7"><?php echo xtc_draw_checkbox_field('rules[order][active]', '',((isset($grouped['order']))? 1 : 0)); ?></div>
                 </div>
                 <div class="col-xs-12">
-                    <div class="col-xs-6 col-sm-2 col-md-5">Selector</div>
-                    <div class="col-xs-6 col-sm-10 col-md-7">Order status</div>
+                    <div class="col-xs-6 col-sm-2 col-md-5"><?php echo TEXT_SELECTOR; ?></div>
+                    <div class="col-xs-6 col-sm-10 col-md-7"><?php echo TEXT_ORDER_STATUS; ?></div>
                 </div>
                 <div class="col-xs-12">
-                    <div class="col-xs-6 col-sm-2 col-md-5">Operation</div>
+                    <div class="col-xs-6 col-sm-2 col-md-5"><?php echo TEXT_OPERATION; ?></div>
                     <div class="col-xs-6 col-sm-10 col-md-7"><?php echo xtc_draw_pull_down_menu('rules[order][operation]', $operations,((isset($grouped['order']))? $grouped['order'][0] : 0)); ?></div>
                 </div>
                 <div class="col-xs-12">
-                    <div class="col-xs-6 col-sm-2 col-md-5">Value</div>
+                    <div class="col-xs-6 col-sm-2 col-md-5"><?php echo TEXT_VALUE; ?></div>
                     <div class="col-xs-6 col-sm-10 col-md-7"><?php echo xtc_draw_input_field('rules[order][option]',((isset($grouped['order']))? $grouped['order'][1] : '')); ?></div>
                 </div>
                 <div class="col-xs-12">
-                    <div class="col-xs-6 col-sm-2 col-md-5">Conditions</div>
+                    <div class="col-xs-6 col-sm-2 col-md-5"><?php echo TEXT_CONDITIONS; ?></div>
                     <div class="col-xs-6 col-sm-10 col-md-7"><?php echo xtc_draw_pull_down_menu('rules[order][condition]', $conditions,((isset($grouped['order']))? $grouped['order'][2] : 0)); ?></div>
                 </div>
             </div>
                 <div class="col-xs-12 hidden-lg hidden-md" style="border-bottom:1px solid #bab9b9;margin-top:10px; margin-bottom: 10px;"></div> 
             <div class="col-xs-12 col-md-6 row" style="font-weight:bold; border-left:1px solid #bab9b9">
                 <div class="col-xs-12">
-                    <div class="col-xs-6 col-sm-2 col-md-5">Activate</div>
+                    <div class="col-xs-6 col-sm-2 col-md-5"><?php echo TEXT_ACTIVATE; ?></div>
                     <div class="col-xs-6 col-sm-10 col-md-7"><?php echo xtc_draw_checkbox_field('rules[customer][active]', '',((isset($grouped['customer']))? 1 : 0)); ?></div>
                 </div>
                 <div class="col-xs-12">
-                    <div class="col-xs-6 col-sm-2 col-md-5">Selector</div>
-                    <div class="col-xs-6 col-sm-10 col-md-7">Customers status</div>
+                    <div class="col-xs-6 col-sm-2 col-md-5"><?php echo TEXT_SELECTOR; ?></div>
+                    <div class="col-xs-6 col-sm-10 col-md-7"><?php echo TEXT_CUSTOMERS_STATUS; ?></div>
                 </div>
                 <div class="col-xs-12">
-                    <div class="col-xs-6 col-sm-2 col-md-5">Operation</div>
+                    <div class="col-xs-6 col-sm-2 col-md-5"><?php echo TEXT_OPERATION; ?></div>
                     <div class="col-xs-6 col-sm-10 col-md-7"><?php echo xtc_draw_pull_down_menu('rules[customer][operation]', $operations,((isset($grouped['customer']))? $grouped['customer'][0] : 0)); ?></div>
                 </div>
                 <div class="col-xs-12">
-                    <div class="col-xs-6 col-sm-2 col-md-5">Value</div>
+                    <div class="col-xs-6 col-sm-2 col-md-5"><?php echo TEXT_VALUE; ?></div>
                     <div class="col-xs-6 col-sm-10 col-md-7"><?php echo xtc_draw_input_field('rules[customer][option]',((isset($grouped['customer']))? $grouped['customer'][1] : '')); ?></div>
                 </div>
                 <div class="col-xs-12">
-                    <div class="col-xs-6 col-sm-2 col-md-5">Conditions</div>
+                    <div class="col-xs-6 col-sm-2 col-md-5"><?php echo TEXT_CONDITIONS; ?></div>
                     <div class="col-xs-6 col-sm-10 col-md-7"><?php echo xtc_draw_pull_down_menu('rules[customer][condition]', $conditions,((isset($grouped['customer']))? $grouped['customer'][2] : 0)); ?></div>
                 </div>
             </div>
             </div>
           <div class="col-xs-12">
-              <p class="small">*multiple option values separate with comma(<b>,</b>).</p>
+              <p class="small"><?php echo TEXT_MULTIPLE_OPTIONS; ?></p>
           </div>
       </td>
     </tr>

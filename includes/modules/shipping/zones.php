@@ -134,7 +134,7 @@
  * class methods
  */
     function quote($method = '') {
-      global $order, $shipping_weight;
+      global $order, $shipping_weight, $shipping_num_boxes;
 
       $dest_country = $order->delivery['country']['iso_code_2'];
       $dest_zone = 0;
@@ -160,7 +160,7 @@
         for ($i=0; $i<$size; $i+=2) {
           if ($shipping_weight <= $zones_table[$i]) {
             $shipping = $zones_table[$i+1];
-            $shipping_method = MODULE_SHIPPING_ZONES_TEXT_WAY . ' ' . $dest_country . ' : ' . $shipping_weight . ' ' . MODULE_SHIPPING_ZONES_TEXT_UNITS;
+            $shipping_method = MODULE_SHIPPING_ZONES_TEXT_WAY . ' ' . $dest_country . ' : ' . $shipping_num_boxes * $shipping_weight . ' ' . MODULE_SHIPPING_ZONES_TEXT_UNITS;
             break;
           }
         }
@@ -177,7 +177,7 @@
                             'module' => MODULE_SHIPPING_ZONES_TEXT_TITLE,
                             'methods' => array(array('id' => $this->code,
                                                      'title' => $shipping_method,
-                                                     'cost' => $shipping_cost)));
+                                                     'cost' => $shipping_cost * $shipping_num_boxes)));
 
       if ($this->tax_class > 0) {
         $this->quotes['tax'] = xtc_get_tax_rate($this->tax_class, $order->delivery['country']['id'], $order->delivery['zone_id']);

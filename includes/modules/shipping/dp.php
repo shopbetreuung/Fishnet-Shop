@@ -107,7 +107,7 @@
       $this->quotes = array('id' => $this->code,
                             'module' => MODULE_SHIPPING_DP_TEXT_TITLE,
                             'methods' => array(array('id' => $this->code,
-                                                     'title' => $shipping_method . ' (' . $shipping_num_boxes . ' x ' . $shipping_weight . ' ' . MODULE_SHIPPING_DP_TEXT_UNITS .')',
+                                                     'title' => $shipping_method . $shipping_num_boxes * $shipping_weight . ' ' . MODULE_SHIPPING_DP_TEXT_UNITS .')',
                                                      'cost' => $shipping_cost * $shipping_num_boxes)));
 
       if ($this->tax_class > 0) {

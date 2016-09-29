@@ -75,18 +75,29 @@ class pdfbill extends pdfbill_closed {
   function LoadData($oID) {
     global $xtPrice;
     
-   $c_query ="SELECT 
-               customers_status 
-	           FROM " . TABLE_ORDERS . "
-	           WHERE 
+    // --- bof -- changes -- h.koch@hen-vm68.com -- 05.2016 --
+    //$c_query ="SELECT
+    //            customers_status
+    //          FROM " . TABLE_ORDERS . "
+    //          WHERE
+    //            orders_id = '".$oID."'";
+    $c_query ="SELECT
+               customers_status,
+               currency
+               FROM " . TABLE_ORDERS . "
+               WHERE
                orders_id = '".$oID."'";
+    // --- eof -- changes -- h.koch@hen-vm68.com -- 05.2016 --
 		$c_query = xtDBquery($c_query);
 		$c_query = xtc_db_fetch_array($c_query);
     $customers_status = $c_query['customers_status'];
-    
-    
-    
-    $xtPrice = new xtcPrice( 'EUR',  $customers_status );
+    $currency         = $c_query['currency'];  // EUR, CHF 
+    // --- changes -- h.koch@hen-vm68.com -- 05.2016 --
+
+
+    //$xtPrice = new xtcPrice( 'EUR',  $customers_status );
+    $xtPrice = new xtcPrice( $currency,  $customers_status ); 
+    // --- changes -- h.koch@hen-vm68.com -- 05.2016 --
 	  $order = new order_pdf($oID);    
 	  $this->data['address_label_customer'] = xtc_address_format($order->customer['format_id'], $order->customer, 0, '', "\n");
 	  $this->data['address_label_shipping'] = xtc_address_format($order->delivery['format_id'], $order->delivery, 0, '', "\n");

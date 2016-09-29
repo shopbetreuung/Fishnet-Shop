@@ -591,5 +591,22 @@ function texts_html( $texts ) {
 
 $texts = texts_html($texts);             
 
-             
+define('TEXT_SELECT_INVOICE_PROFILE', 'Select this invoice profile if:');
+define('TEXT_ACTIVATE', 'Activate');
+define('TEXT_SELECTOR', 'Selector');
+define('TEXT_OPERATION', 'Operation');
+define('TEXT_VALUE', 'Value');
+define('TEXT_CONDITIONS', 'Conditions');
+define('TEXT_BILLING_COUNTRY', 'Billing country');
+define('TEXT_SHIPPING_METHOD', 'Shipping method');
+define('TEXT_PAYMENT_METHOD', 'Payment method');
+define('TEXT_ORDER_STATUS', 'Order status');
+define('TEXT_CUSTOMERS_STATUS', 'Customers status');
+define('TEXT_MULTIPLE_OPTIONS', '*multiple option values separate with comma(<b>,</b>).');
+define('TEXT_AND', 'AND');
+define('TEXT_OR', 'OR');
+define('TEXT_EQUAL', 'EQUAL');
+define('TEXT_NOT_EQUAL', 'NOT EQUAL');
+
+
 ?>

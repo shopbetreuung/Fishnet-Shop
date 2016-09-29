@@ -187,19 +187,19 @@ class KlarnaInstaller
         $configs = array(
             array(
                 'configuration_key' => "{$this->_module}STATUS",
-                'configuration_value' => 'True',
+                'configuration_value' => 'true',
                 'configuration_group_id' => '6',
                 'sort_order' => '0',
                 'set_function' =>
-                    'xtc_cfg_select_option(array(\'True\', \'False\'), '
+                    'xtc_cfg_select_option(array(\'true\', \'false\'), '
             ),
             array(
                 'configuration_key' => "{$this->_module}LATESTVERSION",
-                'configuration_value' => 'True',
+                'configuration_value' => 'true',
                 'configuration_group_id' => '6',
                 'sort_order' => '0',
                 'set_function' =>
-                    'xtc_cfg_select_option(array(\'True\', \'False\'), '
+                    'xtc_cfg_select_option(array(\'true\', \'false\'), '
             ),
             array(
                 'configuration_key' => "{$this->_module}ZONE",
@@ -242,11 +242,11 @@ class KlarnaInstaller
             ),
             array(
                 'configuration_key' => "{$this->_module}LIVEMODE",
-                'configuration_value' => 'True',
+                'configuration_value' => 'true',
                 'configuration_group_id' => '6',
                 'sort_order' => '21',
                 'set_function' =>
-                    'xtc_cfg_select_option(array(\'True\', \'False\'), '
+                    'xtc_cfg_select_option(array(\'true\', \'false\'), '
             ),
             array(
                 'configuration_key' =>

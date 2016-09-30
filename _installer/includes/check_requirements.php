@@ -12,12 +12,11 @@
 
   define('PHP_VERSION_MIN', '5.4.0');
   define('PHP_VERSION_MAX', '5.6.99');
-  $req_show = false;
+
   //BOF *************  check PHP-Version *************
   //BOF - Dokuman - 2012-11-19: remove irritating PHP-Version message
   if (function_exists('version_compare')) {
     if(version_compare(phpversion(), PHP_VERSION_MIN, "<")){
-      $req_show = true;
       $error_flag = true;
       $php_flag = true;
       $message .= '<strong>'. sprintf(TEXT_PHPVERSION_TOO_OLD,PHP_VERSION_MIN) . phpversion() . '</strong>.';
@@ -31,7 +30,6 @@
     */
     //EOF - Dokuman - 2012-11-19: remove irritating PHP-Version message
   } else {
-    $req_show = true;  
     $error_flag = true;
     $php_flag = true;
     $message .= '<strong>'. sprintf(TEXT_PHPVERSION_TOO_OLD,PHP_VERSION_MIN) . phpversion() . '</strong>.';

@@ -587,9 +587,9 @@ CREATE TABLE manufacturers_info (
   manufacturers_meta_description VARCHAR(255) NOT NULL,
   manufacturers_meta_keywords VARCHAR(255) NOT NULL,
   manufacturers_url VARCHAR(255) NOT NULL,
-  manufacturers_description TEXT NOT NULL
-  manufacturers_description_more TEXT NOT NULL
-  manufacturers_short_description TEXT NOT NULL
+  manufacturers_description TEXT NOT NULL,
+  manufacturers_description_more TEXT NOT NULL,
+  manufacturers_short_description TEXT NOT NULL,
   url_clicked INT(5) NOT NULL DEFAULT 0,
   date_last_click DATETIME NULL,
   PRIMARY KEY (manufacturers_id, languages_id)
@@ -1829,27 +1829,7 @@ INSERT INTO configuration_group VALUES (31,'Moneybookers','Moneybookers System',
 INSERT INTO configuration_group VALUES (40,'Popup Window Configuration','Popup Window Parameters',40,1);
 INSERT INTO configuration_group VALUES (1000,'Adminarea Options','Adminarea Configuration', 1000,1);
 
-# Status Admin
-INSERT INTO customers_status VALUES ('0', '2', 'Admin', 1, NULL, NULL, 'admin_status.gif', '0.00', '1', '0.00', '1', '1', '1', 0, '', '', 0, 1, 1, 1, 1);
-INSERT INTO customers_status VALUES ('0', '1', 'Admin', 1, NULL, NULL, 'admin_status.gif', '0.00', '1', '0.00', '1', '1', '1', 0, '', '', 0, 1, 1, 1, 1);
-# Status guest
-INSERT INTO customers_status VALUES ('1', '2', 'Gast', 1, NULL, NULL, 'guest_status.gif', '0.00', '1', '0.00', '1', '1', '1', 0, '', '', 0, 1, 1, 0, 1);
-INSERT INTO customers_status VALUES ('1', '1', 'Guest', 1, NULL, NULL, 'guest_status.gif', '0.00', '1', '0.00', '1', '1', '1', 0, '', '', 0, 1, 1, 0, 1);
-# Status new customer
-INSERT INTO customers_status VALUES('2', '2', 'Neuer Kunde', 1, NULL, NULL, 'customer_status.gif', '0.00', '1', '0.00', '1', '1', '1', 0, '', '', 0, 1, 1, 1, 1);
-INSERT INTO customers_status VALUES('2', '1', 'New Customer', 1, NULL, NULL, 'customer_status.gif', '0.00', '1', '0.00', '1', '1', '1', 0, '', '', 0, 1, 1, 1, 1);
-# Status merchant
-INSERT INTO customers_status VALUES('3', '2', 'H&auml;ndler', 1, NULL, NULL, 'merchant_status.gif', '0.00', '0', '0.00', '1', 1, 0, 1, '', '', 0, 1, 1, 1, 1);
-INSERT INTO customers_status VALUES('3', '1', 'Merchant', 1, NULL, NULL, 'merchant_status.gif', '0.00', '0', '0.00', '1', 1, 0, 1, '', '', 0, 1, 1, 1, 1);
-# Status merchant foreign Countries                                              
-INSERT INTO customers_status VALUES('4', '1', 'Merchant foreign Countries', 1, NULL, NULL, 'merchant_status.gif', '0.00', '0', '0.00', '1', 1, 0, 0, '', '', 0, 1, 1, 1, 1);
-INSERT INTO customers_status VALUES('4', '2', 'H&auml;ndler Ausland', 1, NULL, NULL, 'merchant_status.gif', '0.00', '0', '0.00', '1', 1, 0, 0, '', '', 0, 1, 1, 1, 1);                                                   
-# create Group prices (Admin wont get own status!)
-CREATE TABLE personal_offers_by_customers_status_1 (price_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,products_id int NOT NULL,quantity int, personal_offer decimal(15,4));
-CREATE TABLE personal_offers_by_customers_status_2 (price_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,products_id int NOT NULL,quantity int, personal_offer decimal(15,4));
-CREATE TABLE personal_offers_by_customers_status_0 (price_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,products_id int NOT NULL,quantity int, personal_offer decimal(15,4));
-CREATE TABLE personal_offers_by_customers_status_3 (price_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,products_id int NOT NULL,quantity int, personal_offer decimal(15,4));
-CREATE TABLE personal_offers_by_customers_status_4 (price_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,products_id int NOT NULL,quantity int, personal_offer decimal(15,4));
+
 
 
 #Countries

@@ -139,7 +139,7 @@ require_once(DIR_FS_CATALOG . 'includes/masterpayment/MasterpaymentActions.class
     }	
 
     function install() {
-      xtc_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) values ('MODULE_PAYMENT_MASTERPAYMENT_DEBIT_CARD_STATUS', 'false', '6', '1', 'xtc_cfg_select_option(array(\'true\', \'talse\'), ', now());");
+      xtc_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) values ('MODULE_PAYMENT_MASTERPAYMENT_DEBIT_CARD_STATUS', 'false', '6', '1', 'xtc_cfg_select_option(array(\'true\', \'false\'), ', now());");
       xtc_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_key, configuration_value, configuration_group_id, sort_order, date_added) values ('MODULE_PAYMENT_MASTERPAYMENT_DEBIT_CARD_SORT_ORDER', '11', '6', '0', now())");
 	  xtc_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_key, configuration_value, configuration_group_id, sort_order, date_added) values ('MODULE_PAYMENT_MASTERPAYMENT_DEBIT_CARD_ALLOWED', 'FR', '6', '0', now())");
 	  xtc_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) values ('MODULE_PAYMENT_MASTERPAYMENT_DEBIT_CARD_ICON', 'false', '6', '1', 'xtc_cfg_select_option(array(\'true\', \'false\'), ', now());");	  

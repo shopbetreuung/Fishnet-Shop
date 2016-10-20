@@ -30,7 +30,7 @@
    --------------------------------------------------------------*/
 
 // DB version, used for updates (_installer)
-define('DB_VERSION', 'SH_1.6.0');
+define('DB_VERSION', 'SH_1.6.2');
 //Run Mode
 define('RUN_MODE_ADMIN',true);
 

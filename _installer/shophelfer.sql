@@ -368,7 +368,6 @@ CREATE TABLE categories_description (
   categories_description text NOT NULL,
   categories_meta_title VARCHAR(100) NOT NULL,
   categories_meta_description VARCHAR(255) NOT NULL,
-  categories_meta_keywords VARCHAR(255) NOT NULL,
   PRIMARY KEY (categories_id, language_id),
   KEY idx_categories_name (categories_name)
 ) ENGINE=MyISAM;

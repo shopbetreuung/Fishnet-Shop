@@ -47,7 +47,6 @@
     $categories_description = $_POST['categories_description'];
     $categories_meta_title = $_POST['categories_meta_title'];
     $categories_meta_description = $_POST['categories_meta_description'];
-    $categories_meta_keywords = $_POST['categories_meta_keywords'];
   } else {
     $cInfo = new objectInfo(array());
   }
@@ -199,10 +198,6 @@
            <tr>
             <td class="main" valign="top"><?php  echo $lng_image.TEXT_META_DESCRIPTION .'<br /> (max. 140 '. TEXT_CHARACTERS .')'; ?></td>
             <td class="main meta"><?php echo xtc_draw_input_field('categories_meta_description[' . $languages[$i]['id'] . ']', (isset($categories_meta_description[$languages[$i]['id']]) ? stripslashes($categories_meta_description[$languages[$i]['id']]) : $categories_desc_fields['categories_meta_description']),'style="width:100%" maxlength="140"'); ?></td>
-          </tr>
-           <tr>
-            <td class="main" valign="top"><?php  echo $lng_image.TEXT_META_KEYWORDS .'<br /> (max. 180 '. TEXT_CHARACTERS .')'; ?></td>
-            <td class="main meta"><?php echo xtc_draw_input_field('categories_meta_keywords[' . $languages[$i]['id'] . ']',(isset($categories_meta_keywords[$languages[$i]['id']]) ? stripslashes($categories_meta_keywords[$languages[$i]['id']]) : $categories_desc_fields['categories_meta_keywords']),'style="width:100%" maxlength="180"'); ?></td>
           </tr>
         </table>
         <?php echo ('</div>');?>

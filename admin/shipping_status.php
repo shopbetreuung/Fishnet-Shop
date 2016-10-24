@@ -85,33 +85,6 @@
             xtc_redirect(xtc_href_link(FILENAME_SHIPPING_STATUS, 'page='.$_GET['page'].'&action='.$url_action.'&errors=1&oID=' . $shipping_status_id));
         }
       break;
-
-    case 'deleteconfirm':
-      $oID = xtc_db_prepare_input($_GET['oID']);
-
-      $shipping_status_query = xtc_db_query("select configuration_value from " . TABLE_CONFIGURATION . " where configuration_key = 'DEFAULT_SHIPPING_STATUS_ID'");
-      $shipping_status = xtc_db_fetch_array($shipping_status_query);
-      if ($shipping_status['configuration_value'] == $oID) {
-        xtc_db_query("update " . TABLE_CONFIGURATION . " set configuration_value = '' where configuration_key = 'DEFAULT_SHIPPING_STATUS_ID'");
-      }
-
-      xtc_db_query("delete from " . TABLE_SHIPPING_STATUS . " where shipping_status_id = '" . xtc_db_input($oID) . "'");
-
-      xtc_redirect(xtc_href_link(FILENAME_SHIPPING_STATUS, 'page=' . $_GET['page']));
-      break;
-
-    case 'delete':
-      $oID = xtc_db_prepare_input($_GET['oID']);
-
-
-      $remove_status = true;
-      if ($oID == DEFAULT_SHIPPING_STATUS_ID) {
-        $remove_status = false;
-        $messageStack->add(ERROR_REMOVE_DEFAULT_SHIPPING_STATUS, 'error');
-      } else {
-
-      }
-      break;
   }
   require (DIR_WS_INCLUDES.'head.php');
 ?>
@@ -241,20 +214,11 @@
       $contents[] = array('align' => 'center', 'text' => '<br /><input type="submit" class="btn btn-default" onclick="this.blur();" value="' . BUTTON_UPDATE . '"/> <a class="btn btn-default" onclick="this.blur();" href="' . xtc_href_link(FILENAME_SHIPPING_STATUS, 'page=' . $_GET['page'] . '&oID=' . $oInfo->shipping_status_id) . '">' . BUTTON_CANCEL . '</a>');
       break;
 
-    case 'delete':
-      $heading[] = array('text' => '<b>' . TEXT_INFO_HEADING_DELETE_SHIPPING_STATUS . '</b>');
-
-      $contents = array('form' => xtc_draw_form('status', FILENAME_SHIPPING_STATUS, 'page=' . $_GET['page'] . '&oID=' . $oInfo->shipping_status_id  . '&action=deleteconfirm'));
-      $contents[] = array('text' => TEXT_INFO_DELETE_INTRO);
-      $contents[] = array('text' => '<br /><b>' . $oInfo->shipping_status_name . '</b>');
-      if ($remove_status) $contents[] = array('align' => 'center', 'text' => '<br /><input type="submit" class="btn btn-default" onclick="this.blur();" value="' . BUTTON_DELETE . '"/> <a class="btn btn-default" onclick="this.blur();" href="' . xtc_href_link(FILENAME_SHIPPING_STATUS, 'page=' . $_GET['page'] . '&oID=' . $oInfo->shipping_status_id) . '">' . BUTTON_CANCEL . '</a>');
-      break;
-
     default:
       if (is_object($oInfo)) {
         $heading[] = array('text' => '<b>' . $oInfo->shipping_status_name . '</b>');
 
-        $contents[] = array('align' => 'center', 'text' => '<a class="btn btn-default" onclick="this.blur();" href="' . xtc_href_link(FILENAME_SHIPPING_STATUS, 'page=' . $_GET['page'] . '&oID=' . $oInfo->shipping_status_id . '&action=edit') . '#edit-box">' . BUTTON_EDIT . '</a> <a class="btn btn-default" onclick="this.blur();" href="' . xtc_href_link(FILENAME_SHIPPING_STATUS, 'page=' . $_GET['page'] . '&oID=' . $oInfo->shipping_status_id . '&action=delete') . '#edit-box">' . BUTTON_DELETE . '</a>');
+        $contents[] = array('align' => 'center', 'text' => '<a class="btn btn-default" onclick="this.blur();" href="' . xtc_href_link(FILENAME_SHIPPING_STATUS, 'page=' . $_GET['page'] . '&oID=' . $oInfo->shipping_status_id . '&action=edit') . '#edit-box">' . BUTTON_EDIT . '</a>');
 
         $shipping_status_inputs_string = '';
         $languages = xtc_get_languages();

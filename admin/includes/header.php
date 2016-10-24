@@ -67,7 +67,10 @@
     $success_message = '';
     if (trim($feedback_text) != '') {
       $feedback_text = strip_tags($feedback_text);
-      $feedback .= 'New feedback sent from: ' . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'] . '<br /><br />';
+      $feedback .= 'New feedback sent from: ' . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'] . '<br />';
+      $feedback .= 'Shophelfer version: ' . PROJECT_VERSION . '<br />';
+      $feedback .= 'Database version: ' . DB_VERSION . '<br />';
+      $feedback .= 'Browser: ' . $_SERVER['HTTP_USER_AGENT'] . '<br /><br />';
       $feedback .= 'Feedback: ' . $feedback_text;
       require_once(DIR_FS_CATALOG.DIR_WS_CLASSES.'class.phpmailer.php');
       require_once(DIR_FS_INC . 'xtc_php_mail.inc.php');

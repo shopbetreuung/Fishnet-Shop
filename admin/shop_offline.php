@@ -31,16 +31,6 @@
   
   require (DIR_WS_INCLUDES.'head.php');
 ?>
-
-<script type="text/javascript" src="includes/modules/fckeditor/fckeditor.js"></script>
-<?php 
-if (USE_WYSIWYG == 'true') {
-  $query = xtc_db_query("SELECT code FROM ".TABLE_LANGUAGES." WHERE languages_id='".$_SESSION['languages_id']."'");
-  $data = xtc_db_fetch_array($query);
-  $languages = xtc_get_languages();
-  echo xtc_wysiwyg('shop_offline',$data['code']);
-}
-?>
 </head>
 <body>
     <!-- header //-->
@@ -81,6 +71,14 @@ if (USE_WYSIWYG == 'true') {
     <!-- footer //-->
     <?php require(DIR_WS_INCLUDES . 'footer.php'); ?>
     <!-- footer_eof //-->
+    <?php 
+    if (USE_WYSIWYG == 'true') {
+      $query = xtc_db_query("SELECT code FROM ".TABLE_LANGUAGES." WHERE languages_id='".$_SESSION['languages_id']."'");
+      $data = xtc_db_fetch_array($query);
+      $languages = xtc_get_languages();
+      echo xtc_wysiwyg('shop_offline',$data['code']);
+    }
+    ?>
   </body>
 </html>
 <?php require(DIR_WS_INCLUDES . 'application_bottom.php'); ?>

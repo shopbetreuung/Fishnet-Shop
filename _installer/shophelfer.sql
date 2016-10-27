@@ -261,7 +261,6 @@ CREATE TABLE admin_access (
   products_vpe INT(1) NOT NULL DEFAULT 0,
   cross_sell_groups INT(1) NOT NULL DEFAULT 0,
 
-  fck_wrapper INT(1) NOT NULL DEFAULT 0,
   econda INT(1) NOT NULL DEFAULT 0,
   sofortueberweisung_install INT(1) NOT NULL DEFAULT 0,
   shop_offline INT(1) NOT NULL DEFAULT 0,

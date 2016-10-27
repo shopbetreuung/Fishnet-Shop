@@ -295,7 +295,7 @@ if (USE_WYSIWYG == 'true') {
 	// generate editor for categories EDIT
 	$languages = xtc_get_languages();
 ?>
-<script type="text/javascript" src="includes/modules/fckeditor/fckeditor.js"></script>
+<script type="text/javascript" src="includes/modules/ckeditor/ckeditor.js"></script>
 <script type="text/javascript">
 	window.onload = function()
   {
@@ -306,6 +306,8 @@ if (USE_WYSIWYG == 'true') {
         echo xtc_wysiwyg('categories_description', $data['code'], $languages[$i]['id']);
       }
     }
+  ?>
+    <?php
     // generate editor for products
     if ($_GET['action'] == 'new_product' || $_GET['action'] == 'new_product_preview') {
       for ($i = 0, $n = sizeof($languages); $i < $n; $i++) {

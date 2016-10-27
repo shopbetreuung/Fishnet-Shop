@@ -171,25 +171,6 @@
 	  break;
   }
 require (DIR_WS_INCLUDES.'head.php');
-if (USE_WYSIWYG == 'true') {
-	$query = xtc_db_query("SELECT code FROM ".TABLE_LANGUAGES." WHERE languages_id='".$_SESSION['languages_id']."'");
-	$data = xtc_db_fetch_array($query);
-	// generate editor for imagesliders
-	$languages = xtc_get_languages();
-?>
-<script type="text/javascript" src="includes/modules/fckeditor/fckeditor.js"></script>
-<script type="text/javascript">
-	window.onload = function()
-		{<?php
-	// generate editor for categories
-	if ($_GET['action'] == 'new' || $_GET['action'] == 'edit') {
-		for ($i = 0; $i < sizeof($languages); $i ++) {
-			echo xtc_wysiwyg('imagesliders_description', $data['code'], $languages[$i]['id']);
-		}
-	}
-?>}
-</script><?php
-}
 ?>
 
 </head>
@@ -438,6 +419,27 @@ if (($_GET['action'] != 'new') && ($_GET['action'] != 'edit')) {
 <?php require(DIR_WS_INCLUDES . 'footer.php'); ?>
 <!-- footer_eof //-->
 <br />
+<?php
+if (USE_WYSIWYG == 'true') {
+	$query = xtc_db_query("SELECT code FROM ".TABLE_LANGUAGES." WHERE languages_id='".$_SESSION['languages_id']."'");
+	$data = xtc_db_fetch_array($query);
+	// generate editor for imagesliders
+	$languages = xtc_get_languages();
+?>
+<script type="text/javascript" src="includes/modules/ckeditor/ckeditor.js"></script>
+<script type="text/javascript">
+	window.onload = function()
+		{<?php
+	// generate editor for categories
+	if ($_GET['action'] == 'new' || $_GET['action'] == 'edit') {
+		for ($i = 0; $i < sizeof($languages); $i ++) {
+			echo xtc_wysiwyg('imagesliders_description', $data['code'], $languages[$i]['id']);
+		}
+	}
+?>}
+</script><?php
+}
+?>
 </body>
 </html>
 <?php require(DIR_WS_INCLUDES . 'application_bottom.php'); ?>

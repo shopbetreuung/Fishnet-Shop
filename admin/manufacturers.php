@@ -296,6 +296,8 @@ if (USE_WYSIWYG=='true' && $_GET['action']) {
 	  }
 
       $contents[] = array('text' => '<br />' . TEXT_MANUFACTURERS_URL . $manufacturer_inputs_string);
+	  $contents[] = array('text' => '<br />' . TEXT_MANUFACTURERS_META_TITLE . $manufacturers_meta_title_string);
+	  $contents[] = array('text' => '<br />' . TEXT_MANUFACTURERS_META_DESCRIPTION . $manufacturers_meta_description_string);	  
 	  $manufacturers_description_string = '';	 
       $manufacturers_description_more_string = '';	  
 	  $manufacturers_short_description_string = '';	  

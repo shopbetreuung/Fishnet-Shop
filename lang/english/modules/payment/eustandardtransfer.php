@@ -20,8 +20,7 @@
           '<br />The cheapest and most simple payment method within the EU is the EU-Standard Bank Transfer using IBAN and BIC.' .
           '<br />Please use the following details to transfer your total order value:<br />' .
           '<br />Bank Name: ' . MODULE_PAYMENT_EUTRANSFER_BANKNAM .
-          '<br />Branch: ' . MODULE_PAYMENT_EUTRANSFER_BRANCH .
-          '<br />Account Name: ' . MODULE_PAYMENT_EUTRANSFER_ACCNAM .
+          '<br />Account Name: ' . MODULE_PAYMENT_EUTRANSFER_BRANCH .
           '<br />IBAN:: ' . MODULE_PAYMENT_EUTRANSFER_ACCIBAN .
           '<br />BIC/SWIFT: ' . MODULE_PAYMENT_EUTRANSFER_BANKBIC .
 //        '<br />Sort Code: ' . MODULE_PAYMENT_EUTRANSFER_SORTCODE .
@@ -31,14 +30,11 @@
   define('MODULE_PAYMENT_EUTRANSFER_STATUS_TITLE','Allow Bank Transfer Payment');
   define('MODULE_PAYMENT_EUTRANSFER_STATUS_DESC','Do you want to accept bank transfer order payments?');
   define('MODULE_PAYMENT_EUTRANSFER_TEXT_INFO','');
-  define('MODULE_PAYMENT_EUTRANSFER_BRANCH_TITLE','Branch Location');
-  define('MODULE_PAYMENT_EUTRANSFER_BRANCH_DESC','The brach where you have your account.');
+  define('MODULE_PAYMENT_EUTRANSFER_BRANCH_TITLE','Bank Account Name');
+  define('MODULE_PAYMENT_EUTRANSFER_BRANCH_DESC','The name associated with the account.');
 
   define('MODULE_PAYMENT_EUTRANSFER_BANKNAM_TITLE','Bank Name');
   define('MODULE_PAYMENT_EUTRANSFER_BANKNAM_DESC','Your full bank name');
-
-  define('MODULE_PAYMENT_EUTRANSFER_ACCNAM_TITLE','Bank Account Name');
-  define('MODULE_PAYMENT_EUTRANSFER_ACCNAM_DESC','The name associated with the account.');
 
   define('MODULE_PAYMENT_EUTRANSFER_ACCIBAN_TITLE','Bank Account IBAN');
   define('MODULE_PAYMENT_EUTRANSFER_ACCIBAN_DESC','International account id.<br />(ask your bank if you don\'t know it)');

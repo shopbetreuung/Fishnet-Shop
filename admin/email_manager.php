@@ -19,7 +19,8 @@
   require('includes/application_top.php');
   require_once(DIR_FS_INC . 'xtc_format_filesize.inc.php');
   require_once(DIR_FS_INC . 'xtc_filesize.inc.php');
-  require_once(DIR_FS_INC . 'xtc_wysiwyg.inc.php');
+  // Removed email_manager wysiwyg editor because of the conflicts with Smarty template engine
+  //require_once(DIR_FS_INC . 'xtc_wysiwyg.inc.php');
 
   $action = (isset($_GET['action']) ? $_GET['action'] : '');
   $special = (isset($_GET['special']) ? $_GET['special'] : '');
@@ -113,12 +114,15 @@ foreach($all_email_html_templates as $email_template_path){
 
 require (DIR_WS_INCLUDES.'head.php');
 
+// Removed email_manager wysiwyg editor because of the conflicts with Smarty template engine
+/*  
   if (USE_WYSIWYG=='true') {
     $query=xtc_db_query("SELECT code FROM ". TABLE_LANGUAGES ." WHERE languages_id='".$_SESSION['languages_id']."'");
     $data=xtc_db_fetch_array($query);
     if ($action != 'new_products_content' && $action != '')
       echo xtc_wysiwyg('email_manager',$data['code']);
   }
+*/
 ?>
 </head>
 <body>

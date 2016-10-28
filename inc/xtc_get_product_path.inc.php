@@ -14,8 +14,8 @@
 
    Released under the GNU General Public License 
    ---------------------------------------------------------------------------------------*/
-   include (DIR_FS_INC . 'shopstat_functions.inc.php');
-   include (DIR_FS_INC . 'xtc_get_categories_name.inc.php');
+   require_once (DIR_FS_INC . 'shopstat_functions.inc.php');
+   require_once (DIR_FS_INC . 'xtc_get_categories_name.inc.php');
 // Construct a category path to the product
 // TABLES: products_to_categories
   function xtc_get_product_path($products_id) {

@@ -38,7 +38,12 @@
           next($db_query);
           return $curr;
           }
-        return mysqli_fetch_array($db_query, MYSQLI_ASSOC);
+        $result = mysqli_fetch_array($db_query, MYSQLI_ASSOC);
+        if ($result !== NULL && is_array($result)) {
+            return $result;
+        } else {
+            return false;
+        }
       }
   }
 ?>

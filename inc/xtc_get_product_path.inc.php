@@ -14,12 +14,18 @@
 
    Released under the GNU General Public License 
    ---------------------------------------------------------------------------------------*/
-
+   
    if (!function_exists('shopstat_functions')) {
     require_once (DIR_FS_INC . 'shopstat_functions.inc.php');
    }
    if (!function_exists('xtc_get_categories_name')) {
     require_once (DIR_FS_INC . 'xtc_get_categories_name.inc.php');
+   }
+   if (!function_exists('xtc_get_parent_categories')) {
+    require_once (DIR_FS_INC . 'xtc_get_parent_categories.inc.php');
+   }
+   if (!function_exists('xtc_get_categories_children')) {
+    require_once (DIR_FS_INC . 'xtc_get_categories_children.inc.php');
    }
 
 // Construct a category path to the product

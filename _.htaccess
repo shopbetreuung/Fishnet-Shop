@@ -174,3 +174,8 @@ ErrorDocument 500 /sitemap.html?error=500
   #RewriteCond %{REQUEST_URI} (.*)-.-([_0-9]+)\.html$
   #RewriteRule (.*)-.-([0-9]+)\.html$ index.php?manufacturers_id=$2 [QSA,L]
 </IfModule>
+# Do not allow access to excerpt PHP files
+<FilesMatch "\.(php_)">
+    Order Deny,Allow
+    Deny from all
+</FilesMatch>

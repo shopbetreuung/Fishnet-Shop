@@ -1260,13 +1260,14 @@ require (DIR_WS_INCLUDES.'header.php');
 
 
             //echo "<pre>"; print_r($_SESSION); echo "</pre>";
-
-            echo $form;                                  
+                                
             ?>
              </div>
             </div>
 </div>
-
+        </form>
+          <?php if (ENABLE_PDFBILL == 'true') { ?>
+            <?php echo $form; ?> 
             <div class='col-xs-12'>
 
             <?php if( sizeof($arr_invoice)>0 ) { ?>
@@ -1326,7 +1327,7 @@ require (DIR_WS_INCLUDES.'header.php');
                 }
             });
             </script>
-
+          <?php } ?>
             <?php
 
               

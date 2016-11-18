@@ -1099,6 +1099,7 @@ CREATE TABLE imagesliders_info (
   imagesliders_id INT NOT NULL,
   languages_id int(11) NOT NULL,
   imagesliders_title VARCHAR(100) NOT NULL,
+  imagesliders_alt VARCHAR(100) NOT NULL,
   imagesliders_url VARCHAR(255) NOT NULL,
   imagesliders_url_target TINYINT(1) NOT NULL DEFAULT 0,
   imagesliders_url_typ TINYINT(1) NOT NULL DEFAULT 0,

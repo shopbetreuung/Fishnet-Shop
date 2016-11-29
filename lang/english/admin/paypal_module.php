@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id$
+   $Id: paypal_module.php 10425 2016-11-23 13:29:31Z GTB $
 
    modified eCommerce Shopsoftware
    http://www.modified-shop.org
@@ -15,6 +15,7 @@ $lang_array = array(
   'TEXT_PAYPAL_MODULE_HEADING_TITLE' => 'PayPal Modules',
   
   'TABLE_HEADING_MODULES' => 'Module',
+  'TABLE_HEADING_FILENAME' => 'Module name (for internal usage)',
   'TABLE_HEADING_SORT_ORDER' => 'Sorting',
   'TABLE_HEADING_STATUS' => 'Status',
   'TABLE_HEADING_ACTION' => 'Action',
@@ -37,6 +38,18 @@ $lang_array = array(
 
   'TEXT_PAYPAL_MODULE_USE_TABS' => 'Accordion / Tabs',
   'TEXT_PAYPAL_MODULE_USE_TABS_INFO' => 'Does the template use accordion or tabs in the checkout?',
+
+  'TEXT_PAYPAL_MODULE_SHIPPING_COST' => 'provisional shipping costs',
+  'TEXT_PAYPAL_MODULE_SHIPPING_COST_INFO' => 'Amount for provisional shipping costs.',
+
+  'TEXT_PAYPAL_MODULE_UPSTREAM_PRODUCT' => 'Show at product',
+  'TEXT_PAYPAL_MODULE_UPSTREAM_PRODUCT_INFO' => 'Show details for Installment at product?',
+
+  'TEXT_PAYPAL_MODULE_UPSTREAM_CART' => 'Show at cart',
+  'TEXT_PAYPAL_MODULE_UPSTREAM_CART_INFO' => 'Show details for Installment at cart?',
+
+  'TEXT_PAYPAL_MODULE_UPSTREAM_PAYMENT' => 'Show at checkout',
+  'TEXT_PAYPAL_MODULE_UPSTREAM_PAYMENT_INFO' => 'Show details for Installment during checkout?',
 );
 
 

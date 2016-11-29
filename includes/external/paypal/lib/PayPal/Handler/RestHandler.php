@@ -47,7 +47,6 @@ class RestHandler implements IPayPalHandler
      */
     public function handle($httpConfig, $request, $options)
     {
-
         $credential = $this->apiContext->getCredential();
         $config = $this->apiContext->getConfig();
 
@@ -71,6 +70,9 @@ class RestHandler implements IPayPalHandler
             rtrim(trim($this->_getEndpoint($config)), '/') .
             (isset($options['path']) ? $options['path'] : '')
         );
+
+        // Overwrite Expect Header to disable 100 Continue Issue
+        $httpConfig->addHeader("Expect", null);
 
         if (!array_key_exists("User-Agent", $httpConfig->getHeaders())) {
             $httpConfig->addHeader("User-Agent", PayPalUserAgent::getValue(PayPalConstants::SDK_NAME, PayPalConstants::SDK_VERSION));
@@ -102,7 +104,7 @@ class RestHandler implements IPayPalHandler
     {
         if (isset($config['service.EndPoint'])) {
             return $config['service.EndPoint'];
-        } else if (isset($config['mode'])) {
+        } elseif (isset($config['mode'])) {
             switch (strtoupper($config['mode'])) {
                 case 'SANDBOX':
                     return PayPalConstants::REST_SANDBOX_ENDPOINT;

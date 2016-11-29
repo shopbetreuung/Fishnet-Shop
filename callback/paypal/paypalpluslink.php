@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id$
+   $Id: paypalpluslink.php 10051 2016-07-08 13:36:47Z GTB $
 
    modified eCommerce Shopsoftware
    http://www.modified-shop.org
@@ -74,7 +74,7 @@ if (isset($_GET['oID'])
 
       require (DIR_WS_INCLUDES.'header.php');
 
-      $javascript = '<script type="application/javascript">
+      $javascript = '<script type="text/javascript">
       var ppp = PAYPAL.apps.PPP({	
         "approvalUrl": "'.$approval.'",
         "placeholder": "ppplus",

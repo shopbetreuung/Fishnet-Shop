@@ -239,20 +239,28 @@ if (xtc_not_null($action)) {
 
     // BOF - Tomcraft - 2011-02-01 - Paypal Express Modul
     case 'paypal_express_checkout':
-      $o_paypal->paypal_express_auth_call();
-      xtc_redirect($o_paypal->payPalURL);
+      if (defined('MODULE_PAYMENT_PAYPALEXPRESS_STATUS')	 
+          && MODULE_PAYMENT_PAYPALEXPRESS_STATUS == 'True') 	  	 
+      { 	  	 
+        if (!is_object($product)) { 	  	 
+          require_once(DIR_WS_CLASSES.'product.php'); 	  	 
+          $product = new product(); 	  	 
+        } 	  	 
+        $o_paypal->paypal_express_auth_call();
+        xtc_redirect($o_paypal->payPalURL);
+      } 	  	 
       break;
     // EOF - Tomcraft - 2011-02-01 - Paypal Express Modul
 
     ## Paypal
-    case 'paypal_cart_checkout':
-      if (defined('MODULE_PAYMENT_PAYPALCART_STATUS')
-          && MODULE_PAYMENT_PAYPALCART_STATUS == 'True')
-      {
-        require_once(DIR_FS_EXTERNAL.'paypal/classes/PayPalPayment.php');
-        $paypal_cart = new PayPalPayment('paypalcart');
-        $paypal_cart->payment_redirect(true);
-      }
+    case 'paypal_cart_checkout': 	  	 
+      if (defined('MODULE_PAYMENT_PAYPALCART_STATUS') 	  	 
+          && MODULE_PAYMENT_PAYPALCART_STATUS == 'True') 	  	 
+      { 	  	 
+        require_once(DIR_FS_EXTERNAL.'paypal/classes/PayPalPayment.php'); 	  	 
+        $paypal_cart = new PayPalPayment('paypalcart'); 	  	 
+        $paypal_cart->payment_redirect(true); 	  	 
+      } 	  	 
       break;
   }
 }

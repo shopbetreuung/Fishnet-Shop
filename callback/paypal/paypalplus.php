@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id$
+   $Id: paypalplus.php 10343 2016-10-26 11:54:18Z GTB $
 
    modified eCommerce Shopsoftware
    http://www.modified-shop.org
@@ -19,7 +19,7 @@ if (!isset($_SESSION['customer_id'])) {
 
 if (isset($_GET['checkout']) && $_SESSION['payment'] == 'paypalplus') {
   echo '<script src="https://www.paypalobjects.com/webstatic/ppplus/ppplus.min.js" type="text/javascript"></script>'."\n";
-  echo '<script type="application/javascript">PAYPAL.apps.PPP.doCheckout();</script>'."\n";
+  echo '<script type="text/javascript">PAYPAL.apps.PPP.doCheckout();</script>'."\n";
 } elseif (isset($_SESSION['paypal']['approval'])) {
   require_once(DIR_FS_EXTERNAL.'paypal/classes/PayPalPayment.php');                                        
 
@@ -51,7 +51,7 @@ if (isset($_GET['checkout']) && $_SESSION['payment'] == 'paypalplus') {
   $country = xtc_db_fetch_array($country_query);
 
   echo '<div id="ppplus"></div>';
-  echo '<script type="application/javascript">
+  echo '<script type="text/javascript">
   var ppp = PAYPAL.apps.PPP({	
   "approvalUrl": "'.$_SESSION['paypal']['approval'].'",
   "placeholder": "ppplus",
@@ -71,12 +71,20 @@ if (isset($_GET['checkout']) && $_SESSION['payment'] == 'paypalplus') {
             if (check == true) {
               var payment = ppp.getPaymentMethod();
               if (payment.substring(0, 2) != "pp") {
-                ppp.doCheckout();
+                var comment = $("#comments").val();
+                $.ajax({
+                  type: "POST",
+                  url: "'.xtc_href_link('callback/paypal/paypalplus_comment.php', '', 'SSL').'",
+                  data: { comments: comment },
+                  success: function(data) {
+                    ppp.doCheckout();
+                  }
+                });
               } else {
                 setTimeout("document.checkout_payment.submit()", 10);
               }
             }
-	        }, ';
+	        }, '."\n";
 	  echo '  "thirdPartyPaymentMethods": '.json_encode($module)."\n";
 	}
 

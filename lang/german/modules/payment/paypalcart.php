@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id$
+   $Id: paypalcart.php 10343 2016-10-26 11:54:18Z GTB $
 
    modified eCommerce Shopsoftware
    http://www.modified-shop.org
@@ -29,6 +29,8 @@ $lang_array = array(
 
   'MODULE_PAYMENT_PAYPALCART_TEXT_ERROR_HEADING' => 'Hinweis',
   'MODULE_PAYMENT_PAYPALCART_TEXT_ERROR_MESSAGE' => 'PayPal Zahlung wurde abgebrochen',
+  
+  'TEXT_PAYPAL_CART_ACCOUNT_CREATED' => 'Wir haben f&uuml;r Sie ein Kundenkonto mit Ihrer PayPal E-Mail Adresse angelegt. Das Passwort f&uuml;r Ihr neues Kundenkonto k&ouml;nnen sie sp&auml;ter &uuml;ber die "Passwort vergessen" Funktion anfordern.',
 );
 
 

@@ -250,7 +250,7 @@ class order_total {
                                             'title' => $GLOBALS[$class]->output[$i]['title'], 
                                             'text' => $GLOBALS[$class]->output[$i]['text'], 
                                             'value' => $GLOBALS[$class]->output[$i]['value'], 
-                                            'sort_order' => $GLOBALS[$class]->sort_order
+                                            'sort_order' => ((isset($GLOBALS[$class]->output[$i]['sort_order'])) ? $GLOBALS[$class]->output[$i]['sort_order'] : $GLOBALS[$class]->sort_order)
                                             );
 						}
 					}

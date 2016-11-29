@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id$
+   $Id: german.php 10436 2016-11-23 18:30:56Z GTB $
 
    modified eCommerce Shopsoftware
    http://www.modified-shop.org
@@ -75,6 +75,29 @@ $lang_array = array(
   // status
   'TEXT_PAYPAL_NO_STATUS_CHANGE' => 'keine Status&auml;nderung',
   
+  // template
+  'TEXT_PAYPALINSTALLMENT_HEADING' => 'Zahlen sie bequem und einfach in monatlichen Raten',
+  'TEXT_PAYPALINSTALLMENT_DESCRIPTION' => 'Ihre Ratenzahlung und den passenden Finanzierungsplan k&ouml;nnen Sie im Rahmen des Bestellprozesses ausw&auml;hlen. Ihr Antrag erfolgt komplett online und wird in wenigen Schritten hier im Shop abgeschlossen.',
+
+  'TEXT_PAYPALINSTALLMENT_RATING_PLAN' => 'Finanzierung ab %s in %s Raten mit Ratenzahlung Powered by PayPal',
+  'TEXT_PAYPALINSTALLMENT_RATING_PLAN_SHORT' => 'Finanzierung ab %s im Monat mit',
+
+  'TEXT_PAYPALINSTALLMENT_LEGAL' => 'Repr&auml;sentatives Beispiel gem. &sect; 6a PAngV',
+  'TEXT_PAYPALINSTALLMENT_NOMINAL_RATE' => 'fester Sollzinssatz',
+  'TEXT_PAYPALINSTALLMENT_APR' => 'effektiver Jahreszins',
+  'TEXT_PAYPALINSTALLMENT_TOTAL_COST' => 'Gesamtbetrag',
+  'TEXT_PAYPALINSTALLMENT_TOTAL_NETTO' => 'Nettodarlehensbetrag',
+  'TEXT_PAYPALINSTALLMENT_TOTAL_INTEREST' => 'Zinsbetrag',
+  'TEXT_PAYPALINSTALLMENT_MONTHLY_PAYMENT' => 'monatliche Raten in H&ouml;he von je',
+
+  'TEXT_PAYPALINSTALLMENT_NOTICE' => 'Finanzierung verf&uuml;gbar ab %s bis %s Warenkorbwert mit',
+  'TEXT_PAYPALINSTALLMENT_NOTICE_PRODUCT' => 'Sie k&ouml;nnen diesen Artikel auch finanzieren!',
+  'TEXT_PAYPALINSTALLMENT_NOTICE_CART' => 'Sie k&ouml;nnen diesen Warenkorb auch finanzieren!',
+  'TEXT_PAYPALINSTALLMENT_NOTICE_PAYMENT' => 'Sie k&ouml;nnen diese Bestellung auch finanzieren!',
+  
+  'TEXT_PAYPALINSTALLMENT_CREDITOR' => 'Darlehensgeber',
+  'TEXT_PAYPALINSTALLMENT_INFO_LINK' => 'Informationen zu m&ouml;glichen Raten',
+
 );
 
 

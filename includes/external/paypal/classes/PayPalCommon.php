@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: PayPalCommon.php 10442 2016-11-25 13:01:43Z GTB $
+   $Id: PayPalCommon.php 10470 2016-11-30 11:46:51Z GTB $
 
    modified eCommerce Shopsoftware
    http://www.modified-shop.org
@@ -158,21 +158,28 @@ class PayPalCommon extends PayPalAuth {
           break;
       }
     }
-
+    
+    $total = $this->calc_total();
+    $amount_total = $this->amount->getTotal();
 
     if ($calc_total === true) {
-      $total = $this->calc_total();
       $this->amount->setTotal($total);
     } elseif ($_SESSION['customers_status']['customers_status_show_price_tax'] == 0 
         && $_SESSION['customers_status']['customers_status_add_tax_ot'] == 1
+        && $this->details->getShippingDiscount() == 0
         ) 
-    {
-      $total = $this->calc_total();
-      $amount_total = $this->amount->getTotal();
-      
+    {      
       if ((string)$amount_total != (string)$total) {
         $this->details->setTax($this->details->getTax() + ($amount_total - $total));
       } 
+    } else {
+      if ((string)$amount_total != (string)$total) {
+        if ($this->details->getShippingDiscount() < 0) {
+          $this->details->setShippingDiscount($this->details->getShippingDiscount() + ($amount_total - $total));
+        } elseif ($this->details->setHandlingFee() > 0) {
+          $this->details->setHandlingFee($this->details->getHandlingFee() + ($amount_total - $total));
+        }
+      }
     }
   }
 

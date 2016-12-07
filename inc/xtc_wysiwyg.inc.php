@@ -45,8 +45,10 @@ function xtc_wysiwyg($type, $lang, $langID = '') {
                }
              </script>';
       break;
+	// Removed email_manager wysiwyg editor because of the conflicts with Smarty template engine	  
     // WYSIWYG editor email manager textarea named cont
-    case 'email_manager':
+    /*
+	case 'email_manager':
       $val ='<script type="text/javascript" src="'.$js_src.'"></script>
              <script type="text/javascript">
                window.onload = function() {
@@ -63,6 +65,7 @@ function xtc_wysiwyg($type, $lang, $langID = '') {
                }
              </script>';
       break;
+	  */
     // WYSIWYG editor content manager products content section textarea named file_comment
     case 'products_content':
       $val ='<script type="text/javascript" src="'.$js_src.'"></script>

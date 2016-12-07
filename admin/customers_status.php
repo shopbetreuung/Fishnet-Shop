@@ -164,50 +164,6 @@
         xtc_redirect(xtc_href_link(FILENAME_CUSTOMERS_STATUS, 'page=' . $_GET['page'] . '&cID=' . $customers_status_id));
 
         break;
-
-      case 'deleteconfirm':
-        $cID = xtc_db_prepare_input($_GET['cID']);
-
-        $customers_status_query = xtc_db_query("SELECT configuration_value FROM " . TABLE_CONFIGURATION . " WHERE configuration_key = 'DEFAULT_CUSTOMERS_STATUS_ID'");
-        $customers_status = xtc_db_fetch_array($customers_status_query);
-        if ($customers_status['configuration_value'] == $cID) {
-          xtc_db_query("UPDATE " . TABLE_CONFIGURATION . " SET configuration_value = '' WHERE configuration_key = 'DEFAULT_CUSTOMERS_STATUS_ID'");
-        }
-
-        xtc_db_query("DELETE FROM " . TABLE_CUSTOMERS_STATUS . " WHERE customers_status_id = '" . (int)$cID . "'");
-
-        // We want to drop the existing corresponding personal_offers table
-        xtc_db_query("DROP TABLE IF EXISTS personal_offers_by_customers_status_" . (int)$cID);
-        xtc_db_query("ALTER TABLE `products` DROP `group_permission_" . (int)$cID . "`");
-        xtc_db_query("ALTER TABLE `categories` DROP `group_permission_" . (int)$cID . "`");
-        xtc_redirect(xtc_href_link(FILENAME_CUSTOMERS_STATUS, 'page=' . (int)$_GET['page']));
-        break;
-
-      case 'delete':
-        $cID = xtc_db_prepare_input($_GET['cID']);
-
-        $status_query = xtc_db_query("SELECT COUNT(*) AS count FROM " . TABLE_CUSTOMERS . " WHERE customers_status = '" . xtc_db_input($cID) . "'");
-        $status = xtc_db_fetch_array($status_query);
-
-        $remove_status = true;
-        if (($cID == DEFAULT_CUSTOMERS_STATUS_ID) || ($cID == DEFAULT_CUSTOMERS_STATUS_ID_GUEST) || ($cID == DEFAULT_CUSTOMERS_STATUS_ID_NEWSLETTER)) {
-          $remove_status = false;
-          $messageStack->add(ERROR_REMOVE_DEFAULT_CUSTOMERS_STATUS, 'error');
-        } elseif ($status['count'] > 0) {
-          $remove_status = false;
-          $messageStack->add(ERROR_STATUS_USED_IN_CUSTOMERS, 'error');
-        } else {
-          $history_query = xtc_db_query("SELECT COUNT(*) AS count FROM " . TABLE_CUSTOMERS_STATUS_HISTORY . " WHERE '" . xtc_db_input($cID) . "' in (new_value, old_value)");
-          $history = xtc_db_fetch_array($history_query);
-          if ($history['count'] > 0) {
-            // delete from history
-            xtc_db_query("DELETE FROM " . TABLE_CUSTOMERS_STATUS_HISTORY . "
-                          WHERE '" . xtc_db_input($cID) . "' in (new_value, old_value)");
-            $remove_status = true;
-            // $messageStack->add(ERROR_STATUS_USED_IN_HISTORY, 'error');
-          }
-        }
-        break;
     }
   }
 
@@ -434,22 +390,11 @@ require (DIR_WS_INCLUDES.'head.php');
                           $contents[] = array('align' => 'center', 'text' => '<br /><input type="submit" class="btn btn-default" onclick="this.blur();" value="' . BUTTON_UPDATE . '"> <a class="btn btn-default" onclick="this.blur();" href="' . xtc_href_link(FILENAME_CUSTOMERS_STATUS, 'page=' . $_GET['page'] . '&cID=' . $cInfo->customers_status_id) . '">' . BUTTON_CANCEL . '</a>');
                           break;
 
-                        case 'delete':
-                          $heading[] = array('text' => '<b>' . TEXT_INFO_HEADING_DELETE_CUSTOMERS_STATUS . '</b>');
-
-                          $contents = array('form' => xtc_draw_form('status', FILENAME_CUSTOMERS_STATUS, 'page=' . $_GET['page'] . '&cID=' . $cInfo->customers_status_id  . '&action=deleteconfirm'));
-                          $contents[] = array('text' => TEXT_INFO_DELETE_INTRO);
-                          $contents[] = array('text' => '<br /><b>' . $cInfo->customers_status_name . '</b>');
-
-                          if ($remove_status)
-                            $contents[] = array('align' => 'center', 'text' => '<br /><input type="submit" class="btn btn-default" onclick="this.blur();" value="' . BUTTON_DELETE . '"> <a class="btn btn-default" onclick="this.blur();" href="' . xtc_href_link(FILENAME_CUSTOMERS_STATUS, 'page=' . $_GET['page'] . '&cID=' . $cInfo->customers_status_id) . '">' . BUTTON_CANCEL . '</a>');
-                          break;
-
                         default:
                           if (isset($cInfo) && is_object($cInfo)) {
                             $heading[] = array('text' => '<b>' . $cInfo->customers_status_name . '</b>');
 
-                            $contents[] = array('align' => 'center', 'text' => '<a class="btn btn-default" onclick="this.blur();" href="' . xtc_href_link(FILENAME_CUSTOMERS_STATUS, 'page=' . $_GET['page'] . '&cID=' . $cInfo->customers_status_id . '&action=edit') . '#edit-box">' . BUTTON_EDIT . '</a> <a class="btn btn-default" onclick="this.blur();" href="' . xtc_href_link(FILENAME_CUSTOMERS_STATUS, 'page=' . $_GET['page'] . '&cID=' . $cInfo->customers_status_id . '&action=delete') . '#edit-box">' . BUTTON_DELETE . '</a>');
+                            $contents[] = array('align' => 'center', 'text' => '<a class="btn btn-default" onclick="this.blur();" href="' . xtc_href_link(FILENAME_CUSTOMERS_STATUS, 'page=' . $_GET['page'] . '&cID=' . $cInfo->customers_status_id . '&action=edit') . '#edit-box">' . BUTTON_EDIT . '</a>');
                             $customers_status_inputs_string = '';
                             $languages = xtc_get_languages();
                             for ($i=0; $i<sizeof($languages); $i++) {

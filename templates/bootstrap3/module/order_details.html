@@ -3,7 +3,7 @@
 <table class="table">
 <thead>
   <tr>
-    <th class="hidden-xs text-center">{#text_qty#}</th>
+    <th class="text-center">{#text_qty#}</th>
     <th class="hidden-xs" style="width: 100px;"></th>
     <th style="width: 100%">{#text_article#}</th>
     <th class="hidden-xs text-center">{#text_single#}</th>
@@ -14,7 +14,7 @@
   <tbody>
   {foreach name=aussen item=module_data from=$module_content} 
   <tr>
-    <td class="hidden-xs quantity" style="vertical-align: center;">{$module_data.PRODUCTS_QTY}</td>
+    <td class="quantity" style="vertical-align: center;">{$module_data.PRODUCTS_QTY}</td>
 	<td class="quantity hidden-xs">{if $module_data.PRODUCTS_IMAGE}<img src="{$module_data.PRODUCTS_IMAGE}" style="max-width: 100px; max-height: 100px;" />{/if}</td>
     <td class="productname">
 		<strong><a href="{$module_data.PRODUCTS_LINK}">{$module_data.PRODUCTS_NAME}</a></strong>

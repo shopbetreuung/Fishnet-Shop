@@ -178,11 +178,11 @@
         <table width="100%" border="0" cellspacing="0" cellpadding="5">
           <tr>
             <td class="main" width="190"><?php echo $lng_image.TEXT_EDIT_CATEGORIES_NAME; ?></td>
-            <td class="main"><?php echo xtc_draw_input_field('categories_name[' . $languages[$i]['id'] . ']', (isset($categories_name[$languages[$i]['id']]) ? stripslashes($categories_name[$languages[$i]['id']]) : $categories_desc_fields['categories_name']), 'style="width:100%" maxlength="255"'); ?></td>
+            <td class="main"><?php echo xtc_draw_input_field('categories_name[' . $languages[$i]['id'] . ']', (isset($categories_name[$languages[$i]['id']]) ? stripslashes($categories_name[$languages[$i]['id']]) : $categories_desc_fields['categories_name']), 'style="width:100% !important" maxlength="255"'); ?></td>
           </tr>
           <tr>
             <td class="main"><?php echo $lng_image.TEXT_EDIT_CATEGORIES_HEADING_TITLE; ?></td>
-            <td class="main"><?php echo xtc_draw_input_field('categories_heading_title[' . $languages[$i]['id'] . ']', (isset($categories_name[$languages[$i]['id']]) ? stripslashes($categories_name[$languages[$i]['id']]) : $categories_desc_fields['categories_heading_title']), 'style="width:100%" maxlength="255"'); ?></td>
+            <td class="main"><?php echo xtc_draw_input_field('categories_heading_title[' . $languages[$i]['id'] . ']', (isset($categories_name[$languages[$i]['id']]) ? stripslashes($categories_name[$languages[$i]['id']]) : $categories_desc_fields['categories_heading_title']), 'style="width:100% !important" maxlength="255"'); ?></td>
           </tr>
           <tr>
             <td class="main" valign="top"><?php  echo $lng_image.TEXT_EDIT_CATEGORIES_DESCRIPTION; ?></td>

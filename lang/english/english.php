@@ -194,7 +194,7 @@ define('IMAGE_BUTTON_CHANGE_ADDRESS', 'Change address');
 define('IMAGE_BUTTON_CHECKOUT', 'Checkout');
 define('IMAGE_BUTTON_CONFIRM', 'Confirm'); // Needed for PayPal
 define('IMAGE_BUTTON_CONFIRM_ORDER', 'Buy');
-define('IMAGE_BUTTON_CONTINUE', 'Next');
+define('IMAGE_BUTTON_CONTINUE', 'Start page');
 define('IMAGE_BUTTON_DELETE', 'Delete');
 define('IMAGE_BUTTON_LOGIN', 'Login');
 define('IMAGE_BUTTON_LOGIN_NEWSLETTER', 'Subscribe');
@@ -212,6 +212,7 @@ define('IMAGE_BUTTON_PRODUCT_MORE', 'details');
 // EOF - vr - 2010-02-20 removed double definition 
 define('IMAGE_BUTTON_SEND', 'Send'); //DokuMan - 2010-03-15 - Added button description for contact form
 define('IMAGE_BUTTON_CONTINUE_SHOPPING', 'Continue shopping'); //Hendrik - 2010-11-12 - used in default template ...shopping_cart.html
+define('IMAGE_BUTTON_CHECKOUT_START_PAGE', 'Start page');
 
 define('SMALL_IMAGE_BUTTON_DELETE', 'Delete');
 define('SMALL_IMAGE_BUTTON_EDIT', 'Edit');

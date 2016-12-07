@@ -43,6 +43,11 @@
 		$imageslider = xtc_db_fetch_array($imageslider_query);	
 		return $imageslider['imagesliders_title'];
 	}
+	function xtc_get_imageslider_alt($imageslider_id, $language_id) {
+		$imageslider_query = xtc_db_query("select imagesliders_alt from ".TABLE_IMAGESLIDERS_INFO." where imagesliders_id = '".$imageslider_id."' and languages_id = '".$language_id."'");
+		$imageslider = xtc_db_fetch_array($imageslider_query);	
+		return $imageslider['imagesliders_alt'];
+	}
 	function xtc_get_imageslider_description($imageslider_id, $language_id) {
 		$imageslider_query = xtc_db_query("select imagesliders_description from ".TABLE_IMAGESLIDERS_INFO." where imagesliders_id = '".$imageslider_id."' and languages_id = '".$language_id."'");
 		$imageslider = xtc_db_fetch_array($imageslider_query);	
@@ -125,6 +130,7 @@
 								  'imagesliders_url_typ' => xtc_db_prepare_input($imagesliders_url_typ_array[$language_id]),
 								  'imagesliders_image' => $imagepfad,
 								  'imagesliders_title' => xtc_db_prepare_input($imagesliders_title_array[$language_id]),
+								  'imagesliders_alt' => xtc_db_prepare_input($imagesliders_alt_array[$language_id]),
 								  'imagesliders_description' => xtc_db_prepare_input($imagesliders_description_array[$language_id]));
 	
           if ($_GET['action'] == 'insert') {
@@ -171,25 +177,6 @@
 	  break;
   }
 require (DIR_WS_INCLUDES.'head.php');
-if (USE_WYSIWYG == 'true') {
-	$query = xtc_db_query("SELECT code FROM ".TABLE_LANGUAGES." WHERE languages_id='".$_SESSION['languages_id']."'");
-	$data = xtc_db_fetch_array($query);
-	// generate editor for imagesliders
-	$languages = xtc_get_languages();
-?>
-<script type="text/javascript" src="includes/modules/fckeditor/fckeditor.js"></script>
-<script type="text/javascript">
-	window.onload = function()
-		{<?php
-	// generate editor for categories
-	if ($_GET['action'] == 'new' || $_GET['action'] == 'edit') {
-		for ($i = 0; $i < sizeof($languages); $i ++) {
-			echo xtc_wysiwyg('imagesliders_description', $data['code'], $languages[$i]['id']);
-		}
-	}
-?>}
-</script><?php
-}
 ?>
 
 </head>
@@ -284,6 +271,7 @@ if (($_GET['action'] != 'new') && ($_GET['action'] != 'edit')) {
         $i_sort = ($_SESSION['repopulate_form']['imagesliders_sorting']) ? $_SESSION['repopulate_form']['imagesliders_sorting'] : '';
         $i_url = ($_SESSION['repopulate_form']['imagesliders_url']) ? $_SESSION['repopulate_form']['imagesliders_url'] : '';
         $i_title = ($_SESSION['repopulate_form']['imagesliders_title']) ? $_SESSION['repopulate_form']['imagesliders_title'] : '';
+		$i_alt = ($_SESSION['repopulate_form']['imagesliders_alt']) ? $_SESSION['repopulate_form']['imagesliders_alt'] : '';
         $i_desc = ($_SESSION['repopulate_form']['imagesliders_description']) ? $_SESSION['repopulate_form']['imagesliders_description'] : '';
         unset($_SESSION['repopulate_form']);
     }
@@ -329,7 +317,13 @@ if (($_GET['action'] != 'new') && ($_GET['action'] != 'edit')) {
         $imageslider_title_string .= '<table width="100%"><tr><td class="infoBoxContent" width="1%" valign="top">' . xtc_image(DIR_WS_LANGUAGES . $languages[$i]['directory'] . '/admin/images/' . $languages[$i]['image'], $languages[$i]['name']) . '</td><td>' . xtc_draw_input_field('imagesliders_title[' . $languages[$i]['id'] . ']', $i_title[$languages[$i]['id']], 'style="width:99%;"').'</td></tr></table>';
 	  }
 	  $contents[] = array('text' => '<table width="100%"><tr><td class="infoBoxContent" width="30%" valign="top">' . TEXT_IMAGESLIDERS_TITLE .'</td></tr></table>' .  $imageslider_title_string);
-			
+		
+	  $imageslider_alt_string = '';
+	  for ($i = 0, $n = sizeof($languages); $i < $n; $i++) {
+        $imageslider_alt_string .= '<table width="100%"><tr><td class="infoBoxContent" width="1%" valign="top">' . xtc_image(DIR_WS_LANGUAGES . $languages[$i]['directory'] . '/admin/images/' . $languages[$i]['image'], $languages[$i]['name']) . '</td><td>' . xtc_draw_input_field('imagesliders_alt[' . $languages[$i]['id'] . ']', $i_alt[$languages[$i]['id']], 'style="width:99%;"').'</td></tr></table>';
+	  }
+	  $contents[] = array('text' => '<table width="100%"><tr><td class="infoBoxContent" width="30%" valign="top">' . TEXT_IMAGESLIDERS_ALT .'</td></tr></table>' .  $imageslider_alt_string);	  
+		  
       $imageslider_description_string = '';
 	  for ($i = 0, $n = sizeof($languages); $i < $n; $i++) {
         $imageslider_description_string .= '<table width="100%"><tr><td class="infoBoxContent" width="1%" valign="top">' . xtc_image(DIR_WS_LANGUAGES . $languages[$i]['directory'] . '/admin/images/' . $languages[$i]['image'], $languages[$i]['name']) . '</td><td>' . xtc_draw_textarea_field('imagesliders_description['.$languages[$i]['id'].']', 'soft', '70', '25', $i_desc[$languages[$i]['id']], 'style="width: 99%;"').'</td></tr></table>'; 
@@ -384,6 +378,12 @@ if (($_GET['action'] != 'new') && ($_GET['action'] != 'edit')) {
         $imageslider_title_string .= '<table width="100%"><tr><td class="infoBoxContent" width="1%" valign="top">' . xtc_image(DIR_WS_LANGUAGES . $languages[$i]['directory'] . '/admin/images/' . $languages[$i]['image'], $languages[$i]['name']) . '</td><td>' . xtc_draw_input_field('imagesliders_title[' . $languages[$i]['id'] . ']', xtc_get_imageslider_title($iInfo->imagesliders_id, $languages[$i]['id']), 'style="width:99%;"').'</td></tr></table>';
 	  }
 	  $contents[] = array('text' => '<table width="100%"><tr><td class="infoBoxContent" width="100%" valign="top">' . TEXT_IMAGESLIDERS_TITLE .'</td></tr></table>' . $imageslider_title_string);
+		  
+	  $imageslider_alt_string = '';
+	  for ($i = 0, $n = sizeof($languages); $i < $n; $i++) {
+        $imageslider_alt_string .= '<table width="100%"><tr><td class="infoBoxContent" width="1%" valign="top">' . xtc_image(DIR_WS_LANGUAGES . $languages[$i]['directory'] . '/admin/images/' . $languages[$i]['image'], $languages[$i]['name']) . '</td><td>' . xtc_draw_input_field('imagesliders_alt[' . $languages[$i]['id'] . ']', xtc_get_imageslider_alt($iInfo->imagesliders_id, $languages[$i]['id']), 'style="width:99%;"').'</td></tr></table>';
+	  }
+	  $contents[] = array('text' => '<table width="100%"><tr><td class="infoBoxContent" width="100%" valign="top">' . TEXT_IMAGESLIDERS_ALT .'</td></tr></table>' . $imageslider_alt_string);	  
 			
 	  $imageslider_description_string = '';
 	  for ($i = 0, $n = sizeof($languages); $i < $n; $i++) {
@@ -438,6 +438,27 @@ if (($_GET['action'] != 'new') && ($_GET['action'] != 'edit')) {
 <?php require(DIR_WS_INCLUDES . 'footer.php'); ?>
 <!-- footer_eof //-->
 <br />
+<?php
+if (USE_WYSIWYG == 'true') {
+	$query = xtc_db_query("SELECT code FROM ".TABLE_LANGUAGES." WHERE languages_id='".$_SESSION['languages_id']."'");
+	$data = xtc_db_fetch_array($query);
+	// generate editor for imagesliders
+	$languages = xtc_get_languages();
+?>
+<script type="text/javascript" src="includes/modules/ckeditor/ckeditor.js"></script>
+<script type="text/javascript">
+	window.onload = function()
+		{<?php
+	// generate editor for categories
+	if ($_GET['action'] == 'new' || $_GET['action'] == 'edit') {
+		for ($i = 0; $i < sizeof($languages); $i ++) {
+			echo xtc_wysiwyg('imagesliders_description', $data['code'], $languages[$i]['id']);
+		}
+	}
+?>}
+</script><?php
+}
+?>
 </body>
 </html>
 <?php require(DIR_WS_INCLUDES . 'application_bottom.php'); ?>

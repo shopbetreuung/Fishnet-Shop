@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id$
+   $Id: paypal_profile.php 10065 2016-07-12 11:34:17Z Tomcraft $
 
    modified eCommerce Shopsoftware
    http://www.modified-shop.org
@@ -21,16 +21,16 @@ $lang_array = array(
   'TEXT_PAYPAL_PROFILE_NAME_INFO' => '',
   
   'TEXT_PAYPAL_PROFILE_BRAND' => 'Display name:',
-  'TEXT_PAYPAL_PROFILE_BRAND_INFO' => 'This name will be displayed to the clients at PayPal',
+  'TEXT_PAYPAL_PROFILE_BRAND_INFO' => 'This name will be displayed to the clients at PayPal (max. 127 characters)',
   
   'TEXT_PAYPAL_PROFILE_LOGO' => 'Logo URL:',
-  'TEXT_PAYPAL_PROFILE_LOGO_INFO' => 'Complete URL<br/><br/><b>Note:</b> For the logo to appear, the URL must start with https://',
+  'TEXT_PAYPAL_PROFILE_LOGO_INFO' => 'Complete URL (max. 127 characters)<br/><br/><b>Note:</b> For the logo to appear, the URL must start with https://',
   
   'TEXT_PAYPAL_PROFILE_LOCALE' => 'Language:',
   'TEXT_PAYPAL_PROFILE_LOCALE_INFO' => '',
   
   'TEXT_PAYPAL_PROFILE_PAGE' => 'Page:',
-  'TEXT_PAYPAL_PROFILE_PAGE_INFO' => '<b>Default:</b> Login<br/><br/>For Payment the act of transfer without customer account is pre-selected.',
+  'TEXT_PAYPAL_PROFILE_PAGE_INFO' => '<b>Default:</b> Login<br/><br/>For Billing the act of transfer without customer account is pre-selected.',
 
   'TEXT_PAYPAL_PROFILE_ADDRESS' => 'Address override:',
   'TEXT_PAYPAL_PROFILE_ADDRESS_INFO' => 'Shall the shipping address provided by PayPal be taken over?',

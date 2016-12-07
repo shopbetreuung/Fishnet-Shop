@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id$
+   $Id: paypal_module.php 10425 2016-11-23 13:29:31Z GTB $
 
    modified eCommerce Shopsoftware
    http://www.modified-shop.org
@@ -54,6 +54,18 @@ $payment_array = array(
   'paypalcart',
   'paypallink',
   'paypalpluslink',
+  'paypalinstallment',
+);
+
+$payment_disallowed_array = array(
+  'banktransfer',
+  'billpay',
+  'billpaydebit',
+  'billpaypaylater',
+  'billpaytransactioncredit',
+  'billsafe_2',
+  'payone_installment',
+  'payone_otrans',
 );
 
 $status_array = array(
@@ -219,9 +231,39 @@ require (DIR_WS_INCLUDES.'head.php');
                   if ($module->code == 'paypalcart') {
                     ?>
                     <tr>
+                      <td class="dataTableConfig col-left"><?php echo TEXT_PAYPAL_MODULE_SHIPPING_COST; ?></td>
+                      <td class="dataTableConfig col-middle"><?php echo xtc_draw_input_field('config[profile][MODULE_PAYMENT_'.strtoupper($module->code).'_SHIPPING_COST]', $paypal->get_config('MODULE_PAYMENT_'.strtoupper($module->code).'_SHIPPING_COST'), 'style="width: 300px;"'); ?></td>
+                      <td class="dataTableConfig col-right"><?php echo TEXT_PAYPAL_MODULE_SHIPPING_COST_INFO; ?></td>
+                    </tr>
+                    <tr>
                       <td class="dataTableConfig col-left"><?php echo TEXT_PAYPAL_MODULE_LINK_PRODUCT; ?></td>
                       <td class="dataTableConfig col-middle"><?php echo draw_on_off_selection('config[profile][MODULE_PAYMENT_'.strtoupper($module->code).'_SHOW_PRODUCT]', $status_array, (($paypal->get_config('MODULE_PAYMENT_'.strtoupper($module->code).'_SHOW_PRODUCT') == '1') ? true : false)); ?></td>
                       <td class="dataTableConfig col-right"><?php echo TEXT_PAYPAL_MODULE_LINK_PRODUCT_INFO; ?></td>
+                    </tr>
+                    <?php
+                  }
+
+                  if ($module->code == 'paypalinstallment') {
+                    ?>
+                    <tr>
+                      <td class="dataTableConfig col-left"><?php echo TEXT_PAYPAL_MODULE_ORDER_STATUS_ACCEPTED; ?></td>
+                      <td class="dataTableConfig col-middle"><?php echo xtc_draw_pull_down_menu('config[profile][PAYPAL_ORDER_STATUS_ACCEPTED_ID]', xtc_get_orders_status(), $paypal->get_config('PAYPAL_ORDER_STATUS_ACCEPTED_ID')); ?></td>
+                      <td class="dataTableConfig col-right"><?php echo TEXT_PAYPAL_MODULE_ORDER_STATUS_ACCEPTED_INFO; ?></td>
+                    </tr>
+                    <tr>
+                      <td class="dataTableConfig col-left"><?php echo TEXT_PAYPAL_MODULE_UPSTREAM_PRODUCT; ?></td>
+                      <td class="dataTableConfig col-middle"><?php echo draw_on_off_selection('config[profile][MODULE_PAYMENT_'.strtoupper($module->code).'_UPSTREAM_PRODUCT]', $status_array, (($paypal->get_config('MODULE_PAYMENT_'.strtoupper($module->code).'_UPSTREAM_PRODUCT') == '1') ? true : false)); ?></td>
+                      <td class="dataTableConfig col-right"><?php echo TEXT_PAYPAL_MODULE_UPSTREAM_PRODUCT_INFO; ?></td>
+                    </tr>
+                    <tr>
+                      <td class="dataTableConfig col-left"><?php echo TEXT_PAYPAL_MODULE_UPSTREAM_CART; ?></td>
+                      <td class="dataTableConfig col-middle"><?php echo draw_on_off_selection('config[profile][MODULE_PAYMENT_'.strtoupper($module->code).'_UPSTREAM_CART]', $status_array, (($paypal->get_config('MODULE_PAYMENT_'.strtoupper($module->code).'_UPSTREAM_CART') == '1') ? true : false)); ?></td>
+                      <td class="dataTableConfig col-right"><?php echo TEXT_PAYPAL_MODULE_UPSTREAM_CART_INFO; ?></td>
+                    </tr>
+                    <tr>
+                      <td class="dataTableConfig col-left"><?php echo TEXT_PAYPAL_MODULE_UPSTREAM_PAYMENT; ?></td>
+                      <td class="dataTableConfig col-middle"><?php echo draw_on_off_selection('config[profile][MODULE_PAYMENT_'.strtoupper($module->code).'_UPSTREAM_PAYMENT]', $status_array, (($paypal->get_config('MODULE_PAYMENT_'.strtoupper($module->code).'_UPSTREAM_PAYMENT') == '1') ? true : false)); ?></td>
+                      <td class="dataTableConfig col-right"><?php echo TEXT_PAYPAL_MODULE_UPSTREAM_PAYMENT_INFO; ?></td>
                     </tr>
                     <?php
                   }
@@ -260,7 +302,10 @@ require (DIR_WS_INCLUDES.'head.php');
                       $thirdparty_exists = false;
                       for ($p=0, $x=sizeof($module_array); $p<$x; $p++) {
                         $module_name = substr($module_array[$p], 0,-4);
-                        if (!in_array($module_name, $payment_array)) {
+                        if (!in_array($module_name, $payment_array)
+                            && !in_array($module_name, $payment_disallowed_array)
+                            ) 
+                        {
                           $thirdparty_exists = true;
                         }
                       }
@@ -274,7 +319,10 @@ require (DIR_WS_INCLUDES.'head.php');
                         <?php                      
                         for ($p=0, $x=sizeof($module_array); $p<$x; $p++) {
                           $module_name = substr($module_array[$p], 0,-4);
-                          if (!in_array($module_name, $payment_array)) {
+                          if (!in_array($module_name, $payment_array)
+                              && !in_array($module_name, $payment_disallowed_array)
+                              ) 
+                          {
                             if (file_exists(DIR_FS_LANGUAGES . $_SESSION['language'] . '/modules/payment/' . $module_array[$p])) {
                               include_once(DIR_FS_LANGUAGES . $_SESSION['language'] . '/modules/payment/' . $module_array[$p]);
                             }
@@ -311,6 +359,7 @@ require (DIR_WS_INCLUDES.'head.php');
                 <table class="tableBoxCenter collapse">
                   <tr class="dataTableHeadingRow">
                     <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_MODULES; ?></td>
+                    <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_FILENAME; ?></td>
                     <td class="dataTableHeadingContent txta-r"><?php echo TABLE_HEADING_SORT_ORDER; ?></td>
                     <td class="dataTableHeadingContent txta-c"><?php echo TABLE_HEADING_STATUS; ?>&nbsp;</td>
                     <td class="dataTableHeadingContent txta-r"><?php echo TABLE_HEADING_ACTION; ?>&nbsp;</td>
@@ -328,6 +377,11 @@ require (DIR_WS_INCLUDES.'head.php');
                             if (isset($module->icons_available)) {
                               echo '<br />'.$module->icons_available;
                             }
+                          ?>
+                        </td>
+                        <td class="dataTableContent">
+                          <?php
+                            echo $payment_module;
                           ?>
                         </td>
                         <td class="dataTableContent txta-r">

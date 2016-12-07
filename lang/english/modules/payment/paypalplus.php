@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id$
+   $Id: paypalplus.php 10346 2016-10-26 13:17:10Z GTB $
 
    modified eCommerce Shopsoftware
    http://www.modified-shop.org
@@ -29,6 +29,8 @@ $lang_array = array(
 
   'MODULE_PAYMENT_PAYPALPLUS_TEXT_ERROR_HEADING' => 'Note',
   'MODULE_PAYMENT_PAYPALPLUS_TEXT_ERROR_MESSAGE' => 'PayPal payment has been canceled',
+
+  'MODULE_PAYMENT_PAYPALPLUS_INVOICE' => 'Pay upon Invoice',
 );
 
 

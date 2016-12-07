@@ -185,7 +185,9 @@ INSERT INTO email_manager (em_id, em_name, em_language, em_body, em_delete, em_t
 (29,	'sepa_mail',	1,	'{config_load file=\"$language/lang_$language.conf\" section=\"duty_info\"} \r\n{$PAYMENT_INFO_HTML}<br />\r\n\r\n[SIGNATUR]',	0,	'mail',	'{config_load file=\"$language/lang_$language.conf\" section=\"duty_info\"} \r\n\r\n{$PAYMENT_INFO_TXT}\r\n\r\n[SIGNATUR]'),
 (30,	'sepa_mail',	2,	'<p>{config_load file=&quot;$language/lang_$language.conf&quot; section=&quot;duty_info&quot;}  {$PAYMENT_INFO_HTML}<br />\r\n[SIGNATUR]</p>',	0,	'mail',	'{config_load file=\"$language/lang_$language.conf\" section=\"duty_info\"} \r\n\r\n{$PAYMENT_INFO_TXT}\r\n\r\n[SIGNATUR]'),
 (31,	'signatur',	1,	'<div><font size=\"1\" face=\"Verdana, Arial, Helvetica, sans-serif\">__________________________________________________________________<br />\r\n<br />\r\n<b>Company</b><br />\r\nAddress<br />\r\nLocation<br />\r\nHomepage<br />\r\nE-mail<br />\r\nPhone:<br />\r\nFax:<br />\r\nCEO:<br />\r\nVAT Reg No: <br /></font></div\r\n',	0,	'mail',	'__________________________________________________________________\r\n\r\nCompany\r\nAddress\r\nLocation\r\nHomepage\r\nE-mail\r\nPhone:\r\nFax:\r\nCEO:\r\nVAT Reg No\r\n'),
-(32,	'signatur',	2,	'<div><font size=\"1\" face=\"Verdana, Arial, Helvetica, sans-serif\">__________________________________________________________________<br />\r\n<br />\r\nFirma<br />\r\nAdresse<br />\r\nOrt<br />\r\nHomepage<br />\r\nE-Mail<br />\r\nFon:<br />\r\nFax:<br />\r\nUSt-IdNr.:<br />\r\nHandelsregister<br />\r\nGesch&auml;ftsf&uuml;hrer:<br />\r\n</font></div>',	0,	'mail',	'__________________________________________________________________\r\n\r\nFirma\r\nAdresse\r\nOrt\r\nHomepage\r\nE-Mail\r\nFon:\r\nFax:\r\nUSt-IdNr.:\r\nHandelsregister\r\nGeschäftsführer:');
+(32,	'signatur',	2,	'<div><font size=\"1\" face=\"Verdana, Arial, Helvetica, sans-serif\">__________________________________________________________________<br />\r\n<br />\r\nFirma<br />\r\nAdresse<br />\r\nOrt<br />\r\nHomepage<br />\r\nE-Mail<br />\r\nFon:<br />\r\nFax:<br />\r\nUSt-IdNr.:<br />\r\nHandelsregister<br />\r\nGesch&auml;ftsf&uuml;hrer:<br />\r\n</font></div>',	0,	'mail',	'__________________________________________________________________\r\n\r\nFirma\r\nAdresse\r\nOrt\r\nHomepage\r\nE-Mail\r\nFon:\r\nFax:\r\nUSt-IdNr.:\r\nHandelsregister\r\nGeschäftsführer:'),
+(33,  'stock_reorder_mail', 2,  '<p>Nach dem letzten Verkauf des Produktes  {$PRODUCTS_NAME} ist der Bestand auf {$PRODUCTS_CURRENT_QTY}  gesunken. Bitte bestellen Sie nach.</p>' , 0, 'mail',  'Nach dem letzten Verkauf des Produktes  {$PRODUCTS_NAME} ist der Bestand auf {$PRODUCTS_CURRENT_QTY}  gesunken. Bitte bestellen Sie nach.'),
+(34,  'stock_reorder_mail', 1, '<p>After the most recent offer the {$PRODUCTS_NAME} has been reduced to {$PRODUCTS_CURRENT_QTY} quantity, please re-stock</p>' , 0, 'mail',  'After the most recent offer the {$PRODUCTS_NAME} has been reduced to {$PRODUCTS_CURRENT_QTY} quantity, please re-stock');
 
 DROP TABLE IF EXISTS admin_access;
 CREATE TABLE admin_access (
@@ -261,7 +263,6 @@ CREATE TABLE admin_access (
   products_vpe INT(1) NOT NULL DEFAULT 0,
   cross_sell_groups INT(1) NOT NULL DEFAULT 0,
 
-  fck_wrapper INT(1) NOT NULL DEFAULT 0,
   econda INT(1) NOT NULL DEFAULT 0,
   sofortueberweisung_install INT(1) NOT NULL DEFAULT 0,
   shop_offline INT(1) NOT NULL DEFAULT 0,
@@ -368,7 +369,6 @@ CREATE TABLE categories_description (
   categories_description text NOT NULL,
   categories_meta_title VARCHAR(100) NOT NULL,
   categories_meta_description VARCHAR(255) NOT NULL,
-  categories_meta_keywords VARCHAR(255) NOT NULL,
   PRIMARY KEY (categories_id, language_id),
   KEY idx_categories_name (categories_name)
 ) ENGINE=MyISAM;
@@ -1101,6 +1101,7 @@ CREATE TABLE imagesliders_info (
   imagesliders_id INT NOT NULL,
   languages_id int(11) NOT NULL,
   imagesliders_title VARCHAR(100) NOT NULL,
+  imagesliders_alt VARCHAR(100) NOT NULL,
   imagesliders_url VARCHAR(255) NOT NULL,
   imagesliders_url_target TINYINT(1) NOT NULL DEFAULT 0,
   imagesliders_url_typ TINYINT(1) NOT NULL DEFAULT 0,
@@ -1829,7 +1830,27 @@ INSERT INTO configuration_group VALUES (31,'Moneybookers','Moneybookers System',
 INSERT INTO configuration_group VALUES (40,'Popup Window Configuration','Popup Window Parameters',40,1);
 INSERT INTO configuration_group VALUES (1000,'Adminarea Options','Adminarea Configuration', 1000,1);
 
-
+# Status Admin
+INSERT INTO customers_status VALUES ('0', '2', 'Admin', 1, NULL, NULL, 'admin_status.gif', '0.00', '1', '0.00', '1', '1', '1', 0, '', '', 0, 1, 1, 1, 1);
+INSERT INTO customers_status VALUES ('0', '1', 'Admin', 1, NULL, NULL, 'admin_status.gif', '0.00', '1', '0.00', '1', '1', '1', 0, '', '', 0, 1, 1, 1, 1);
+# Status guest
+INSERT INTO customers_status VALUES ('1', '2', 'Gast', 1, NULL, NULL, 'guest_status.gif', '0.00', '1', '0.00', '1', '1', '1', 0, '', '', 0, 1, 1, 0, 1);
+INSERT INTO customers_status VALUES ('1', '1', 'Guest', 1, NULL, NULL, 'guest_status.gif', '0.00', '1', '0.00', '1', '1', '1', 0, '', '', 0, 1, 1, 0, 1);
+# Status new customer
+INSERT INTO customers_status VALUES('2', '2', 'Neuer Kunde', 1, NULL, NULL, 'customer_status.gif', '0.00', '1', '0.00', '1', '1', '1', 0, '', '', 0, 1, 1, 1, 1);
+INSERT INTO customers_status VALUES('2', '1', 'New Customer', 1, NULL, NULL, 'customer_status.gif', '0.00', '1', '0.00', '1', '1', '1', 0, '', '', 0, 1, 1, 1, 1);
+# Status merchant
+INSERT INTO customers_status VALUES('3', '2', 'H&auml;ndler', 1, NULL, NULL, 'merchant_status.gif', '0.00', '0', '0.00', '1', 1, 0, 1, '', '', 0, 1, 1, 1, 1);
+INSERT INTO customers_status VALUES('3', '1', 'Merchant', 1, NULL, NULL, 'merchant_status.gif', '0.00', '0', '0.00', '1', 1, 0, 1, '', '', 0, 1, 1, 1, 1);
+# Status merchant foreign Countries                                              
+INSERT INTO customers_status VALUES('4', '1', 'Merchant foreign Countries', 1, NULL, NULL, 'merchant_status.gif', '0.00', '0', '0.00', '1', 1, 0, 0, '', '', 0, 1, 1, 1, 1);
+INSERT INTO customers_status VALUES('4', '2', 'H&auml;ndler Ausland', 1, NULL, NULL, 'merchant_status.gif', '0.00', '0', '0.00', '1', 1, 0, 0, '', '', 0, 1, 1, 1, 1);                                                   
+# create Group prices (Admin wont get own status!)
+CREATE TABLE personal_offers_by_customers_status_1 (price_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,products_id int NOT NULL,quantity int, personal_offer decimal(15,4));
+CREATE TABLE personal_offers_by_customers_status_2 (price_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,products_id int NOT NULL,quantity int, personal_offer decimal(15,4));
+CREATE TABLE personal_offers_by_customers_status_0 (price_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,products_id int NOT NULL,quantity int, personal_offer decimal(15,4));
+CREATE TABLE personal_offers_by_customers_status_3 (price_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,products_id int NOT NULL,quantity int, personal_offer decimal(15,4));
+CREATE TABLE personal_offers_by_customers_status_4 (price_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,products_id int NOT NULL,quantity int, personal_offer decimal(15,4));
 
 
 #Countries

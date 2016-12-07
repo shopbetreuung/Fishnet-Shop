@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id$
+   $Id: paypal_profile.php 10051 2016-07-08 13:36:47Z GTB $
 
    modified eCommerce Shopsoftware
    http://www.modified-shop.org
@@ -63,7 +63,7 @@ $status_array = array(
 
 $landingpage_array = array(
   array('id' => 'Login', 'text' => 'Login'),
-  array('id' => 'Payment', 'text' => 'Payment'),
+  array('id' => 'Billing', 'text' => 'Billing'),
 ); 
 
 //$locale_code = array(

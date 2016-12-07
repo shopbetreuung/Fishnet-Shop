@@ -294,6 +294,34 @@ if (isset ($_SESSION['tmp_oID']) && is_numeric($_SESSION['tmp_oID'])) { // Dokum
                            SET products_status = '0'
                          WHERE products_id = '".xtc_get_prid($order->products[$i]['id'])."'");
         }
+		  
+		if (is_numeric(STOCK_REORDER_LEVEL) && $stock_left <= STOCK_REORDER_LEVEL) {
+
+			$smarty->assign('language', $order->info['language']);
+
+			$smarty->assign("PRODUCTS_NAME", $order->products[$i]['name']);
+			$smarty->assign("PRODUCTS_CURRENT_QTY", $stock_left);
+
+			$html_mail = $smarty->fetch('db:stock_reorder_mail.html');
+			$txt_mail = $smarty->fetch('db:stock_reorder_mail.txt');
+			
+			$restock_subject = 'Re-Stock';
+
+			xtc_php_mail(EMAIL_BILLING_ADDRESS,
+               EMAIL_BILLING_NAME,
+               EMAIL_BILLING_ADDRESS,
+               STORE_NAME,
+               EMAIL_BILLING_FORWARDING_STRING,
+               EMAIL_BILLING_ADDRESS,
+               STORE_NAME,
+               '',
+               '',
+               $restock_subject,
+               $html_mail,
+               $txt_mail
+               );
+		}
+		  
       }
     }
 

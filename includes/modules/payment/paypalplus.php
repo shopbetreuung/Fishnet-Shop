@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: paypalplus.php 9861 2016-05-25 07:05:22Z GTB $
+   $Id: paypalplus.php 10343 2016-10-26 11:54:18Z GTB $
 
    modified eCommerce Shopsoftware
    http://www.modified-shop.org
@@ -33,6 +33,19 @@ class paypalplus extends PayPalPayment {
         
     $payments = get_third_party_payments();
     
+    if (ACTIVATE_GIFT_SYSTEM == 'true') {
+      require_once (DIR_WS_CLASSES . 'order_total.php');
+      $order_total_modules = new order_total();
+      $credit_selection = $order_total_modules->credit_selection();
+    }
+    if (isset($credit_selection) 
+        && is_array($credit_selection) 
+        && count($credit_selection) > 0
+        ) 
+    {
+      $payments = array();
+    }
+    
     if (isset($_SESSION['payment'])) {
       for ($i=0, $n=count($payments); $i<$n; $i++) {
         if ($payments[$i]['id'] == $_SESSION['payment']) {
@@ -56,7 +69,7 @@ class paypalplus extends PayPalPayment {
           var s = document.getElementsByTagName(\'script\')[0];
           s . parentNode . insertBefore(pp, s);
         })();
-        $(window).load(function() {
+        $(window).on(\'load\',function() {
           '.((count($payments) > 0) ? '
           if ($(\'input[name="payment"]:checked\', \'#checkout_payment\').val() == "'.$this->code.'") {
             $("#continueButton").attr("onclick", "ppp.doContinue(); return false;");

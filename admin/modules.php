@@ -77,16 +77,17 @@
         xtc_redirect(xtc_href_link(FILENAME_MODULES, 'set=' . $set . '&module=' . $class));
         break;
       case 'edit':
-        $class = basename($_GET['module']);
-        if ($class == 'paypalcart'
-            || $class == 'paypalclassic'
-            || $class == 'paypallink'
-            || $class == 'paypalplus'
-            || $class == 'paypalpluslink'
-            ) 
-        {
-          xtc_redirect(xtc_href_link('paypal_module.php', 'action=edit&module=' . $class));
-        }
+        $class = basename($_GET['module']); 	  	 
+        if ($class == 'paypalcart' 	  	 
+            || $class == 'paypalclassic' 	  	 
+            || $class == 'paypallink' 	  	 
+            || $class == 'paypalplus' 	  	 
+            || $class == 'paypalpluslink' 	  	 
+            || $class == 'paypalinstallment' 	  	 
+            )  	  	 
+        { 	  	 
+          xtc_redirect(xtc_href_link('paypal_module.php', 'action=edit&module=' . $class)); 	  	 
+        } 	  	 
         break;
     }
   }
@@ -273,15 +274,6 @@ require (DIR_WS_INCLUDES.'head.php');
                     $heading = array();
                     $contents = array();
                     switch ($action) {
-                      // BOF - Tomcraft - 2009-10-03 - Paypal Express Modul
-                      case 'removepaypal':
-                        $heading[] = array('text' => '<b>' . $mInfo->title . '</b>');
-                        $contents = array ('form' => xtc_draw_form('modules', FILENAME_MODULES, 'set=' . $set . '&module=' . $_GET['module'] . '&action=remove'));
-                        $contents[] = array ('text' => '<br />'.TEXT_INFO_DELETE_PAYPAL.'<br /><br />'.$mInfo->description);
-                        $contents[] = array ('text' => '<br />'.xtc_draw_checkbox_field('paypaldelete').' '.BUTTON_MODULE_REMOVE);
-                        $contents[] = array ('align' => 'center', 'text' => '<br /><input type="submit" class="btn btn-default" onclick="this.blur();" value="'. BUTTON_START .'"><a class="btn btn-default" onclick="this.blur();" href="'.xtc_href_link(FILENAME_MODULES, 'set=' . $set . '&module=' . $_GET['module']).'">' . BUTTON_CANCEL . '</a>');
-                        break;
-                      // EOF - Tomcraft - 2009-10-03 - Paypal Express Modul
                       case 'edit':
                         $keys = '';
                         reset($mInfo->keys);

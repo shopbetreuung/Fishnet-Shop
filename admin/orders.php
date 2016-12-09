@@ -39,10 +39,19 @@ if(!defined('MAX_DISPLAY_ORDER_RESULTS')) {
   define('MAX_DISPLAY_ORDER_RESULTS', 30);
 }
 //New function
-function get_payment_name($payment_method) {
+function get_payment_name($payment_method, $order_id = '') {
   if (file_exists(DIR_FS_CATALOG.'lang/'.$_SESSION['language'].'/modules/payment/'.$payment_method.'.php')){
     include(DIR_FS_CATALOG.'lang/'.$_SESSION['language'].'/modules/payment/'.$payment_method.'.php');
-    $payment_method = constant(strtoupper('MODULE_PAYMENT_'.$payment_method.'_TEXT_TITLE'));
+    $text = ''; 
+    if ($payment_method == 'paypalplus' && (int)$order_id > 0) { 	  	 
+      require_once(DIR_FS_EXTERNAL.'paypal/classes/PayPalInfo.php'); 	  	 
+      $paypal = new PayPalInfo($payment_method); 	  	 
+      $payment_array = $paypal->get_payment_data($order_id); 	  	 
+      if (count($payment_array) > 0 && $payment_array['payment_method'] == 'pay_upon_invoice') { 	  	 
+        $text = ' - ' . MODULE_PAYMENT_PAYPALPLUS_INVOICE; 	  	 
+      } 	  	 
+    } 	  	 
+    $payment_method = constant(strtoupper('MODULE_PAYMENT_'.$payment_method.'_TEXT_TITLE')) . $text;
   }
   return $payment_method;
 }
@@ -825,7 +834,7 @@ require (DIR_WS_INCLUDES.'header.php');
               </tr>
               <tr>
                 <td class="main"><b><?php echo ENTRY_PAYMENT_METHOD; ?></b></td>
-                <td class="main"><?php echo get_payment_name($order->info['payment_method']) . ' ('.$order->info['payment_method'].')'; ?></td>
+                <td class="main"><?php echo get_payment_name($order->info['payment_method'], $order->info['order_id']) . ' ('.$order->info['payment_method'].')'; ?></td>
               </tr>
               <?php
               
@@ -1588,7 +1597,7 @@ elseif ($action == 'custom_action') {
                         if (xtc_not_null($oInfo->last_modified)) {
                         $contents[] = array ('text' => TEXT_DATE_ORDER_LAST_MODIFIED.' '.xtc_date_short($oInfo->last_modified));
                       }
-                      $contents[] = array ('text' => '<br />'.TEXT_INFO_PAYMENT_METHOD.' '.get_payment_name($oInfo->payment_method).' ('.$oInfo->payment_method.')');
+                      $contents[] = array ('text' => '<br />'.TEXT_INFO_PAYMENT_METHOD.' '.get_payment_name($oInfo->payment_method, $oInfo->orders_id).' ('.$oInfo->payment_method.')');
                       $order = new order($oInfo->orders_id);
                       $contents[] = array ('text' => '<br /><br />'.sizeof($order->products).'&nbsp;'.TEXT_PRODUCTS);
                       for ($i = 0; $i < sizeof($order->products); $i ++) {

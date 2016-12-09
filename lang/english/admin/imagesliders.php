@@ -30,6 +30,7 @@ define('TEXT_IMAGE_NONEXISTENT', 'IMAGE DOES NOT EXIST');
 define('TEXT_NEW_INTRO', 'Insert a new image with all datas.');
 define('TEXT_EDIT_INTRO', 'Bitte f&uuml;hren Sie alle notwendigen &Auml;nderungen durch');
 define('TEXT_IMAGESLIDERS_TITLE', 'Title for image:');
+define('TEXT_IMAGESLIDERS_ALT', 'Alternative text for image:');
 define('TEXT_IMAGESLIDERS_NAME', 'Name for image entry:');
 define('TEXT_CATEGORIES', 'Categories:');
 define('TEXT_IMAGESLIDERS_IMAGE', 'Image:');

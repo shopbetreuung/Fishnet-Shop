@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id$
+   $Id: english.php 10436 2016-11-23 18:30:56Z GTB $
 
    modified eCommerce Shopsoftware
    http://www.modified-shop.org
@@ -75,6 +75,29 @@ $lang_array = array(
   // status
   'TEXT_PAYPAL_NO_STATUS_CHANGE' => 'no status change',
   
+  // template
+  'TEXT_PAYPALINSTALLMENT_HEADING' => 'Pay easily in monthly installments',
+  'TEXT_PAYPALINSTALLMENT_DESCRIPTION' => 'You can choose your installment payment and the appropriate financing plan as part of the ordering process. Your application is completely online and will be completed in a few steps here in the shop.',
+
+  'TEXT_PAYPALINSTALLMENT_RATING_PLAN' => 'Financing from %s with %s Installments Powered by PayPal',
+  'TEXT_PAYPALINSTALLMENT_RATING_PLAN_SHORT' => 'Financing from %s in the month with',
+
+  'TEXT_PAYPALINSTALLMENT_LEGAL' => 'Representative example according to &sect; 6a PAngV',
+  'TEXT_PAYPALINSTALLMENT_NOMINAL_RATE' => 'Nominal rate',
+  'TEXT_PAYPALINSTALLMENT_APR' => 'Effective interest rate',
+  'TEXT_PAYPALINSTALLMENT_TOTAL_COST' => 'Total amount',
+  'TEXT_PAYPALINSTALLMENT_TOTAL_NETTO' => 'Net loan amount',
+  'TEXT_PAYPALINSTALLMENT_TOTAL_INTEREST' => 'Interest',
+  'TEXT_PAYPALINSTALLMENT_MONTHLY_PAYMENT' => 'Monthly installments of each',
+
+  'TEXT_PAYPALINSTALLMENT_NOTICE' => 'Financing available from %s to %s basket value with',
+  'TEXT_PAYPALINSTALLMENT_NOTICE_PRODUCT' => 'You can also finance this product!',
+  'TEXT_PAYPALINSTALLMENT_NOTICE_CART' => 'You can also finance this basket!',
+  'TEXT_PAYPALINSTALLMENT_NOTICE_PAYMENT' => 'You can also finance this order!',
+  
+  'TEXT_PAYPALINSTALLMENT_CREDITOR' => 'Borrower',
+  'TEXT_PAYPALINSTALLMENT_INFO_LINK' => 'Information on possible rates',
+
 );
 
 

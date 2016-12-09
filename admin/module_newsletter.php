@@ -253,14 +253,7 @@
 
   require (DIR_WS_INCLUDES.'head.php');
 ?>
-<?php
-  if (USE_WYSIWYG=='true') {
-    $query=xtc_db_query("SELECT code FROM ". TABLE_LANGUAGES ." WHERE languages_id='".$_SESSION['languages_id']."'");
-    $data=xtc_db_fetch_array($query);
-    if ($_GET['action']!='')
-      echo xtc_wysiwyg('newsletter',$data['code']);
-  }
-?>
+
 </head>
 <body marginwidth="0" marginheight="0" topmargin="0" bottommargin="0" leftmargin="0" rightmargin="0" bgcolor="#FFFFFF">
 <!-- header //-->
@@ -546,6 +539,14 @@
 <!-- footer //-->
 <?php require(DIR_WS_INCLUDES . 'footer.php'); ?>
 <!-- footer_eof //-->
+<?php
+if (USE_WYSIWYG=='true') {
+	$query=xtc_db_query("SELECT code FROM ". TABLE_LANGUAGES ." WHERE languages_id='".$_SESSION['languages_id']."'");
+	$data=xtc_db_fetch_array($query);
+	if ($_GET['action']!='')
+	  echo xtc_wysiwyg('newsletter',$data['code']);
+}
+?>
 </body>
 </html>
 <?php require(DIR_WS_INCLUDES . 'application_bottom.php'); ?>

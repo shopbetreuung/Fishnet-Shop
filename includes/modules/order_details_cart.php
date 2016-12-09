@@ -143,6 +143,9 @@ if ($_SESSION['customers_status']['customers_status_show_price'] == '1') {
   $total_content .= NOT_ALLOWED_TO_SEE_PRICES.'<br />';
 }
 
+## PayPal
+include(DIR_FS_EXTERNAL.'paypal/modules/order_details_cart.php');
+
 if (SHOW_SHIPPING == 'true') {
   $module_smarty->assign('SHIPPING_INFO', $main->getShippingLink()); //web28 -2012-09-29 - use main function
 }

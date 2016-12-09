@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id$
+   $Id: PayPalAdmin.php 10066 2016-07-12 12:26:45Z GTB $
 
    modified eCommerce Shopsoftware
    http://www.modified-shop.org
@@ -97,10 +97,10 @@ class PayPalAdmin extends PayPalPayment {
     // set Presentation
     $presentation = new Presentation();
     if ($config['presentation']['logo_image'] != '') {
-      $presentation->setLogoImage($config['presentation']['logo_image']);
+      $presentation->setLogoImage(substr($config['presentation']['logo_image'], 0, 127));
     }
     if ($config['presentation']['brand_name'] != '') {
-      $presentation->setBrandName($config['presentation']['brand_name']);
+      $presentation->setBrandName(substr($config['presentation']['brand_name'], 0, 127));
     }
     if ($config['presentation']['locale_code'] != '') {
       $presentation->setLocaleCode(strtoupper($config['presentation']['locale_code']));
@@ -143,10 +143,10 @@ class PayPalAdmin extends PayPalPayment {
     // set Presentation
     $presentation = new Presentation();
     if ($config['presentation']['logo_image'] != '') {
-      $presentation->setLogoImage($config['presentation']['logo_image']);
+      $presentation->setLogoImage(substr($config['presentation']['logo_image'], 0, 127));
     }
     if ($config['presentation']['brand_name'] != '') {
-      $presentation->setBrandName($config['presentation']['brand_name']);
+      $presentation->setBrandName(substr($config['presentation']['brand_name'], 0, 127));
     }
     if ($config['presentation']['locale_code'] != '') {
       $presentation->setLocaleCode(strtoupper($config['presentation']['locale_code']));
@@ -236,6 +236,8 @@ class PayPalAdmin extends PayPalPayment {
     if ($id == $this->get_config('PAYPAL_STANDARD_PROFILE')) {
       $this->delete_config('PAYPAL_STANDARD_PROFILE');
     }
+
+    $this->delete_config($id, 'config_value');
   }
 
 

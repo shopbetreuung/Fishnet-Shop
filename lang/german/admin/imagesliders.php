@@ -30,6 +30,7 @@ define('TEXT_IMAGE_NONEXISTENT', 'BILD NICHT VORHANDEN');
 define('TEXT_NEW_INTRO', 'Bitte legen Sie das neue Bild mit allen relevanten Daten ein.');
 define('TEXT_EDIT_INTRO', 'Bitte f&uuml;hren Sie alle notwendigen &Auml;nderungen durch');
 define('TEXT_IMAGESLIDERS_TITLE', 'Title f&uuml;r Bild:');
+define('TEXT_IMAGESLIDERS_ALT', 'Alternativer Text f&uuml;r Bild:');
 define('TEXT_IMAGESLIDERS_NAME', 'Name f&uuml;r Bildeintrag:');
 define('TEXT_CATEGORIES', 'Kategorien (cPaths | 0 f&uuml;r Startseite | mehrere Kommagetrennt)');
 define('TEXT_IMAGESLIDERS_IMAGE', 'Bild:');

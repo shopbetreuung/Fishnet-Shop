@@ -16,13 +16,15 @@
 
 function xtc_wysiwyg($type, $lang, $langID = '') {
 
-  $js_src = DIR_WS_MODULES .'fckeditor/fckeditor.js';
-  $path = DIR_WS_MODULES .'fckeditor/';
-  $filemanager = DIR_WS_ADMIN.'fck_wrapper.php?Connector='.DIR_WS_MODULES . 'fckeditor/editor/filemanager/connectors/php/connector.php&ServerPath='. DIR_WS_CATALOG;
-  $file_path = '&Type=File';
-  $image_path = '&Type=Image';
-  $flash_path = '&Type=Flash';
-  $media_path = '&Type=Media';
+  $js_src = DIR_WS_MODULES .'ckeditor/ckeditor.js';
+  $path = DIR_WS_MODULES .'ckeditor/';
+  $filemanager = DIR_WS_MODULES.'kcfinder/browse.php?opener=ckeditor&cms=shophelfer&lang='.$lang;
+  $file_path = '&type=files';
+  $image_path = '&type=images';
+  $flash_path = '&type=flash';
+  $media_path = '&type=flash';
+	
+  $editor = '&editor=ckeditor';
 
   $sid = '&'.session_name() . '=' . session_id(); //web28 security fix
   switch($type) {
@@ -239,6 +241,7 @@ function xtc_wysiwyg($type, $lang, $langID = '') {
 				   ';
 		break;
   }
+	
   return $val;
 }
 ?>

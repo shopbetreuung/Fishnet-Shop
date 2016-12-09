@@ -88,13 +88,7 @@
 ?>
 <!doctype html public "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html <?php echo HTML_PARAMS; ?>>
-<?php if (USE_WYSIWYG=='true') {
-if (!isset($_GET['action'])) {
-$query=xtc_db_query("SELECT code FROM ". TABLE_LANGUAGES ." WHERE languages_id='".$_SESSION['languages_id']."'");
-$data=xtc_db_fetch_array($query);
-echo xtc_wysiwyg('mail',$data['code']);
-}
-}
+<?php
 require (DIR_WS_INCLUDES.'head.php');
 ?>
 </head>
@@ -250,6 +244,15 @@ require (DIR_WS_INCLUDES.'head.php');
 <?php require(DIR_WS_INCLUDES . 'footer.php'); ?>
 <!-- footer_eof //-->
 <br />
+<?php
+if (USE_WYSIWYG=='true') {
+	if (!isset($_GET['action'])) {
+	$query=xtc_db_query("SELECT code FROM ". TABLE_LANGUAGES ." WHERE languages_id='".$_SESSION['languages_id']."'");
+	$data=xtc_db_fetch_array($query);
+	echo xtc_wysiwyg('mail',$data['code']);
+	}
+}
+?>
 </body>
 </html>
 <?php require(DIR_WS_INCLUDES . 'application_bottom.php'); ?>

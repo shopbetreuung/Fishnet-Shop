@@ -299,17 +299,17 @@
              <?php echo $lng_image. '&nbsp;'.TEXT_PRODUCTS_URL . '&nbsp;<small>' . TEXT_PRODUCTS_URL_WITHOUT_HTTP . '</small>'; ?><?php echo xtc_draw_input_field('products_url[' . $languages[$i]['id'] . ']', (($products_url[$languages[$i]['id']]) ? stripslashes($products_url[$languages[$i]['id']]) : $products_desc_fields['products_url']),'style="width:70%" maxlength="255"'); ?>
           </div>
           <!-- input boxes desc, meta etc -->
-          <div class="main col-xs-12" >
+          <div class="main col-xs-12 productspad" >
              <b><?php echo $lng_image . '&nbsp;' . TEXT_PRODUCTS_DESCRIPTION; ?></b><br />
           </div>
-          <div class=" col-xs-12" >
+          <div class=" col-xs-12 productspad" >
              <?php echo xtc_draw_textarea_field('products_description_' . $languages[$i]['id'], 'soft', '103', '30', (isset($products_description[$languages[$i]['id']]) ? stripslashes($products_description[$languages[$i]['id']]) : $products_desc_fields['products_description'])); ?>
           </div>
           <div style="height: 8px;"></div>
-          <div class=" col-xs-12" >
+          <div class=" col-xs-12 productspad" >
             <b><?php echo $lng_image . '&nbsp;' . TEXT_PRODUCTS_SHORT_DESCRIPTION; ?></b><br />
           </div>
-          <div class=" col-xs-12" >
+          <div class=" col-xs-12 productspad" >
             <?php echo xtc_draw_textarea_field('products_short_description_' . $languages[$i]['id'], 'soft', '103', '20', (isset($products_short_description[$languages[$i]['id']]) ? stripslashes($products_short_description[$languages[$i]['id']]) : $products_desc_fields['products_short_description'])); ?>
           </div>
           <div valign="top" class="main" style="padding: 3px; line-height:20px;">

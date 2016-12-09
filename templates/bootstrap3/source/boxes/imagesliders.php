@@ -40,6 +40,7 @@ if (!$box_smarty->is_cached(CURRENT_TEMPLATE.'/boxes/box_imagesliders.html', $ca
 	$imagesliders_query = "SELECT DISTINCT
 						 i.imagesliders_id,
                          ii.imagesliders_title,
+						 ii.imagesliders_alt,
                          ii.imagesliders_url,
 						 ii.imagesliders_url_target,
 						 ii.imagesliders_url_typ,

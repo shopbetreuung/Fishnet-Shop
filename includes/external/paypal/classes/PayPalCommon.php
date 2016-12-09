@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id$
+   $Id: PayPalCommon.php 10470 2016-11-30 11:46:51Z GTB $
 
    modified eCommerce Shopsoftware
    http://www.modified-shop.org
@@ -50,7 +50,9 @@ class PayPalCommon extends PayPalAuth {
       } else {
         return mb_convert_encoding($string, "UTF-8", $_SESSION['language_charset']);
       }
-    }    
+    }
+    
+    return $string;  
   }
 
   
@@ -67,6 +69,28 @@ class PayPalCommon extends PayPalAuth {
   }
   
   
+  function format_price_currency($price) {
+    $xtPrice = new xtcPrice('EUR', $_SESSION['customers_status']['customers_status_id']);
+    return $xtPrice->xtcFormat($price, true);
+  }
+
+
+	function get_min_installment_amount() {
+		return array(
+		  'amount' => 99.00, 
+		  'currency' => 'EUR',
+		);
+	}
+
+
+	function get_max_installment_amount() {
+		return array(
+		  'amount' => 5000.00, 
+		  'currency' => 'EUR',
+		);
+	}
+
+
   function save_config($sql_data_array) {
     if (is_array($sql_data_array) && count($sql_data_array) > 0) {
       foreach ($sql_data_array as $sql_data) {        
@@ -77,8 +101,8 @@ class PayPalCommon extends PayPalAuth {
   }
 
 
-  function delete_config($config_key) {
-    xtc_db_query("DELETE FROM ".TABLE_PAYPAL_CONFIG." WHERE config_key = '".xtc_db_input($config_key)."'");
+  function delete_config($value, $col = 'config_key') {
+    xtc_db_query("DELETE FROM ".TABLE_PAYPAL_CONFIG." WHERE ".$col." = '".xtc_db_input($value)."'");
   }
 
 
@@ -92,14 +116,22 @@ class PayPalCommon extends PayPalAuth {
   }
 
 
-  function get_totals($totals, $calc_total = false) {
-        
+  function get_totals($totals, $calc_total = false, $subtotal = 0) {
+    
+    for ($i = 0, $n = sizeof($totals); $i < $n; $i ++) {
+      switch(((isset($totals[$i]['code'])) ? $totals[$i]['code'] : $totals[$i]['class'])) {
+        case 'ot_subtotal':
+          $sortorder_subtotal = $totals[$i]['sort_order'];
+          break;
+      }
+    }
+    
     for ($i = 0, $n = sizeof($totals); $i < $n; $i ++) {
       switch(((isset($totals[$i]['code'])) ? $totals[$i]['code'] : $totals[$i]['class'])) {
         case 'ot_subtotal_no_tax':
           break;
         case 'ot_subtotal':
-          $this->details->setSubtotal($this->details->getSubtotal() + $totals[$i]['value']);
+          $this->details->setSubtotal((($subtotal > 0) ? $subtotal : $totals[$i]['value']));
           break;
         case 'ot_total':
           $this->amount->setTotal($totals[$i]['value']);
@@ -115,45 +147,58 @@ class PayPalCommon extends PayPalAuth {
             $this->details->setTax($this->details->getTax() + $totals[$i]['value']);
           }
           break;
-        /*           
-        case 'ot_discount':
-        case 'ot_bonus_fee':
-        case 'ot_coupon':
-        case 'ot_gv':
-          $this->details->setShippingDiscount($this->details->getShippingDiscount() + (($totals[$i]['value'] > 0) ? $totals[$i]['value'] : $totals[$i]['value'] * (-1)));
-          break;
-        case 'ot_ps_fee':
-        case 'ot_cod_fee':
-        case 'ot_loworderfee':
-          $this->details->setHandlingFee($this->details->getHandlingFee() + $totals[$i]['value']);
-          break;
-        */
         default:
-          if($totals[$i]['value'] < 0) {
-            $this->details->setShippingDiscount($this->details->getShippingDiscount() + $totals[$i]['value']);
-          } else {
-            $this->details->setHandlingFee($this->details->getHandlingFee() + $totals[$i]['value']);
+          if ($totals[$i]['sort_order'] > $sortorder_subtotal) {
+            if($totals[$i]['value'] < 0) {
+              $this->details->setShippingDiscount($this->details->getShippingDiscount() + $totals[$i]['value']);
+            } else {
+              $this->details->setHandlingFee($this->details->getHandlingFee() + $totals[$i]['value']);
+            }
           }
           break;
       }
     }
+    
+    $total = $this->calc_total();
+    $amount_total = $this->amount->getTotal();
 
     if ($calc_total === true) {
-      $total = 0;
-      $total += $this->details->getSubtotal();
-      $total += $this->details->getShipping();
-      $total += $this->details->getTax();
-      $total += $this->details->getHandlingFee();
-      $total += $this->details->getShippingDiscount();
-      $total += $this->details->getInsurance();
-      $total += $this->details->getGiftWrap();
-      $total += $this->details->getFee();
-  
       $this->amount->setTotal($total);
+    } elseif ($_SESSION['customers_status']['customers_status_show_price_tax'] == 0 
+        && $_SESSION['customers_status']['customers_status_add_tax_ot'] == 1
+        && $this->details->getShippingDiscount() == 0
+        ) 
+    {      
+      if ((string)$amount_total != (string)$total) {
+        $this->details->setTax($this->details->getTax() + ($amount_total - $total));
+      } 
+    } else {
+      if ((string)$amount_total != (string)$total) {
+        if ($this->details->getShippingDiscount() < 0) {
+          $this->details->setShippingDiscount($this->details->getShippingDiscount() + ($amount_total - $total));
+        } elseif ($this->details->setHandlingFee() > 0) {
+          $this->details->setHandlingFee($this->details->getHandlingFee() + ($amount_total - $total));
+        }
+      }
     }
   }
 
-
+  
+  function calc_total() {
+    $total = 0;
+    $total += $this->details->getSubtotal();
+    $total += $this->details->getShipping();
+    $total += $this->details->getTax();
+    $total += $this->details->getHandlingFee();
+    $total += $this->details->getShippingDiscount();
+    $total += $this->details->getInsurance();
+    $total += $this->details->getGiftWrap();
+    $total += $this->details->getFee();
+    
+    return $total;
+  }
+  
+  
   function fix_totals($totals) {
           
     for ($i = 0, $n = sizeof($totals); $i < $n; $i ++) {
@@ -164,6 +209,20 @@ class PayPalCommon extends PayPalAuth {
           break;            
       }
     }
+  }
+
+
+  function check_discount() {
+    if ($this->details->getHandlingFee() > 0
+        || $this->details->getShippingDiscount() < 0
+        || $this->details->getInsurance() > 0
+        || $this->details->getGiftWrap() > 0
+        || $this->details->getFee() > 0
+        )
+    {
+      return true;
+    }
+    return false;
   }
 
 
@@ -433,6 +492,75 @@ class PayPalCommon extends PayPalAuth {
     return $address_id;
   }
   
+  
+  function get_presentment_details($amount, $currency, $iso_code_2, $type, $single = true) {
+    global $request_type;
+    
+    $pp_smarty = new Smarty();
+    
+    $min_amount = $this->get_min_installment_amount();
+    $max_amount = $this->get_max_installment_amount();
+
+    if ((string)$amount >= (string)$min_amount['amount']
+        && (string)$amount <= (string)$max_amount['amount']
+        )
+    {
+      if ($this->get_config('MODULE_PAYMENT_'.strtoupper($this->code).'_UPSTREAM_'.strtoupper($type)) == '1') {
+        $presentment_array = $this->get_presentment($amount, $currency, $iso_code_2, $single);
+        $pp_smarty->assign('presentment', array($presentment_array));
+        if ($type == 'payment') {
+          $pp_smarty->assign('details', '1');
+          $pp_smarty->assign('logo_image', xtc_image(DIR_WS_IMAGES.'icons/pp_credit-german_v_rgb.png'));
+        } else {
+          $pp_smarty->assign('details', (((int)$presentment_array['apr'] == 0) ? '0' : '1'));
+          if ((int)$presentment_array['apr'] == 0) {
+            $pp_smarty->assign('logo_image', xtc_image(DIR_WS_IMAGES.'icons/pp_credit-german_h_rgb.png'));
+          }
+        }
+      } else {
+        $pp_smarty->assign('logo_image', xtc_image(DIR_WS_IMAGES.'icons/pp_credit-german_h_rgb.png'));
+      }
+    
+      if (!defined('POPUP_CONTENT_LINK_PARAMETERS')) {
+        define('POPUP_CONTENT_LINK_PARAMETERS', '&KeepThis=true&TB_iframe=true&height=400&width=600');
+      }
+      if (!defined('POPUP_CONTENT_LINK_CLASS')) {
+        define('POPUP_CONTENT_LINK_CLASS', 'thickbox');
+      }
+      $link_parameters = defined('TPL_POPUP_CONTENT_LINK_PARAMETERS') ? TPL_POPUP_CONTENT_LINK_PARAMETERS : POPUP_CONTENT_LINK_PARAMETERS;
+      $link_class = defined('TPL_POPUP_CONTENT_LINK_CLASS') ? TPL_POPUP_CONTENT_LINK_CLASS : POPUP_CONTENT_LINK_CLASS;
+      $link = xtc_href_link('callback/paypal/paypalinstallment.php', 'amount='.$amount.'&country='.$iso_code_2.$link_parameters, $request_type);
+
+      $store_owner = explode("\n", STORE_NAME_ADDRESS);
+      for ($i=0, $n=count($store_owner); $i<$n; $i++) {
+        if (trim($store_owner[$i]) == '') {
+          unset($store_owner[$i]);
+        } else {
+          $store_owner[$i] = trim($store_owner[$i]);
+        }
+      }
+      $store_owner = implode(', ', $store_owner);
+
+      $pp_smarty->assign($type, true);
+      $pp_smarty->assign('creditor', $store_owner);
+      $pp_smarty->assign('link_class', $link_class);
+      $pp_smarty->assign('link', $link);
+      $pp_smarty->assign('notice', constant('TEXT_PAYPALINSTALLMENT_NOTICE_'.strtoupper($type)));
+      $pp_smarty->assign('total_amount', $this->format_price_currency($amount));
+    } else {
+      $pp_smarty = new Smarty();
+      $pp_smarty->assign($type, true);
+      $pp_smarty->assign('nopresentment', true);
+      $pp_smarty->assign('min_amount', $this->format_price_currency($min_amount['amount']));
+      $pp_smarty->assign('max_amount', $this->format_price_currency($max_amount['amount']));
+      $pp_smarty->assign('logo_image', xtc_image(DIR_WS_IMAGES.'icons/pp_credit-german_h_rgb.png'));
+    }
+
+    $pp_smarty->assign('language', $_SESSION['language']);
+    $presentment = $pp_smarty->fetch(DIR_FS_EXTERNAL.'paypal/templates/presentment_info.html');
+    
+    return $presentment;
+  }
   
 }
 ?>

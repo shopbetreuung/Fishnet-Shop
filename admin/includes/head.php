@@ -47,7 +47,7 @@
 			$('.dropdown-submenu > a').submenupicker();
 		})
 	</script>
-
+  <script type="text/javascript" src="includes/javascript/ckeditorrewriter.js"></script>
     
 	
 	

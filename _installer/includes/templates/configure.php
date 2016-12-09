@@ -21,13 +21,13 @@ $file_contents =
 '// Define the webserver and path parameters' . PHP_EOL .
 '// * DIR_FS_* = Filesystem directories (local/physical)' . PHP_EOL .
 '// * DIR_WS_* = Webserver directories (virtual/URL)' . PHP_EOL .
-'  define(\'HTTP_SERVER\', \'' . $http_server . '\'); // eg, http://localhost - should not be empty for productive servers' . PHP_EOL .
-'  define(\'HTTPS_SERVER\', \'' . $https_server . '\'); // eg, https://localhost - should not be empty for productive servers' . PHP_EOL .
-'  define(\'ENABLE_SSL\', ' . (($_POST['ENABLE_SSL'] == 'true') ? 'true' : 'false') . '); // secure webserver for checkout procedure?' . PHP_EOL .
+'  define(\'HTTP_SERVER\', \'' . $_SESSION['configure']['HTTP_SERVER'] . '\'); // eg, http://localhost - should not be empty for productive servers' . PHP_EOL .
+'  define(\'HTTPS_SERVER\', \'' . $_SESSION['configure']['HTTPS_SERVER'] . '\'); // eg, https://localhost - should not be empty for productive servers' . PHP_EOL .
+'  define(\'ENABLE_SSL\', ' . (($_SESSION['configure']['ENABLE_SSL'] == 'true') ? 'true' : 'false') . '); // secure webserver for checkout procedure?' . PHP_EOL .
 //BOF - web28 - 2010.09.15 - using SSL proxy
-'  define(\'USE_SSL_PROXY\', ' . (($_POST['USE_SSL_PROXY'] == 'true') ? 'true' : 'false') . '); // using SSL proxy?' . PHP_EOL .
+'  define(\'USE_SSL_PROXY\', ' . (($_SESSION['configure']['USE_SSL_PROXY'] == 'true') ? 'true' : 'false') . '); // using SSL proxy?' . PHP_EOL .
 //EOF - web28 - 2010.09.15 - using SSL proxy
-'  define(\'DIR_WS_CATALOG\', \'' . $_POST['DIR_WS_CATALOG'] . '\'); // absolute path required' . PHP_EOL .
+'  define(\'DIR_WS_CATALOG\', \'' . $_SESSION['configure']['DIR_WS_CATALOG'] . '\'); // absolute path required' . PHP_EOL .
 //BOF - web28 - 2010.02.18 - STRATO ROOT PATCH
 '  define(\'DIR_FS_DOCUMENT_ROOT\', \'' . DIR_FS_DOCUMENT_ROOT . '\');' . PHP_EOL .
 '  define(\'DIR_FS_CATALOG\', \'' . DIR_FS_DOCUMENT_ROOT . '\');' . PHP_EOL .
@@ -50,10 +50,10 @@ $file_contents =
 '  define(\'DIR_FS_INC\', DIR_FS_CATALOG . \'inc/\');' . PHP_EOL .
 '' . PHP_EOL .
 '// define our database connection' . PHP_EOL .
-'  define(\'DB_SERVER\', \'' . $_POST['DB_SERVER'] . '\'); // eg, localhost - should not be empty for productive servers' . PHP_EOL .
-'  define(\'DB_SERVER_USERNAME\', \'' . $_POST['DB_SERVER_USERNAME'] . '\');' . PHP_EOL .
-'  define(\'DB_SERVER_PASSWORD\', \'' . $_POST['DB_SERVER_PASSWORD']. '\');' . PHP_EOL .
-'  define(\'DB_DATABASE\', \'' . $_POST['DB_DATABASE']. '\');' . PHP_EOL .
-'  define(\'USE_PCONNECT\', \'' . (($_POST['USE_PCONNECT'] == 'true') ? 'true' : 'false') . '\'); // use persistent connections?' . PHP_EOL .
-'  define(\'STORE_SESSIONS\', \'' . (($_POST['STORE_SESSIONS'] == 'files') ? '' : 'mysql') . '\'); // leave empty \'\' for default handler or set to \'mysql\'' . PHP_EOL .                     
+'  define(\'DB_SERVER\', \'' . $_SESSION['db']['DB_SERVER'] . '\'); // eg, localhost - should not be empty for productive servers' . PHP_EOL .
+'  define(\'DB_SERVER_USERNAME\', \'' . $_SESSION['db']['DB_SERVER_USERNAME'] . '\');' . PHP_EOL .
+'  define(\'DB_SERVER_PASSWORD\', \'' . $_SESSION['db']['DB_SERVER_PASSWORD']. '\');' . PHP_EOL .
+'  define(\'DB_DATABASE\', \'' . $_SESSION['db']['DB_DATABASE']. '\');' . PHP_EOL .
+'  define(\'USE_PCONNECT\', \'' . ('false') . '\'); // use persistent connections?' . PHP_EOL .
+'  define(\'STORE_SESSIONS\', \'' . ('mysql') . '\'); // leave empty \'\' for default handler or set to \'mysql\'' . PHP_EOL .                     
 '?>';

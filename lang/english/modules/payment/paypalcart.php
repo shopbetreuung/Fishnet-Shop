@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id$
+   $Id: paypalcart.php 10343 2016-10-26 11:54:18Z GTB $
 
    modified eCommerce Shopsoftware
    http://www.modified-shop.org
@@ -29,6 +29,8 @@ $lang_array = array(
 
   'MODULE_PAYMENT_PAYPALCART_TEXT_ERROR_HEADING' => 'Note',
   'MODULE_PAYMENT_PAYPALCART_TEXT_ERROR_MESSAGE' => 'PayPal payment has been canceled',
+
+  'TEXT_PAYPAL_CART_ACCOUNT_CREATED' => 'We have created a customer account with your PayPal E-Mail address. You can request the password for your new customer account later using the "Forgotten Password" function.',
 );
 
 

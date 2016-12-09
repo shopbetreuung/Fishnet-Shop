@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id$
+   $Id: paypal_config.php 10425 2016-11-23 13:29:31Z GTB $
 
    modified eCommerce Shopsoftware
    http://www.modified-shop.org
@@ -33,13 +33,13 @@ $lang_array = array(
   'TEXT_PAYPAL_CONFIG_INVOICE_PREFIX_INFO' => 'Frei w&auml;hlbare Zeichenfolge (Pr&auml;fix), die der Bestellnummer vorangestellt und f&uuml;r die Erzeugung der PayPal-Rechnungsnummer genutzt wird.<br />Dadurch k&ouml;nnen mehrere Shops mit nur einer PayPal App arbeiten. Konflikte bei gleichen Bestellnummern werden vermieden. Jede Bestellung erh&auml;lt eine eigene Rechnungs-Nummer im PayPal Konto.',
 
   'TEXT_PAYPAL_CONFIG_TRANSACTION' => 'Transaktion:',
-  'TEXT_PAYPAL_CONFIG_TRANSACTION_INFO' => 'W&auml;hlen Sie die Art der Transaktion.<br/><br/><b>Hinweis:</b> Bei PayPal Plus wird immer ein Sale gemacht.',
+  'TEXT_PAYPAL_CONFIG_TRANSACTION_INFO' => 'W&auml;hlen Sie die Art der Transaktion.<br/><br/><b>Hinweis:</b> Bei PayPal Plus und PayPal Ratenzahlung wird immer ein Sale gemacht.',
 
   'TEXT_PAYPAL_CONFIG_CAPTURE' => 'Manuell erfassen:',
   'TEXT_PAYPAL_CONFIG_CAPTURE_INFO' => 'Wollen Sie Zahlungen bei PayPal manuell erfassen (Capture)?<br/><br/><b>Hinweis:</b> Dazu ist es notwendig, dass die Transaktion auf Authorize gesetzt ist.',
 
   'TEXT_PAYPAL_CONFIG_CART' => 'Warenkorb:',
-  'TEXT_PAYPAL_CONFIG_CART_INFO' => 'Soll der Warenkorb zu PayPal &uuml;bertragen werden?',
+  'TEXT_PAYPAL_CONFIG_CART_INFO' => 'Soll der Warenkorb zu PayPal &uuml;bertragen werden?<br/><br/><b>Hinweis:</b> Diese Einstellung kann Probleme bei der Verwendung von ot-Modulen unter "Module" -> "Zusammenfassung" mit sich bringen, die einen Rabatt oder Aufschlag gew&auml;hren ("Rabatt [ot_discount]", "Rabatt Coupons [ot_coupon]", "Gutscheine [ot_gv]", "Rabatt &amp; Zuschlag auf Zahlungsarten [ot_payment]", etc.).<br/>Empfohlene Einstellung: "Nein"',
 
   'TEXT_PAYPAL_CONFIG_STATE_SUCCESS' => 'Status Erfolg:',
   'TEXT_PAYPAL_CONFIG_STATE_SUCCESS_INFO' => 'Status bei erfolgreicher Bestellung',
@@ -81,4 +81,5 @@ $PAYPAL_INST_ORDER_STATUS_PENDING_NAME = 'PayPal wartend';
 $PAYPAL_INST_ORDER_STATUS_CAPTURED_NAME = 'PayPal erfasst';
 $PAYPAL_INST_ORDER_STATUS_REFUNDED_NAME = 'PayPal erstattet';
 $PAYPAL_INST_ORDER_STATUS_REJECTED_NAME = 'PayPal abgelehnt';
+$PAYPAL_INST_ORDER_STATUS_ACCEPTED_NAME = 'PayPal akzeptiert';
 ?>

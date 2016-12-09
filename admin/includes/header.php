@@ -139,7 +139,7 @@
               <a class="feedbackbutton" name="feedbacksubmit" type="submit" title="Feedback senden" data-toggle="tooltip" data-placement="bottom" onclick="document.getElementById('feedbackform').submit();"><span class="glyphicon glyphicon-envelope"></span></a>
             </div>
 
-            <a class="feedbackbutton" id="feedbackbtn" title="Feedback senden" data-toggle="tooltip" data-placement="bottom"><span class="glyphicon glyphicon-envelope"></span></a>
+            <a class="feedbackbutton" id="feedbackbtn" title=" <?php echo (BOX_SEND_FEEDBACK) ; ?>" data-toggle="tooltip" data-placement="bottom"><span class="glyphicon glyphicon-envelope"></span></a>
           </form>
           <?php } else { ?>
           <div class="feedbacksent">
@@ -147,7 +147,7 @@
           </div>
           <?php } ?>
         </li>
-				<li class="topicon"><a href="<?php echo xtc_href_link('../index.php', '', 'NONSSL') ; ?>" data-toggle="tooltip" data-placement="bottom" title="zum Shop"><span class="glyphicon glyphicon-globe"></span></a></li>			
+				<li class="topicon"><a href="<?php echo xtc_href_link('../index.php', '', 'NONSSL') ; ?>" data-toggle="tooltip" data-placement="bottom" title=" <?php echo (BOX_TO_SHOP) ; ?>"><span class="glyphicon glyphicon-globe"></span></a></li>			
 				<li class="topicon"><a href="<?php echo xtc_href_link('credits.php', '', 'NONSSL') ; ?>" data-toggle="tooltip" data-placement="bottom" title=" <?php echo (BOX_CREDITS) ; ?>"><span class="glyphicon glyphicon-info-sign"></span></a></li>
 				<li class="topicon"><a href="http://www.shophelfer.com/wiki/index.php" target="_blank" data-toggle="tooltip" data-placement="bottom" title="Wiki"><span class="glyphicon glyphicon-book"></span></a></li>
 				<li class="topicon"><a href="<?php echo xtc_href_link('../logoff.php', '', 'NONSSL') ; ?>" data-toggle="tooltip" data-placement="bottom" title=" <?php echo (BOX_LOGOUT) ; ?>"><span class="glyphicon glyphicon-log-out"></span></a></li>

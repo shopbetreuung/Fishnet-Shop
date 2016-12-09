@@ -194,7 +194,7 @@ define('IMAGE_BUTTON_CHANGE_ADDRESS', 'Change address');
 define('IMAGE_BUTTON_CHECKOUT', 'Checkout');
 define('IMAGE_BUTTON_CONFIRM', 'Confirm'); // Needed for PayPal
 define('IMAGE_BUTTON_CONFIRM_ORDER', 'Buy');
-define('IMAGE_BUTTON_CONTINUE', 'Start page');
+define('IMAGE_BUTTON_CONTINUE', 'Continue');
 define('IMAGE_BUTTON_DELETE', 'Delete');
 define('IMAGE_BUTTON_LOGIN', 'Login');
 define('IMAGE_BUTTON_LOGIN_NEWSLETTER', 'Subscribe');

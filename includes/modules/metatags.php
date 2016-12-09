@@ -344,8 +344,7 @@ switch(basename($PHP_SELF)) {
     // Sind wir in einer Kategorie?
     if(!empty($current_category_id)) {
       $categories_meta_query = xtDBquery("
-        select  categories_meta_keywords,
-                categories_meta_description,
+        select  categories_meta_description,
                 categories_meta_title,
                 categories_name,
                 categories_description

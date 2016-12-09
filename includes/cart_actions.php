@@ -240,7 +240,7 @@ if (xtc_not_null($action)) {
     // BOF - Tomcraft - 2011-02-01 - Paypal Express Modul
     case 'paypal_express_checkout':
       if (defined('MODULE_PAYMENT_PAYPALEXPRESS_STATUS')	 
-          && MODULE_PAYMENT_PAYPALEXPRESS_STATUS == 'True') 	  	 
+          && MODULE_PAYMENT_PAYPALEXPRESS_STATUS == 'true') 	  	 
       { 	  	 
         if (!is_object($product)) { 	  	 
           require_once(DIR_WS_CLASSES.'product.php'); 	  	 

@@ -1378,7 +1378,7 @@ INSERT INTO content_manager VALUES (19, 0, 0, '', 1, 'Revocation form', 'Revocat
 INSERT INTO content_manager VALUES (20, 0, 0, '', 2, 'Muster-Widerrufsformular', 'Muster-Widerrufsformular', '<p><strong>Muster-Widerrufsformular<br /></strong><br />F&uuml;gen Sie hier das Muster-Widerrufsformular ein.</p>', 0, 1, '', 1, 10, 0, '', '', '', NOW(), 1);
 INSERT INTO content_manager VALUES (21, 0, 0, '', 1, 'Shipping time', 'Shipping time', '<p><strong>Shipping time<br /></strong><br />Add your shipping time informations here.</p>', 0, 1, '', 1, 11, 0, '', '', '', NOW(), 1);
 INSERT INTO content_manager VALUES (22, 0, 0, '', 2, 'Lieferzeit', 'Lieferzeit', '<p><strong>Lieferzeit<br /></strong><br />F&uuml;gen Sie hier Ihre Angaben zur Lieferzeit ein.</p>', 0, 1, '', 1, 11, 0, '', '', '', NOW(), 1);
-INSERT INTO content_manager VALUES (23, 0, 0, '', 1, 'Template Box 1', 'Shipping', '<p>Hier k&ouml;nnten Informationen zum Versand stehen.</p><p>Diese Box k&ouml;nnen&nbsp;Sie im Adminbereich unter <b>Inhalte -&gt; Content Manager</b> - Eintrag Template Box 1 bearbeiten.</p>', 0, 2, '', 1, 12, 1, '', '', '', NOW(), 1);
+INSERT INTO content_manager VALUES (23, 0, 0, '', 1, 'Template Box 1', 'Shipping', '<p>Here could be information about shipping.</p>', 0, 2, '', 1, 12, 1, '', '', '', NOW(), 1);
 INSERT INTO content_manager VALUES (24, 0, 0, '', 2, 'Template Box 1', 'Versand', '<p>Hier k&ouml;nnten Informationen zum Versand stehen.</p><p>Diese Box k&ouml;nnen&nbsp;Sie im Adminbereich unter <b>Inhalte -&gt; Content Manager</b> - Eintrag Template Box 1 bearbeiten.</p>', 0, 2, '', 1, 12, 1, '', '', '', NOW(), 1);
 
 # 1 - Default, 2 - USA, 3 - Spain, 4 - Singapore, 5 - Germany , 6 - Taiwan , 7 - China, 8 - Great Britain

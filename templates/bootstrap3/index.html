@@ -79,14 +79,15 @@
 		<div class="col-xs-12">
 		{/if}
 		
+			{if !strstr($smarty.server.PHP_SELF, 'shopping_cart') && !strstr($smarty.server.PHP_SELF, 'checkout')}
 			<p class="visible-xs">
 				<button type="button" class="btn btn-primary" data-toggle="offcanvas">Men&uuml; &ouml;ffnen</button>
 			</p>
-			
-			{$box_IMAGESLIDER}
+			{/if}
 			
 			{if strstr ($smarty.server.PHP_SELF, 'index')}
 				{if $smarty.get.cPath==null and $smarty.get.manufacturers_id==''}
+					{$box_IMAGESLIDER}
 					{if $BANNER}{$BANNER}{/if}
 				{/if}
 			{/if}

@@ -21,7 +21,6 @@
 		  '<br />Bitte verwenden Sie folgende Daten f&uuml;r die &Uuml;berweisung des Gesamtbetrages:<br />' .
           '<br />Name der Bank: ' . MODULE_PAYMENT_EUTRANSFER_BANKNAM .
           '<br />Empf&auml;nger: ' . MODULE_PAYMENT_EUTRANSFER_BRANCH .
-          '<br />Bankleitzahl: ' . MODULE_PAYMENT_EUTRANSFER_ACCNAM .
           '<br />IBAN: ' . MODULE_PAYMENT_EUTRANSFER_ACCIBAN .
           '<br />BIC/SWIFT: ' . MODULE_PAYMENT_EUTRANSFER_BANKBIC .
 //        '<br />Sort Code: ' . MODULE_PAYMENT_EUTRANSFER_SORTCODE .
@@ -36,9 +35,6 @@
 
   define('MODULE_PAYMENT_EUTRANSFER_BANKNAM_TITLE','Name der Bank');
   define('MODULE_PAYMENT_EUTRANSFER_BANKNAM_DESC','Der volle Name der Bank');
-
-  define('MODULE_PAYMENT_EUTRANSFER_ACCNAM_TITLE','Bankleitzahl');
-  define('MODULE_PAYMENT_EUTRANSFER_ACCNAM_DESC','Die Bankleitzahl des angegebenen Kontos.');
 
   define('MODULE_PAYMENT_EUTRANSFER_ACCIBAN_TITLE','Bank Account IBAN');
   define('MODULE_PAYMENT_EUTRANSFER_ACCIBAN_DESC','International account id.<br />(Fragen Sie Ihre Bank, wenn Sie nicht sicher sind.)');

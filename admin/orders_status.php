@@ -86,43 +86,6 @@
             xtc_redirect(xtc_href_link(FILENAME_ORDERS_STATUS, 'page='.$_GET['page'].'&action='.$url_action.'&errors=1&oID=' . $orders_status_id));
         }
         break;
-
-      case 'deleteconfirm':
-        $oID = xtc_db_prepare_input($_GET['oID']);
-
-        $orders_status_query = xtc_db_query("select configuration_value from " . TABLE_CONFIGURATION . " where configuration_key = 'DEFAULT_ORDERS_STATUS_ID'");
-        $orders_status = xtc_db_fetch_array($orders_status_query);
-        if ($orders_status['configuration_value'] == $oID) {
-          xtc_db_query("update " . TABLE_CONFIGURATION . " set configuration_value = '' where configuration_key = 'DEFAULT_ORDERS_STATUS_ID'");
-        }
-
-        xtc_db_query("delete from " . TABLE_ORDERS_STATUS . " where orders_status_id = '" . xtc_db_input($oID) . "'");
-
-        xtc_redirect(xtc_href_link(FILENAME_ORDERS_STATUS, 'page=' . $_GET['page']));
-        break;
-
-      case 'delete':
-        $oID = xtc_db_prepare_input($_GET['oID']);
-
-        $status_query = xtc_db_query("select count(*) as count from " . TABLE_ORDERS . " where orders_status = '" . (int)$oID . "'");
-        $status = xtc_db_fetch_array($status_query);
-
-        $remove_status = true;
-        if ($oID == DEFAULT_ORDERS_STATUS_ID) {
-          $remove_status = false;
-          $messageStack->add(ERROR_REMOVE_DEFAULT_ORDER_STATUS, 'error');
-        } elseif ($status['count'] > 0) {
-          $remove_status = false;
-          $messageStack->add(ERROR_STATUS_USED_IN_ORDERS, 'error');
-        } else {
-          $history_query = xtc_db_query("select count(*) as count from " . TABLE_ORDERS_STATUS_HISTORY . " where orders_status_id = '" . xtc_db_input($oID) . "'");
-          $history = xtc_db_fetch_array($history_query);
-          if ($history['count'] > 0) {
-            $remove_status = false;
-            $messageStack->add(ERROR_STATUS_USED_IN_HISTORY, 'error');
-          }
-        }
-        break;
     }
   }
   require (DIR_WS_INCLUDES.'head.php');
@@ -256,7 +219,7 @@
       if (isset($oInfo) && is_object($oInfo)) {
         $heading[] = array('text' => '<b>' . $oInfo->orders_status_name . '</b>');
 
-        $contents[] = array('align' => 'center', 'text' => '<a class="btn btn-default" onclick="this.blur();" href="' . xtc_href_link(FILENAME_ORDERS_STATUS, 'page=' . $_GET['page'] . '&oID=' . $oInfo->orders_status_id . '&action=edit') . '#edit-box">' . BUTTON_EDIT . '</a> <a class="btn btn-default" onclick="this.blur();" href="' . xtc_href_link(FILENAME_ORDERS_STATUS, 'page=' . $_GET['page'] . '&oID=' . $oInfo->orders_status_id . '&action=delete') . '#edit-box">' . BUTTON_DELETE . '</a>');
+        $contents[] = array('align' => 'center', 'text' => '<a class="btn btn-default" onclick="this.blur();" href="' . xtc_href_link(FILENAME_ORDERS_STATUS, 'page=' . $_GET['page'] . '&oID=' . $oInfo->orders_status_id . '&action=edit') . '#edit-box">' . BUTTON_EDIT . '</a>');
 
         $orders_status_inputs_string = '';
         $languages = xtc_get_languages();

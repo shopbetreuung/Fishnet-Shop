@@ -115,7 +115,7 @@ if (defined('PAYPAL_API_VERSION')) {
       // Stand: 01.06.2009
       global $PHP_SELF;
       if (defined('MODULE_PAYMENT_PAYPALEXPRESS_STATUS')) {
-        if($_SESSION['allow_checkout'] == 'true' && $_SESSION['cart']->show_total()>0 && MODULE_PAYMENT_PAYPALEXPRESS_STATUS=='True') {
+        if($_SESSION['allow_checkout'] == 'true' && $_SESSION['cart']->show_total()>0 && MODULE_PAYMENT_PAYPALEXPRESS_STATUS=='true') {
           $unallowed_modules = explode(',', $_SESSION['customers_status']['customers_status_payment_unallowed']);
           if(!in_array('paypalexpress', $unallowed_modules)) {
             include(DIR_WS_LANGUAGES . $_SESSION['language'] . '/modules/payment/paypalexpress.php');
@@ -131,7 +131,7 @@ if (defined('PAYPAL_API_VERSION')) {
   /*************************************************************/
     function build_express_fehler_button(){
       // Stand: 01.06.2009
-      if(MODULE_PAYMENT_PAYPALEXPRESS_STATUS=='True'){
+      if(MODULE_PAYMENT_PAYPALEXPRESS_STATUS=='true'){
         include(DIR_WS_LANGUAGES . $_SESSION['language'] . '/modules/payment/paypalexpress.php');
         $alt=((defined('MODULE_PAYMENT_PAYPALEXPRESS_ALT_BUTTON'))? MODULE_PAYMENT_PAYPALEXPRESS_ALT_BUTTON :'PayPal');
         $source=((strtoupper($_SESSION['language_code'])=='DE')?'epaypal_de.gif':'epaypal_en.gif');

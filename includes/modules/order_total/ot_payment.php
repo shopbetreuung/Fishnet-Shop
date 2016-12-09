@@ -109,6 +109,9 @@ class ot_payment
         } else {
             $tod_shipping = 0;
         }
+		
+		// reset the sum for each payment fix
+		unset($this->discount['sum']);
 
         // Fix shipping tax (web28)
         if ($this->sort_order < MODULE_ORDER_TOTAL_SHIPPING_SORT_ORDER) {

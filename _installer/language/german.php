@@ -31,6 +31,7 @@
   define('TEXT_CONNECTION_ERROR','Eine Testverbindung zur Datenbank war nicht erfolgreich.');
   define('TEXT_CONNECTION_SUCCESS','Eine Testverbindung zur Datenbank war erfolgreich.');
   define('TEXT_DB_DATA_NOT_CORRECT', 'Die Verbindung zur Datenbank war nicht erfolgreich, &uuml;berpr&uuml;fen Sie bitte Ihre Daten');
+  define('TEXT_DB_DATA_NOT_ENTERED_ERROR', 'Bitte geben Sie alle Daten ein');
   define('TEXT_DB_ERROR','Folgender Fehler wurde zur&uuml;ckgegeben:');
   define('TEXT_DB_ERROR_1','Bitte klicken Sie auf <i>Back</i> um Ihre Datenbankeinstellungen zu &uuml;berpr&uuml;fen.');
   define('TEXT_DB_ERROR_2','Wenn Sie Hilfe zu Ihrer Datenbank ben&ouml;tigen, wenden Sie sich bitte an Ihren Provider.');

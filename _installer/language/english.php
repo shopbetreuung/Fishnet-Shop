@@ -30,6 +30,7 @@
   define('TEXT_CONNECTION_ERROR','The test connect to the database was NOT successful.');
   define('TEXT_CONNECTION_SUCCESS','The test connect to the database was successful.');
   define('TEXT_DB_DATA_NOT_CORRECT', 'The connection to the database was not successful, please check your data');
+  define('TEXT_DB_DATA_NOT_ENTERED_ERROR', 'Please enter all database data');
   define('TEXT_DB_ERROR','The error message returned is:');
   define('TEXT_DB_ERROR_1','Please click on the <i>Back</i> graphic to review your database server settings.');
   define('TEXT_DB_ERROR_2','If you require help with your database server settings, please consult your hosting company.');

@@ -5,3 +5,5 @@ INSERT INTO `email_manager` (`em_name` ,`em_language` ,`em_body` ,`em_delete` ,`
 
 UPDATE configuration SET use_function = 'xtc_cfg_pull_down_tax_classes' WHERE configuration_key = 'MODULE_ORDER_TOTAL_SHIPPING_TAX_CLASS';
 
+UPDATE `languages` SET `language_charset` = 'utf-8';
+

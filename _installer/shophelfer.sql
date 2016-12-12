@@ -2110,8 +2110,8 @@ INSERT INTO countries VALUES (241,'Montenegro','ME','MNE',1,1,0);
 INSERT INTO currencies VALUES (1,'Euro','EUR','','EUR',',','.','2','1.0000', NOW());
 
 # BOF - Tomcraft - 2009-11-08 - Added option to deactivate languages (status 1)
-INSERT INTO languages VALUES (1,'English','en','icon.gif','english',2,'iso-8859-15',1);
-INSERT INTO languages VALUES (2,'Deutsch','de','icon.gif','german',1,'iso-8859-15',1);
+INSERT INTO languages VALUES (1,'English','en','icon.gif','english',2,'utf-8',1);
+INSERT INTO languages VALUES (2,'Deutsch','de','icon.gif','german',1,'utf-8',1);
 # EOF - Tomcraft - 2009-11-08 - Added option to deactivate languages (status 1)
 
 INSERT INTO orders_status VALUES (1,1,'Pending', 0);

@@ -17,7 +17,9 @@ $profile_categories  = array();
 $helpwindows_text_arr = array();
 
 if( isset($_POST['profile']) ){
-  if( $_POST['profile']['default_profile']=='1' ) {
+  if (isset($_POST['profile']['profile_name']) && $_POST['profile']['profile_name'] != 'default') {
+    $profile_save_name = $_POST['profile']['profile_name'];
+  } elseif( $_POST['profile']['default_profile']=='1' ) {
     $profile_save_name='default';
   } else {
     $profile_save_name = 'profile_'.$_POST['profile']['languages_code'].'_'.$_POST['profile']['typeofbill'];
@@ -1010,7 +1012,7 @@ $operations = array(
   <tr align="left">
      <th class="BilldataTableContent" colspan="4">
         <div class='col-xs-12'>
-            <div class='col-xs-12 col-sm-1'><input type="button" name="saveprofile" id="SelectColor" class="btn btn-default" onclick="pdfkatalog.submit();" value="<?php echo $texts['button_generate'] ?>"></div>
+            <div class='col-xs-12 col-sm-1'><input type="hidden" name="profile[profile_name]" value="<?php echo $profile_name; ?>"><input type="button" name="saveprofile" id="SelectColor" class="btn btn-default" onclick="pdfkatalog.submit();" value="<?php echo $texts['button_generate'] ?>"></div>
             <div class='col-xs-12 col-sm-11'>
       <input type="checkbox" name="preview"><?php echo $texts['preview_at_example'] ?> 
                         <select name="example_order_id" class="form-control">

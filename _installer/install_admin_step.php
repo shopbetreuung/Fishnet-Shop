@@ -155,6 +155,7 @@ if (isset($_POST['action']) && ($_POST['action'] == 'process'))
 
             xtc_db_query("insert into " . TABLE_ADDRESS_BOOK . " (
                                 customers_id,
+                                entry_gender,
                                 entry_company,
                                 entry_firstname,
                                 entry_lastname,
@@ -165,6 +166,7 @@ if (isset($_POST['action']) && ($_POST['action'] == 'process'))
                                 entry_country_id,
                                 entry_zone_id) VALUES
                                 ('" . $admin_id . "',
+                                '" . xtc_db_input($gender) . "',
                                 '" . xtc_db_input($company) . "',
                                 '" . xtc_db_input($firstname) . "',
                                 '" . xtc_db_input($lastname) . "',
@@ -228,6 +230,7 @@ if (isset($_POST['action']) && ($_POST['action'] == 'process'))
                                 ('1','','','now()','','')");
             xtc_db_query("insert into " . TABLE_ADDRESS_BOOK . " (
                                 customers_id,
+                                entry_gender,
                                 entry_company,
                                 entry_firstname,
                                 entry_lastname,
@@ -238,6 +241,7 @@ if (isset($_POST['action']) && ($_POST['action'] == 'process'))
                                 entry_country_id,
                                 entry_zone_id) VALUES
                                 ('1',
+                                '" . xtc_db_input($gender) . "',
                                 '" . xtc_db_input($company) . "',
                                 '" . xtc_db_input($firstname) . "',
                                 '" . xtc_db_input($lastname) . "',

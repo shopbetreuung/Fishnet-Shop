@@ -1201,10 +1201,9 @@ require (DIR_WS_INCLUDES.'header.php');
             $profile_list = profile_list();
             $values=array();
             foreach( $profile_list as $p ) {
-              if( (strpos( $p['profile_name'], '_invoice' )!==false) || ($p['profile_name']=='default') ) {
+              if($p['typeofbill'] == 'invoice') {
                 $values_invoice[] = array( 'id' => $p['profile_name'], 'text'=>$p['profile_name'] );
-              }
-              if( (strpos( $p['profile_name'], '_delivnote' )!==false) ) {
+              } else {
                 $values_delivery[] = array( 'id' => $p['profile_name'], 'text'=>$p['profile_name'] );
               }
             }

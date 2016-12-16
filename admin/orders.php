@@ -91,7 +91,7 @@ function profile_automatic_select($order){
         $order_data = array(
             'country' => str_replace(' ', '',$order->billing['country']), 
             'shipping' => str_replace(' ', '',$order->info['shipping_method']), 
-            'payment' => str_replace(' ', '',get_payment_name($order->info['payment_method'])), 
+            'payment' => str_replace(' ', '',$order->info['payment_method']), 
             'order' => str_replace(' ', '',xtc_get_order_status_name($order->info['orders_status'])), 
             'customer' => str_replace(' ', '',$order->info['status_name']));
         #Going trough profiles with rules and comparing rule data with order data
@@ -258,11 +258,7 @@ if (($action == 'edit' || $action == 'update_order') && $order_exists) {
     
     if( isset($_POST['pdf_invoice_generate']) ) {
     
-    if(isset($_POST['profile_automatic_invoice'])){
-       $profile_name = profile_automatic_select($order);
-    } else {
       $profile_name         = $_POST['profile_name_invoice'];
-    }
       $pdfbill_deliverydate = $_POST['pdfbill_deliverydate'];
 
       if( $profile_name=='' ) {
@@ -1201,18 +1197,20 @@ require (DIR_WS_INCLUDES.'header.php');
             $profile_list = profile_list();
             $values=array();
             foreach( $profile_list as $p ) {
-              if( (strpos( $p['profile_name'], '_invoice' )!==false) || ($p['profile_name']=='default') ) {
+              if($p['typeofbill'] == 'invoice') {
                 $values_invoice[] = array( 'id' => $p['profile_name'], 'text'=>$p['profile_name'] );
-              }
-              if( (strpos( $p['profile_name'], '_delivnote' )!==false) ) {
+              } else {
                 $values_delivery[] = array( 'id' => $p['profile_name'], 'text'=>$p['profile_name'] );
               }
             }
 
             $lc=get_language_code($_SESSION['language']);
-            $input_profile_invoice = xtc_draw_pull_down_menu('profile_name_invoice', $values_invoice, 'profile_'.$lc.'_invoice');
+            $selected_invoice = '';
+            if (PDFBILL_AUTOMATIC_INVOICE == 'true') {
+              $selected_invoice = profile_automatic_select($order);
+            }
+            $input_profile_invoice = xtc_draw_pull_down_menu('profile_name_invoice', $values_invoice, $selected_invoice);
             $input_profile_delivey = xtc_draw_pull_down_menu('profile_name_delivery', $values_delivery, 'profile_'.$lc.'_delivnote');
-            $input_automatic_invoice = xtc_draw_checkbox_field('profile_automatic_invoice'); 
 
             $button_invoice_create    = xtc_button( BUTTON_PDFBILL_CREATE,   'submit', 'name="pdf_invoice_generate" class="btn btn-default"');
             $button_invoice_recreate  = xtc_button( BUTTON_PDFBILL_RECREATE, 'submit', 'name="pdf_invoice_generate" class="btn btn-default"');
@@ -1297,10 +1295,6 @@ require (DIR_WS_INCLUDES.'header.php');
                 <div class="main col-xs-12 col-sm-4"><?php echo $input_profile_invoice ?></div>
                 <div class="main col-xs-12 col-sm-4"><?php echo $buttonlist_invoice; ?>   </div>
               </div>
-              <div class='col-xs-12'>
-                <div class="main col-xs-12 col-sm-4"><?php echo PDFBILL_TXT_AUTOMATIC ?></div>
-                <div class="main col-xs-12 col-sm-4"><?php echo $input_automatic_invoice ?></div>
-              </div>
             <?php } ?>
               <div class='col-xs-12'>
                 <div class="main col-xs-12">&nbsp;</div>
@@ -1324,18 +1318,6 @@ require (DIR_WS_INCLUDES.'header.php');
               </div>
             </div>
             </form>
-            <?php #MN: Script to toggle profile select list when automatic profile select is on/off ?>
-            <script>
-            $('input[name=profile_automatic_invoice]').click(function(){
-            var el = $("select[name=profile_name_invoice]");
-            if (el){
-                el.removeAttr("disabled");
-                if (this.checked){
-                    el.attr("disabled", "disabled");     
-                }
-                }
-            });
-            </script>
           <?php } ?>
             <?php
 

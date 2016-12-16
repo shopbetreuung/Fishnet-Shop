@@ -1682,9 +1682,10 @@ INSERT INTO configuration (configuration_id, configuration_key, configuration_va
 INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'REVOCATION_ID', '9', 17, 14, NULL, NOW(), NULL, NULL);
 # EOF - Tomcraft - 2010-06-09 - predefined revocation_id
 INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'ENABLE_PDFBILL', 'false', 17, 15, NULL, NOW(), NULL, 'xtc_cfg_select_option(array(\'true\', \'false\'),');
+INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'PDFBILL_AUTOMATIC_INVOICE', 'false', 17, 16, NULL, now(), NULL, 'xtc_cfg_select_option(array(\'true\', \'false\'),');
 
 # BOF - DokuMan - 2010-08-13 - Google RSS Feed REFID configuration
-INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'GOOGLE_RSS_FEED_REFID', '', 17, 15, NULL, NOW(), NULL, NULL);
+INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'GOOGLE_RSS_FEED_REFID', '', 17, 17, NULL, NOW(), NULL, NULL);
 # EOF - DokuMan - 2010-08-13 - Google RSS Feed REFID configuration
 
 # BOF - Tutorial: Umsetzung der EU-Verbraucherrichtlinie vom 13.06.2014

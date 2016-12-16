@@ -5,5 +5,8 @@ INSERT INTO `email_manager` (`em_name` ,`em_language` ,`em_body` ,`em_delete` ,`
 
 UPDATE configuration SET use_function = 'xtc_cfg_pull_down_tax_classes' WHERE configuration_key = 'MODULE_ORDER_TOTAL_SHIPPING_TAX_CLASS';
 
+INSERT INTO `configuration` (`configuration_key`, `configuration_value`, `configuration_group_id`, `sort_order`, `last_modified`, `date_added`, `use_function`, `set_function`) VALUES ('PDFBILL_AUTOMATIC_INVOICE', 'false', '17', '16', NULL, now(), NULL, 'xtc_cfg_select_option(array(\'true\', \'false\'),');
+UPDATE configuration SET sort_order = 17 WHERE configuration_key = 'GOOGLE_RSS_FEED_REFID';
+
 UPDATE `languages` SET `language_charset` = 'utf-8';
 

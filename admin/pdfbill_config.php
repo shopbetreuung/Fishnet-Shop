@@ -19,8 +19,6 @@ $helpwindows_text_arr = array();
 if( isset($_POST['profile']) ){
   if (isset($_POST['profile']['profile_name']) && $_POST['profile']['profile_name'] != 'default') {
     $profile_save_name = $_POST['profile']['profile_name'];
-  } elseif( $_POST['profile']['default_profile']=='1' ) {
-    $profile_save_name='default';
   } else {
     $profile_save_name = 'profile_'.$_POST['profile']['languages_code'].'_'.$_POST['profile']['typeofbill'];
   }
@@ -53,6 +51,9 @@ if(isset($_POST['rules'])){
   
 //echo "profile_save_name=$profile_save_name<br>\n";
   profile_save($profile_save_name, $_POST['profile'], $checked_ids, $rules);
+  if( $_POST['profile']['default_profile']=='1' ) {
+    profile_save('default', $_POST['profile'], $checked_ids, $rules);
+  }
   $messageStack->add('Profile saved', 'ready');
 }
 

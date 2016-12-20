@@ -57,9 +57,9 @@ define('MODULE_PAYMENT_BANKTRANSFER_TEXT_NOTE2', 'If you do not want to send you
 define('MODULE_PAYMENT_BANKTRANSFER_TEXT_NOTE3', 'Fax form');
 define('MODULE_PAYMENT_BANKTRANSFER_TEXT_NOTE4', ' and sent it back to us.');
 
-define('JS_BANK_BLZ', '* Please enter your bank code!\n\n');
+define('JS_BANK_BLZ', '* Please enter your BIC!\n\n');
 define('JS_BANK_NAME', '* Please enter your name and bank!\n\n');
-define('JS_BANK_NUMBER', '* Please enter your account number!\n\n');
+define('JS_BANK_NUMBER', '* Please enter your IBAN!\n\n');
 define('JS_BANK_OWNER', '* Please enter the name of the account owner!\n\n');
 define('JS_BANK_OWNER_EMAIL', '* Please enter E-Mail-Address of the account owner!\n\n');
 

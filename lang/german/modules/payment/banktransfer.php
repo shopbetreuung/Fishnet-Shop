@@ -57,9 +57,9 @@ define('MODULE_PAYMENT_BANKTRANSFER_TEXT_NOTE2', 'Wenn Sie aus Sicherheitsbedenk
 define('MODULE_PAYMENT_BANKTRANSFER_TEXT_NOTE3', 'Faxformular');
 define('MODULE_PAYMENT_BANKTRANSFER_TEXT_NOTE4', ' herunterladen und uns ausgef&uuml;llt zusenden.');
 
-define('JS_BANK_BLZ', '* Bitte geben Sie die BLZ / BIC Ihrer Bank ein!\n\n');
+define('JS_BANK_BLZ', '* Bitte geben Sie die BIC Ihrer Bank ein!\n\n');
 define('JS_BANK_NAME', '* Bitte geben Sie den Namen Ihrer Bank ein!\n\n');
-define('JS_BANK_NUMBER', '* Bitte geben Sie Ihre Kontonummer / IBAN ein!\n\n');
+define('JS_BANK_NUMBER', '* Bitte geben Sie Ihre IBAN ein!\n\n');
 define('JS_BANK_OWNER', '* Bitte geben Sie den Namen des Kontoinhabers ein!\n\n');
 define('JS_BANK_OWNER_EMAIL', '* Bitte geben Sie die E-Mail-Adresse des Kontoinhabers ein!\n\n');
 

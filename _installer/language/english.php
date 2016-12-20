@@ -45,7 +45,6 @@
   define('TEXT_DB_CLIENT_VERSION_WARNING','Your MySQL version is too old. The shop requires at least version: 4.1.2 </br></br>You can continue the installation.</br>If the installation can not be correctly carried out, ask your provider for an update!');
   define('TEXT_DB_CLIENT_VERSION','Your MySQL version: ');
   // EOF - vr - 2010-01-14 - check MySQL *client* version
-  define('TEXT_DB_DATA_NOT_ENTERED_ERROR', 'Please enter all database data');
   // BOF - web28 - 2010-02-1014 - check FILE PATH
   define('TEXT_PATH_ERROR','<h1>Invalid path</h1>');
   define('TEXT_PATH_ERROR2','Regard! You have entered an invalid file path!');

@@ -273,7 +273,7 @@ function texts_html( $texts ) {
   
              'image' => array(                    // Decoimage (3)
                'headline' => array( 
-                 'headline'                               => 'Decobild (4):' ),
+                 'headline'                               => 'Bild (3):' ),
                'image_display' => array( 
                  'question'                               => 'Anzeige',
                  'chk_text'                               => 'anzeigen' ),

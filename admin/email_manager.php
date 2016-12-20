@@ -114,16 +114,6 @@ foreach($all_email_html_templates as $email_template_path){
 
 require (DIR_WS_INCLUDES.'head.php');
 
-// Removed email_manager wysiwyg editor because of the conflicts with Smarty template engine
-/*  
-  if (USE_WYSIWYG=='true') {
-    $query=xtc_db_query("SELECT code FROM ". TABLE_LANGUAGES ." WHERE languages_id='".$_SESSION['languages_id']."'");
-    $data=xtc_db_fetch_array($query);
-    if ($action != 'new_products_content' && $action != '')
-      echo xtc_wysiwyg('email_manager',$data['code']);
-  }
-*/
-
 ?>
 </head>
 <body>
@@ -285,12 +275,15 @@ require (DIR_WS_INCLUDES.'head.php');
     <?php require(DIR_WS_INCLUDES . 'footer.php'); ?>
     <!-- footer_eof //-->
     <?php
+    // Removed email_manager wysiwyg editor because of the conflicts with Smarty template engine
+    /*  
       if (USE_WYSIWYG=='true') {
         $query=xtc_db_query("SELECT code FROM ". TABLE_LANGUAGES ." WHERE languages_id='".$_SESSION['languages_id']."'");
         $data=xtc_db_fetch_array($query);
         if ($action != 'new_products_content' && $action != '')
           echo xtc_wysiwyg('email_manager',$data['code']);
       }
+      */
     ?>
   </body>
 </html>

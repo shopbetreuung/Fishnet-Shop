@@ -30,6 +30,7 @@
   define('TEXT_CONNECTION_ERROR','The test connect to the database was NOT successful.');
   define('TEXT_CONNECTION_SUCCESS','The test connect to the database was successful.');
   define('TEXT_DB_DATA_NOT_CORRECT', 'The connection to the database was not successful, please check your data');
+  define('TEXT_DB_DATA_NOT_ENTERED_ERROR', 'Please enter all database data');
   define('TEXT_DB_ERROR','The error message returned is:');
   define('TEXT_DB_ERROR_1','Please click on the <i>Back</i> graphic to review your database server settings.');
   define('TEXT_DB_ERROR_2','If you require help with your database server settings, please consult your hosting company.');
@@ -44,7 +45,6 @@
   define('TEXT_DB_CLIENT_VERSION_WARNING','Your MySQL version is too old. The shop requires at least version: 4.1.2 </br></br>You can continue the installation.</br>If the installation can not be correctly carried out, ask your provider for an update!');
   define('TEXT_DB_CLIENT_VERSION','Your MySQL version: ');
   // EOF - vr - 2010-01-14 - check MySQL *client* version
-  define('TEXT_DB_DATA_NOT_ENTERED_ERROR', 'Please enter all database data');
   // BOF - web28 - 2010-02-1014 - check FILE PATH
   define('TEXT_PATH_ERROR','<h1>Invalid path</h1>');
   define('TEXT_PATH_ERROR2','Regard! You have entered an invalid file path!');
@@ -78,7 +78,7 @@
   // index.php
   define('TITLE_SELECT_LANGUAGE','Select your language :');
   define('TEXT_WELCOME','Welcome');
-  define('TEXT_WELCOME_INDEX','<b>Welcome to shophelfer.com Shopsoftware</b><br /><br />The shophelfer.com Shopsoftware is an open source e-commerce solution under on going development by the shophelfer.com Shopsoftware community.<br /> Its feature packed out-of-the-box installation allows store owners to setup, run, and maintain their online stores with minimum effort and with no costs involved.<br />The shophelfer.com Shopsoftware combines open source solutions to provide a free and open development platform, which includes the powerful PHP web scripting language, the stable Apache web server, and the fast MySQL database server.<br /><br />With no restrictions or special requirements, the shophelfer.com Shopsoftware can be installed on on any environment that supports PHP 5.0 and MySQL, which includes Linux, Solaris, BSD, and Microsoft Windows environments.<br /><br />The shophelfer.com Shopsoftware is an open source community project, join our community and help us!');
+  define('TEXT_WELCOME_INDEX','<b>Welcome to shophelfer.com Shopsoftware</b><br /><br />The shophelfer.com Shopsoftware is an open source e-commerce solution that is constantly developed by Fishnet Services<br />Its out-of-the-box installation allows the shop owner to install, run and manage his online shop with a minimum of effort and expense.<br /><br />The shophelfer.com Shopsoftware runs on any system that provides a PHP environment (starting with PHP 5.0) and MySQL, such as Linux, Solaris, BSD, and Microsoft Windows.<br /><br />The shophelfer.com Shopsoftware is an OpenSource project - we always look forward to help.');
   define('TEXT_WELCOME_REQUIREMENTS_STEP', '<b>Requirements</b>');
   define('TEXT_WELCOME_DBCONNECTION_STEP', 'Database Connection');
   define('TEXT_WELCOME_PERMISSIONS_STEP', 'Permissions check');

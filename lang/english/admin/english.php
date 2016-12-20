@@ -115,6 +115,10 @@ define('BOX_CONFIGURATION_25', 'Legal');
 define('BOX_CONFIGURATION_40', 'Popup Window Options');
 define('BOX_CONFIGURATION_1000', 'My Admin');
 
+define('BOX_CREDITS', 'more about Shophelfer');
+define('BOX_LOGOUT', 'logout');
+define('BOX_TO_SHOP', 'to Shop');
+define('BOX_SEND_FEEDBACK', 'send Feedback');
 define('BOX_MODULES', 'Payment-/Shipping-/Billing-Modules');
 define('BOX_PAYMENT', 'Payment Systems');
 define('BOX_SHIPPING', 'Shipping Methods');

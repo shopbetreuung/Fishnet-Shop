@@ -31,6 +31,7 @@
   define('TEXT_CONNECTION_ERROR','Eine Testverbindung zur Datenbank war nicht erfolgreich.');
   define('TEXT_CONNECTION_SUCCESS','Eine Testverbindung zur Datenbank war erfolgreich.');
   define('TEXT_DB_DATA_NOT_CORRECT', 'Die Verbindung zur Datenbank war nicht erfolgreich, &uuml;berpr&uuml;fen Sie bitte Ihre Daten');
+  define('TEXT_DB_DATA_NOT_ENTERED_ERROR', 'Bitte geben Sie alle Daten ein');
   define('TEXT_DB_ERROR','Folgender Fehler wurde zur&uuml;ckgegeben:');
   define('TEXT_DB_ERROR_1','Bitte klicken Sie auf <i>Back</i> um Ihre Datenbankeinstellungen zu &uuml;berpr&uuml;fen.');
   define('TEXT_DB_ERROR_2','Wenn Sie Hilfe zu Ihrer Datenbank ben&ouml;tigen, wenden Sie sich bitte an Ihren Provider.');
@@ -78,7 +79,7 @@
   // index.php
   define('TITLE_SELECT_LANGUAGE','W&auml;hlen Sie eine Sprache aus!');
   define('TEXT_WELCOME', 'Willkommen');
-  define('TEXT_WELCOME_INDEX','<b>Willkommen zur shophelfer.com Shopsoftware</b><br /><br />Die shophelfer.com Shopsoftware ist eine Open-Source e-commerce L&ouml;sung, die st&auml;ndig von der shophelfer.com Community weiterentwickelt wird.<br /> Seine out-of-the-box Installation erlaubt es dem Shop-Besitzer seinen Online-Shop mit einem Minimum an Aufwand und Kosten zu installieren, zu betreiben und zu verwalten.<br /><br />Die shophelfer.com Shopsoftware ist auf jedem System lauff&auml;hig, welches eine PHP Umgebung (ab PHP 5.0) und MySQL zur Verf&uuml;gung stellt, wie zum Beispiel Linux, Solaris, BSD, und Microsoft Windows.<br /><br />Die shophelfer.com Shopsoftware ist ein OpenSource-Community-Projekt &ndash; &uuml;ber Hilfe freuen wir uns immer.');
+  define('TEXT_WELCOME_INDEX','<b>Willkommen zur shophelfer.com Shopsoftware</b><br /><br />Die shophelfer.com Shopsoftware ist eine Open-Source e-commerce L&ouml;sung, die st&auml;ndig von Fishnet Services weiterentwickelt wird.<br /> Seine out-of-the-box Installation erlaubt es dem Shop-Besitzer seinen Online-Shop mit einem Minimum an Aufwand und Kosten zu installieren, zu betreiben und zu verwalten.<br /><br />Die shophelfer.com Shopsoftware ist auf jedem System lauff&auml;hig, welches eine PHP Umgebung (ab PHP 5.0) und MySQL zur Verf&uuml;gung stellt, wie zum Beispiel Linux, Solaris, BSD, und Microsoft Windows.<br /><br />Die shophelfer.com Shopsoftware ist ein OpenSource-Projekt – &uuml;ber Hilfe freuen wir uns immer.');
   define('TEXT_WELCOME_REQUIREMENTS_STEP', '<b>Bedarf</b>');
   define('TEXT_WELCOME_DBCONNECTION_STEP', 'Datenbank-Verbindung');
   define('TEXT_WELCOME_PERMISSIONS_STEP', 'Berechtigungen prüfen');

@@ -822,3 +822,9 @@ define('COOKIE_NOTE_CONTENT_ID_DESC', '');
 
 define('CONTACT_FORM_CONSENT_TITLE', 'Contact form consent');
 define('CONTACT_FORM_CONSENT_DESC', 'Contact form requires the consent to data processing.');
+
+define('ENABLE_PDFBILL_TITLE', 'Enable PDF Bill');
+define('ENABLE_PDFBILL_DESC', '');
+
+define('USE_BOOTSTRAP_TITLE', 'Use Bootstrap');
+define('USE_BOOTSTRAP_DESC', '');

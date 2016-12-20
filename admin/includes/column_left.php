@@ -514,9 +514,6 @@
 											"access"	=> "modules",
 											"check"		=> true);
 	
-	## PayPal
-	include(DIR_FS_EXTERNAL.'paypal/modules/column_left.php');
-	
 	$menu_items['configuration'][] = array(	"name" 		=> BOX_ORDERS_STATUS,
 											"is_main"	=> true,
 											"link" 		=> xtc_href_link(FILENAME_ORDERS_STATUS, '', 'NONSSL'),
@@ -530,6 +527,9 @@
 											"check"		=> ACTIVATE_SHIPPING_STATUS);											 
   	
 	$menu_items['configuration'][] = array(	"name" 		=> false, "is_main"	=> true);
+    
+  ## PayPal
+	include(DIR_FS_EXTERNAL.'paypal/modules/column_left.php');
 	
 	$menu_items['configuration'][] = array(	"name" 		=> BOX_CONFIGURATION_1000,
 											"is_main"	=> true,

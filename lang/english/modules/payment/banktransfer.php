@@ -27,7 +27,7 @@ define('MODULE_PAYMENT_BANKTRANSFER_TEXT_DESCRIPTION', 'Banktransfer Payments');
 define('MODULE_PAYMENT_BANKTRANSFER_TEXT_INFO','');
 define('MODULE_PAYMENT_BANKTRANSFER_TEXT_BANK', 'Banktransfer');
 define('MODULE_PAYMENT_BANKTRANSFER_TEXT_EMAIL_FOOTER', 'Note: You can download our Fax Confirmation form from here: ' . HTTP_SERVER . DIR_WS_CATALOG . MODULE_PAYMENT_BANKTRANSFER_URL_NOTE . '');
-define('MODULE_PAYMENT_BANKTRANSFER_TEXT_BANK_INFO', 'Please note that direct debit without IBAN/BIC is <b>only available</b> from a <b>german bank account</b>. By specifying IBAN/BIC, you can use the direct debit system <b>across the EU</b>.<br/>Fields marked with (*) are mandatory. For a german IBAN specifying a BIC is optional.<br/><br/>');
+define('MODULE_PAYMENT_BANKTRANSFER_TEXT_BANK_INFO', 'By specifying IBAN/BIC, you can use the direct debit system <b>across the EU</b>.<br/>Fields marked with (*) are mandatory. For a german IBAN specifying a BIC is optional.<br/><br/>');
 define('MODULE_PAYMENT_BANKTRANSFER_TEXT_BANK_OWNER', 'Account Owner:*');
 define('MODULE_PAYMENT_BANKTRANSFER_TEXT_BANK_OWNER_EMAIL', 'E-Mail Account Owner:*');
 define('MODULE_PAYMENT_BANKTRANSFER_TEXT_BANK_NUMBER', 'Account Number:*');
@@ -43,7 +43,7 @@ define('MODULE_PAYMENT_BANKTRANSFER_TEXT_BANK_ERROR_1', 'Account number and bank
 define('MODULE_PAYMENT_BANKTRANSFER_TEXT_BANK_ERROR_2', 'No plausibility check method available for this bank code!');
 define('MODULE_PAYMENT_BANKTRANSFER_TEXT_BANK_ERROR_3', 'Account number cannot be verified!');
 define('MODULE_PAYMENT_BANKTRANSFER_TEXT_BANK_ERROR_4', 'Account number cannot be verified! Please check again.');
-define('MODULE_PAYMENT_BANKTRANSFER_TEXT_BANK_ERROR_5', 'Bank code not found! Please check again.');
+define('MODULE_PAYMENT_BANKTRANSFER_TEXT_BANK_ERROR_5', 'BIC not found! Please check again.');
 define('MODULE_PAYMENT_BANKTRANSFER_TEXT_BANK_ERROR_8', 'Incorrect bank code or no bank code entered.');
 define('MODULE_PAYMENT_BANKTRANSFER_TEXT_BANK_ERROR_9', 'No account number indicated.');
 define('MODULE_PAYMENT_BANKTRANSFER_TEXT_BANK_ERROR_10', 'No account holder indicated.');
@@ -57,9 +57,9 @@ define('MODULE_PAYMENT_BANKTRANSFER_TEXT_NOTE2', 'If you do not want to send you
 define('MODULE_PAYMENT_BANKTRANSFER_TEXT_NOTE3', 'Fax form');
 define('MODULE_PAYMENT_BANKTRANSFER_TEXT_NOTE4', ' and sent it back to us.');
 
-define('JS_BANK_BLZ', '* Please enter your bank code!\n\n');
+define('JS_BANK_BLZ', '* Please enter your BIC!\n\n');
 define('JS_BANK_NAME', '* Please enter your name and bank!\n\n');
-define('JS_BANK_NUMBER', '* Please enter your account number!\n\n');
+define('JS_BANK_NUMBER', '* Please enter your IBAN!\n\n');
 define('JS_BANK_OWNER', '* Please enter the name of the account owner!\n\n');
 define('JS_BANK_OWNER_EMAIL', '* Please enter E-Mail-Address of the account owner!\n\n');
 

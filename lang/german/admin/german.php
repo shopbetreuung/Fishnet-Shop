@@ -116,6 +116,8 @@ define('BOX_CONFIGURATION_1000', 'Adminbereich Optionen');
 
 define('BOX_CREDITS', 'Mehr &uuml;ber shophelfer');
 define('BOX_LOGOUT', 'abmelden');
+define('BOX_TO_SHOP', 'zum Shop');
+define('BOX_SEND_FEEDBACK', 'Feedback senden');
 define('BOX_MODULES', 'Zahlungs-/Versand-/Verrechnungs-Module');
 define('BOX_PAYMENT', 'Zahlungsoptionen');
 define('BOX_SHIPPING', 'Versandart');

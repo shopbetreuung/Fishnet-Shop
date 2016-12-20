@@ -12,17 +12,40 @@
 
   defined( '_VALID_XTC' ) or die( 'Direct Access to this location is not allowed.' );
   
-  if ((isset($admin_access['paypal_config']) && $admin_access['paypal_config'] == '1')
-      || (isset($admin_access['paypal_profile']) && $admin_access['paypal_profile'] == '1')
-      || (isset($admin_access['paypal_webhook']) && $admin_access['paypal_webhook'] == '1')
-      || (isset($admin_access['paypal_module']) && $admin_access['paypal_module'] == '1')
-      || (isset($admin_access['paypal_payment']) && $admin_access['paypal_payment'] == '1')
-      )
-  {      
-    if (isset($admin_access['paypal_config']) && $admin_access['paypal_config'] == '1') echo '<li><a href="' . xtc_href_link('paypal_config.php', '') . '" class="menuBoxContentLink"> -' . TEXT_PAYPAL_TAB_CONFIG . '</a></li>';
-    if (isset($admin_access['paypal_profile']) && $admin_access['paypal_profile'] == '1') echo '<li><a href="' . xtc_href_link('paypal_profile.php', '') . '" class="menuBoxContentLink"> -' . TEXT_PAYPAL_TAB_PROFILE . '</a></li>';
-    if (isset($admin_access['paypal_webhook']) && $admin_access['paypal_webhook'] == '1') echo '<li><a href="' . xtc_href_link('paypal_webhook.php', '') . '" class="menuBoxContentLink"> -' . TEXT_PAYPAL_TAB_WEBHOOK . '</a></li>';
-    if (isset($admin_access['paypal_module']) && $admin_access['paypal_module'] == '1') echo '<li><a href="' . xtc_href_link('paypal_module.php', '') . '" class="menuBoxContentLink"> -' . TEXT_PAYPAL_TAB_MODULE . '</a></li>';
-    if (isset($admin_access['paypal_payment']) && $admin_access['paypal_payment'] == '1') echo '<li><a href="' . xtc_href_link('paypal_payment.php', '') . '" class="menuBoxContentLink"> -' . TEXT_PAYPAL_TAB_TRANSACTIONS . '</a></li>';
-  }
+
+  $menu_items['configuration'][] = array(	"name" 		=> TEXT_PAYPAL_TAB_CONFIG,
+											"is_main"	=> true,
+											"link" 		=> xtc_href_link('paypal_config.php', '', 'NONSSL'),
+											"access"	=> "paypal_config",
+											"check"		=> true);	
+
+  $menu_items['configuration'][] = array(	"name" 		=> TEXT_PAYPAL_TAB_PROFILE,
+											"is_main"	=> true,
+											"link" 		=> xtc_href_link('paypal_profile.php', '', 'NONSSL'),
+											"access"	=> "paypal_profile",
+											"check"		=> true);	
+
+
+  $menu_items['configuration'][] = array(	"name" 		=> TEXT_PAYPAL_TAB_WEBHOOK,
+											"is_main"	=> true,
+											"link" 		=> xtc_href_link('paypal_webhook.php', '', 'NONSSL'),
+											"access"	=> "paypal_webhook",
+											"check"		=> true);	
+
+
+  $menu_items['configuration'][] = array(	"name" 		=> TEXT_PAYPAL_TAB_MODULE,
+											"is_main"	=> true,
+											"link" 		=> xtc_href_link('paypal_module.php', '', 'NONSSL'),
+											"access"	=> "paypal_module",
+											"check"		=> true);	
+
+
+  $menu_items['configuration'][] = array(	"name" 		=> TEXT_PAYPAL_TAB_TRANSACTIONS,
+											"is_main"	=> true,
+											"link" 		=> xtc_href_link('paypal_payment.php', '', 'NONSSL'),
+											"access"	=> "paypal_payment",
+											"check"		=> true);	
+
+
+  $menu_items['configuration'][] = array(	"name" 		=> false, "is_main"	=> true);
 ?>

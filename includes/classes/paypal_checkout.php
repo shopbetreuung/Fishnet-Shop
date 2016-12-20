@@ -1519,12 +1519,16 @@ if (defined('PAYPAL_API_VERSION')) {
     }
   /*************************************************************/
     function mn_iconv($t1,$t2,$string){
+      // dont convert same codecs
+      if (strtolower($t1) == strtolower($t2)) {
+          return($string);
+      }
       // Stand: 29.04.2009
       if(function_exists('iconv')) {
         return iconv($t1, $t2, $string);
       }
       /// Kein iconv im PHP
-      if($t2 == "UTF-8") {
+      if(strtolower($t2) == "utf-8") {
         // nur als Ersatz für das iconv und nur in eine richtung 1251 to UTF8
         //ISO 8859-1 to UTF-8
         if(function_exists('utf8_encode')) {
@@ -1533,7 +1537,7 @@ if (defined('PAYPAL_API_VERSION')) {
           $string=preg_replace("/([\x80-\xFF])/e","chr(0xC0|ord('\\1')>>6).chr(0x80|ord('\\1')&0x3F)",$string);
           return($string);
         }
-      } elseif($t1 == "UTF-8") {
+      } elseif(strtolower($t1) == "utf-8") {
         //UTF-8 to ISO 8859-1
         if(function_exists('utf8_decode')) {
           return utf8_decode($string);

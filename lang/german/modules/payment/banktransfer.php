@@ -27,7 +27,7 @@ define('MODULE_PAYMENT_BANKTRANSFER_TEXT_DESCRIPTION', 'Lastschriftverfahren');
 define('MODULE_PAYMENT_BANKTRANSFER_TEXT_INFO', '');
 define('MODULE_PAYMENT_BANKTRANSFER_TEXT_BANK', 'Bankeinzug');
 define('MODULE_PAYMENT_BANKTRANSFER_TEXT_EMAIL_FOOTER', 'Hinweis: Sie k&ouml;nnen sich unser Faxformular unter ' . HTTP_SERVER . DIR_WS_CATALOG . MODULE_PAYMENT_BANKTRANSFER_URL_NOTE . ' herunterladen und es ausgef&uuml;llt an uns zur&uuml;cksenden.');
-define('MODULE_PAYMENT_BANKTRANSFER_TEXT_BANK_INFO', 'Bitte beachten Sie, dass das Lastschriftverfahren ohne Angabe von IBAN/BIC <b>nur</b> von einem <b>deutschen Girokonto</b> aus m&ouml;glich ist. Durch Angabe von IBAN/BIC k&ouml;nnen Sie das Lastschriftverfahren <b>EU-weit</b> nutzen.<br/>Felder mit (*) sind Pflichtangaben. Bei einer deutschen IBAN ist der BIC optional.<br/><br/>');
+define('MODULE_PAYMENT_BANKTRANSFER_TEXT_BANK_INFO', 'Durch Angabe von IBAN/BIC k&ouml;nnen Sie das Lastschriftverfahren <b>EU-weit</b> nutzen.<br/>Felder mit (*) sind Pflichtangaben. Bei einer deutschen IBAN ist der BIC optional.<br/><br/>');
 define('MODULE_PAYMENT_BANKTRANSFER_TEXT_BANK_OWNER', 'Kontoinhaber:*');
 define('MODULE_PAYMENT_BANKTRANSFER_TEXT_BANK_OWNER_EMAIL', 'E-Mail Kontoinhaber:*');
 define('MODULE_PAYMENT_BANKTRANSFER_TEXT_BANK_NUMBER', 'KtoNr:*');
@@ -43,7 +43,7 @@ define('MODULE_PAYMENT_BANKTRANSFER_TEXT_BANK_ERROR_1', 'Kontonummer und Banklei
 define('MODULE_PAYMENT_BANKTRANSFER_TEXT_BANK_ERROR_2', 'Diese Kontonummer ist nicht pr&uuml;fbar, bitte kontrollieren Sie zur Sicherheit Ihre Eingabe nochmals.');
 define('MODULE_PAYMENT_BANKTRANSFER_TEXT_BANK_ERROR_3', 'Diese Kontonummer ist nicht pr&uuml;fbar, bitte kontrollieren Sie zur Sicherheit Ihre Eingabe nochmals.');
 define('MODULE_PAYMENT_BANKTRANSFER_TEXT_BANK_ERROR_4', 'Diese Kontonummer ist nicht pr&uuml;fbar, bitte kontrollieren Sie zur Sicherheit Ihre Eingabe nochmals.');
-define('MODULE_PAYMENT_BANKTRANSFER_TEXT_BANK_ERROR_5', 'Diese Bankleitzahl existiert nicht, bitte korrigieren Sie Ihre Angabe.');
+define('MODULE_PAYMENT_BANKTRANSFER_TEXT_BANK_ERROR_5', 'Diese BIC existiert nicht, bitte korrigieren Sie Ihre Angabe.');
 define('MODULE_PAYMENT_BANKTRANSFER_TEXT_BANK_ERROR_8', 'Sie haben keine korrekte Bankleitzahl eingegeben.');
 define('MODULE_PAYMENT_BANKTRANSFER_TEXT_BANK_ERROR_9', 'Sie haben keine korrekte Kontonummer eingegeben.');
 define('MODULE_PAYMENT_BANKTRANSFER_TEXT_BANK_ERROR_10', 'Sie haben keinen Kontoinhaber angegeben.');
@@ -57,9 +57,9 @@ define('MODULE_PAYMENT_BANKTRANSFER_TEXT_NOTE2', 'Wenn Sie aus Sicherheitsbedenk
 define('MODULE_PAYMENT_BANKTRANSFER_TEXT_NOTE3', 'Faxformular');
 define('MODULE_PAYMENT_BANKTRANSFER_TEXT_NOTE4', ' herunterladen und uns ausgef&uuml;llt zusenden.');
 
-define('JS_BANK_BLZ', '* Bitte geben Sie die BLZ / BIC Ihrer Bank ein!\n\n');
+define('JS_BANK_BLZ', '* Bitte geben Sie die BIC Ihrer Bank ein!\n\n');
 define('JS_BANK_NAME', '* Bitte geben Sie den Namen Ihrer Bank ein!\n\n');
-define('JS_BANK_NUMBER', '* Bitte geben Sie Ihre Kontonummer / IBAN ein!\n\n');
+define('JS_BANK_NUMBER', '* Bitte geben Sie Ihre IBAN ein!\n\n');
 define('JS_BANK_OWNER', '* Bitte geben Sie den Namen des Kontoinhabers ein!\n\n');
 define('JS_BANK_OWNER_EMAIL', '* Bitte geben Sie die E-Mail-Adresse des Kontoinhabers ein!\n\n');
 

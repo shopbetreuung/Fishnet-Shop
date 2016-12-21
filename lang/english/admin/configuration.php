@@ -828,3 +828,6 @@ define('ENABLE_PDFBILL_DESC', '');
 
 define('USE_BOOTSTRAP_TITLE', 'Use Bootstrap');
 define('USE_BOOTSTRAP_DESC', '');
+
+define('PDFBILL_AUTOMATIC_INVOICE_TITLE', 'PDF Bill automatic invoice profiles');
+define('PDFBILL_AUTOMATIC_INVOICE_DESC', '');

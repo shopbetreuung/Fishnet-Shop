@@ -227,6 +227,11 @@ function profile_save( $profile_name, $parameter_arr, $checked_ids = '', $rules 
 }
 
 
+function add_new_profile($profile_name){
+  $sql = "insert into ". TABLE_PDFBILL_PROFILE. " (profile_name) values ('$profile_name')";
+  xtDBquery($sql);
+}
+
 function profile_load( $profile_id ) {
   $sql = "select * from ".TABLE_PDFBILL_PROFILE." where profile_id = '$profile_id'";    
   $sql = xtDBquery($sql);

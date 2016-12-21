@@ -16,6 +16,21 @@ $profile_categories  = array();
 
 $helpwindows_text_arr = array();
 
+if(isset($_POST['new_profile_name']) && !empty($_POST['new_profile_name']) && $_POST['new_profile_name'] != 'default'){
+  $all_profiles = profile_list();
+  $existing = false;
+  foreach($all_profiles as $profile){
+    if($profile['profile_name'] == $_POST['new_profile_name']) {
+      $existing = true;
+      break;
+    }
+  }
+  if (!$existing){ 
+      add_new_profile($_POST['new_profile_name']);
+      $profile_name = $_POST['new_profile_name'];
+  }
+}
+
 if( isset($_POST['profile']) ){
   if (isset($_POST['profile']['profile_name']) && $_POST['profile']['profile_name'] != 'default') {
     $profile_save_name = $_POST['profile']['profile_name'];
@@ -208,7 +223,7 @@ function toggle_column() {
       
 
       <table  width="100%" cellspacing="0" cellpadding="0" class="BillOuterTable">
-        <tr><form name="pdfkatalog" <?php echo 'action="' . xtc_href_link('pdfbill_config.php', '', 'NONSSL') . '"'; ?> method="post">
+        <tr>
           <td width="90%" class="BillOuterTd">
           <table width="100%" border="0" cellpadding="0" cellspacing="0">
       <tr>
@@ -237,7 +252,14 @@ function toggle_column() {
         <?php
       }  
      
-?>        
+?>  
+    <button onclick="javascript:ShowInputs();" id="selected" type="button" class="btn btn-default btn-sm glyphicon glyphicon-plus"></button>
+    <?php echo xtc_draw_form('new_pdfbill_profile', 'pdfbill_config.php', '', 'post', 'style="display: inline-block;"');?>
+      
+        <input id="showtext" class="form-control" style="display:none" type="text" name="new_profile_name" autocomplete="false"/>
+        <input id="showsubmit" class="btn btn-default" style="display:none;" type="submit" value="<?php echo TEXT_SUBMIT_NEW_PROFILE; ?>"/>
+    </form>
+            
       </td>
     </tr>    
     
@@ -272,6 +294,7 @@ function toggle_column() {
       <td  class="BillMainOuterTd">
         <table cellspacing="0" cellpadding="0" width="100%">
           <tr>
+            <form name="pdfkatalog" <?php echo 'action="' . xtc_href_link('pdfbill_config.php', '', 'NONSSL') . '"'; ?> method="post">
             <td class="BillMainOuterDiv" >
     
     
@@ -2094,6 +2117,16 @@ function getPosition(id)
 <?php
   } // foreach
 ?>
+</script>
+
+<script type="text/javascript">
+  function ShowInputs(){
+    if (document.getElementById('selected').onclick) {
+        document.getElementById('showtext').style.display = 'inline-block';
+        document.getElementById('showsubmit').style.display = 'inline-block';
+        document.getElementById('selected').style.display = "none";
+    }
+  }
 </script>
 <?php  
   

@@ -835,3 +835,5 @@ define('COOKIE_NOTE_CONTENT_ID_DESC', '');
 define('CONTACT_FORM_CONSENT_TITLE', 'Kontaktformular Zustimmung');
 define('CONTACT_FORM_CONSENT_DESC', 'Kontaktformular bedarf der Zustimmung zur Datenverarbeitung.');
 
+define('PDFBILL_AUTOMATIC_INVOICE_TITLE', 'PDF Rechnung automatische Rechnungsprofile');
+define('PDFBILL_AUTOMATIC_INVOICE_DESC', '');

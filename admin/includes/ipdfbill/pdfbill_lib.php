@@ -256,11 +256,21 @@ function profile_load_n( $profile_name ) {
   return $ret;
   
 }  
+
 function profile_list() {
-  $sql = "select profile_id, profile_name, rules from ".TABLE_PDFBILL_PROFILE;    
+  $sql = "select profile_id, profile_name, rules, profile_parameter from ".TABLE_PDFBILL_PROFILE;    
   $sql = xtDBquery($sql);
-  $ret=array();
+  $ret = array();
   while( $data = xtc_db_fetch_array($sql) ) {
+    $profile_parameters = array();
+    $profile_parameters = explode(',', $data['profile_parameter']);
+    foreach ($profile_parameters as $profile_parameter) {
+      if (strstr($profile_parameter, 'typeofbill')) {
+        $typeofbill_array = explode('=', $profile_parameter);
+        $data['typeofbill'] = $typeofbill_array[1];
+      }
+    }
+    unset($data['profile_parameter']);
     $ret[] = $data;
   }
   return $ret;

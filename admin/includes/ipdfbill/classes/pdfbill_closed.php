@@ -691,7 +691,7 @@ class pdfbill_closed extends PDF_Clipping {
                      
 //        Write(float h , string txt [, mixed link])
 
-        $this->Write( s2h($this->parameter_arr['terms_font_size']), $txt);
+        $this->Write( s2h($this->parameter_arr['terms_font_size']), utf8_encode($txt));
         
         
       } else {   // file not exists

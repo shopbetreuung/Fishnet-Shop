@@ -25,6 +25,10 @@
  * @author Andy Prevost (codeworxtech) <codeworxtech@users.sourceforge.net>
  * @author Brent R. Matzelle (original founder)
  */
+
+// Fix for SMTP
+require_once('class.smtp.php');
+
 class PHPMailer
 {
     /**

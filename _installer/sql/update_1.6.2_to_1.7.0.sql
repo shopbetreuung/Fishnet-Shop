@@ -10,3 +10,5 @@ UPDATE configuration SET sort_order = 17 WHERE configuration_key = 'GOOGLE_RSS_F
 
 UPDATE `languages` SET `language_charset` = 'utf-8';
 
+UPDATE database_version SET version = 'SH_1.7.0';
+

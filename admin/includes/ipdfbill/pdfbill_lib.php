@@ -227,6 +227,17 @@ function profile_save( $profile_name, $parameter_arr, $checked_ids = '', $rules 
 }
 
 
+function add_new_profile($profile_name){
+  $select_param_sql = xtDBquery("select profile_parameter from ". TABLE_PDFBILL_PROFILE." where profile_name = 'default'");
+  if($array = xtc_db_fetch_array($select_param_sql) ) {
+    $default_parameters = $array['profile_parameter'];
+    $insert_sql = "insert into ". TABLE_PDFBILL_PROFILE. " (profile_name, profile_parameter) values ('$profile_name', '$default_parameters')";
+  }else{
+    $insert_sql = "insert into ". TABLE_PDFBILL_PROFILE. " (profile_name) values ('$profile_name')";
+  }
+  xtDBquery($insert_sql);
+}
+
 function profile_load( $profile_id ) {
   $sql = "select * from ".TABLE_PDFBILL_PROFILE." where profile_id = '$profile_id'";    
   $sql = xtDBquery($sql);

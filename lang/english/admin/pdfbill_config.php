@@ -607,6 +607,7 @@ define('TEXT_AND', 'AND');
 define('TEXT_OR', 'OR');
 define('TEXT_EQUAL', 'EQUAL');
 define('TEXT_NOT_EQUAL', 'NOT EQUAL');
+define('TEXT_SUBMIT_NEW_PROFILE','Submit new profile');
 
 
 ?>

@@ -9,6 +9,7 @@ CKEDITOR.editorConfig = function( config ) {
 	// http://docs.ckeditor.com/#!/api/CKEDITOR.config
 	
 	config.extraPlugins = 'colorbutton';
+	config.extraPlugins = 'justify';
 	
 	config.removePlugins = 'stylescombo';
 	
@@ -16,6 +17,7 @@ CKEDITOR.editorConfig = function( config ) {
 	config.toolbarGroups = [
 		{ name: 'clipboard',   groups: [ 'clipboard', 'undo' ] },
 		{ name: 'editing',     groups: [ 'find', 'selection', 'spellchecker' ] },
+		{ name: 'align'},
 		{ name: 'links' },
 		{ name: 'insert' },
 		{ name: 'forms' },

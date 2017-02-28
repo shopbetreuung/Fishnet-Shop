@@ -8,8 +8,7 @@ CKEDITOR.editorConfig = function( config ) {
 	// For complete reference see:
 	// http://docs.ckeditor.com/#!/api/CKEDITOR.config
 	
-	config.extraPlugins = 'colorbutton';
-	config.extraPlugins = 'iframe';
+	config.extraPlugins = 'colorbutton,justify,iframe';
 	
 	config.removePlugins = 'stylescombo';
 	
@@ -17,6 +16,7 @@ CKEDITOR.editorConfig = function( config ) {
 	config.toolbarGroups = [
 		{ name: 'clipboard',   groups: [ 'clipboard', 'undo' ] },
 		{ name: 'editing',     groups: [ 'find', 'selection', 'spellchecker' ] },
+		{ name: 'align'},
 		{ name: 'links' },
 		{ name: 'insert' },
 		{ name: 'forms' },

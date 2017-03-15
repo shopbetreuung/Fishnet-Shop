@@ -336,7 +336,7 @@ define('SHIPPING_ORIGIN_ZIP_DESC' , 'Enter the Postal Code (ZIP) of the Store to
 define('SHIPPING_MAX_WEIGHT_TITLE' , 'Enter the Maximum Package Weight you will ship');
 define('SHIPPING_MAX_WEIGHT_DESC' , 'Carriers have a max weight limit for a single package. This is a common one for all.');
 define('SHIPPING_BOX_WEIGHT_TITLE' , 'Package Tare weight.');
-define('SHIPPING_BOX_WEIGHT_DESC' , 'What is the weight of typical packaging of small to medium packages?');
+define('SHIPPING_BOX_WEIGHT_DESC' , 'Minimum tare weight which is added to the total weight (net) of all products. For example, for 1,5 kg enter 1.5.');
 define('SHIPPING_BOX_PADDING_TITLE' , 'Larger packages - percentage increase.');
 define('SHIPPING_BOX_PADDING_DESC' , 'For 10% enter 10');
 define('SHOW_SHIPPING_TITLE' , 'Shipping Costs in Shopping Cart');

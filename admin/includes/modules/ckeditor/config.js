@@ -8,7 +8,7 @@ CKEDITOR.editorConfig = function( config ) {
 	// For complete reference see:
 	// http://docs.ckeditor.com/#!/api/CKEDITOR.config
 	
-	config.extraPlugins = 'colorbutton,justify,iframe';
+	config.extraPlugins = 'colorbutton,justify,iframe,find,showblocks,dialog';
 	
 	config.removePlugins = 'stylescombo';
 	

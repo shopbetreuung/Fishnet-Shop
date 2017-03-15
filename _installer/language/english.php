@@ -216,11 +216,14 @@
   define('TEXT_EMAIL_FROM_LONG','(The e-mail adress used in (sent) e-mails)');
   define('TITLE_ZONE_CONFIG','Zone configuration');
   define('TEXT_ZONE','Set up zones for EU?');
+  define('TEXT_BLZ','Set up German bank numbers?');
   define('TITLE_ZONE_CONFIG_NOTE','*Note: The shophelfer.com Shopsoftware can automatically setup the right Zone-Setup if your store is located within the EU.');
   define('TITLE_SHOP_CONFIG_NOTE','*Note: Information for basic Shop configuration');
   define('TITLE_ADMIN_CONFIG_NOTE','*Note: Information for Admin/Superuser');
   define('TEXT_ZONE_NO','No');
   define('TEXT_ZONE_YES','Yes');
+  define('TEXT_BLZ_NO','No');
+  define('TEXT_BLZ_YES','Yes');
   define('TEXT_COMPANY','Company name');
   define('ENTRY_GENDER_ERROR', 'Please select gender for this admin');
   define('ENTRY_FIRST_NAME_ERROR','Firstname too short');
@@ -239,6 +242,7 @@
   define('ENTRY_EMAIL_ADDRESS_FROM_ERROR','Email-From too short');
   define('ENTRY_EMAIL_ADDRESS_FROM_CHECK_ERROR','Check Email-From Format');
   define('SELECT_ZONE_SETUP_ERROR','Select Zone setup');
+  define('SELECT_BLZ_SETUP_ERROR','Select Bank code setup');
 
   // install_step7
   define('TITLE_GUEST_CONFIG','Guest configuration');

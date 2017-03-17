@@ -528,12 +528,6 @@
 											"link" 		=> xtc_href_link(FILENAME_SHIPPING_STATUS, '', 'NONSSL'),
 											"access"	=> "shipping_status",
 											"check"		=> ACTIVATE_SHIPPING_STATUS);											
-	
-	$menu_items['configuration'][] = array(	"name" 		=> BOX_CONFIGURATION_1000,
-											"is_main"	=> true,
-											"link" 		=> xtc_href_link(FILENAME_CONFIGURATION, 'gID=1000', 'NONSSL'),
-											"access"	=> "configuration",
-											"check"		=> true);	
 																						
 	$menu_items['configuration'][] = array(	"name" 		=> BOX_FRONTEND,
 											"is_main"	=> true,
@@ -587,7 +581,13 @@
 											"is_main"	=> false,
 											"link" 		=> xtc_href_link(FILENAME_CONFIGURATION, 'gID=25', 'NONSSL'),
 											"access"	=> "configuration",
-											"check"		=> true);   
+											"check"		=> true);  
+    
+  $menu_items['configuration'][] = array(	"name" 		=> BOX_CONFIGURATION_1000,
+											"is_main"	=> true,
+											"link" 		=> xtc_href_link(FILENAME_CONFIGURATION, 'gID=1000', 'NONSSL'),
+											"access"	=> "configuration",
+											"check"		=> true);
 											
 	$menu_items['configuration'][] = array(	"name" 		=> BOX_CONFIGURATION_19,
 											"is_main"	=> true,

@@ -31,7 +31,7 @@ class selfpickup
         $this->description = MODULE_SHIPPING_SELFPICKUP_TEXT_DESCRIPTION;
         $this->icon        = '';   // change $this->icon =  DIR_WS_ICONS . 'shipping_ups.gif'; to some freeshipping icon
         $this->sort_order  = MODULE_SHIPPING_SELFPICKUP_SORT_ORDER;
-        $this->enabled = ((MODULE_SHIPPING_SELFPICKUP_STATUS == 'True') ? true : false);
+        $this->enabled = ((MODULE_SHIPPING_SELFPICKUP_STATUS == 'true') ? true : false);
     }
 
     function quote($method = '')
@@ -65,7 +65,7 @@ class selfpickup
 
     function install() 
     {
-        xtc_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) values ('MODULE_SHIPPING_SELFPICKUP_STATUS', 'True', '6', '7', 'xtc_cfg_select_option(array(\'True\', \'False\'), ', now())");
+        xtc_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) values ('MODULE_SHIPPING_SELFPICKUP_STATUS', 'true', '6', '7', 'xtc_cfg_select_option(array(\'true\', \'false\'), ', now())");
         xtc_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_key, configuration_value, configuration_group_id, sort_order, date_added) values ('MODULE_SHIPPING_SELFPICKUP_ALLOWED', '', '6', '0', now())");
         xtc_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_key, configuration_value, configuration_group_id, sort_order, date_added) values ('MODULE_SHIPPING_SELFPICKUP_SORT_ORDER', '0', '6', '4', now())");
     }

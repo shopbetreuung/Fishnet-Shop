@@ -321,6 +321,8 @@ define('ACCOUNT_SUBURB_TITLE' , 'Suburb');
 define('ACCOUNT_SUBURB_DESC' , 'Display suburb in customer account');
 define('ACCOUNT_STATE_TITLE' , 'District');
 define('ACCOUNT_STATE_DESC' , 'Display district in customer account');
+define('PASSWORD_SECURITY_CHECK_TITLE','Password Security Check');
+define('PASSWORD_SECURITY_CHECK_DESC','Force new customers to register with secure password (means with at least 1 character and 1 number. See minimum configuration for password length)');
 
 define('DEFAULT_CURRENCY_TITLE' , 'Default Currency');
 define('DEFAULT_CURRENCY_DESC' , 'Currency to be used as default');

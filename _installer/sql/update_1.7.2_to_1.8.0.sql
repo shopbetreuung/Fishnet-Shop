@@ -3661,5 +3661,7 @@ insert into banktransfer_blz (blz, bankname, prz) values (87096034, 'Volksbank E
 insert into banktransfer_blz (blz, bankname, prz) values (87096124, 'Volksbank Mittweida', '06');
 insert into banktransfer_blz (blz, bankname, prz) values (87096214, 'Volksbank Chemnitz', '06');
 
+INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'PASSWORD_SECURITY_CHECK', 'false', 5, 120, NULL, NOW(), NULL, 'xtc_cfg_select_option(array(\'true\', \'false\'),');
+
 UPDATE database_version SET version = 'SH_1.8.0';
 

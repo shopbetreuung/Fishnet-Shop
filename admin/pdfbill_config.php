@@ -733,6 +733,7 @@ if( FREEE_INFO ) {
     </tr>
 <?php
   tr_display(     $fn.'_display',      $texts_tmp[$fn.'_display'],    $profile[$fn.'_display']     );
+  tr_display_comments(     $fn.'_display_comments',      $texts_tmp[$fn.'_display_comments'],    $profile[$fn.'_display_comments']     );
   tr_textarea(    $fn.'_text',         $texts_tmp[$fn.'_text'],       $profile[$fn.'_text'], 40  );
   tr_align(       $fn.'_position',     $texts_tmp[$fn.'_position'],   $profile[$fn.'_position']    );
   tr_color(       $fn.'_font_color',   $texts_tmp[$fn.'_font_color'], $profile[$fn.'_font_color']  );
@@ -1168,6 +1169,23 @@ function tr_display( $fieldname, $text_arr, $check='0' ) {
 <?php
 }
 
+
+function tr_display_comments( $fieldname, $text_arr, $check='0' ) {
+  if( $check=='1' ) {
+    $checked='checked ';
+  }
+?>
+    <tr align="left">
+      <th class="BilldataTableContent" colspan="4">
+        <div class='col-xs-12'>
+            <div class='col-xs-12 col-sm-1'><?php echo $text_arr['question']; echo helpwindows_add($text_arr['help']); ?></div>
+            <div class='col-xs-12 col-sm-11'><input type="checkbox" name="<?php echo n2p($fieldname) ?>" value="1" <?php  echo $checked ?>><?php echo $text_arr['chk_text'] ?></div>
+            <div class='col-xs-12'><br></div>
+        </div>
+      </th>
+    </tr>
+<?php
+}
 /*
   tr_trennzeile( 'Absender:' );
             );

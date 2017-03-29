@@ -34,6 +34,7 @@
     <link rel="stylesheet" type="text/css" href="includes/css/admin_responsive.css">
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        <script src="https://code.jquery.com/jquery-migrate-1.2.1.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.0/jquery-ui.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.5.0/lodash.min.js"></script>
 	<script type="text/javascript" src="includes/javascript/gridstack.min.js"></script>

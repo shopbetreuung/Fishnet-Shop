@@ -490,6 +490,9 @@ function texts_html( $texts ) {
                'subtext_display' => array( 
                  'question'                               => 'Anzeige',
                  'chk_text'                               => 'anzeigen' ),
+	  		       'subtext_display_comments' => array( 
+                 'question'                               => 'Anzeige Kommentar?',
+                 'chk_text'                               => 'anzeigen' ),
                'subtext_text' => array( 
                  'question'                               => 'Text:',
                  'fieldtext'                              => '' ),               

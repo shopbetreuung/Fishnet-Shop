@@ -199,6 +199,18 @@ if (isset($_POST['action']) && ($_POST['action'] == 'process')) {
     $error = true;
     $messageStack->add('create_account', ENTRY_PASSWORD_ERROR);
   }
+	
+  if(PASSWORD_SECURITY_CHECK == 'true'){
+  
+    $passwordLetter  = preg_match('/[a-zA-Z]/',    $password);
+    $passwordDigit   = preg_match('/\d/',          $password);
+
+    if (!$passwordLetter || !$passwordDigit) {
+          $error = true;
+          $messageStack->add('create_account', ENTRY_PASSWORD_NOT_COMPILANT);
+    }	
+  }	
+	
   elseif ($password != $confirmation) {
     $error = true;
     $messageStack->add('create_account', ENTRY_PASSWORD_ERROR_NOT_MATCHING);

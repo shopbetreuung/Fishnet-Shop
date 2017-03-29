@@ -52,6 +52,17 @@ if (isset ($_POST['action']) && ($_POST['action'] == 'process')) {
 		$messageStack->add('account_password', ENTRY_PASSWORD_NEW_ERROR_NOT_MATCHING);
 	}
 
+	if (PASSWORD_SECURITY_CHECK == 'true'){
+
+		$passwordLetter  = preg_match('/[a-zA-Z]/',    $password_new);
+		$passwordDigit   = preg_match('/\d/',          $password_new);
+
+		if (!$passwordLetter || !$passwordDigit) {
+			$error = true;
+			$messageStack->add('account_password', ENTRY_PASSWORD_NOT_COMPILANT);
+		}
+	}
+	
 	if ($error == false) {
 		$check_customer_query = xtc_db_query("select customers_password from ".TABLE_CUSTOMERS." where customers_id = '".(int) $_SESSION['customer_id']."'");
 		$check_customer = xtc_db_fetch_array($check_customer_query);

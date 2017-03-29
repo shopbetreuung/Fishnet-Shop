@@ -29,6 +29,7 @@ if (isset($_POST['action']) && ($_POST['action'] == 'process'))
     $store_name = xtc_db_prepare_input($_POST['STORE_NAME']);
     $email_from = xtc_db_prepare_input($_POST['EMAIL_ADRESS_FROM']);
     $zone_setup = xtc_db_prepare_input($_POST['ZONE_SETUP']);
+    $blz_setup = xtc_db_prepare_input($_POST['BLZ_SETUP']);
     $company = xtc_db_prepare_input($_POST['COMPANY']);
     $street_address = xtc_db_prepare_input($_POST['STREET_ADRESS']);
     $postcode = xtc_db_prepare_input($_POST['POST_CODE']);
@@ -83,6 +84,12 @@ if (isset($_POST['action']) && ($_POST['action'] == 'process'))
     {
         $error = true;
         $messageStack->add('install_shopinfo_step', SELECT_ZONE_SETUP_ERROR);
+    }
+    
+    if (($blz_setup != 'yes') && ($blz_setup != 'no'))
+    {
+        $error = true;
+        $messageStack->add('install_shopinfo_step', SELECT_BLZ_SETUP_ERROR);
     }
 
 
@@ -488,6 +495,53 @@ if (isset($_POST['action']) && ($_POST['action'] == 'process'))
             xtc_db_query("INSERT INTO zones_to_geo_zones VALUES (238, 238, 0, 6, NULL, now()) ON DUPLICATE KEY UPDATE zone_country_id = 238, zone_id = 0, geo_zone_id = 6, last_modified = NULL, date_added = now() ");
             xtc_db_query("INSERT INTO zones_to_geo_zones VALUES (239, 239, 0, 6, NULL, now()) ON DUPLICATE KEY UPDATE zone_country_id = 239, zone_id = 0, geo_zone_id = 6, last_modified = NULL, date_added = now() ");
         }
+        
+        if ($blz_setup == 'yes') {
+            $lines = array();
+            $banktransfer = array();
+            $blz = array();
+            
+            $handle = @fopen("http://www.bundesbank.de/Redaktion/DE/Downloads/Aufgaben/Unbarer_Zahlungsverkehr/Bankleitzahlen/2017_06_04/blz_2017_03_06_txt.txt?__blob=publicationFile", "r");
+            if ($handle) {
+                while (!feof($handle)) {
+                    $line = stream_get_line($handle, 65535, "\n");
+                    $lines[]= $line;
+                }
+                fclose($handle);
+                foreach ($lines as $line) {
+                    // to avoid dublettes, the unique flag
+                    // "bankleitzahlführender Zahlungsdienstleister" will be queried
+                    if (substr($line, 8, 1) == '1') {                //leading payment provider for bank code number (only one per bank code)
+                        $blz['blz'] = substr($line, 0, 8);             //bank code number(8)
+                        $blz['bankname'] = trim(substr($line, 9, 58)); //bank name(58)
+                        $blz['prz'] = substr($line, 150, 2);           //checksum(2)
+                        $blz['aenderungskennzeichen'] = substr($line, 158, 1); //change code(1)
+
+                        /*
+                        // check the change code of the bank code number
+                        // "A" = Addition
+                        // "D" = Deletion (do not import bank code numbers with this flag)
+                        // "M" = Modified
+                        // "U" = Unchanged
+                        */
+                        if ($blz['aenderungskennzeichen']!= 'D' && ($blz['aenderungskennzeichen']== 'A' || $blz['aenderungskennzeichen'] == 'U' || $blz['aenderungskennzeichen'] == 'M')) {
+                          // Add the bank code number to the import array
+                          $banktransfer[] = $blz;
+                        }
+                    }
+                }
+            
+                if (count($banktransfer) > 1) {
+                    // clear table banktransfer_blz
+                    xtc_db_query("delete from ".TABLE_BANKTRANSFER_BLZ);
+                    // and fill it with the the content from the downloaded file
+                    foreach ($banktransfer as $rec) {
+                        $sql = sprintf('insert into banktransfer_blz (blz, bankname, prz) values (%s, \'%s\', \'%s\')',(int)$rec['blz'], xtc_db_input(utf8_encode($rec['bankname'])), xtc_db_input($rec['prz']));
+                        xtc_db_query($sql);
+                    }
+                }
+            }   
+        }
 
         xtc_redirect(xtc_href_link('install_admin_step.php', '', 'NONSSL'));
     }
@@ -567,6 +621,15 @@ if (isset($_POST['action']) && ($_POST['action'] == 'process'))
                             <?php echo xtc_draw_radio_field_installer('ZONE_SETUP', 'yes', 'true'); ?>
                             <?php echo  TEXT_ZONE_NO; ?>
                             <?php echo xtc_draw_radio_field_installer('ZONE_SETUP', 'no'); ?>
+                          </p>
+                    </div>
+                    <div class="well">
+                        <p>
+                            <b><?php echo TEXT_BLZ; ?></b><br />
+                            <?php echo  TEXT_BLZ_YES; ?>
+                            <?php echo xtc_draw_radio_field_installer('BLZ_SETUP', 'yes', 'true'); ?>
+                            <?php echo  TEXT_BLZ_NO; ?>
+                            <?php echo xtc_draw_radio_field_installer('BLZ_SETUP', 'no'); ?>
                           </p>
                     </div>
                     <div class="col-xs-2 pull-right nopad">

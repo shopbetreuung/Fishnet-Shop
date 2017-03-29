@@ -329,6 +329,8 @@ define('ACCOUNT_SUBURB_TITLE' , 'Vorort');
 define('ACCOUNT_SUBURB_DESC' , 'Die Abfrage f&uuml;r den Vorort im Account benutzen');
 define('ACCOUNT_STATE_TITLE' , 'Bundesland');
 define('ACCOUNT_STATE_DESC' , 'Die Abfrage f&uuml;r das Bundesland im Account benutzen');
+define('PASSWORD_SECURITY_CHECK_TITLE','Kennwort Sicherheitsprüfung');
+define('PASSWORD_SECURITY_CHECK_DESC','Neue Kunden zwingen, sich mit sicherem Passwort zu registrieren (bedeutet mit mindestens 1 Buchstaben und 1 Ziffer. Beachten Sie die Minimum Konfiguration für die Passwort Länge)');
 
 define('DEFAULT_CURRENCY_TITLE' , 'Standard W&auml;hrung');
 define('DEFAULT_CURRENCY_DESC' , 'W&auml;hrung die standardm&auml;ssig benutzt wird');
@@ -837,3 +839,6 @@ define('CONTACT_FORM_CONSENT_DESC', 'Kontaktformular bedarf der Zustimmung zur D
 
 define('PDFBILL_AUTOMATIC_INVOICE_TITLE', 'PDF Rechnung automatische Rechnungsprofile');
 define('PDFBILL_AUTOMATIC_INVOICE_DESC', '');
+
+define('USE_ATTRIBUTES_IFRAME_TITLE', 'Attribute editieren in iframe');
+define('USE_ATTRIBUTES_IFRAME_DESC', '&Ouml;ffnet die Attribut Verwaltung in der Kategorie/Artikelansicht in einem iframe');

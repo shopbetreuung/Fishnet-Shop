@@ -147,6 +147,7 @@ define('ENTRY_PASSWORD_CURRENT_ERROR','Your password must consist of at least ' 
 define('ENTRY_PASSWORD_NEW_TEXT', '*');
 define('ENTRY_PASSWORD_NEW_ERROR', 'Your new password must consist of at least ' . ENTRY_PASSWORD_MIN_LENGTH . ' characters.');
 define('ENTRY_PASSWORD_NEW_ERROR_NOT_MATCHING', 'Your passwords do not match.');
+define('ENTRY_PASSWORD_NOT_COMPILANT', 'Your password must have at least one letter and at least one digit');
 
 /*
  *

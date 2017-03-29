@@ -421,7 +421,13 @@ class data_cell_textblock extends data_cell_text{
   
   function _content() {
     $ret=$this->text;
-
+    $new_link = "";
+    if ($this->text != '') {
+      $new_line = "\n\n\n";
+    }
+    if ($this->fieldname == 'subtext' && $this->parameter_arr['subtext_display_comments']) {
+      $ret.=$new_line."Kunden Kommentar: ".$this->products_data['COMMENT'];
+    }
     return $ret;        
   }
   

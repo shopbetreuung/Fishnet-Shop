@@ -27,32 +27,54 @@ require(DIR_WS_MODULES.'new_attributes_config.php');
 require(DIR_FS_INC .'xtc_findTitle.inc.php');
 require_once(DIR_FS_INC . 'xtc_format_filesize.inc.php');
 
+$oldaction = isset($_GET['oldaction']) ? '&oldaction='.$_GET['oldaction'] : (isset($_POST['oldaction']) ? '&oldaction='.$_POST['oldaction']: '');
+$oldpage = isset($_GET['page']) ? '&page='.$_GET['page'] : (isset($_POST['page']) ? '&page='.$_POST['page']: '') ;
+
+$iframe = (isset($_GET['iframe']) ? $iframe = '&iframe=1' : '');
 //nach Speichern zur Kontrolle neu laden
 if (isset($_POST['products_options_id']) && $_POST['action'] == 'change') {
    include(DIR_WS_MODULES.'new_attributes_change.php');
-   xtc_redirect(xtc_href_link(FILENAME_NEW_ATTRIBUTES, 'cpath='. $_POST['cpath'].'&current_product_id='. $_POST['current_product_id'].'&option_order_by='.$_POST['option_order_by'].'&products_options_id=' .$_POST['products_options_id']));
+   $options_id = isset($_POST['options_id']) ? '&options_id='.implode(',',$_POST['options_id']) : '';
+   xtc_redirect(xtc_href_link(FILENAME_NEW_ATTRIBUTES, 'cpath='. $_POST['cpath'].'&current_product_id='. $_POST['current_product_id'].'&option_order_by='.$_POST['option_order_by'].'&products_options_id=' .$_POST['products_options_id'].$oldaction.$oldpage.$options_id.$iframe));
 }
 //nach Abbrechen zurück zur Kategorie
 if (isset($_GET['cPath'])) {
    include(DIR_WS_MODULES.'new_attributes_change.php');
-   xtc_redirect(xtc_href_link(FILENAME_CATEGORIES, 'cPath=' . $_GET['cPath'] . '&pID=' . $_GET['current_product_id']));
+   xtc_redirect(xtc_href_link(FILENAME_CATEGORIES, 'cPath=' . $_GET['cPath'] . '&pID=' . $_GET['current_product_id'] . str_replace('old','',$oldaction). $oldpage));
 }
+
 //Aufruf über Icon aus Katgorie/Artikelübersicht
 if (isset($_GET['action']) && !isset($_POST['action'])) {
   $_POST = $_GET;
 }
 require (DIR_WS_INCLUDES.'head.php');
 ?>
-  
+<link rel="stylesheet" type="text/css" href="includes/css/attributes_table.css">
+<script type="text/javascript" src="includes/javascript/jquery.new_attributes.js"></script>
+<?php 
+    if(USE_ATTRIBUTES_IFRAME == 'true'){?>
+    
+    <style>
+        .row.margin-for-attr-iframe{
+            margin-top: -140px;
+        }
+    </style>
+    
+    <?php
+    }
+    ?>
 </head>
 <body>
     <!-- header //-->
     <?php
+    if (!isset($_GET['iframe'])) {
       require(DIR_WS_INCLUDES . 'header.php');
+    }
+    
     ?>
     <!-- header_eof //-->
     <!-- body //-->
-    <div class="row">
+    <div class="row margin-for-attr-iframe">
             <?php
             // BOF - Tomcraft - 2009-11-11 - NEW SORT SELECTION
             if (isset($_GET['option_order_by']) && $_GET['option_order_by'] && !isset($_POST['action'])) {
@@ -98,7 +120,10 @@ require (DIR_WS_INCLUDES.'head.php');
     <!-- EOF - Tomcraft - 2009-06-10 - added missing table close tag -->
     <!-- body_eof //-->
     <!-- footer //-->
-    <?php require(DIR_WS_INCLUDES . 'footer.php'); ?>
+    <?php if (!isset($_GET['iframe'])) {
+	  require(DIR_WS_INCLUDES . 'footer.php');
+    }	 
+    ?>
     <!-- footer_eof //-->
   </body>
 </html>

@@ -219,11 +219,14 @@
   define('TEXT_EMAIL_FROM_LONG','Die E-Mail Adresse, die in den Bestellungen als From benutzt wird.');
   define('TITLE_ZONE_CONFIG','Zonen Konfiguration');
   define('TEXT_ZONE','automatisches Einstellen der Steuerzonen?');
+  define('TEXT_BLZ','Deutsche Bankcodes einrichten?');
   define('TITLE_ZONE_CONFIG_NOTE','*Hinweis: shophelfer.com Shopsoftware kann die Zonen automatisch aufsetzten, sofern Sich Ihr Shop in der EU befindet.');
   define('TITLE_SHOP_CONFIG_NOTE','*Hinweis: Information for grundlegende Shopeinstellungen');
   define('TITLE_ADMIN_CONFIG_NOTE','*Hinweis: Informationen f&uuml;r Admin/Superuser');
   define('TEXT_ZONE_NO','Nein');
   define('TEXT_ZONE_YES','Ja');
+  define('TEXT_BLZ_NO','Nein');
+  define('TEXT_BLZ_YES','Ja');
   define('TEXT_COMPANY','Firmenname');
   define('ENTRY_GENDER_ERROR', 'Bitte w&auml;hlen Sie Geschlecht f&uuml;r diese Admin');
   define('ENTRY_FIRST_NAME_ERROR','Vorname ist zu kurz');
@@ -242,6 +245,7 @@
   define('ENTRY_EMAIL_ADDRESS_FROM_ERROR','E-Mail-From ist zu kurz');
   define('ENTRY_EMAIL_ADDRESS_FROM_CHECK_ERROR','Bitte &uuml;berpr&uuml;fen Sie den E-Mail-From');
   define('SELECT_ZONE_SETUP_ERROR','W&auml;hlen Sie Zone-Setup');
+  define('SELECT_BLZ_SETUP_ERROR','W&auml;hlen Sie Bankcode-Setup');
 
   // install_step7
   define('TITLE_GUEST_CONFIG','Gast Konfiguration');

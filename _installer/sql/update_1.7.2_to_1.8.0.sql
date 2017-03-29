@@ -3663,5 +3663,7 @@ insert into banktransfer_blz (blz, bankname, prz) values (87096214, 'Volksbank C
 
 INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'PASSWORD_SECURITY_CHECK', 'false', 5, 120, NULL, NOW(), NULL, 'xtc_cfg_select_option(array(\'true\', \'false\'),');
 
+INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'USE_ATTRIBUTES_IFRAME', 'true', '1000', '110', NULL , NOW() , NULL , 'xtc_cfg_select_option(array(\'true\', \'false\'),');
+
 UPDATE database_version SET version = 'SH_1.8.0';
 

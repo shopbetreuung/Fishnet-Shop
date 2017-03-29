@@ -833,3 +833,6 @@ define('USE_BOOTSTRAP_DESC', '');
 
 define('PDFBILL_AUTOMATIC_INVOICE_TITLE', 'PDF Bill automatic invoice profiles');
 define('PDFBILL_AUTOMATIC_INVOICE_DESC', '');
+
+define('USE_ATTRIBUTES_IFRAME_TITLE', 'Edit Attributes in iframe');
+define('USE_ATTRIBUTES_IFRAME_DESC', 'Open Attribute Manager in the Category / Product view in an iframe');

@@ -26,6 +26,7 @@
    define('TITLE_UPDATED','Artikeltattribute erfolgreich aktualisiert.');
    define('SELECT_PRODUCT','Bitte w&auml;hlen Sie einen Artikel aus der Liste zum Editieren:');
    define('SELECT_COPY','Bestehende Attribute k&ouml;nnen ebenfalls auf andere Artikel kopiert werden, w&auml;hlen Sie hierzu den Originalartikel aus:');
+   define('ATTR_SAVE_ACTIVE', 'Aufgeklappte Attribute speichern');
 
 // BOF - Tomcraft - 2009-11-11 - NEW SORT SELECTION
    define('TEXT_OPTION_ID', 'Options ID');

@@ -204,8 +204,8 @@
   }
 
   ////
-  // Output a selection field - alias function for xtc_draw_checkbox_field() and xtc_draw_radio_field()
-  function xtc_draw_selection_field($name, $type, $value = '', $checked = false, $compare = '') {
+   // Output a selection field - alias function for xtc_draw_checkbox_field() and xtc_draw_radio_field()
+  function xtc_draw_selection_field($name, $type, $value = '', $checked = false, $compare = '', $parameters = '', $attributes_checkbox = false) {
     $selection = '<input type="' . $type . '" name="' . $name . '"';
     if ($value != '') {
       $selection .= ' value="' . $value . '"';
@@ -216,20 +216,26 @@
     //EOF - DokuMan - 2010-09-08 - set undefined index
       $selection .= ' CHECKED';
     }
-    $selection .= '>';
+    $addtag = '';
+    if ($attributes_checkbox === true && strpos($parameters,'noStyling') === false) {
+      $addtag = '<em>&nbsp;</em>';
+      $parameters  = preg_replace("'\s+=\s+'",'=',$parameters);
+      $parameters = (strpos($parameters,'class="') !== false ? str_replace('class="', 'class="ChkBox ',$parameters) : $parameters . ' class="ChkBox"');
+    }
+    if (xtc_not_null($parameters)) $selection .= ' ' . $parameters;
+    
+    $selection .= '>'.$addtag;
     return $selection;
   }
 
-  ////
   // Output a form checkbox field
-  function xtc_draw_checkbox_field($name, $value = '', $checked = false, $compare = '') {
-    return xtc_draw_selection_field($name, 'checkbox', $value, $checked, $compare);
+  function xtc_draw_checkbox_field($name, $value = '', $checked = false, $compare = '', $parameters = '') {
+    return xtc_draw_selection_field($name, 'checkbox', $value, $checked, $compare, $parameters);
   }
 
-  ////
   // Output a form radio field
-  function xtc_draw_radio_field($name, $value = '', $checked = false, $compare = '') {
-    return xtc_draw_selection_field($name, 'radio', $value, $checked, $compare);
+  function xtc_draw_radio_field($name, $value = '', $checked = false, $compare = '', $parameters = '') {
+    return xtc_draw_selection_field($name, 'radio', $value, $checked, $compare, $parameters);
   }
 
   ////

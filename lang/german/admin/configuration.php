@@ -839,3 +839,6 @@ define('CONTACT_FORM_CONSENT_DESC', 'Kontaktformular bedarf der Zustimmung zur D
 
 define('PDFBILL_AUTOMATIC_INVOICE_TITLE', 'PDF Rechnung automatische Rechnungsprofile');
 define('PDFBILL_AUTOMATIC_INVOICE_DESC', '');
+
+define('USE_ATTRIBUTES_IFRAME_TITLE', 'Attribute editieren in iframe');
+define('USE_ATTRIBUTES_IFRAME_DESC', '&Ouml;ffnet die Attribut Verwaltung in der Kategorie/Artikelansicht in einem iframe');

@@ -26,7 +26,8 @@
    define('TITLE_UPDATED','Product Attributes Updated.');
    define('SELECT_PRODUCT','Please select a product to edit:');
    define('SELECT_COPY','Please select a product to copy attributes from:');
-
+   define('ATTR_SAVE_ACTIVE', 'Save Unfold Attributes');
+   
 // BOF - Tomcraft - 2009-11-11 - NEW SORT SELECTION
    define('TEXT_OPTION_ID', 'Option ID');
    define('TEXT_OPTION_NAME', 'Option Name');

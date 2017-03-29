@@ -1,0 +1,22 @@
+body{
+    overflow-x: hidden;
+}
+.dataTableHeadingContent.attr-chk {
+    background-color: #C1FFC1!important;
+    position:relative;
+}
+.dataTableHeadingRow.att-red{
+    color:#c00;
+}
+.dataTableHeadingRow.att-green {
+    color:#060;
+}
+.attributes .attributes-odd, .attributes .attributes-even, .attributes .downloads{
+    display:none;
+}
+span.glyphicon.glyphicon-chevron-down{
+    margin-left: 10px;
+}
+.select_all{
+display:none;
+}

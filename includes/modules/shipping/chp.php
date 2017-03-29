@@ -15,7 +15,7 @@
    Released under the GNU General Public License 
    -----------------------------------------------------------------------------------------
    Third Party contributions:
-   swiss_post_1.02       	Autor:	Copyright (C) 2002 - 2003 TheMedia, Dipl.-Ing Thomas Plänkers | http://www.themedia.at & http://www.oscommerce.at
+   swiss_post_1.02       	Autor:	Copyright (C) 2002 - 2003 TheMedia, Dipl.-Ing Thomas Plï¿½nkers | http://www.themedia.at & http://www.oscommerce.at
 
    Released under the GNU General Public License 
    ---------------------------------------------------------------------------------------*/
@@ -38,7 +38,7 @@
       $this->sort_order = MODULE_SHIPPING_CHP_SORT_ORDER;
       $this->icon = DIR_WS_ICONS . 'shipping_chp.gif';
       $this->tax_class = MODULE_SHIPPING_CHP_TAX_CLASS;
-      $this->enabled = ((MODULE_SHIPPING_CHP_STATUS == 'True') ? true : false);
+      $this->enabled = ((MODULE_SHIPPING_CHP_STATUS == 'true') ? true : false);
 
       if ( ($this->enabled == true) && ((int)MODULE_SHIPPING_CHP_ZONE > 0) ) {
         $check_flag = false;
@@ -208,7 +208,7 @@
     }
 
     function install() {
-      xtc_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('MODULE_SHIPPING_CHP_STATUS', 'True', 6, 0, NULL, now(), NULL, 'xtc_cfg_select_option(array(\'True\', \'False\'),')");
+      xtc_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('MODULE_SHIPPING_CHP_STATUS', 'true', 6, 0, NULL, now(), NULL, 'xtc_cfg_select_option(array(\'true\', \'false\'),')");
       xtc_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('MODULE_SHIPPING_CHP_HANDLING', '0', 6, 0, NULL, now(), NULL, NULL)");
       xtc_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('MODULE_SHIPPING_CHP_TAX_CLASS', '0', 6, 0, NULL, now(), 'xtc_get_tax_class_title', 'xtc_cfg_pull_down_tax_classes(')");
       xtc_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('MODULE_SHIPPING_CHP_ZONE', '0', 6, 0, NULL, now(), 'xtc_get_zone_class_title', 'xtc_cfg_pull_down_zone_classes(')");

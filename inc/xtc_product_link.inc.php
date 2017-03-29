@@ -12,6 +12,8 @@
    Released under the GNU General Public License
    ---------------------------------------------------------------------------------------*/
 
+include_once(DIR_FS_INC . 'xtc_get_parent_categories.inc.php');
+
 function xtc_product_link($pID, $name='') {
 
     #Check for current category link    

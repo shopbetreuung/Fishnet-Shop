@@ -124,6 +124,10 @@ if (!is_object($product) || !$product->isProduct()) {
   //products formated price
   $info_smarty->assign('PRODUCTS_PRICE', $products_price['formated']);
 
+  //price for search engines
+  $info_smarty->assign('PRODUCTS_PRICE_PLAIN', $products_price['plain']);
+  $info_smarty->assign('PRODUCTS_PRICE_CURRENCY', $xtPrice->actualCurr);
+ 
   //get products vpe
   $info_smarty->assign('PRODUCTS_VPE',$main->getVPEtext($product->data, $products_price['plain'])); //web28 - 2012-04-17 - use classes function getVPEtext() 
   

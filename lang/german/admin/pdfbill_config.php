@@ -570,7 +570,7 @@ function texts_html( $texts ) {
                  'text_italic'                            => 'Kursiv',         
                  'text_underlined'                        => 'Unterstrichen' ),
                'terms_head_font_size' => array( 
-                 'question'                               => 'Schriftgröße Überschift:' ),
+                 'question'                               => 'Schriftgröße Überschrift:' ),
 
                'terms_font_color'                         => $txt_std_color,
                'terms_font_type' => array( 

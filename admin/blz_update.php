@@ -13,7 +13,7 @@
 
 require('includes/application_top.php');
 
-$blz_file_default_link = 'http://www.bundesbank.de/Redaktion/DE/Downloads/Kerngeschaeftsfelder/Unbarer_Zahlungsverkehr/Bankleitzahlen/2012_12_02/blz_2012_09_03_txt.txt?__blob=publicationFile';
+$blz_file_default_link = 'http://www.bundesbank.de/Redaktion/DE/Downloads/Aufgaben/Unbarer_Zahlungsverkehr/Bankleitzahlen/2017_06_04/blz_2017_03_06_txt.txt?__blob=publicationFile';
 $connection = xtc_db_connect();
 
 require (DIR_WS_INCLUDES.'head.php');
@@ -122,7 +122,7 @@ require (DIR_WS_INCLUDES.'head.php');
           // and fill it with the the content from the downloaded file
           foreach ($banktransfer as $rec) {
             $sql = sprintf('insert into banktransfer_blz (blz, bankname, prz) values (%s, \'%s\', \'%s\')',
-           (int)$rec['blz'], xtc_db_input($rec['bankname']), xtc_db_input($rec['prz']));
+           (int)$rec['blz'], xtc_db_input(utf8_encode($rec['bankname'])), xtc_db_input($rec['prz']));
             xtc_db_query($sql);
             if(mysqli_affected_rows($connection) != 0) {
               $j = $j + mysqli_affected_rows($connection); // sum up affected rows

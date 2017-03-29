@@ -36,7 +36,7 @@
       $this->sort_order  = MODULE_SHIPPING_CHRONOPOST_SORT_ORDER;
       $this->icon        = DIR_WS_ICONS . 'shipping_chronopost.gif';
       $this->tax_class   = MODULE_SHIPPING_CHRONOPOST_TAX_CLASS;
-      $this->enabled     = ((MODULE_SHIPPING_CHRONOPOST_STATUS == 'True') ? true : false);
+      $this->enabled     = ((MODULE_SHIPPING_CHRONOPOST_STATUS == 'true') ? true : false);
 
 /**
  * CUSTOMIZE THIS SETTING FOR THE NUMBER OF chronopost NEEDED
@@ -120,7 +120,7 @@
     }
 
     function install() {
-      xtc_db_query("insert into " . TABLE_CONFIGURATION . " ( configuration_key, configuration_value,  configuration_group_id, sort_order, date_added) VALUES ('MODULE_SHIPPING_CHRONOPOST_STATUS', 'True', '6', 'xtc_cfg_select_option(array(\'True\', \'False\'), ', now())");
+      xtc_db_query("insert into " . TABLE_CONFIGURATION . " ( configuration_key, configuration_value,  configuration_group_id, sort_order, date_added) VALUES ('MODULE_SHIPPING_CHRONOPOST_STATUS', 'true', '6', 'xtc_cfg_select_option(array(\'true\', \'false\'), ', now())");
       xtc_db_query("insert into " . TABLE_CONFIGURATION . " ( configuration_key, configuration_value,  configuration_group_id, sort_order, date_added) values ('MODULE_SHIPPING_CHRONOPOST_HANDLING', '0', '6', '0', now())");
       xtc_db_query("insert into " . TABLE_CONFIGURATION . " ( configuration_key, configuration_value,  configuration_group_id, sort_order, date_added) values ('MODULE_SHIPPING_CHRONOPOST_ALLOWED', '', '6', '0', now())");
 	  

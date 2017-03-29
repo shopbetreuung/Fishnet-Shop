@@ -121,7 +121,7 @@ define('TEXT_PRODUCT_NOT_AVAILABLE', 'Deaktiviert');
 define('TEXT_PRODUCTS_MANUFACTURER', 'Artikelhersteller:');
 define('TEXT_PRODUCTS_MANUFACTURER_MODEL', 'Hersteller Art.Nr.(HAN):');
 define('TEXT_PRODUCTS_WHOLESALER', 'Gro&szlig;h&auml;ndler:');
-define('TEXT_PRODUCTS_WHOLESALER_REORDER', 'Nachbestellen ab Großhändler x Stück:');
+define('TEXT_PRODUCTS_WHOLESALER_REORDER', 'Beim Großhändler nachbestellen ab x Stück:');
 define('TEXT_PRODUCTS_NAME', 'Artikelname:');
 define('TEXT_PRODUCTS_DESCRIPTION', 'Artikelbeschreibung:');
 define('TEXT_PRODUCTS_QUANTITY', 'Artikelanzahl:');

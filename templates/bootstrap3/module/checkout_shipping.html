@@ -7,7 +7,7 @@
   <div class="col-sm-3"><div class="inactive"><span class="number">4.</span> <span class="title">{#title_success#}</span><br /><span class="description">{#desc_success#}</span></div></div>
 </div>
 
-{if $error != ''}<div class="errormessage">{$error}</div>{/if}
+{if $error != ''}<div class="alert alert-danger">{$error}</div>{/if}
 <h1>{#heading_shipping#}</h1>
 {$FORM_ACTION}
 <p><strong>{#title_address#}:</strong><br/>{$ADDRESS_LABEL}</p>

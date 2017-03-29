@@ -37,7 +37,7 @@
       $this->sort_order = MODULE_SHIPPING_GLS_SORT_ORDER;
       $this->icon = DIR_WS_ICONS . 'shipping_gls.gif';
       $this->tax_class = MODULE_SHIPPING_GLS_TAX_CLASS;
-      $this->enabled = ((MODULE_SHIPPING_GLS_STATUS == 'True') ? true : false);
+      $this->enabled = ((MODULE_SHIPPING_GLS_STATUS == 'true') ? true : false);
 
       if ( ($this->enabled == true) && ((int)MODULE_SHIPPING_GLS_ZONE > 0) ) {
         $check_flag = false;
@@ -198,7 +198,7 @@
 // put out a notice to make sure that the tables are created
 
 //disabled the next one because of some problems: If module is installed and this set to 0, checkout doesn't work.
-      xtc_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) VALUES ('MODULE_SHIPPING_GLS_STATUS', 'True', '6', '0', 'xtc_cfg_select_option(array(\'True\', \'False\'), ', now())");
+      xtc_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) VALUES ('MODULE_SHIPPING_GLS_STATUS', 'true', '6', '0', 'xtc_cfg_select_option(array(\'true\', \'false\'), ', now())");
       xtc_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_key, configuration_value, configuration_group_id, sort_order, date_added) values ('MODULE_SHIPPING_GLS_HANDLING', '0', '6', '0', now())");
       xtc_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_key, configuration_value, configuration_group_id, sort_order, date_added) values ('MODULE_SHIPPING_GLS_ALLOWED', '', '6', '0', now())");
       xtc_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_key, configuration_value, configuration_group_id, sort_order, date_added) values ('MODULE_SHIPPING_GLS_SORT_ORDER', '0', '6', '0', now())");

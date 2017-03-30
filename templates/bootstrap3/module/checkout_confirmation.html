@@ -91,9 +91,9 @@
     <table style="clear:both">
       {foreach name=aussen item=data from=$PAYMENT_INFORMATION}
       <tr>
-          <td class="main">{if $data.title != ''}{$data.title|stripslashes}{else}&nbsp;{/if}</td>
+          <td class="main">{if $data.title != ''}{$data.title|stripslashes|utf8_encode}{else}&nbsp;{/if}</td>
           <td>&nbsp;</td>
-          <td class="main">{if $data.field != ''}{$data.field|stripslashes}{else}&nbsp;{/if}</td>
+          <td class="main">{if $data.field != ''}{$data.field|stripslashes|utf8_encode}{else}&nbsp;{/if}</td>
         </tr>
         {/foreach}
     </table>

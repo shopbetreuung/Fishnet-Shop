@@ -115,6 +115,7 @@ class pdfbill extends pdfbill_closed {
 		  include (DIR_FS_LANGUAGES.$_SESSION['language'].'/modules/payment/'.$order->info['payment_method'].'.php');
 		  $payment_method = constant(strtoupper('MODULE_PAYMENT_'.$order->info['payment_method'].'_TEXT_TITLE'));
 	  }
+    $this->data['payment_method'] = $order->info['payment_method'];
 	  $this->data['PAYMENT_METHOD'] =$payment_method;
 	  $this->data['COMMENT'] = $order->info['comments'];
 	  $this->data['order'] = $order;

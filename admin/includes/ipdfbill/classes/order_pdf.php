@@ -73,7 +73,10 @@
       $order_status_query = xtc_db_query("select orders_status_name from " . TABLE_ORDERS_STATUS . " where orders_status_id = '" . $order['orders_status'] . "' and language_id = '" . $_SESSION['languages_id'] . "'");
       $order_status = xtc_db_fetch_array($order_status_query);
 //echo "ord query:<pre>"; print_r($order); echo "</pre>";    
-
+	  if(MODULE_PAYMENT_BILLPAY_STATUS == 'true' || MODULE_PAYMENT_BILLPAYPAYLATER_STATUS == 'true'){
+            $billpay_info_query = xtc_db_query ("select account_holder, account_number, bank_code, bank_name, invoice_reference, invoice_due_date from billpay_bankdata where orders_id = '" . $order_id . "' ");
+            $billpay_info = xtc_db_fetch_array($billpay_info_query);
+      }
       $this->info = array('currency' => $order['currency'],
                           'currency_value' => $order['currency_value'],
                           'payment_method' => $order['payment_method'],
@@ -86,8 +89,13 @@
                           'comments' => $order['comments'],
                           'ibn_billdate' => $order['ibn_billdate'],
                           'ibn_billnr' => $order['ibn_billnr'],
-                          'ibn_pdfnotifydate' => $order['ibn_pdfnotifydate']
-                          
+                          'ibn_pdfnotifydate' => $order['ibn_pdfnotifydate'],
+						  'account_holder' => $billpay_info['account_holder'],
+                          'account_number' => $billpay_info['account_number'],
+                          'bank_code' => $billpay_info['bank_code'],
+                          'bank_name' => $billpay_info['bank_name'],
+                          'invoice_reference' => $billpay_info['invoice_reference'],
+                          'invoice_due_date' => $billpay_info['invoice_due_date']
                           );
 
       $this->customer = array('id' => $order['customers_id'],

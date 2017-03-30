@@ -428,6 +428,17 @@ class data_cell_textblock extends data_cell_text{
     if ($this->fieldname == 'subtext' && $this->parameter_arr['subtext_display_comments']) {
       $ret.=$new_line."Kunden Kommentar: ".$this->products_data['COMMENT'];
     }
+    if ($this->fieldname == 'subtext' && ($this->products_data['payment_method'] == 'billpay' || $this->products_data['payment_method'] == 'billpaypaylater')) {
+      $unformated_date = $this->products_data['INVOICE_DUE_DATE'];
+      $formated_date = substr($unformated_date,6,2).".".substr($unformated_date,4,-2).".".substr($unformated_date,0,-4);
+      $ret.=$new_line.$billpay_info."\n\n".
+      'Kontoinhaber: '.$this->products_data['ACCOUNT_HOLDER'].
+      "\nIBAN: ".$this->products_data['ACCOUNT_NUMBER'].
+      "\nBIC: ".$this->products_data['BANK_CODE'].
+      "\nKreditinstitut: ".$this->products_data['BANK_NAME'].
+      "\nVerwendungszweck: ".$this->products_data['INVOICE_REFERENCE'].
+      "\nZahlungsziel: ".$formated_date;
+    }
     return $ret;        
   }
   

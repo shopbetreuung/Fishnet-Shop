@@ -426,6 +426,9 @@ class data_cell_textblock extends data_cell_text{
       $billpay_info = "Vielen Dank, dass Sie sich für die BillPay Rechnung entschieden haben. Bitte überweisen Sie den Rechnungsbetrag innerhalb der Zahlungsfrist unter Angabe des Verwendungszwecks auf folgendes Konto:";
       $paypalplus_info_text = 'PayPal Plus Informationen: ';
     }
+    if ($this->fieldname == 'subtext') {
+      $ret.=$new_line."Kunden Kommentar: ".$this->products_data['COMMENT'];
+    }
     if($this->parameter_arr['typeofbill'] == 'invoice'){
       if ($this->fieldname == 'subtext' && ($this->products_data['payment_method'] == 'billpay' || $this->products_data['payment_method'] == 'billpaypaylater')) {
         $unformated_date = $this->products_data['INVOICE_DUE_DATE'];

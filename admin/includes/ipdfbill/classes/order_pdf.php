@@ -77,6 +77,11 @@
             $billpay_info_query = xtc_db_query ("select account_holder, account_number, bank_code, bank_name, invoice_reference, invoice_due_date from billpay_bankdata where orders_id = '" . $order_id . "' ");
             $billpay_info = xtc_db_fetch_array($billpay_info_query);
       }
+		if(MODULE_PAYMENT_PAYPALPLUS_STATUS == 'True'){
+            require_once(DIR_FS_EXTERNAL.'paypal/classes/PayPalInfo.php');
+            $paypal = new PayPalInfo($order['payment_method']);
+            $admin_info_array = $paypal->order_info($order_id);
+      }
       $this->info = array('currency' => $order['currency'],
                           'currency_value' => $order['currency_value'],
                           'payment_method' => $order['payment_method'],
@@ -95,7 +100,12 @@
                           'bank_code' => $billpay_info['bank_code'],
                           'bank_name' => $billpay_info['bank_name'],
                           'invoice_reference' => $billpay_info['invoice_reference'],
-                          'invoice_due_date' => $billpay_info['invoice_due_date']
+                          'invoice_due_date' => $billpay_info['invoice_due_date'],
+						  'address_pp' => xtc_address_format($order['customers_address_format_id'], $admin_info_array['address'], 1, '', '<br />'),
+                          'email_pp' => $admin_info_array['email_address'],
+                          'account_status_pp' => $admin_info_array['account_status'],
+                          'intent_pp' => $admin_info_array['intent'],
+                          'price_pp' => format_price($admin_info_array['total'], 1, $admin_info_array['transactions'][0]['relatedResource'][0]['currency'], 0, 0)
                           );
 
       $this->customer = array('id' => $order['customers_id'],

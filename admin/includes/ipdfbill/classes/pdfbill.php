@@ -102,6 +102,18 @@ class pdfbill extends pdfbill_closed {
 	  $this->data['address_label_customer'] = xtc_address_format($order->customer['format_id'], $order->customer, 0, '', "\n");
 	  $this->data['address_label_shipping'] = xtc_address_format($order->delivery['format_id'], $order->delivery, 0, '', "\n");
 	  $this->data['address_label_payment']  = xtc_address_format($order->billing['format_id'], $order->billing, 0, '', "\n");
+    $this->data['ACCOUNT_HOLDER'] = $order->info['account_holder'];
+	  $this->data['ACCOUNT_NUMBER'] = $order->info['account_number'];
+	  $this->data['BANK_CODE'] = $order->info['bank_code'];
+	  $this->data['BANK_NAME'] = $order->info['bank_name'];
+	  $this->data['INVOICE_REFERENCE'] = $order->info['invoice_reference'];
+	  $this->data['INVOICE_DUE_DATE'] = $order->info['invoice_due_date'];
+          
+    $this->data['PAYPAL_ADDRESS'] = $order->info['address_pp'];
+	  $this->data['PAYPAL_EMAIL'] = $order->info['email_pp'];
+	  $this->data['PAYPAL_ACC_STATUS'] = $order->info['account_status_pp'];
+	  $this->data['PAYPAL_INTENT'] = $order->info['intent_pp'];
+	  $this->data['PAYPAL_PRICE'] = $order->info['price_pp'];
 	  $this->data['csID'] = $order->customer['csID'];
 	  // get products data
 	  $order_total = $order->getTotalData($oID); 

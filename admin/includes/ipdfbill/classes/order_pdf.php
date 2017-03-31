@@ -73,7 +73,15 @@
       $order_status_query = xtc_db_query("select orders_status_name from " . TABLE_ORDERS_STATUS . " where orders_status_id = '" . $order['orders_status'] . "' and language_id = '" . $_SESSION['languages_id'] . "'");
       $order_status = xtc_db_fetch_array($order_status_query);
 //echo "ord query:<pre>"; print_r($order); echo "</pre>";    
-
+	  if(MODULE_PAYMENT_BILLPAY_STATUS == 'true' || MODULE_PAYMENT_BILLPAYPAYLATER_STATUS == 'true'){
+            $billpay_info_query = xtc_db_query ("select account_holder, account_number, bank_code, bank_name, invoice_reference, invoice_due_date from billpay_bankdata where orders_id = '" . $order_id . "' ");
+            $billpay_info = xtc_db_fetch_array($billpay_info_query);
+      }
+		if(MODULE_PAYMENT_PAYPALPLUS_STATUS == 'True'){
+            require_once(DIR_FS_EXTERNAL.'paypal/classes/PayPalInfo.php');
+            $paypal = new PayPalInfo($order['payment_method']);
+            $admin_info_array = $paypal->order_info($order_id);
+      }
       $this->info = array('currency' => $order['currency'],
                           'currency_value' => $order['currency_value'],
                           'payment_method' => $order['payment_method'],
@@ -86,8 +94,18 @@
                           'comments' => $order['comments'],
                           'ibn_billdate' => $order['ibn_billdate'],
                           'ibn_billnr' => $order['ibn_billnr'],
-                          'ibn_pdfnotifydate' => $order['ibn_pdfnotifydate']
-                          
+                          'ibn_pdfnotifydate' => $order['ibn_pdfnotifydate'],
+						  'account_holder' => $billpay_info['account_holder'],
+                          'account_number' => $billpay_info['account_number'],
+                          'bank_code' => $billpay_info['bank_code'],
+                          'bank_name' => $billpay_info['bank_name'],
+                          'invoice_reference' => $billpay_info['invoice_reference'],
+                          'invoice_due_date' => $billpay_info['invoice_due_date'],
+						  'address_pp' => xtc_address_format($order['customers_address_format_id'], $admin_info_array['address'], 1, '', '<br />'),
+                          'email_pp' => $admin_info_array['email_address'],
+                          'account_status_pp' => $admin_info_array['account_status'],
+                          'intent_pp' => $admin_info_array['intent'],
+                          'price_pp' => format_price($admin_info_array['total'], 1, $admin_info_array['transactions'][0]['relatedResource'][0]['currency'], 0, 0)
                           );
 
       $this->customer = array('id' => $order['customers_id'],

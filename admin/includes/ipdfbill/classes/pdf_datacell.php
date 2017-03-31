@@ -421,14 +421,37 @@ class data_cell_textblock extends data_cell_text{
   
   function _content() {
     $ret=$this->text;
-    $new_link = "";
     if ($this->text != '') {
       $new_line = "\n\n\n";
+      $billpay_info = "Vielen Dank, dass Sie sich für die BillPay Rechnung entschieden haben. Bitte überweisen Sie den Rechnungsbetrag innerhalb der Zahlungsfrist unter Angabe des Verwendungszwecks auf folgendes Konto:";
+      $paypalplus_info_text = 'PayPal Plus Informationen: ';
     }
-    if ($this->fieldname == 'subtext' && $this->parameter_arr['subtext_display_comments']) {
-      $ret.=$new_line."Kunden Kommentar: ".$this->products_data['COMMENT'];
+    if($this->parameter_arr['typeofbill'] == 'invoice'){
+      if ($this->fieldname == 'subtext' && ($this->products_data['payment_method'] == 'billpay' || $this->products_data['payment_method'] == 'billpaypaylater')) {
+        $unformated_date = $this->products_data['INVOICE_DUE_DATE'];
+        $formated_date = substr($unformated_date,6,2).".".substr($unformated_date,4,-2).".".substr($unformated_date,0,-4);
+        $ret.=$new_line.$billpay_info."\n\n".
+        'Kontoinhaber: '.$this->products_data['ACCOUNT_HOLDER'].
+        "\nIBAN: ".$this->products_data['ACCOUNT_NUMBER'].
+        "\nBIC: ".$this->products_data['BANK_CODE'].
+        "\nKreditinstitut: ".$this->products_data['BANK_NAME'].
+        "\nVerwendungszweck: ".$this->products_data['INVOICE_REFERENCE'].
+        "\nZahlungsziel: ".$formated_date;
+      }
+      if($this->fieldname == 'subtext' && ($this->products_data['payment_method'] == 'paypalplus')){
+        $address = $this->products_data['PAYPAL_ADDRESS'];
+        $breaks = array("<br />", "<br>", "<br/>");
+        $address_converted = str_ireplace($breaks, "\n", $address);
+
+        $ret.=$new_line.$paypalplus_info_text."\n\n".
+        "Adresse: \n".$address_converted."\n".
+        "Email-Addresse: ".strip_tags($this->products_data['PAYPAL_EMAIL'])."\n".
+        "Account Status: ".strip_tags($this->products_data['PAYPAL_ACC_STATUS'])."\n".
+        "Intent: ".strip_tags($this->products_data['PAYPAL_INTENT'])."\n".
+        "Betrag: ".strip_tags(trim($this->products_data['PAYPAL_PRICE']));
+      }
     }
-    return $ret;        
+    return $ret;
   }
   
   

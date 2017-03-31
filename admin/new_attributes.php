@@ -52,7 +52,8 @@ require (DIR_WS_INCLUDES.'head.php');
 <link rel="stylesheet" type="text/css" href="includes/css/attributes_table.css">
 <script type="text/javascript" src="includes/javascript/jquery.new_attributes.js"></script>
 <?php 
-    if(USE_ATTRIBUTES_IFRAME == 'true'){?>
+     if(isset($_GET['iframe'])){
+?>
     
     <style>
         .row.margin-for-attr-iframe{

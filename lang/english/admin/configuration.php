@@ -416,6 +416,7 @@ define('SMTP_AUTH_TITLE' , 'SMTP AUTH');
 define('SMTP_AUTH_DESC' , 'Enable secure authentication for your SMTP Server');
 define('SMTP_PORT_TITLE' , 'SMTP Port');
 define('SMTP_PORT_DESC' , 'Please enter the SMTP port of your SMTP server(default: 25)?');
+define('SMTP_SECURE_DESC', 'Select the method \'ssl\' or \'tls\' for e-mail encryption, or select \'---\' for no encryption.');
 
 //DokuMan - 2011-09-20 - E-Mail SQL errors
 define('EMAIL_SQL_ERRORS_TITLE','Send SQL error messages to shop owner via email');

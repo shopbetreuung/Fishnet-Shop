@@ -584,6 +584,9 @@
       xtc_db_query("DELETE FROM ".TABLE_NEWSLETTER_RECIPIENTS." WHERE customers_id = '".xtc_db_input($customers_id)."'"); // DokuMan - 2011-04-15 - also delete the newsletter entry of the customer
       xtc_redirect(xtc_href_link(FILENAME_CUSTOMERS, xtc_get_all_get_params(array ('cID', 'action'))));
       break;
+    case 'deleteguests':
+      require_once DIR_WS_INCLUDES.'delete_guests.php';
+      break;
     default :
       $customers_query = xtc_db_query("
       -- admin/customers.php
@@ -1535,6 +1538,17 @@ function check_form() {
                   }
                 ?>
                 </table>
+                <div class="col-xs-12">
+                <?php
+                    $check_customer_query = xtc_db_query("SELECT * FROM customers c JOIN customers_info ci ON c.customers_id = ci.customers_info_id WHERE c.customers_id NOT IN (SELECT o.customers_id FROM orders o) AND customers_status = '1' AND ci.customers_info_date_account_created < DATE_SUB(NOW(), INTERVAL 60 DAY)");
+                    if(xtc_db_num_rows($check_customer_query) > 0){
+                        echo xtc_draw_form('customers-delete', FILENAME_CUSTOMERS, 'action=deleteguests', 'post', 'id = "delete-guest-customers"');
+                        echo '<input type="submit" name ="delete-guest" class="btn btn-default" value="'.BUTTON_DELETE_GUESTS.'">';
+                        echo TEXT_INFO_DELETE_GUESTS;
+                        echo '</form><br />';
+                    }
+                ?>
+                </div><br/><br/>
                     <div class="col-xs-12">
                       <div class="col-xs-6 smallText" ><?php echo $customers_split->display_count($customers_query_numrows, MAX_DISPLAY_LIST_CUSTOMERS, $_GET['page'], TEXT_DISPLAY_NUMBER_OF_CUSTOMERS); ?></div>
                       <div class="col-xs-6 smallText" ><?php echo $customers_split->display_links($customers_query_numrows, MAX_DISPLAY_LIST_CUSTOMERS, MAX_DISPLAY_PAGE_LINKS, $_GET['page'], xtc_get_all_get_params(array('page', 'info', 'x', 'y', 'cID'))); ?></div>

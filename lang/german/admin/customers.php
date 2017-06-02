@@ -69,4 +69,6 @@ define('TEXT_INFO_DELETE_DEFAULT', '<b>Dieser Adressbucheintrag kann nicht gel&o
 
 define('ENTRY_SYMBOL', 'Symbol');
 define('NO_SYMBOL', 'Kein Symbol');
+
+define('TEXT_INFO_DELETE_GUESTS', '(L&ouml;scht alle Gastkonten ohne Bestellung, die &auml;lter sind als 60 Tage)');
 ?>

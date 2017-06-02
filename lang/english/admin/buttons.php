@@ -83,4 +83,6 @@ define('BUTTON_DELETE_TEMP_CACHE', 'Delete Templatecache');
 define('BUTTON_VIEW_PRODUCT', 'View Product');
 //EOF - web28 - 2011-07-13 - New Button
 
+define('BUTTON_DELETE_GUESTS', 'Delete guests');
+
 ?>

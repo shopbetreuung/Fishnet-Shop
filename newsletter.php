@@ -33,6 +33,7 @@ require_once (DIR_FS_INC.'xtc_validate_email.inc.php');
 $inp = 'true';
 $del = '';
 $info_message = '';
+$success_message = '';
 
 if (isset ($_GET['action']) && ($_GET['action'] == 'process')) {    
 	
@@ -88,7 +89,7 @@ if (isset ($_GET['action']) && ($_GET['action'] == 'process')) {
 			$sql_data_array = array ('customers_email_address' => xtc_db_input($_POST['email']), 'customers_id' => xtc_db_input($customers_id), 'customers_status' => xtc_db_input($customers_status), 'customers_firstname' => xtc_db_input($customers_firstname), 'customers_lastname' => xtc_db_input($customers_lastname), 'mail_status' => '0', 'mail_key' => xtc_db_input($vlcode), 'date_added' => 'now()');
 			xtc_db_perform(TABLE_NEWSLETTER_RECIPIENTS, $sql_data_array);
 
-			$info_message = TEXT_EMAIL_INPUT;
+			$success_message = TEXT_EMAIL_INPUT;
 
 			if (SEND_EMAILS == true) {
 				xtc_php_mail(EMAIL_SUPPORT_ADDRESS, EMAIL_SUPPORT_NAME, xtc_db_input($_POST['email']), '', '', EMAIL_SUPPORT_REPLY_ADDRESS, EMAIL_SUPPORT_REPLY_ADDRESS_NAME, '', '', TEXT_EMAIL_SUBJECT, $html_mail, $txt_mail);
@@ -130,7 +131,7 @@ if (isset ($_GET['action']) && ($_GET['action'] == 'process')) {
 		} else {
 			$del_query = xtc_db_query("delete from ".TABLE_NEWSLETTER_RECIPIENTS." where customers_email_address ='".xtc_db_input($_POST['email'])."'");
            
-			$info_message = TEXT_EMAIL_DEL;
+			$success_message = TEXT_EMAIL_DEL;
 		}	
 	}	
 }
@@ -150,7 +151,7 @@ if (isset ($_GET['action']) && ($_GET['action'] == 'activate')) {
 		} else {
 			xtc_db_query("update ".TABLE_NEWSLETTER_RECIPIENTS." set mail_status = '1' where customers_email_address = '".xtc_db_input($_GET['email'])."'");
 			
-			$info_message = TEXT_EMAIL_ACTIVE;
+			$success_message = TEXT_EMAIL_ACTIVE;
 		}
 	}
 }
@@ -174,7 +175,7 @@ if (isset ($_GET['action']) && ($_GET['action'] == 'remove')) {
 		} else {
 			$del_query = xtc_db_query("delete from ".TABLE_NEWSLETTER_RECIPIENTS." where  customers_email_address ='".xtc_db_input($_GET['email'])."' and mail_key = '".xtc_db_input($_GET['key'])."'");
 			
-			$info_message = TEXT_EMAIL_DEL;
+			$success_message = TEXT_EMAIL_DEL;
 		}
 	}
 }
@@ -185,6 +186,7 @@ require (DIR_WS_INCLUDES.'header.php');
 
 $smarty->assign('text_newsletter', TEXT_NEWSLETTER);
 $smarty->assign('info_message', $info_message);
+$smarty->assign('success_message', $success_message);
 $smarty->assign('FORM_ACTION', xtc_draw_form('sign', xtc_href_link(FILENAME_NEWSLETTER, 'action=process', 'SSL'))); // web28 - 2010-09-21 - change NONSSL -> SSL 
 //BOF - web28 - 2010-02-09: SHOW EMAIL  IN INPUT FIELD
 //$smarty->assign('INPUT_EMAIL', xtc_draw_input_field('email', xtc_db_input($_POST['email'])));

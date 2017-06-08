@@ -191,13 +191,13 @@
           <tr>
             <td class="main" colspan="2"><?php echo xtc_draw_textarea_field('categories_description[' . $languages[$i]['id'] . ']', 'soft', '100', '25', (isset($categories_description[$languages[$i]['id']]) ? stripslashes($categories_description[$languages[$i]['id']]) : $categories_desc_fields['categories_description']), 'style="width:100%"'); ?></td>
           </tr>
-            <td class="main" valign="top"><?php  echo $lng_image.TEXT_META_TITLE .'<br /> (max. 50 '. TEXT_CHARACTERS .')'; ?></td>
-            <td class="main meta"><?php echo xtc_draw_input_field('categories_meta_title[' . $languages[$i]['id'] . ']',(isset($categories_meta_title[$languages[$i]['id']]) ? stripslashes($categories_meta_title[$languages[$i]['id']]) : $categories_desc_fields['categories_meta_title']), 'style="width:100%" maxlength="50"'); ?></td>
+            <td class="main" valign="top"><?php  echo $lng_image.TEXT_META_TITLE .'<br /> (max. 71 '. TEXT_CHARACTERS .')'; ?></td>
+            <td class="main meta"><?php echo xtc_draw_input_field('categories_meta_title[' . $languages[$i]['id'] . ']',(isset($categories_meta_title[$languages[$i]['id']]) ? stripslashes($categories_meta_title[$languages[$i]['id']]) : $categories_desc_fields['categories_meta_title']), 'style="width:100%" maxlength="71"'); ?></td>
           <tr>
           </tr>
            <tr>
-            <td class="main" valign="top"><?php  echo $lng_image.TEXT_META_DESCRIPTION .'<br /> (max. 140 '. TEXT_CHARACTERS .')'; ?></td>
-            <td class="main meta"><?php echo xtc_draw_input_field('categories_meta_description[' . $languages[$i]['id'] . ']', (isset($categories_meta_description[$languages[$i]['id']]) ? stripslashes($categories_meta_description[$languages[$i]['id']]) : $categories_desc_fields['categories_meta_description']),'style="width:100%" maxlength="140"'); ?></td>
+            <td class="main" valign="top"><?php  echo $lng_image.TEXT_META_DESCRIPTION .'<br /> (max. 156 '. TEXT_CHARACTERS .')'; ?></td>
+            <td class="main meta"><?php echo xtc_draw_input_field('categories_meta_description[' . $languages[$i]['id'] . ']', (isset($categories_meta_description[$languages[$i]['id']]) ? stripslashes($categories_meta_description[$languages[$i]['id']]) : $categories_desc_fields['categories_meta_description']),'style="width:100%" maxlength="156"'); ?></td>
           </tr>
         </table>
         <?php echo ('</div>');?>

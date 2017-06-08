@@ -26,8 +26,10 @@ class it_recht_kanzlei {
       $user_auth_token_flag, 
       $action, 
       $post_xml;
+
+  function __construct() {}
   
-  function __construct($post_xml) {
+  function process($post_xml) {
   
     $this->set_shopversion();
     
@@ -42,6 +44,11 @@ class it_recht_kanzlei {
     if(trim($post_xml) == ''){
       $this->return_error('12');
     }
+    
+    if ($this->isXMLContentValid($post_xml) === false) {
+      $this->return_error('12');
+    }
+    
     // create xml object
     $xml = simplexml_load_string($post_xml, null, LIBXML_NOCDATA);
     
@@ -58,6 +65,22 @@ class it_recht_kanzlei {
     // return general error
     $this->return_error('99');
     exit();
+  }
+
+  function isXMLContentValid($xmlContent, $version = '1.0', $encoding = 'utf-8') {
+    if (trim($xmlContent) == '') {
+      return false;
+    }
+
+    libxml_use_internal_errors(true);
+
+    $doc = new DOMDocument($version, $encoding);
+    $doc->loadXML($xmlContent);
+
+    $errors = libxml_get_errors();
+    libxml_clear_errors();
+
+    return empty($errors);
   }
   
   function check_api_action($api_action) {
@@ -193,17 +216,17 @@ class it_recht_kanzlei {
       if ($xml->rechtstext_type == 'agb') {
         $content_group = MODULE_API_IT_RECHT_KANZLEI_TYPE_AGB;
         if ($pdf_file_stored === true) {
-          $pdf_file_text = '<br /><br /><a href="'.DIR_WS_CATALOG.$local_dir_for_pdf_storage.$file_pdf_targetfilename.'" target="_blank">AGB - PDF download!</a>';
+          $pdf_file_text = '<br /><br /><a href="'.((ENABLE_SSL === true) ? HTTPS_SERVER : HTTP_SERVER).DIR_WS_CATALOG.$local_dir_for_pdf_storage.$file_pdf_targetfilename.'" target="_blank">AGB - PDF download!</a>';
         }
       } elseif ($xml->rechtstext_type == 'datenschutz') {
         $content_group = MODULE_API_IT_RECHT_KANZLEI_TYPE_DSE;
         if ($pdf_file_stored === true) {
-          $pdf_file_text = '<br /><br /><a href="'.DIR_WS_CATALOG.$local_dir_for_pdf_storage.$file_pdf_targetfilename.'" target="_blank">Datenschutz - PDF download!</a>';
+          $pdf_file_text = '<br /><br /><a href="'.((ENABLE_SSL === true) ? HTTPS_SERVER : HTTP_SERVER).DIR_WS_CATALOG.$local_dir_for_pdf_storage.$file_pdf_targetfilename.'" target="_blank">Datenschutz - PDF download!</a>';
         }
       } elseif ($xml->rechtstext_type == 'widerruf') {
         $content_group = MODULE_API_IT_RECHT_KANZLEI_TYPE_WRB;
         if ($pdf_file_stored === true) {
-          $pdf_file_text = '<br /><br /><a href="'.DIR_WS_CATALOG.$local_dir_for_pdf_storage.$file_pdf_targetfilename.'" target="_blank">Widerruf - PDF download!</a>';
+          $pdf_file_text = '<br /><br /><a href="'.((ENABLE_SSL === true) ? HTTPS_SERVER : HTTP_SERVER).DIR_WS_CATALOG.$local_dir_for_pdf_storage.$file_pdf_targetfilename.'" target="_blank">Widerruf - PDF download!</a>';
         }
       } elseif ($xml->rechtstext_type == 'impressum') {
         $content_group = MODULE_API_IT_RECHT_KANZLEI_TYPE_IMP;
@@ -220,7 +243,7 @@ class it_recht_kanzlei {
           $this->return_success();
         } else {
           $sql_data_array = array('content_text' => $this->charset_decode_utf_8($xml->rechtstext_html.$pdf_file_text));
-        xtc_db_perform(TABLE_CONTENT_MANAGER, $sql_data_array, 'update', "content_group = '".$content_group."' AND languages_id = '".$languages_id."'");
+          xtc_db_perform(TABLE_CONTENT_MANAGER, $sql_data_array, 'update', "content_group = '".$content_group."' AND languages_id = '".$languages_id."'");
           if (mysql_affected_rows() < 1) {
             $check_content_query = xtc_db_query("SELECT content_text 
                                                    FROM ".TABLE_CONTENT_MANAGER." 
@@ -228,8 +251,8 @@ class it_recht_kanzlei {
                                                     AND languages_id = '".$languages_id."'");
             $check_content = xtc_db_fetch_array($check_content_query);
             if ($check_content['content_text'] != $sql_data_array['content_text']) {
-          $this->return_error('99');
-        }
+              $this->return_error('99');
+            }
           }
         }
       } else {

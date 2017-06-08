@@ -1598,7 +1598,6 @@ INSERT INTO configuration (configuration_id, configuration_key, configuration_va
 INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'SEND_EMAILS', 'true', 12, 12, NULL, NOW(), NULL, 'xtc_cfg_select_option(array(\'true\', \'false\'),');
 INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'USE_CONTACT_EMAIL_ADDRESS', 'false', 12, 13, NULL, NOW(), NULL, 'xtc_cfg_select_option(array(\'true\', \'false\'),');
 INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'EMAIL_SQL_ERRORS', 'false', '12', '14', NULL, NOW(), NULL, 'xtc_cfg_select_option(array(\'true\', \'false\'),');
-INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'SMTP_SECURE', '---', 12, 15, NULL, NOW(), NULL, 'xtc_cfg_select_option(array(\'---\', \'ssl\', \'tls\'),');
 
 # Constants for contact_us
 INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'CONTACT_US_EMAIL_ADDRESS', 'contact@your-shop.com', 12, 20, NULL, NOW(), NULL, NULL);
@@ -2123,7 +2122,7 @@ INSERT INTO orders_status VALUES (1,1,'Pending', 0);
 INSERT INTO orders_status VALUES (1,2,'Offen', 0);
 INSERT INTO orders_status VALUES (2,1,'Processing', 0);
 INSERT INTO orders_status VALUES (2,2,'In Bearbeitung', 0);
-INSERT INTO orders_status VALUES (3,1,'Delivered', 0);
+INSERT INTO orders_status VALUES (3,1,'Shipped', 0);
 INSERT INTO orders_status VALUES (3,2,'Versendet', 0);
 
 # USA

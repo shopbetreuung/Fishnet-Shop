@@ -289,6 +289,7 @@ CREATE TABLE admin_access (
 
   parcel_carriers INT(1) NOT NULL DEFAULT 0,
   
+  waste_paper_bin INT(1) NOT NULL DEFAULT 0;
   PRIMARY KEY (customers_id)
 ) ENGINE=MyISAM;
 
@@ -858,6 +859,7 @@ CREATE TABLE products (
   products_startpage_sort INT(4) NOT NULL DEFAULT 0,
   wholesaler_id INT(11) NOT NULL DEFAULT 0,
   wholesaler_reorder INT(4) NOT NULL DEFAULT 0,
+  waste_paper_bin` INT(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (products_id),
   KEY idx_products_date_added (products_date_added),
   KEY idx_manufacturers_id(manufacturers_id),

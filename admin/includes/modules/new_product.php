@@ -102,7 +102,19 @@
 
   <?php
   $form_action = isset($_GET['pID']) ? 'update_product' : 'insert_product';
-  echo xtc_draw_form('new_product', FILENAME_CATEGORIES, 'cPath=' . $_GET['cPath'] . $catfunc->page_parameter . '&pID=' . $_GET['pID'] . '&action='.$form_action, 'post', 'enctype="multipart/form-data"');
+  $page = '';
+  $page1 = '';
+  if ($product['waste_paper_bin'] == '0'){
+      $page = FILENAME_CATEGORIES;
+      $page1 = 'cPath=' . $_GET['cPath'] . $catfunc->page_parameter . '&pID=' . $_GET['pID'] . '&action='.$form_action;
+  }else if($product['waste_paper_bin'] == '1'){
+      $page = FILENAME_WASTE_PAPER_BIN;
+      $page1 = '';
+  }else{
+      $page = FILENAME_CATEGORIES;
+      $page1 = 'cPath=' . $_GET['cPath'] . $catfunc->page_parameter . '&pID=' . $_GET['pID'] . '&action='.$form_action;
+  }
+  echo xtc_draw_form('new_product' , $page, $page1, 'post', 'enctype="multipart/form-data"');
   ?>
 <div class='row'>
         <div class='col-xs-12 left_mobile'>
@@ -247,7 +259,7 @@
         if (isset($_GET['pID']) && $_GET['pID'] > 0) {
           echo '&nbsp;&nbsp;<a class="btn btn-default" href="' . xtc_href_link('../product_info.php', 'products_id=' . $_GET['pID']) . '" target="_blank">' . BUTTON_VIEW_PRODUCT . '</a>';
         }
-        echo '&nbsp;&nbsp;<a class="btn btn-default" href="' . xtc_href_link(FILENAME_CATEGORIES, 'cPath=' . $cPath . $catfunc->page_parameter . '&pID=' . $_GET['pID']) . '">' . BUTTON_CANCEL . '</a>';
+        echo '&nbsp;&nbsp;<a class="btn btn-default" href="' . xtc_href_link($page, $page1).'">' . BUTTON_CANCEL . '</a>';
         ?>
       </div>
       <!-- EOF - Tomcraft - 2009-11-02 - TOP SAVE AND CANCEL BUTTON //-->
@@ -384,7 +396,7 @@
           if (isset($_GET['pID']) && $_GET['pID'] > 0) {
             echo '&nbsp;&nbsp;<a class="btn btn-default" href="' . xtc_href_link('../product_info.php', 'products_id=' . $_GET['pID']) . '" target="_blank">' . BUTTON_VIEW_PRODUCT . '</a>';
           }
-          echo '&nbsp;&nbsp;<a class="btn btn-default" href="' . xtc_href_link(FILENAME_CATEGORIES, 'cPath=' . $cPath . $catfunc->page_parameter . '&pID=' . $_GET['pID']) . '">' . BUTTON_CANCEL . '</a>';
+          echo '&nbsp;&nbsp;<a class="btn btn-default" href="' . xtc_href_link($page, $page1). '">' . BUTTON_CANCEL . '</a>';
           ?>
         </div>
         <!-- EOF - Tomcraft - 2009-11-02 - Save //-->

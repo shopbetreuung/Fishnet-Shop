@@ -125,6 +125,7 @@ define('BOX_SHIPPING', 'Shipping Methods');
 define('BOX_ORDER_TOTAL', 'Order Total');
 define('BOX_CATEGORIES', 'Categories / Products');
 define('BOX_PRODUCTS_CONTENT', 'Products content');
+define('BOX_WASTE_PAPER_BIN', 'Waste paper bin');
 define('BOX_PRODUCTS_ATTRIBUTES', 'Product Options');
 define('BOX_MANUFACTURERS', 'Manufacturers');
 define('BOX_WHOLESALERS', 'Wholesalers');

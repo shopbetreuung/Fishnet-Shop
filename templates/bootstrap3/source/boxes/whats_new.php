@@ -59,6 +59,7 @@ if ($random_product = xtc_random_select("-- templates/xtc5/source/boxes/whats_ne
                                     LEFT JOIN ".TABLE_CATEGORIES." c
                                            ON c.categories_id = p2c.categories_id AND c.categories_status = 1
                                         WHERE p.products_status = 1
+                                        AND p.waste_paper_bin = '0'
                                           " . $fsk_lock . "
                                           " . $group_check . "
                                           " . $current_prd . "

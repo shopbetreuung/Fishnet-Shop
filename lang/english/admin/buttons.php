@@ -30,6 +30,7 @@ define('BUTTON_MOVE', 'Move');
 define('BUTTON_SAVE', 'Save');
 define('BUTTON_STATUS_ON', 'Status active');
 define('BUTTON_STATUS_OFF', 'Status inactive');
+define('BUTTON_WASTE_BIN', 'Waste paper bin');
 define('BUTTON_EDIT_ATTRIBUTES', 'Edit Attributes');
 define('BUTTON_INSERT', 'Insert');
 define('BUTTON_UPDATE', 'Update');

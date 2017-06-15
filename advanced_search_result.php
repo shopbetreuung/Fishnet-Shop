@@ -234,6 +234,7 @@ if ($errorno) {
           break;
         }
       }
+      $where_str .= "AND p.waste_paper_bin = '0'";
       $where_str .= " ) GROUP BY p.products_id ORDER BY p.products_id ";
     }
   }

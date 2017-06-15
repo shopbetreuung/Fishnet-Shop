@@ -30,6 +30,7 @@ define('BUTTON_MOVE', 'Verschieben');
 define('BUTTON_SAVE', 'Speichern');
 define('BUTTON_STATUS_ON', 'Status aktiv');
 define('BUTTON_STATUS_OFF', 'Status inaktiv');
+define('BUTTON_WASTE_BIN', 'Papierkorb');
 define('BUTTON_EDIT_ATTRIBUTES', 'Attribute editieren');
 define('BUTTON_INSERT', 'Einf&uuml;gen');
 define('BUTTON_UPDATE', 'Aktualisieren');

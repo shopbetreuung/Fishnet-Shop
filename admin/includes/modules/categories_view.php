@@ -414,7 +414,7 @@
                }
                $from_str .= "LEFT OUTER JOIN ".TABLE_SPECIALS." AS s ON (p.products_id = s.products_id) AND s.status = '1'";
                //where-string
-               $where_str = " WHERE pd.language_id = '".(int) $_SESSION['languages_id']."'";
+               $where_str = " WHERE pd.language_id = '".(int) $_SESSION['languages_id']."' AND waste_paper_bin = 0";
                $where_str .= $current_category_id != '' ? " AND p2c.categories_id = '" . (int)$current_category_id ."'" : '';
                //go for keywords... this is the main search process
                if (isset ($_GET['search']) && xtc_not_null($_GET['search'])) {
@@ -490,7 +490,7 @@
                                       p.products_startpage_sort
                                  FROM " . TABLE_PRODUCTS . " p
                             LEFT JOIN " . TABLE_PRODUCTS_DESCRIPTION . " pd ON p.products_id = pd.products_id AND pd.language_id = '" . (int)$_SESSION['languages_id'] . "'
-                                      " . $add_join . $add_where ."
+                                      " . $add_join . $add_where . " AND waste_paper_bin = 0 
                              ORDER BY " . $prodsort;
                 $products_split = new splitPageResults($_GET['page'], MAX_DISPLAY_LIST_PRODUCTS, $select_str, $products_query_numrows);
                 $products_query = xtc_db_query($select_str);
@@ -499,8 +499,9 @@
              // ----------------------------------------------------------------------------------------------------- //
              // WHILE loop to display products STARTS
              // ----------------------------------------------------------------------------------------------------- //
-
+             
              while ($products = xtc_db_fetch_array($products_query)) {
+               
                $products_count++;
                $rows++;
                // Get categories_id for product if search
@@ -920,7 +921,7 @@
                   $heading[]  = array('align' => 'center', 'text' => '<b>' . xtc_get_products_name($pInfo->products_id, $_SESSION['languages_id']) . '</b>');
                   //Multi Element Actions
                   $contents[] = array('align' => 'center', 'text' => '<div style="padding-top: 5px; font-weight: bold; width: 90%;">' . TEXT_MARKED_ELEMENTS . '</div>');
-                  $contents[] = array('align' => 'center', 'text' => xtc_button(BUTTON_DELETE, 'submit', 'name="multi_delete"').'&nbsp;'.xtc_button(BUTTON_MOVE, 'submit', 'name="multi_move"').'&nbsp;'.xtc_button(BUTTON_COPY, 'submit', 'name="multi_copy"'));
+                  $contents[] = array('align' => 'center', 'text' => xtc_button(BUTTON_DELETE, 'submit', 'name="multi_delete"').'&nbsp;'.xtc_button(BUTTON_WASTE_BIN, 'submit', 'name="waste_bin"').'&nbsp;'.xtc_button(BUTTON_MOVE, 'submit', 'name="multi_move"').'&nbsp;'.xtc_button(BUTTON_COPY, 'submit', 'name="multi_copy"'));
                   $contents[] = array('align' => 'center', 'text' => '<input type="submit" class="btn btn-default" name="multi_status_on" onclick="this.blur();" value="'. BUTTON_STATUS_ON . '">&nbsp;<input type="submit" class="btn btn-default" onclick="this.blur();" name="multi_status_off" value="' . BUTTON_STATUS_OFF . '">');
                   $contents[] = array('text'  => '</form>');
                   //Single Product Actions

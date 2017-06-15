@@ -414,7 +414,14 @@ class categories {
       xtc_reset_cache_block('also_purchased');
     }
   } // remove_product ends
-
+  
+  
+  // ----------------------------------------------------------------------------------------------------- //
+  // put_product_into_waste_paper_bin
+  
+  function put_in_waste_bin($pID){
+      xtc_db_query("UPDATE products SET waste_paper_bin = '1' WHERE products_id = '".$pID."'");
+  }
   // ----------------------------------------------------------------------------------------------------- //
 
   // deletes given product from categories, removes it completely if no category is left
@@ -436,7 +443,7 @@ class categories {
       $this->remove_product($product_id);
     }
   } // delete_product ends
-
+  
   // ----------------------------------------------------------------------------------------------------- //
 
   // inserts / updates a product from given data

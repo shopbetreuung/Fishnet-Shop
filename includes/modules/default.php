@@ -52,6 +52,7 @@ if (isset ($cPath) && xtc_not_null($cPath)) {
                                   left join ".TABLE_PRODUCTS." p
                                    on p2c.products_id = p.products_id
                                   where p2c.categories_id = ".(int)$current_category_id."
+                                  and p.waste_paper_bin = '0'
                                   and p.products_status = 1";
   $categories_products_result = xtDBquery($categories_products_query);
   if (xtc_db_num_rows($categories_products_result, true) > 0) {
@@ -255,6 +256,7 @@ if ($category_depth == 'nested') {
                          ".$from."
                    WHERE p.products_status = '1'
                      AND p.products_id = pd.products_id
+                     AND p.waste_paper_bin = '0'
                      AND pd.language_id = '".(int) $_SESSION['languages_id']."'
                          ".$group_check."
                          ".$fsk_lock."
@@ -272,6 +274,7 @@ if ($category_depth == 'nested') {
                                        JOIN ".TABLE_CATEGORIES." c on c.categories_id = p2c.categories_id
                                        JOIN ".TABLE_CATEGORIES_DESCRIPTION." cd on cd.categories_id = p2c.categories_id
                                        WHERE p.products_status = '1'
+                                         AND p.waste_paper_bin = '0'
                                          AND cd.language_id = '".(int) $_SESSION['languages_id']."'
                                          AND p.manufacturers_id = '".(int) $_GET['manufacturers_id']."'
                                          ORDER BY cd.categories_name";
@@ -283,6 +286,7 @@ if ($category_depth == 'nested') {
                                        JOIN ".TABLE_PRODUCTS_TO_CATEGORIES." p2c on p2c.products_id = p.products_id
                                        JOIN ".TABLE_MANUFACTURERS." m on m.manufacturers_id = p.manufacturers_id
                                        WHERE p.products_status = '1'
+                                         AND p.waste_paper_bin = '0'
                                          AND p2c.categories_id = '".$current_category_id."'
                                          ORDER BY m.manufacturers_name";
     }

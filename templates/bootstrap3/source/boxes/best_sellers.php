@@ -102,6 +102,7 @@ if (!$box_smarty->is_cached(CURRENT_TEMPLATE.'/boxes/box_best_sellers.html', $ca
 			                       ".TABLE_PRODUCTS_TO_CATEGORIES." p2c,
 			                       ".TABLE_CATEGORIES." c
 			                       where p.products_status = '1'
+                                               AND p.waste_paper_bin = '0'
 			                       and c.categories_status = '1'
 			                       and p.products_ordered > 0
 			                       and p.products_id = pd.products_id
@@ -126,6 +127,7 @@ if (!$box_smarty->is_cached(CURRENT_TEMPLATE.'/boxes/box_best_sellers.html', $ca
 			                       pd.products_name from ".TABLE_PRODUCTS." p,
 			                       ".TABLE_PRODUCTS_DESCRIPTION." pd	
 			                       where p.products_status = '1'
+                                               AND p.waste_paper_bin = '0'
 			                       ".$group_check."
 			                       and p.products_ordered > 0
 			                       and p.products_id = pd.products_id ".$fsk_lock."

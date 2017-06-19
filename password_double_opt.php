@@ -55,14 +55,14 @@ if (isset ($_GET['action']) && ($_GET['action'] == 'first_opt_in') && $_POST) {
   // create mails
   $html_mail = $smarty->fetch('db:password_verification_mail.html');
   $txt_mail = $smarty->fetch('db:password_verification_mail.txt');
-
+  $subject = $smarty->fetch('db:password_verification_mail.subject');
     if (!xtc_db_num_rows($check_customer_query)) {
       $case = 'wrong_mail';
       $info_message = TEXT_EMAIL_ERROR;
     } else {
       $case = 'first_opt_in';
       xtc_db_query("update ".TABLE_CUSTOMERS." set password_request_key = '".$vlcode."' where customers_id = '".$check_customer['customers_id']."'");
-      xtc_php_mail(EMAIL_SUPPORT_ADDRESS, EMAIL_SUPPORT_NAME, $check_customer['customers_email_address'], '', '', EMAIL_SUPPORT_REPLY_ADDRESS, EMAIL_SUPPORT_REPLY_ADDRESS_NAME, '', '', TEXT_EMAIL_PASSWORD_FORGOTTEN, $html_mail, $txt_mail);
+      xtc_php_mail(EMAIL_SUPPORT_ADDRESS, EMAIL_SUPPORT_NAME, $check_customer['customers_email_address'], '', '', EMAIL_SUPPORT_REPLY_ADDRESS, EMAIL_SUPPORT_REPLY_ADDRESS_NAME, '', '', $subject, $html_mail, $txt_mail);
 
     }
 }
@@ -93,8 +93,9 @@ if (isset ($_GET['action']) && ($_GET['action'] == 'verified')) {
     // create mails
     $html_mail = $smarty->fetch('db:new_password_mail.html');
     $txt_mail = $smarty->fetch('db:new_password_mail.txt');
+    $subject = $smarty->fetch('db:new_password_mail.subject');
 
-    xtc_php_mail(EMAIL_SUPPORT_ADDRESS, EMAIL_SUPPORT_NAME, $check_customer['customers_email_address'], '', '', EMAIL_SUPPORT_REPLY_ADDRESS, EMAIL_SUPPORT_REPLY_ADDRESS_NAME, '', '', TEXT_EMAIL_PASSWORD_NEW_PASSWORD, $html_mail, $txt_mail);
+    xtc_php_mail(EMAIL_SUPPORT_ADDRESS, EMAIL_SUPPORT_NAME, $check_customer['customers_email_address'], '', '', EMAIL_SUPPORT_REPLY_ADDRESS, EMAIL_SUPPORT_REPLY_ADDRESS_NAME, '', '', $subject, $html_mail, $txt_mail);
     if (!isset ($mail_error)) {
       xtc_redirect(xtc_href_link(FILENAME_LOGIN, 'info_message='.urlencode(TEXT_PASSWORD_SENT), 'SSL', true, false));
     }

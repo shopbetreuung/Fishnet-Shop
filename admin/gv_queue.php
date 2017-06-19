@@ -66,9 +66,9 @@
 
       $html_mail=$smarty->fetch('db:gift_accepted.html');
       $txt_mail=$smarty->fetch('db:gift_accepted.txt');
+      $subject = $smarty->fetch('db:gift_accepted.subject');
 
-
-      xtc_php_mail(EMAIL_BILLING_ADDRESS,EMAIL_BILLING_NAME,$mail['customers_email_address'] , $mail['customers_firstname'] . ' ' . $mail['customers_lastname'] , '', EMAIL_BILLING_REPLY_ADDRESS, EMAIL_BILLING_REPLY_ADDRESS_NAME, '', '', EMAIL_BILLING_SUBJECT, $html_mail , $txt_mail);
+      xtc_php_mail(EMAIL_BILLING_ADDRESS,EMAIL_BILLING_NAME,$mail['customers_email_address'] , $mail['customers_firstname'] . ' ' . $mail['customers_lastname'] , '', EMAIL_BILLING_REPLY_ADDRESS, EMAIL_BILLING_REPLY_ADDRESS_NAME, '', '', $subject, $html_mail , $txt_mail);
 
 
       $gv_amount=$gv_resulta['amount'];

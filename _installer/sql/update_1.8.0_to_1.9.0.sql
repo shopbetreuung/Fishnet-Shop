@@ -10,4 +10,54 @@ ALTER TABLE products ADD waste_paper_bin INT( 1 ) NOT NULL DEFAULT 0;
 ALTER TABLE admin_access ADD waste_paper_bin INT(1) NOT NULL DEFAULT 0;
 UPDATE admin_access SET waste_paper_bin = '1' WHERE customers_id = '1';
 
+ALTER TABLE email_manager ADD em_subject VARCHAR(128) NOT NULL DEFAULT '';
+
+UPDATE email_manager SET em_subject = 'Your order {$nr} from {$date}' WHERE em_name = 'change_order_mail' AND em_language = '1';
+UPDATE email_manager SET em_subject = 'Ihre Bestellung {$nr} vom {$date}' WHERE em_name = 'change_order_mail' AND em_language = '2';
+
+UPDATE email_manager SET em_subject = 'Your account has been successfully created' WHERE em_name = 'create_account_mail' AND em_language = '1';
+UPDATE email_manager SET em_subject = 'Sie haben soeben Ihr Kundenkonto erfolgreich erstellt' WHERE em_name = 'create_account_mail' AND em_language = '2';
+
+UPDATE email_manager SET em_subject = 'We\'ve created your customer account.' WHERE em_name = 'create_account_mail_admin' AND em_language = '1';
+UPDATE email_manager SET em_subject = 'Es wurde ein Account für Sie eingerichtet.' WHERE em_name = 'create_account_mail_admin' AND em_language = '2';
+
+UPDATE email_manager SET em_subject = 'The voucher code you purchased has been activated.' WHERE em_name = 'gift_accepted' AND em_language = '1';
+UPDATE email_manager SET em_subject = 'Ihr Guthaben steht Ihnen nun zur Verfügung.' WHERE em_name = 'gift_accepted' AND em_language = '2';
+
+UPDATE email_manager SET em_subject = 'Invoice of your order from {$ORDER_DATE}.' WHERE em_name = 'invoice_mail' AND em_language = '1';
+UPDATE email_manager SET em_subject = 'Rechnung zu Ihrer Bestellung vom {$ORDER_DATE}.' WHERE em_name = 'invoice_mail' AND em_language = '2';
+
+UPDATE email_manager SET em_subject = 'Please confirm your newsletter registration.' WHERE em_name = 'newsletter_mail' AND em_language = '1';
+UPDATE email_manager SET em_subject = 'Bitte bestätigen Sie Ihre Newsletteranmeldung.' WHERE em_name = 'newsletter_mail' AND em_language = '2';
+
+UPDATE email_manager SET em_subject = 'You\'ve received a new password!' WHERE em_name = 'new_password_mail' AND em_language = '1';
+UPDATE email_manager SET em_subject = 'Wir haben Ihr Passwort geändert.' WHERE em_name = 'new_password_mail' AND em_language = '2';
+
+UPDATE email_manager SET em_subject = 'Your order {$nr} from {$date}' WHERE em_name = 'order_mail' AND em_language = '1';
+UPDATE email_manager SET em_subject = 'Ihre Bestellung {$nr} vom {$date}' WHERE em_name = 'order_mail' AND em_language = '2';
+
+UPDATE email_manager SET em_subject = 'Please confirm your password request!' WHERE em_name = 'password_verification_mail' AND em_language = '1';
+UPDATE email_manager SET em_subject = 'Bitte bestätigen Sie Ihre Passwortanfrage!' WHERE em_name = 'password_verification_mail' AND em_language = '2';
+
+UPDATE email_manager SET em_subject = 'Sie haben einen Gutschein erhalten.' WHERE em_name = 'send_coupon' AND em_language = '1';
+UPDATE email_manager SET em_subject = 'You\'ve received a voucher.' WHERE em_name = 'send_coupon' AND em_language = '2';
+
+UPDATE email_manager SET em_subject = 'Sie haben einen Gutschein erhalten.' WHERE em_name = 'send_gift' AND em_language = '1';
+UPDATE email_manager SET em_subject = 'You\'ve received a voucher.' WHERE em_name = 'send_gift' AND em_language = '2';
+
+UPDATE email_manager SET em_subject = 'You\'ve received a voucher from a friend.' WHERE em_name = 'send_gift_to_friend' AND em_language = '1';
+UPDATE email_manager SET em_subject = 'Sie haben einen Gutschein von einem Freund erhalten.' WHERE em_name = 'send_gift_to_friend' AND em_language = '2';
+
+UPDATE email_manager SET em_subject = 'Your order with SEPA debit.' WHERE em_name = 'sepa_mail' AND em_language = '1';
+UPDATE email_manager SET em_subject = 'Ihre Bestellung mit SEPA Lastschrift.' WHERE em_name = 'sepa_mail' AND em_language = '2';
+
+UPDATE email_manager SET em_subject = 'Shop Message: please re-stock.' WHERE em_name = 'stock_reorder_mail' AND em_language = '1';
+UPDATE email_manager SET em_subject = 'Shopnachricht: Bitte bestellen Sie nach.' WHERE em_name = 'stock_reorder_mail' AND em_language = '2';
+
+DELETE FROM email_manager WHERE em_name = 'change_password_mail';
+
+DELETE FROM configuration WHERE configuration_key = 'EMAIL_SUPPORT_SUBJECT';
+DELETE FROM configuration WHERE configuration_key = 'EMAIL_BILLING_SUBJECT';
+DELETE FROM configuration WHERE configuration_key = 'EMAIL_BILLING_SUBJECT_ORDER';
+
 UPDATE database_version SET version = 'SH_1.9.0';

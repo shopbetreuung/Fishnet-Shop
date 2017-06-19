@@ -193,8 +193,14 @@ function shopSofortComment($oID, $order, $status, $comments, $notifyCustomer, $n
 			$smarty->assign('ORDER_STATUS', $orders_status_array[$status]);
 			$html_mail = $smarty->fetch('db:change_order_mail.html');
 			$txt_mail = $smarty->fetch('db:change_order_mail.txt');
-			
-			shopDbMail(EMAIL_BILLING_ADDRESS, EMAIL_BILLING_NAME, $check_status['customers_email_address'], $check_status['customers_name'], '', EMAIL_BILLING_REPLY_ADDRESS, EMAIL_BILLING_REPLY_ADDRESS_NAME, '', '', EMAIL_BILLING_SUBJECT, $html_mail, $txt_mail);
+                        
+			$smarty->assign('nr', $oID);
+                        $smarty->assign('date', strftime(DATE_FORMAT_LONG));
+                        $smarty->assign('lastname', $order->customer['lastname']);
+                        $smarty->assign('firstname',$order->customer['firstname']);
+                        $order_subject = $smarty->fetch('db:change_order_mail.subject');
+                        
+			shopDbMail(EMAIL_BILLING_ADDRESS, EMAIL_BILLING_NAME, $check_status['customers_email_address'], $check_status['customers_name'], '', EMAIL_BILLING_REPLY_ADDRESS, EMAIL_BILLING_REPLY_ADDRESS_NAME, '', '', $order_subject, $html_mail, $txt_mail);
 			$customer_notified = '1';
 		}
 		

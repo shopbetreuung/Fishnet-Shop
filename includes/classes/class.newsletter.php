@@ -178,9 +178,9 @@ class newsletter {
 		$txt_mail = $smarty->fetch('db:newsletter_mail.txt');
 		
 		$email_subject = $mailer->subject;
-
+                $subject = $smarty->fetch('db:newsletter_mail.subject');
 		if (SEND_EMAILS == true) {
-				xtc_php_mail(EMAIL_SUPPORT_ADDRESS, EMAIL_SUPPORT_NAME, xtc_db_input($mail), '', '', EMAIL_SUPPORT_REPLY_ADDRESS, EMAIL_SUPPORT_REPLY_ADDRESS_NAME, '', '', TEXT_EMAIL_SUBJECT, $html_mail, $txt_mail);
+				xtc_php_mail(EMAIL_SUPPORT_ADDRESS, EMAIL_SUPPORT_NAME, xtc_db_input($mail), '', '', EMAIL_SUPPORT_REPLY_ADDRESS, EMAIL_SUPPORT_REPLY_ADDRESS_NAME, '', '', $subject, $html_mail, $txt_mail);
 			}
 		
 		

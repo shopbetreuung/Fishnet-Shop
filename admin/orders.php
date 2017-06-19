@@ -312,8 +312,9 @@ if (($action == 'edit' || $action == 'update_order') && $order_exists) {
       $pdffile= DIR_FS_ADMIN.get_pdf_invoice_filename( $oID );
       $pdffile_downloadname = get_pdf_invoice_download_filename( $oID );
       
-      $order_subject = str_replace('{$nr}', $order->info['ibn_billnr'], EMAIL_BILLING_SUBJECT);
-      $order_subject = str_replace('{$date}', strftime(DATE_FORMAT_LONG), $order_subject);
+      $smarty->assign('nr', $order->info['ibn_billnr']);
+      $smarty->assign('date', strftime(DATE_FORMAT_LONG));
+      $order_subject = $smarty->fetch('db:invoice_mail.subject');
       
       xtc_php_mail( EMAIL_BILLING_ADDRESS,                                 //  $from_email_address,        
                     EMAIL_BILLING_NAME,                                     //  $from_email_name,           
@@ -518,10 +519,12 @@ switch ($action) {
 		$smarty->assign('PARCEL_LINK_TXT', $parcel_link_txt);
         $html_mail = $smarty->fetch('db:change_order_mail.html');
         $txt_mail = $smarty->fetch('db:change_order_mail.txt');
-        $order_subject_search = array('{$nr}', '{$date}', '{$lastname}', '{$firstname}');
-        $order_subject_replace = array($oID, strftime(DATE_FORMAT_LONG), $order->customer['lastname'], $order->customer['firstname']);
-        $order_subject = str_replace($order_subject_search, $order_subject_replace, EMAIL_BILLING_SUBJECT);
-
+        $smarty->assign('nr', $oID);
+        $smarty->assign('date', strftime(DATE_FORMAT_LONG));
+        $smarty->assign('lastname', $order->customer['lastname']);
+        $smarty->assign('firstname',$order->customer['firstname']);
+        $order_subject = $smarty->fetch('db:change_order_mail.subject');
+        
         xtc_php_mail(EMAIL_BILLING_ADDRESS,
                      EMAIL_BILLING_NAME,
                      $check_status['customers_email_address'],
@@ -609,8 +612,9 @@ switch ($action) {
 			$pdffile= DIR_FS_ADMIN.get_pdf_invoice_filename( $oID );
 			$pdffile_downloadname = get_pdf_invoice_download_filename( $oID );
 
-			$order_subject = str_replace('{$nr}', $order->info['ibn_billnr'], EMAIL_BILLING_SUBJECT);
-			$order_subject = str_replace('{$date}', strftime(DATE_FORMAT_LONG), $order_subject);
+			$smarty->assign('nr', $order->info['ibn_billnr']);
+                        $smarty->assign('date', strftime(DATE_FORMAT_LONG));
+                        $order_subject = $smarty->fetch('db:invoice_mail.subject');
 
 			xtc_php_mail( EMAIL_BILLING_ADDRESS,                                 //  $from_email_address,        
 						  EMAIL_BILLING_NAME,                                     //  $from_email_name,           

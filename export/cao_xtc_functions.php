@@ -2330,6 +2330,12 @@ function OrderUpdate ()
           $smarty->assign('NOTIFY_COMMENTS',$comments);
           $smarty->assign('ORDER_STATUS',$o_status);
 
+          $smarty->assign('nr', $oID);
+          $smarty->assign('date', strftime(DATE_FORMAT_LONG));
+          $smarty->assign('lastname', $order->customer['lastname']);
+          $smarty->assign('firstname',$order->customer['firstname']);
+          $order_subject = $smarty->fetch('db:change_order_mail.subject');
+          
           $html_mail=$smarty->fetch('db:change_order_mail.html');
           $txt_mail=$smarty->fetch('db:change_order_mail.txt');
 
@@ -2343,7 +2349,7 @@ function OrderUpdate ()
                        EMAIL_BILLING_REPLY_ADDRESS_NAME,
                        '',
                        '',
-                       EMAIL_BILLING_SUBJECT,
+                       $order_subject,
                        $html_mail ,
                        $txt_mail);
 
@@ -2531,7 +2537,7 @@ function CustomersUpdate ()
 
     $html_mail=$smarty->fetch('db:create_account_mail_admin.html');
     $txt_mail=$smarty->fetch('db:create_account_mail_admin.txt');
-
+    $create_account_subject = $smarty->fetch('db:create_account_mail_admin.subject');
     // send mail with html/txt template
     xtc_php_mail(
       EMAIL_SUPPORT_ADDRESS,
@@ -2543,7 +2549,7 @@ function CustomersUpdate ()
       EMAIL_SUPPORT_REPLY_ADDRESS_NAME,
       '',
       '',
-      EMAIL_SUPPORT_SUBJECT,
+      $create_account_subject,
       $html_mail ,
       $txt_mail);
   }

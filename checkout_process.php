@@ -305,7 +305,7 @@ if (isset ($_SESSION['tmp_oID']) && is_numeric($_SESSION['tmp_oID'])) { // Dokum
 			$html_mail = $smarty->fetch('db:stock_reorder_mail.html');
 			$txt_mail = $smarty->fetch('db:stock_reorder_mail.txt');
 			
-			$restock_subject = 'Re-Stock';
+			$restock_subject = $smarty->fetch('db:stock_reorder_mail.subject');
 
 			xtc_php_mail(EMAIL_BILLING_ADDRESS,
                EMAIL_BILLING_NAME,

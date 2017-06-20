@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: paypal_module.php 10425 2016-11-23 13:29:31Z GTB $
+   $Id: paypal_module.php 10739 2017-05-17 06:14:15Z GTB $
 
    modified eCommerce Shopsoftware
    http://www.modified-shop.org
@@ -115,7 +115,7 @@ if (isset($_GET['action'])) {
           foreach ($_POST['config']['profile'] as $key => $value) {
             $sql_data_array[] = array(
               'config_key' => $key,
-              'config_value' => $value,
+              'config_value' => ((preg_replace('/[^0-9,.]/', '', $value) == $value) ? str_replace(',', '.', $value) : $value),
             );
           }
           $paypal->save_config($sql_data_array);
@@ -175,6 +175,7 @@ require (DIR_WS_INCLUDES.'head.php');
           <div class="pageHeadingImage"><?php echo xtc_image(DIR_WS_ICONS.'heading_configuration.gif'); ?></div>
           <div class="flt-l">
             <div class="pageHeading pdg2"><?php echo TEXT_PAYPAL_MODULE_HEADING_TITLE; ?></div>
+            <div class="main">v<?php echo $paypal->paypal_version; ?></div>
           </div>
           <?php
             include_once(DIR_FS_EXTERNAL.'paypal/modules/admin_menu.php');

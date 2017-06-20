@@ -31,7 +31,6 @@ require_once (DIR_FS_INC.'xtc_format_price.inc.php');
 require_once (DIR_FS_INC.'xtc_date_short.inc.php');  // for specials
 
 if (!is_object($product) || !$product->isProduct()) {
-
   // product not found in database
   $error = TEXT_PRODUCT_NOT_FOUND;
   include (DIR_WS_MODULES.FILENAME_ERROR_HANDLER);

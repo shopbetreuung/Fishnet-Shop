@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: paypal_profile.php 10051 2016-07-08 13:36:47Z GTB $
+   $Id: paypal_profile.php 10739 2017-05-17 06:14:15Z GTB $
 
    modified eCommerce Shopsoftware
    http://www.modified-shop.org
@@ -93,6 +93,7 @@ require (DIR_WS_INCLUDES.'head.php');
           <div class="pageHeadingImage"><?php echo xtc_image(DIR_WS_ICONS.'heading_configuration.gif'); ?></div>
           <div class="flt-l">
             <div class="pageHeading pdg2"><?php echo TEXT_PAYPAL_PROFILE_HEADING_TITLE; ?></div>
+            <div class="main">v<?php echo $paypal->paypal_version; ?></div>
           </div>
           <?php
             if (!isset($_GET['action'])) {

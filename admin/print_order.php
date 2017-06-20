@@ -83,7 +83,7 @@
     if(strpos($order->info['payment_method'], 'paypalplus') !== false) {
       require_once(DIR_FS_EXTERNAL.'paypal/classes/PayPalInfo.php');
       $paypal = new PayPalInfo($order->info['payment_method']);      
-      $smarty->assign('PAYMENT_INFO', $paypal->success($order->info['order_id']));
+      $smarty->assign('PAYMENT_INFO', $paypal->get_payment_instructions($order->info['order_id']));
     }
   }
   $smarty->assign('COMMENTS', $order->info['comments']);

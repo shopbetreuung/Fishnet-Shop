@@ -70,16 +70,17 @@
                                    WHERE orders_id = '" . $order_id . "'");
       $order = xtc_db_fetch_array($order_query);
 
+      $index = 0;
       $totals_query = xtc_db_query("SELECT *
                                     FROM " . TABLE_ORDERS_TOTAL . "
                                     WHERE orders_id = '" . $order_id . "'
                                     ORDER BY sort_order");
       while ($totals = xtc_db_fetch_array($totals_query)) {
-        $this->totals[] = array('title' => $totals['title'],
-                                'text' => $totals['text'],
-                                'value'=> $totals['value'],
-                                'class'=> $totals['class']
-                               );
+        // build totals array dynamically
+        foreach ($totals as $key => $val) {
+          $this->totals[$index][$key] = $val;
+        }
+        $index ++;
       }
 
       // BOF - web28 - 2010-05-06 - PayPal API Modul / Paypal Express Modul
@@ -446,7 +447,7 @@
                           'shipping_method' => isset($_SESSION['shipping']) && is_array($_SESSION['shipping']) ? $_SESSION['shipping']['title'] : '',
                           'shipping_cost' => isset($_SESSION['shipping']) && is_array($_SESSION['shipping']) ? $_SESSION['shipping']['cost'] : '',
                           'comments' => isset($_SESSION['comments']) ? $_SESSION['comments'] : '',
-                           'shipping_class' => isset($_SESSION['shipping']) && is_array($_SESSION['shipping']) ? $_SESSION['shipping']['id'] : '',
+                          'shipping_class' => isset($_SESSION['shipping']) && is_array($_SESSION['shipping']) ? $_SESSION['shipping']['id'] : '',
                           'payment_class' => isset($_SESSION['payment']) ? $_SESSION['payment'] : '',
                           'subtotal' => 0,
                           'tax' => 0,

@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: german.php 10436 2016-11-23 18:30:56Z GTB $
+   $Id: german.php 10770 2017-06-10 06:38:24Z GTB $
 
    modified eCommerce Shopsoftware
    http://www.modified-shop.org
@@ -38,6 +38,7 @@ $lang_array = array(
   // instruction
   'TEXT_PAYPAL_INSTRUCTIONS' => 'Zahlungsanweisung',
   'TEXT_PAYPAL_INSTRUCTIONS_CHECKOUT' => 'Bitte &uuml;berweisen Sie den Betrag von %s bis sp&auml;testens %s auf folgendes Konto:',
+  'TEXT_PAYPAL_INSTRUCTIONS_CHECKOUT_SHORT' => 'Bitte &uuml;berweisen Sie den Betrag von %s auf folgendes Konto:',
   'TEXT_PAYPAL_INSTRUCTIONS_AMOUNT' => 'Betrag:',
   'TEXT_PAYPAL_INSTRUCTIONS_REFERENCE' => 'Verwendungszweck:',
   'TEXT_PAYPAL_INSTRUCTIONS_PAYDATE' => 'Zahlbar bis:',
@@ -76,7 +77,7 @@ $lang_array = array(
   'TEXT_PAYPAL_NO_STATUS_CHANGE' => 'keine Status&auml;nderung',
   
   // template
-  'TEXT_PAYPALINSTALLMENT_HEADING' => 'Zahlen sie bequem und einfach in monatlichen Raten',
+  'TEXT_PAYPALINSTALLMENT_HEADING' => 'Zahlen Sie bequem und einfach in monatlichen Raten',
   'TEXT_PAYPALINSTALLMENT_DESCRIPTION' => 'Ihre Ratenzahlung und den passenden Finanzierungsplan k&ouml;nnen Sie im Rahmen des Bestellprozesses ausw&auml;hlen. Ihr Antrag erfolgt komplett online und wird in wenigen Schritten hier im Shop abgeschlossen.',
 
   'TEXT_PAYPALINSTALLMENT_RATING_PLAN' => 'Finanzierung ab %s in %s Raten mit Ratenzahlung Powered by PayPal',

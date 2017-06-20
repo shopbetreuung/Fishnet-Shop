@@ -46,6 +46,7 @@ require_once (DIR_FS_INC . 'xtc_get_address_format_id.inc.php');
 require_once (DIR_FS_INC . 'xtc_check_stock.inc.php');
 unset ($_SESSION['tmp_oID']);
 unset ($_SESSION['transaction_id']); //Dokuman - 2009-10-02 - added moneybookers payment module version 2.4
+unset ($_SESSION['paypal']);
 
 // if the customer is not logged on, redirect them to the login page
 if (!isset ($_SESSION['customer_id'])) {

@@ -214,7 +214,7 @@ if (xtc_db_num_rows($product_result) > 0) {
 
 # Sitemap add content manager to list
     $content_query=xtc_db_query("SELECT
-                                        content_id,
+                                        content_group,
                                         change_date
                                    FROM ".TABLE_CONTENT_MANAGER."
                                   WHERE languages_id='".$_SESSION['languages_id']."'
@@ -226,7 +226,7 @@ if (xtc_db_num_rows($product_result) > 0) {
             
             $date = strtotime($content_data['change_date']); 
             
-            $string = sprintf(SITEMAP_ENTRY, xtc_href_link(FILENAME_CONTENT,'coID='.$content_data['content_id']), PRIORITY_PRODUCTS, iso8601_date($date), CHANGEFREQ_CATEGORIES); 
+            $string = sprintf(SITEMAP_ENTRY, xtc_href_link(FILENAME_CONTENT,'coID='.$content_data['content_group']), PRIORITY_PRODUCTS, iso8601_date($date), CHANGEFREQ_CATEGORIES); 
             
             $c_cm_total++; 
             output_entry(); 

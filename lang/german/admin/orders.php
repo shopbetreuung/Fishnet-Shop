@@ -19,6 +19,8 @@
 // --- bof -- ipdfbill --------
 define( 'BUTTON_PDFBILL_CREATE',                  'PDF-Rechnung generieren');       // pdfbill
 define( 'BUTTON_PDFDELIVNOTE_CREATE',             'PDF-Lieferschein generieren');   // pdfbill
+define( 'BUTTON_PDFREMINDER_CREATE',              'PDF-Mahnung generieren');           // pdfbill
+define( 'BUTTON_PDF2NDREMINDER_CREATE',           'PDF-Zweite Mahnung generieren');    // pdfbill
 define( 'BUTTON_PDFBILL_RECREATE',                'PDF-Rechnung aktualisieren');    // pdfbill
 define( 'BUTTON_PDFBILL_DISPLAY',                 'PDF-anzeigen');                  // pdfbill
 define( 'BUTTON_PDFBILL_SEND_INVOICE_MAIL',       'PDF Rechnung senden');           // pdfbill
@@ -30,7 +32,9 @@ define( 'PDFBILL_MSG_DELINFO_PDF' ,               '<br /><br />Eine PDF-Rechnung
 define( 'PDFBILL_TXT_DELIVERYDATE' ,              'Lieferdatum:' );      
 define( 'PDFBILL_TXT_BILLPROFILE' ,               'Rechnung:' );      
 define( 'PDFBILL_TXT_DELIVNOTEPROFILE' ,          'Lieferschein:' );
-define( 'PDFBILL_TXT_AUTOMATIC' ,                 'Automatische Profilauswahl:' );  
+define( 'PDFBILL_TXT_AUTOMATIC' ,                 'Automatische Profilauswahl:' );
+define('PDFBILL_TXT_REMINDERPROFILE',             '1. Mahnung');
+define('PDFBILL_TXT_2NDREMINDERPROFILE',          '2. Mahnung');
 // --- eof -- ipdfbill --------
    
    

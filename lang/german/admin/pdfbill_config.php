@@ -203,7 +203,9 @@ function texts_html( $texts ) {
              'typeofbill' => array( 
                'question'                                 => 'Profil für:',
                'text_1'                                   => 'Rechnung',
-               'text_2'                                   => 'Lieferschein' ),
+               'text_2'                                   => 'Lieferschein',
+               'text_3'                                   => 'Mahnung',
+               'text_4'                                   => 'Zweite Mahnung'),
              // Frage ob es ein Lieferschein oder Rechnungsprofil sein soll
              'language' => array( 
                'question'                                 => 'Sprache' ),

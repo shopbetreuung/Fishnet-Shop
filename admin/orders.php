@@ -374,6 +374,48 @@ if (($action == 'edit' || $action == 'update_order') && $order_exists) {
   //    $pdf->Output();
     }  
     
+    if( isset($_POST['pdf_reminder_generate']) ) {
+      $profile_name         = $_POST['profile_name_reminder'];
+
+      if( $profile_name=='' ) {
+        $profile_name='default';
+      }
+
+      $profile=profile_load_n( $profile_name );
+      $profile=$profile['profile_parameter_arr'];
+      $pdf=new pdfbill( $profile, $oID );
+
+      $pdf->max_height=280;
+      $pdf->doc_name  =  get_pdf_reminder_filename( $oID );
+      
+      $pdf->LoadData($oID);
+     
+      $pdf->format();
+      //$pdf->Output($pdf->doc_name, "F");
+      $pdf->Output($pdf->doc_name, "F");
+  //    $pdf->Output();
+    }  
+    
+    if( isset($_POST['pdf_2ndreminder_generate']) ) {
+      $profile_name         = $_POST['profile_name_2ndreminder'];
+      if( $profile_name=='' ) {
+        $profile_name='default';
+      }
+
+      $profile=profile_load_n( $profile_name );
+      $profile=$profile['profile_parameter_arr'];
+      $pdf=new pdfbill( $profile, $oID );
+
+      $pdf->max_height=280;
+      $pdf->doc_name  =  get_pdf_2ndreminder_filename( $oID );
+      
+      $pdf->LoadData($oID);
+     
+      $pdf->format();
+      //$pdf->Output($pdf->doc_name, "F");
+      $pdf->Output($pdf->doc_name, "F");
+  //    $pdf->Output();
+    }
     
     
   }
@@ -1206,17 +1248,21 @@ require (DIR_WS_INCLUDES.'header.php');
 			
              <?php 
             // --- bof -- ipdfbill -------- 
-            $form = xtc_draw_form('pdf_bill', FILENAME_ORDERS, xtc_get_all_get_params(array('pdf')).'pdf=1' ); 
-
+            $form = xtc_draw_form('pdf_bill', FILENAME_ORDERS, xtc_get_all_get_params(array('pdf')).'pdf=1');
             $input_deliverydate = xtc_draw_input_field('pdfbill_deliverydate',$_POST['pdfbill_deliverydate'], 'size="12"');
 
             $profile_list = profile_list();
+            asort($profile_list);
             $values=array();
             foreach( $profile_list as $p ) {
               if($p['typeofbill'] == 'invoice') {
                 $values_invoice[] = array( 'id' => $p['profile_name'], 'text'=>$p['profile_name'] );
-              } else {
+              } elseif($p['typeofbill'] == 'delivnote') {
                 $values_delivery[] = array( 'id' => $p['profile_name'], 'text'=>$p['profile_name'] );
+              }elseif($p['typeofbill'] == 'reminder'){
+                $values_reminder[] = array( 'id' => $p['profile_name'], 'text'=>$p['profile_name'] );
+              }elseif($p['typeofbill'] == '2ndreminder'){
+                $values_2ndreminder[] = array ('id' => $p['profile_name'], 'text'=>$p['profile_name'] );
               }
             }
 
@@ -1225,30 +1271,41 @@ require (DIR_WS_INCLUDES.'header.php');
             if (PDFBILL_AUTOMATIC_INVOICE == 'true') {
               $selected_invoice = profile_automatic_select($order);
             }
+            
             $input_profile_invoice = xtc_draw_pull_down_menu('profile_name_invoice', $values_invoice, $selected_invoice);
             $input_profile_delivey = xtc_draw_pull_down_menu('profile_name_delivery', $values_delivery, 'profile_'.$lc.'_delivnote');
-
+            
+            $input_profile_reminder = xtc_draw_pull_down_menu('profile_name_reminder', $values_reminder, 'profile_'.$lc.'_reminder');
+            $input_profile_2ndreminder = xtc_draw_pull_down_menu('profile_name_2ndreminder', $values_2ndreminder, 'profile_'.$lc.'_2ndreminder');
+            
             $button_invoice_create    = xtc_button( BUTTON_PDFBILL_CREATE,   'submit', 'name="pdf_invoice_generate" class="btn btn-default"');
             $button_invoice_recreate  = xtc_button( BUTTON_PDFBILL_RECREATE, 'submit', 'name="pdf_invoice_generate" class="btn btn-default"');
             $button_invoice_sendmail  = xtc_button( BUTTON_PDFBILL_SEND_INVOICE_MAIL, 'submit', 'name="pdf_invoice_sendmail" class="btn btn-default"');
             $button_invoice_sendmail2 = xtc_button( BUTTON_PDFBILL_SEND_INVOICE_MAIL2, 'submit', 'name="pdf_invoice_sendmail2" class="btn btn-default"');
 
             $button_delivery_create    = xtc_button( BUTTON_PDFDELIVNOTE_CREATE,   'submit', 'name="pdf_delivery_generate" class="btn btn-default"');
-
+            
+            $button_reminder_create    = xtc_button( BUTTON_PDFREMINDER_CREATE,   'submit', 'name="pdf_reminder_generate" class="btn btn-default"');
+            $button_2ndreminder_create    = xtc_button( BUTTON_PDF2NDREMINDER_CREATE,   'submit', 'name="pdf_2ndreminder_generate" class="btn btn-default"');
+            
             $button_faktur = '<a class="btn btn-default" href="'.xtc_href_link(FILENAME_ORDERS, xtc_get_all_get_params(array('pdf')).'pdf=1&action2=set_ibillnr' ).'">'.BUTTON_BILL.'</a>';
-
 
             $filename=FILENAME_PDFBILL_DISPLAY.'?oID='.$oID;
             //$button_invoice_display   = '<a class="btn btn-default" target="_new" href="' . xtc_href_link($filename) . '">' . BUTTON_PDFBILL_DISPLAY . '</a>'; 
             $button_invoice_display   = '<a class="btn btn-default" target="_new" href="' . xtc_href_link($filename, "oID=".$oID."&file=".get_pdf_invoice_filename( $oID )) . '">' . BUTTON_PDFBILL_DISPLAY . '</a>'; 
-
+            
             $filename=FILENAME_PDFBILL_DISPLAY;
             $button_delivery_display   = '<a class="btn btn-default" target="_new" href="' . xtc_href_link($filename, "oID=".$oID."&file=".get_pdf_delnote_filename( $oID )) . '">' . BUTTON_PDFBILL_DISPLAY . '</a>'; 
-
-
+            
+            $button_reminder_display   = '<a class="btn btn-default" target="_new" href="' . xtc_href_link($filename, "oID=".$oID."&file=".get_pdf_reminder_filename( $oID )) . '">' . BUTTON_PDFBILL_DISPLAY . '</a>'; 
+            
+            $button_2ndreminder_display   = '<a class="btn btn-default" target="_new" href="' . xtc_href_link($filename, "oID=".$oID."&file=".get_pdf_2ndreminder_filename( $oID )) . '">' . BUTTON_PDFBILL_DISPLAY . '</a>'; 
+            
             xtc_button( BUTTON_PDFBILL_DISPLAY, 'submit', 'name="pdf_invoice_display" class="btn btn-default"');
             $arr_invoice  = array();
             $arr_delivery = array();
+            $arr_reminder = array();
+            $arr_2ndreminder = array();
             $arr_std      = array();
 
             if( $order->info['ibn_billnr']>0 ) {
@@ -1272,13 +1329,27 @@ require (DIR_WS_INCLUDES.'header.php');
                 $arr_delivery[] = $button_delivery_create;
               }
               
+              if(!pdfbill_reminder_exists($oID)){
+                $arr_reminder[] = $button_reminder_create;
+              } else {
+                $arr_reminder[] = $button_reminder_display;
+                $arr_reminder[] = $button_reminder_create;
+              }
               
+              if(!pdfbill_2ndreminder_exists($oID)){
+                $arr_2ndreminder[] = $button_2ndreminder_create;
+              } else {
+                $arr_2ndreminder[] = $button_2ndreminder_display;
+                $arr_2ndreminder[] = $button_2ndreminder_create;
+              }
               
 
             }
 
             $buttonlist_invoice  = implode('&nbsp;', $arr_invoice);  
-            $buttonlist_delivery = implode('&nbsp;', $arr_delivery);  
+            $buttonlist_delivery = implode('&nbsp;', $arr_delivery);
+            $buttonlist_reminder = implode('&nbsp;', $arr_reminder);
+            $buttonlist_2ndreminder = implode('&nbsp;', $arr_2ndreminder);
             $buttonlist_std      = implode('&nbsp;', $arr_std    );  
 
 
@@ -1320,8 +1391,24 @@ require (DIR_WS_INCLUDES.'header.php');
             <?php if( sizeof($arr_delivery)>0 ) { ?>
               <div class='col-xs-12'>
                 <div class="main col-xs-12 col-sm-4 "><?php echo PDFBILL_TXT_DELIVNOTEPROFILE ?></div>
-                <div class="main col-xs-12 col-sm-4"><?php echo $input_profile_delivey ?></div>
+                <div class="main col-xs-12 col-sm-4"><?php echo $input_profile_delivey; ?></div>
                 <div class="main col-xs-12 col-sm-4"><?php echo $buttonlist_delivery; ?>   </div>
+              </div>
+            <?php } ?>
+              
+              <?php if( sizeof($arr_reminder)>0 ) { ?>
+              <div class='col-xs-12'>
+                <div class="main col-xs-12 col-sm-4 "><?php echo PDFBILL_TXT_REMINDERPROFILE ?></div>
+                <div class="main col-xs-12 col-sm-4"><?php echo $input_profile_reminder; ?></div>
+                <div class="main col-xs-12 col-sm-4"><?php echo $buttonlist_reminder; ?>   </div>
+              </div>
+            <?php } ?>
+              
+            <?php if( sizeof($arr_2ndreminder)>0 ) {?>
+              <div class='col-xs-12'>
+                <div class="main col-xs-12 col-sm-4 "><?php echo PDFBILL_TXT_2NDREMINDERPROFILE ?></div>
+                <div class="main col-xs-12 col-sm-4"><?php echo $input_profile_2ndreminder; ?></div>
+                <div class="main col-xs-12 col-sm-4"><?php echo $buttonlist_2ndreminder; ?>   </div>
               </div>
             <?php } ?>
 

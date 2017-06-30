@@ -111,12 +111,10 @@
 	{$smarty.const.TITLE} &copy; {$smarty.now|date_format:"%Y"} | Template &copy; 2014-{$smarty.now|date_format:"%Y"} by shophelfer.com
 </div>
 
-{if ($smarty.const.TRACKING_COUNT_ADMIN_ACTIVE=='true' and $smarty.session.customers_status.customers_status_id == '0')
-  or $smarty.session.customers_status.customers_status_id != '0'}
-  {if $smarty.const.TRACKING_PIWIK_ACTIVE=='true'}
+{if ($smarty.const.TRACKING_COUNT_ADMIN_ACTIVE=='true' and $smarty.session.customers_status.customers_status_id == '0')}  {if $smarty.const.TRACKING_PIWIK_ACTIVE == 'true'}
     {piwik url=$smarty.const.TRACKING_PIWIK_LOCAL_PATH id=$smarty.const.TRACKING_PIWIK_ID goal=$smarty.const.TRACKING_PIWIK_GOAL}
   {/if}
-  {if $smarty.const.TRACKING_GOOGLEANALYTICS_ACTIVE=='true'}
-    {googleanalytics account=$smarty.const.TRACKING_GOOGLEANALYTICS_ID trackorders=true}
+  {if $smarty.const.TRACKING_GOOGLEANALYTICS_ACTIVE == 'true'}
+    {googleanalytics account=$smarty.const.TRACKING_GOOGLEANALYTICS_ID}
   {/if}
 {/if}

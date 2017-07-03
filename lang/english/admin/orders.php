@@ -29,7 +29,8 @@ define( 'BUTTON_BILL',                      'Billing');           // ibillnr
 define( 'PDFBILL_INVOICE_WORD',             'invoice' );              // used for pdf e-mail 
 define( 'PDFBILL_MSG_INVOICEMAIL_SENT',     'E-Mail sent' );      
 define( 'PDFBILL_MSG_DELINFO_PDF' ,         '<br /><br />Any PDF-Invoice exists and will be removed additionally.' );      
-define( 'PDFBILL_TXT_DELIVERYDATE' ,        'Date Delivery:' );      
+define( 'PDFBILL_TXT_DELIVERYDATE' ,        'Delivery date / note for delivery note' );      
+define( 'PDFBILL_TXT_DELIVNOTEPROFILE' ,    'Delivery note:' );
 define( 'PDFBILL_TXT_BILLPROFILE' ,         'Profile:' );  
 define('PDFBILL_TXT_REMINDERPROFILE',       '1. reminder');
 define('PDFBILL_TXT_2NDREMINDERPROFILE',    '2. reminder');
@@ -110,6 +111,7 @@ define('ENTRY_DATE_LAST_UPDATED', 'Date Last Updated:');
 define('ENTRY_NOTIFY_CUSTOMER', 'Notify Customer:');
 define('ENTRY_NOTIFY_COMMENTS', 'Append Comments:');
 define('ENTRY_PRINTABLE', 'Print Invoice');
+define('ENTRY_BILLING', 'Bill number: ');
 
 define('TEXT_INFO_HEADING_DELETE_ORDER', 'Delete Order');
 define('TEXT_INFO_DELETE_INTRO', 'Are you sure you want to delete this order?');

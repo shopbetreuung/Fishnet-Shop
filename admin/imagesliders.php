@@ -123,6 +123,7 @@
 		  $imagesliders_url_target_array = $_POST['imagesliders_url_target'];
 		  $imagesliders_url_typ_array = $_POST['imagesliders_url_typ'];			
 		  $imagesliders_title_array = $_POST['imagesliders_title'];
+		  $imagesliders_alt_array = $_POST['imagesliders_alt'];
 		  $imagesliders_description_array = $_POST['imagesliders_description'];
           $language_id = $languages[$i]['id'];
           $sql_data_array = array('imagesliders_url' => xtc_db_prepare_input($imagesliders_url_array[$language_id]),

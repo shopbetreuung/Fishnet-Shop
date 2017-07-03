@@ -357,7 +357,7 @@ require (DIR_WS_INCLUDES.'head.php');
                 <?php              
               } else {
                 ?>
-                <table class="tableBoxCenter collapse">
+                <table class="tableBoxCenter">
                   <tr class="dataTableHeadingRow">
                     <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_MODULES; ?></td>
                     <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_FILENAME; ?></td>

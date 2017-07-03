@@ -1369,13 +1369,6 @@ require (DIR_WS_INCLUDES.'header.php');
               <div class='col-xs-12'>
                   <strong><?php echo BUTTON_PDFBILL_CREATE; ?></strong>
               </div>
-            <!--
-              <div class='col-xs-12'>
-                <div class="main col-xs-12">Lieferdatum</div>
-                <div class="main col-xs-12"><?php echo $input_deliverydate ?></div>
-                <div class="main col-xs-12">&nbsp;</div>
-              </div>
-              -->
               <div class='col-xs-12'><br></div>
               <div class='col-xs-12'>
                 <div class="main col-xs-12 col-sm-4"><?php echo PDFBILL_TXT_BILLPROFILE ?></div>
@@ -1389,6 +1382,11 @@ require (DIR_WS_INCLUDES.'header.php');
                 <div class="main col-xs-12">&nbsp;</div>
               </div>
             <?php if( sizeof($arr_delivery)>0 ) { ?>
+              <div class='col-xs-12'>
+                <div class="main col-xs-12 col-sm-4"><?php echo PDFBILL_TXT_DELIVERYDATE; ?></div>
+                <div class="main col-xs-12 col-sm-4"><?php echo $input_deliverydate ?></div>
+                <div class="main col-xs-12 col-sm-4">&nbsp;</div>
+              </div>
               <div class='col-xs-12'>
                 <div class="main col-xs-12 col-sm-4 "><?php echo PDFBILL_TXT_DELIVNOTEPROFILE ?></div>
                 <div class="main col-xs-12 col-sm-4"><?php echo $input_profile_delivey; ?></div>

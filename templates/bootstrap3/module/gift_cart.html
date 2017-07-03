@@ -17,13 +17,9 @@
 {if $C_FLAG == 'true'}
 <p>{#text_gift#}</p>
 <div class="highlightbox">
-	<table border="0" cellspacing="0" cellpadding="4">
-  		<tr>
-    		<td><strong>{#text_code#}</strong></td>
-    		<td>{$INPUT_CODE}</td>
-    		<td>{$BUTTON_SUBMIT}</td>
-  		</tr>
-	</table>
+<strong>{#text_code#}</strong>
+{$INPUT_CODE}
+{$BUTTON_SUBMIT}
 </div>
 {else}
 <p>{#create_account#}<br />

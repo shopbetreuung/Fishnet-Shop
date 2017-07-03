@@ -59,7 +59,7 @@ require (DIR_WS_INCLUDES.'head.php');
             
             if (count($list) > 0) {
             ?>              
-            <table class="tableBoxCenter collapse">
+            <table class="tableBoxCenter">
               <tr class="dataTableHeadingRow">
                 <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_ORDER; ?></td>
                 <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_NAME; ?></td>

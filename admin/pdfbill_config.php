@@ -239,6 +239,8 @@ function toggle_column() {
   <td>
 <?php  
       $profile_list = profile_list();
+      asort($profile_list);
+      
       foreach( $profile_list as $p ) {
         ?>
             <a id="SelectCat" onFocus="if(this.blur)this.blur()" class='btn btn-default' href="<?php echo $PHP_SELF?>?profile_name=<?php echo $p['profile_name'] ?>">
@@ -460,7 +462,6 @@ function toggle_column() {
     </tr>
 <?php
   tr_display(     $fn.'_display',      $texts_tmp[$fn.'_display'],    $profile[$fn.'_display']     );
-
   tr_trennzeile(  $texts_tmp[$fn.'_trenn1'] );
   tr_align(       $fn.'_position',     $texts_tmp[$fn.'_position'],   $profile[$fn.'_position']    );
   tr_color(       $fn.'_font_color',   $texts_tmp[$fn.'_font_color'], $profile[$fn.'_font_color']  );
@@ -500,7 +501,6 @@ function toggle_column() {
                                                                         'value_2'  => $profile[$fn.'_value_4']  ), 
                     array( 20, 20 )
             );
-            
   tr_input_2l(      array( $fn.'_text_5', $fn.'_value_5' ),
                                                $texts_tmp[$fn.'_linetexts_5'],
                                                                  array( 'value_1'  => $profile[$fn.'_text_5'], 
@@ -513,7 +513,6 @@ function toggle_column() {
                                                                         'value_2'  => $profile[$fn.'_value_6']  ), 
                     array( 20, 20 )
             );
-            
   tr_dimensions(  $fn.'_horizontal',
                   $fn.'_vertical',
                   $fn.'_width',
@@ -1015,8 +1014,7 @@ $operations = array(
   
   tr_headline( $texts_tmp['headline'] );
   tr_check1( 'default_profile', $texts['default_profile'] );
-  tr_radio2( 'typeofbill', $texts['typeofbill'], $profile['typeofbill'], array('invoice', 'delivnote') );
-  
+  tr_radio_n( 'typeofbill', $texts['typeofbill'], $profile['typeofbill'], array('invoice', 'delivnote', 'reminder', '2ndreminder') );
   reset($languages_arr);
   $values=array();
   $i=1;

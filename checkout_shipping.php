@@ -146,15 +146,15 @@ if ($order->delivery['country']['iso_code_2'] != '') {
 	$_SESSION['delivery_zone'] = $order->delivery['country']['iso_code_2'];
 }
 // load all enabled shipping modules
-require (DIR_WS_CLASSES.'shipping.php');
+require_once (DIR_WS_CLASSES.'shipping.php');
 $shipping_modules = new shipping;
 
-require (DIR_WS_MODULES.'order_total/ot_shipping.php');
+require_once (DIR_WS_MODULES.'order_total/ot_shipping.php');
 $ot_shipping = new ot_shipping;
 $ot_shipping->process();
 
 if ($free_shipping == true) {
-  include (DIR_WS_LANGUAGES.$_SESSION['language'].'/modules/order_total/ot_shipping.php');
+  include_once (DIR_WS_LANGUAGES.$_SESSION['language'].'/modules/order_total/ot_shipping.php');
 }
 
 // process the selected shipping method

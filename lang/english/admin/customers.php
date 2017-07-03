@@ -69,4 +69,6 @@ define('TEXT_INFO_DELETE_DEFAULT', '<b>The address book entry can not be deleted
 
 define('ENTRY_SYMBOL', 'Symbol');
 define('NO_SYMBOL', 'No Symbol');
+
+define('TEXT_INFO_DELETE_GUESTS','(Deletes guest accounts without order, that are older that 60 days)');
 ?>

@@ -393,8 +393,8 @@ if (isset($_POST['action']) && ($_POST['action'] == 'process')) {
     $smarty->caching = 0;
     $html_mail = $smarty->fetch('db:create_account_mail.html');
     $txt_mail = $smarty->fetch('db:create_account_mail.txt');
-
-    xtc_php_mail(EMAIL_SUPPORT_ADDRESS, EMAIL_SUPPORT_NAME, $email_address, $name, EMAIL_SUPPORT_FORWARDING_STRING, EMAIL_SUPPORT_REPLY_ADDRESS, EMAIL_SUPPORT_REPLY_ADDRESS_NAME, '', '', EMAIL_SUPPORT_SUBJECT, $html_mail, $txt_mail);
+    $subject = $smarty->fetch('db:create_account_mail.subject');
+    xtc_php_mail(EMAIL_SUPPORT_ADDRESS, EMAIL_SUPPORT_NAME, $email_address, $name, EMAIL_SUPPORT_FORWARDING_STRING, EMAIL_SUPPORT_REPLY_ADDRESS, EMAIL_SUPPORT_REPLY_ADDRESS_NAME, '', '', $subject, $html_mail, $txt_mail);
 
     if ($newsletter == 1) {
       require_once (DIR_WS_CLASSES.'class.newsletter.php');

@@ -48,6 +48,7 @@
                                         AND mi.languages_id = '" . (int)$_SESSION['languages_id'] . "'),
                                             " . TABLE_PRODUCTS . " p
                                        WHERE p.products_id = '" . $product->data['products_id'] . "'
+                                         AND p.waste_paper_bin = '0'
                                          AND p.manufacturers_id = m.manufacturers_id");
 
     if (xtc_db_num_rows($manufacturer_query,true)) {

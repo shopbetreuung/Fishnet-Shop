@@ -19,6 +19,8 @@
 // --- bof -- ipdfbill --------
 define( 'BUTTON_PDFBILL_CREATE',            'Create PDF-Invoice');    // pdfbill
 define( 'BUTTON_PDFDELIVNOTE_CREATE',       'Create PDF');            // pdfbill
+define( 'BUTTON_PDFREMINDER_CREATE',        'Create PDF-Reminder');   // pdfbill
+define( 'BUTTON_PDF2NDREMINDER_CREATE',     'Create PDF-Second Reminder');   // pdfbill
 define( 'BUTTON_PDFBILL_RECREATE',          'Recreate PDF-Invoice');  // pdfbill
 define( 'BUTTON_PDFBILL_DISPLAY',           'Display PDF');           // pdfbill
 define( 'BUTTON_PDFBILL_SEND_INVOICE_MAIL', 'Send Invoice');          // pdfbill
@@ -30,6 +32,8 @@ define( 'PDFBILL_MSG_DELINFO_PDF' ,         '<br /><br />Any PDF-Invoice exists 
 define( 'PDFBILL_TXT_DELIVERYDATE' ,        'Delivery date / note for delivery note' );      
 define( 'PDFBILL_TXT_DELIVNOTEPROFILE' ,    'Delivery note:' );
 define( 'PDFBILL_TXT_BILLPROFILE' ,         'Profile:' );  
+define('PDFBILL_TXT_REMINDERPROFILE',       '1. reminder');
+define('PDFBILL_TXT_2NDREMINDERPROFILE',    '2. reminder');
 // --- eof -- ipdfbill -------- 
    
 define('TEXT_BANK', 'Bank Collection');

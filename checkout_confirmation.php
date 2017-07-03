@@ -96,16 +96,26 @@ if(($_SESSION['cart']->get_content_type() == 'mixed') || ($_SESSION['cart']->get
 }
 $smarty->assign('agree_download', $_SESSION['agree_download']);
 
+// BOF - Tomcraft - 2017-05-04 - Fix from r5913
 // load the selected payment module
 require_once (DIR_WS_CLASSES . 'payment.php');
-if (isset ($_SESSION['credit_covers']) || !isset($_SESSION['payment'])) { //DokuMan - 2010-10-14 - check that payment is not yet set
+if (isset($_SESSION['credit_covers']) 
+    || (isset($_SESSION['cot_gv']) && !isset($_SESSION['payment']))
+    || (isset($_SESSION['cot_gv']) && isset($_POST['credit_order_total']) && $_SESSION['cot_gv'] > $_POST['credit_order_total'])
+    ) 
+{
   $_SESSION['payment'] = 'no_payment'; // GV Code Start/End ICW added for CREDIT CLASS
 }
+
+if (!isset($_SESSION['payment'])) {
+  xtc_redirect(xtc_href_link(FILENAME_CHECKOUT_PAYMENT, 'error_message=' . urlencode(ERROR_NO_PAYMENT_MODULE_SELECTED), 'SSL'));
+}
+
 $payment_modules = new payment($_SESSION['payment']);
 
 // GV Code ICW ADDED FOR CREDIT CLASS SYSTEM
-require (DIR_WS_CLASSES . 'order_total.php');
-require (DIR_WS_CLASSES . 'order.php');
+require_once (DIR_WS_CLASSES . 'order_total.php');
+require_once (DIR_WS_CLASSES . 'order.php');
 $order = new order();
 
 $payment_modules->update_status();
@@ -117,17 +127,29 @@ $order_total_modules->pre_confirmation_check();
 // GV Code End
 
 // GV Code line changed
-if(isset($_SESSION['payment']) && $_SESSION['payment'] != 'no_payment') { //web28 - 2012-04-27 - fix for coupon amount == order total
-  if ((is_array($payment_modules->modules) && (sizeof($payment_modules->modules) > 1) && (!is_object($$_SESSION['payment'])) && (!isset ($_SESSION['credit_covers']))) || (is_object($$_SESSION['payment']) && ($$_SESSION['payment']->enabled == false))) {
-    xtc_redirect(xtc_href_link(FILENAME_CHECKOUT_PAYMENT, 'error_message=' . urlencode(ERROR_NO_PAYMENT_MODULE_SELECTED), 'SSL'));
-  }
+if ((is_array($payment_modules->modules)  
+     && (sizeof($payment_modules->modules) > 1)  	  	 
+     && (!is_object(${$_SESSION['payment']}))  	  	 
+     && (!isset($_SESSION['credit_covers'])))  	  	 
+    ||  	  	 
+    (is_object(${$_SESSION['payment']})  	  	 
+     && (${$_SESSION['payment']}->enabled == false)) 	  	 
+    || 	  	 
+    (isset($_SESSION['cot_gv']) 	  	 
+     && $_SESSION['cot_gv'] > 0 	  	 
+     && $xtPrice->xtcFormat($order->info['total'], false) > $_SESSION['cot_gv'] 	  	 
+     && $_SESSION['payment'] == 'no_payment'))
+{
+	xtc_redirect(xtc_href_link(FILENAME_CHECKOUT_PAYMENT, 'error_message=' . urlencode(ERROR_NO_PAYMENT_MODULE_SELECTED), 'SSL'));
 }
+// EOF - Tomcraft - 2017-05-04 - Fix from r5913
+
 
 if (is_array($payment_modules->modules)) {
   $payment_modules->pre_confirmation_check();
 }
 // load the selected shipping module
-require (DIR_WS_CLASSES . 'shipping.php');
+require_once (DIR_WS_CLASSES . 'shipping.php');
 $shipping_modules = new shipping($_SESSION['shipping']);
 
 // Stock Check

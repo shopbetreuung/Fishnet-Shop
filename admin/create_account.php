@@ -379,7 +379,7 @@
 
         $html_mail = $smarty->fetch('db:create_account_mail_admin.html');
         $txt_mail = $smarty->fetch('db:create_account_mail_admin.txt');
-
+        $create_account_subject = $smarty->fetch('db:create_account_mail_admin.subject');
         xtc_php_mail(EMAIL_SUPPORT_ADDRESS,
                      EMAIL_SUPPORT_NAME,
                      $customers_email_address,
@@ -389,7 +389,7 @@
                      EMAIL_SUPPORT_REPLY_ADDRESS_NAME,
                      '',
                      '',
-                     EMAIL_SUPPORT_SUBJECT,
+                     $create_account_subject,
                      $html_mail,
                      $txt_mail);
       }

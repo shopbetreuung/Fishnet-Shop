@@ -32,13 +32,21 @@ if ($_SESSION['customer_id'] == $order_check['customers_id'] || $send_by_admin) 
   $order = new order($insert_id);
 
 // BOF - Tomcraft - 2009-10-03 - Paypal Express Modul
-  if (isset($_SESSION['paypal_express_new_customer']) && $_SESSION['paypal_express_new_customer'] == 'true' && isset($_SESSION['ACCOUNT_PASSWORD']) && $_SESSION['ACCOUNT_PASSWORD'] == 'true') {
-    require_once (DIR_FS_INC.'xtc_create_password.inc.php');
-    require_once (DIR_FS_INC.'xtc_encrypt_password.inc.php');
-    $password_encrypted =  xtc_RandomString(10);
-    $password = xtc_encrypt_password($password_encrypted);
-    xtc_db_query("update " . TABLE_CUSTOMERS . " set customers_password = '" . $password . "' where customers_id = '" . (int) $_SESSION['customer_id'] . "'");
-    $smarty->assign('NEW_PASSWORD', $password_encrypted);
+  if (isset($_SESSION['paypal_express_new_customer']) 
+      && $_SESSION['paypal_express_new_customer'] == 'true'
+      && !isset($send_by_admin)
+      && is_object($order)
+      ) 
+  {
+    require_once (DIR_FS_INC.'xtc_random_charcode.inc.php');
+  
+    $vlcode = xtc_random_charcode(32);
+    $link = xtc_href_link(FILENAME_PASSWORD_DOUBLE_OPT, 'action=verified&customers_id='.$order->customer['ID'].'&key='.$vlcode, 'SSL', false);
+
+    $sql_data_array = array('password_request_key' => $vlcode);
+    xtc_db_perform(TABLE_CUSTOMERS, $sql_data_array, 'update', "customers_id = '" . $order->customer['ID'] . "'");
+  
+    $smarty->assign('NEW_PASSWORD', $link);
   }
 // EOF - Tomcraft - 2009-10-03 - Paypal Express Modul
 
@@ -165,7 +173,7 @@ if ($_SESSION['customer_id'] == $order_check['customers_id'] || $send_by_admin) 
         $banktransfer_owner_email = $rec['banktransfer_owner_email'];
         $sepa_html_mail = $smarty->fetch('db:sepa_mail.html');
         $sepa_txt_mail = $smarty->fetch('db:sepa_mail.txt');
-        
+        $sepa_subject = $smarty->fetch('db:sepa_mail.subject');
         // no pre-notification in order mail
         $smarty->clear_assign('PAYMENT_INFO_HTML');
         $smarty->clear_assign('PAYMENT_INFO_TXT');
@@ -208,13 +216,14 @@ if ($_SESSION['customer_id'] == $order_check['customers_id'] || $send_by_admin) 
 
   //email attachments
   $email_attachments = defined('EMAIL_BILLING_ATTACHMENTS') ? EMAIL_BILLING_ATTACHMENTS : '';
-
+  
   // create subject
-  $order_subject = str_replace('{$nr}', $insert_id, EMAIL_BILLING_SUBJECT_ORDER);
-  $order_subject = str_replace('{$date}', xtc_date_long($order->info['date_purchased']), $order_subject); // Tomcraft - 2011-12-28 - Use date_puchased instead of current date in E-Mail subject
-  $order_subject = str_replace('{$lastname}', $order->customer['lastname'], $order_subject);
-  $order_subject = str_replace('{$firstname}', $order->customer['firstname'], $order_subject);
-
+  $smarty->assign('nr', $insert_id);
+  $smarty->assign('date', xtc_date_long($order->info['date_purchased']));
+  $smarty->assign('lastname', $order->customer['lastname']);      
+  $smarty->assign('firstname', $order->customer['firstname']);
+  $order_subject = $smarty->fetch('db:order_mail.subject');
+  
   // send mail to admin
   xtc_php_mail(EMAIL_BILLING_ADDRESS,
                EMAIL_BILLING_NAME,
@@ -229,7 +238,6 @@ if ($_SESSION['customer_id'] == $order_check['customers_id'] || $send_by_admin) 
                $html_mail,
                $txt_mail
                );
-
   // send mail to customer
   if (SEND_EMAILS == 'true' || $send_by_admin) {
     xtc_php_mail(EMAIL_BILLING_ADDRESS,
@@ -256,7 +264,7 @@ if ($_SESSION['customer_id'] == $order_check['customers_id'] || $send_by_admin) 
                    EMAIL_BILLING_REPLY_ADDRESS_NAME,
                    '',
                    '',
-                   EMAIL_BILLING_SUBJECT,
+                   $sepa_subject,
                    $sepa_html_mail,
                    $sepa_txt_mail
                  );

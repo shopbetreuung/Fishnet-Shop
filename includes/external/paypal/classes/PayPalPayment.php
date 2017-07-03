@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: PayPalPayment.php 10471 2016-11-30 19:00:22Z Tomcraft $
+   $Id: PayPalPayment.php 10748 2017-05-24 09:08:48Z GTB $
 
    modified eCommerce Shopsoftware
    http://www.modified-shop.org
@@ -15,6 +15,7 @@
 defined('TABLE_PAYPAL_PAYMENT') OR define('TABLE_PAYPAL_PAYMENT', 'paypal_payment');
 defined('TABLE_PAYPAL_CONFIG') OR define('TABLE_PAYPAL_CONFIG', 'paypal_config');
 defined('TABLE_PAYPAL_IPN') OR define('TABLE_PAYPAL_IPN', 'paypal_ipn');
+defined('TABLE_PAYPAL_INSTRUCTIONS') OR define('TABLE_PAYPAL_INSTRUCTIONS', 'paypal_instructions');
 
 
 // include needed functions
@@ -67,16 +68,10 @@ use PayPal\Api\CreditFinancing;
 class PayPalPayment extends PayPalPaymentBase {
 
 
-  function __construct($class) {
-    $paypal_installed = false;
-    $check_installed_query = xtc_db_query("SHOW TABLES LIKE '".TABLE_PAYPAL_CONFIG."'");
-    if (xtc_db_num_rows($check_installed_query) > 0) {
-      $paypal_installed = true;
-    }
-    
-    $this->loglevel = (($paypal_installed === true) ? $this->get_config('PAYPAL_LOG_LEVEL')  : 'FINE'); 
+  function __construct($class) {    
+    $this->loglevel = ((PayPalPaymentBase::check_install() === true) ? $this->get_config('PAYPAL_LOG_LEVEL') : 'FINE'); 
     $config = array(
-      'LogEnabled' => ((defined('MODULE_PAYMENT_'.strtoupper($class).'_STATUS' || $paypal_installed === true) && $this->get_config('PAYPAL_LOG_ENALBLED') == '1') ? true : false),
+      'LogEnabled' => ((defined('MODULE_PAYMENT_'.strtoupper($class).'_STATUS' || PayPalPaymentBase::check_install() === true) && $this->get_config('PAYPAL_LOG_ENALBLED') == '1') ? true : false),
       'SplitLogging' => true,
       'LogLevel' => $this->loglevel,
       'LogThreshold' => '2MB',
@@ -182,8 +177,8 @@ class PayPalPayment extends PayPalPaymentBase {
                 ->setCurrency($_SESSION['currency']) 
                 ->setQuantity(1) 
                 ->setPrice($shipping_cost); 
-        $this->amount->setTotal($this->amount->getTotal() + $shipping_cost);
-        $this->details->setSubtotal($this->amount->getTotal());
+        $this->amount->setTotal($this->amount->getTotal() + (double)$shipping_cost);
+        $this->details->setSubtotal($this->amount->getTotal() - $this->details->getShippingDiscount());
       }    
           
       // set amount 
@@ -254,23 +249,29 @@ class PayPalPayment extends PayPalPaymentBase {
         ) 
     { 
       $item = array();
-      $item[0] = new Item(); 
-      $item[0]->setName($this->encode_utf8(MODULE_PAYMENT_PAYPAL_TEXT_ORDER))
-              ->setCurrency($_SESSION['currency']) 
-              ->setQuantity(1) 
-              ->setPrice($this->details->getSubtotal()); 
     
       if ($cart === true) {
         $shipping_cost = $this->get_config('MODULE_PAYMENT_'.strtoupper($this->code).'_SHIPPING_COST');
+        
+        $item[0] = new Item(); 
+        $item[0]->setName($this->encode_utf8(MODULE_PAYMENT_PAYPAL_TEXT_ORDER))
+                ->setCurrency($_SESSION['currency']) 
+                ->setQuantity(1) 
+                ->setPrice($this->details->getSubtotal() - (double)$shipping_cost); 
+
         if ((int)$shipping_cost > 0) {
           $item[1] = new Item(); 
           $item[1]->setName($this->encode_utf8(PAYPAL_EXP_VORL))
                   ->setCurrency($_SESSION['currency']) 
                   ->setQuantity(1) 
                   ->setPrice($shipping_cost); 
-          $this->amount->setTotal($this->amount->getTotal() + $shipping_cost);
-          $this->details->setSubtotal($this->amount->getTotal());
         }    
+      } else {
+        $item[0] = new Item(); 
+        $item[0]->setName($this->encode_utf8(MODULE_PAYMENT_PAYPAL_TEXT_ORDER))
+                ->setCurrency($_SESSION['currency']) 
+                ->setQuantity(1) 
+                ->setPrice($this->details->getSubtotal()); 
       }
     }
     $itemList->setItems($item);
@@ -543,6 +544,7 @@ class PayPalPayment extends PayPalPaymentBase {
           
           // sendto
           $_SESSION['sendto'] = $this->get_shipping_address($_SESSION['customer_id'], $customer['delivery']);
+          $_SESSION['delivery_zone'] = $customer['delivery']['delivery_country']['iso_code_2'];
 
         } elseif (!isset($_SESSION['customer_id'])) {
           // redirect
@@ -681,7 +683,9 @@ class PayPalPayment extends PayPalPaymentBase {
         unset($_SESSION['paypal']);
         xtc_redirect(xtc_href_link(FILENAME_CHECKOUT_PAYMENT, 'payment_error='.$this->code, 'SSL'));
       }
-
+      
+      $this->save_payment_instructions($insert_id);
+      
       $status = $this->get_orders_status($payment);
       if ($status['status_id'] < 0) {
         $check_query = xtc_db_query("SELECT orders_status
@@ -691,6 +695,10 @@ class PayPalPayment extends PayPalPaymentBase {
         $status['status_id'] = $check['orders_status'];
       }
       $this->update_order($status['comment'], $status['status_id'], $insert_id);    
+
+      xtc_db_query("UPDATE ".TABLE_PAYPAL_PAYMENT." 
+                       SET transaction_id = '".xtc_db_input($status['transaction_id'])."'
+                     WHERE orders_id = '".$insert_id."'");
 
     } else {
       // redirect
@@ -908,6 +916,10 @@ class PayPalPayment extends PayPalPaymentBase {
       $status['status_id'] = $check['orders_status'];
     }
     $this->update_order($status['comment'], $status['status_id'], $insert_id);    
+
+    xtc_db_query("UPDATE ".TABLE_PAYPAL_PAYMENT." 
+                     SET transaction_id = '".xtc_db_input($status['transaction_id'])."'
+                   WHERE orders_id = '".$insert_id."'");
   }
     
   
@@ -1201,6 +1213,10 @@ class PayPalPayment extends PayPalPaymentBase {
       }
       $this->update_order($status['comment'], $status['status_id'], $insert_id);    
 
+      xtc_db_query("UPDATE ".TABLE_PAYPAL_PAYMENT." 
+                       SET transaction_id = '".xtc_db_input($status['transaction_id'])."'
+                     WHERE orders_id = '".$insert_id."'");
+
     } else {
       // redirect
       unset($_SESSION['paypal']);
@@ -1248,6 +1264,7 @@ class PayPalPayment extends PayPalPaymentBase {
       return array(
         'status_id' => $status_id,
         'comment' => 'Transaction ID: '.$resource->getId(),
+        'transaction_id' => $resource->getId(),
       );
       
     } catch (Exception $ex) {
@@ -1358,13 +1375,15 @@ class PayPalPayment extends PayPalPaymentBase {
 
         // customer details
         $payer = $payment->getPayer();
-        $payerinfo = $payer->getPayerInfo();
-
+        if (is_object($payer)) {
+          $payerinfo = $payer->getPayerInfo();
+        }
+        
         $payment_array = array(
           'id' => $payment->getId(),
-          'payment_method' => $payer->getPaymentMethod(),
-          'email_address' => $payerinfo->getEmail(),
-          'account_status' => $payer->getStatus(),
+          'payment_method' => ((is_object($payer)) ? $payer->getPaymentMethod() : ''),
+          'email_address' => ((is_object($payerinfo)) ? $payerinfo->getEmail() : ''),
+          'account_status' => ((is_object($payer)) ? $payer->getStatus() : ''),
           'intent' => $payment->getIntent(),
           'state' => $payment->getState(),
         );
@@ -1384,8 +1403,9 @@ class PayPalPayment extends PayPalPaymentBase {
 
     // customer details
     $payer = $payment->getPayer();
-    $payerinfo = $payer->getPayerInfo();
-
+    if (is_object($payer)) {
+      $payerinfo = $payer->getPayerInfo();
+    }
     $customer_data = $this->get_customer_data($payment);
 
     $message = '';
@@ -1396,9 +1416,9 @@ class PayPalPayment extends PayPalPaymentBase {
         
     $payment_array = array(
       'id' => $payment->getId(),
-      'payment_method' => $payer->getPaymentMethod(),
-      'email_address' => $payerinfo->getEmail(),
-      'account_status' => $payer->getStatus(),
+      'payment_method' => ((is_object($payer)) ? $payer->getPaymentMethod() : ''),
+      'email_address' => ((isset($payerinfo) && is_object($payerinfo)) ? $payerinfo->getEmail() : ''),
+      'account_status' => ((is_object($payer)) ? $payer->getStatus() : ''),
       'intent' => $payment->getIntent(),
       'state' => $payment->getState(),
       'message' => $message,
@@ -1550,8 +1570,12 @@ class PayPalPayment extends PayPalPaymentBase {
     try {
       // customer details
       $payer = $payment->getPayer();
-      $customer = $payer->getPayerInfo();
-      $address = $customer->getShippingAddress();
+      if (is_object($payer)) {
+        $customer = $payer->getPayerInfo();
+      }
+      if (is_object($customer)) {
+        $address = $customer->getShippingAddress();
+      }
       
       $valid = true;
     } catch (Exception $ex) {

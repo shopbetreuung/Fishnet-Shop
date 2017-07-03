@@ -91,7 +91,7 @@
       $html_mail=$smarty->fetch('db:send_gift.html');
       $txt_mail=$smarty->fetch('db:send_gift.txt');
 
-      if ($subject=='') $subject=EMAIL_BILLING_SUBJECT;
+      if ($subject=='') $subject = $smarty->fetch('db:send_gift.subject');
       xtc_php_mail(EMAIL_BILLING_ADDRESS,EMAIL_BILLING_NAME, $mail['customers_email_address'] , $mail['customers_firstname'] . ' ' . $mail['customers_lastname'] , '', EMAIL_BILLING_REPLY_ADDRESS, EMAIL_BILLING_REPLY_ADDRESS_NAME, '', '', $subject, $html_mail , $txt_mail);
 
 	  // Now create the coupon main and email entry
@@ -132,7 +132,7 @@
       $html_mail=$smarty->fetch('db:send_gift.html');
       $txt_mail=$smarty->fetch('db:send_gift.txt');
 
-      if ($subject == '') $subject = EMAIL_BILLING_SUBJECT; //web28 - 2011-07-07 - Fix email subject
+      if ($subject == '') $subject = $smarty->fetch('db:send_gift.subject'); //web28 - 2011-07-07 - Fix email subject
       xtc_php_mail(EMAIL_BILLING_ADDRESS,EMAIL_BILLING_NAME, $_POST['email_to'] , '' , '', EMAIL_BILLING_REPLY_ADDRESS, EMAIL_BILLING_REPLY_ADDRESS_NAME, '', '', $subject, $html_mail , $txt_mail); //web28 - 2011-07-07 - Fix email subject
       // Now create the coupon email entry
       $insert_query = xtc_db_query("insert into " . TABLE_COUPONS . " (coupon_code, coupon_type, coupon_amount, date_created) values ('" . $id1 . "', 'G', '" . $_POST['amount'] . "', now())");

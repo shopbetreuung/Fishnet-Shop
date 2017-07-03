@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: PayPalPaymentBase.php 10425 2016-11-23 13:29:31Z GTB $
+   $Id: PayPalPaymentBase.php 10770 2017-06-10 06:38:24Z GTB $
 
    modified eCommerce Shopsoftware
    http://www.modified-shop.org
@@ -27,6 +27,7 @@ class PayPalPaymentBase extends PayPalCommon {
     global $order;
 
     $this->code = $class;
+    $this->paypal_version = '1.0';
 
     $this->title = ((defined('MODULE_PAYMENT_'.strtoupper($this->code).'_TEXT_TITLE')) ? constant('MODULE_PAYMENT_'.strtoupper($this->code).'_TEXT_TITLE') : '');
     $this->info = ((defined('MODULE_PAYMENT_'.strtoupper($this->code).'_TEXT_INFO')) ? constant('MODULE_PAYMENT_'.strtoupper($this->code).'_TEXT_INFO') : '');
@@ -59,6 +60,10 @@ class PayPalPaymentBase extends PayPalCommon {
   
     if (is_object($order) && !defined('RUN_MODE_ADMIN')) {
       $this->update_status();
+    }
+    
+    if ($this->check_install() && version_compare($this->paypal_version, $this->get_config('PAYPAL_VERSION'), '>')) {
+      $this->paypal_update();
     }
   }
 
@@ -198,9 +203,16 @@ class PayPalPaymentBase extends PayPalCommon {
           'field' => $payment['instruction']['bank']['bic'],
         ),
       );
-  
+      
+      $title = sprintf(TEXT_PAYPAL_INSTRUCTIONS_CHECKOUT, $payment['instruction']['amount']['total'].' '.$payment['instruction']['amount']['currency'], $payment['instruction']['date']);
+      if ($fields[2]['field'] == '') {
+        unset($fields[2]);
+        $fields = array_values($fields);
+        $title = sprintf(TEXT_PAYPAL_INSTRUCTIONS_CHECKOUT_SHORT, $payment['instruction']['amount']['total'].' '.$payment['instruction']['amount']['currency']);
+      }
+      
       $success = array(
-        array ('title' => sprintf(TEXT_PAYPAL_INSTRUCTIONS_CHECKOUT, $payment['instruction']['amount']['total'].' '.$payment['instruction']['amount']['currency'], $payment['instruction']['date']),
+        array ('title' => $title,
                'class' => $this->code,
                'fields' => $fields
                ),
@@ -211,6 +223,28 @@ class PayPalPaymentBase extends PayPalCommon {
   }
 
 
+  function save_payment_instructions($orders_id) {
+    $payment = $this->get_order_details($orders_id);
+  
+    if (isset($payment['instruction'])) {
+      
+      $sql_data_array = array(
+        'orders_id' => $orders_id,
+        'amount' => $payment['instruction']['amount']['total'],
+        'currency' => $payment['instruction']['amount']['currency'],
+        'reference' => $payment['instruction']['reference'],
+        'date' => date('Y-m-d', strtotime($payment['instruction']['date'])),
+        'name' => $payment['instruction']['bank']['name'],
+        'holder' => $payment['instruction']['bank']['holder'],
+        'iban' => $payment['instruction']['bank']['iban'],
+        'bic' => $payment['instruction']['bank']['bic'],
+      );
+    
+      xtc_db_perform(TABLE_PAYPAL_INSTRUCTIONS, $sql_data_array);
+    }
+  }
+  
+  
   function admin_order($oID) {
     return false;
   }
@@ -234,7 +268,7 @@ class PayPalPaymentBase extends PayPalCommon {
 
 
   function check() {
-    if(!isset($this->_check)) {
+    if (!isset($this->_check)) {
       $check_query = xtc_db_query("SELECT configuration_value 
                                      FROM ".TABLE_CONFIGURATION." 
                                     WHERE configuration_key = 'MODULE_PAYMENT_".strtoupper($this->code)."_STATUS'");
@@ -245,11 +279,15 @@ class PayPalPaymentBase extends PayPalCommon {
 
 
   function check_install() {
-    $check_query = xtc_db_query("SHOW TABLES LIKE '".TABLE_PAYPAL_CONFIG."'");
-    if (xtc_db_num_rows($check_query) > 0) {
-      return true;
+    if (!isset($this->_check_install)) {
+      $check_query = xtc_db_query("SHOW TABLES LIKE '".TABLE_PAYPAL_CONFIG."'");
+      if (xtc_db_num_rows($check_query) > 0) {
+        $this->_check_install = true;
+      } else {
+        $this->_check_install = false;
+      }
     }
-    return false;
+    return $this->_check_install;
   }
   
   
@@ -372,22 +410,36 @@ class PayPalPaymentBase extends PayPalCommon {
                     orders_id int(11) NOT NULL default '0', 
                     payment_id varchar(64) NOT NULL default '', 
                     payer_id varchar(64) NOT NULL default '', 
+                    transaction_id varchar(64) NOT NULL default '', 
                     PRIMARY KEY (paypal_id), 
                     KEY idx_orders_id (orders_id)
-                  ) ENGINE = MYISAM;");
+                  );");
   
     xtc_db_query("CREATE TABLE IF NOT EXISTS ".TABLE_PAYPAL_CONFIG." (
                     config_key varchar(128) NOT NULL,
                     config_value text NOT NULL,
                     KEY idx_config_key (config_key)
-                  ) ENGINE = MYISAM;");
+                  );");
 
     xtc_db_query("CREATE TABLE IF NOT EXISTS ".TABLE_PAYPAL_IPN." (
                     orders_id int(11) NOT NULL,
                     transaction_id varchar(64) NOT NULL default '',
                     payment_status varchar(64) NOT NULL default '',
                     KEY idx_orders_id (orders_id)
-                  ) ENGINE = MYISAM;");
+                  );");
+
+    xtc_db_query("CREATE TABLE IF NOT EXISTS ".TABLE_PAYPAL_INSTRUCTIONS." (
+                    orders_id int(11) NOT NULL DEFAULT '0',
+                    amount decimal(15,4) DEFAULT NULL,
+                    currency varchar(8) DEFAULT NULL,
+                    reference varchar(128) DEFAULT NULL,
+                    date date DEFAULT NULL,
+                    name varchar(128) DEFAULT NULL,
+                    holder varchar(128) DEFAULT NULL,
+                    iban varchar(34) DEFAULT NULL,
+                    bic varchar(11) DEFAULT NULL,
+                    KEY idx_orders_id (orders_id)
+                  );");
 
     $admin_access_array = array(
       'paypal_config',
@@ -452,6 +504,7 @@ class PayPalPaymentBase extends PayPalCommon {
       xtc_db_query("DROP TABLE IF EXISTS ".TABLE_PAYPAL_PAYMENT);
       xtc_db_query("DROP TABLE IF EXISTS ".TABLE_PAYPAL_CONFIG);
       xtc_db_query("DROP TABLE IF EXISTS ".TABLE_PAYPAL_IPN);
+      xtc_db_query("DROP TABLE IF EXISTS ".TABLE_PAYPAL_INSTRUCTIONS);
 
 
   
@@ -495,45 +548,79 @@ class PayPalPaymentBase extends PayPalCommon {
         if (file_exists(DIR_FS_LANGUAGES.$languages['directory'].'/admin/paypal_config.php')) {
           include(DIR_FS_LANGUAGES.$languages['directory'].'/admin/paypal_config.php');
         }
-        if ($$statusname != '') {
+        if (${$statusname} != '') {
           $check_query = xtc_db_query("SELECT orders_status_id 
                                          FROM " . TABLE_ORDERS_STATUS . " 
-                                        WHERE orders_status_name = '" .xtc_db_input($$statusname). "' 
+                                        WHERE orders_status_name = '" .xtc_db_input(${$statusname}). "' 
                                           AND language_id = '".(int)$languages['languages_id']."' 
                                         LIMIT 1");
           $status = xtc_db_fetch_array($check_query);
-          if (xtc_db_num_rows($check_query) < 1 || ($$statusid && $status['orders_status_id'] != $$statusid) ) {
-            if (!$$statusid) {
+          if (xtc_db_num_rows($check_query) < 1 || (${$statusid} && $status['orders_status_id'] != ${$statusid}) ) {
+            if (!${$statusid}) {
               $status_query = xtc_db_query("SELECT max(orders_status_id) as status_id FROM " . TABLE_ORDERS_STATUS);
               $status = xtc_db_fetch_array($status_query);
-              $$statusid = $status['status_id'] + 1;
+              ${$statusid} = $status['status_id'] + 1;
             }
             $check_query = xtc_db_query("SELECT orders_status_id 
                                            FROM " . TABLE_ORDERS_STATUS . " 
-                                          WHERE orders_status_id = '".(int)$$statusid ."' 
+                                          WHERE orders_status_id = '".(int)${$statusid} ."' 
                                             AND language_id='".(int)$languages['languages_id']."'");
             if (xtc_db_num_rows($check_query) < 1) {
               $sql_data_array = array(
-                'orders_status_id' => (int)$$statusid,
+                'orders_status_id' => (int)${$statusid},
                 'language_id' => (int)$languages['languages_id'],
-                'orders_status_name' => $$statusname,
+                'orders_status_name' => ${$statusname},
               );
               xtc_db_perform(TABLE_ORDERS_STATUS, $sql_data_array);
               $sql_data_array = array(
                 array(
                   'config_key' => $statusid,
-                  'config_value' => (int)$$statusid,
+                  'config_value' => (int)${$statusid},
                 )
               );
               $this->save_config($sql_data_array);
             }
           } else {
-            $$statusid = $status['orders_status_id'];
+            ${$statusid} = $status['orders_status_id'];
           }
         }
       }
     }
   }
   
+  
+  function paypal_update() {
+    $table_array = array(
+      array('column' => 'transaction_id', 'default' => "varchar(64) NOT NULL default ''"),
+    );
+    foreach ($table_array as $table) {
+      $check_query = xtc_db_query("SHOW COLUMNS FROM ".TABLE_PAYPAL_PAYMENT." LIKE '".xtc_db_input($table['column'])."'");
+      if (xtc_db_num_rows($check_query) < 1) {
+        xtc_db_query("ALTER TABLE ".TABLE_PAYPAL_PAYMENT." ADD ".$table['column']." ".$table['default']."");
+      }
+    }
+    
+    xtc_db_query("CREATE TABLE IF NOT EXISTS ".TABLE_PAYPAL_INSTRUCTIONS." (
+                    orders_id int(11) NOT NULL DEFAULT '0',
+                    amount decimal(15,4) DEFAULT NULL,
+                    currency varchar(8) DEFAULT NULL,
+                    reference varchar(128) DEFAULT NULL,
+                    date date DEFAULT NULL,
+                    name varchar(128) DEFAULT NULL,
+                    holder varchar(128) DEFAULT NULL,
+                    iban varchar(34) DEFAULT NULL,
+                    bic varchar(11) DEFAULT NULL,
+                    KEY idx_orders_id (orders_id)
+                  );");
+    
+    $sql_data_array = array(
+      array(
+        'config_key' => 'PAYPAL_VERSION',
+        'config_value' => $this->paypal_version,
+      )
+    );
+    $this->save_config($sql_data_array);
+  }
+
 }
 ?>

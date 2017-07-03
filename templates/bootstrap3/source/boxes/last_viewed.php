@@ -72,7 +72,8 @@ if (isset ($_SESSION['tracking']['products_history'][0])) {
                                            " . TABLE_PRODUCTS_DESCRIPTION . " pd,
                                            " . TABLE_PRODUCTS_TO_CATEGORIES . " p2c,
                                            " . TABLE_CATEGORIES_DESCRIPTION . " cd
-                                           where p.products_status = '1'                                                                                               
+                                           where p.products_status = '1'
+                                           AND p.waste_paper_bin = '0'
                                            and p.products_id = '".(int)$_SESSION['tracking']['products_history'][$random_last_viewed]."'
                                            and pd.products_id = '".(int)$_SESSION['tracking']['products_history'][$random_last_viewed]."'
                                            and p2c.products_id = '".(int)$_SESSION['tracking']['products_history'][$random_last_viewed]."'

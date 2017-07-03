@@ -109,8 +109,10 @@
 
       $html_mail=$smarty->fetch('db:send_coupon.html');
       $txt_mail=$smarty->fetch('db:send_coupon.txt');
-
-      xtc_php_mail(EMAIL_BILLING_ADDRESS,EMAIL_BILLING_NAME, $mail['customers_email_address'] , $mail['customers_firstname'] . ' ' . $mail['customers_lastname'] , '', EMAIL_BILLING_REPLY_ADDRESS, EMAIL_BILLING_REPLY_ADDRESS_NAME, '', '', $subject, $html_mail , $txt_mail);
+      $subject_from_db = $smarty->fetch('db:send_coupon.subject');
+      
+      $subject_final = $subject == '' ? $subject_from_db : $subject;
+      xtc_php_mail(EMAIL_BILLING_ADDRESS,EMAIL_BILLING_NAME, $mail['customers_email_address'] , $mail['customers_firstname'] . ' ' . $mail['customers_lastname'] , '', EMAIL_BILLING_REPLY_ADDRESS, EMAIL_BILLING_REPLY_ADDRESS_NAME, '', '', $subject_final,  $html_mail , $txt_mail);
     }
 
     xtc_redirect(xtc_href_link(FILENAME_COUPON_ADMIN, 'mail_sent_to=' . urlencode($mail_sent_to)));
@@ -374,9 +376,11 @@ if (USE_WYSIWYG=='true' && $_GET['action'] == 'email') {
                 <td class="smallText"><b><?php echo TEXT_FROM; ?></b><br /><?php echo encode_htmlspecialchars(stripslashes($_POST['from'])); ?></td>
               </tr>
                 <div class="col-xs-12"><br></div>
+              <?php if(isset($_POST['subject']) && !empty($_POST['subject'])){?>
               <tr>
                 <td class="smallText"><b><?php echo TEXT_SUBJECT; ?></b><br /><?php echo encode_htmlspecialchars(stripslashes($_POST['subject'])); ?></td>
               </tr>
+              <?php } ?>
                 <div class="col-xs-12"><br></div>
               <tr>
                 <td class="smallText"><b><?php echo TEXT_MESSAGE; ?></b><br /><?php echo stripslashes($_POST['message']); ?></td>

@@ -61,7 +61,9 @@ if(isset($_GET['wID'])){
 	
     $smarty->assign('PRODUCTS', $order_products);
     $html_mail = $smarty->fetch('db:'.$wInfo->wholesaler_email_template.".html");
-	
+    $subject = $smarty->fetch('db:'.$wInfo->wholesaler_email_template.".subject");
+    if($subject == '') $subject = EMAIL_SUBJECT_WHOLESALER;
+    
     if (SEND_EMAILS == true && $sendorder == true) {
       xtc_php_mail( EMAIL_SUPPORT_ADDRESS,                                //  $from_email_address,        
                     EMAIL_SUPPORT_NAME,                                   //  $from_email_name,           
@@ -72,7 +74,7 @@ if(isset($_GET['wID'])){
                     EMAIL_SUPPORT_REPLY_ADDRESS_NAME,                //  $reply_address_name,        
                     '',                                                   //  $path_to_attachement,       
                     '',                                                   //  $name_of_attachment, 
-                    EMAIL_SUBJECT_WHOLESALER,                        //  $email_subject,             
+                    $subject,                        //  $email_subject,             
                     $html_mail,                                           //  $message_body_html,         
                     '' );                                                 //  $message_body_plain
      

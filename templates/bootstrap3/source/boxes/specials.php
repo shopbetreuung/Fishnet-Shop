@@ -45,6 +45,7 @@ if ($random_product = xtc_random_select("select
                                            ".TABLE_SPECIALS." s where p.products_status = '1'
                                            and p.products_id = s.products_id
                                            and pd.products_id = s.products_id
+                                           and p.waste_paper_bin = '0'
                                            and pd.language_id = '".$_SESSION['languages_id']."'
                                            and s.status = '1'
                                            ".$group_check."

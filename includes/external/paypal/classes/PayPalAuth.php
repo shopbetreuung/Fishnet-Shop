@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: PayPalAuth.php 10209 2016-08-06 14:29:35Z GTB $
+   $Id: PayPalAuth.php 10476 2016-12-02 10:16:18Z GTB $
 
    modified eCommerce Shopsoftware
    http://www.modified-shop.org
@@ -59,6 +59,8 @@ class PayPalAuth {
     
     if (strpos($this->code, 'paypalplus') !== false) {
       $apiContext->addRequestHeader('PayPal-Partner-Attribution-Id', 'ModifiedeCommerce_Cart_REST_Plus');
+    } elseif (strpos($this->code, 'paypalinstallment') !== false) {
+      $apiContext->addRequestHeader('PayPal-Partner-Attribution-Id', 'ModifiedeCommerce_Cart_Inst');
     } else {
       $apiContext->addRequestHeader('PayPal-Partner-Attribution-Id', 'ModifiedeCommerce_Cart_REST_EC');
     }

@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: PayPalCommon.php 10470 2016-11-30 11:46:51Z GTB $
+   $Id: PayPalCommon.php 10733 2017-05-12 09:33:15Z GTB $
 
    modified eCommerce Shopsoftware
    http://www.modified-shop.org
@@ -176,7 +176,7 @@ class PayPalCommon extends PayPalAuth {
       if ((string)$amount_total != (string)$total) {
         if ($this->details->getShippingDiscount() < 0) {
           $this->details->setShippingDiscount($this->details->getShippingDiscount() + ($amount_total - $total));
-        } elseif ($this->details->setHandlingFee() > 0) {
+        } elseif ($this->details->getHandlingFee() > 0) {
           $this->details->setHandlingFee($this->details->getHandlingFee() + ($amount_total - $total));
         }
       }

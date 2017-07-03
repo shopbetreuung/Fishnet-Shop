@@ -374,7 +374,6 @@ class data_cell_text extends data_cell{
 		$pdf->Cell( $this->width, $this->height,
                 $this->_content(), $this->_border, 0,
                 $this->position );
-                
     if( $this->parameter_arr['pdfdebug'] == '1' ) {
       $this->_debuginfo( $pdf, $offset_x, $offset_y );
     }
@@ -966,11 +965,11 @@ class data_cell_poslist extends data_cell_text {
   function data_cell_poslist( $fieldname, &$products_data, &$parameter_arr) {
     $this->data_cell_text( $fieldname, $products_data, $parameter_arr );
 
-    $this->position2      = $this->parameter_arr[$fieldname.'_position2']    == '' ? DATA_CELL_POSITION : $this->parameter_arr[$fieldname.'_position2'] ;
-    $this->font_color2    = $this->parameter_arr[$fieldname.'_font_color2']  == '' ? DATA_CELL_FONT_COLOR : $this->parameter_arr[$fieldname.'_font_color2'] ;
-    $this->font_type2     = $this->parameter_arr[$fieldname.'_font_type2']   == '' ? DATA_CELL_FONT_TYPE  : $this->parameter_arr[$fieldname.'_font_type2'] ;
-    $this->font_style2    = $this->parameter_arr[$fieldname.'_font_style2']  == '' ? DATA_CELL_FONT_STYLE : $this->parameter_arr[$fieldname.'_font_style2'] ;
-    $this->font_size2     = $this->parameter_arr[$fieldname.'_font_size2']   == '' ? DATA_CELL_FONT_SIZE  : $this->parameter_arr[$fieldname.'_font_size2'] ;
+    $this->position2      = $this->parameter_arr[$fieldname.'_position']    == '' ? DATA_CELL_POSITION : $this->parameter_arr[$fieldname.'_position'] ;
+    $this->font_color2    = $this->parameter_arr[$fieldname.'_font_color']  == '' ? DATA_CELL_FONT_COLOR : $this->parameter_arr[$fieldname.'_font_color'] ;
+    $this->font_type2     = $this->parameter_arr[$fieldname.'_font_type']   == '' ? DATA_CELL_FONT_TYPE  : $this->parameter_arr[$fieldname.'_font_type'] ;
+    $this->font_style2    = $this->parameter_arr[$fieldname.'_font_style']  == '' ? DATA_CELL_FONT_STYLE : $this->parameter_arr[$fieldname.'_font_style'] ;
+    $this->font_size2     = $this->parameter_arr[$fieldname.'_font_size']   == '' ? DATA_CELL_FONT_SIZE  : $this->parameter_arr[$fieldname.'_font_size'] ;
 
 //echo "<pre>"; print_r($this->parameter_arr); echo "</pre>";
     $i=1;
@@ -1078,7 +1077,6 @@ return 1;
       $x+=$width;
     }
     $y+=$line_h;
-    
     $content_arr_arr = $this->_content();
     
     $this->finish=true; // default
@@ -1108,7 +1106,6 @@ return 1;
             
       for( $i=0; $i<$this->cols; $i++ ) {
         $align = $this->parameter_arr[$this->fieldname.'_align_'.($i+1)];
-
         $pdf->SetXY( $x ,$y );
         $width = $this->parameter_arr[$this->fieldname.'_width_'.($i+1)];
         

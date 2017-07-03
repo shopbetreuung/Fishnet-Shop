@@ -124,6 +124,7 @@ define('BOX_SHIPPING', 'Versandart');
 define('BOX_ORDER_TOTAL', 'Bestellzusammenfassung');
 define('BOX_CATEGORIES', 'Kategorien / Artikel');
 define('BOX_PRODUCTS_CONTENT', 'Artikel Content');
+define('BOX_WASTE_PAPER_BIN', 'Papierkorb');
 define('BOX_PRODUCTS_ATTRIBUTES', 'Attribute anlegen');
 define('BOX_MANUFACTURERS', 'Hersteller');
 define('BOX_WHOLESALERS', 'Gro&szlig;h&auml;ndler');

@@ -54,6 +54,7 @@ if (isset ($_GET['action']) && ($_GET['action'] == 'process')) {
 	// create mails
 	$html_mail = $smarty->fetch('db:newsletter_mail.html');
 	$txt_mail = $smarty->fetch('db:newsletter_mail.txt');
+        $subject = $smarty->fetch('db:newsletter_mail.subject');
 
 	// Check if email exists 
   //BOF - web28 - 2010-02-09: NEWSLETTER ERROR HANDLING
@@ -92,7 +93,7 @@ if (isset ($_GET['action']) && ($_GET['action'] == 'process')) {
 			$success_message = TEXT_EMAIL_INPUT;
 
 			if (SEND_EMAILS == true) {
-				xtc_php_mail(EMAIL_SUPPORT_ADDRESS, EMAIL_SUPPORT_NAME, xtc_db_input($_POST['email']), '', '', EMAIL_SUPPORT_REPLY_ADDRESS, EMAIL_SUPPORT_REPLY_ADDRESS_NAME, '', '', TEXT_EMAIL_SUBJECT, $html_mail, $txt_mail);
+				xtc_php_mail(EMAIL_SUPPORT_ADDRESS, EMAIL_SUPPORT_NAME, xtc_db_input($_POST['email']), '', '', EMAIL_SUPPORT_REPLY_ADDRESS, EMAIL_SUPPORT_REPLY_ADDRESS_NAME, '', '', $subject, $html_mail, $txt_mail);
 			}
 
 		} else {
@@ -105,7 +106,7 @@ if (isset ($_GET['action']) && ($_GET['action'] == 'process')) {
 				$info_message = TEXT_EMAIL_EXIST_NO_NEWSLETTER;
 
 				if (SEND_EMAILS == true) {
-					xtc_php_mail(EMAIL_SUPPORT_ADDRESS, EMAIL_SUPPORT_NAME, xtc_db_input($_POST['email']), '', '', EMAIL_SUPPORT_REPLY_ADDRESS, EMAIL_SUPPORT_REPLY_ADDRESS_NAME, '', '', TEXT_EMAIL_SUBJECT, $html_mail, $txt_mail);
+					xtc_php_mail(EMAIL_SUPPORT_ADDRESS, EMAIL_SUPPORT_NAME, xtc_db_input($_POST['email']), '', '', EMAIL_SUPPORT_REPLY_ADDRESS, EMAIL_SUPPORT_REPLY_ADDRESS_NAME, '', '', $subject, $html_mail, $txt_mail);
 				}
 
 			} else {

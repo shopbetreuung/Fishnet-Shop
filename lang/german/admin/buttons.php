@@ -30,6 +30,7 @@ define('BUTTON_MOVE', 'Verschieben');
 define('BUTTON_SAVE', 'Speichern');
 define('BUTTON_STATUS_ON', 'Status aktiv');
 define('BUTTON_STATUS_OFF', 'Status inaktiv');
+define('BUTTON_WASTE_BIN', 'Papierkorb');
 define('BUTTON_EDIT_ATTRIBUTES', 'Attribute editieren');
 define('BUTTON_INSERT', 'Einf&uuml;gen');
 define('BUTTON_UPDATE', 'Aktualisieren');
@@ -82,4 +83,6 @@ define('BUTTON_DELETE_TEMP_CACHE', 'Templatecache leeren');
 // BOF - web28 - 2011-07-13 - New Button
 define('BUTTON_VIEW_PRODUCT', 'Artikel ansehen');
 //EOF - web28 - 2011-07-13 - New Button
+
+define('BUTTON_DELETE_GUESTS', 'L&ouml;sche G&auml;ste');
 ?>

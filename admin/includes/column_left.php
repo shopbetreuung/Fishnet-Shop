@@ -81,6 +81,13 @@
                                             "link"      => xtc_href_link(FILENAME_PRODUCTS_CONTENT, '', 'NONSSL'),
                                             "access"    => "products_content",
                                             "check"     => true);
+    
+        $menu_items['products'][] = array(		"name" 		=> BOX_WASTE_PAPER_BIN,
+											"is_main"	=> true,
+											"link" 		=> xtc_href_link(FILENAME_WASTE_PAPER_BIN, '', 'NONSSL'),
+											"access"	=> "waste_paper_bin",
+											"check"		=> true);                                    
+    
 	
 	$menu_items['products'][] = array(		"name" 		=> BOX_ATTRIBUTES,
 											"is_main"	=> true,

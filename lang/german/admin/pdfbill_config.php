@@ -7,6 +7,7 @@ define( PDFBILL_PROFILE_LANG, 'Profil für Sprache: ');
 $help_var_orderdata = kl('
   *date_order* = Bestelldatum      <br />
   *date_invoice* = Rechnungsdatum  <br />
+  *orders_id_sys* = Rechnungsnummer <br />
   *orders_id* = Bestell ID         <br />
   *customers_id* = Kunden ID       <br />
   *ust_id* = Kunden UST ID       <br />
@@ -202,7 +203,9 @@ function texts_html( $texts ) {
              'typeofbill' => array( 
                'question'                                 => 'Profil für:',
                'text_1'                                   => 'Rechnung',
-               'text_2'                                   => 'Lieferschein' ),
+               'text_2'                                   => 'Lieferschein',
+               'text_3'                                   => 'Mahnung',
+               'text_4'                                   => 'Zweite Mahnung'),
              // Frage ob es ein Lieferschein oder Rechnungsprofil sein soll
              'language' => array( 
                'question'                                 => 'Sprache' ),

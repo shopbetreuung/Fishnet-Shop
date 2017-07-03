@@ -37,7 +37,6 @@
   
 $path = DIR_FS_CATALOG.'templates/'.CURRENT_TEMPLATE.'/mail';
 $all_email_html_templates = glob($path.'/*/*.*');
-
 #Check for email template files
 $email_temlates_query=xtc_db_query("SELECT em_id ,em_name FROM ".TABLE_EMAILS_MANAGER."");
 $names_array = array() ;
@@ -78,6 +77,7 @@ foreach($all_email_html_templates as $email_template_path){
 
     $content_title=xtc_db_prepare_input($_POST['cont_title']);
     $content_type=xtc_db_prepare_input($_POST['cont_type']);
+    $content_subject = xtc_db_prepare_input($_POST['cont_subject']);
     $content_html=xtc_db_prepare_input($_POST['cont']);
     $content_text=xtc_db_prepare_input($_POST['cont_txt']);
     $coID=xtc_db_prepare_input($_POST['coID']);
@@ -100,6 +100,7 @@ foreach($all_email_html_templates as $email_template_path){
                             'em_name' => $content_title,
                             'em_language' => $content_language,
                             'em_body' => $content_html,
+                            'em_subject' => $content_subject,
                             'em_body_txt' => $content_text,
                             'em_type' => $content_type);
       if ($id=='update') {
@@ -224,6 +225,12 @@ require (DIR_WS_INCLUDES.'head.php');
                               ?>
                               <br /><br />
                               <?php
+                                if($content['em_name'] == 'change_order_mail' || $content['em_name'] == 'order_mail'){
+                                    echo '<div class="col-sm-12" style="margin-bottom: 15px;">'.TEXT_USEABLE_VARIABLES_1.'</div>';
+                                }
+                                if($content['em_name'] == 'invoice_mail'){
+                                    echo '<div class="col-sm-12" style="margin-bottom: 15px;">'.TEXT_USEABLE_VARIABLES_2.'</div>';
+                                }
                                 if ($action != 'new') {
                                   echo xtc_draw_form('edit_content',FILENAME_EMAIL_MANAGER,'action=edit&id=update&coID='.$g_coID,'post','enctype="multipart/form-data"').xtc_draw_hidden_field('coID',$g_coID);
                                 } else {
@@ -236,11 +243,15 @@ require (DIR_WS_INCLUDES.'head.php');
                                   </div>
                                   <div class="col-xs-12">
                                     <div class="col-xs-12 col-sm-2"><?php echo TEXT_TITLE; ?></div>
-                                    <div class="col-xs-12 col-sm-10"><?php echo xtc_draw_input_field('cont_title',isset($content['em_name'])?$content['em_name']:'','size="60"'); ?></div>
+                                    <div class="col-xs-12 col-sm-10"><?php echo xtc_draw_input_field('cont_title',isset($content['em_name'])?$content['em_name']:'','size="60" readonly'); ?></div>
                                   </div>
                                   <div class="col-xs-12">
                                     <div class="col-xs-12 col-sm-2"><?php echo TEXT_TYPE; ?></div>
                                     <div class="col-xs-12 col-sm-10"><?php echo xtc_draw_input_field('cont_type',isset($content['em_type'])?$content['em_type']:'','size="60"'); ?></div>
+                                <?php if ($content['em_name'] != 'sepa_info' && $content['em_name'] != 'signatur'){?>
+                                    <div class="col-xs-12 col-sm-2"><?php echo TEXT_SUBJECT; ?></div>
+                                    <div class="col-xs-12 col-sm-10"><?php echo xtc_draw_input_field('cont_subject',isset($content['em_subject']) && !empty($content['em_subject']) ? $content['em_subject'] : '','size="60"'); ?></div>
+                                <?php } ?>
                                     <div class="col-xs-12 col-sm-2"  ><?php echo TEXT_CONTENT; ?></div>
                                     <div class="col-xs-12 col-sm-10">
                                       <?php

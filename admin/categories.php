@@ -87,6 +87,20 @@ if (isset ($_POST['multi_status_off'])) {
 }
 // --- MULTI STATUS ENDS ---
 
+
+//---WASTE PAPER BIN --- //
+
+if (isset ($_POST['waste_bin'])) {
+    if(is_array($_POST['multi_products'])){
+        foreach ($_POST['multi_products'] as $product_id){
+            $catfunc->put_in_waste_bin($product_id);
+        }
+    }
+}
+
+//---WASTE PAPER BIN END ---//
+
+
 //regular actions
 if ($_GET['action']) {
 	switch ($_GET['action']) {
@@ -172,7 +186,7 @@ if ($_GET['action']) {
 				}
 			}
 			// --- MULTI DELETE ENDS ---
-
+                        
 			// --- MULTI MOVE ---
 			if (isset ($_POST['multi_move_confirm'])) {
 				//move multi_categories

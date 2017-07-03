@@ -669,7 +669,6 @@ class pdfbill_closed extends PDF_Clipping {
         $this->Cell( 0, 20, //s2h($font_size), 
                      $this->parameter_arr['terms_formtext'], DEFAULT_BORDER, 2, 
                      $position );
-
         // --- content ---------
 //        $font_color    = $this->parameter_arr['product_terms_font_color']       == '' ? DATA_CELL_FONT_COLOR     : $this->parameter_arr['product_terms_font_color']          ;         
 //        $font_type     = $this->parameter_arr['product_terms_font_type']   == '' ? DATA_CELL_FONT_TYPE      : $this->parameter_arr['product_terms_font_type']      ;

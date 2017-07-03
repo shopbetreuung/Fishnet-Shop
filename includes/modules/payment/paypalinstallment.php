@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: paypalinstallment.php 10433 2016-11-23 15:50:49Z GTB $
+   $Id: paypalinstallment.php 10678 2017-04-11 14:14:58Z GTB $
 
    modified eCommerce Shopsoftware
    http://www.modified-shop.org
@@ -133,6 +133,12 @@ class paypalinstallment extends PayPalPayment {
       'PAYPAL_INST_ORDER_STATUS_ACCEPTED_NAME' => 'PAYPAL_ORDER_STATUS_ACCEPTED_ID'
     );
 	  $this->status_install($stati);
+	  
+	  require_once(DIR_FS_CATALOG.DIR_WS_MODULES.'order_total/ot_paypalinstallment_fee.php');
+	  $pp_fee = new ot_paypalinstallment_fee();
+	  if ($pp_fee->check() != 1) {
+	    $pp_fee->install();
+	  }
 	}
 
 

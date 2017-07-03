@@ -103,6 +103,15 @@ function pdfbill_delnote_exists( $oid ) {
   return (file_exists($filename));
 }
 
+function pdfbill_reminder_exists( $oid ) {
+  $filename=PDFBILL_FOLDER.'pdf_reminder_'.($oid).'.pdf'; 
+  return (file_exists($filename));
+}
+
+function pdfbill_2ndreminder_exists( $oid ) {
+  $filename=PDFBILL_FOLDER.'pdf_2ndreminder_'.($oid).'.pdf'; 
+  return (file_exists($filename));
+}
 
 function get_pdf_invoice_filename( $ordes_id ) {
   return PDFBILL_FOLDER.PDFBILL_PREFIX.($ordes_id.'.pdf');
@@ -110,6 +119,14 @@ function get_pdf_invoice_filename( $ordes_id ) {
 
 function get_pdf_delnote_filename( $ordes_id ) {
   return PDFBILL_FOLDER.'pdf_delnote_'.($ordes_id.'.pdf');
+}
+
+function get_pdf_reminder_filename( $ordes_id ) {
+  return PDFBILL_FOLDER.'pdf_reminder_'.($ordes_id.'.pdf');
+}
+
+function get_pdf_2ndreminder_filename( $ordes_id ) {
+  return PDFBILL_FOLDER.'pdf_2ndreminder_'.($ordes_id.'.pdf');
 }
 
 function get_pdf_invoice_download_filename( $ordes_id ) {

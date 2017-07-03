@@ -37,7 +37,7 @@ class cell_cluster_list extends cell_cluster {
       new data_cell_poslist(       'poslist',      $products_data, $this->parameter_arr)
     );
     
-    $this->dataobjects[0]->indexnumber = 1;           
+    $this->dataobjects[0]->indexnumber = 0;           
     $this->dataobjects[1]->parent_indexnumber = 1;
     
     $this->verbinde();

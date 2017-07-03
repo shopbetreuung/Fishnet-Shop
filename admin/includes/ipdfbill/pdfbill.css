@@ -149,6 +149,7 @@ select#FontSize {
 	visibility: visible;
 	top: -250px;
 	left: 50px; /*position where enlarged image should offset horizontally */
+        z-index: 10;
 }
 .OuterDiv {
 	padding:4px;

@@ -241,6 +241,9 @@ if ($_SESSION['cart']->show_total() > 0 ) {
   if(isset($_SESSION['paypal_warten'])) {
     $smarty->assign('info_message', $_SESSION['paypal_warten']); //Tomcraft - 2009-12-08 - fixed duplicate error messages in shopping cart
   } else {
+    if (isset($_GET['success_message']) && xtc_not_null($_GET['success_message'])) {
+      $smarty->assign('success_message', str_replace('+', ' ', encode_htmlspecialchars($_GET['success_message'])));
+    }
     if (isset($_GET['info_message']) && xtc_not_null($_GET['info_message'])) {
       $smarty->assign('info_message', str_replace('+', ' ', encode_htmlspecialchars($_GET['info_message'])));
     }

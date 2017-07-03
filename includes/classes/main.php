@@ -250,7 +250,7 @@ class main {
     if (!is_array($product))
       $product = $this->data;
     if (isset($product['products_vpe_status']) && $product['products_vpe_status'] == 1 && $product['products_vpe_value'] != 0.0 && $price > 0) {
-      return $xtPrice->xtcFormat($price * (1 / $product['products_vpe_value']), false).TXT_PER.xtc_get_vpe_name($product['products_vpe']);
+	  return $xtPrice->xtcFormat($price * (1 / $product['products_vpe_value']), true).TXT_PER.xtc_get_vpe_name($product['products_vpe']);
     }
     return;
   }

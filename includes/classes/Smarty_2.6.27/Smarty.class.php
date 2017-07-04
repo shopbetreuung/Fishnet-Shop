@@ -1988,14 +1988,11 @@ function db_get_template ($tpl_name, &$tpl_source, &$smarty_obj) {
         
 	if (strtolower($template[1]) == 'html') {
 		$tpl_source = $db_template["em_body"];
-	} else {
+	} elseif (strtolower($template[1]) == 'txt'){
 		$tpl_source = $db_template["em_body_txt"];
-	}
-         if (strtolower($template[1]) == 'subject') {
-            $tpl_source = $db_template['em_subject'];
-         }else{
-             $tpl_source = $db_template['em_subject'];
-         }
+	}else{
+        $tpl_source = $db_template['em_subject'];
+    }
 
 	return true;
 

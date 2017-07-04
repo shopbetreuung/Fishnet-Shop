@@ -424,6 +424,7 @@ define('SMTP_AUTH_TITLE' , 'SMTP AUTH');
 define('SMTP_AUTH_DESC' , 'Erfordert der SMTP Server eine sichere Authentifizierung?');
 define('SMTP_PORT_TITLE' , 'SMTP Port');
 define('SMTP_PORT_DESC' , 'Geben sie den SMTP Port Ihres SMTP Servers ein (default: 25)?');
+define('SMTP_SECURE_TITLE', 'SMTP Verschl&uuml;sselungsverfahren');
 define('SMTP_SECURE_DESC', 'W&auml;hlen Sie das Verfahren \'ssl\' oder \'tls\' zur E-Mail-Verschl&uuml;sselung, oder w&auml;hlen Sie \'---\' f&uuml;r keine Verschl&uuml;sselung.');
 
 //DokuMan - 2011-09-20 - E-Mail SQL errors

@@ -19,10 +19,10 @@
   define('MODULE_PAYMENT_EUTRANSFER_TEXT_DESCRIPTION', 
           '<br />The cheapest and most simple payment method within the EU is the EU-Standard Bank Transfer using IBAN and BIC.' .
           '<br />Please use the following details to transfer your total order value:<br />' .
-          '<br />Bank Name: ' . MODULE_PAYMENT_EUTRANSFER_BANKNAM .
-          '<br />Account Name: ' . MODULE_PAYMENT_EUTRANSFER_BRANCH .
-          '<br />IBAN:: ' . MODULE_PAYMENT_EUTRANSFER_ACCIBAN .
-          '<br />BIC/SWIFT: ' . MODULE_PAYMENT_EUTRANSFER_BANKBIC .
+          '<br />Bank Name: ' . (defined('MODULE_PAYMENT_EUTRANSFER_BANKNAM') ? MODULE_PAYMENT_EUTRANSFER_BANKNAM : '') .
+          '<br />Account Name: ' . (defined('MODULE_PAYMENT_EUTRANSFER_BRANCH') ? MODULE_PAYMENT_EUTRANSFER_BRANCH : '').
+          '<br />IBAN: ' . (defined('MODULE_PAYMENT_EUTRANSFER_ACCIBAN') ? MODULE_PAYMENT_EUTRANSFER_ACCIBAN : '').
+          '<br />BIC/SWIFT: ' . (defined('MODULE_PAYMENT_EUTRANSFER_BANKBIC') ? MODULE_PAYMENT_EUTRANSFER_BANKBIC : '') .
 //        '<br />Sort Code: ' . MODULE_PAYMENT_EUTRANSFER_SORTCODE .
           '<br /><br />Your order will not be shipped until we receive your payment in the above account.<br />');
 

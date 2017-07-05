@@ -161,3 +161,6 @@ input[type=checkbox].noStyling {
   width: 12px;
   height: 12px;
 }
+.buttons-space{
+    margin: 20px 0 20px 0;
+}

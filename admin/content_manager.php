@@ -572,7 +572,7 @@ require (DIR_WS_INCLUDES.'head.php');
                                       ?>
                                     </div>
                                   </div>
-                                  <div class="col-xs-12">
+                                  <div class="col-xs-12 buttons-space">
                                     <div class="col-xs-12" colspan="2" align="right" class="main"><?php echo '<input type="submit" class="btn btn-default" onclick="this.blur();" value="' . BUTTON_SAVE . '"/>'; ?><a class="btn btn-default" onclick="this.blur();" href="<?php echo xtc_href_link(FILENAME_CONTENT_MANAGER); ?>"><?php echo BUTTON_BACK; ?></a></div>
                                   </div>
                               </form>

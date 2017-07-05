@@ -264,7 +264,7 @@ require (DIR_WS_INCLUDES.'head.php');
                                         echo xtc_draw_textarea_field('cont_txt','','100%','10',isset($content['em_body_txt'])?$content['em_body_txt']:'');
                                       ?>
                                     </div>
-                                  <div class="col-xs-12">
+                                  <div class="col-xs-12 buttons-space">
                                     <?php echo '<input type="submit" class="btn btn-default" onclick="this.blur();" value="' . BUTTON_SAVE . '"/>'; ?><a class="btn btn-default" onclick="this.blur();" href="<?php echo xtc_href_link(FILENAME_EMAIL_MANAGER); ?>"><?php echo BUTTON_BACK; ?></a>
                                   </div>
                               </form>

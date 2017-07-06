@@ -1347,7 +1347,7 @@ DROP TABLE IF EXISTS personal_offers_by_customers_status_3;
 DROP TABLE IF EXISTS personal_offers_by_customers_status_4;
 
 #database Version
-INSERT INTO database_version(version) VALUES ('SH_1.9.2');
+INSERT INTO database_version(version) VALUES ('SH_1.9.3');
 
 INSERT INTO cm_file_flags (file_flag, file_flag_name) VALUES ('0', 'information');
 INSERT INTO cm_file_flags (file_flag, file_flag_name) VALUES ('1', 'content');

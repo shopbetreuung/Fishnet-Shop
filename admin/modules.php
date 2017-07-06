@@ -274,6 +274,13 @@ require (DIR_WS_INCLUDES.'head.php');
                     $heading = array();
                     $contents = array();
                     switch ($action) {
+                      case 'removepaypal':
+                        $heading[] = array('text' => '<b>' . $mInfo->title . '</b>');
+                        $contents = array ('form' => xtc_draw_form('modules', FILENAME_MODULES, 'set=' . $set . '&module=' . $_GET['module'] . '&action=remove'));
+                        $contents[] = array ('text' => '<br />'.TEXT_INFO_DELETE_PAYPAL.'<br /><br />'.$mInfo->description);
+                        $contents[] = array ('text' => '<br />'.xtc_draw_checkbox_field('paypaldelete').' '.BUTTON_MODULE_REMOVE);
+                        $contents[] = array ('align' => 'center', 'text' => '<br /><input type="submit" class="btn btn-default" onclick="this.blur();" value="'. BUTTON_START .'"><a class="btn btn-default" onclick="this.blur();" href="'.xtc_href_link(FILENAME_MODULES, 'set=' . $set . '&module=' . $_GET['module']).'">' . BUTTON_CANCEL . '</a>');
+                        break;
                       case 'edit':
                         $keys = '';
                         reset($mInfo->keys);

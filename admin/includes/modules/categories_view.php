@@ -152,9 +152,23 @@
               }
               ?>
         </div>
-  <div class='col-xs-12'> <br> </div>
-            <!-- search and quickjump -->
+  	<div class='col-xs-12'> <br> </div>
+        <!-- search and quickjump -->
         <div class='col-xs-12'>
+		<?php
+		//multi-actions form STARTS
+		 if ((isset($_POST['multi_categories']) && xtc_not_null($_POST['multi_categories'])) || (isset($_POST['multi_products']) && xtc_not_null($_POST['multi_products']))) {
+		   $action_multi = "action=multi_action_confirm&" . xtc_get_all_get_params(array('cPath', 'action')) . (isset($_GET['cPath']) ? 'cPath=' . $cPath : '');
+		 } else {
+		   $action_multi = "action=multi_action&" . xtc_get_all_get_params(array('cPath', 'action')) . (isset($_GET['cPath']) ? 'cPath=' . $cPath : '');
+		 }
+		 echo xtc_draw_form('multi_action_form', FILENAME_CATEGORIES, $action_multi, 'post', 'onsubmit="javascript:return CheckMultiForm()"');
+		 //add current category id in $_POST
+		 if (isset($_GET['cPath'])) {
+		   echo '<input type="hidden" id="cPath" name="cPath" value="' . $cPath . '">';
+		 }
+			
+		?>
         <div id='responsive_table' class='table-responsive pull-left col-sm-12'>
             <!-- categories and products table -->
             <table class='table table-bordered'>
@@ -204,17 +218,6 @@
                </td>
              </tr>
              <?php
-             //multi-actions form STARTS
-             if ((isset($_POST['multi_categories']) && xtc_not_null($_POST['multi_categories'])) || (isset($_POST['multi_products']) && xtc_not_null($_POST['multi_products']))) {
-               $action_multi = "action=multi_action_confirm&" . xtc_get_all_get_params(array('cPath', 'action')) . (isset($_GET['cPath']) ? 'cPath=' . $cPath : '');
-             } else {
-               $action_multi = "action=multi_action&" . xtc_get_all_get_params(array('cPath', 'action')) . (isset($_GET['cPath']) ? 'cPath=' . $cPath : '');
-             }
-             echo xtc_draw_form('multi_action_form', FILENAME_CATEGORIES, $action_multi, 'post', 'onsubmit="javascript:return CheckMultiForm()"');
-             //add current category id in $_POST
-             if (isset($_GET['cPath'])) {
-               echo '<input type="hidden" id="cPath" name="cPath" value="' . $cPath . '">';
-             }
 
              // ----------------------------------------------------------------------------------------------------- //
              // WHILE loop to display categories STARTS
@@ -993,6 +996,7 @@
             <?php
           }
           ?>
+</form>
       </div>
 
           <div class="smallText" align="center" style="padding:5px;">

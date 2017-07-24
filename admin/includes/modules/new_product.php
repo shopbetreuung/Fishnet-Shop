@@ -102,18 +102,20 @@
 
   <?php
   $form_action = isset($_GET['pID']) ? 'update_product' : 'insert_product';
-  $page = '';
-  $page1 = '';
   if ($product['waste_paper_bin'] == '0'){
       $page = FILENAME_CATEGORIES;
-      $page1 = 'cPath=' . $_GET['cPath'] . $catfunc->page_parameter . '&pID=' . $_GET['pID'] . '&action='.$form_action;
+	  $cancel_page = 'cPath=' . $_GET['cPath'] . $catfunc->page_parameter . '&pID=' . $_GET['pID'];
+      $page1 = $cancel_page . '&action='.$form_action;
   }else if($product['waste_paper_bin'] == '1'){
       $page = FILENAME_WASTE_PAPER_BIN;
+	  $cancel_page = '';
       $page1 = '';
   }else{
       $page = FILENAME_CATEGORIES;
-      $page1 = 'cPath=' . $_GET['cPath'] . $catfunc->page_parameter . '&pID=' . $_GET['pID'] . '&action='.$form_action;
+	  $cancel_page = 'cPath=' . $_GET['cPath'] . $catfunc->page_parameter . '&pID=' . $_GET['pID'];
+      $page1 = $cancel_page . '&action='.$form_action;
   }
+
   echo xtc_draw_form('new_product' , $page, $page1, 'post', 'enctype="multipart/form-data"');
   ?>
 <div class='row'>
@@ -259,7 +261,7 @@
         if (isset($_GET['pID']) && $_GET['pID'] > 0) {
           echo '&nbsp;&nbsp;<a class="btn btn-default" href="' . xtc_href_link('../product_info.php', 'products_id=' . $_GET['pID']) . '" target="_blank">' . BUTTON_VIEW_PRODUCT . '</a>';
         }
-        echo '&nbsp;&nbsp;<a class="btn btn-default" href="' . xtc_href_link($page, $page1).'">' . BUTTON_CANCEL . '</a>';
+        echo '&nbsp;&nbsp;<a class="btn btn-default" href="' . xtc_href_link($page, $cancel_page).'">' . BUTTON_CANCEL . '</a>';
         ?>
       </div>
       <!-- EOF - Tomcraft - 2009-11-02 - TOP SAVE AND CANCEL BUTTON //-->
@@ -396,13 +398,11 @@
           if (isset($_GET['pID']) && $_GET['pID'] > 0) {
             echo '&nbsp;&nbsp;<a class="btn btn-default" href="' . xtc_href_link('../product_info.php', 'products_id=' . $_GET['pID']) . '" target="_blank">' . BUTTON_VIEW_PRODUCT . '</a>';
           }
-          echo '&nbsp;&nbsp;<a class="btn btn-default" href="' . xtc_href_link($page, $page1). '">' . BUTTON_CANCEL . '</a>';
+          echo '&nbsp;&nbsp;<a class="btn btn-default" href="' . xtc_href_link($page, $cancel_page). '">' . BUTTON_CANCEL . '</a>';
           ?>
         </div>
         <!-- EOF - Tomcraft - 2009-11-02 - Save //-->
       </div>
-    </td>
-  </tr>
-</table>
+	</div>
 </div>
 </form>

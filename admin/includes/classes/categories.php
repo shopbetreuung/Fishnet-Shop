@@ -951,6 +951,7 @@ class categories {
         xtc_db_perform(TABLE_PRODUCTS_ATTRIBUTES, $sql_data_array);
       }
     }
+	return $dup_products_id;
   } //duplicate_product ends
 
   // ----------------------------------------------------------------------------------------------------- //
@@ -977,6 +978,9 @@ class categories {
         $this->set_product_status($src_products_id, $products_status);
         $this->set_product_startpage($src_products_id, 1);
       }
+		
+	  return $src_products_id;
+		
     } elseif ($dest_categories_id != 0) {
       $messageStack->add_session(ERROR_CANNOT_LINK_TO_SAME_CATEGORY, 'error');
     }

@@ -1313,7 +1313,7 @@ function check_form() {
         ?>
         <div class='col-xs-12'>
             <p class="h2">
-                <?php echo HEADING_TITLE; ?>  <small><?php echo BOX_HEADING_CUSTOMERS; ?></small>
+                <?php echo HEADING_TITLE; ?>  <!--<small><?php //echo BOX_HEADING_CUSTOMERS; ?></small>-->
             </p>
         </div>
         <div class="col-xs-12">

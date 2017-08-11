@@ -811,7 +811,7 @@ function check_form() {
     <div>
       <div valign="middle" class="pageHeading"><?php if ($customers_statuses_id_array[$customers['customers_status']]['csa_image'] != '') { echo xtc_image(DIR_WS_ICONS . $customers_statuses_id_array[$customers['customers_status']]['csa_image'], ''); } ?></div><?php// web28 - 2011-10-31 - change  $customers_statuses_array  to $customers_statuses_id_array?>
       <div class="main"></div>
-      <div class="pageHeading" align="right"><?php echo xtc_draw_separator('pixel_divans.gif', HEADING_IMAGE_WIDTH, HEADING_IMAGE_HEIGHT); ?></div>
+      <!--<div class="pageHeading" align="right"><?php //echo xtc_draw_separator('pixel_divans.gif', HEADING_IMAGE_WIDTH, HEADING_IMAGE_HEIGHT); ?></div>-->
     </div>
     <div>
       <div colspan="3" class="main"><?php echo HEADING_TITLE_STATUS  .': ' . $customers_statuses_id_array[$customers['customers_status']]['text'] ; ?></div><?php// web28 - 2011-10-31 - change  $customers_statuses_array  to $customers_statuses_id_array?>

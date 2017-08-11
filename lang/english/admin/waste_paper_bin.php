@@ -11,5 +11,5 @@ define('TABLE_HEADING_EDIT', 'Edit');
 define('TEXT_PRODUCTS', 'Products');
 define('BUTTON_OUT_OF_WASTE_BIN', 'Undo products');
 define('DELETE_PERMANENTLY', 'Delete permanently');
-
+define('TEXT_IMAGE_NONEXISTENT', 'No image');
 

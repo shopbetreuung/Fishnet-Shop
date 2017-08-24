@@ -16,7 +16,7 @@
    ---------------------------------------------------------------------------------------*/
 defined( '_VALID_XTC' ) or die( 'Direct Access to this location is not allowed.' );
 
-define('MODULE_IMAGE_PROCESS_CATEGORY_TEXT_DESCRIPTION', 'commerce:SEO Imageprocessing - Stapelverarbeitung f&uuml;r Kategoriebilder.');
+define('MODULE_IMAGE_PROCESS_CATEGORY_TEXT_DESCRIPTION', 'Imageprocessing - Stapelverarbeitung f&uuml;r Kategoriebilder.');
 define('MODULE_IMAGE_PROCESS_CATEGORY_TEXT_TITLE', 'Imageprocessing f&uuml;r Kategoriebilder');
 define('MODULE_IMAGE_PROCESS_CATEGORY_STATUS_DESC','Modulstatus');
 define('MODULE_IMAGE_PROCESS_CATEGORY_STATUS_TITLE','Status');

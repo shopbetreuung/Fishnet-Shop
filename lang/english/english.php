@@ -549,4 +549,14 @@ define('COOKIE_NOTE_TEXT', 'This website uses cookies to ensure you get the best
 define('COOKIE_NOTE_MORE_TEXT', 'More info');
 define('COOKIE_NOTE_DISMISS_TEXT', 'Got it!');
 
+//google_sitemap.php
+define('SITEMAP_FILE', 'Sitemap file');
+define('SITEMAP_INDEX_FILE', 'Sitemap-Index-File');
+define('SITEMAP_CREATED', ' created');
+define('SITEMAP_CATEGORY','Categories');
+define('SITEMAP_PRODUCT', 'Products');
+define('SITEMAP_AND', 'and ');
+define('SITEMAP_CONTENTPAGE', 'Content pages');
+define('SITEMAP_EXPORT', 'exported');
+
 ?>

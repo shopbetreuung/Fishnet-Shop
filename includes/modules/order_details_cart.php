@@ -34,9 +34,6 @@ $module_smarty = new Smarty;
 $module_smarty->assign('tpl_path', 'templates/'.CURRENT_TEMPLATE.'/');
 
 $payment_modules = explode(";", MODULE_PAYMENT_INSTALLED);
-if(in_array('klarna_invoice.php', $payment_modules) || in_array('klarna_partPayment.php', $payment_modules) || in_array('klarna_SpecCamp.php', $payment_modules)) {
-	include_once(DIR_WS_INCLUDES.'modules/payment/klarna/display_klarna_cart.php');
-}
 
 // include needed functions
 require_once (DIR_FS_INC.'xtc_check_stock.inc.php');

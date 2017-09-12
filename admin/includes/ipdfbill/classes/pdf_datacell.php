@@ -1433,7 +1433,7 @@ class data_cell_resumefields extends data_cell_datafields {
     foreach( $this->products_data['order_total'] as $tot_line ) {
       $text = decode_entities($tot_line['TITLE']);
       
-      $ret[] = array( 'text'    => strip_tags($text),
+      $ret[] = array( 'text'    => strip_tags(utf8_encode($text)),
                       'value'   => strip_tags($tot_line['TEXT'])    );
     }
 //echo "<pre>"; print_r($ret); echo "</pre>";

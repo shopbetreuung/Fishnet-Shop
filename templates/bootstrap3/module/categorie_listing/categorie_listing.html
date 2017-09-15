@@ -12,7 +12,7 @@
 <div class="hrproductpreview"></div>
 <div class="row">
 {foreach name=aussen item=module_data from=$module_content} 
-	<div class="col-xs-12 col-sm-6 col-md-4">
+	<div class="{$COLUMN_STYLE}">
 		<div class="thumbnail" data-col="{$smarty.foreach.aussen.iteration}">
 			<div class="equalize categories_image text-center">{if $module_data.CATEGORIES_IMAGE}<a href="{$module_data.CATEGORIES_LINK}"><img class="img-responsive" style="max-height: 140px; margin: 0 auto;" src="{$module_data.CATEGORIES_IMAGE}" alt="{$module_data.CATEGORIES_NAME}" /></a>{/if}</div>
 			<div class="caption" data-col="{$smarty.foreach.aussen.iteration}">

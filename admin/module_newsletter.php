@@ -266,7 +266,7 @@
 <div class="row">
     
     <div class='col-xs-12'>
-        <div class="col-xs-2 col-sm-1 text-right"><?php echo xtc_image(DIR_WS_ICONS.'heading_modules.gif'); ?></div>
+        <div class="col-xs-2 col-sm-1 text-right"><?php echo xtc_image(DIR_WS_ICONS.'heading_news.gif'); ?></div>
         <div class="col-xs-10 col-sm-11"><p class="h2"><?php echo HEADING_TITLE; ?></p> Tools</div>
         <div class="main col-xs-12 text-center" style="clear:both; border: 1px red solid; padding:5px; background: #FFD6D6;"><?php echo TEXT_NEWSLETTER_INFO; ?></div>
     </div>

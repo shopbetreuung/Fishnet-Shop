@@ -121,7 +121,7 @@ if ($autogenerate) {
 $autogenerate = $autogenerate || $output_to_file; 
 if ($autogenerate) { 
     $fp = $function_open($filename, 'w'); 
-    $main_content = "Sitemap-Datei '<b>" . $filename . "</b>' erstellt."; 
+    $main_content = SITEMAP_FILE . " '<b>" . $filename . "</b>'" . SITEMAP_CREATED."."; 
 } 
 $notify_url = SITEMAP_CATALOG.$sitemap_filename; 
 
@@ -238,11 +238,11 @@ if ($autogenerate) {
     $function_close($fp); 
 } 
 
-$main_content .= "<br><br>" . $c_cat_total . " <b>Kategorien</b>, " . $c_prod_total . " <b>Produkte</b> und " . $c_cm_total . " <b>Content pages</b>  exportiert."; 
+$main_content .= "<br><br>" . $c_cat_total . " <b>".SITEMAP_CATEGORY."</b>, " . $c_prod_total . " <b>".SITEMAP_PRODUCT."</b>  " . SITEMAP_AND . $c_cm_total . " <b>" . SITEMAP_CONTENTPAGE." </b> ".SITEMAP_EXPORT."."; 
 // generates sitemap-index file 
 if ($autogenerate && $i > 1) { 
     $sitemap_index_file = 'sitemap_index'.$file_extension; 
-    $main_content = $main_content . "<br><br>Sitemap-Index-Datei '<b>" . $sitemap_index_file . "</b>' erstellt."; 
+    $main_content = $main_content . "<br><br>".SITEMAP_INDEX_FILE." '<b>" . $sitemap_index_file . "</b>' ". SITEMAP_CREATED. "."; 
     $notify_url = SITEMAP_CATALOG.$sitemap_index_file; 
     $fp = $function_open('sitemap_index'.$file_extension, 'w'); 
     $function_write($fp, SITEMAPINDEX_HEADER); 
@@ -323,7 +323,7 @@ function output_entry()
             $i++; 
             $filename = 'sitemap'.$i.$file_extension; 
             $fp = $function_open($filename, 'w'); 
-            $main_content = $main_content . "<br>Sitemap-Datei '<b>" . $filename . "</b>' erstellt."; 
+            $main_content = $main_content . "<br>".SITEMAP_FILE. " '<b>" . $filename . "</b>' ".SITEMAP_CREATED. "."; 
             output(SITEMAP_HEADER); 
             $strlen = strlen(SITEMAP_HEADER); 
         } 

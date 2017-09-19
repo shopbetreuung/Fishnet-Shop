@@ -29,6 +29,12 @@ class mcp_prepay extends micropayment_method {
             parent::install();
         }
 
+        $lastStatusArray = xtc_db_query('SELECT MAX(`orders_status_id`) last_id FROM ' . TABLE_ORDERS_STATUS);
+        $t = xtc_db_fetch_array($lastStatusArray);
+        $lastStatusId = $t['last_id'] + 1;
+        xtc_db_query("INSERT INTO " . TABLE_ORDERS_STATUS . " (`orders_status_id`,`language_id`,`orders_status_name`) VALUES ('" . $lastStatusId . "',1,'Cancelled micropayment Prepay')");
+        xtc_db_query("INSERT INTO " . TABLE_ORDERS_STATUS . " (`orders_status_id`,`language_id`,`orders_status_name`) VALUES ('" . $lastStatusId . "',2,'Storniert micropayment Prepay')");
+        
         xtc_db_query("INSERT INTO " . TABLE_CONFIGURATION . " ( `configuration_key`, `configuration_value`, `configuration_group_id`, `sort_order`, `set_function`, `date_added`) VALUES ('MODULE_PAYMENT_MCP_PREPAY_STATUS', 'false', '6', '1', 'xtc_cfg_select_option(array(\'true\', \'false\'), ', NOW())");
         xtc_db_query("INSERT INTO " . TABLE_CONFIGURATION . " ( `configuration_key`, `configuration_value`, `configuration_group_id`, `sort_order`, `date_added`) VALUES ('MODULE_PAYMENT_MCP_PREPAY_MINIMUM_AMOUNT', '0', '6', '0', NOW())");
         xtc_db_query("INSERT INTO " . TABLE_CONFIGURATION . " ( `configuration_key`, `configuration_value`, `configuration_group_id`, `sort_order`, `date_added`) VALUES ('MODULE_PAYMENT_MCP_PREPAY_MAXIMUM_AMOUNT', '500', '6', '0', NOW())");
@@ -53,6 +59,8 @@ class mcp_prepay extends micropayment_method {
     function remove()
     {
         xtc_db_query("DELETE FROM " . TABLE_CONFIGURATION . " WHERE `configuration_key` LIKE 'MODULE_PAYMENT_MCP_PREPAY_%'");
+        xtc_db_query("DELETE FROM " . TABLE_ORDERS_STATUS . " WHERE orders_status_name = 'Cancelled micropayment Prepay' ");
+        xtc_db_query("DELETE FROM " . TABLE_ORDERS_STATUS . " WHERE orders_status_name = 'Storniert micropayment Prepay' ");
         parent::remove();
     }
 }

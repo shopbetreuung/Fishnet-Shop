@@ -153,6 +153,35 @@ if ($category_depth == 'nested') {
   }
 
   $max_per_row = MAX_DISPLAY_CATEGORIES_PER_ROW;
+	
+	switch ($max_per_row) {
+		  
+	  case '1':
+		  $column_css = 'col-xs-12 col-sm-12 col-md-12';
+	  break;
+		  
+	  case '2':
+		  $column_css = 'col-xs-12 col-sm-6 col-md-6';
+	  break;
+		  
+	  case '3':
+		  $column_css = 'col-xs-12 col-sm-6 col-md-4';
+	  break;
+		  
+	  case '4':
+		  $column_css = 'col-xs-12 col-sm-6 col-md-3';
+	  break;
+		  
+	  case '5':
+		  $column_css = 'col-xs-12 col-sm-6 col-md-5';
+	  break;
+	
+	  default:
+		  $column_css = 'col-xs-12 col-sm-6 col-md-4';
+	  break;
+  }
+  $default_smarty->assign('COLUMN_STYLE', $column_css);
+	
   $width = $max_per_row ? intval(100 / $max_per_row).'%' : '';
   $default_smarty->assign('TR_COLS', $max_per_row);
   $default_smarty->assign('TD_WIDTH', $width);

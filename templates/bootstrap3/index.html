@@ -111,10 +111,18 @@
 	{$smarty.const.TITLE} &copy; {$smarty.now|date_format:"%Y"} | Template &copy; 2014-{$smarty.now|date_format:"%Y"} by shophelfer.com
 </div>
 
-{if ($smarty.const.TRACKING_COUNT_ADMIN_ACTIVE=='true' and $smarty.session.customers_status.customers_status_id == '0')}  {if $smarty.const.TRACKING_PIWIK_ACTIVE == 'true'}
-    {piwik url=$smarty.const.TRACKING_PIWIK_LOCAL_PATH id=$smarty.const.TRACKING_PIWIK_ID goal=$smarty.const.TRACKING_PIWIK_GOAL}
-  {/if}
-  {if $smarty.const.TRACKING_GOOGLEANALYTICS_ACTIVE == 'true'}
+<!--Start Google Analytics-->
+{if $smarty.const.TRACKING_COUNT_ADMIN_ACTIVE=='true' and $smarty.const.TRACKING_GOOGLEANALYTICS_ACTIVE=='true' and ($smarty.session.customers_status.customers_status_id != 0 || $smarty.session.customers_status.customers_status_id == 0)}	
     {googleanalytics account=$smarty.const.TRACKING_GOOGLEANALYTICS_ID}
-  {/if}
+{elseif $smarty.const.TRACKING_COUNT_ADMIN_ACTIVE=='false' and $smarty.const.TRACKING_GOOGLEANALYTICS_ACTIVE=='true' and $smarty.session.customers_status.customers_status_id != 0}
+	{googleanalytics account=$smarty.const.TRACKING_GOOGLEANALYTICS_ID}
 {/if}
+<!--End Google Analytics-->
+	
+<!--Start Piwik-->
+{if $smarty.const.TRACKING_COUNT_ADMIN_ACTIVE=='true' and $smarty.const.TRACKING_PIWIK_ACTIVE=='true' and ($smarty.session.customers_status.customers_status_id != 0 || $smarty.session.customers_status.customers_status_id == 0)}
+	{piwik url=$smarty.const.TRACKING_PIWIK_LOCAL_PATH id=$smarty.const.TRACKING_PIWIK_ID goal=$smarty.const.TRACKING_PIWIK_GOAL}
+{elseif $smarty.const.TRACKING_COUNT_ADMIN_ACTIVE=='false' and $smarty.const.TRACKING_PIWIK_ACTIVE=='true' and $smarty.session.customers_status.customers_status_id != 0}
+	{piwik url=$smarty.const.TRACKING_PIWIK_LOCAL_PATH id=$smarty.const.TRACKING_PIWIK_ID goal=$smarty.const.TRACKING_PIWIK_GOAL}
+{/if}
+<!--End Piwik-->

@@ -34,6 +34,6 @@ define('TABLE_HEADING_CONTENT_AVALIABLE','Is available');
 define('TEXT_TYPE','Art der E-Mail:');
 define('TEXT_CONTENT_TXT','Text E-Mail-K&ouml;rper:');
 define('TEXT_SUBJECT', 'Betreff:');
-define('TEXT_USEABLE_VARIABLES_1', 'Sie k&ouml;nnen diese Variablen in Betreff: <br />{$nr} - Bestellnummer, {$date} - Datum der Bestellung, {$firstname} und {$lastname} - Vorname und Nachname des Kunden');
-define('TEXT_USEABLE_VARIABLES_2', 'Sie k&ouml;nnen diese Variablen in Betreff: <br /> {$ORDER_DATE} - Datum der Bestellung');
+define('TEXT_USEABLE_VARIABLES_1', 'Sie k&ouml;nnen diese Variablen im Betreff verwenden: <br />{$nr} - Bestellnummer, {$date} - Datum der Bestellung, {$firstname} und {$lastname} - Vorname und Nachname des Kunden');
+define('TEXT_USEABLE_VARIABLES_2', 'Sie k&ouml;nnen diese Variablen im Betreff verwenden: <br /> {$ORDER_DATE} - Datum der Bestellung');
  ?>

@@ -18,7 +18,7 @@ if ($category_image_width == '0' || !isset($category_image_width) || $category_i
 	$category_image_width = '150';
 }
 
-if ($category_image_height == '0' || !isset($category_image_height) || $category_image_height == '' || !is_numeric($category_image_height  || $category_image_height <= 0)) {
+if ($category_image_height == '0' || !isset($category_image_height) || $category_image_height == '' || !is_numeric($category_image_height)  || $category_image_height <= 0) {
 	$category_image_height = '150';
 }
 

@@ -24,7 +24,7 @@ define( 'BUTTON_PDF2NDREMINDER_CREATE',     'Create PDF-Second Reminder');   // 
 define( 'BUTTON_PDFBILL_RECREATE',          'Recreate PDF-Invoice');  // pdfbill
 define( 'BUTTON_PDFBILL_DISPLAY',           'Display PDF');           // pdfbill
 define( 'BUTTON_PDFBILL_SEND_INVOICE_MAIL', 'Send Invoice');          // pdfbill
-define( 'BUTTON_PDFBILL_INVOICE_MAIL2',     'Send Invoice again');    // pdfbill
+define( 'BUTTON_PDFBILL_SEND_INVOICE_MAIL2',     'Resend PDF-Invoice');    // pdfbill
 define( 'BUTTON_BILL',                      'Billing');           // ibillnr   
 define( 'PDFBILL_INVOICE_WORD',             'invoice' );              // used for pdf e-mail 
 define( 'PDFBILL_MSG_INVOICEMAIL_SENT',     'E-Mail sent' );      

@@ -106,7 +106,7 @@
 
       $this->quotes['methods'][] = array('id'    => $this->code,
 					 'title' => MODULE_SHIPPING_CHRONOPOST_TEXT_WAY . ' ' . $order->delivery['country']['title'],
-					 'cost'  => $cost + MODULE_SHIPPING_CHRONOPOST_HANDLING + SHIPPING_HANDLING);
+					 'cost'  => $cost);
 
       return $this->quotes;
     }

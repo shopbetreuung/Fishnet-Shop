@@ -16,8 +16,8 @@
    ---------------------------------------------------------------------------------------*/
    
   function xtc_db_query_installer($query, $link = 'db_link') {
-    global $$link;
+    global ${$link};
 
-    return mysqli_query($$link, $query);
+    return mysqli_query(${$link}, $query);
   }
  ?>

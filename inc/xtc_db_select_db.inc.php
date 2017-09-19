@@ -16,8 +16,8 @@
    ---------------------------------------------------------------------------------------*/
    
   function xtc_db_select_db($database, $link = 'db_link') {
-    global $$link;
+    global ${$link};
       
-    return mysqli_select_db($$link, $database);
+    return mysqli_select_db(${$link}, $database);
   }
  ?>

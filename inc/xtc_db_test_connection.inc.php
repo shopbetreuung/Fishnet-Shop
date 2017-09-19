@@ -17,17 +17,17 @@
    
 function xtc_db_test_connection($database, $link = 'db_link') {
     global $db_error;
-    global $$link;
+    global ${$link};
 
 
     $db_error = false;
 
     if (!$db_error) {
       if (!@xtc_db_select_db($database)) {
-        $db_error = mysqli_error($$link);
+        $db_error = mysqli_error(${$link});
       } else {
         if (!@xtc_db_query_installer('select count(*) from configuration')) {
-          $db_error = mysqli_error($$link);
+          $db_error = mysqli_error(${$link});
         }
       }
     }

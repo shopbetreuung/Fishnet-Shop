@@ -986,7 +986,8 @@
           if ((xtc_not_null($heading)) && (xtc_not_null($contents))) {
             //display info box
             echo '<div class="col-md-3 col-sm-12 col-xs-12 pull-right edit-box-class">' . "\n";
-            echo box::infoBox($heading, $contents); // cYbercOsmOnauT - 2011-02-05 - Changed methods of the classes box and tableBox to static
+            $box = new box;
+			echo $box->infoBox($heading, $contents); // cYbercOsmOnauT - 2011-02-05 - Changed methods of the classes box and tableBox to static
             echo '</div>' . "\n";
             ?>
             <script>

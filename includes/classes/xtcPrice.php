@@ -190,7 +190,7 @@ class xtcPrice {
    * @return Double gross price
    */
   function xtcAddTax($price, $tax) {
-    $price += $price / 100 * $tax;
+    $price += floatval($price) / 100 * floatval($tax);
     $price = $this->xtcCalculateCurr($price);
     return round($price, $this->currencies[$this->actualCurr]['decimal_places']);
   }
@@ -369,7 +369,8 @@ class xtcPrice {
    * @return Double converted price
    */
   function xtcCalculateCurr($price) {
-    return $this->currencies[$this->actualCurr]['value'] * $price;
+    $price_convert = floatval($price);
+	return $this->currencies[$this->actualCurr]['value'] * $price_convert;
   }
   
   /**

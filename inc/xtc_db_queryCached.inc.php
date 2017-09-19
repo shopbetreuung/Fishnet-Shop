@@ -17,7 +17,7 @@
 
 
   function xtc_db_queryCached($query, $link = 'db_link') {
-    global $$link;
+    global ${$link};
 
     // get HASH ID for filename
     $id=md5($query);
@@ -43,10 +43,10 @@
          if (file_exists($file)) @unlink($file);
 
         // get result from DB and create new file
-        $result = mysqli_query($$link, $query) or xtc_db_error($query, mysqli_errno($$link), mysqli_error($$link));
+        $result = mysqli_query(${$link}, $query) or xtc_db_error($query, mysqli_errno(${$link}), mysqli_error(${$link}));
 
         if (STORE_DB_TRANSACTIONS == 'true') {
-                $result_error = mysqli_error($$link);
+                $result_error = mysqli_error(${$link});
                 error_log('RESULT ' . $result . ' ' . $result_error . "\n", 3, STORE_PAGE_PARSE_TIME_LOG);
         }
 

@@ -183,14 +183,13 @@ if(file_exists(DIR_FS_INC.'xtc_Security.inc.php')){
 }
 // set the application parameters
 
-function xtDBquery($query) {
-	if (DB_CACHE == 'true') {
-//			echo  'cached query: '.$query.'<br>';
-		$result = xtc_db_queryCached($query);
-	} else {
-//				echo '::'.$query .'<br>';
-		$result = xtc_db_query($query);
+function xtDBquery($query, $link='db_link') {
+	global ${$link};
 
+	if (defined('DB_CACHE') && DB_CACHE == 'true') {
+	  $result = xtc_db_queryCached($query, $link);
+	} else {
+	  $result = xtc_db_query($query, $link);
 	}
 	return $result;
 }

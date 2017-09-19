@@ -19,16 +19,16 @@
   include_once(DIR_FS_INC . 'xtc_db_error.inc.php');
 
   function xtc_db_connect($server = DB_SERVER, $username = DB_SERVER_USERNAME, $password = DB_SERVER_PASSWORD, $database = DB_DATABASE, $link = 'db_link') {
-    global $$link;
+    global ${$link};
 
     if (!function_exists('mysqli_connect')) {
       die ('Call to undefined function: mysqli_connect(). Please install the MySQL Connector for PHP');
     }
 
     if (USE_PCONNECT == 'true') {
-      $$link = @mysqli_connect($server, $username, $password, $database);
+      ${$link} = @mysqli_connect($server, $username, $password, $database);
     } else {
-      $$link = @mysqli_connect($server, $username, $password, $database);
+      ${$link} = @mysqli_connect($server, $username, $password, $database);
     }
 
     //vr - 2010-01-01 - Disable "STRICT" mode for MySQL 5!
@@ -41,8 +41,8 @@
     }
 
     
-    mysqli_set_charset($$link, 'utf8');
+    mysqli_set_charset(${$link}, 'utf8');
     
-    return $$link;
+    return ${$link};
   }
 ?>

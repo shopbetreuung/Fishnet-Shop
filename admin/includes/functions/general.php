@@ -225,7 +225,9 @@ function xtc_output_string($string, $translate = false, $protected = false) {
   function xtc_get_path($current_category_id = '') {
     global $cPath_array;
     if (empty($current_category_id)) {
-      $cPath_new = implode('_', $cPath_array);
+      if(is_array($cPath_array)){
+         $cPath_new = implode('_', $cPath_array);
+      }
     } else {
       if (sizeof($cPath_array) == 0) {
         $cPath_new = $current_category_id;
@@ -2250,7 +2252,7 @@ function xtc_output_string($string, $translate = false, $protected = false) {
    * @return float
    */
   function xtc_spaceUsed($dir) {
-    $totalspaceUsed = ''; //DokuMan - 2011-09-06 - sum up correct filesize avoiding global variable
+    $totalspaceUsed = 0; //DokuMan - 2011-09-06 - sum up correct filesize avoiding global variable
 
     if (is_dir($dir)) {
       if ($dh = opendir($dir)) {

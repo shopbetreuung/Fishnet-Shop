@@ -83,7 +83,7 @@ $products_new_query_raw = "select distinct
 $products_new_split = new splitPageResults($products_new_query_raw, $_GET['page'], MAX_DISPLAY_PRODUCTS_NEW, 'p.products_id');
 //BOF - Hetfield - 2009-08-11 - no longer empty site products_new.php
 if (($products_new_split->number_of_rows > 0)) {
-$module_content = '';
+$module_content = array();
 //BOF - Hetfield - 2009-08-11 - replace table with div
 	$smarty->assign('NAVIGATION_BAR', '
 		   <div style="width:100%;font-size:smaller">

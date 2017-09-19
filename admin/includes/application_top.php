@@ -30,7 +30,7 @@
    --------------------------------------------------------------*/
 
 // DB version, used for updates (_installer)
-define('DB_VERSION', 'SH_1.9.4');
+define('DB_VERSION', 'SH_1.10.0');
 //Run Mode
 define('RUN_MODE_ADMIN',true);
 
@@ -160,13 +160,15 @@ while ($configuration = xtc_db_fetch_array($configuration_query)) {
 define('FILENAME_IMAGEMANIPULATOR',IMAGE_MANIPULATOR);
 
 // move to xtc_db_queryCached.inc.php
-function xtDBquery($query) {
-  if (DB_CACHE=='true') {
-    $result=xtc_db_queryCached($query);
-  } else {
-    $result=xtc_db_query($query);
-  }
-return $result;
+function xtDBquery($query, $link='db_link') {
+	global ${$link};
+
+	if (defined('DB_CACHE') && DB_CACHE == 'true') {
+	  $result = xtc_db_queryCached($query, $link);
+	} else {
+	  $result = xtc_db_query($query, $link);
+	}
+	return $result;
 }
 
 // security inputfilter for GET/POST/COOKIE

@@ -17,7 +17,7 @@
    
 function xtc_db_test_create_db_permission($database, $link = 'db_link') {
     global $db_error;
-    global $$link;
+    global ${$link};
 
     $db_created = false;
     $db_error = false;
@@ -35,10 +35,10 @@ function xtc_db_test_create_db_permission($database, $link = 'db_link') {
         if (!@xtc_db_query_installer('create database ' . $database)) {
 // EOF - Dokuman - 2009-05-27 - xtc_db_query_installer typo
         
-          $db_error = mysqli_error($$link);
+          $db_error = mysqli_error(${$link});
         }
       } else {
-        $db_error = mysqli_error($$link);
+        $db_error = mysqli_error(${$link});
       }
       
       if (!$db_error) {
@@ -48,17 +48,17 @@ function xtc_db_test_create_db_permission($database, $link = 'db_link') {
               if ($db_created) {
                 if (@xtc_db_query_installer('drop database ' . $database)) {
                 } else {
-                  $db_error = mysqli_error($$link);
+                  $db_error = mysqli_error(${$link});
                 }
               }
             } else {
-              $db_error = mysqli_error($$link);
+              $db_error = mysqli_error(${$link});
             }
           } else {
-            $db_error = mysqli_error($$link);
+            $db_error = mysqli_error(${$link});
           }
         } else {
-          $db_error = mysqli_error($$link);
+          $db_error = mysqli_error(${$link});
         }
       }
     }

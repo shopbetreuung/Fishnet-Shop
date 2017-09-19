@@ -18,8 +18,8 @@
   include_once(DIR_FS_INC . 'xtc_db_error.inc.php');
    
   function xtc_db_insert_id($link = 'db_link') {
-    global $$link;
+    global ${$link};
     
-    return mysqli_insert_id($$link);
+    return mysqli_insert_id(${$link});
   }
  ?>

@@ -17,7 +17,7 @@
    ---------------------------------------------------------------------------------------*/
 
   function xtc_db_connect_installer($server, $username, $password, $database, $link = 'db_link') {
-    global $$link, $db_error;
+    global ${$link}, $db_error;
 
     $db_error = false;
 
@@ -26,15 +26,15 @@
       return false;
     }
 
-    $$link = @mysqli_connect($server, $username, $password, $database) or $db_error = mysqli_error($$link);
+    ${$link} = @mysqli_connect($server, $username, $password, $database) or $db_error = mysqli_error(${$link});
 
     //vr - 2010-01-01 - Disable "STRICT" mode for MySQL 5!
-    if(version_compare(@mysqli_get_server_info($$link), '5.0.0', '>=')) {
-      @mysqli_query($$link, "SET SESSION sql_mode=''");
+    if(version_compare(@mysqli_get_server_info(${$link}), '5.0.0', '>=')) {
+      @mysqli_query(${$link}, "SET SESSION sql_mode=''");
     }
 
-    mysqli_set_charset($$link, 'utf8');
+    mysqli_set_charset(${$link}, 'utf8');
 
-    return $$link;
+    return ${$link};
   }
  ?>

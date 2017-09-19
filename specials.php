@@ -62,7 +62,7 @@ $specials_query_raw = "select p.products_id,
 //EOF - DokuMan - 2010-01-26 - use Join on TABLE_PRODUCTS_DESCRIPTION & TABLE_SPECIALS
 $specials_split = new splitPageResults($specials_query_raw, isset($_GET['page']) ? $_GET['page'] : 0, MAX_DISPLAY_SPECIAL_PRODUCTS);
 
-$module_content = '';
+$module_content = array();
 $row = 0;
 if ($specials_split->number_of_rows==0) xtc_redirect(xtc_href_link(FILENAME_DEFAULT));
 require (DIR_WS_INCLUDES.'header.php');

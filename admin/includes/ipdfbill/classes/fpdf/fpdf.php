@@ -412,12 +412,15 @@ function SetFillColor($r, $g=null, $b=null)
 
 function SetTextColor($r, $g=null, $b=null)
 {
+	$r_float = floatval($r);
 	// Set color for text
-	if(($r==0 && $g==0 && $b==0) || $g===null)
-		$this->TextColor = sprintf('%.3F g',$r/255);
-	else
-		$this->TextColor = sprintf('%.3F %.3F %.3F rg',$r/255,$g/255,$b/255);
+	if(($r_float==0 && $g==0 && $b==0) || $g===null){
+		$this->TextColor = sprintf('%.3F g',$r_float/255); 
+	}
+	else{
+		$this->TextColor = sprintf('%.3F %.3F %.3F rg',$r_float/255,$g/255,$b/255);
 	$this->ColorFlag = ($this->FillColor!=$this->TextColor);
+	}
 }
 
 function GetStringWidth($s)

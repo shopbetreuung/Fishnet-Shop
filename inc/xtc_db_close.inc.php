@@ -16,7 +16,7 @@
    ---------------------------------------------------------------------------------------*/
    
   function xtc_db_close($link = 'db_link') {
-    global $$link;
+    global ${$link};
 
     return mysqli_close($link);
   }

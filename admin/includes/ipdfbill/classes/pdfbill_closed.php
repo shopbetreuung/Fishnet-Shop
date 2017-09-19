@@ -399,7 +399,7 @@ class pdfbill_closed extends PDF_Clipping {
   
 
 
-  function Image($file,$x,$y,$w=0,$h=0,$type='',$link='')
+  function Image($file,$x=null,$y=null,$w=0,$h=0,$type='',$link='')
   {
 	  //Put an image on the page
 	  if(!isset($this->images[$file]))
@@ -883,8 +883,8 @@ function decode_entities($text, $quote_style = ENT_COMPAT) {
         $trans_tbl = array_flip($trans_tbl);
         $text = strtr($text, $trans_tbl);
     }
-    $text = preg_replace('~&#x([0-9a-f]+);~ei', 'chr(hexdec("\\1"))', $text);
-    $text = preg_replace('~&#([0-9]+);~e', 'chr("\\1")', $text);
+    $text = preg_replace_callback('~&#x([0-9a-f]+);~i', function ($m) {return chr(hexdec($m[1]));}, $text);
+    $text = preg_replace_callback('~&#([0-9]+);~', function($m){return chr($m[1]);}, $text);
     return $text;
 }
 

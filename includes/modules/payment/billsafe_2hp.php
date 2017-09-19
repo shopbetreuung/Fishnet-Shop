@@ -91,7 +91,7 @@ class billsafe_2hp {
     if (strtoupper($currency) != 'EUR') {
       $display = null;
       return $display;
-      break;
+      //break;
     }
     $order_total = $order->info['total'];
     $min_order = MODULE_PAYMENT_BILLSAFE_2HP_MIN_ORDER;
@@ -99,7 +99,7 @@ class billsafe_2hp {
     if (($order_total < $min_order) || ($order_total > $max_order)) {
       $display = null;
       return $display;
-      break;
+      //break;
     }
     require_once (DIR_FS_CATALOG.'includes/external/billsafe/classes/billsafe_2/billsafe_2.php');//DokuMan - 2012-06-19 - move billsafe to external directory
     $bs = new Billsafe_Sdk(DIR_FS_CATALOG.'includes/external/billsafe/classes/billsafe_2/ini.php');//DokuMan - 2012-06-19 - move billsafe to external directory

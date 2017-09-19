@@ -347,7 +347,8 @@ require (DIR_WS_INCLUDES.'head.php');
                     }
                     if ( (xtc_not_null($heading)) && (xtc_not_null($contents)) ) {
                       echo '<div class="col-md-3 hidden-xs hidden-sm pull-right">' . "\n";#col-sm-12 col-xs-12 
-                      echo box::infoBoxSt($heading, $contents); // cYbercOsmOnauT - 2011-02-07 - Changed methods of the classes box and tableBox to static
+                      $box = new box;
+					  echo $box->infoBox($heading, $contents); // cYbercOsmOnauT - 2011-02-07 - Changed methods of the classes box and tableBox to static
                       echo '</div>' . "\n";
                     ?>
                       <script>

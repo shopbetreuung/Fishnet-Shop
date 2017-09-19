@@ -16,7 +16,7 @@
    ---------------------------------------------------------------------------------------*/
 
   function xtc_db_fetch_array(&$db_query,$cq=false, $link = 'db_link') {
-      global $$link;
+      global ${$link};
 	  if ($db_query == false) {
 		  return false;
 	  }

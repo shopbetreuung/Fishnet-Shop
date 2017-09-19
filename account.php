@@ -65,7 +65,7 @@ $cpath = xtc_get_product_path($_SESSION['tracking']['products_history'][$i]);
 	$i ++;
 }
 
-$order_content = '';
+$order_content = array();
 if (xtc_count_customer_orders() > 0) {
 
 	$orders_query = xtc_db_query("select

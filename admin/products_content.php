@@ -330,7 +330,7 @@ require (DIR_WS_INCLUDES.'head.php');
                                                            FROM ".TABLE_PRODUCTS_CONTENT."
                                                           WHERE products_id='".$_GET['pID']."'
                                                        ORDER BY content_name");
-                            $content_array='';
+                            $content_array=array();
                             while ($content_data=xtc_db_fetch_array($content_query)) {
                               $content_array[]=array('id'=> $content_data['content_id'],
                                                    'name'=> $content_data['content_name'],

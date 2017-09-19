@@ -175,7 +175,7 @@
     }
     $translation_table = array_flip($translation_table);
     $Return= strtr($Text,$translation_table);
-    return preg_replace( '/&#(\d+);/me',"chr('\\1')",$Return);
+    return preg_replace_callback( '/&#(\d+);/m',function($m){return chr($m[1]);},$Return);
   }
   function metaHtmlEntities($Text) {
     //BOF web28 2011-12-02 UFT-8

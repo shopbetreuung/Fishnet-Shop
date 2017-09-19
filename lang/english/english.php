@@ -233,7 +233,7 @@ define('TEXT_PRINT', 'print'); //DokuMan - 2009-05-26 - Added description for 'a
  *
  */
 
-define('TEXT_GREETING_PERSONAL', 'Nice to see you again <span class="greetUser">%s!</span> Would you like to view our <a style="text-decoration:underline;" href="%s">new products</a> ?');
+define('TEXT_GREETING_PERSONAL', 'Nice to see you again <span class="greetUser">%s!</span> Would you like to view our <a style="text-decoration:underline;" href="%s">top products</a> ?');
 define('TEXT_GREETING_PERSONAL_RELOGON', '<small>If you are not %s , please  <a style="text-decoration:underline;" href="%s">login</a>  with your account.</small>');
 define('TEXT_GREETING_GUEST', 'Welcome  <span class="greetUser">visitor!</span> Would you like to <a style="text-decoration:underline;" href="%s">login</a>? Or would you like to create a new <a style="text-decoration:underline;" href="%s">account</a> ?');
 
@@ -548,5 +548,15 @@ define('_SHIPPING_FREE','Download');
 define('COOKIE_NOTE_TEXT', 'This website uses cookies to ensure you get the best experience on our website.');
 define('COOKIE_NOTE_MORE_TEXT', 'More info');
 define('COOKIE_NOTE_DISMISS_TEXT', 'Got it!');
+
+//google_sitemap.php
+define('SITEMAP_FILE', 'Sitemap file');
+define('SITEMAP_INDEX_FILE', 'Sitemap-Index-File');
+define('SITEMAP_CREATED', ' created');
+define('SITEMAP_CATEGORY','Categories');
+define('SITEMAP_PRODUCT', 'Products');
+define('SITEMAP_AND', 'and ');
+define('SITEMAP_CONTENTPAGE', 'Content pages');
+define('SITEMAP_EXPORT', 'exported');
 
 ?>

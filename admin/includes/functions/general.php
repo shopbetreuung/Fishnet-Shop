@@ -2340,10 +2340,10 @@ function xtc_output_string($string, $translate = false, $protected = false) {
 	if($date == ''){
 		$date = date("Y-m-d H:i:s");
 	}
-    $usedate = getdate($date);
-    $day = $usedate['mday'];
-    $month = $usedate['mon'];
-    $year = $usedate['year'];
+    $date_use = explode("-", $date);
+    $day = $date_use[2];
+    $month = $date_use[1];
+    $year = $date_use[0];
 	$to_year = date("Y") + 15;
     $from_year = date("Y") - 1;
     $date_selector = '<select name="'.$prefix.'_day">';

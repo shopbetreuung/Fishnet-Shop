@@ -146,7 +146,7 @@
         //Check if there is free shipping in the database.
         if($dpd_cost['dpd_free_shipping_over'] == -1.0000){
           //do normal processing of shipping
-          $shipping_dpd_cost = ($shipping + MODULE_SHIPPING_DPD_HANDLING + SHIPPING_HANDLING);
+          $shipping_dpd_cost = ($shipping + MODULE_SHIPPING_DPD_HANDLING);
         } else if(($dpd_cost['dpd_free_shipping_over'] != -1.0000) && ($dpd_cost['dpd_shipping_subsidized'] == -1.0000)){
           //free shipping if over amount
           if($order->info['subtotal'] >= $dpd_cost['dpd_free_shipping_over']){
@@ -157,19 +157,19 @@
           } else {
 //              print('Free Else Order: ' . $order->info['subtotal'] . ' Cost: ' . $dpd_cost['dpd_free_shipping_over']);
             //charge for shipping
-            $shipping_dpd_cost = ($shipping + MODULE_SHIPPING_DPD_HANDLING + SHIPPING_HANDLING);
+            $shipping_dpd_cost = ($shipping + MODULE_SHIPPING_DPD_HANDLING);
           }
         //subsidized shipping over amount
         } else {
           if($order->info['subtotal'] >= $dpd_cost['dpd_free_shipping_over']){
 //              print('Sub Order: ' . $order->info['subtotal'] . ' Cost: ' . $dpd_cost['dpd_free_shipping_over']);
             //shipping is subsidized
-            $shipping_dpd_cost = (($shipping + MODULE_SHIPPING_DPD_HANDLING + SHIPPING_HANDLING)-$dpd_cost['dpd_shipping_subsidized']);
+            $shipping_dpd_cost = (($shipping + MODULE_SHIPPING_DPD_HANDLING)-$dpd_cost['dpd_shipping_subsidized']);
             $shipping_dpd_method = MODULE_SHIPPING_DPD_SUBSIDIZED_SHIPPING . ' ' .MODULE_SHIPPING_DPD_TEXT_WAY . ' ' . $dest_country . " : " . $shipping_num_boxes * $shipping_weight . ' ' . MODULE_SHIPPING_DPD_TEXT_UNITS;
           } else {
 //              print('Sub Else Order: ' . $order->info['subtotal'] . ' Cost: ' . $dpd_cost['dpd_free_shipping_over']);
             //charge for shipping
-            $shipping_dpd_cost = ($shipping + MODULE_SHIPPING_DPD_HANDLING + SHIPPING_HANDLING);
+            $shipping_dpd_cost = ($shipping + MODULE_SHIPPING_DPD_HANDLING);
 
           }
         }

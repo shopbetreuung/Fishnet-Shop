@@ -139,7 +139,7 @@
         //Check if there is free shipping in the database.
         if($gls_cost['gls_free_shipping_over'] == -1.0000){
           //do normal processing of shipping
-          $shipping_gls_cost = ($shipping + MODULE_SHIPPING_GLS_HANDLING + SHIPPING_HANDLING);
+          $shipping_gls_cost = ($shipping + MODULE_SHIPPING_GLS_HANDLING);
         } else if(($gls_cost['gls_free_shipping_over'] != -1.0000) && ($gls_cost['gls_shipping_subsidized'] == -1.0000)){
           //free shipping if over amount
           if($order->info['subtotal'] >= $gls_cost['gls_free_shipping_over']){
@@ -150,19 +150,19 @@
           } else {
 //              print('Free Else Order: ' . $order->info['subtotal'] . ' Cost: ' . $gls_cost['gls_free_shipping_over']);
             //charge for shipping
-            $shipping_gls_cost = ($shipping + MODULE_SHIPPING_GLS_HANDLING + SHIPPING_HANDLING);
+            $shipping_gls_cost = ($shipping + MODULE_SHIPPING_GLS_HANDLING);
           }
         //subsidized shipping over amount
         } else {
           if($order->info['subtotal'] >= $gls_cost['gls_free_shipping_over']){
 //              print('Sub Order: ' . $order->info['subtotal'] . ' Cost: ' . $gls_cost['gls_free_shipping_over']);
             //shipping is subsidized
-            $shipping_gls_cost = (($shipping + MODULE_SHIPPING_GLS_HANDLING + SHIPPING_HANDLING)-$gls_cost['gls_shipping_subsidized']);
+            $shipping_gls_cost = (($shipping + MODULE_SHIPPING_GLS_HANDLING)-$gls_cost['gls_shipping_subsidized']);
             $shipping_gls_method = MODULE_SHIPPING_GLS_SUBSIDIZED_SHIPPING . ' ' .MODULE_SHIPPING_GLS_TEXT_WAY . ' ' . $dest_country . " : " . $shipping_num_boxes * $shipping_weight . ' ' .             MODULE_SHIPPING_GLS_TEXT_UNITS;
           } else {
 //              print('Sub Else Order: ' . $order->info['subtotal'] . ' Cost: ' . $gls_cost['gls_free_shipping_over']);
             //charge for shipping
-            $shipping_gls_cost = ($shipping + MODULE_SHIPPING_GLS_HANDLING + SHIPPING_HANDLING);
+            $shipping_gls_cost = ($shipping + MODULE_SHIPPING_GLS_HANDLING);
 
           }
         }

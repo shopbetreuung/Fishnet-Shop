@@ -233,7 +233,7 @@ define('TEXT_PRINT', 'drucken'); //DokuMan - 2009-05-26 - Added description for 
  * 
  */
 
-define('TEXT_GREETING_PERSONAL', 'Sch&ouml;n, dass Sie wieder da sind, <span class="greetUser">%s!</span> M&ouml;chten Sie sich unsere <a style="text-decoration:underline;" href="%s">neuen Artikel</a> ansehen?');
+define('TEXT_GREETING_PERSONAL', 'Sch&ouml;n, dass Sie wieder da sind, <span class="greetUser">%s!</span> M&ouml;chten Sie sich unsere <a style="text-decoration:underline;" href="%s">Top Artikel</a> ansehen?');
 define('TEXT_GREETING_PERSONAL_RELOGON', '<small>Wenn Sie nicht %s sind, melden Sie sich bitte <a style="text-decoration:underline;" href="%s">hier</a> mit Ihren Anmeldedaten an.</small>');
 define('TEXT_GREETING_GUEST', 'Herzlich Willkommen <span class="greetUser">Gast!</span> M&ouml;chten Sie sich <a style="text-decoration:underline;" href="%s">anmelden</a>? Oder wollen Sie ein <a style="text-decoration:underline;" href="%s">Kundenkonto</a> er&ouml;ffnen?');
 
@@ -549,4 +549,13 @@ define('COOKIE_NOTE_TEXT', 'Mit Ihrem Besuch auf unserer Website stimmen Sie der
 define('COOKIE_NOTE_MORE_TEXT', 'Mehr Infos');
 define('COOKIE_NOTE_DISMISS_TEXT', 'Verstanden');
 
+//google_sitemap.php
+define('SITEMAP_FILE', 'Sitemap-Datei');
+define('SITEMAP_INDEX_FILE', 'Sitemap-Index-Datei');
+define('SITEMAP_CREATED', ' erstellt');
+define('SITEMAP_CATEGORY','Kategorien');
+define('SITEMAP_PRODUCT', 'Produkte');
+define('SITEMAP_AND', 'und ');
+define('SITEMAP_CONTENTPAGE', 'Content pages');
+define('SITEMAP_EXPORT', 'exportiert');
 ?>

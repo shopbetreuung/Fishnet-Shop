@@ -1,6 +1,4 @@
 <link rel="stylesheet" href="{$payonecss}" type="text/css" media="screen" />
-<script src="https://cdn.klarna.com/public/kitt/core/v1.0/js/klarna.min.js"></script>
-<script src="https://cdn.klarna.com/public/kitt/toc/v1.1/js/klarna.terms.min.js"></script>
 
 <div class="payone_cc_container">
   {if $error}<div class="errormessage">{$error}</div>{/if}
@@ -19,9 +17,6 @@
         <td colspan="2"><input type="checkbox" id="conditions" name="conditions" value="true"/>{$confirm_text}</td>
       </tr>
     {/if}
-    <tr>
-      <td colspan="2" align="right">{$smarty.const.TEXT_KLARNA_INVOICE} <span id="invoice"></span></td>
-    </tr>
   </table>
 </div>
 {$invoice_js}

@@ -11,4 +11,5 @@ define('TABLE_HEADING_EDIT', 'Bearbeiten');
 define('TEXT_PRODUCTS', 'Produkt');
 define('BUTTON_OUT_OF_WASTE_BIN', 'Wiederherstellen');
 define('DELETE_PERMANENTLY', 'Endg&uuml;ltig l&ouml;schen');
+define('TEXT_IMAGE_NONEXISTENT', 'Kein Bild');
 

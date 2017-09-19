@@ -94,7 +94,7 @@
       $cost = -1;
       for ($i = 0, $n = sizeof($table); $i < $n; $i+=2) {
 	if ($shipping_weight <= $table[$i]) {
-	  $cost = $table[$i+1] + MODULE_SHIPPING_CHRONOPOST_HANDLING + SHIPPING_HANDLING;
+	  $cost = $table[$i+1] + MODULE_SHIPPING_CHRONOPOST_HANDLING;
 	  break;
 	}
       }
@@ -106,7 +106,7 @@
 
       $this->quotes['methods'][] = array('id'    => $this->code,
 					 'title' => MODULE_SHIPPING_CHRONOPOST_TEXT_WAY . ' ' . $order->delivery['country']['title'],
-					 'cost'  => $cost + MODULE_SHIPPING_CHRONOPOST_HANDLING + SHIPPING_HANDLING);
+					 'cost'  => $cost);
 
       return $this->quotes;
     }

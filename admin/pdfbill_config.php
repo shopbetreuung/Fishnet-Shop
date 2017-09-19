@@ -95,7 +95,7 @@ if($rules != ''){
     $rules_array = explode(' ', $rules);
     $rules_groups = array_chunk($rules_array, 4);
     $grouped = array();
-    var_dump($rules_array);
+    //var_dump($rules_array);
     foreach($rules_groups as $group){
         $operation = 0;
         if($group[1] == '!='){

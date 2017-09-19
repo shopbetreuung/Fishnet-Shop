@@ -152,7 +152,7 @@ define('MAX_RANDOM_SELECT_NEW_DESC' , 'How many records to select from to choose
 define('MAX_RANDOM_SELECT_SPECIALS_TITLE' , 'Selection of Products on Special');
 define('MAX_RANDOM_SELECT_SPECIALS_DESC' , 'How many records to select from to choose one random product special to display');
 define('MAX_DISPLAY_CATEGORIES_PER_ROW_TITLE' , 'Categories To List Per Row');
-define('MAX_DISPLAY_CATEGORIES_PER_ROW_DESC' , 'How many categories to list per row');
+define('MAX_DISPLAY_CATEGORIES_PER_ROW_DESC' , 'How many categories to list per row. Minimum 1, Maximum 5.');
 define('MAX_DISPLAY_PRODUCTS_NEW_TITLE' , 'New Products Listing');
 define('MAX_DISPLAY_PRODUCTS_NEW_DESC' , 'Maximum number of new products to display in new products page');
 define('MAX_DISPLAY_BESTSELLERS_TITLE' , 'Best Sellers');

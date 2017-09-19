@@ -24,7 +24,7 @@
   // USAGE: /login_admin.php?show_error=admin
 
   // further documentation, see also:
-  // http://www.modified-shop.org/wiki/Login_in_den_Administrationsbereich_nach_%C3%84nderungen_nicht_mehr_m%C3%B6glich
+  // http://www.shophelfer.com/index.php?title=Login_im_Wartungsmodus_nicht_m%C3%B6glich
 
 $error = false;
 

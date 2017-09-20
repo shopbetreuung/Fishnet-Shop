@@ -210,11 +210,18 @@ if ($_SESSION['customer_id'] == $order_check['customers_id'] || $send_by_admin) 
 
   ## PayPal
   require_once(DIR_FS_EXTERNAL.'paypal/modules/send_order.php');
-	
-  require_once(DIR_FS_EXTERNAL.'paypal/classes/PayPalInfo.php');
-  $paypal = new PayPalInfo($order->info['payment_method']);
-  $admin_info_array = $paypal->order_info($order->info['order_id']);
-  $payment_array = $paypal->get_payment_data($order->info['order_id']);
+	$paypal_payment_method = array(
+	  'paypalplus',
+	  'paypalclassic',
+	  'paypalcart',
+	  'paypallink',
+	  'paypalpluslink'
+	);
+  if(in_array($order->info['payment_method'], $paypal_payment_method)){
+	  require_once(DIR_FS_EXTERNAL.'paypal/classes/PayPalInfo.php');
+	  $paypal = new PayPalInfo($order->info['payment_method']);
+	  $admin_info_array = $paypal->order_info($order->info['order_id']);
+	  $payment_array = $paypal->get_payment_data($order->info['order_id']);
 	
 	if (isset($admin_info_array['instruction']) && $payment_array['payment_method'] == 'pay_upon_invoice') {
 		  $smarty->assign('paypal_payment_method', $order->info['payment_method']);
@@ -227,7 +234,7 @@ if ($_SESSION['customer_id'] == $order_check['customers_id'] || $send_by_admin) 
 		  $smarty->assign('paypal_iban', $admin_info_array['instruction']['bank']['iban']);
 		  $smarty->assign('paypal_bic', $admin_info_array['instruction']['bank']['bic']);
 	}
-
+  }
   $html_mail = $smarty->fetch('db:order_mail.html');
   $txt_mail = $smarty->fetch('db:order_mail.txt');
 

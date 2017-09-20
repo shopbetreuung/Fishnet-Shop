@@ -173,7 +173,7 @@ if ($category_depth == 'nested') {
 	  break;
 		  
 	  case '5':
-		  $column_css = 'col-xs-12 col-sm-6 col-md-5';
+		  $column_css = 'col-xs-12 col-sm-6 col-md-5th';
 	  break;
 	
 	  default:

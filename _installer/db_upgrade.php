@@ -60,13 +60,14 @@ $pfad = './sql/';
 $ordner = opendir($pfad);
 while ($datei = readdir($ordner))
 {
-    if (preg_match('/^update_[0-9].[0-9].[0-9]/i', $datei))
+    if (preg_match('/^update_[0-9]{1,2}.[0-9]{1,2}.[0-9]{1,2}/i', $datei)) //This should be preg_match which matches two-digit numbers
     { //accept only sql files that start(!) with scheme "update_x.x.x.x"
         $farray[] = $pfad . $datei;
     }
 }
 closedir($ordner);
-sort($farray);
+//sort($farray);
+natsort($farray); //We need natural sortig, because system take last one from array as update (it's because of two-digit numbers)
 
 //DB seems to be an old xtCommerce installation, so include XTCOMMERCE304_FILE here
 if ($db_version_update == '')

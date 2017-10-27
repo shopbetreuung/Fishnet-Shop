@@ -260,7 +260,7 @@ class ot_payment
         global $xtPrice;
         // return round($value * 100) / 100 * $percent / 100;
         //return $god_amount = $value * $percent / 100;
-        return $xtPrice->xtcFormat($value * $percent / 100, false);
+        return $xtPrice->xtcFormat(floatval($value) * floatval($percent) / 100, false);
     }
     
     function get_module_cost($payment_modul)

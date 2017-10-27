@@ -756,7 +756,7 @@ class categories {
         $quantity = xtc_db_prepare_input($products_data['products_quantity_staffel_'.$group_data[$col]['STATUS_ID']]);
         $staffelpreis = xtc_db_prepare_input($products_data['products_price_staffel_'.$group_data[$col]['STATUS_ID']]);
         if (PRICE_IS_BRUTTO == 'true') {
-          $staffelpreis = ($staffelpreis / (xtc_get_tax_rate($products_data['products_tax_class_id']) + 100) * 100);
+          $staffelpreis = floatval($staffelpreis / floatval(xtc_get_tax_rate($products_data['products_tax_class_id']) + 100) * 100);
         }
         $staffelpreis = xtc_round($staffelpreis, PRICE_PRECISION);
         if ($staffelpreis != '' && $quantity != '') {

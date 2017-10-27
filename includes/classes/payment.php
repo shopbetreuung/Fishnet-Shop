@@ -90,7 +90,7 @@
 
         //print_r($include_modules);
         for ($i = 0, $n = sizeof($include_modules); $i < $n; $i++) {
-          if (!in_array($include_modules[$i]['class'], $unallowed_modules)) {
+          if (!in_array($include_modules[$i]['class'], $unallowed_modules) && $include_modules[$i]['class'] != 'paypalinstallment') {
             // check if zone is alowed to see module
             if (constant('MODULE_PAYMENT_' . strtoupper(str_replace('.php', '', $include_modules[$i]['file'])) . '_ALLOWED') != '') {
               $unallowed_zones = explode(',', constant('MODULE_PAYMENT_' . strtoupper(str_replace('.php', '', $include_modules[$i]['file'])) . '_ALLOWED'));

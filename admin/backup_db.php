@@ -22,9 +22,9 @@ $Id: backup_db.php 4174 2013-01-04 15:55:13Z web28 $
   include ('includes/functions/db_restore.php');
 
   $link = 'db_link';
-  global $$link;
+  global ${$link};
   
-  $connection = $$link;
+  $connection = ${$link};
   
   $action = (isset($_GET['action']) ? $_GET['action'] : '');
 

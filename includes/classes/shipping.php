@@ -76,10 +76,10 @@
           $shipping_weight = $shipping_weight/$shipping_num_boxes;
         }  
 		  
-        if (SHIPPING_BOX_WEIGHT >= $shipping_weight*SHIPPING_BOX_PADDING/100) {
+        if (SHIPPING_BOX_WEIGHT >= $shipping_weight*(floatval(SHIPPING_BOX_PADDING))/100) {
           $shipping_weight = $shipping_weight+SHIPPING_BOX_WEIGHT;
         } else {
-          $shipping_weight = $shipping_weight + ($shipping_weight*SHIPPING_BOX_PADDING/100);
+          $shipping_weight = $shipping_weight + ($shipping_weight*(floatval(SHIPPING_BOX_PADDING))/100);
         }
 
         $include_quotes = array();

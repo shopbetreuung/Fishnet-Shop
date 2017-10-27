@@ -277,7 +277,8 @@
         $Text = substr($Text,0,$Length).$Abk;
       }
     }
-    return htmlspecialchars($Text, ENT_QUOTES, strtoupper($_SESSION['language_charset']));
+    $Text = encode_htmlspecialchars($Text, ENT_QUOTES, $_SESSION['language_charset']);
+	return str_replace('&amp;','&',$Text);
   }
 // ---------------------------------------------------------------------------------------
 //  metaTitle und metaKeyWords, Rückgabe bzw. Formatierung

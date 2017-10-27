@@ -165,21 +165,21 @@ class paypal {
 			while($languages = xtc_db_fetch_array($languages_query)) {
 				if(file_exists(DIR_FS_LANGUAGES.$languages['directory'].'/admin/paypal.php'))
 					include(DIR_FS_LANGUAGES.$languages['directory'].'/admin/paypal.php');
-				if($$statusname!=''):
-					$check_query = xtc_db_query("select orders_status_id from " . TABLE_ORDERS_STATUS . " where orders_status_name = '" .$$statusname. "' AND language_id='".$languages['languages_id']."' limit 1");
+				if(${$statusname}!=''):
+					$check_query = xtc_db_query("select orders_status_id from " . TABLE_ORDERS_STATUS . " where orders_status_name = '" .${$statusname}. "' AND language_id='".$languages['languages_id']."' limit 1");
 					$status = xtc_db_fetch_array($check_query);
-					if(xtc_db_num_rows($check_query) < 1 OR ($$statusid AND $status['orders_status_id']!=$$statusid) ):
-						if(!$$statusid):
+					if(xtc_db_num_rows($check_query) < 1 OR (${$statusid} AND $status['orders_status_id']!=${$statusid}) ):
+						if(!${$statusid}):
 							$status_query = xtc_db_query("select max(orders_status_id) as status_id from " . TABLE_ORDERS_STATUS);
 							$status = xtc_db_fetch_array($status_query);
-							$$statusid = $status['status_id']+1;
+							${$statusid} = $status['status_id']+1;
 						endif;
-						$check_query = xtc_db_query("select orders_status_id from " . TABLE_ORDERS_STATUS . " where orders_status_id = '".$$statusid ."' AND language_id='".$languages['languages_id']."'");
+						$check_query = xtc_db_query("select orders_status_id from " . TABLE_ORDERS_STATUS . " where orders_status_id = '".${$statusid} ."' AND language_id='".$languages['languages_id']."'");
 						if(xtc_db_num_rows($check_query)<1):
-							xtc_db_query("insert into " . TABLE_ORDERS_STATUS . " (orders_status_id, language_id, orders_status_name) values ('" . $$statusid . "', '" . $languages['languages_id'] . "', '" .$$statusname. "')");
+							xtc_db_query("insert into " . TABLE_ORDERS_STATUS . " (orders_status_id, language_id, orders_status_name) values ('" . ${$statusid} . "', '" . $languages['languages_id'] . "', '" .${$statusname}. "')");
 						endif;
 					else:
-						$$statusid = $status['orders_status_id'];
+						${$statusid} = $status['orders_status_id'];
 					endif;
 				endif;
 			}

@@ -146,9 +146,9 @@ if (isset ($_SESSION['tmp_oID']) && is_numeric($_SESSION['tmp_oID'])) { // Dokum
   $insert_id = $_SESSION['tmp_oID'];
 } else {
   // check if tmp order need to be created
-  if (isset ($$_SESSION['payment']->form_action_url) && $$_SESSION['payment']->tmpOrders) {
+  if (isset (${$_SESSION['payment']}->form_action_url) && ${$_SESSION['payment']}->tmpOrders) {
     $tmp = true;
-    $tmp_status = $$_SESSION['payment']->tmpStatus;
+    $tmp_status = ${$_SESSION['payment']}->tmpStatus;
   } else {
     $tmp = false;
     $tmp_status = $order->info['order_status'];

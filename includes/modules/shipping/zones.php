@@ -169,7 +169,7 @@
           $shipping_cost = 0;
           $shipping_method = MODULE_SHIPPING_ZONES_UNDEFINED_RATE;
         } else {
-          $shipping_cost = ($shipping + constant('MODULE_SHIPPING_ZONES_HANDLING_' . $dest_zone));
+          $shipping_cost = ($shipping + (int)constant('MODULE_SHIPPING_ZONES_HANDLING_' . $dest_zone));
         }
       }
 

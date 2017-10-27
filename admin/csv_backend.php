@@ -25,7 +25,7 @@
       case 'upload':
         $upload_file=xtc_db_prepare_input($_POST['file_upload']);
         if ($upload_file = &xtc_try_upload('file_upload',DIR_FS_CATALOG.'import/')) {
-            $$upload_file_name=$upload_file->filename;
+            ${$upload_file_name}=$upload_file->filename;
         }
       break;
 

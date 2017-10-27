@@ -315,8 +315,8 @@ class sofort_sofortrechnung extends sofort{
 		
 		list ($shippingModule, $shippingMethod) = explode('_', $_SESSION['shipping']['id']); //e.g. "dp_dp" or "freeamount_freeamount"
 		if($shippingModule) {
-			global $$shippingModule; //notice $$
-			$shippingObject = $$shippingModule; //notice $$
+			global ${$shippingModule}; //notice $$
+			$shippingObject = ${$shippingModule}; //notice $$
 			$shippingAmount = $order->info['shipping_cost'] * $order->info['currency_value'];
 			
 			if (isset($shippingObject->tax_class)) {

@@ -1182,13 +1182,13 @@ function UpdateTables ()
 
   $link = 'db_link';
 
-  global $$link, $logger;
+  global ${$link}, $logger;
 
   for ($i=1;$i<=13;$i++)
   {
     echo '<b>SQL:</b> ' . $sql[$i] . '<br>';;
 
-    if (@xtc_db_query($sql[$i], $$link))
+    if (@xtc_db_query($sql[$i], ${$link}))
     {
       echo '<b>Ergebnis : OK</b>';
     }

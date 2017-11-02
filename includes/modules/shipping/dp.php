@@ -100,7 +100,7 @@
           $shipping_cost = 0;
           $shipping_method = MODULE_SHIPPING_DP_UNDEFINED_RATE;
         } else {
-          $shipping_cost = ($shipping + MODULE_SHIPPING_DP_HANDLING);
+          $shipping_cost = ($shipping + floatval(MODULE_SHIPPING_DP_HANDLING));
         }
       }
 

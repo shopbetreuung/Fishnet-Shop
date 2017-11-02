@@ -246,8 +246,8 @@ class image_manipulation
 		$this->dotc = ImageColorAllocate($this->dot, $this->sr, $this->sg, $this->sb);
 		$this->v = imagecreate($this->q, $this->r);
 		$this->sbc = imagecolorallocate($this->v, $this->sbrr, $this->sbrg, $this->sbrb);
-		$this->rsw = $this->q-$this->sw;
-		$this->rsh = $this->r-$this->sw;
+		$this->rsw = floatval($this->q)-floatval($this->sw);
+      	$this->rsh = floatval($this->r)-floatval($this->sw);
 		imagefill($this->v, 0, 0, $this->sbc);
 		for($this->sws = 0; $this->sws < $this->sw; $this->sws++)
 			{

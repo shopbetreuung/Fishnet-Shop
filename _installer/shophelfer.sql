@@ -289,6 +289,9 @@ CREATE TABLE admin_access (
   parcel_carriers INT(1) NOT NULL DEFAULT 0,
   
   waste_paper_bin INT(1) NOT NULL DEFAULT 0,
+  
+  inventory INT(1) NOT NULL DEFAULT 0,
+  invoiced_orders INT(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (customers_id)
 ) ENGINE=MyISAM;
 

@@ -321,6 +321,16 @@
 											"link" 		=> xtc_href_link(FILENAME_STATS_STOCK_WARNING, '', 'NONSSL'),
 											"access"	=> "stats_stock_warning",
 											"check"		=> true);
+        $menu_items['marketingseo'][] = array(	"name" 		=> BOX_INVENTORY,
+											"is_main"	=> false,
+											"link" 		=> xtc_href_link(FILENAME_INVENTORY, '', 'NONSSL'),
+											"access"	=> "inventory",
+											"check"		=> true);
+        $menu_items['marketingseo'][] = array(	"name" 		=> BOX_INVOICED_ORDERS,
+											"is_main"	=> false,
+											"link" 		=> xtc_href_link(FILENAME_INVOICED_ORDERS, '', 'NONSSL'),
+											"access"	=> "invoiced_orders",
+											"check"		=> true);
 
 	$menu_items['marketingseo'][] = array(	"name" 		=> BOX_CONFIGURATION_24,
 											"is_main"	=> true,

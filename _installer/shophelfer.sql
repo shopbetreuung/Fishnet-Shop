@@ -292,6 +292,7 @@ CREATE TABLE admin_access (
   
   inventory INT(1) NOT NULL DEFAULT 0,
   invoiced_orders INT(1) NOT NULL DEFAULT 0,
+  outstanding INT(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (customers_id)
 ) ENGINE=MyISAM;
 

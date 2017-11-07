@@ -15,8 +15,8 @@
   
   require (DIR_WS_INCLUDES.'head.php');
   require(DIR_WS_CLASSES . 'report_classes.php');
-  if($_GET['action'] == 'export_invoiced_orders'){
-      $handler = new xtc_export_csv_invoice_orders(TEXT_LINK_NAME, $invoice_number, $invoice_date, $total_net, $total_gross);
+  if($_GET['action'] == 'outstanding'){
+      $handler = new xtc_export_csv_invoice_orders(TEXT_LINK_NAME, $invoice_number, $invoice_date, $total_net, $total_gross, true);
   }
 ?>
 </head>
@@ -36,7 +36,7 @@
 <table class='table table-bordered'>
     <tr><td> <?php echo TEXT_CUSTOMERS_NAME; ?> </td> <td> <?php echo TEXT_ORDERS_ID; ?> </td> </tr>
 <?php
-  $orders_query = xtc_db_query("SELECT o.customers_name, o.orders_id, o.ibn_billnr, o.ibn_billdate FROM " . TABLE_ORDERS . " o WHERE o.ibn_billnr != 0 ORDER BY o.ibn_billnr DESC");
+  $orders_query = xtc_db_query("SELECT o.customers_name, o.orders_id, o.ibn_billnr, o.ibn_billdate FROM " . TABLE_ORDERS . " o WHERE o.ibn_billnr != 0 AND o.orders_status != '3' ORDER BY o.ibn_billnr DESC");
   while ($orders_values = xtc_db_fetch_array($orders_query)) {
     echo '<tr><td width="50%" class="dataTableContent"><a href="' . xtc_href_link(FILENAME_ORDERS, 'oID=' . $orders_values['orders_id'] . '&action=edit') . '"><b>' . $orders_values['customers_name'] . '</b></a></td><td width="50%" class="dataTableContent">';
     echo $orders_values['orders_id'];
@@ -48,8 +48,8 @@
     </div>
 </div>
 <?php 
-echo xtc_draw_form('export_invoiced_orders',FILENAME_INVOICED_ORDERS,'action=export_invoiced_orders','POST','enctype="multipart/form-data"'); 
-echo '<br/><input type="submit" class="btn btn-default" onclick="this.blur();" value="' . BUTTON_EXPORT_INVOICED_CSV . '"/>';
+echo xtc_draw_form('outstanding',FILENAME_OUTSTANDING_ORDERS,'action=outstanding','POST','enctype="multipart/form-data"'); 
+echo '<br/><input type="submit" class="btn btn-default" onclick="this.blur();" value="' . BUTTON_EXPORT_OUTSTANDING_CSV . '"/>';
 ?>
 </form>
 <!-- body_eof //-->

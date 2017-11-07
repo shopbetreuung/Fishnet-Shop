@@ -42,7 +42,7 @@ class xtc_export_csv_stock {
     }
 }
 class xtc_export_csv_invoice_orders {
-    function xtc_export_csv_invoice_orders($filename, $invoice_number, $invoice_date, $total_net, $total_gross){
+    function xtc_export_csv_invoice_orders($filename, $invoice_number, $invoice_date, $total_net, $total_gross, $paid = false){
         header('Content-Type: text/csv; charset=utf-8');
         header('Content-Disposition: attachment; filename=' . $filename . '.csv');
         ob_end_clean();
@@ -52,7 +52,11 @@ class xtc_export_csv_invoice_orders {
         
         fputcsv($output, explode(';', $output_header_fields), ";");
         
-        $orders_query = xtc_db_query("SELECT o.customers_name, o.orders_id, o.ibn_billnr, o.ibn_billdate FROM " . TABLE_ORDERS . " o WHERE o.ibn_billnr != 0 ORDER BY o.ibn_billnr DESC");
+        if($paid == true){
+            $order_status = "AND o.orders_status != '3'";
+        }
+        
+        $orders_query = xtc_db_query("SELECT o.customers_name, o.orders_id, o.ibn_billnr, o.ibn_billdate FROM " . TABLE_ORDERS . " o WHERE o.ibn_billnr != 0 ".$order_status." ORDER BY o.ibn_billnr DESC");
         while ($orders_values = xtc_db_fetch_array($orders_query)) {
             $invoice_number = $orders_values['ibn_billnr'];
             $netto = floatval(0);

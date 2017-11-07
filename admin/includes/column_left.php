@@ -331,6 +331,11 @@
 											"link" 		=> xtc_href_link(FILENAME_INVOICED_ORDERS, '', 'NONSSL'),
 											"access"	=> "invoiced_orders",
 											"check"		=> true);
+        $menu_items['marketingseo'][] = array(	"name" 		=> BOX_OUTSTANDING_ORDERS,
+											"is_main"	=> false,
+											"link" 		=> xtc_href_link(FILENAME_OUTSTANDING_ORDERS, '', 'NONSSL'),
+											"access"	=> "outstanding",
+											"check"		=> true);
 
 	$menu_items['marketingseo'][] = array(	"name" 		=> BOX_CONFIGURATION_24,
 											"is_main"	=> true,

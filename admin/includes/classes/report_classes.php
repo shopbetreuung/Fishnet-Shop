@@ -85,3 +85,43 @@ class xtc_export_csv_invoice_orders {
     }
 }
 
+class xtc_export_csv_inventory_turnover{
+    function xtc_export_csv_inventory_turnover($filename, $products_name, $ai, $it, $start_date){
+            header('Content-Type: text/csv; charset=utf-8');
+            header('Content-Disposition: attachment; filename=' . $filename . '.csv');
+            ob_end_clean();
+            $output = fopen('php://output', 'w');
+            
+            $output_header_fields = TEXT_PRODUCTS_NAME.";".TEXT_AI.";".CSV_TEXT_INVENTORY_TURNOVER;
+
+            fputcsv($output, explode(';', $output_header_fields), ";");
+            $today = date('Y-m-d H:i:s', time());
+            $selected = 'o.orders_id, p.products_id, pd.products_name, p.products_quantity, p.products_ordered';
+            $products_query = xtc_db_query("SELECT DISTINCT ".$selected." 
+                    FROM products p
+                    JOIN products_description pd ON p.products_id = pd.products_id
+                    JOIN orders_products op ON p.products_id = op.products_id
+                    JOIN orders o ON op.orders_id = o.orders_id 
+                    WHERE pd.language_id = '" . $_SESSION['languages_id']."' 
+                    AND (o.date_purchased BETWEEN '" . $start_date . "' AND '" . $today . "') ");
+            while ($products_values = xtc_db_fetch_array($products_query)) {
+
+                $sold_stock = $products_values['products_ordered'];
+                
+                $products_name = $products_values['products_name'];
+                $current_stock = $products_values['products_quantity'];
+                
+                $whole_stock = $current_stock + $sold_stock;
+                $ai = ($whole_stock + $current_stock)  / 2;
+
+                $it = $sold_stock / $ai;
+                
+                $output_fields = $products_name.";".$ai.";".xtc_round($it, 2).";";
+
+                fputcsv($output, explode(';', $output_fields), ";");
+            }
+
+                fclose($output) or die("Can't close php://output");
+                exit;
+    }
+}

@@ -108,5 +108,6 @@ define('FILENAME_IMAGESLIDERS', 'imagesliders.php');  // Imageslider (c)2008 by 
 define('FILENAME_ERROR_DISPLAY', 'error_display.php');
 define('FILENAME_INVENTORY', 'inventory.php');
 define('FILENAME_INVOICED_ORDERS', 'invoiced_orders.php');
-define('FILENAME_OUTSTANDING_ORDERS', 'outstanding.php')
+define('FILENAME_OUTSTANDING_ORDERS', 'outstanding.php');
+define('FILENAME_INVENTORY_TURNOVER_ORDERS', 'inventory_turnover.php');
 ?>

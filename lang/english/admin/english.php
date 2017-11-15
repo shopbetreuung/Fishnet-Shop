@@ -187,6 +187,7 @@ define('BOX_PARCEL_CARRIERS', 'Parcel carriers');
 define('BOX_INVENTORY', 'Inventory');
 define('BOX_INVOICED_ORDERS', 'Outgoing orders');
 define('BOX_OUTSTANDING_ORDERS', 'Outstanding');
+define('BOX_INVENTORY_TURNOVER', 'Inventory turnover');
 
 define('TXT_GROUPS','<b>Groups</b>:');
 define('TXT_SYSTEM','System');

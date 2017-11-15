@@ -190,6 +190,7 @@ define('BOX_PARCEL_CARRIERS', 'Paketdienstleister');
 define('BOX_INVENTORY', 'Inventurliste');
 define('BOX_INVOICED_ORDERS', 'Ausgangsrechnungen');
 define('BOX_OUTSTANDING_ORDERS', 'Offene Posten');
+define('BOX_INVENTORY_TURNOVER', 'Lagerumschlagsh&auml;ufigkeit');
 
 define('TXT_GROUPS','<b>Gruppen</b>:');
 define('TXT_SYSTEM','System');

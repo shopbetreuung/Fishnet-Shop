@@ -291,8 +291,10 @@ CREATE TABLE admin_access (
   waste_paper_bin INT(1) NOT NULL DEFAULT 0,
   
   inventory INT(1) NOT NULL DEFAULT 0,
+  inventory_turnover INT(1) NOT NULL DEFAULT 0,
   invoiced_orders INT(1) NOT NULL DEFAULT 0,
   outstanding INT(1) NOT NULL DEFAULT 0,
+  globaledit INT(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (customers_id)
 ) ENGINE=MyISAM;
 

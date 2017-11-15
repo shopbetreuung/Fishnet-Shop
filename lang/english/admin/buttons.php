@@ -86,4 +86,6 @@ define('BUTTON_VIEW_PRODUCT', 'View Product');
 
 define('BUTTON_DELETE_GUESTS', 'Delete guests');
 
+define('BUTTON_GLOBAL_EDIT', 'Global edit');
+
 ?>

@@ -9,3 +9,9 @@ UPDATE admin_access SET invoiced_orders = '1' WHERE customers_id = '1';
 ALTER TABLE admin_access ADD outstanding INT(1) NOT NULL DEFAULT '0';
 UPDATE admin_access SET outstanding = '1' WHERE customers_id = '1';
 
+ALTER TABLE admin_access ADD inventory_turnover INT(1) NOT NULL DEFAULT '0';
+UPDATE admin_access SET inventory_turnover = '1' WHERE customers_id = '1';
+
+ALTER TABLE admin_access ADD globaledit INT(1) NOT NULL DEFAULT '0';
+UPDATE admin_access SET globaledit = '1' WHERE customers_id = '1';
+

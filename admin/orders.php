@@ -1371,7 +1371,7 @@ require (DIR_WS_INCLUDES.'header.php');
               </div>
               <div class='col-xs-12'><br></div>
               <div class='col-xs-12'>
-                <div class="main col-xs-12 col-sm-4"><?php echo PDFBILL_TXT_BILLPROFILE ?></div>
+                  <div class="main col-xs-12 col-sm-4"><?php echo PDFBILL_TXT_BILLPROFILE ?> <br /> <?php if(pdfbill_invoice_exists($oID)){ echo PDFBILL_LAST_GENERATED.date("d.m.Y", filectime(get_pdf_invoice_filename( $oID )));}else{ echo PDFBILL_NOT_GENERATED;}?></div>
                 <div class="main col-xs-12 col-sm-4"><?php echo $input_profile_invoice ?></div>
                 <div class="main col-xs-12 col-sm-4"><?php echo $buttonlist_invoice; ?>   </div>
               </div>
@@ -1388,7 +1388,7 @@ require (DIR_WS_INCLUDES.'header.php');
                 <div class="main col-xs-12 col-sm-4">&nbsp;</div>
               </div>
               <div class='col-xs-12'>
-                <div class="main col-xs-12 col-sm-4 "><?php echo PDFBILL_TXT_DELIVNOTEPROFILE ?></div>
+                  <div class="main col-xs-12 col-sm-4 "><?php echo PDFBILL_TXT_DELIVNOTEPROFILE ?> <br /> <?php if(pdfbill_delnote_exists($oID)){ echo PDFBILL_LAST_GENERATED.date("d.m.Y", filectime(get_pdf_delnote_filename( $oID )));}else{ echo PDFBILL_NOT_GENERATED;}?></div>
                 <div class="main col-xs-12 col-sm-4"><?php echo $input_profile_delivey; ?></div>
                 <div class="main col-xs-12 col-sm-4"><?php echo $buttonlist_delivery; ?>   </div>
               </div>
@@ -1396,7 +1396,7 @@ require (DIR_WS_INCLUDES.'header.php');
               
               <?php if( sizeof($arr_reminder)>0 ) { ?>
               <div class='col-xs-12'>
-                <div class="main col-xs-12 col-sm-4 "><?php echo PDFBILL_TXT_REMINDERPROFILE ?></div>
+                <div class="main col-xs-12 col-sm-4 "><?php echo PDFBILL_TXT_REMINDERPROFILE ?>  <br /> <?php if(pdfbill_reminder_exists($oID)){ echo PDFBILL_LAST_GENERATED.date("d.m.Y", filectime(get_pdf_reminder_filename( $oID )));}else{ echo PDFBILL_NOT_GENERATED;}?></div>
                 <div class="main col-xs-12 col-sm-4"><?php echo $input_profile_reminder; ?></div>
                 <div class="main col-xs-12 col-sm-4"><?php echo $buttonlist_reminder; ?>   </div>
               </div>
@@ -1404,7 +1404,7 @@ require (DIR_WS_INCLUDES.'header.php');
               
             <?php if( sizeof($arr_2ndreminder)>0 ) {?>
               <div class='col-xs-12'>
-                <div class="main col-xs-12 col-sm-4 "><?php echo PDFBILL_TXT_2NDREMINDERPROFILE ?></div>
+                <div class="main col-xs-12 col-sm-4 "><?php echo PDFBILL_TXT_2NDREMINDERPROFILE ?>  <br /> <?php if(pdfbill_2ndreminder_exists($oID)){ echo PDFBILL_LAST_GENERATED.date("d.m.Y", filectime(get_pdf_2ndreminder_filename( $oID )));}else{ echo PDFBILL_NOT_GENERATED;}?></div>
                 <div class="main col-xs-12 col-sm-4"><?php echo $input_profile_2ndreminder; ?></div>
                 <div class="main col-xs-12 col-sm-4"><?php echo $buttonlist_2ndreminder; ?>   </div>
               </div>

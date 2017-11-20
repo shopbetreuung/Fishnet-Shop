@@ -559,4 +559,6 @@ define('SITEMAP_AND', 'and ');
 define('SITEMAP_CONTENTPAGE', 'Content pages');
 define('SITEMAP_EXPORT', 'exported');
 
+define('TEXT_EDIT_CATEGORIES', 'Edit category');
+
 ?>

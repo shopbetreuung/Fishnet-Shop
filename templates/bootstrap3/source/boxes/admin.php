@@ -63,6 +63,9 @@ $box_smarty->assign('tpl_path','templates/'.CURRENT_TEMPLATE.'/');
 	if ($product->isProduct()) {
 		$box_content .= '<li><a href="' . xtc_href_link_admin(FILENAME_EDIT_PRODUCTS, 'cPath=' . $cPath . '&amp;pID=' . $product->data['products_id']) . '&amp;action=new_product' . '" onclick="window.open(this.href); return false;">' . IMAGE_BUTTON_PRODUCT_EDIT . '</a></li>';
 	}
+        if(basename($_SERVER[SCRIPT_NAME]) == 'index.php' && isset($_GET['cPath'])){
+		$box_content .= '<li><a href="' . xtc_href_link_admin(FILENAME_EDIT_PRODUCTS, 'cPath=' . $cPath . '&amp;cID=' . $current_category_id) . '&amp;action=edit_category' . '" onclick="window.open(this.href); return false;">' . TEXT_EDIT_CATEGORIES . '</a></li>';
+	}
     if ($flag==true) define('SEARCH_ENGINE_FRIENDLY_URLS',true);
     $box_smarty->assign('BOX_CONTENT', $box_content);
 

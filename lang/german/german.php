@@ -558,4 +558,6 @@ define('SITEMAP_PRODUCT', 'Produkte');
 define('SITEMAP_AND', 'und ');
 define('SITEMAP_CONTENTPAGE', 'Content pages');
 define('SITEMAP_EXPORT', 'exportiert');
+
+define('TEXT_EDIT_CATEGORIES', 'Kategorie editieren');
 ?>

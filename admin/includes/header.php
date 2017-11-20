@@ -61,24 +61,23 @@
     $search_cat = htmlentities(isset($_GET['search']) ? $_GET['search'] : ''); //DokuMan - 2010-09-08 - set undefined index
   }
 
-  if (isset($_POST['feedbacktext']) && $_POST['feedbacktext'] != '') {
-    $feedback_text = $_POST['feedbacktext'];
+if (isset($_GET['feedbacktext']) && $_GET['feedbacksend'] == 'Send' && !empty($_GET['feedbacktext'] )) {
+    $feedback_text = $_GET['feedbacktext'];
     $feedback = '';
-    $success_message = '';
+    $success = '';
     if (trim($feedback_text) != '') {
-      $feedback_text = strip_tags($feedback_text);
-      $feedback .= 'New feedback sent from: ' . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'] . '<br />';
-      $feedback .= 'Shophelfer version: ' . PROJECT_VERSION . '<br />';
-      $feedback .= 'Database version: ' . DB_VERSION . '<br />';
-      $feedback .= 'Browser: ' . $_SERVER['HTTP_USER_AGENT'] . '<br /><br />';
-      $feedback .= 'Feedback: ' . $feedback_text;
-      require_once(DIR_FS_CATALOG.DIR_WS_CLASSES.'class.phpmailer.php');
-      require_once(DIR_FS_INC . 'xtc_php_mail.inc.php');
-      xtc_php_mail(EMAIL_BILLING_ADDRESS, EMAIL_BILLING_ADDRESS, 'support@fishnet-services.com', 'support@fishnet-services.com', '', '', '', '', '', 'Feedback Shophelfer', $feedback, $feedback);
-      $success_message = FEEDBACK_SENT;
+        $feedback_text = strip_tags($feedback_text);
+        $feedback .= 'New feedback sent from: ' . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'] . '<br />';
+        $feedback .= 'Shophelfer version: ' . PROJECT_VERSION . '<br />';
+        $feedback .= 'Database version: ' . DB_VERSION . '<br />';
+        $feedback .= 'Browser: ' . $_SERVER['HTTP_USER_AGENT'] . '<br /><br />';
+        $feedback .= 'Feedback: ' . $feedback_text;
+        require_once(DIR_FS_CATALOG.DIR_WS_CLASSES.'class.phpmailer.php');
+        require_once(DIR_FS_INC . 'xtc_php_mail.inc.php');
+        xtc_php_mail(EMAIL_BILLING_ADDRESS, EMAIL_BILLING_ADDRESS, 'support@fishnet-services.com', 'support@fishnet-services.com', '', '', '', '', '', 'Feedback Shophelfer', $feedback, $feedback);
+        $success = FEEDBACK_SENT;
     }
-  }
-
+}
 ?>
           
 <nav class="navbar navbar-default navbar-fixed-top">
@@ -121,37 +120,36 @@
 				</div>
 			</form>
       
-            <script type="text/javascript">
+    <script type="text/javascript">
       $(document).ready(function() {
         $('#feedbackbtn').on('click', function() {
-             $('.feedbackinputs').removeClass('hidden');
+             $('#feedbackinput').removeClass('hidden');
+             $('#feedbacklabel').removeClass('hidden');
              $(this).hide();
         });
       });
+      $(document).on("keypress", '#feedbackform', function (e) {
+          var code = e.keyCode || e.which;
+          if (code == 13) {
+              e.preventDefault();
+              return false;
+          }
+      });
       </script>
-			
-			<ul class="hidden-xs hidden-sm hidden-md nav navbar-nav navbar-right">
-        <li class="topicon">      
-          <?php if (!isset($success_message) || $success_message == '') { ?>
-          <form id="feedbackform" method="post">
-            <div class="hidden feedbackinputs">
-              <input class="form-control" type="text" name="feedbacktext" style="width: 200px !important;" />
-              <a class="feedbackbutton" name="feedbacksubmit" type="submit" title="Feedback senden" data-toggle="tooltip" data-placement="bottom" onclick="document.getElementById('feedbackform').submit();"><span class="glyphicon glyphicon-envelope"></span></a>
-            </div>
-
-            <a class="feedbackbutton" id="feedbackbtn" title=" <?php echo (BOX_SEND_FEEDBACK) ; ?>" data-toggle="tooltip" data-placement="bottom"><span class="glyphicon glyphicon-envelope"></span></a>
-          </form>
-          <?php } else { ?>
-          <div class="feedbacksent">
-            <?php echo $success_message; ?>
-          </div>
-          <?php } ?>
+    <ul class="hidden-xs hidden-sm hidden-md nav navbar-nav navbar-right">
+        <li class="topicon">
+            <form id="feedbackform" method="get">
+                <input type="text" name="feedbacktext" id="feedbackinput" style="width: 200px !important;" class="hidden"/>
+                <a class="feedbackbutton" id="feedbackbtn" title=" <?php echo (BOX_SEND_FEEDBACK) ; ?>" data-toggle="tooltip" data-placement="bottom"><span class="glyphicon glyphicon-envelope"></span></a>
+                <label for="mySubmit" id="feedbacklabel" class="feedbackbutton hidden" title="Send" data-toggle="tooltip" data-placement="bottom"><i class="glyphicon glyphicon-send"></i> </label>
+                <input id="mySubmit" type="submit" value="Send" class="hidden" name="feedbacksend"/>
+            </form>
         </li>
-				<li class="topicon"><a href="<?php echo xtc_href_link('../index.php', '', 'NONSSL') ; ?>" data-toggle="tooltip" data-placement="bottom" title=" <?php echo (BOX_TO_SHOP) ; ?>"><span class="glyphicon glyphicon-globe"></span></a></li>			
-				<li class="topicon"><a href="<?php echo xtc_href_link('credits.php', '', 'NONSSL') ; ?>" data-toggle="tooltip" data-placement="bottom" title=" <?php echo (BOX_CREDITS) ; ?>"><span class="glyphicon glyphicon-info-sign"></span></a></li>
-				<li class="topicon"><a href="http://www.shophelfer.com/wiki/index.php" target="_blank" data-toggle="tooltip" data-placement="bottom" title="Wiki"><span class="glyphicon glyphicon-book"></span></a></li>
-				<li class="topicon"><a href="<?php echo xtc_href_link('../logoff.php', '', 'NONSSL') ; ?>" data-toggle="tooltip" data-placement="bottom" title=" <?php echo (BOX_LOGOUT) ; ?>"><span class="glyphicon glyphicon-log-out"></span></a></li>
-			</ul>
+        <li class="topicon"><a href="<?php echo xtc_href_link('../index.php', '', 'NONSSL') ; ?>" data-toggle="tooltip" data-placement="bottom" title=" <?php echo (BOX_TO_SHOP) ; ?>"><span class="glyphicon glyphicon-globe"></span></a></li>			
+        <li class="topicon"><a href="<?php echo xtc_href_link('credits.php', '', 'NONSSL') ; ?>" data-toggle="tooltip" data-placement="bottom" title=" <?php echo (BOX_CREDITS) ; ?>"><span class="glyphicon glyphicon-info-sign"></span></a></li>
+        <li class="topicon"><a href="http://www.shophelfer.com/wiki/index.php" target="_blank" data-toggle="tooltip" data-placement="bottom" title="Wiki"><span class="glyphicon glyphicon-book"></span></a></li>
+        <li class="topicon"><a href="<?php echo xtc_href_link('../logoff.php', '', 'NONSSL') ; ?>" data-toggle="tooltip" data-placement="bottom" title=" <?php echo (BOX_LOGOUT) ; ?>"><span class="glyphicon glyphicon-log-out"></span></a></li>
+    </ul>
 		</div>
 		<?php
 

@@ -15,7 +15,7 @@
    
 function xtc_add_tax($price, $tax) 
 	{ 
-	  $price=$price+$price/100*$tax;
+	  $price=floatval($price)+floatval($price)/100*floatval($tax);
 	  return $price;
 	  }
  ?>

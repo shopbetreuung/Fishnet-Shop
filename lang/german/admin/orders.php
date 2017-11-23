@@ -65,6 +65,7 @@ define('HEADING_TITLE', 'Bestellungen');
 define('HEADING_TITLE_SEARCH', 'Bestell-Nr.:');
 define('HEADING_TITLE_STATUS', 'Status:');
 define('HEADING_CHOOSE_PAYMENT', 'Zahlart');
+define('HEADING_SAVE_FILTERS', 'Ausgew&auml;hlten Filter speichern');
 
 define('TABLE_HEADING_TRACKING', 'Paketverfolgung');
 

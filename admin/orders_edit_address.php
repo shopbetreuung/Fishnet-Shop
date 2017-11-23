@@ -42,8 +42,7 @@ if ($_GET['edit_action']=='address') {
   $delivery_countries_id = get_country_id($order->delivery['country']);
   $billing_countries_id = get_country_id($order->billing['country']);
   //EOC web28 - 2013-02-02 - add dropdown countries boxes
-
-  echo xtc_draw_form('adress_edit', FILENAME_ORDERS_EDIT, 'action=address_edit', 'post');
+  echo xtc_draw_form('adress_edit', FILENAME_ORDERS_EDIT, xtc_get_all_get_params(array('action')).'action=address_edit', 'post');
   echo xtc_draw_hidden_field('oID', $_GET['oID']);
   echo xtc_draw_hidden_field('cID', $order->customer['ID']);
 ?>
@@ -263,7 +262,7 @@ if (ACCOUNT_SUBURB == 'true') {
 <br />
 <?php
 
-  echo xtc_draw_form('adress_edit', FILENAME_ORDERS_EDIT, 'action=address_edit', 'post');
+  echo xtc_draw_form('adress_edit', FILENAME_ORDERS_EDIT, xtc_get_all_get_params(array('action')).'action=address_edit', 'post');
   echo xtc_draw_hidden_field('oID', $_GET['oID']);
   echo xtc_draw_hidden_field('cID', $order->customer['ID']);
 ?>

@@ -63,6 +63,7 @@ define('HEADING_TITLE', 'Orders');
 define('HEADING_TITLE_SEARCH', 'Order ID:');
 define('HEADING_TITLE_STATUS', 'Status:');
 define('HEADING_CHOOSE_PAYMENT', 'Payment');
+define('HEADING_SAVE_FILTERS', 'Save selected filters');
 
 define('TABLE_HEADING_TRACKING', 'Package tracking');
 

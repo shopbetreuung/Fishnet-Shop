@@ -15,3 +15,6 @@ UPDATE admin_access SET inventory_turnover = '1' WHERE customers_id = '1';
 ALTER TABLE admin_access ADD globaledit INT(1) NOT NULL DEFAULT '0';
 UPDATE admin_access SET globaledit = '1' WHERE customers_id = '1';
 
+ALTER TABLE admin_access ADD stock_range INT(1) NOT NULL DEFAULT '0';
+UPDATE admin_access SET stock_range = '1' WHERE customers_id = '1';
+

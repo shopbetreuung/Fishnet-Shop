@@ -125,3 +125,78 @@ class xtc_export_csv_inventory_turnover{
                 exit;
     }
 }
+
+class xtc_export_csv_stock_range{
+    function xtc_export_csv_stock_range($filename, $products_name, $stock_range, $start_date){
+            header('Content-Type: text/csv; charset=utf-8');
+            header('Content-Disposition: attachment; filename=' . $filename . '.csv');
+            ob_end_clean();
+            $output = fopen('php://output', 'w');
+            
+            $output_header_fields = TEXT_PRODUCTS_NAME.";".TEXT_STOCK;
+
+            fputcsv($output, explode(';', $output_header_fields), ";");
+            $today = date('Y-m-d H:i:s', time());
+            $products_stock_query = xtc_db_query("select distinct op.products_id, op.products_name, p.products_quantity, p.products_ordered from " . TABLE_PRODUCTS. " p
+                    JOIN products_description pd ON p.products_id = pd.products_id
+                    JOIN orders_products op ON p.products_id = op.products_id
+                    JOIN orders o ON op.orders_id = o.orders_id 
+                    WHERE pd.language_id = '" . $_SESSION['languages_id']."' 
+                    AND (o.date_purchased BETWEEN '" . $start_date . "' AND '" . $today . "')
+                    GROUP BY op.products_name ASC");
+            
+                while ($products_stock = xtc_db_fetch_array($products_stock_query)) {
+                    $today_stock = $products_stock['products_quantity'];
+                    $sells_stock = $products_stock['products_ordered'];
+                    
+                    $whole_stock = $sells_stock + $today_stock;
+
+                    $average_stock = ($today_stock + $whole_stock) / 2;
+
+                    $date1 = new DateTime($start_date);
+                    $date2 = new DateTime($today);
+
+                    $interval = $date2->diff($date1);
+                    $number_of_days_between_given_date_and_today = $interval->format('%a');
+
+                    $average_sells_per_day = ($sells_stock / $number_of_days_between_given_date_and_today);
+
+                    $stock_range = $average_stock / $average_sells_per_day;
+                
+                    $products_name = $products_stock['products_name'];
+                    
+                    $output_fields = $products_name.";".xtc_round($stock_range,2).";";	
+                    
+                    $products_attributes_query = xtc_db_query("SELECT op.products_quantity, opa.products_options_values, pa.attributes_stock, op.products_quantity
+                                                      FROM orders_products_attributes opa
+                                                      JOIN products_attributes pa ON opa.orders_products_options_values_id = pa.options_values_id
+                                                      JOIN orders_products op ON op.orders_products_id = opa.orders_products_id
+                                                      JOIN products_options_values pov ON pov.products_options_values_id = pa.options_values_id
+                                                   WHERE
+                                                       pa.products_id = '".$products_stock['products_id'] . "'
+                                                   AND pov.language_id = '" . $_SESSION['languages_id'] . "'
+                                                   GROUP BY opa.products_options_values");
+                    while ($products_attributes_values = xtc_db_fetch_array($products_attributes_query)) {
+
+                        $sells_attr_stock = $products_attributes_values['products_quantity'];
+                        $today_attr_stock = $products_attributes_values['attributes_stock'];
+
+                        $whole_attr_stock = $sells_attr_stock + $today_attr_stock;
+
+                        $average_attr_stock = ($today_attr_stock + $whole_attr_stock) / 2;
+
+                        $average_sells_attr_per_day = ($sells_attr_stock / $number_of_days_between_given_date_and_today);
+
+                        $stock_attr_range = $average_attr_stock / $average_sells_attr_per_day;
+
+                        $attributes_name = $products_attributes_values['products_options_values'];
+                        
+                        $output_fields .= "Attribute: ".$attributes_name . " ".TEXT_HAVE." " . xtc_round($stock_attr_range,2)." ". TEXT_IN_STOCK_RANGE." \n";
+                    }
+                fputcsv($output, explode(';', $output_fields), ";");
+            }
+
+                fclose($output) or die("Can't close php://output");
+                exit;
+    }
+}

@@ -295,6 +295,7 @@ CREATE TABLE admin_access (
   invoiced_orders INT(1) NOT NULL DEFAULT 0,
   outstanding INT(1) NOT NULL DEFAULT 0,
   globaledit INT(1) NOT NULL DEFAULT 0,
+  stock_range INT(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (customers_id)
 ) ENGINE=MyISAM;
 

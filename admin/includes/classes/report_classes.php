@@ -86,24 +86,22 @@ class xtc_export_csv_invoice_orders {
 }
 
 class xtc_export_csv_inventory_turnover{
-    function xtc_export_csv_inventory_turnover($filename, $products_name, $ai, $it, $start_date){
+    function xtc_export_csv_inventory_turnover($filename, $products_name, $ai, $it, $start_date, $inventory_turnover){
             header('Content-Type: text/csv; charset=utf-8');
             header('Content-Disposition: attachment; filename=' . $filename . '.csv');
             ob_end_clean();
             $output = fopen('php://output', 'w');
-            
             $output_header_fields = TEXT_PRODUCTS_NAME.";".TEXT_AI.";".CSV_TEXT_INVENTORY_TURNOVER;
 
             fputcsv($output, explode(';', $output_header_fields), ";");
             $today = date('Y-m-d H:i:s', time());
-            $selected = 'o.orders_id, p.products_id, pd.products_name, p.products_quantity, p.products_ordered';
-            $products_query = xtc_db_query("SELECT DISTINCT ".$selected." 
-                    FROM products p
+            $products_query = xtc_db_query("select distinct op.products_id, op.products_name, p.products_quantity, p.products_ordered from " . TABLE_PRODUCTS. " p
                     JOIN products_description pd ON p.products_id = pd.products_id
                     JOIN orders_products op ON p.products_id = op.products_id
                     JOIN orders o ON op.orders_id = o.orders_id 
                     WHERE pd.language_id = '" . $_SESSION['languages_id']."' 
-                    AND (o.date_purchased BETWEEN '" . $start_date . "' AND '" . $today . "') ");
+                    AND (o.date_purchased BETWEEN '" . $start_date . "' AND '" . $today . "')
+                    GROUP BY op.products_name ASC");
             while ($products_values = xtc_db_fetch_array($products_query)) {
 
                 $sold_stock = $products_values['products_ordered'];
@@ -115,10 +113,38 @@ class xtc_export_csv_inventory_turnover{
                 $ai = ($whole_stock + $current_stock)  / 2;
 
                 $it = $sold_stock / $ai;
+                if($inventory_turnover > xtc_round($it, 2)){
+                    $output_fields = $products_name.";".$ai.";".xtc_round($it, 2).";";
+                }
                 
-                $output_fields = $products_name.";".$ai.";".xtc_round($it, 2).";";
+                $products_attributes_query = xtc_db_query("SELECT op.products_quantity, opa.products_options_values, pa.attributes_stock, op.products_quantity
+                                                      FROM orders_products_attributes opa
+                                                      JOIN products_attributes pa ON opa.orders_products_options_values_id = pa.options_values_id
+                                                      JOIN orders_products op ON op.orders_products_id = opa.orders_products_id
+                                                      JOIN products_options_values pov ON pov.products_options_values_id = pa.options_values_id
+                                                   WHERE
+                                                       pa.products_id = '".$products_values['products_id'] . "'
+                                                   AND pov.language_id = '" . $_SESSION['languages_id'] . "'
+                                                   GROUP BY opa.products_options_values");
+                while ($products_attributes_values = xtc_db_fetch_array($products_attributes_query)) {
+                    $sold_attr_stock = $products_attributes_values['products_quantity'];
+                    $current_attr_stock = $products_attributes_values['attributes_stock'];
 
-                fputcsv($output, explode(';', $output_fields), ";");
+                    $whole_attr_stock = $sold_attr_stock + $current_attr_stock;
+
+                    $ai_attr = ($whole_attr_stock + $current_attr_stock)  / 2;
+
+                    $it_attr = $sold_attr_stock / $ai_attr;
+
+                    $attributes_name = $products_attributes_values['products_options_values'];
+                    
+                    if($inventory_turnover > xtc_round($it_attr, 2)){
+                        $output_fields .= "Attribute: ".$attributes_name . " ".TEXT_HAVE_AI." " . xtc_round($ai_attr,2)." ". TEXT_INVENTORY_TURNOVER_RESULT. " " . xtc_round($it_attr, 2). " \n";
+                    }
+                }
+                if($output_fields != NULL){
+                    fputcsv($output, explode(';', $output_fields), ";");
+                }
             }
 
                 fclose($output) or die("Can't close php://output");

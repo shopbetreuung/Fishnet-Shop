@@ -16,5 +16,7 @@ define('TEXT_IT', 'Lagerumschlagsh&auml;ufigkeit');
 
 define('CSV_NAME_FILE', 'lu');
 
+define('TEXT_HAVE_AI', 'hat Durchschnittlicher Lagerbestand ');
+define('TEXT_INVENTORY_TURNOVER_RESULT', 'und IT ist')
 ?>
 

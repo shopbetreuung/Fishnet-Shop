@@ -17,7 +17,7 @@
   require(DIR_WS_CLASSES . 'report_classes.php');
    $error = false;
     if($_GET['action'] == 'inventory_turnover'){
-        $handler = new xtc_export_csv_inventory_turnover(CSV_NAME_FILE, $products_name, $ai, $it, $_SESSION['start_date']);
+        $handler = new xtc_export_csv_inventory_turnover(CSV_NAME_FILE, $products_name, $ai, $it, $_SESSION['start_date'], $_SESSION['inventory_turnover']);
     }
 ?>
 
@@ -53,21 +53,20 @@
         <?php
         if (isset($_POST['from_t']) && is_numeric($_POST['from_t']) && isset($_POST['from_m']) && is_numeric($_POST['from_m']) && isset($_POST['from_y']) && is_numeric($_POST['from_y']) && isset($_POST['inventory_turnover']) && is_numeric($_POST['inventory_turnover'])) {
             $start_date = (int) $_POST['from_y'] . '-' . (int) $_POST['from_m'] . '-' . (int) $_POST['from_t'] . ' 00:00:00';
+            $inputed_inventory_turnover = xtc_round($_POST['inventory_turnover'], 2);
             $_SESSION['start_date'] = $start_date;
+            $_SESSION['inventory_turnover'] = $inputed_inventory_turnover;
             $today = date('Y-m-d H:i:s', time());
-            $selected = 'o.orders_id, p.products_id, pd.products_name, p.products_quantity, p.products_ordered';
-            $products_query = xtc_db_query("SELECT DISTINCT ".$selected." 
-                    FROM products p
+            $products_query = xtc_db_query("select distinct op.products_id, op.products_name, p.products_quantity, p.products_ordered from " . TABLE_PRODUCTS. " p
                     JOIN products_description pd ON p.products_id = pd.products_id
                     JOIN orders_products op ON p.products_id = op.products_id
                     JOIN orders o ON op.orders_id = o.orders_id 
                     WHERE pd.language_id = '" . $_SESSION['languages_id']."' 
-                    AND (o.date_purchased BETWEEN '" . $start_date . "' AND '" . $today . "') ");
+                    AND (o.date_purchased BETWEEN '" . $start_date . "' AND '" . $today . "')
+                    GROUP BY op.products_name ASC");
             while ($products_values = xtc_db_fetch_array($products_query)) {
 
                 $sold_stock = $products_values['products_ordered'];
-                
-                
                 $current_stock = $products_values['products_quantity'];
                 
                 $whole_stock = $current_stock + $sold_stock;
@@ -77,13 +76,40 @@
 
                 $date = $products_values['date_purcashed'];
                 $datefinal = date('d.m.Y', strtotime($date));
-                $inputed_inventory_turnover = xtc_round($_POST['inventory_turnover'], 2);
                 
+                $products_attributes_query = xtc_db_query("SELECT op.products_quantity, opa.products_options_values, pa.attributes_stock, op.products_quantity
+                                                  FROM orders_products_attributes opa
+                                                  JOIN products_attributes pa ON opa.orders_products_options_values_id = pa.options_values_id
+						  JOIN orders_products op ON op.orders_products_id = opa.orders_products_id
+                                                  JOIN products_options_values pov ON pov.products_options_values_id = pa.options_values_id
+                                               WHERE
+                                                   pa.products_id = '".$products_values['products_id'] . "'
+                                               AND pov.language_id = '" . $_SESSION['languages_id'] . "'
+                                               GROUP BY opa.products_options_values 
+                            ");
                 if($inputed_inventory_turnover > xtc_round($it, 2)){
                     echo '<tr><td width="33.3333333%" class="dataTableContent">'.$products_values['products_name'] . '</td>';
                         echo '<td width="33.3333333%" class="dataTableContent">'.$ai.'</td>';
                         echo '<td width="33.3333333%" class="dataTableContent">'.xtc_round($it, 2).'</td>';
                     echo '</tr>';
+                }
+                while ($products_attributes_values = xtc_db_fetch_array($products_attributes_query)) {
+        
+                    $sold_attr_stock = $products_attributes_values['products_quantity'];
+                    $current_attr_stock = $products_attributes_values['attributes_stock'];
+
+                    $whole_attr_stock = $sold_attr_stock + $current_attr_stock;
+
+                    $ai_attr = ($whole_attr_stock + $current_attr_stock)  / 2;
+
+                    $it_attr = $sold_attr_stock / $ai_attr;
+
+                    if($inputed_inventory_turnover > xtc_round($it_attr, 2)){
+                        echo '<tr><td width="33.3333333%" class="dataTableContent">&nbsp;&nbsp;&nbsp;&nbsp;-'.$products_attributes_values['products_options_values'] . '</td>';
+                            echo '<td width="33.3333333%" class="dataTableContent">'.$ai_attr.'</td>';
+                            echo '<td width="33.3333333%" class="dataTableContent">'.xtc_round($it_attr, 2).'</td>';
+                        echo '</tr>';
+                    }
                 }
             }
         }

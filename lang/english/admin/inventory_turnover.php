@@ -16,4 +16,7 @@ define('TEXT_IT', 'Inventory turnover');
 
 define('CSV_NAME_FILE', 'it');
 
+define('TEXT_HAVE_AI', 'have average inventory');
+define('TEXT_INVENTORY_TURNOVER_RESULT', 'and IT is')
+
 ?>

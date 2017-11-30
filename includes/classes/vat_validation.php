@@ -243,6 +243,12 @@ class vat_validation {
     if($this->live_check == 'true') {
       $country_iso_code = strtoupper($country);
 
+	  // fix for Greece
+	  $search_array = array('gr');
+	  $replace_array = array('el');
+	  $country = str_replace($search_array, $replace_array, $country);
+	  $country_check['countries_iso_code_2'] = str_replace($search_array, $replace_array, $country); 
+		
       //Check VAT for EU countries only
       switch ($country_iso_code) {
       // EU countries
@@ -254,12 +260,13 @@ class vat_validation {
         case 'DE':
         case 'DK':
         case 'EE':
-        case 'GR':
+        case 'EL':
         case 'ES':
         case 'FI':
         case 'FR':
         case 'GB':
         case 'HU':
+	    case 'HR':
         case 'IE':
         case 'IT':
         case 'LT':

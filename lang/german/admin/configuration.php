@@ -564,6 +564,9 @@ define('CHECK_CLIENT_AGENT_DESC','Bekannte Suchmaschinen Spider ohne Session auf
 define('SHOW_IP_LOG_TITLE','IP-Log im Checkout?');
 define('SHOW_IP_LOG_DESC','Text "Ihre IP wird aus Sicherheitsgr&uuml;nden gespeichert", beim Checkout anzeigen?');
 
+define('SAVE_IP_IN_DATABASE_TITLE', 'Speichern Sie die IP-Adresse in der Datenbank?');
+define('SAVE_IP_IN_DATABASE_DESC', 'Betrifft nur IPv4 Adressen');
+
 define('ACTIVATE_GIFT_SYSTEM_TITLE','Gutscheinsystem aktivieren?');
 define('ACTIVATE_GIFT_SYSTEM_DESC','Gutscheinsystem aktivieren?');
 

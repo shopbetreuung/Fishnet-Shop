@@ -160,11 +160,24 @@ if (isset ($_SESSION['tmp_oID']) && is_numeric($_SESSION['tmp_oID'])) { // Dokum
     $discount = '0.00';
   }
 
-  if (isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+   if (isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
     $customers_ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
   } else {
     $customers_ip = $_SERVER['REMOTE_ADDR'];
   }
+  
+  if(SAVE_IP_IN_DATABASE == 'true'){
+        $ip = $customers_ip;
+    }elseif(SAVE_IP_IN_DATABASE == 'false'){
+        $ip = '0';
+    }elseif(SAVE_IP_IN_DATABASE == 'shortened'){
+        if(filter_var($customers_ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4)) {
+            $ip = preg_replace("/(\d+\.\d+\.\d+)\.\d+/", "$1.0", $customers_ip);
+        }else{
+            $ip = $customers_ip;
+        }
+
+    }
 
   $sql_data_array = array ('customers_id' => $_SESSION['customer_id'],
                            'customers_name' => $order->customer['firstname'].' '.$order->customer['lastname'],
@@ -219,7 +232,7 @@ if (isset ($_SESSION['tmp_oID']) && is_numeric($_SESSION['tmp_oID'])) { // Dokum
                            'currency' => $order->info['currency'],
                            'currency_value' => $order->info['currency_value'],
                            'account_type' => $_SESSION['account_type'], //web28 - 2012-04-12 add missing account-type
-                           'customers_ip' => $customers_ip,
+                           'customers_ip' => $ip,
                            'language' => $_SESSION['language'],
                            'comments' => $order->info['comments']
                            );  

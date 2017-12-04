@@ -22,4 +22,5 @@ define('TABLE_HEADING_NUMBER', 'No.');
 define('TABLE_HEADING_PRODUCTS', 'Products');
 define('TABLE_HEADING_PURCHASED', 'Purchased');
 define('TABLE_HEADING_QUANTITY', 'Stock');
+define('TEXT_RESET_ALL', 'Reset all');
 ?>

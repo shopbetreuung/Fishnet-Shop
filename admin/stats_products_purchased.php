@@ -16,7 +16,21 @@
    --------------------------------------------------------------*/
 
   require('includes/application_top.php');
+  require(DIR_FS_INC. 'xtc_remove_non_numeric.inc.php');
   
+  if ($_POST['maxrows']){
+  $maxrows = xtc_remove_non_numeric(xtc_db_prepare_input($_POST['maxrows']));
+  } else {
+  $maxrows = $_GET['maxrows'];
+  }
+  if ($maxrows <= '20') $maxrows=20;
+  
+  if ($_GET['clear_id']){
+  xtc_db_query("update " . TABLE_PRODUCTS . " set products_ordered = '0' where products_id ='".$_GET['clear_id']."'");
+  }
+  if ($_GET['clear_all']=='true'){
+  xtc_db_query("update " . TABLE_PRODUCTS . " set products_ordered = '0' ");
+  }   
   require (DIR_WS_INCLUDES.'head.php');
 ?>
 </head>
@@ -39,6 +53,7 @@
                       <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_PRODUCTS; ?></td>
                       <td class="dataTableHeadingContent" align="center"><?php echo TABLE_HEADING_PURCHASED; ?>&nbsp;</td>
                       <td class="dataTableHeadingContent" align="center"><?php echo TABLE_HEADING_QUANTITY; ?>&nbsp;</td>
+					    <td class="dataTableHeadingContent" align="center"><?php echo TABLE_HEADING_RESET; ?>&nbsp;</td> 	
                     </tr>
                     <?php
                     $rows = (isset($_GET['page']) && $_GET['page'] > 1) ? $_GET['page'] * $maxrows - $maxrows : 0;                    
@@ -69,17 +84,32 @@
                       <td class="dataTableContent"><?php echo $products['products_name']; ?></td>                      
                       <td class="dataTableContent" align="center"><?php echo $products['products_ordered']; ?>&nbsp;</td>
                       <td class="dataTableContent" align="center"><?php echo $products['products_quantity']; ?>&nbsp;</td>
+					  <td class="dataTableContent" align="center"><?php echo '<a href="'.$_SERVER['PHP_SELF'].'?clear_id='.$products['products_id'].'&page='.$_GET['page'].'&maxrows='.$maxrows.'"><img src="images/icon_reset.gif" alt="reset" style="border:0px;" /> </a>'; ?></td>	
+                  
                     </tr>
                   <?php
                     }
                   ?>
+				    <tr class="dataTableRow" onmouseover="this.className='dataTableRowOver';this.style.cursor='hand'" onmouseout="this.className='dataTableRow'">    
+					<td class="dataTableContent" colspan="6" align="right" style="padding-right:20px"><?php echo '<a href="'.$_SERVER['PHP_SELF'].'?clear_all=true&page='.$_GET['page'].'&maxrows='.$maxrows.'"><img src="images/icons/warning.gif" alt="" style="border:0px;" />&nbsp;'.TEXT_RESET_ALL.'&nbsp;<img src="images/icons/warning.gif" alt="" style="border:0px;" /></a>'; ?></td>
+				  </tr>	  
                   </table>
                 </div>
                 
-                    <div class='col-xs-12'>
-                      <div class="smallText col-xs-6" ><?php echo $products_split->display_count($products_query_numrows, '20', $_GET['page'], TEXT_DISPLAY_NUMBER_OF_PRODUCTS); ?></div>
-                      <div class="smallText col-xs-6 text-right" ><?php echo $products_split->display_links($products_query_numrows, '20', MAX_DISPLAY_PAGE_LINKS, $_GET['page']); ?>&nbsp;</div>
-                    </div>
+                <div class='col-xs-12'>
+                    <div class="smallText col-xs-6" ><?php echo $products_split->display_count($products_query_numrows, '20', $_GET['page'], TEXT_DISPLAY_NUMBER_OF_PRODUCTS); ?></div>
+                    <div class="smallText col-xs-6 text-right" ><?php echo $products_split->display_links($products_query_numrows, '20', MAX_DISPLAY_PAGE_LINKS, $_GET['page']); ?>&nbsp;</div>
+                </div>
+                <div class='col-xs-12'> &nbsp; </div>
+                <div class='col-xs-12'>
+                    <div class="smallText col-xs-12" ><?php echo TEXT_ROWS. xtc_draw_form('getmaxrows', FILENAME_STATS_PRODUCTS_PURCHASED, 'page='.$_GET['page']) . xtc_draw_input_field('maxrows', $maxrows, 'style="width:50px"'); ?>
+                        <input type="image" src="images/icon_arrow_right.gif" alt="los" title="los" /> </form>
+                    </div> 
+                </div>
+	
+	
+				  
+				  
                 
 </div>
 <!-- body_eof //-->

@@ -21,4 +21,5 @@ define('TABLE_HEADING_MODEL', 'Products model');
 define('TABLE_HEADING_NUMBER', 'No.');
 define('TABLE_HEADING_PRODUCTS', 'Products');
 define('TABLE_HEADING_VIEWED', 'Viewed');
+define('TEXT_RESET_ALL', 'Reset all');
 ?>

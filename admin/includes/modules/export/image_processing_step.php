@@ -83,7 +83,7 @@ if ( !class_exists( "image_processing_step" ) ) {
       }
 
       $max_files = sizeof($files);
-      $step = $_GET['max'];
+      $step = (int)$_GET['max'];
       $count = (int)$_GET['count'];
       $limit = $offset + $step;
       for ($i=$offset; $i<$limit; $i++) {

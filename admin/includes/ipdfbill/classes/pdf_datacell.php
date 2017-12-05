@@ -1021,7 +1021,7 @@ class data_cell_poslist extends data_cell_text {
     $txt = str_replace( '*p_model_att*', $this->products_data['order_data'][$pos_inx]['PRODUCTS_ATTRIBUTES_MODEL'], $txt );
     $txt = str_replace( '*p_model_org*', $this->products_data['order_data'][$pos_inx]['PRODUCTS_MODEL'], $txt );
     
-    $txt = str_replace( '*p_name*',         $this->products_data['order_data'][$pos_inx]['PRODUCTS_NAME'].$this->products_data['order_data'][$pos_inx]['PRODUCTS_ATTRIBUTES'], $txt );
+    $txt = str_replace( '*p_name*',         html_entity_decode($this->products_data['order_data'][$pos_inx]['PRODUCTS_NAME'], ENT_QUOTES | ENT_HTML5).$this->products_data['order_data'][$pos_inx]['PRODUCTS_ATTRIBUTES'], $txt );
     $txt = str_replace( '*p_price*',        $this->products_data['order_data'][$pos_inx]['PRODUCTS_PRICE'], $txt );
     $txt = str_replace( '*p_single_price*', $this->products_data['order_data'][$pos_inx]['PRODUCTS_SINGLE_PRICE'], $txt );
     $txt = str_replace( '*p_qty*',          $this->products_data['order_data'][$pos_inx]['PRODUCTS_QTY'], $txt );

@@ -17,10 +17,24 @@
    
   function xtc_get_products_stock($products_id) {
     $products_id = xtc_get_prid($products_id);
+    
+    $stock = 0;
+    $stock_special = 0;
+    
+    $stock_with_special_query = xtc_db_query("select specials_quantity from " . TABLE_SPECIALS . " where products_id = '" . xtc_db_input((int)$products_id) . "'");
+    $stock_with_special_values = xtc_db_fetch_array($stock_with_special_query);
+    $stock_special = $stock_with_special_values['specials_quantity'];
+    
+    
     $stock_query = xtc_db_query("select products_quantity from " . TABLE_PRODUCTS . " where products_id = '" . xtc_db_input((int)$products_id) . "'");
     $stock_values = xtc_db_fetch_array($stock_query);
-
-    return $stock_values['products_quantity'];
+    $stock = $stock_values['products_quantity'];
+    
+    if($stock_special > 0){
+        return $stock_special;
+    }else{
+        return $stock;
+    }
   }
 
  ?>

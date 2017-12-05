@@ -187,7 +187,8 @@
       while ($resp[$cnt] = xtc_db_fetch_array($rqItems)) {
         // to avoid rounding differences round for every quantum
         // multiply with the number of items afterwords.
-        $price = $resp[$cnt]['psum'] / $resp[$cnt]['pquant'];
+		if($resp[$cnt]['psum'] > 0 || $resp[$cnt]['pquant'] > 0) //check for PHP division by zero warning
+        	$price = $resp[$cnt]['psum'] / $resp[$cnt]['pquant'];
 
         // products_attributes
         // are there any attributes for this order_id ?

@@ -898,6 +898,7 @@
                   $contents[] = array('align' => 'center', 'text' => '<div style="padding-top: 5px; font-weight: bold; width: 90%;">' . TEXT_MARKED_ELEMENTS . '</div>');
                   $contents[] = array('align' => 'center', 'text' => '<input type="submit" class="btn btn-default" name="multi_delete" onclick="this.blur();" value="'. BUTTON_DELETE . '">&nbsp;<input type="submit" class="btn btn-default" onclick="this.blur();" name="multi_move" value="' . BUTTON_MOVE . '">&nbsp;<input type="submit" class="btn btn-default" onclick="this.blur();" name="multi_copy" value="' . BUTTON_COPY . '">');
                   $contents[] = array('align' => 'center', 'text' => '<input type="submit" class="btn btn-default" name="multi_status_on" onclick="this.blur();" value="'. BUTTON_STATUS_ON . '">&nbsp;<input type="submit" class="btn btn-default" onclick="this.blur();" name="multi_status_off" value="' . BUTTON_STATUS_OFF . '">');
+                  $contents[] = array('align' => 'center', 'text' => '<input type="submit" class="btn btn-default" name="global_edit" onclick="this.blur();" value="'. BUTTON_GLOBAL_EDIT . '">');
                   $contents[] = array('text'  => '</form>');
                   //Single Element Actions
                   $contents[] = array('align' => 'center', 'text' => '<div style="padding-top: 5px; font-weight: bold; width: 90%; border-top: 1px solid Black; margin-top: 5px;">' . TEXT_ACTIVE_ELEMENT . '</div>');
@@ -926,6 +927,7 @@
                   $contents[] = array('align' => 'center', 'text' => '<div style="padding-top: 5px; font-weight: bold; width: 90%;">' . TEXT_MARKED_ELEMENTS . '</div>');
                   $contents[] = array('align' => 'center', 'text' => xtc_button(BUTTON_DELETE, 'submit', 'name="multi_delete"').'&nbsp;'.xtc_button(BUTTON_WASTE_BIN, 'submit', 'name="waste_bin"').'&nbsp;'.xtc_button(BUTTON_MOVE, 'submit', 'name="multi_move"').'&nbsp;'.xtc_button(BUTTON_COPY, 'submit', 'name="multi_copy"'));
                   $contents[] = array('align' => 'center', 'text' => '<input type="submit" class="btn btn-default" name="multi_status_on" onclick="this.blur();" value="'. BUTTON_STATUS_ON . '">&nbsp;<input type="submit" class="btn btn-default" onclick="this.blur();" name="multi_status_off" value="' . BUTTON_STATUS_OFF . '">');
+                  $contents[] = array('align' => 'center', 'text' => '<input type="submit" class="btn btn-default" name="global_edit" onclick="this.blur();" value="'. BUTTON_GLOBAL_EDIT . '">');
                   $contents[] = array('text'  => '</form>');
                   //Single Product Actions
                   $contents[] = array('align' => 'center', 'text' => '<div style="padding-top: 5px; font-weight: bold; width: 90%; border-top: 1px solid Black; margin-top: 5px;">' . TEXT_ACTIVE_ELEMENT . '</div>');

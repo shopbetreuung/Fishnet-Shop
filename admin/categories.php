@@ -101,6 +101,29 @@ if (isset ($_POST['waste_bin'])) {
 //---WASTE PAPER BIN END ---//
 
 
+//---GLOBAL EDIT PRODUCTS START---//
+
+if (isset ($_POST['global_edit'])) {
+    $pID = array();
+    $cID = array();
+    if(is_array($_POST['multi_products'])){
+        foreach ($_POST['multi_products'] as $product_id){
+            $pID[] =  $product_id;
+        }
+    }
+    
+    if(is_array($_POST['multi_categories'])){
+        foreach ($_POST['multi_categories'] as $category_id){
+            $cID[] =  $category_id;
+        }
+    }
+  $pid = implode("_", $pID);
+  $cid = implode("_", $cID);
+  
+  xtc_redirect(xtc_href_link('globaledit.php', 'pPath='.xtc_get_id_path($pid).'&cPath='.xtc_get_id_path($cid), 'SSL'));
+}
+//---GLOBAL EDIT PRODUCTS END---//
+
 //regular actions
 if ($_GET['action']) {
 	switch ($_GET['action']) {

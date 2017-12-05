@@ -85,4 +85,6 @@ define('BUTTON_VIEW_PRODUCT', 'Artikel ansehen');
 //EOF - web28 - 2011-07-13 - New Button
 
 define('BUTTON_DELETE_GUESTS', 'L&ouml;sche G&auml;ste');
+
+define('BUTTON_GLOBAL_EDIT', 'Globale Bearbeitung');
 ?>

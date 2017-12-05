@@ -244,7 +244,21 @@ if (is_array($payment_modules->modules)) {
   $payment_button .= $payment_modules->process_button();
 }
 $smarty->assign('MODULE_BUTTONS', $payment_button);
-$smarty->assign('CHECKOUT_BUTTON', xtc_image_submit('button_confirm_order.gif', IMAGE_BUTTON_CONFIRM_ORDER) . '</form>' . "\n");
+if ($_SESSION['shipping']['id'] != '1_1') {
+	$smarty->assign('CHECKOUT_BUTTON', xtc_image_submit('button_confirm_order.gif', IMAGE_BUTTON_CONFIRM_ORDER) . '</form>' . "\n");
+} else {
+	$smarty->assign('CHECKOUT_BUTTON', '</form>' . "\n");
+}
+
+$error_stack = '';
+if (isset($messageStack->messages)) {
+	foreach ($messageStack->messages as $message) {
+		if ($message['class'] == 'checkout_confirmation') {
+			$error_stack .=	'<div ' . $message['params'] . '>' . $message['text'] . '</div><br />';
+		}
+	}
+}
+$smarty->assign('CHECKOUT_CONFIRMATION_ERRORS', $error_stack);
 
 //check if display conditions on checkout page is true
 if (DISPLAY_REVOCATION_ON_CHECKOUT == 'true') {

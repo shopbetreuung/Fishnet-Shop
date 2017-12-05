@@ -129,7 +129,7 @@ if ($action == 'address_edit') {
                            );
   xtc_db_perform(TABLE_ORDERS, $sql_data_array, 'update', 'orders_id = \''.(int)($_POST['oID']).'\'');
 
-  xtc_redirect(xtc_href_link(FILENAME_ORDERS_EDIT, 'edit_action=address&oID='.(int)$_POST['oID']));
+  xtc_redirect(xtc_href_link(FILENAME_ORDERS_EDIT, xtc_get_all_get_params(array('action')).'edit_action=address&oID='.(int)$_POST['oID']));
 }
 // Adressbearbeitung Ende
 
@@ -246,7 +246,7 @@ if ($action == 'product_edit') {
   // Update products_ordered (for bestsellers list)
   xtc_db_query("UPDATE " . TABLE_PRODUCTS . " SET products_ordered = products_ordered - ".sprintf('%d', $new_qty)." WHERE products_id = '".(int)($_POST['products_id'])."'");
 
-  xtc_redirect(xtc_href_link(FILENAME_ORDERS_EDIT, 'edit_action=products&oID='.(int)$_POST['oID']));
+  xtc_redirect(xtc_href_link(FILENAME_ORDERS_EDIT, xtc_get_all_get_params(array('action')).'edit_action=products&oID='.(int)$_POST['oID']));
 }
 // Artikel bearbeiten Ende:
 
@@ -390,7 +390,7 @@ if ($action == 'product_option_edit') {
   $sql_data_array = xtc_array_merge($sql_data_array, $update_sql_data);
   xtc_db_perform(TABLE_ORDERS_PRODUCTS, $sql_data_array, 'update', 'orders_products_id = \''.(int)($_POST['opID']).'\'');
 
-  xtc_redirect(xtc_href_link(FILENAME_ORDERS_EDIT, 'edit_action=options&oID='.(int)$_POST['oID'].'&pID='.(int)$products['products_id'].'&opID='.(int)$_POST['opID']));
+  xtc_redirect(xtc_href_link(FILENAME_ORDERS_EDIT, xtc_get_all_get_params(array('action')).'edit_action=options&oID='.(int)$_POST['oID'].'&pID='.(int)$products['products_id'].'&opID='.(int)$_POST['opID']));
 }
 // Produkt Optionen bearbeiten Ende
 
@@ -515,7 +515,7 @@ if ($action == 'product_option_ins') {
   $sql_data_array = xtc_array_merge($sql_data_array, $update_sql_data);
   xtc_db_perform(TABLE_ORDERS_PRODUCTS, $sql_data_array, 'update', 'orders_products_id = \''.(int)($_POST['opID']).'\'');
 
-  xtc_redirect(xtc_href_link(FILENAME_ORDERS_EDIT, 'edit_action=options&oID='.(int)$_POST['oID'].'&pID='.(int)$products['products_id'].'&opID='.(int)$_POST['opID']));
+  xtc_redirect(xtc_href_link(FILENAME_ORDERS_EDIT, xtc_get_all_get_params(array('action')).'edit_action=options&oID='.(int)$_POST['oID'].'&pID='.(int)$products['products_id'].'&opID='.(int)$_POST['opID']));
 }
 
 // Produkt Optionen einfügen Ende
@@ -528,7 +528,7 @@ if ($action == 'payment_edit') {
   $sql_data_array = array ('payment_method' => xtc_db_prepare_input($_POST['payment']), 'payment_class' => xtc_db_prepare_input($_POST['payment']),);
   xtc_db_perform(TABLE_ORDERS, $sql_data_array, 'update', 'orders_id = \''.(int)($_POST['oID']).'\'');
 
-  xtc_redirect(xtc_href_link(FILENAME_ORDERS_EDIT, 'edit_action=other&oID='.(int)$_POST['oID']));
+  xtc_redirect(xtc_href_link(FILENAME_ORDERS_EDIT, xtc_get_all_get_params(array('action')).'edit_action=other&oID='.(int)$_POST['oID']));
 }
 // Zahlung Ende
 
@@ -562,7 +562,7 @@ if ($action == 'shipping_edit') {
   $sql_data_array = array ('shipping_method' => xtc_db_prepare_input($shipping_text), 'shipping_class' => xtc_db_prepare_input($shipping_class),);
   xtc_db_perform(TABLE_ORDERS, $sql_data_array, 'update', 'orders_id = \''.(int)($_POST['oID']).'\'');
 
-  xtc_redirect(xtc_href_link(FILENAME_ORDERS_EDIT, 'edit_action=other&oID='.(int)$_POST['oID']));
+  xtc_redirect(xtc_href_link(FILENAME_ORDERS_EDIT, xtc_get_all_get_params(array('action')).'edit_action=other&oID='.(int)$_POST['oID']));
 }
 // Versandkosten Ende
 
@@ -575,16 +575,16 @@ if ($action== 'ot_edit') {
     $module_query = xtc_db_query("select value, class from ".TABLE_ORDERS_TOTAL." where orders_id = '".(int)$_POST['oID']."' and class='ot_shipping'");
     if (!xtc_db_num_rows($module_query)) {
       $messageStack->add_session(ERROR_INPUT_SHIPPING_TITLE, 'error');
-      xtc_redirect(xtc_href_link(FILENAME_ORDERS_EDIT, 'edit_action=other&oID='.(int)$_POST['oID']));
+      xtc_redirect(xtc_href_link(FILENAME_ORDERS_EDIT, xtc_get_all_get_params(array('action')).'edit_action=other&oID='.(int)$_POST['oID']));
     }
   }
   if ($_POST['value'] != '' && trim($_POST['title']) == '') {
     $messageStack->add_session(ERROR_INPUT_TITLE, 'error');
-    xtc_redirect(xtc_href_link(FILENAME_ORDERS_EDIT, 'edit_action=other&oID='.(int)$_POST['oID']));
+    xtc_redirect(xtc_href_link(FILENAME_ORDERS_EDIT, xtc_get_all_get_params(array('action')).'edit_action=other&oID='.(int)$_POST['oID']));
   }
   if ($_POST['value'] == '' && trim($_POST['title']) == '') {
     $messageStack->add_session(ERROR_INPUT_EMPTY, 'error');
-    xtc_redirect(xtc_href_link(FILENAME_ORDERS_EDIT, 'edit_action=other&oID='.(int)$_POST['oID']));
+    xtc_redirect(xtc_href_link(FILENAME_ORDERS_EDIT, xtc_get_all_get_params(array('action')).'edit_action=other&oID='.(int)$_POST['oID']));
   }
   //BOF - web28 2011-05-08 - new error input handling
 
@@ -631,7 +631,7 @@ if ($action== 'ot_edit') {
     xtc_db_perform(TABLE_ORDERS_TOTAL, $sql_data_array);
   }
 
-  xtc_redirect(xtc_href_link(FILENAME_ORDERS_EDIT, 'edit_action=other&oID='.(int)$_POST['oID']));
+  xtc_redirect(xtc_href_link(FILENAME_ORDERS_EDIT, xtc_get_all_get_params(array('action')).'edit_action=other&oID='.(int)$_POST['oID']));
 }
 // OT Module Ende
 
@@ -677,7 +677,7 @@ if ($action == 'lang_edit') {
   $sql_data_array = array ('language' => xtc_db_prepare_input($lang['directory']));
   xtc_db_perform(TABLE_ORDERS, $sql_data_array, 'update', 'orders_id  = \''.(int)($_POST['oID']).'\'');
 
-  xtc_redirect(xtc_href_link(FILENAME_ORDERS_EDIT, 'edit_action=other&oID='.(int)$_POST['oID']));
+  xtc_redirect(xtc_href_link(FILENAME_ORDERS_EDIT, xtc_get_all_get_params(array('action')).'edit_action=other&oID='.(int)$_POST['oID']));
 }
 
 // Sprachupdate Ende
@@ -745,7 +745,7 @@ if ($action == 'curr_edit') {
   }
   // OT Ende
 
-  xtc_redirect(xtc_href_link(FILENAME_ORDERS_EDIT, 'edit_action=other&oID='.(int)$_POST['oID']));
+  xtc_redirect(xtc_href_link(FILENAME_ORDERS_EDIT, xtc_get_all_get_params(array('action')).'edit_action=other&oID='.(int)$_POST['oID']));
 }
 
 // Währungswechsel Ende
@@ -789,7 +789,7 @@ if ($action == 'product_option_delete') {
   $sql_data_array = xtc_array_merge($sql_data_array, $update_sql_data);
   xtc_db_perform(TABLE_ORDERS_PRODUCTS, $sql_data_array, 'update', 'orders_products_id = \''.(int)($_POST['opID']).'\'');
 
-  xtc_redirect(xtc_href_link(FILENAME_ORDERS_EDIT, 'edit_action=options&oID='.(int)$_POST['oID'].'&pID='.(int)$products['products_id'].'&opID='.(int)$_POST['opID']));
+  xtc_redirect(xtc_href_link(FILENAME_ORDERS_EDIT, xtc_get_all_get_params(array('action')).'edit_action=options&oID='.(int)$_POST['oID'].'&pID='.(int)$products['products_id'].'&opID='.(int)$_POST['opID']));
 }
 // Löschen einer Artikeloptions aus der Bestellung Ende:
 
@@ -798,7 +798,7 @@ if ($action == 'ot_delete') {
 
   xtc_db_query("delete from ".TABLE_ORDERS_TOTAL." where orders_total_id = '".(int)($_POST['otID'])."'");
 
-  xtc_redirect(xtc_href_link(FILENAME_ORDERS_EDIT, 'edit_action=other&oID='.(int)$_POST['oID']));
+  xtc_redirect(xtc_href_link(FILENAME_ORDERS_EDIT, xtc_get_all_get_params(array('action')).'edit_action=other&oID='.(int)$_POST['oID']));
 }
 // Löschen eines OT Moduls aus der Bestellung Ende:
 
@@ -1128,8 +1128,8 @@ if ($action == 'save_order') {
   //EXIT; //DEBUG
   xtc_db_query("delete from ".TABLE_ORDERS_RECALCULATE." where orders_id = '".xtc_db_input($_POST['oID'])."'");
   // Löschen des Zwischenspeichers Ende
-
-  xtc_redirect(xtc_href_link(FILENAME_ORDERS, 'action=edit&oID='.(int)$_POST['oID']));
+unset($_GET['edit_action']);
+  xtc_redirect(xtc_href_link(FILENAME_ORDERS, xtc_get_all_get_params(array('action, oID')).'action=edit'));
 }
 // Rückberechnung Ende
 
@@ -1299,19 +1299,21 @@ require (DIR_WS_INCLUDES.'head.php');
                 
                     <div class="col-xs-12">
                       <?php
+                      unset($_GET['cID']);
                       echo TEXT_SAVE_ORDER;
-                      echo xtc_draw_form('save_order', FILENAME_ORDERS_EDIT, 'action=save_order', 'post');
-                        echo xtc_draw_hidden_field('customers_status_id', $address[customers_status]);
+                      echo xtc_draw_form('save_order', FILENAME_ORDERS_EDIT, xtc_get_all_get_params(array('action')).'action=save_order', 'post');
+                        echo xtc_draw_hidden_field('customers_status_id', $address['customers_status']);
                         echo xtc_draw_hidden_field('oID', (int)$_GET['oID']);
                         echo xtc_draw_hidden_field('cID', (int)$_GET['cID']);
                         echo '<input type="submit" class="btn btn-default" onclick="this.blur();" value="'.BUTTON_SAVE.'"/>';
                         //BOF - web28 -2011-06-08 - add back buttons
                         if (isset($_GET['edit_action'])) {
+                            unset($_GET['edit_action']);
                           echo '&nbsp;&nbsp;&nbsp;';
-                          echo '<a class="btn btn-default" onclick="this.blur();" href="'.xtc_href_link(FILENAME_ORDERS_EDIT, 'oID='.(int)$_GET['oID']).'">'.BUTTON_BACK.'</a>';
+                          echo '<a class="btn btn-default" onclick="this.blur();" href="'.xtc_href_link(FILENAME_ORDERS_EDIT, xtc_get_all_get_params(array('action'))).'">'.BUTTON_BACK.'</a>';
                         } else {
                           echo '&nbsp;&nbsp;&nbsp;';
-                          echo '<a class="btn btn-default" onclick="this.blur();" href="'.xtc_href_link(FILENAME_ORDERS, 'action=edit&oID='.(int)$_GET['oID']).'">'.BUTTON_BACK.'</a>';
+                          echo '<a class="btn btn-default" onclick="this.blur();" href="'.xtc_href_link(FILENAME_ORDERS, xtc_get_all_get_params(array('action'))).'">'.BUTTON_BACK.'</a>';
                         }
                         //EOF - web28 -2011-06-08 - add back buttons
                         ?>
@@ -1343,9 +1345,9 @@ require (DIR_WS_INCLUDES.'head.php');
                 default :
                   if (is_object($order)) {
                     $heading[] = array ('text' => '<b>'.TABLE_HEADING_ORDER.(int)$_GET['oID'].'</b>');
-                    $contents[] = array ('align' => 'center', 'text' => '<br />'.TEXT_EDIT_ADDRESS.'<br /><a class="btn btn-default" onclick="this.blur();" href="'.xtc_href_link(FILENAME_ORDERS_EDIT, 'edit_action=address&oID='.(int)$_GET['oID']).'">'.BUTTON_EDIT.'</a><br /><br />');
-                    $contents[] = array ('align' => 'center', 'text' => '<br />'.TEXT_EDIT_PRODUCTS.'<br /><a class="btn btn-default" onclick="this.blur();" href="'.xtc_href_link(FILENAME_ORDERS_EDIT, 'edit_action=products&oID='.(int)$_GET['oID']).'">'.BUTTON_EDIT.'</a><br /><br />');
-                    $contents[] = array ('align' => 'center', 'text' => '<br />'.TEXT_EDIT_OTHER.'<br /><a class="btn btn-default" onclick="this.blur();" href="'.xtc_href_link(FILENAME_ORDERS_EDIT, 'edit_action=other&oID='.(int)$_GET['oID']).'">'.BUTTON_EDIT.'</a><br /><br />');
+                    $contents[] = array ('align' => 'center', 'text' => '<br />'.TEXT_EDIT_ADDRESS.'<br /><a class="btn btn-default" onclick="this.blur();" href="'.xtc_href_link(FILENAME_ORDERS_EDIT, xtc_get_all_get_params(array('action, oID')).'edit_action=address').'">'.BUTTON_EDIT.'</a><br /><br />');
+                    $contents[] = array ('align' => 'center', 'text' => '<br />'.TEXT_EDIT_PRODUCTS.'<br /><a class="btn btn-default" onclick="this.blur();" href="'.xtc_href_link(FILENAME_ORDERS_EDIT, xtc_get_all_get_params(array('action, oID')).'edit_action=products').'">'.BUTTON_EDIT.'</a><br /><br />');
+                    $contents[] = array ('align' => 'center', 'text' => '<br />'.TEXT_EDIT_OTHER.'<br /><a class="btn btn-default" onclick="this.blur();" href="'.xtc_href_link(FILENAME_ORDERS_EDIT, xtc_get_all_get_params(array('action, oID')).'edit_action=other').'">'.BUTTON_EDIT.'</a><br /><br />');
                   }
                   break;
               }

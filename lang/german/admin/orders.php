@@ -35,6 +35,8 @@ define( 'PDFBILL_TXT_DELIVNOTEPROFILE' ,          'Lieferschein:' );
 define( 'PDFBILL_TXT_AUTOMATIC' ,                 'Automatische Profilauswahl:' );
 define('PDFBILL_TXT_REMINDERPROFILE',             '1. Mahnung');
 define('PDFBILL_TXT_2NDREMINDERPROFILE',          '2. Mahnung');
+define('PDFBILL_LAST_GENERATED', 'Zuletzt generiert am ');
+define('PDFBILL_NOT_GENERATED', 'Noch nicht generiert ');
 // --- eof -- ipdfbill --------
    
    
@@ -63,6 +65,7 @@ define('HEADING_TITLE', 'Bestellungen');
 define('HEADING_TITLE_SEARCH', 'Bestell-Nr.:');
 define('HEADING_TITLE_STATUS', 'Status:');
 define('HEADING_CHOOSE_PAYMENT', 'Zahlart');
+define('HEADING_SAVE_FILTERS', 'Ausgew&auml;hlten Filter speichern');
 
 define('TABLE_HEADING_TRACKING', 'Paketverfolgung');
 

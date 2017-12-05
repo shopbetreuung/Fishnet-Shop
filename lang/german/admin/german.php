@@ -187,6 +187,10 @@ define('BOX_SAFETERMS','Safeterms - AGB Service'); // Tomcraft - 2013-06-21 - Sa
 define('BOX_IT_RECHT_KANZLEI', 'IT Recht Kanzlei');
 define('BOX_LAW','Rechtliches');
 define('BOX_PARCEL_CARRIERS', 'Paketdienstleister');
+define('BOX_INVENTORY', 'Inventurliste');
+define('BOX_INVOICED_ORDERS', 'Ausgangsrechnungen');
+define('BOX_OUTSTANDING_ORDERS', 'Offene Posten');
+define('BOX_INVENTORY_TURNOVER', 'Lagerumschlagsh&auml;ufigkeit');
 
 define('TXT_GROUPS','<b>Gruppen</b>:');
 define('TXT_SYSTEM','System');

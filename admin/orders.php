@@ -794,7 +794,7 @@ require (DIR_WS_INCLUDES.'header.php');
         </div>
         <div class="col-xs-12">
             <a class="btn btn-default" href="<?php echo xtc_href_link(FILENAME_ORDERS, xtc_get_all_get_params(array('action')));?>"><?php echo BUTTON_BACK; ?></a>
-            <a class="btn btn-default" href="<?php echo xtc_href_link(FILENAME_ORDERS_EDIT, 'oID='.$oID.'&cID=' . $order->customer['ID']);?>"><?php echo BUTTON_EDIT ?></a>
+            <a class="btn btn-default" href="<?php echo xtc_href_link(FILENAME_ORDERS_EDIT, xtc_get_all_get_params(array('action')).'cID=' . $order->customer['ID']);?>"><?php echo BUTTON_EDIT ?></a>
         </div>
 
       <!-- BOC CUSTOMERS INFO BLOCK -->
@@ -1244,7 +1244,7 @@ require (DIR_WS_INCLUDES.'header.php');
 			<?php
 			}
 			?>
-            <a class="btn btn-default" href="<?php echo xtc_href_link(FILENAME_ORDERS, 'page='.$_GET['page'].'&oID='.$oID); ?>"><?php echo BUTTON_BACK;?></a>
+            <a class="btn btn-default" href="<?php echo xtc_href_link(FILENAME_ORDERS, xtc_get_all_get_params(array('action')));?>"><?php echo BUTTON_BACK; ?></a>
 			
              <?php 
             // --- bof -- ipdfbill -------- 
@@ -1371,7 +1371,7 @@ require (DIR_WS_INCLUDES.'header.php');
               </div>
               <div class='col-xs-12'><br></div>
               <div class='col-xs-12'>
-                <div class="main col-xs-12 col-sm-4"><?php echo PDFBILL_TXT_BILLPROFILE ?></div>
+                  <div class="main col-xs-12 col-sm-4"><?php echo PDFBILL_TXT_BILLPROFILE ?> <br /> <?php if(pdfbill_invoice_exists($oID)){ echo PDFBILL_LAST_GENERATED.date("d.m.Y", filectime(get_pdf_invoice_filename( $oID )));}else{ echo PDFBILL_NOT_GENERATED;}?></div>
                 <div class="main col-xs-12 col-sm-4"><?php echo $input_profile_invoice ?></div>
                 <div class="main col-xs-12 col-sm-4"><?php echo $buttonlist_invoice; ?>   </div>
               </div>
@@ -1388,7 +1388,7 @@ require (DIR_WS_INCLUDES.'header.php');
                 <div class="main col-xs-12 col-sm-4">&nbsp;</div>
               </div>
               <div class='col-xs-12'>
-                <div class="main col-xs-12 col-sm-4 "><?php echo PDFBILL_TXT_DELIVNOTEPROFILE ?></div>
+                  <div class="main col-xs-12 col-sm-4 "><?php echo PDFBILL_TXT_DELIVNOTEPROFILE ?> <br /> <?php if(pdfbill_delnote_exists($oID)){ echo PDFBILL_LAST_GENERATED.date("d.m.Y", filectime(get_pdf_delnote_filename( $oID )));}else{ echo PDFBILL_NOT_GENERATED;}?></div>
                 <div class="main col-xs-12 col-sm-4"><?php echo $input_profile_delivey; ?></div>
                 <div class="main col-xs-12 col-sm-4"><?php echo $buttonlist_delivery; ?>   </div>
               </div>
@@ -1396,7 +1396,7 @@ require (DIR_WS_INCLUDES.'header.php');
               
               <?php if( sizeof($arr_reminder)>0 ) { ?>
               <div class='col-xs-12'>
-                <div class="main col-xs-12 col-sm-4 "><?php echo PDFBILL_TXT_REMINDERPROFILE ?></div>
+                <div class="main col-xs-12 col-sm-4 "><?php echo PDFBILL_TXT_REMINDERPROFILE ?>  <br /> <?php if(pdfbill_reminder_exists($oID)){ echo PDFBILL_LAST_GENERATED.date("d.m.Y", filectime(get_pdf_reminder_filename( $oID )));}else{ echo PDFBILL_NOT_GENERATED;}?></div>
                 <div class="main col-xs-12 col-sm-4"><?php echo $input_profile_reminder; ?></div>
                 <div class="main col-xs-12 col-sm-4"><?php echo $buttonlist_reminder; ?>   </div>
               </div>
@@ -1404,7 +1404,7 @@ require (DIR_WS_INCLUDES.'header.php');
               
             <?php if( sizeof($arr_2ndreminder)>0 ) {?>
               <div class='col-xs-12'>
-                <div class="main col-xs-12 col-sm-4 "><?php echo PDFBILL_TXT_2NDREMINDERPROFILE ?></div>
+                <div class="main col-xs-12 col-sm-4 "><?php echo PDFBILL_TXT_2NDREMINDERPROFILE ?>  <br /> <?php if(pdfbill_2ndreminder_exists($oID)){ echo PDFBILL_LAST_GENERATED.date("d.m.Y", filectime(get_pdf_2ndreminder_filename( $oID )));}else{ echo PDFBILL_NOT_GENERATED;}?></div>
                 <div class="main col-xs-12 col-sm-4"><?php echo $input_profile_2ndreminder; ?></div>
                 <div class="main col-xs-12 col-sm-4"><?php echo $buttonlist_2ndreminder; ?>   </div>
               </div>
@@ -1439,6 +1439,15 @@ elseif ($action == 'custom_action') {
   include ('orders_actions.php');
   // ACTION ELSE - START
 } else {
+    
+    if(($_GET['save_filters']) == 'on'){
+        $link_oID = xtc_get_all_get_params(array('oID', 'action'));
+        $link_action = xtc_get_all_get_params(array('action'));
+    }else{
+        $link_oID = '';
+        $link_action = '';
+    }
+    
 ?>
             <div class='col-xs-12'>
                 <div class='col-xs-12 col-sm-6'>
@@ -1454,9 +1463,10 @@ elseif ($action == 'custom_action') {
                   </form>
                     </div>
                     <div class='col-xs-12'>
-                  <?php echo xtc_draw_form('payment_method_status', FILENAME_ORDERS, '', 'get'); ?>
+                  <?php echo xtc_draw_form('payment_method_status', FILENAME_ORDERS, '', 'get', 'id="payment_order_status"'); ?>
                   <?php echo HEADING_TITLE_STATUS . ' ' . xtc_draw_pull_down_menu('status', array_merge(array(array('id' => '', 'text' => TEXT_ALL_ORDERS)),array(array('id' => '0', 'text' => TEXT_VALIDATING)), $orders_statuses),(isset($_GET['status']) && xtc_not_null($_GET['status']) ? (int)$_GET['status'] : ''),'onchange="this.form.submit();"'); ?> <br />
-                  <?php echo HEADING_CHOOSE_PAYMENT. ' ' . xtc_draw_pull_down_menu('payment_method', array_merge(array(array('id' => '', 'text' => TEXT_ALL_PAYMENT_METHODS)), $payment_methods),(isset($_GET['payment_method']) && xtc_not_null($_GET['payment_method']) ? $_GET['payment_method'] : ''),'onchange="this.form.submit();"').xtc_draw_hidden_field(xtc_session_name(), xtc_session_id()); ?>
+                  <?php echo HEADING_CHOOSE_PAYMENT. ' ' . xtc_draw_pull_down_menu('payment_method', array_merge(array(array('id' => '', 'text' => TEXT_ALL_PAYMENT_METHODS)), $payment_methods),(isset($_GET['payment_method']) && xtc_not_null($_GET['payment_method']) ? $_GET['payment_method'] : ''),'onchange="this.form.submit();"').xtc_draw_hidden_field(xtc_session_name(), xtc_session_id()); ?> <br />
+                  <?php echo HEADING_SAVE_FILTERS; ?> <input type="checkbox" name="save_filters" class="save-filters" <?php if(isset($_GET['save_filters'])) echo "checked='checked'"; ?>  onchange="this.form.submit();"/>
                   </form>
                     </div>
                 </div>
@@ -1660,12 +1670,12 @@ elseif ($action == 'custom_action') {
                         }
                       }
                     }
-                    $contents[] = array ('align' => 'center', 'text' => '<br /><input type="submit" class="btn btn-default" value="'. BUTTON_DELETE .'"><a class="btn btn-default" href="'.xtc_href_link(FILENAME_ORDERS, xtc_get_all_get_params(array ('oID', 'action')).'oID='.$oInfo->orders_id).'">' . BUTTON_CANCEL . '</a>');
+                    $contents[] = array ('align' => 'center', 'text' => '<br /><input type="submit" class="btn btn-default" value="'. BUTTON_DELETE .'"><a class="btn btn-default" href="'.xtc_href_link(FILENAME_ORDERS, $link_oID.'oID='.$oInfo->orders_id).'">' . BUTTON_CANCEL . '</a>');
                     break;
                   default :
                     if (isset($oInfo) && is_object($oInfo)) {
                       $heading[] = array ('text' => '<b>['.$oInfo->orders_id.']&nbsp;&nbsp;'.xtc_datetime_short($oInfo->date_purchased).'</b>');
-                      $contents[] = array ('align' => 'center', 'text' => '<a class="btn btn-default" href="'.xtc_href_link(FILENAME_ORDERS, xtc_get_all_get_params(array ('oID', 'action')).'oID='.$oInfo->orders_id.'&action=edit').'">'.BUTTON_EDIT.'</a> <a class="btn btn-default" href="'.xtc_href_link(FILENAME_ORDERS, xtc_get_all_get_params(array ('oID', 'action')).'oID='.$oInfo->orders_id.'&action=delete').'">'.BUTTON_DELETE.'</a>');
+                      $contents[] = array ('align' => 'center', 'text' => '<a class="btn btn-default" href="'.xtc_href_link(FILENAME_ORDERS, $link_oID.'oID='.$oInfo->orders_id.'&action=edit').'">'.BUTTON_EDIT.'</a> <a class="btn btn-default" href="'.xtc_href_link(FILENAME_ORDERS, $link_oID.'oID='.$oInfo->orders_id.'&action=delete').'">'.BUTTON_DELETE.'</a>');
                       //BOF - Dokuman - 2012-06-19 - BILLSAFE payment module
                       if ($oInfo->payment_method === 'billsafe_2') {
                         $contents[] = array ('align' => 'center', 'text' => '<a class="btn btn-default" href="billsafe_orders_2.php?oID='.$oInfo->orders_id.'">BillSAFE Details</a>');

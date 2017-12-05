@@ -16,9 +16,22 @@
    ---------------------------------------------------------------------------------------*/
 
   function xtc_write_user_info($customer_id) {
-
+      
+        if(SAVE_IP_IN_DATABASE == 'true'){
+            $ip = $_SESSION['tracking']['ip'];
+        }elseif(SAVE_IP_IN_DATABASE == 'false'){
+            $ip = '0';
+        }elseif(SAVE_IP_IN_DATABASE == 'shortened'){
+            if(filter_var($_SESSION['tracking']['ip'], FILTER_VALIDATE_IP, FILTER_FLAG_IPV4)) {
+                $ip = preg_replace("/(\d+\.\d+\.\d+)\.\d+/", "$1.0", $_SESSION['tracking']['ip']);
+            }else{
+                $ip = $_SESSION['tracking']['ip'];
+            }
+            
+        }
+      
       $sql_data_array = array('customers_id' => xtc_db_input((int)$customer_id),
-                              'customers_ip' => xtc_db_input($_SESSION['tracking']['ip']),
+                              'customers_ip' => xtc_db_input($ip),
                               'customers_ip_date' => 'now()',
                               'customers_host' => xtc_db_input($_SESSION['tracking']['http_referer']['host']),
                               'customers_advertiser' => xtc_db_input($_SESSION['tracking']['refID']),

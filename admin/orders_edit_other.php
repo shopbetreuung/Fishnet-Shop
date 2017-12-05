@@ -33,7 +33,7 @@ defined( '_VALID_XTC' ) or die( 'Direct Access to this location is not allowed.'
     <td class="dataTableHeadingContent" width="100%" colspan="3"><b><?php echo TEXT_LANGUAGE; ?></b></td>
   </tr>
   <?php
-  echo xtc_draw_form('lang_edit', FILENAME_ORDERS_EDIT, 'action=lang_edit', 'post');
+  echo xtc_draw_form('lang_edit', FILENAME_ORDERS_EDIT, xtc_get_all_get_params(array('action')).'action=lang_edit', 'post');
     $lang_query = xtc_db_query("select languages_id, name, directory from " . TABLE_LANGUAGES . " ");
     while($lang = xtc_db_fetch_array($lang_query)){
       ?>
@@ -71,7 +71,7 @@ defined( '_VALID_XTC' ) or die( 'Direct Access to this location is not allowed.'
     <td class="dataTableHeadingContent" width="100%" colspan="3"><b><?php echo TEXT_CURRENCIES; ?></b></td>
   </tr>
   <?php
-    echo xtc_draw_form('curr_edit', FILENAME_ORDERS_EDIT, 'action=curr_edit', 'post');
+    echo xtc_draw_form('curr_edit', FILENAME_ORDERS_EDIT, xtc_get_all_get_params(array('action')).'action=curr_edit', 'post');
     $curr_query = xtc_db_query("select currencies_id, title, code, value from " . TABLE_CURRENCIES . " ");
     while($curr = xtc_db_fetch_array($curr_query)){
       ?>
@@ -135,7 +135,7 @@ defined( '_VALID_XTC' ) or die( 'Direct Access to this location is not allowed.'
     $order_payment_text = constant('MODULE_PAYMENT_'.strtoupper($order_payment).'_TEXT_TITLE');
   }
   //EOF - web28 - 2011-06-08 - FIX for no installed payment modules
-  echo xtc_draw_form('payment_edit', FILENAME_ORDERS_EDIT, 'action=payment_edit', 'post');
+  echo xtc_draw_form('payment_edit', FILENAME_ORDERS_EDIT, xtc_get_all_get_params(array('action')).'action=payment_edit', 'post');
     ?>
     <tr class="dataTableRow">
       <td class="dataTableContent" align="left" width="30%">
@@ -185,7 +185,7 @@ defined( '_VALID_XTC' ) or die( 'Direct Access to this location is not allowed.'
     }
     $order_shipping_text = constant('MODULE_SHIPPING_'.strtoupper($order_shipping).'_TEXT_TITLE');
   }  
-  echo xtc_draw_form('shipping_edit', FILENAME_ORDERS_EDIT, 'action=shipping_edit', 'post');
+  echo xtc_draw_form('shipping_edit', FILENAME_ORDERS_EDIT, xtc_get_all_get_params(array('action')).'action=shipping_edit', 'post');
 ?>
 	<table class='table table-striped table-bordered'>
 	  <tr class="dataTableHeadingRow">
@@ -241,7 +241,7 @@ defined( '_VALID_XTC' ) or die( 'Direct Access to this location is not allowed.'
     //if ($total != 'ot_shipping'){
     ?>
     <tr class="dataTableRow">
-      <?php echo xtc_draw_form('ot_edit', FILENAME_ORDERS_EDIT, 'action=ot_edit', 'post'); ?>
+      <?php echo xtc_draw_form('ot_edit', FILENAME_ORDERS_EDIT, xtc_get_all_get_params(array('action')).'action=ot_edit', 'post'); ?>
        <td class="dataTableContent" align="left"><?php echo $total_text; ?></td>
         <td class="dataTableContent" align="left"><?php echo xtc_draw_input_field('title', $ototal['title'], 'size=40'); ?></td>
         <td class="dataTableContent" align="left" width="20%"><?php echo xtc_draw_input_field('value', $ototal['value']); ?></td>
@@ -256,7 +256,7 @@ defined( '_VALID_XTC' ) or die( 'Direct Access to this location is not allowed.'
       </form>
       <td>
         <?php
-          echo xtc_draw_form('ot_delete', FILENAME_ORDERS_EDIT, 'action=ot_delete', 'post');
+          echo xtc_draw_form('ot_delete', FILENAME_ORDERS_EDIT, xtc_get_all_get_params(array('action')).'action=ot_delete', 'post');
           echo xtc_draw_hidden_field('oID', $_GET['oID']);
           echo xtc_draw_hidden_field('otID', $ototal['orders_total_id']);
           //BOF - web28 - 2011-06-13 - no display of BUTTON_DELETE by or_total
@@ -286,7 +286,7 @@ defined( '_VALID_XTC' ) or die( 'Direct Access to this location is not allowed.'
     //if (($total != 'ot_subtotal')&&($total != 'ot_subtotal_no_tax')&&($total != 'ot_total')&&($total != 'ot_tax')){
     //if ($total != 'ot_shipping'){
     ?>
-    <?php echo xtc_draw_form('ot_edit', FILENAME_ORDERS_EDIT, 'action=ot_edit', 'post'); ?>
+    <?php echo xtc_draw_form('ot_edit', FILENAME_ORDERS_EDIT, xtc_get_all_get_params(array('action')).'action=ot_edit', 'post'); ?>
   <tr class="dataTableRow">
     <td class="dataTableContent" style="width:200px"><b><?php echo TEXT_ORDER_TOTAL; ?></b></td>
     <td class="dataTableContent" align="left"><?php echo $total_text; ?></td>
@@ -311,7 +311,7 @@ defined( '_VALID_XTC' ) or die( 'Direct Access to this location is not allowed.'
     </form>
         <td>
         <?php
-          echo xtc_draw_form('ot_delete', FILENAME_ORDERS_EDIT, 'action=ot_delete', 'post');
+          echo xtc_draw_form('ot_delete', FILENAME_ORDERS_EDIT, xtc_get_all_get_params(array('action')).'action=ot_delete', 'post');
           echo xtc_draw_hidden_field('oID', $_GET['oID']);
           echo xtc_draw_hidden_field('otID', $ototal['orders_total_id']);
           //BOF - web28 - 2011-06-13 - no display of BUTTON_DELETE by or_total

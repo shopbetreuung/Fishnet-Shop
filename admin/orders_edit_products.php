@@ -60,7 +60,7 @@ $currencies = new currencies();
     ?>
     <tr class="dataTableRow">
       <?php
-      echo xtc_draw_form('product_edit', FILENAME_ORDERS_EDIT, 'action=product_edit', 'post');
+      echo xtc_draw_form('product_edit', FILENAME_ORDERS_EDIT, xtc_get_all_get_params(array('action')).'action=product_edit', 'post');
         //BOF - web28 - 2011-01-16 - FIX missing sessions id
         echo xtc_draw_hidden_field(xtc_session_name(), xtc_session_id());
         //EOF - web28 - 2011-01-16 - FIX missing sessions id
@@ -105,7 +105,7 @@ $currencies = new currencies();
       <td class="dataTableContent" colspan="8">&nbsp;</td>
       <td class="dataTableContent">
         <?php
-        echo xtc_draw_form('select_options', FILENAME_ORDERS_EDIT, '', 'GET');
+        echo xtc_draw_form('select_options', FILENAME_ORDERS_EDIT, xtc_get_all_get_params(array('action')), 'GET');
           echo xtc_draw_hidden_field('edit_action', 'options');
           echo xtc_draw_hidden_field('pID', $order->products[$i]['id']);
           echo xtc_draw_hidden_field('oID', $_GET['oID']);
@@ -127,7 +127,7 @@ for ($i = 0, $n = sizeof($order->products); $i < $n; $i++) {
 ?>   
     
     <?php
-      echo xtc_draw_form('product_edit', FILENAME_ORDERS_EDIT, 'action=product_edit', 'post');
+      echo xtc_draw_form('product_edit', FILENAME_ORDERS_EDIT, xtc_get_all_get_params(array('action')).'action=product_edit', 'post');
         //BOF - web28 - 2011-01-16 - FIX missing sessions id
         echo xtc_draw_hidden_field(xtc_session_name(), xtc_session_id());
         //EOF - web28 - 2011-01-16 - FIX missing sessions id
@@ -189,7 +189,7 @@ for ($i = 0, $n = sizeof($order->products); $i < $n; $i++) {
           ?>
         </form>
         <?php
-        echo xtc_draw_form('select_options', FILENAME_ORDERS_EDIT, '', 'GET');
+        echo xtc_draw_form('select_options', FILENAME_ORDERS_EDIT, xtc_get_all_get_params(array('action')), 'GET');
           echo xtc_draw_hidden_field('edit_action', 'options');
           echo xtc_draw_hidden_field('pID', $order->products[$i]['id']);
           echo xtc_draw_hidden_field('oID', $_GET['oID']);

@@ -34,6 +34,8 @@ define( 'PDFBILL_TXT_DELIVNOTEPROFILE' ,    'Delivery note:' );
 define( 'PDFBILL_TXT_BILLPROFILE' ,         'Profile:' );  
 define('PDFBILL_TXT_REMINDERPROFILE',       '1. reminder');
 define('PDFBILL_TXT_2NDREMINDERPROFILE',    '2. reminder');
+define('PDFBILL_LAST_GENERATED', 'Last generated on ');
+define('PDFBILL_NOT_GENERATED', 'Not yet generated');
 // --- eof -- ipdfbill -------- 
    
 define('TEXT_BANK', 'Bank Collection');
@@ -61,6 +63,7 @@ define('HEADING_TITLE', 'Orders');
 define('HEADING_TITLE_SEARCH', 'Order ID:');
 define('HEADING_TITLE_STATUS', 'Status:');
 define('HEADING_CHOOSE_PAYMENT', 'Payment');
+define('HEADING_SAVE_FILTERS', 'Save selected filters');
 
 define('TABLE_HEADING_TRACKING', 'Package tracking');
 

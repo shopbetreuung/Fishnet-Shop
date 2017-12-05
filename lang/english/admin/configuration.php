@@ -555,6 +555,9 @@ define('CHECK_CLIENT_AGENT_DESC','Prevent known spiders from starting a session.
 define('SHOW_IP_LOG_TITLE','IP-Log on Checkout?');
 define('SHOW_IP_LOG_DESC','Show Text "Your IP will be saved", in checkout?');
 
+define('SAVE_IP_IN_DATABASE_TITLE', 'Save IP Address in database?');
+define('SAVE_IP_IN_DATABASE_DESC', 'Concerning IPv4 addresses only');
+
 define('ACTIVATE_GIFT_SYSTEM_TITLE','Activate Gift Voucher System');
 define('ACTIVATE_GIFT_SYSTEM_DESC','Activate gift voucher system');
 

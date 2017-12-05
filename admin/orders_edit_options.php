@@ -48,7 +48,7 @@
       ?>
       <tr class="dataTableRow">
         <?php
-        echo xtc_draw_form('product_option_edit', FILENAME_ORDERS_EDIT, 'action=product_option_edit', 'post');
+        echo xtc_draw_form('product_option_edit', FILENAME_ORDERS_EDIT, xtc_get_all_get_params(array('action')).'action=product_option_edit', 'post');
           //BOF - web28 - 2011-01-16 - FIX missing sessions id
           echo xtc_draw_hidden_field(xtc_session_name(), xtc_session_id());
           //EOF - web28 - 2011-01-16 - FIX missing sessions id
@@ -75,7 +75,7 @@
         </form>
         <td class="dataTableContent">
           <?php
-          echo xtc_draw_form('product_option_delete', FILENAME_ORDERS_EDIT, 'action=product_option_delete', 'post');
+          echo xtc_draw_form('product_option_delete', FILENAME_ORDERS_EDIT, xtc_get_all_get_params(array('action')).'action=product_option_delete', 'post');
             //BOF - web28 - 2011-01-16 - FIX missing sessions id
             echo xtc_draw_hidden_field(xtc_session_name(), xtc_session_id());
             //EOF - web28 - 2011-01-16 - FIX missing sessions id

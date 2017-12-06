@@ -49,8 +49,8 @@ require('includes/application_top.php');
                 <?php
                 echo xtc_draw_form("change_categories", "globaledit.php?pPath=".$_GET['pPath'].'&cPath='.$_GET['cPath'],"","post","id=change_categories");
                     echo TEXT_CHOOSE.xtc_draw_pull_down_menu('search_replace_categories', $categories_change).'<br />';
-                    echo TEXT_SEARCH.xtc_draw_input_field('search_categories', '' ,'style="width: 135px"').'<br />';
-                    echo TEXT_REPLACE.xtc_draw_input_field('replace_categories', '' ,'style="width: 135px"').'<br />';
+                    echo TEXT_SEARCH.xtc_draw_input_field('search_categories', '' ,'style="width: 200px !important"').'<br />';
+                    echo TEXT_REPLACE.xtc_draw_input_field('replace_categories', '' ,'style="width: 200px !important"').'<br />';
                 ?>
                 <input type="submit" class="btn btn-default" name="categories_change" value="<?php echo BUTTON_SAVE; ?>" <?php echo $confirm_save_entry;?>>
                 </form>
@@ -114,8 +114,8 @@ require('includes/application_top.php');
                 <?php
                 echo xtc_draw_form("change_products", "globaledit.php?pPath=".$_GET['pPath'].'&cPath='.$_GET['cPath'],"","post","id=change_products");
                     echo TEXT_CHOOSE.xtc_draw_pull_down_menu('search_replace_products', $products_change).'<br />';
-                    echo TEXT_SEARCH.xtc_draw_input_field('search_products', '' ,'style="width: 135px"').'<br />';
-                    echo TEXT_REPLACE.xtc_draw_input_field('replace_products', '' ,'style="width: 135px"').'<br />';
+                    echo TEXT_SEARCH.xtc_draw_input_field('search_products', '' ,'style="width: 200px !important"').'<br />';
+                    echo TEXT_REPLACE.xtc_draw_input_field('replace_products', '' ,'style="width: 200px !important"').'<br />';
                 ?>
                 <input type="submit" class="btn btn-default" name="products_change" value="<?php echo BUTTON_SAVE; ?>" <?php echo $confirm_save_entry;?>>
                 </form>

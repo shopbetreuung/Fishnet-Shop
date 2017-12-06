@@ -302,7 +302,7 @@ var $PRZ; //Enthält die Prüfziffer
        $Method16 = 0;
      }
      if ($Help == 1) {
-       if ($Checksum == substr($AccountNo,Checkpoint - 2,1)) {
+       if ($Checksum == substr($AccountNo,$Checkpoint - 2,1)) {
          $Method16 = 0;
        }
      }
@@ -1218,7 +1218,7 @@ var $PRZ; //Enthält die Prüfziffer
           }
         }
         // Ausnahme: Diese Kontonummer ist als richtig zu bewerten.
-        if ($AccountNo == 0185125434) {
+        if ((string)$AccountNo == '0185125434') {
           $PResult = 0;
         }
         break;

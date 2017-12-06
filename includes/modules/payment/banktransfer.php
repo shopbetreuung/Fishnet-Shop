@@ -154,10 +154,10 @@
 
     function pre_confirmation_check(){
       if (@$_POST['banktransfer_fax'] == false && @$_POST['recheckok'] != 'true') {
+		  
         include(DIR_WS_CLASSES . 'banktransfer_validation.php');
-
         // iban / classic?
-        $number = preg_replace('/[^a-zA-Z0-9]/', '', $_POST['banktransfer_number']); 
+        $number = preg_replace_callback('/[^a-zA-Z0-9]/', function($m){ return ''; }, $_POST['banktransfer_number']); 
         // iban
         $banktransfer_validation = new IbanAccountCheck;
         $banktransfer_result = $banktransfer_validation->IbanCheckAccount($number, $_POST['banktransfer_blz']);

@@ -199,7 +199,7 @@ define('IMAGE_BUTTON_CONTINUE', 'Continue');
 define('IMAGE_BUTTON_DELETE', 'Delete');
 define('IMAGE_BUTTON_LOGIN', 'Login');
 define('IMAGE_BUTTON_LOGIN_NEWSLETTER', 'Subscribe');
-define('IMAGE_BUTTON_UNSUBSCRIBE_NEWSLETTER', 'Unubscribe');
+define('IMAGE_BUTTON_UNSUBSCRIBE_NEWSLETTER', 'Unsubscribe');
 define('IMAGE_BUTTON_IN_CART', 'Add to cart');
 define('IMAGE_BUTTON_SEARCH', 'Search');
 define('IMAGE_BUTTON_UPDATE', 'Update');

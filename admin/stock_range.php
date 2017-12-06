@@ -12,16 +12,14 @@
    --------------------------------------------------------------*/
 
   require('includes/application_top.php');
-  
-  require (DIR_WS_INCLUDES.'head.php');
-  require (DIR_WS_CLASSES.'order.php');
-  require(DIR_WS_CLASSES . 'report_classes.php');
-   $error = false;
-    if($_GET['action'] == 'stock_range'){
-        $handler = new xtc_export_csv_stock_range(CSV_NAME_FILE, $products_name, $stock_range, $_SESSION['start_date']);
-    }
-?>
 
+if($_GET['action'] == 'stock_range'){
+	require_once(DIR_WS_CLASSES . 'report_classes.php');
+	$handler = new xtc_export_csv_stock_range(CSV_NAME_FILE, $products_name, $stock_range, $_SESSION['start_date']);
+}
+
+require_once(DIR_WS_INCLUDES.'head.php');
+?>
 </head>
 <body marginwidth="0" marginheight="0" topmargin="0" bottommargin="0" leftmargin="0" rightmargin="0" bgcolor="#FFFFFF">
 <!-- header //-->
@@ -82,12 +80,12 @@
                     $number_of_days_between_given_date_and_today = $interval->format('%a');
 
                     $average_sells_per_day = ($sells_stock / $number_of_days_between_given_date_and_today);
-
-                    $stock_range = $average_stock / $average_sells_per_day;
-                    echo '<tr><td width="33.3333333%" class="dataTableContent">'.$products_stock['products_name'] . '</td>';
-                        echo '<td width="33.3333333%" class="dataTableContent">'.xtc_round($stock_range,2).'</td>';
-                    echo '</tr>';
-                    
+					if($average_sells_per_day > 0){
+                    	$stock_range = $average_stock / $average_sells_per_day;
+						echo '<tr><td width="33.3333333%" class="dataTableContent">'.$products_stock['products_name'] . '</td>';
+							echo '<td width="33.3333333%" class="dataTableContent">'.xtc_round($stock_range,2).'</td>';
+						echo '</tr>';
+					}
                     $products_attributes_query = xtc_db_query("SELECT op.products_quantity, opa.products_options_values, pa.attributes_stock, op.products_quantity
                                                   FROM orders_products_attributes opa
                                                   JOIN products_attributes pa ON opa.orders_products_options_values_id = pa.options_values_id
@@ -110,12 +108,13 @@
         $average_attr_stock = ($today_attr_stock + $whole_attr_stock) / 2;
         
         $average_sells_attr_per_day = ($sells_attr_stock / $number_of_days_between_given_date_and_today);
+        if($average_sells_attr_per_day > 0){
+        	$stock_attr_range = $average_attr_stock / $average_sells_attr_per_day;
         
-        $stock_attr_range = $average_attr_stock / $average_sells_attr_per_day;
-        
-      echo '<tr><td width="50%" class="dataTableContent">&nbsp;&nbsp;&nbsp;&nbsp;-' . $products_attributes_values['products_options_values'] . '</td><td width="50%" class="dataTableContent">';
-      echo xtc_round($stock_attr_range,2);
-      echo '</td></tr>';
+		  	echo '<tr><td width="50%" class="dataTableContent">&nbsp;&nbsp;&nbsp;&nbsp;-' . $products_attributes_values['products_options_values'] . '</td><td width="50%" class="dataTableContent">';
+		  	echo xtc_round($stock_attr_range,2);
+		  	echo '</td></tr>';
+		}
     }
                 }
             }
@@ -125,7 +124,7 @@
 </form>
 </div>
 <?php 
-echo xtc_draw_form('stock_range',FILENAME_STOCK_RANGE_ORDERS,'action=stock_range','POST','enctype="multipart/form-data"'); 
+echo xtc_draw_form('stock_range',FILENAME_STOCK_RANGE,'action=stock_range','POST','enctype="multipart/form-data"'); 
 echo '<br/><input type="submit" class="btn btn-default" onclick="this.blur();" value="' . BUTTON_EXPORT_STOCK_RANGE_CSV . '"/>';
 ?>
 </form>

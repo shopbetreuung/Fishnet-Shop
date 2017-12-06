@@ -11,16 +11,14 @@
    Released under the GNU General Public License 
    --------------------------------------------------------------*/
 
-  require('includes/application_top.php');
-  
-  require (DIR_WS_INCLUDES.'head.php');
-  require(DIR_WS_CLASSES . 'report_classes.php');
-   $error = false;
-    if($_GET['action'] == 'inventory_turnover'){
-        $handler = new xtc_export_csv_inventory_turnover(CSV_NAME_FILE, $products_name, $ai, $it, $_SESSION['start_date'], $_SESSION['inventory_turnover']);
-    }
-?>
+require('includes/application_top.php');
 
+if($_GET['action'] == 'inventory_turnover'){
+	require_once (DIR_WS_CLASSES . 'report_classes.php');
+	$handler = new xtc_export_csv_inventory_turnover(CSV_NAME_FILE, $products_name, $ai, $it, $_SESSION['start_date'], $_SESSION['inventory_turnover']);
+}
+require_once (DIR_WS_INCLUDES.'head.php');
+?>
 </head>
 <body marginwidth="0" marginheight="0" topmargin="0" bottommargin="0" leftmargin="0" rightmargin="0" bgcolor="#FFFFFF">
 <!-- header //-->

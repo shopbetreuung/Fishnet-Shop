@@ -129,7 +129,7 @@ function W4B_graduated_prices_edit_addrow(objButton, intStatus) {
   var objDeleteButton = document.createElement("a");
 
   var objDeleteButtonClassName = document.createAttribute("class");
-  objDeleteButtonClassName.nodeValue = "button";
+  objDeleteButtonClassName.nodeValue = "btn btn-default";
   var objDeleteButtonHref = document.createAttribute("href");
   objDeleteButtonHref.nodeValue = '<?php global $cPath; echo xtc_href_link(FILENAME_CATEGORIES,
     'cPath=' . $cPath . '&function=delete&quantity=\'+objQuantity.value+\'&statusID=\'+intStatus+\'&action=new_product&pID=' . $_GET['pID']); ?>';
@@ -239,6 +239,7 @@ function W4B_graduated_prices_edit_unhtmlentities($text) {
   $text = str_replace("&ldquo;","“",$text);
   $text = str_replace("&rdquo;","”",$text);
   $text = str_replace("&euro;" ,"€",$text);
+  $text = str_replace("&ouml;" ,"ö",$text);
 
   return $text;
 }
@@ -265,7 +266,7 @@ function W4B_graduated_prices_save() {
         $staffelpreis = xtc_db_prepare_input($products_data['products_price_staffel_'.$group_data[$col]['STATUS_ID']]);
 
         if (PRICE_IS_BRUTTO == 'true') {
-          $staffelpreis = ($staffelpreis / (xtc_get_tax_rate($products_data['products_tax_class_id']) + 100) * 100);
+          $staffelpreis = (floatval($staffelpreis) / (floatval(xtc_get_tax_rate($products_data['products_tax_class_id'])) + 100) * 100);
         }
         $staffelpreis = xtc_round($staffelpreis, PRICE_PRECISION);
         if ($staffelpreis != '' && $quantity != '') {

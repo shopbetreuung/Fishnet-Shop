@@ -143,11 +143,10 @@ if ((is_array($payment_modules->modules)
 	xtc_redirect(xtc_href_link(FILENAME_CHECKOUT_PAYMENT, 'error_message=' . urlencode(ERROR_NO_PAYMENT_MODULE_SELECTED), 'SSL'));
 }
 // EOF - Tomcraft - 2017-05-04 - Fix from r5913
-
-
 if (is_array($payment_modules->modules)) {
   $payment_modules->pre_confirmation_check();
 }
+
 // load the selected shipping module
 require_once (DIR_WS_CLASSES . 'shipping.php');
 $shipping_modules = new shipping($_SESSION['shipping']);

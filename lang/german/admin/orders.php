@@ -29,7 +29,7 @@ define( 'BUTTON_BILL',                            'Fakturieren');               
 define( 'PDFBILL_INVOICE_WORD' ,                  'rechnung' );                     // used for pdf e-mail 
 define( 'PDFBILL_MSG_INVOICEMAIL_SENT' ,          'E-Mail wurde &uuml;bermittelt' );      
 define( 'PDFBILL_MSG_DELINFO_PDF' ,               '<br /><br />Eine PDF-Rechnung wurde bereits erstellt und wird ebenfalls gel&ouml;scht.' );      
-define( 'PDFBILL_TXT_DELIVERYDATE' ,              'Lieferdatum /-hinweis f&uuml;r Lieferschein' );      
+define( 'PDFBILL_TXT_DELIVERYDATE' ,              'Lieferdatum /-hinweis f&uuml;r Lieferschein<br />(nur wenn *date_delivery* in PDF Konfiguration verwendet)' );      
 define( 'PDFBILL_TXT_BILLPROFILE' ,               'Rechnung:' );      
 define( 'PDFBILL_TXT_DELIVNOTEPROFILE' ,          'Lieferschein:' );
 define( 'PDFBILL_TXT_AUTOMATIC' ,                 'Automatische Profilauswahl:' );

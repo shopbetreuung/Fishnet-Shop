@@ -11,13 +11,13 @@
    Released under the GNU General Public License 
    --------------------------------------------------------------*/
 
-  require('includes/application_top.php');
+require('includes/application_top.php');
   
-  require (DIR_WS_INCLUDES.'head.php');
-  require(DIR_WS_CLASSES . 'report_classes.php');
-  if($_GET['action'] == 'outstanding'){
-      $handler = new xtc_export_csv_invoice_orders(TEXT_LINK_NAME, $invoice_number, $invoice_date, $total_net, $total_gross, true);
-  }
+if($_GET['action'] == 'outstanding'){
+  require_once(DIR_WS_CLASSES . 'report_classes.php');
+  $handler = new xtc_export_csv_invoice_orders(TEXT_LINK_NAME, $invoice_number, $invoice_date, $total_net, $total_gross, true);
+}
+require_once(DIR_WS_INCLUDES.'head.php');
 ?>
 </head>
 <body marginwidth="0" marginheight="0" topmargin="0" bottommargin="0" leftmargin="0" rightmargin="0" bgcolor="#FFFFFF">

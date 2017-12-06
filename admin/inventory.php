@@ -11,13 +11,13 @@
    Released under the GNU General Public License 
    --------------------------------------------------------------*/
 
-  require('includes/application_top.php');
-  
-  require (DIR_WS_INCLUDES.'head.php');
+require('includes/application_top.php');
+
+if($_GET['action'] == 'export_stock_orders'){
   require(DIR_WS_CLASSES . 'report_classes.php');
-  if($_GET['action'] == 'export_stock_orders'){
-      $handler = new xtc_export_csv_stock(TEXT_LINK_NAME, $product_id, $product_name, $product_stock, $products_attributes_name, $product_attribute_stock);
-  }
+  $handler = new xtc_export_csv_stock(TEXT_LINK_NAME, $product_id, $product_name, $product_stock, $products_attributes_name, $product_attribute_stock);
+}
+require (DIR_WS_INCLUDES.'head.php');
 ?>
 </head>
 <body marginwidth="0" marginheight="0" topmargin="0" bottommargin="0" leftmargin="0" rightmargin="0" bgcolor="#FFFFFF">

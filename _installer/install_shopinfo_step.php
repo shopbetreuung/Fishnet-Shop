@@ -105,6 +105,7 @@ if (isset($_POST['action']) && ($_POST['action'] == 'process'))
         xtc_db_query("UPDATE " . TABLE_CONFIGURATION . " SET configuration_value='" . ($email_from) . "' WHERE configuration_key = 'EMAIL_BILLING_ADDRESS'");
         xtc_db_query("UPDATE " . TABLE_CONFIGURATION . " SET configuration_value='" . ($email_from) . "' WHERE configuration_key = 'CONTACT_US_EMAIL_ADDRESS'");
         xtc_db_query("UPDATE " . TABLE_CONFIGURATION . " SET configuration_value='" . ($email_from) . "' WHERE configuration_key = 'EMAIL_SUPPORT_ADDRESS'");
+        xtc_db_query("UPDATE " . TABLE_CONFIGURATION . " SET configuration_value='" . ($email_from) . "' WHERE configuration_key = 'EMAIL_SUPPORT_REPLY_ADDRESS'");
         $store_name_address = $store_name.'\n'.$street_address.'\n'.$postcode.' '.$city.'\n'.xtc_get_country_name($country).'\n'.$telephone_number;
         xtc_db_query("UPDATE " . TABLE_CONFIGURATION . " SET configuration_value='" . ($store_name_address) . "' WHERE configuration_key = 'STORE_NAME_ADDRESS'");
         

@@ -243,7 +243,15 @@ require (DIR_WS_INCLUDES.'head.php');
                                   </div>
                                   <div class="col-xs-12">
                                     <div class="col-xs-12 col-sm-2"><?php echo TEXT_TITLE; ?></div>
-                                    <div class="col-xs-12 col-sm-10"><?php echo xtc_draw_input_field('cont_title',isset($content['em_name'])?$content['em_name']:'','size="60" readonly'); ?></div>
+                                    <?php 
+                                    if ($action != 'new') { 
+                                      $readonly = 'readonly';
+                                    }else{
+                                        $readonly = '';
+                                    }
+                                    ?>
+                                    <div class="col-xs-12 col-sm-10"><?php echo xtc_draw_input_field('cont_title',isset($content['em_name'])?$content['em_name']:'','size="60"'.$readonly); ?></div>
+                                    
                                   </div>
                                   <div class="col-xs-12">
                                     <div class="col-xs-12 col-sm-2"><?php echo TEXT_TYPE; ?></div>

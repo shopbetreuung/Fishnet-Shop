@@ -59,8 +59,8 @@ class xtc_export_csv_invoice_orders {
         $orders_query = xtc_db_query("SELECT o.customers_name, o.orders_id, o.ibn_billnr, o.ibn_billdate FROM " . TABLE_ORDERS . " o WHERE o.ibn_billnr != 0 ".$order_status." ORDER BY o.ibn_billnr DESC");
         while ($orders_values = xtc_db_fetch_array($orders_query)) {
             $invoice_number = $orders_values['ibn_billnr'];
-            $netto = floatval(0);
-            $brutto = floatval(0);
+            $netto = floatval(0.0);
+            $brutto = floatval(0.0);
             $order_total_qry = xtc_db_query("SELECT value, class FROM ".TABLE_ORDERS_TOTAL." WHERE orders_id = '".(int)$orders_values['orders_id']."' AND (class = 'ot_tax' or class = 'ot_total')");
 		  while ($order_total = xtc_db_fetch_array($order_total_qry)) {
 			if ($order_total["class"] == 'ot_tax') {
@@ -186,12 +186,13 @@ class xtc_export_csv_stock_range{
                     $number_of_days_between_given_date_and_today = $interval->format('%a');
 
                     $average_sells_per_day = ($sells_stock / $number_of_days_between_given_date_and_today);
+                    if($average_sells_per_day > 0){
+                        $stock_range = $average_stock / $average_sells_per_day;
 
-                    $stock_range = $average_stock / $average_sells_per_day;
-                
-                    $products_name = $products_stock['products_name'];
-                    
-                    $output_fields = $products_name.";".xtc_round($stock_range,2).";";	
+                        $products_name = $products_stock['products_name'];
+
+                        $output_fields = $products_name.";".xtc_round($stock_range,2).";";
+                    }
                     
                     $products_attributes_query = xtc_db_query("SELECT op.products_quantity, opa.products_options_values, pa.attributes_stock, op.products_quantity
                                                       FROM orders_products_attributes opa
@@ -212,14 +213,17 @@ class xtc_export_csv_stock_range{
                         $average_attr_stock = ($today_attr_stock + $whole_attr_stock) / 2;
 
                         $average_sells_attr_per_day = ($sells_attr_stock / $number_of_days_between_given_date_and_today);
+                        if($average_sells_attr_per_day > 0){
+                            $stock_attr_range = $average_attr_stock / $average_sells_attr_per_day;
 
-                        $stock_attr_range = $average_attr_stock / $average_sells_attr_per_day;
+                            $attributes_name = $products_attributes_values['products_options_values'];
 
-                        $attributes_name = $products_attributes_values['products_options_values'];
-                        
-                        $output_fields .= "Attribute: ".$attributes_name . " ".TEXT_HAVE." " . xtc_round($stock_attr_range,2)." ". TEXT_IN_STOCK_RANGE." \n";
+                            $output_fields .= "Attribute: ".$attributes_name . " ".TEXT_HAVE." " . xtc_round($stock_attr_range,2)." ". TEXT_IN_STOCK_RANGE." \n";
+                        }
                     }
-                fputcsv($output, explode(';', $output_fields), ";");
+                if($average_sells_attr_per_day > 0 || $average_sells_per_day > 0){
+                    fputcsv($output, explode(';', $output_fields), ";");
+                }
             }
 
                 fclose($output) or die("Can't close php://output");

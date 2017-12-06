@@ -341,6 +341,11 @@
 											"link" 		=> xtc_href_link(FILENAME_INVENTORY_TURNOVER_ORDERS, '', 'NONSSL'),
 											"access"	=> "inventory_turnover",
 											"check"		=> true);
+        $menu_items['marketingseo'][] = array(	"name" 		=> BOX_STOCK_RANGE,
+                          "is_main"	=> false,
+                          "link" 		=> xtc_href_link(FILENAME_STOCK_RANGE, '', 'NONSSL'),
+                          "access"	=> "stock_range",
+                          "check"		=> true);
 
 	$menu_items['marketingseo'][] = array(	"name" 		=> BOX_CONFIGURATION_24,
 											"is_main"	=> true,

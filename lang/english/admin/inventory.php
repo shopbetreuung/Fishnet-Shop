@@ -1,5 +1,4 @@
 <?php
-
 define('HEADING_TITLE', 'Inventory');
 define('TEXT_LINK_NAME', 'inventory');
 define('TEXT_EXPORT', 'Export');

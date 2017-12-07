@@ -234,12 +234,12 @@ function W4B_graduated_prices_edit_unhtmlentities($text) {
   $text = str_replace("&lt;"   ,"<",$text);
   $text = str_replace("&gt;"   ,">",$text);
   $text = str_replace("&quot;" ,'"',$text);
-  $text = str_replace("&ndash;","–",$text);
-  $text = str_replace("&bdquo;","„",$text);
-  $text = str_replace("&ldquo;","“",$text);
-  $text = str_replace("&rdquo;","”",$text);
-  $text = str_replace("&euro;" ,"€",$text);
-  $text = str_replace("&ouml;" ,"ö",$text);
+  $text = str_replace("&ndash;","Â–",$text);
+  $text = str_replace("&bdquo;","Â„",$text);
+  $text = str_replace("&ldquo;","Â“",$text);
+  $text = str_replace("&rdquo;","Â”",$text);
+  $text = str_replace("&euro;" ,"Â€",$text);
+  $text = str_replace("&ouml;" ,"Ã¶",$text);
 
   return $text;
 }

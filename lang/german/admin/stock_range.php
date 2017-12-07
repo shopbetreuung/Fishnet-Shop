@@ -10,3 +10,4 @@ define('TEXT_STOCK', 'Lagerreichweite');
 define('BUTTON_EXPORT_STOCK_RANGE_CSV', 'Export CSV Produkte');
 define('TEXT_HAVE', 'hat');
 define('TEXT_IN_STOCK_RANGE', 'auf Lagerreichweite');
+?>

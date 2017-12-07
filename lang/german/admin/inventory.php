@@ -1,5 +1,4 @@
 <?php
-
 define('HEADING_TITLE', 'Inventurliste');
 define('TEXT_LINK_NAME', 'inventurliste');
 define('TEXT_EXPORT', 'Export');
@@ -10,6 +9,4 @@ define('TEXT_PRODUCTS_STOCK', 'Produktbestand');
 define('TEXT_PRODUCTS_ATTRIBUTES', 'Attribute');
 define('TEXT_HAVE', 'hat');
 define('TEXT_IN_STOCK', 'auf Lager.');
-
 ?>
-

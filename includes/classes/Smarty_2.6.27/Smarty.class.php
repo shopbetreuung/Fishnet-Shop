@@ -1983,7 +1983,7 @@ function db_get_template ($tpl_name, &$tpl_source, &$smarty_obj) {
 	$template = substr($tpl_name, (strrpos($tpl_name, "/") !==false)?strrpos($tpl_name, "/")+1:0);
 	$template = explode(".", $template);
 
-	$db_qry = xtc_db_query("SELECT em_body, em_body_txt, em_subject FROM ".TABLE_EMAILS_MANAGER." WHERE em_language = '".$_SESSION['languages_id']."' AND em_name = '".$template[0]."'");
+	$db_qry = xtc_db_query("SELECT em_body, em_body_txt, em_subject FROM ".TABLE_EMAILS_MANAGER." WHERE em_language = '".$_SESSION['languages_id']."' AND em_name = '".$template[0]."' AND em_delete = '0'");
 	$db_template = xtc_db_fetch_array($db_qry);
         
 	if (strtolower($template[1]) == 'html') {

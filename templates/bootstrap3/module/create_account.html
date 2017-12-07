@@ -4,124 +4,106 @@
 {if $error!=''}<div class="errormessage">{$error}</div>{/if}
 <h2>{#title_personal#}</h2>
 <div class="highlightbox">
+<table width="100%" cellspacing="0" cellpadding="4">
 {if $gender=='1'}
-  <div class="form-group">
-    <label class="control-label-account col-sm-3">{#text_gender#}</label>
-    <div class="col-sm-9">
-    {$INPUT_MALE} {$INPUT_FEMALE}
-    </div>
-  </div>
-{/if}
-  <div class="form-group">
-    <label class="control-label-account col-sm-3">{#text_firstname#}</label>
-    <div class="col-sm-9">
-    {$INPUT_FIRSTNAME}
-    </div>
-  </div>
-  <div class="form-group">
-    <label class="control-label-account col-sm-3">{#text_lastname#}</label>
-    <div class="col-sm-9">
-    {$INPUT_LASTNAME}
-    </div>
-  </div>
-  {if $birthdate=='1'}
-  <div class="form-group">
-    <label class="control-label-account col-sm-3">{#text_birthdate#}</label>
-    <div class="col-sm-9">
-    {$INPUT_DOB}
-    </div>
-  </div>
+  <tr> 
+    <td width="120">{#text_gender#}</td>
+    <td>
+		<table cellspacing="0" cellpadding="0">
+			<tr>
+			  	<td>{$INPUT_MALE}</td>
+			  	<td>{$INPUT_FEMALE}</td>				
+  			</tr>
+		</table>
+	</td>
+  </tr>
   {/if}
-  <div class="form-group">
-    <label class="control-label-account col-sm-3">{#text_email#}</label>
-    <div class="col-sm-9">
-    {$INPUT_EMAIL}
-    </div>
-  </div>
-  <div class="form-group">
-    <label class="control-label-account col-sm-3">{#text_confirm_email#}</label>
-    <div class="col-sm-9">
-    {$INPUT_CONFIRM_EMAIL}
-    </div>
-  </div>
+  <tr> 
+    <td width="120">{#text_firstname#}</td>
+    <td>{$INPUT_FIRSTNAME}</td>
+  </tr>
+  <tr> 
+    <td>{#text_lastname#}</td>
+    <td>{$INPUT_LASTNAME}</td>
+  </tr>
+  {if $birthdate=='1'}
+  <tr> 
+    <td>{#text_birthdate#}</td>
+    <td>{$INPUT_DOB}</td>
+  </tr>
+  {/if}
+  <tr>
+    <td>{#text_email#}</td>
+    <td>{$INPUT_EMAIL}</td>
+  </tr>
+  <tr>
+    <td>{#text_confirm_email#}</td>
+    <td>{$INPUT_CONFIRM_EMAIL}</td>
+  </tr>
+</table>
 </div>
 {if $company=='1'}
 <h2>{#title_company#}</h2>
 <div class="highlightbox">
-  <div class="form-group">
-    <label class="control-label-account col-sm-3">{#text_company#}</label>
-    <div class="col-sm-9">
-    {$INPUT_COMPANY}
-    </div>
-  </div>
+<table width="100%" border="0" cellspacing="0" cellpadding="4">
+  <tr> 
+    <td width="120">{#text_company#}</td>
+    <td>{$INPUT_COMPANY}</td>
+  </tr>
   {if $vat=='1'}
-  <div class="form-group">
-    <label class="control-label-account col-sm-3">{#text_ustid#}</label>
-    <div class="col-sm-9">
-    {$INPUT_VAT}
-    </div>
-  </div>
+  <tr>
+     <td>{#text_ustid#}</td>
+     <td>{$INPUT_VAT}</td>
+  </tr>
   {/if}
+</table>
 </div>
 {/if}
 <h2>{#title_address#}</h2>
 <div class="highlightbox">
-  <div class="form-group">
-    <label class="control-label-account col-sm-3">{#text_street#}</label>
-    <div class="col-sm-9">
-    {$INPUT_STREET}
-    </div>
-  </div>
+<table width="100%" border="0" cellspacing="0" cellpadding="4">
+  <tr> 
+    <td width="120">{#text_street#}</td>
+    <td>{$INPUT_STREET}</td>
+  </tr>
   {if $suburb=='1'}
-  <div class="form-group">
-    <label class="control-label-account col-sm-3">{#text_suburb#}</label>
-    <div class="col-sm-9">
-    {$INPUT_SUBURB}
-    </div>
-  </div>
+  <tr> 
+    <td>{#text_suburb#}</td>
+    <td>{$INPUT_SUBURB}</td>
+  </tr>
   {/if}
-  <div class="form-group">
-    <label class="control-label-account col-sm-3">{#text_code#}</label>
-    <div class="col-sm-9">          
-    {$INPUT_CODE}
-    </div>
-  </div>
-  <div class="form-group">
-    <label class="control-label-account col-sm-3">{#text_city#}</label>
-    <div class="col-sm-9">
-    {$INPUT_CITY}
-    </div>
-  </div>
+  <tr> 
+    <td>{#text_code#}</td>
+    <td>{$INPUT_CODE}</td>
+  </tr>
+  <tr> 
+    <td>{#text_city#}</td>
+    <td>{$INPUT_CITY}</td>
+  </tr>
   {if $state=='1'}
-  <div class="form-group">
-    <label class="control-label-account col-sm-3">{#text_state#}</label>
-    <div class="col-sm-9">          
-    {$INPUT_STATE}
-    </div>
-  </div>
+  <tr> 
+    <td>{#text_state#}</td>
+    <td>{$INPUT_STATE}</td>
+  </tr>
   {/if}
-  <div class="form-group">
-    <label class="control-label-account col-sm-3">{#text_country#}</label>
-    <div class="col-sm-9">          
-    {$SELECT_COUNTRY}
-    </div>
-  </div>
+  <tr>
+    <td>{#text_country#}</td>
+    <td>{$SELECT_COUNTRY}</td>
+  </tr>
+</table>
 </div>
 <h2>{#title_contact#}</h2>
 <div class="highlightbox">
-  
-  <div class="form-group">
-    <label class="control-label-account col-sm-3">{#text_tel#}</label>
-    <div class="col-sm-9">
-    {$INPUT_TEL}
-    </div>
-  </div>
-  <div class="form-group">
-    <label class="control-label-account col-sm-3">{#text_fax#}</label>
-    <div class="col-sm-9">
-    {$INPUT_FAX}
-    </div>
-  </div>
+<table width="100%" border="0" cellspacing="0" cellpadding="4">
+  <tr> 
+    <td width="120">{#text_tel#}</td>
+    <td>{$INPUT_TEL}</td>
+  </tr>
+  <tr>
+    <td>{#text_fax#}</td>
+    <td>{$INPUT_FAX}</td>
+  </tr>
+</table>
 </div>
 <h2>{#title_newsletter#}</h2>
 <div class="highlightbox">
@@ -134,18 +116,16 @@
 </div>
 <h2>{#title_password#}</h2>
 <div class="highlightbox">
-  <div class="form-group">
-    <label class="control-label-account col-sm-3">{#text_password#}</label>
-    <div class="col-sm-9">
-    {$INPUT_PASSWORD}
-    </div>
-  </div>
-  <div class="form-group">
-    <label class="control-label-account col-sm-3">{#text_confirmation#}</label>
-    <div class="col-sm-9">
-    {$INPUT_CONFIRMATION}
-    </div>
-  </div>
+<table width="100%" border="0" cellspacing="0" cellpadding="4">
+  <tr> 
+    <td width="120">{#text_password#}</td>
+    <td>{$INPUT_PASSWORD}</td>
+  </tr>
+  <tr> 
+    <td>{#text_confirmation#}</td>
+    <td>{$INPUT_CONFIRMATION}</td>
+  </tr>
+</table>
 </div>
 {if $PRIVACY_CHECKBOX}
 <table width="100%" border="0" cellspacing="0" cellpadding="4">

@@ -686,6 +686,21 @@ BASIC Template for AGB Hosting Content
 .products_name_block{
     padding-bottom: 15px;
 }
+.control-label{
+	margin-bottom: 0px;
+	padding-right: 0px;
+	margin-top: 11px;
+}
+@media screen and (max-width: 1200px) {
+	.control-label{
+		margin-top: 0px;
+	}
+}
+.control-label-account{
+	font-weight: normal;
+	margin-bottom: 0px;
+	padding-right: 0px;
+}
 
 /* Category menu identation */
 

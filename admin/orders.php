@@ -1459,7 +1459,7 @@ elseif ($action == 'custom_action') {
                 <div class='col-xs-12 col-sm-6 text-right'>
                     <div class='col-xs-12'>
                   <?php echo xtc_draw_form('orders', FILENAME_ORDERS, '', 'get'); ?>
-                  <?php echo HEADING_TITLE_SEARCH . ' ' . xtc_draw_input_field('oID', '', 'size="12"') . xtc_draw_hidden_field('action', 'edit').xtc_draw_hidden_field(xtc_session_name(), xtc_session_id()); ?>
+                  <?php echo HEADING_TITLE_SEARCH . ' ' . xtc_draw_input_field('searchOrders', '', 'size="12"') . xtc_draw_hidden_field('action', 'edit').xtc_draw_hidden_field(xtc_session_name(), xtc_session_id()); ?>
                   </form>
                     </div>
                     <div class='col-xs-12'>
@@ -1491,6 +1491,15 @@ elseif ($action == 'custom_action') {
                       <td class="dataTableHeadingContent" align="right"><?php echo TABLE_HEADING_ACTION; ?>&nbsp;</td>
                     </tr>
                     <?php
+					$search = '';
+                    if (isset($_GET['searchOrders']) && (xtc_not_null($_GET['searchOrders']))) {
+                      $keywords = xtc_db_input(xtc_db_prepare_input($_GET['searchOrders']));
+                      $search = "AND (o.orders_id LIKE '%".$keywords."%'
+                                      OR o.customers_name LIKE '%".$keywords."%' 
+                                      OR o.delivery_name LIKE '%".$keywords."%'
+                                      OR o.billing_name LIKE '%".$keywords."%'
+                                     )";
+                    }
                     if (isset($_GET['cID'])) {
                       $cID = (int) $_GET['cID'];
                       $orders_query_raw = "-- /admin/orders.php
@@ -1551,11 +1560,13 @@ elseif ($action == 'custom_action') {
                                             LEFT JOIN (".TABLE_ORDERS_TOTAL." ot, ".TABLE_ORDERS_STATUS." s)
                                                    ON (o.orders_id = ot.orders_id AND o.orders_status = s.orders_status_id)
                                                 WHERE (s.language_id = '".(int)$_SESSION['languages_id']."'
-                                                        AND ot.class = 'ot_total')
+                                                        AND ot.class = 'ot_total'
+														$search)
                                                    OR (o.orders_status = '0'
                                                         AND ot.class = 'ot_total'
                                                         AND s.orders_status_id = '1'
-                                                        AND s.language_id = '".(int)$_SESSION['languages_id']."')
+                                                        AND s.language_id = '".(int)$_SESSION['languages_id']."'
+														$search)
                                              ORDER BY o.orders_id DESC";
                     }
                     $orders_split = new splitPageResults($_GET['page'], MAX_DISPLAY_ORDER_RESULTS, $orders_query_raw, $orders_query_numrows);

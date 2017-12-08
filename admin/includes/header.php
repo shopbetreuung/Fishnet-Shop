@@ -55,7 +55,7 @@
     $search_email = htmlentities(isset($_GET['search_email']) ? $_GET['search_email'] : ''); //DokuMan - 2010-09-08 - set undefined index
   }
   if (strpos($page_filename, 'orders.php') !== false) {
-    $search_ord = htmlentities(isset($_GET['oID']) ? $_GET['oID'] : ''); //DokuMan - 2010-09-08 - set undefined index
+    $search_ord = htmlentities(isset($_GET['searchOrders']) ? $_GET['searchOrders'] : ''); //DokuMan - 2010-09-08 - set undefined index
   }
   if (strpos($page_filename, 'categories.php') !== false){
     $search_cat = htmlentities(isset($_GET['search']) ? $_GET['search'] : ''); //DokuMan - 2010-09-08 - set undefined index
@@ -102,7 +102,7 @@ if (isset($_GET['feedbacktext']) && $_GET['feedbacksend'] == 'Send' && !empty($_
 			
 			<form class="navbar-form navbar-left hidden-xs hidden-sm" role="search" action="<?php echo xtc_href_link('orders.php'); ?>" method="get">
 				<div class="form-group">
-					<input name="oID" type="text" value="<?php echo $search_ord;?>" class="form-control" placeholder="Bestellnummer" style="width: 200px !important;" />
+					<input name="searchOrders" type="text" value="<?php echo $search_ord;?>" class="form-control" placeholder="Bestellnummer" style="width: 200px !important;" />
 					<input type="hidden" name="action" value="search" />
 					<input name="<?php echo xtc_session_name(); ?>" type="hidden" value="<?php echo xtc_session_id(); ?>" />
 				</div>

@@ -1599,9 +1599,8 @@ elseif ($action == 'custom_action') {
                       }
                       
                       $customers_symbol_query = xtc_db_query("SELECT customers_symbol FROM " . TABLE_CUSTOMERS . " WHERE customers_id = '" . $orders['customers_id'] . "'");
-                      while ($customers_symbol_array = xtc_db_fetch_array($customers_symbol_query)) {
-                        $customers_symbol = $customers_symbol_array['customers_symbol'];
-                      }
+                      $customers_symbol_array = xtc_db_fetch_array($customers_symbol_query);
+                      $customers_symbol = $customers_symbol_array['customers_symbol'];
                       
                       ?>
                       <td class="dataTableContent"><?php echo '<a href="' . $orders_link . '">' . $orders_image_preview . '</a>&nbsp;' . ($symbol_array[$customers_symbol]['image'] ? xtc_image(DIR_WS_ADMIN.'images/' . $symbol_array[$customers_symbol]['image'], $symbol_array[$customers_symbol]['value'], 25, 25) : '') . '&nbsp;' . $orders['customers_name']; ?></td>

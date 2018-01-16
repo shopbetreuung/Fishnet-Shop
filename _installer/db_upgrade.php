@@ -232,7 +232,7 @@ function get_db_size()
                         {
                             if ($aa_spalten['Field'] != 'customers_id')
                             {
-                                mysql_query("UPDATE admin_access SET " . $aa_spalten['Field'] . " = '1' WHERE customers_id = '1'");
+                                xtc_db_query("UPDATE admin_access SET " . $aa_spalten['Field'] . " = '1' WHERE customers_id = '1'");
                             }
                         }
                         // EOF - Set Admin Flags

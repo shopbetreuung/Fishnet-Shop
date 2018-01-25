@@ -1439,7 +1439,7 @@ elseif ($action == 'custom_action') {
   include ('orders_actions.php');
   // ACTION ELSE - START
 } else {
-    
+    $link_for_delete = xtc_get_all_get_params(array('oID', 'action'));
     if(($_GET['save_filters']) == 'on'){
         $link_oID = xtc_get_all_get_params(array('oID', 'action'));
         $link_action = xtc_get_all_get_params(array('action'));
@@ -1685,7 +1685,7 @@ elseif ($action == 'custom_action') {
                   default :
                     if (isset($oInfo) && is_object($oInfo)) {
                       $heading[] = array ('text' => '<b>['.$oInfo->orders_id.']&nbsp;&nbsp;'.xtc_datetime_short($oInfo->date_purchased).'</b>');
-                      $contents[] = array ('align' => 'center', 'text' => '<a class="btn btn-default" href="'.xtc_href_link(FILENAME_ORDERS, $link_oID.'oID='.$oInfo->orders_id.'&action=edit').'">'.BUTTON_EDIT.'</a> <a class="btn btn-default" href="'.xtc_href_link(FILENAME_ORDERS, $link_oID.'oID='.$oInfo->orders_id.'&action=delete').'">'.BUTTON_DELETE.'</a>');
+                      $contents[] = array ('align' => 'center', 'text' => '<a class="btn btn-default" href="'.xtc_href_link(FILENAME_ORDERS, $link_oID.'oID='.$oInfo->orders_id.'&action=edit').'">'.BUTTON_EDIT.'</a> <a class="btn btn-default" href="'.xtc_href_link(FILENAME_ORDERS, $link_for_delete.'oID='.$oInfo->orders_id.'&action=delete').'">'.BUTTON_DELETE.'</a>');
                       //BOF - Dokuman - 2012-06-19 - BILLSAFE payment module
                       if ($oInfo->payment_method === 'billsafe_2') {
                         $contents[] = array ('align' => 'center', 'text' => '<a class="btn btn-default" href="billsafe_orders_2.php?oID='.$oInfo->orders_id.'">BillSAFE Details</a>');

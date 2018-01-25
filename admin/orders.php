@@ -151,7 +151,7 @@ require (DIR_WS_CLASSES.'currencies.php');
 $currencies = new currencies();
 
 $action = (isset($_GET['action']) ? xtc_db_prepare_input($_GET['action']) : '');
-$oID = isset($_GET['oID']) ? (int) $_GET['oID'] : '';
+$oID = (isset($_GET['searchOrders']) && is_numeric($_GET['searchOrders'])) ? (int) $_GET['searchOrders'] : '';
 
 
 // --- bof -- ipdfbill -------- 
@@ -168,38 +168,38 @@ $oID = isset($_GET['oID']) ? (int) $_GET['oID'] : '';
 //}
 
 // pdfbill, Suchfunktion neue Rechn.nummern beginn -----------------
-if ((($_GET['action'] == 'edit') || ($_GET['action'] == 'update_order')) && ($_GET['oID'])) {
-    
-  $oID = xtc_db_prepare_input($_GET['oID']);
+if ((($_GET['action'] == 'edit') || ($_GET['action'] == 'update_order')) && ($_GET['searchOrders'])) {
+	    
+	  $oID = xtc_db_prepare_input($_GET['searchOrders']);
 
-  $orders_query = xtc_db_query("-- /admin/orders.php
-                                  SELECT orders_id
-                                    FROM ".TABLE_ORDERS."
-                                   WHERE orders_id = '".xtc_db_input($oID)."'");
-  $order_exists = true;
-  if (!xtc_db_num_rows($orders_query)) {
-    $order_exists = false;
-    //$messageStack->add(sprintf(ERROR_ORDER_DOES_NOT_EXIST, $oID), 'error');
-  }
-  
-  if( $order_exists==false ) {
-    $orders_query = xtc_db_query($a="select orders_id from ".TABLE_ORDERS." where ibn_fullbillnr like '%".xtc_db_input($oID)."%'");
-    $order_exists = true;
-    if (!xtc_db_num_rows($orders_query)) {
-      $order_exists = false;
-      $messageStack->add(sprintf(ERROR_ORDER_DOES_NOT_EXIST, $oID), 'error');
-    } else {
-      $data=xtc_db_fetch_array($orders_query);
-      $oID=$data['orders_id'];
-      $_GET['oID']=$oID;
-    }
-  }
-  
-  if( order_exists==false ) {
-    $messageStack->add(sprintf(ERROR_ORDER_DOES_NOT_EXIST, $oID), 'error');
-  }
- 
-}
+	  $orders_query = xtc_db_query("-- /admin/orders.php
+		                          SELECT orders_id
+		                            FROM ".TABLE_ORDERS."
+		                           WHERE orders_id = '".xtc_db_input($oID)."'");
+	  $order_exists = true;
+	  if (!xtc_db_num_rows($orders_query)) {
+	    $order_exists = false;
+	    //$messageStack->add(sprintf(ERROR_ORDER_DOES_NOT_EXIST, $oID), 'error');
+	  }
+	  
+	  if( $order_exists==false ) {
+	    $orders_query = xtc_db_query($a="select orders_id from ".TABLE_ORDERS." where ibn_fullbillnr like '%".xtc_db_input($oID)."%'");
+	    $order_exists = true;
+	    if (!xtc_db_num_rows($orders_query)) {
+	      $order_exists = false;
+	      $messageStack->add(sprintf(ERROR_ORDER_DOES_NOT_EXIST, $oID), 'error');
+	    } else {
+	      $data=xtc_db_fetch_array($orders_query);
+	      $oID=$data['orders_id'];
+	      $_GET['oID']=$oID;
+	    }
+	  }
+	  
+	  if( order_exists==false ) {
+	    $messageStack->add(sprintf(ERROR_ORDER_DOES_NOT_EXIST, $oID), 'error');
+	  }
+	 
+	}
 // pdfbill, Suchfunktion neue Rechn.nummern end -----------------
 // --- eof -- ipdfbill -------- 
 
@@ -226,29 +226,29 @@ $order_select_fields = 'o.orders_id,
                         ';
 
 //admin search bar
-if ($action == 'search' && $oID) {
-  $orders_query_raw = "-- /admin/orders.php
-                     SELECT ".$order_select_fields.",
-                            s.orders_status_name
-                       FROM ".TABLE_ORDERS." o
-                  LEFT JOIN (".TABLE_ORDERS_TOTAL." ot, ".TABLE_ORDERS_STATUS." s)
-                         ON (o.orders_id = ot.orders_id AND o.orders_status = s.orders_status_id)
-                      WHERE s.language_id = '".(int)$_SESSION['languages_id']."'
-                        AND o.orders_id LIKE '%".$oID."%'
-                        AND ot.class = 'ot_total'
-                   ORDER BY o.orders_id DESC";
-  $orders_query = xtc_db_query($orders_query_raw);
-  $order_exists = false;
-  if (xtc_db_num_rows($orders_query) == 1) {
-     $order_exists = true;
-     $oID_array = xtc_db_fetch_array($orders_query);
-     $oID = $oID_array['orders_id'];
-     $_GET['action'] = 'edit';
-     $action = 'edit';
-     $_GET['oID'] = $oID;
-     //$messageStack->add('1 Treffer: ' . $oID, 'notice');
-  }
-}
+if (USE_SEARCH_ORDER_REDIRECT == 'true' && $oID != '') {    
+	  $orders_query_raw = "-- /admin/orders.php
+		   SELECT ".$order_select_fields.",
+		           s.orders_status_name
+		           FROM ".TABLE_ORDERS." o
+		           LEFT JOIN (".TABLE_ORDERS_TOTAL." ot, ".TABLE_ORDERS_STATUS." s)
+		           ON (o.orders_id = ot.orders_id AND o.orders_status = s.orders_status_id)
+		           WHERE s.language_id = '".(int)$_SESSION['languages_id']."'                        
+		           AND o.orders_id = ".$oID."    
+		           AND ot.class = 'ot_total'
+		           ORDER BY o.orders_id DESC";
+	  $orders_query = xtc_db_query($orders_query_raw);
+	  $order_exists = false;
+	  if (xtc_db_num_rows($orders_query) == 1) {
+	     $order_exists = true;
+	     $oID_array = xtc_db_fetch_array($orders_query);
+	     $oID = $oID_array['orders_id'];
+	     $_GET['action'] = 'edit';
+	     $action = 'edit';
+	     $_GET['oID'] = $oID;
+	     //$messageStack->add('1 Treffer: ' . $oID, 'notice');
+	  }  
+	}
 
 require (DIR_WS_CLASSES.'order.php');
 if (($action == 'edit' || $action == 'update_order') && $order_exists) {

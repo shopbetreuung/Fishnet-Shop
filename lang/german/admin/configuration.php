@@ -857,3 +857,6 @@ define('PDFBILL_AUTOMATIC_INVOICE_DESC', '');
 
 define('USE_ATTRIBUTES_IFRAME_TITLE', 'Attribute editieren in iframe');
 define('USE_ATTRIBUTES_IFRAME_DESC', '&Ouml;ffnet die Attribut Verwaltung in der Kategorie/Artikelansicht in einem iframe');
+
+define('USE_SEARCH_ORDER_REDIRECT_TITLE', 'Bestellung direkt &ouml;ffnen');
+define('USE_SEARCH_ORDER_REDIRECT_DESC', 'Nach der Suche nach id wird die Bestellung direkt ge&ouml;ffnet.');

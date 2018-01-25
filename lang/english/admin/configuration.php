@@ -851,3 +851,6 @@ define('PDFBILL_AUTOMATIC_INVOICE_DESC', '');
 
 define('USE_ATTRIBUTES_IFRAME_TITLE', 'Edit Attributes in iframe');
 define('USE_ATTRIBUTES_IFRAME_DESC', 'Open Attribute Manager in the Category / Product view in an iframe');
+
+define('USE_SEARCH_ORDER_REDIRECT_TITLE', 'Open order directly');
+define('USE_SEARCH_ORDER_REDIRECT_DESC', 'After search order by id, it will open order directly.');

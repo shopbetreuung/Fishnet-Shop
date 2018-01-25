@@ -151,7 +151,8 @@ require (DIR_WS_CLASSES.'currencies.php');
 $currencies = new currencies();
 
 $action = (isset($_GET['action']) ? xtc_db_prepare_input($_GET['action']) : '');
-$oID = (isset($_GET['searchOrders']) && is_numeric($_GET['searchOrders'])) ? (int) $_GET['searchOrders'] : '';
+$oID = (isset($_GET['oID'])) ? (int)$_GET['oID'] : '';
+$search_oID = (isset($_GET['searchOrders']) && is_numeric($_GET['searchOrders'])) ? (int)$_GET['searchOrders'] : '';
 
 
 // --- bof -- ipdfbill -------- 
@@ -168,9 +169,9 @@ $oID = (isset($_GET['searchOrders']) && is_numeric($_GET['searchOrders'])) ? (in
 //}
 
 // pdfbill, Suchfunktion neue Rechn.nummern beginn -----------------
-if ((($_GET['action'] == 'edit') || ($_GET['action'] == 'update_order')) && ($_GET['searchOrders'])) {
+if ((($_GET['action'] == 'edit') || ($_GET['action'] == 'update_order')) && ($_GET['oID'])) {
 	    
-	  $oID = xtc_db_prepare_input($_GET['searchOrders']);
+	  $oID = xtc_db_prepare_input($_GET['oID']);
 
 	  $orders_query = xtc_db_query("-- /admin/orders.php
 		                          SELECT orders_id
@@ -226,7 +227,7 @@ $order_select_fields = 'o.orders_id,
                         ';
 
 //admin search bar
-if (USE_SEARCH_ORDER_REDIRECT == 'true' && $oID != '') {    
+if (USE_SEARCH_ORDER_REDIRECT == 'true' && $search_oID != '') {   
 	  $orders_query_raw = "-- /admin/orders.php
 		   SELECT ".$order_select_fields.",
 		           s.orders_status_name
@@ -234,7 +235,7 @@ if (USE_SEARCH_ORDER_REDIRECT == 'true' && $oID != '') {
 		           LEFT JOIN (".TABLE_ORDERS_TOTAL." ot, ".TABLE_ORDERS_STATUS." s)
 		           ON (o.orders_id = ot.orders_id AND o.orders_status = s.orders_status_id)
 		           WHERE s.language_id = '".(int)$_SESSION['languages_id']."'                        
-		           AND o.orders_id = ".$oID."    
+		           AND o.orders_id = ".$search_oID."    
 		           AND ot.class = 'ot_total'
 		           ORDER BY o.orders_id DESC";
 	  $orders_query = xtc_db_query($orders_query_raw);
@@ -1572,7 +1573,7 @@ elseif ($action == 'custom_action') {
                     $orders_split = new splitPageResults($_GET['page'], MAX_DISPLAY_ORDER_RESULTS, $orders_query_raw, $orders_query_numrows);
                     $orders_query = xtc_db_query($orders_query_raw);
                     while ($orders = xtc_db_fetch_array($orders_query)) {
-                      if ((!xtc_not_null($oID) || (isset($oID) && $oID == $orders['orders_id'])) && !isset($oInfo)) { //web28 - 2012-04-14 - FIX !xtc_not_null($oID)
+                      if ((!xtc_not_null($oID) || (!empty($oID) && $oID == $orders['orders_id'])) && !isset($oInfo)) { //web28 - 2012-04-14 - FIX !xtc_not_null($oID)
                         $oInfo = new objectInfo($orders);
                       }
                       if (isset($oInfo) && is_object($oInfo) && ($orders['orders_id'] == $oInfo->orders_id)) {

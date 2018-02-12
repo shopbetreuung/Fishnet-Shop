@@ -1424,6 +1424,7 @@ INSERT INTO configuration (configuration_id, configuration_key, configuration_va
 INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'PRICE_PRECISION', '4', 1, 28, NULL, NOW(), NULL, NULL);
 INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'IBN_BILLNR', '1', 1, 99, NULL , NOW(), NULL , NULL);            
 INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'IBN_BILLNR_FORMAT', '{n}-{d}-{m}-{y}', 1, 99, NULL, NOW(), NULL, NULL);   
+INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'REQUIRED_PHONE_NUMBER', 'false', 1, 99, NULL, NOW(), NULL, 'xtc_cfg_select_option(array(\'true\', \'false\'),'); 
 
 #Web28 - 2012-08-28 - Constants for checkout options
 INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'CHECKOUT_USE_PRODUCTS_SHORT_DESCRIPTION', 'false', 1, 40, NULL, NOW(), NULL, 'xtc_cfg_select_option(array(\'true\', \'false\'),');

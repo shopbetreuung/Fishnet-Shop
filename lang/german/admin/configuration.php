@@ -860,3 +860,6 @@ define('USE_ATTRIBUTES_IFRAME_DESC', '&Ouml;ffnet die Attribut Verwaltung in der
 
 define('USE_SEARCH_ORDER_REDIRECT_TITLE', 'Bestellung direkt &ouml;ffnen');
 define('USE_SEARCH_ORDER_REDIRECT_DESC', 'Nach der Suche nach id wird die Bestellung direkt ge&ouml;ffnet.');
+
+define('REQUIRED_PHONE_NUMBER_TITLE','Ben&ouml;tigte Telefonnummer');
+define('REQUIRED_PHONE_NUMBER_DESC','Wenn es erforderlich ist, wird es mindestens 3 Ziffern verlangen');

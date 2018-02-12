@@ -190,10 +190,12 @@ if (isset($_POST['action']) && ($_POST['action'] == 'process')) {
     }
   }
 
-  if (strlen($telephone) < ENTRY_TELEPHONE_MIN_LENGTH) {
-    $error = true;
-    $messageStack->add('create_account', ENTRY_TELEPHONE_NUMBER_ERROR);
-  }
+  if((REQUIRED_PHONE_NUMBER == 'false' && $telephone != '') || (REQUIRED_PHONE_NUMBER == 'true')){
+        if (strlen($telephone) < ENTRY_TELEPHONE_MIN_LENGTH) {
+          $error = true;
+          $messageStack->add('create_account', ENTRY_TELEPHONE_NUMBER_ERROR);
+        }
+   }
 
   if (strlen($password) < ENTRY_PASSWORD_MIN_LENGTH) {
     $error = true;
@@ -496,7 +498,7 @@ if (ACCOUNT_STATE == 'true') {
 }
 
 $smarty->assign('SELECT_COUNTRY', xtc_get_country_list(array ('name' => 'country', 'text' => '&nbsp;'. (xtc_not_null(ENTRY_COUNTRY_TEXT) ? '<span class="inputRequirement">'.ENTRY_COUNTRY_TEXT.'</span>' : '')), $country));
-$smarty->assign('INPUT_TEL', xtc_draw_input_fieldNote(array ('name' => 'telephone', 'text' => '&nbsp;'. (xtc_not_null(ENTRY_TELEPHONE_NUMBER_TEXT) ? '<span class="inputRequirement">'.ENTRY_TELEPHONE_NUMBER_TEXT.'</span>' : ''))));
+$smarty->assign('INPUT_TEL', xtc_draw_input_fieldNote(array ('name' => 'telephone', 'text' => '&nbsp;'. (xtc_not_null(ENTRY_TELEPHONE_NUMBER_TEXT) && (REQUIRED_PHONE_NUMBER !='false') ? '<span class="inputRequirement">'.ENTRY_TELEPHONE_NUMBER_TEXT.'</span>' : ''))));
 $smarty->assign('INPUT_FAX', xtc_draw_input_fieldNote(array ('name' => 'fax', 'text' => '&nbsp;'. (xtc_not_null(ENTRY_FAX_NUMBER_TEXT) ? '<span class="inputRequirement">'.ENTRY_FAX_NUMBER_TEXT.'</span>' : ''))));
 $smarty->assign('INPUT_PASSWORD', xtc_draw_password_fieldNote(array ('name' => 'password', 'text' => '&nbsp;'. (xtc_not_null(ENTRY_PASSWORD_TEXT) ? '<span class="inputRequirement">'.ENTRY_PASSWORD_TEXT.'</span>' : ''))));
 $smarty->assign('CHECKBOX_NEWSLETTER', xtc_draw_checkbox_field('newsletter', '1').'&nbsp;'. (xtc_not_null(ENTRY_NEWSLETTER_TEXT) ? '<span class="inputRequirement">'.ENTRY_NEWSLETTER_TEXT.'</span>' : ''));

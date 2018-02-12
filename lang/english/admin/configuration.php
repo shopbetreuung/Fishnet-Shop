@@ -854,3 +854,6 @@ define('USE_ATTRIBUTES_IFRAME_DESC', 'Open Attribute Manager in the Category / P
 
 define('USE_SEARCH_ORDER_REDIRECT_TITLE', 'Open order directly');
 define('USE_SEARCH_ORDER_REDIRECT_DESC', 'After search order by id, it will open order directly.');
+
+define('REQUIRED_PHONE_NUMBER_TITLE','Required phone number');
+define('REQUIRED_PHONE_NUMBER_DESC','If it\'s required, it will ask for minimum 3 digits');

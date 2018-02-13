@@ -819,7 +819,11 @@ if (USE_WYSIWYG=='true' && $_GET['action'] == 'email') {
                               <tr class="dataTableHeadingRow">
                                 <td class="dataTableHeadingContent" align="left" width="25"><?php echo COUPON_ID; ?></td>
                                 <td class="dataTableHeadingContent" align="left"><?php echo COUPON_NAME; ?></td>
-                                <td class="dataTableHeadingContent hidden-xs" align="left" width="110"><?php echo COUPON_AMOUNT; ?></td>
+                                <?php
+                                    $coupon_query = xtc_db_query("SELECT coupon_type FROM ".TABLE_COUPONS." WHERE coupon_type = 'S' ");
+                                    $coupon_num_rows = xtc_db_num_rows($coupon_query);                                    
+                                ?>
+                                <td class="dataTableHeadingContent hidden-xs" align="left" <?php echo ($coupon_num_rows == 0 ? 'width=110px' : 'width=auto'); ?> ><?php echo COUPON_AMOUNT; ?></td>
                                 <td class="dataTableHeadingContent hidden-xs" align="left" width="110"><?php echo TEXT_COUPON_MINORDER; ?></td>
                                 <td class="dataTableHeadingContent hidden-xs" align="left" width="80"><?php echo COUPON_CODE; ?></td>
                                 <td class="dataTableHeadingContent" align="center" width="70"><?php echo TEXT_COUPON_STATUS; ?></td>
@@ -858,16 +862,16 @@ if (USE_WYSIWYG=='true' && $_GET['action'] == 'email') {
                                     <td class="dataTableContent" align="left">&nbsp;<?php echo $cc_list['coupon_id']; ?></td>
                                     <td class="dataTableContent" align="left">&nbsp;<?php echo $coupon_desc['coupon_name']; ?></td>
                                     <td class="dataTableContent hidden-xs" align="left" style="padding-left: 5px">
-                                      <?php
-                                      if ($cc_list['coupon_type'] == 'P') {
-                                        echo $cc_list['coupon_amount'] . '%';
-                                      } elseif ($cc_list['coupon_type'] == 'S') {
-                                        echo TEXT_FREE_SHIPPING;
-                                      } else {
-                                        echo $currencies->format($cc_list['coupon_amount']);
-                                      }
-                                      ?>
-                                      &nbsp;
+                                        <?php
+                                        if ($cc_list['coupon_type'] == 'P') {
+                                          echo $cc_list['coupon_amount'] . '%';
+                                        } elseif ($cc_list['coupon_type'] == 'S') {
+                                            echo $currencies->format($cc_list['coupon_amount'])." (".TEXT_FREE_SHIPPING.")"; 
+                                        } else {
+                                          echo $currencies->format($cc_list['coupon_amount']);
+                                        }
+                                        ?>
+                                        &nbsp;
                                     </td>
                                     <td class="dataTableContent hidden-xs" align="left">&nbsp;<?php echo $currencies->format($cc_list['coupon_minimum_order']); ?></td>
                                     <td class="dataTableContent hidden-xs" align="left">&nbsp;<?php echo $cc_list['coupon_code']; ?></td>
@@ -914,14 +918,15 @@ if (USE_WYSIWYG=='true' && $_GET['action'] == 'email') {
       $contents[] = array('text' => '<br />' . COUPON_CODE . '<br />' . xtc_draw_input_field('voucher_code'));
       $contents[] = array('text' => '<br />' . COUPON_USES_COUPON . '<br />' . xtc_draw_input_field('voucher_number_of'));
       break;
-    default:
+    default:      
       $heading[] = array('text'=>'['.$cInfo->coupon_id.']  '.$cInfo->coupon_code);
       $amount = $cInfo->coupon_amount;
+
       if ($cInfo->coupon_type == 'P') {
         $amount .= '%';
         // BOF - web28 - 2010-07-22 - FIX coupon_amount
-      } elseif ($cInfo->coupon_type == 'S') {
-        $amount = TEXT_FREE_SHIPPING;
+      } elseif ($cInfo->coupon_type == 'S') {         
+          $amount = $currencies->format($amount)." (".TEXT_FREE_SHIPPING.")";       
         // EOF - web28 - 2010-07-22 - FIX coupon_amount
       } else {
         $amount = $currencies->format($amount);

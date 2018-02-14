@@ -15,7 +15,7 @@
 
    Released under the GNU General Public License
    ---------------------------------------------------------------------------------------*/
-define('MODULE_PAYMENT_PAYPALEXPRESS_TEXT_TITLE', 'PayPal Express Purchase (cart)');
+define('MODULE_PAYMENT_PAYPALEXPRESS_TEXT_TITLE', 'PayPal Express Purchase (cart, deprecated)');
 define('MODULE_PAYMENT_PAYPALEXPRESS_TEXT_DESCRIPTION', 'PayPal Express Purchase');
 define('MODULE_PAYMENT_PAYPAL_TEXT_EXTENDED_DESCRIPTION', '<strong><font color="red">ATTENTION:</font></strong> Please setup PayPal configuration! (Adv. Configuration -> Partner -> <a href="'.xtc_href_link(FILENAME_CONFIGURATION, 'gID=111125').'">PayPal</a>)!');
 define('MODULE_PAYMENT_PAYPALEXPRESS_TEXT_INFO', '');

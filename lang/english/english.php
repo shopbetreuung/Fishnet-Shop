@@ -404,12 +404,12 @@ define('TEXT_NEWSLETTER','You want to stay up to date?<br />No problem, receive 
 define('TEXT_EMAIL_INPUT','Your e-mail adress has been registered in our system.<br />An e-mail with a confirmation link has been sent out. Click the link in order to complete registration!');
 
 define('TEXT_WRONG_CODE','<font color="#ff0000">The security code you entered was not correct. Please try again. <br />The form is not case sensitive.</font>');
-define('TEXT_EMAIL_EXIST_NO_NEWSLETTER','<font color="#ff0000">New code sent on this address!</font>');
+define('TEXT_EMAIL_EXIST_NO_NEWSLETTER','<font color="#008000">New code sent on this address!</font>');
 define('TEXT_EMAIL_EXIST_NEWSLETTER','<font color="#ff0000">This e-mail address is already registered for the newsletter!</font>');
 define('TEXT_EMAIL_NOT_EXIST','<font color="#ff0000">This e-mail address is not registered for newsletters!</font>');
 define('TEXT_EMAIL_DEL','Your e-mail address was deleted successfully from our newsletter-database.');
 define('TEXT_EMAIL_DEL_ERROR','<font color="#ff0000">An Error occured, your e-mail address has not been removed from our database!</font>');
-define('TEXT_EMAIL_ACTIVE','<font color="#ff0000">Your e-mail address has successfully been registered for the newsletter!</font>');
+define('TEXT_EMAIL_ACTIVE','<font color="#008000">Your e-mail address has successfully been registered for the newsletter!</font>');
 define('TEXT_EMAIL_ACTIVE_ERROR','<font color="#ff0000">An error occured, your e-mail address has not been registered for the newsletter!</font>');
 define('TEXT_EMAIL_SUBJECT','Your newsletter account');
 

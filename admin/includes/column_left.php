@@ -179,7 +179,12 @@
 											"is_main"	=> false,
 											"link" 		=> xtc_href_link(FILENAME_BLZ_UPDATE, '', 'NONSSL'),
 											"access"	=> "blz_update",
-											"check"		=> true);			
+											"check"		=> true);
+        $menu_items['content'][] = array(		"name" 		=> BOX_DSGVO_CUSTOMER_EXPORT,
+							"is_main"	=> false,
+							"link" 		=> xtc_href_link(FILENAME_DSGVO_EXPORT, '', 'NONSSL'),
+							"access"	=> "dsgvo_export",
+							"check"		=> true);
 											
 	$menu_items['content'][] = array(		"name" 		=> BOX_IMPORT,
 											"is_main"	=> false,

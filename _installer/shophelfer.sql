@@ -296,6 +296,7 @@ CREATE TABLE admin_access (
   outstanding INT(1) NOT NULL DEFAULT 0,
   globaledit INT(1) NOT NULL DEFAULT 0,
   stock_range INT(1) NOT NULL DEFAULT 0,
+  dsgvo_export INT(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (customers_id)
 ) ENGINE=MyISAM;
 

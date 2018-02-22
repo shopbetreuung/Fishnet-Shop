@@ -542,3 +542,4 @@ define('TEXT_PAYPAL_TAB_MODULE', 'PayPal Module');
 define('TEXT_PAYPAL_TAB_TRANSACTIONS', 'PayPal Transaktionen');
 
 define('FEEDBACK_SENT', 'Feedback gesendet');
+define('TEXT_DISPLAY_NUMBER_OF_DSGVO_EXPORT', 'Angezeigt werden <b>%d</b> to <b>%d</b> (of <b>%d</b> DSGVOstatus)');

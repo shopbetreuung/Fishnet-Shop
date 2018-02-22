@@ -179,4 +179,5 @@ ErrorDocument 500 /sitemap.html?error=500
   #RewriteRule (.*)-.-([_0-9]+)-([_0-9]+)\.html$ index.php?manufacturers_id=$2&page=$3 [QSA,L]
   #RewriteCond %{REQUEST_URI} (.*)-.-([_0-9]+)\.html$
   #RewriteRule (.*)-.-([0-9]+)\.html$ index.php?manufacturers_id=$2 [QSA,L]
+  RewriteRule log/.* sitemap.html [R,QSA,L]
 </IfModule>

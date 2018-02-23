@@ -374,8 +374,8 @@ define('STOCK_REORDER_LEVEL_TITLE' , 'E-Mail an den Admin das ein Artikel nachbe
 define('STOCK_REORDER_LEVEL_DESC' , 'Ab welcher Stückzahl soll der Admin eine E-Mail erhalten?');
 define('STORE_PAGE_PARSE_TIME_TITLE' , 'Speichern der Berechnungszeit des Shop-Seitenaufbaus');
 define('STORE_PAGE_PARSE_TIME_DESC' , 'Speicher der Zeit die ben&ouml;tigt wird, um Skripte bis zum Output der Seite zu berechnen');
-define('STORE_PAGE_PARSE_TIME_LOG_TITLE' , 'Speicherort der Logdatei');
-define('STORE_PAGE_PARSE_TIME_LOG_DESC' , 'Hier den Speicherort/Dateiname eintragen, in dem die Berechnungszeit f&uuml;r den Seitenaufbau, sowie die Datenbank Abfragen gespeichert werden.<br/><strong>Achtung: Datei kann bei l&auml;ngerer Laufzeit sehr gro&szlig; werden!</strong>.<br/><br/>Standard-Datei "page_parse_time.log":<br/><strong>Frontend:</strong> Berechnungszeit und Datenbank Abfragen im Frontend des Shops werden im Root-Verzeichnis in der Datei "<strong>page_parse_time.log</strong>" gespeichert.<br/><strong>Administrationsbereich (Backend):</strong> Berechnungszeit und Datenbank Abfragen im Administrationsbereich des Shops werden automatisch in der Datei "<strong>admin/page_parse_time.log</strong>" gespeichert.');
+define('STORE_PAGE_PARSE_TIME_LOG_TITLE' , 'Zielort der Protokolldatei');
+define('STORE_PAGE_PARSE_TIME_LOG_DESC' , 'Geben Sie den Dateinamen ein, unter dem die Seitenparsezeit sowie die Datenbankabfragen gespeichert werden..<br/><strong>Achtung: Bei langen Logging-Sitzungen kann die Datei sehr groß werden!</strong>.<br/><br/>Standardwert "page_parse_time.log".<br/><strong>Parsezeit und Datenbankabfragen im Shop-Backend werden im Ordner "log" des Shoproot  gespeichert.</strong>"');
 define('STORE_PARSE_DATE_TIME_FORMAT_TITLE' , 'Datumsformat in der Log-Datei');
 define('STORE_PARSE_DATE_TIME_FORMAT_DESC' , 'Das Datumsformat f&uuml;r Logging (Standard: %d/%m/%Y %H:%M:%S)');
 

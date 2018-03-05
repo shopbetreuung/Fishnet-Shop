@@ -18,6 +18,7 @@
 <script src="<?php echo 'templates/'.CURRENT_TEMPLATE; ?>/javascript/bootstrap.min.js" type="text/javascript"></script>
 <script src="<?php echo 'templates/'.CURRENT_TEMPLATE; ?>/javascript/bootstrap-add.js" type="text/javascript"></script>
 <script src="<?php echo 'templates/'.CURRENT_TEMPLATE; ?>/javascript/ekko-lightbox.min.js" type="text/javascript"></script>
+<script src="https://www.google.com/recaptcha/api.js" type="text/javascript"></script>
 
 <?php if (SHOW_COOKIE_NOTE == 'true') {
 	if (is_numeric(COOKIE_NOTE_CONTENT_ID) && COOKIE_NOTE_CONTENT_ID != 0) {

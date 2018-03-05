@@ -722,6 +722,9 @@ define('IBN_BILLNR_FORMAT_TITLE', 'Invoice number format');
 define('IBN_BILLNR_FORMAT_DESC', 'Format invoice number.: {n}=number, {d}=day, {m}=month, {y}=year, <br>example. "100{n}-{d}-{m}-{y}" => "10099-28-02-2007"');
 //EOF - hendrik - 2011-05-14 - independent invoice number and date
 
+define('FAILED_LOGINS_LIMIT_TITLE', 'Failed logins limit');
+define('FAILED_LOGINS_LIMIT_DESC', 'Maximum number of login tries before captcha validation is required');
+
 //BOC - h-h-h - 2011-12-23 - Button "Buy Now" optional - default off
 define('SHOW_BUTTON_BUY_NOW_TITLE', 'Show "Buy Now" in productlists');
 define('SHOW_BUTTON_BUY_NOW_DESC', '<b>Caution:</b><br /> This option is judicially critical if customers can\'t see all important informations directly in the productlists .');

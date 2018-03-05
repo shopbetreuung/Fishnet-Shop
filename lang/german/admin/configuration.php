@@ -731,6 +731,9 @@ define('IBN_BILLNR_FORMAT_TITLE', 'Rechnungsnummer Format');       //ibillnr
 define('IBN_BILLNR_FORMAT_DESC', 'Aufbauschema Rechn.Nr.: {n}=laufende Nummer, {d}=Tag, {m}=Monat, {y}=Jahr, <br>z.B. "100{n}-{d}-{m}-{y}" ergibt "10099-28-02-2007"');
 //EOF - hendrik - 2011-05-14 - independent invoice number and date
 
+define('FAILED_LOGINS_LIMIT_TITLE', 'Limit f&uuml;r fehlgeschlagene Anmeldungen');
+define('FAILED_LOGINS_LIMIT_DESC', 'Maximale Anzahl von Anmeldeversuchen, bevor eine Captcha-Validierung erforderlich ist.');
+
 //BOC - h-h-h - 2011-12-23 - Button "Buy Now" optional - default off
 define('SHOW_BUTTON_BUY_NOW_TITLE', 'Zeige "Jetzt Kaufen" in den Artikellisten');
 define('SHOW_BUTTON_BUY_NOW_DESC', '<b>Achtung:</b><br /> Dies kann zu Abmahnungen f&uuml;hren, wenn dem Kunden nicht alle wichtigen Informationen schon in den Listenseiten gezeigt werden!');

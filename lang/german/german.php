@@ -317,6 +317,7 @@ define('JS_PRICE_TO_LESS_THAN_PRICE_FROM', '* Preis bis muss gr&ouml;&szlig;er o
 define('JS_INVALID_KEYWORDS', '* Suchbegriff unzul&auml;ssig\n');
 define('TEXT_LOGIN_ERROR', '<font color="#ff0000"><strong>FEHLER:</strong></font> Falsche E-Mail Adresse oder Passwort.');
 define('TEXT_NO_EMAIL_ADDRESS_FOUND', '<font color="#ff0000"><strong>FEHLER:</strong></font> Falsche E-Mail Adresse oder Passwort.');
+define('TEXT_NO_EMAIL_ADDRESS_FOUND', '<font color="#ff0000"><strong>FEHLER:</strong></font> Falsche E-Mail Adresse oder Passwort.');
 define('TEXT_PASSWORD_SENT', 'Ein neues Passwort wurde per E-Mail verschickt.');
 define('TEXT_PRODUCT_NOT_FOUND', 'Artikel wurde nicht gefunden!');
 define('TEXT_MORE_INFORMATION', 'F&uuml;r weitere Informationen besuchen Sie bitte die <a style="text-decoration:underline;" href="%s" onclick="window.open(this.href); return false;">Homepage</a> zu diesem Artikel.');

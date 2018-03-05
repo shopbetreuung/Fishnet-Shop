@@ -41,26 +41,69 @@ if ($session_started == false) {
 }
 $info_message = false; //DokuMan - 2010-02-28 - set undefined variable
 
+if (!isset($_SESSION['customers_login_tries'])) {
+  $_SESSION['customers_login_tries'] = 1;
+}
+
 if (isset ($_GET['action']) && ($_GET['action'] == 'process')) {
 	$email_address = xtc_db_prepare_input($_POST['email_address']);
 	$password = xtc_db_prepare_input($_POST['password']);
 
+    // brute force        
+    $check_login_query = xtc_db_query("SELECT customers_login_tries
+                                         FROM ".TABLE_CUSTOMERS_LOGIN."
+                                        WHERE (customers_email_address = '".xtc_db_input($email_address)."'
+                                               OR customers_ip = '".xtc_db_input($_SESSION['tracking']['ip'])."')");
+    
+    if (xtc_db_num_rows($check_login_query) > 0) {
+      while ($check_login = xtc_db_fetch_array($check_login_query)) {
+        if ($check_login['customers_login_tries'] > $_SESSION['customers_login_tries']) {
+          $_SESSION['customers_login_tries'] = $check_login['customers_login_tries'];
+        }
+      }
+      // update login tries
+      xtc_db_query("UPDATE ".TABLE_CUSTOMERS_LOGIN." 
+                       SET customers_login_tries = '".($_SESSION['customers_login_tries'] + 1)."'
+                     WHERE (customers_email_address = '".xtc_db_input($email_address)."'
+                            OR customers_ip = '".xtc_db_input($_SESSION['tracking']['ip'])."')");
+    } else {
+      $sql_data_array = array(
+        'customers_ip' => $_SESSION['tracking']['ip'],
+        'customers_email_address' => $email_address,
+        'customers_login_tries' => ($_SESSION['customers_login_tries'] + 1),
+      );
+      xtc_db_perform(TABLE_CUSTOMERS_LOGIN, $sql_data_array);
+    }  
+    $captcha_error = false;
+    if ($_SESSION['customers_login_tries'] > FAILED_LOGINS_LIMIT) {  
+           $captcha_error = true;
+        if (isset($_POST['g-recaptcha-response']) && !empty( $_POST['g-recaptcha-response'])) {
+            $captcha_error = false;
+        } else {
+            $info_message .= TEXT_LOGIN_ERROR_NO_CAPTCHA."<br />";
+        }
+    }
 	// Check if email exists
 	$check_customer_query = xtc_db_query("select customers_id, customers_vat_id, customers_firstname,customers_lastname, customers_gender, customers_password, customers_email_address, customers_default_address_id from ".TABLE_CUSTOMERS." where customers_email_address = '".xtc_db_input($email_address)."' and account_type = '0'");
 	if (!xtc_db_num_rows($check_customer_query)) {
 		$_GET['login'] = 'fail';
-		$info_message = TEXT_NO_EMAIL_ADDRESS_FOUND;
+		$info_message .= TEXT_NO_EMAIL_ADDRESS_FOUND;
 	} else {
 		$check_customer = xtc_db_fetch_array($check_customer_query);
 		// Check that password is good
 		if (!xtc_validate_password($password, $check_customer['customers_password'])) {
 			$_GET['login'] = 'fail';
-			$info_message = TEXT_LOGIN_ERROR;
-		} else {
+			$info_message .= TEXT_LOGIN_ERROR;
+		} else if($captcha_error === false){
 			if (SESSION_RECREATE == 'True') {
 				xtc_session_recreate();
 			}
-
+                        // reset Login tries
+                        unset($_SESSION['customers_login_tries']);
+                        xtc_db_query("DELETE FROM ".TABLE_CUSTOMERS_LOGIN."
+                        WHERE (customers_email_address = '".xtc_db_input($email_address)."'
+                               OR customers_ip = '".xtc_db_input($_SESSION['tracking']['ip'])."')");
+                        
 			$check_country_query = xtc_db_query("select entry_country_id, entry_zone_id from ".TABLE_ADDRESS_BOOK." where customers_id = '".(int) $check_customer['customers_id']."' and address_book_id = '".$check_customer['customers_default_address_id']."'");
 			$check_country = xtc_db_fetch_array($check_country_query);
 
@@ -118,6 +161,11 @@ $smarty->assign('INPUT_MAIL', xtc_draw_input_field('email_address'));
 $smarty->assign('INPUT_PASSWORD', xtc_draw_password_field('password'));
 $smarty->assign('LINK_LOST_PASSWORD', xtc_href_link(FILENAME_PASSWORD_DOUBLE_OPT, '', 'SSL'));
 $smarty->assign('FORM_END', '</form>');
+
+// captcha
+if ($_SESSION['customers_login_tries'] >= FAILED_LOGINS_LIMIT) {    
+    $smarty->assign('RECAPTCHA','<div class="g-recaptcha" data-sitekey="6LfUijkUAAAAAJsvsJrm_4tpFJFm9fST3uVz7Yty"></div>');
+}
 
 $smarty->assign('language', $_SESSION['language']);
 $smarty->caching = 0;

@@ -57,6 +57,7 @@ if ($error) {
 if(isset($_GET['repair']) || isset($_GET['show_error'])) {
   $action = 'login_admin.php';
 } else {
+  include ('includes/application_top.php');
   $action = 'login.php?action=process';
 }
 
@@ -307,10 +308,13 @@ input[type=text]:focus, input[type=password]:focus {
   background: -moz-linear-gradient(top,  #ededed,  #fff);
   filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#ededed', endColorstr='#ffffff');
 }
+.login_admin_recaptcha {
+  margin-left: 8px;
+}
 </style>
 </head>
 <body>
-<form name="login" method="post" action="<?php echo $action; ?>">
+<form name="login" method="post" action="<?php echo $action; ?>" style="height: <?php echo ($_SESSION['customers_login_tries'] >= FAILED_LOGINS_LIMIT) ? '290px' : '190px'?>">
   <h1>Administrator-Login</h1>
   <a href="http://www.shophelfer.com/index.php?title=Login_im_Wartungsmodus_nicht_m%C3%B6glich" target="_blank"><img src="images/icons/question.png" width="32" height="32" title="Eingabehilfe und Repataturoptionen" /></a>
   <p><i>E-Mail</i>
@@ -319,6 +323,13 @@ input[type=text]:focus, input[type=password]:focus {
   <p><i>Passwort</i>
     <input type="password" name="password" maxlength="30" />
   </p>
+  <?php
+    if ($_SESSION['customers_login_tries'] >= FAILED_LOGINS_LIMIT) {
+  ?>  
+    <div class="g-recaptcha login_admin_recaptcha" data-sitekey="6LfUijkUAAAAAJsvsJrm_4tpFJFm9fST3uVz7Yty"></div>
+  <?php
+    }       
+  ?>
   <p>
     <input type="submit" class="login" name="Submit" value="Anmelden" />
     <?php

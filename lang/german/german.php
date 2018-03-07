@@ -317,7 +317,7 @@ define('JS_PRICE_TO_LESS_THAN_PRICE_FROM', '* Preis bis muss gr&ouml;&szlig;er o
 define('JS_INVALID_KEYWORDS', '* Suchbegriff unzul&auml;ssig\n');
 define('TEXT_LOGIN_ERROR', '<font color="#ff0000"><strong>FEHLER:</strong></font> Falsche E-Mail Adresse oder Passwort.');
 define('TEXT_NO_EMAIL_ADDRESS_FOUND', '<font color="#ff0000"><strong>FEHLER:</strong></font> Falsche E-Mail Adresse oder Passwort.');
-define('TEXT_NO_EMAIL_ADDRESS_FOUND', '<font color="#ff0000"><strong>FEHLER:</strong></font> Falsche E-Mail Adresse oder Passwort.');
+define('TEXT_LOGIN_ERROR_NO_CAPTCHA', '<font color="#ff0000"><strong>FEHLER:</strong></font> reCaptcha Verifizierung fehlgeschlagen, bitte versuchen Sie es erneut.');
 define('TEXT_PASSWORD_SENT', 'Ein neues Passwort wurde per E-Mail verschickt.');
 define('TEXT_PRODUCT_NOT_FOUND', 'Artikel wurde nicht gefunden!');
 define('TEXT_MORE_INFORMATION', 'F&uuml;r weitere Informationen besuchen Sie bitte die <a style="text-decoration:underline;" href="%s" onclick="window.open(this.href); return false;">Homepage</a> zu diesem Artikel.');
@@ -406,21 +406,23 @@ define('TEXT_NEWSLETTER','Sie m&ouml;chten immer auf dem Laufenden bleiben?<br /
 define('TEXT_EMAIL_INPUT','Ihre E-Mail-Adresse wurde in unser System eingetragen.<br />Gleichzeitig wurde Ihnen vom System eine E-Mail mit einem Aktivierungslink geschickt. Bitte klicken Sie nach dem Erhalt der E-Mail auf den Link, um Ihre Eintragung zu best&auml;tigen. Ansonsten bekommen Sie keinen Newsletter von uns zugestellt!');
 
 define('TEXT_WRONG_CODE','<font color="#ff0000">Ihr eingegebener Sicherheitscode stimmte nicht mit dem angezeigten Code &uuml;berein. Bitte versuchen Sie es erneut.</font>');
-define('TEXT_EMAIL_EXIST_NO_NEWSLETTER','<font color="#ff0000">Es wurde ein neuer Sicherheitscode auf diese Adresse gesendet!</font>');
+define('TEXT_EMAIL_EXIST_NO_NEWSLETTER','<font color="#008000">Es wurde ein neuer Sicherheitscode auf diese Adresse gesendet!</font>');
 define('TEXT_EMAIL_EXIST_NEWSLETTER','<font color="#ff0000">Diese E-Mail-Adresse existiert bereits in unserer Datenbank und ist f&uuml;r den Newsletterempfang bereits freigeschaltet!</font>');
 define('TEXT_EMAIL_NOT_EXIST','<font color="#ff0000">Diese E-Mail-Adresse existiert nicht in unserer Datenbank!</font>');
 define('TEXT_EMAIL_DEL','Ihre E-Mail-Adresse wurde aus unserer Newsletterdatenbank gel&ouml;scht.');
 define('TEXT_EMAIL_DEL_ERROR','<font color="#ff0000">Es ist ein Fehler aufgetreten, Ihre E-Mail-Adresse wurde nicht gel&ouml;scht!</font>');
-define('TEXT_EMAIL_ACTIVE','<font color="#ff0000">Ihre E-Mail-Adresse wurde erfolgreich f&uuml;r den Newsletterempfang freigeschaltet!</font>');
+define('TEXT_EMAIL_ACTIVE','<font color="#008000">Ihre E-Mail-Adresse wurde erfolgreich f&uuml;r den Newsletterempfang freigeschaltet!</font>');
 define('TEXT_EMAIL_ACTIVE_ERROR','<font color="#ff0000">Es ist ein Fehler aufgetreten, Ihre E-Mail-Adresse wurde nicht freigeschaltet!</font>');
 define('TEXT_EMAIL_SUBJECT','Ihre Newsletter-Anmeldung');
 
 define('TEXT_CUSTOMER_GUEST',' Gast');
 
-define('TEXT_LINK_MAIL_SENDED','Ihre Anfrage nach einem neuen Passwort muss von Ihnen erst best&auml;tigt werden.<br />Deshalb wurde Ihnen vom System eine E-Mail mit einem Best&auml;tigungslink geschickt. Bitte klicken Sie nach Erhalt der E-Mail auf den mitgeschickten Link, um eine weitere E-Mail mit Ihrem neuen Anmelde-Passwort zu erhalten. Andernfalls wird Ihnen das neue Passwort nicht zugestellt oder eingerichtet!');
+define('TEXT_LINK_MAIL_SENDED','Ihre Anfrage nach einem neuen Passwort muss zunächst von Ihnen best&auml;tigt werden. Daher hat Ihnen das System eine E-Mail mit einem Best&auml;tigungslink geschickt. Bitte klicken Sie nach Erhalt der E-Mail auf den Link. Andernfalls k&ouml;nnen Sie kein neues Passwort vergeben! <br /><br /><br /> Der Best&auml;tigungslink ist f&uuml;r %s Sekunden g&uuml;ltig.');
 define('TEXT_PASSWORD_MAIL_SENDED','Eine E-Mail mit einem neuen Anmelde-Passwort wurde Ihnen soeben zugestellt.<br />Bitte &auml;ndern Sie nach Ihrer n&auml;chsten Anmeldung Ihr Passwort wie gew&uuml;nscht.');
 define('TEXT_CODE_ERROR','Bitte geben Sie Ihre E-Mail-Adresse erneut ein. <br />Achten Sie dabei auf Tippfehler!');
-define('TEXT_EMAIL_ERROR','Bitte geben Sie Ihre E-Mail-Adresse erneut ein. <br />Achten Sie dabei auf Tippfehler!');
+define('TEXT_EMAIL_ERROR','Die E-Mail-Adresse ist nicht in unserem Shop registriert.<br /> Bitte versuchen Sie es erneut.');
+define('TEXT_REQUEST_NOT_VALID', 'Dieser Link ist nicht gültig. Bitte fordern Sie ein neues Passwort an.');
+define('TEXT_RECAPTCHA_ERROR','reCaptcha &Uuml;berpr&uuml;fung fehlgeschlagen, bitte versuchen Sie es erneut.');
 define('TEXT_NO_ACCOUNT','Leider m&uuml;ssen wir Ihnen mitteilen, dass Ihre Anfrage f&uuml;r ein neues Anmelde-Passwort entweder ung&uuml;ltig war oder abgelaufen ist.<br />Bitte versuchen Sie es erneut.');
 define('HEADING_PASSWORD_FORGOTTEN','Passwort vergessen?');
 define('TEXT_PASSWORD_FORGOTTEN','&Auml;ndern Sie Ihr Passwort in drei leichten Schritten.');

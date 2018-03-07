@@ -21,6 +21,8 @@ require ('includes/application_top.php');
 // create smarty elements
 $smarty = new Smarty;
 
+$request_time = is_numeric(VALID_REQUEST_TIME) ? VALID_REQUEST_TIME : '3600';
+
 // include boxes
 require (DIR_FS_CATALOG.'templates/'.CURRENT_TEMPLATE.'/source/boxes.php');
 
@@ -56,51 +58,77 @@ if (isset ($_GET['action']) && ($_GET['action'] == 'first_opt_in') && $_POST) {
   $html_mail = $smarty->fetch('db:password_verification_mail.html');
   $txt_mail = $smarty->fetch('db:password_verification_mail.txt');
   $subject = $smarty->fetch('db:password_verification_mail.subject');
+  if (isset($_POST['g-recaptcha-response']) && !empty( $_POST['g-recaptcha-response'])) {
     if (!xtc_db_num_rows($check_customer_query)) {
       $case = 'wrong_mail';
       $info_message = TEXT_EMAIL_ERROR;
     } else {
       $case = 'first_opt_in';
-      xtc_db_query("update ".TABLE_CUSTOMERS." set password_request_key = '".$vlcode."' where customers_id = '".$check_customer['customers_id']."'");
-      xtc_php_mail(EMAIL_SUPPORT_ADDRESS, EMAIL_SUPPORT_NAME, $check_customer['customers_email_address'], '', '', EMAIL_SUPPORT_REPLY_ADDRESS, EMAIL_SUPPORT_REPLY_ADDRESS_NAME, '', '', $subject, $html_mail, $txt_mail);
-
+      xtc_db_query("update ".TABLE_CUSTOMERS." set password_request_key = '".$vlcode."' , password_request_time = '".date('Y-m-d H:i:00')."' where customers_id = '".$check_customer['customers_id']."'");
+      xtc_php_mail(EMAIL_SUPPORT_ADDRESS, EMAIL_SUPPORT_NAME, $check_customer['customers_email_address'], '', '', EMAIL_SUPPORT_REPLY_ADDRESS, EMAIL_SUPPORT_REPLY_ADDRESS_NAME, '', '', $subject, $html_mail, $txt_mail);  
+    
     }
-}
-
-// Verification
-if (isset ($_GET['action']) && ($_GET['action'] == 'verified')) {
-  $check_customer_query = xtc_db_query("select customers_id, customers_email_address, password_request_key from ".TABLE_CUSTOMERS." where customers_id = '".(int)$_GET['customers_id']."' and password_request_key = '".xtc_db_input($_GET['key'])."'");
-  $check_customer = xtc_db_fetch_array($check_customer_query);
-  if (!xtc_db_num_rows($check_customer_query) || $_GET['key']=="") {
-    $case = 'no_account';
-    $info_message = TEXT_NO_ACCOUNT;
   } else {
-    $newpass = xtc_create_random_value(ENTRY_PASSWORD_MIN_LENGTH);
-    $crypted_password = xtc_encrypt_password($newpass);
-
-    xtc_db_query("update ".TABLE_CUSTOMERS." set customers_password = '".$crypted_password."' where customers_email_address = '".xtc_db_input($check_customer['customers_email_address'])."'"); //DokuMan - 2011-02-19 - SQL injection fix 16.02.2011
-    xtc_db_query("update ".TABLE_CUSTOMERS." set password_request_key = '' where customers_id = '".$check_customer['customers_id']."'");
-    // assign language to template for caching
-    $smarty->assign('language', $_SESSION['language']);
-    $smarty->assign('tpl_path', 'templates/'.CURRENT_TEMPLATE.'/');
-    $smarty->assign('logo_path', HTTP_SERVER.DIR_WS_CATALOG.'templates/'.CURRENT_TEMPLATE.'/img/');
-
-    // assign vars
-    $smarty->assign('EMAIL', $check_customer['customers_email_address']);
-    $smarty->assign('NEW_PASSWORD', $newpass);
-    // dont allow cache
-    $smarty->caching = false;
-    // create mails
-    $html_mail = $smarty->fetch('db:new_password_mail.html');
-    $txt_mail = $smarty->fetch('db:new_password_mail.txt');
-    $subject = $smarty->fetch('db:new_password_mail.subject');
-
-    xtc_php_mail(EMAIL_SUPPORT_ADDRESS, EMAIL_SUPPORT_NAME, $check_customer['customers_email_address'], '', '', EMAIL_SUPPORT_REPLY_ADDRESS, EMAIL_SUPPORT_REPLY_ADDRESS_NAME, '', '', $subject, $html_mail, $txt_mail);
-    if (!isset ($mail_error)) {
-      xtc_redirect(xtc_href_link(FILENAME_LOGIN, 'info_message='.urlencode(TEXT_PASSWORD_SENT), 'SSL', true, false));
+      $case = 'wrong_recaptcha';
+      $info_message = TEXT_RECAPTCHA_ERROR;
     }
-  }
 }
+
+    // Verification
+    if (isset ($_GET['action']) && ($_GET['action'] == 'verified') && isset($_GET['key']) && $_GET['key'] != '') {
+      $case = 'second_opt_in';
+
+      $check_customer_query = xtc_db_query("SELECT *
+                                              FROM ".TABLE_CUSTOMERS." 
+                                             WHERE customers_id = '".(int)$_GET['customers_id']."' AND password_request_key = '".$_GET['key']."' ");
+
+      $check_customer_array = xtc_db_fetch_array($check_customer_query);
+      
+      if (!xtc_db_num_rows($check_customer_query) || $_GET['key'] == '') {
+        $case = 'no_account';
+        $info_message = TEXT_NO_ACCOUNT;        
+      } elseif (time() > (strtotime($check_customer_array['password_request_time']) + $request_time)) {
+        $case = 'double_opt';
+        $info_message = TEXT_REQUEST_NOT_VALID;
+      } else {  
+        $error = false;
+            
+        $password = xtc_db_prepare_input($_POST['password_new']);
+        $password_confirm = xtc_db_prepare_input($_POST['password_confirmation']);
+            
+        if(!empty($password)) {     
+
+            if ($password != $password_confirm) {
+                $error = true;
+                $messageStack->add('password_double_opt_in', ENTRY_PASSWORD_ERROR_NOT_MATCHING);
+            }
+
+            if (strlen($password) < ENTRY_PASSWORD_MIN_LENGTH) {
+                $error = true;        
+                $messageStack->add('password_double_opt_in', ENTRY_PASSWORD_ERROR);
+            }
+
+            if(PASSWORD_SECURITY_CHECK == 'true') {
+
+                $passwordLetter  = preg_match('/[a-zA-Z]/',    $password);
+                $passwordDigit   = preg_match('/\d/',          $password);
+
+                if (!$passwordLetter || !$passwordDigit) {
+                        $error = true;
+                        $messageStack->add('password_double_opt_in', ENTRY_PASSWORD_NOT_COMPILANT);
+                }	
+            }	
+
+            if ($error == false) {
+                  $crypted_password = xtc_encrypt_password($password);          
+                  xtc_db_query("UPDATE ".TABLE_CUSTOMERS." set customers_password = '".$crypted_password."' WHERE customers_email_address = '".$check_customer_array['customers_email_address']."' ");
+                  xtc_redirect(xtc_href_link(FILENAME_LOGIN, '', 'SSL')); 
+            }           
+
+        }  
+
+      }
+    }
 
 $breadcrumb->add(NAVBAR_TITLE_PASSWORD_DOUBLE_OPT, xtc_href_link(FILENAME_PASSWORD_DOUBLE_OPT, '', 'NONSSL'));
 
@@ -110,19 +138,27 @@ switch ($case) {
   case 'first_opt_in' :
     $smarty->assign('text_heading', HEADING_PASSWORD_FORGOTTEN);
     //$smarty->assign('info_message', $info_message); //DokuMan - 2010-08-26 - unnecessary assign
-    $smarty->assign('info_message', TEXT_LINK_MAIL_SENDED);
+    $smarty->assign('info_message', sprintf(TEXT_LINK_MAIL_SENDED, $request_time));
     $smarty->assign('language', $_SESSION['language']);
     $smarty->caching = 0;
     $main_content = $smarty->fetch(CURRENT_TEMPLATE.'/module/password_messages.html');
     break;
+
+  case 'second_opt_in':
+    if ($messageStack->size('password_double_opt_in') > 0) {
+      $smarty->assign('error', $messageStack->output('password_double_opt_in'));
+    }
+    $smarty->assign('FORM_ACTION', xtc_draw_form('password_double_opt_in', xtc_href_link(FILENAME_PASSWORD_DOUBLE_OPT, xtc_get_all_get_params(), 'SSL'), 'post').xtc_draw_hidden_field('action', 'process'));
+    $smarty->assign('INPUT_NEW', xtc_draw_password_fieldNote(array ('name' => 'password_new', 'text' => '&nbsp;'. (xtc_not_null(ENTRY_PASSWORD_NEW_TEXT) ? '<span class="inputRequirement">'.ENTRY_PASSWORD_NEW_TEXT.'</span>' : ''))));
+    $smarty->assign('INPUT_CONFIRM', xtc_draw_password_fieldNote(array ('name' => 'password_confirmation', 'text' => '&nbsp;'. (xtc_not_null(ENTRY_PASSWORD_CONFIRMATION_TEXT) ? '<span class="inputRequirement">'.ENTRY_PASSWORD_CONFIRMATION_TEXT.'</span>' : ''))));
+    $smarty->assign('BUTTON_BACK', '<a href="'.xtc_href_link(FILENAME_ACCOUNT, '', 'SSL').'">'.xtc_image_button('button_back.gif', IMAGE_BUTTON_BACK).'</a>');
+    $smarty->assign('BUTTON_SUBMIT', xtc_image_submit('button_continue.gif', IMAGE_BUTTON_CONTINUE));
+    $smarty->assign('FORM_END', '</form>');
     
-  case 'second_opt_in' :
-    $smarty->assign('text_heading', HEADING_PASSWORD_FORGOTTEN);
-    $smarty->assign('info_message', $info_message);
-    //    $smarty->assign('info_message', TEXT_PASSWORD_MAIL_SENDED);
-    $smarty->assign('language', $_SESSION['language']);
+    // dont allow cache
     $smarty->caching = 0;
-    $main_content = $smarty->fetch(CURRENT_TEMPLATE.'/module/password_messages.html');
+    $smarty->assign('language', $_SESSION['language']);
+    $main_content = $smarty->fetch(CURRENT_TEMPLATE.'/module/account_password.html');
     break;
 
   case 'code_error' :
@@ -153,6 +189,25 @@ switch ($case) {
     // BOF - DokuMan - 2010-10-28 - added missing arguments for xtc_draw_input_field
     //$smarty->assign('INPUT_EMAIL', xtc_draw_input_field('email', xtc_db_input(isset($_POST['email']) ? $_POST['email'] : '')));
     $smarty->assign('INPUT_EMAIL', xtc_draw_input_field('email', xtc_db_input(isset($_POST['email']) ? $_POST['email'] : ''), '', 'text', false));
+    $smarty->assign('RECAPTCHA','<div class="g-recaptcha" data-sitekey="6LfUijkUAAAAAJsvsJrm_4tpFJFm9fST3uVz7Yty"></div>');
+    // EOF - DokuMan - 2010-10-28 - added missing arguments for xtc_draw_input_field
+    $smarty->assign('BUTTON_SEND', xtc_image_submit('button_send.gif', IMAGE_BUTTON_LOGIN));
+    $smarty->assign('FORM_END', '</form>');
+    $main_content = $smarty->fetch(CURRENT_TEMPLATE.'/module/password_double_opt_in.html');
+    break;
+
+  case 'wrong_recaptcha' :
+    $smarty->assign('text_heading', HEADING_PASSWORD_FORGOTTEN);
+    $smarty->assign('info_message', $info_message);
+    $smarty->assign('message', TEXT_PASSWORD_FORGOTTEN);
+    $smarty->assign('SHOP_NAME', STORE_NAME);
+    $smarty->assign('language', $_SESSION['language']);
+    $smarty->caching = 0;
+    $smarty->assign('FORM_ACTION', xtc_draw_form('sign', xtc_href_link(FILENAME_PASSWORD_DOUBLE_OPT, 'action=first_opt_in', 'SSL')));
+    // BOF - DokuMan - 2010-10-28 - added missing arguments for xtc_draw_input_field
+    //$smarty->assign('INPUT_EMAIL', xtc_draw_input_field('email', xtc_db_input(isset($_POST['email']) ? $_POST['email'] : '')));
+    $smarty->assign('INPUT_EMAIL', xtc_draw_input_field('email', xtc_db_input(isset($_POST['email']) ? $_POST['email'] : ''), '', 'text', false));
+    $smarty->assign('RECAPTCHA','<div class="g-recaptcha" data-sitekey="6LfUijkUAAAAAJsvsJrm_4tpFJFm9fST3uVz7Yty"></div>');
     // EOF - DokuMan - 2010-10-28 - added missing arguments for xtc_draw_input_field
     $smarty->assign('BUTTON_SEND', xtc_image_submit('button_send.gif', IMAGE_BUTTON_LOGIN));
     $smarty->assign('FORM_END', '</form>');
@@ -178,6 +233,7 @@ switch ($case) {
     // BOF - DokuMan - 2010-10-28 - added missing arguments for xtc_draw_input_field
     //$smarty->assign('INPUT_EMAIL', xtc_draw_input_field('email', xtc_db_input(isset($_POST['email']) ? $_POST['email'] : '')));
     $smarty->assign('INPUT_EMAIL', xtc_draw_input_field('email', xtc_db_input(isset($_POST['email']) ? $_POST['email'] : ''), '', 'text', false));
+    $smarty->assign('RECAPTCHA','<div class="g-recaptcha" data-sitekey="6LfUijkUAAAAAJsvsJrm_4tpFJFm9fST3uVz7Yty"></div>');
     // EOF - DokuMan - 2010-10-28 - added missing arguments for xtc_draw_input_field
     $smarty->assign('BUTTON_SEND', xtc_image_submit('button_continue.gif', IMAGE_BUTTON_CONTINUE));
     $smarty->assign('FORM_END', '</form>');

@@ -724,6 +724,8 @@ define('IBN_BILLNR_FORMAT_DESC', 'Format invoice number.: {n}=number, {d}=day, {
 
 define('FAILED_LOGINS_LIMIT_TITLE', 'Failed logins limit');
 define('FAILED_LOGINS_LIMIT_DESC', 'Maximum number of login tries before captcha validation is required');
+define('VALID_REQUEST_TIME_TITLE', 'Valid password renewal request time');
+define('VALID_REQUEST_TIME_DESC', 'Set valid password renewal request time in seconds for which the renewal of the password is enabled after sending a request (default 3600 seconds)');
 
 //BOC - h-h-h - 2011-12-23 - Button "Buy Now" optional - default off
 define('SHOW_BUTTON_BUY_NOW_TITLE', 'Show "Buy Now" in productlists');

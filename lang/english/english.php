@@ -316,7 +316,7 @@ define('JS_PRICE_TO_LESS_THAN_PRICE_FROM', '* Price up to must be larger or same
 define('JS_INVALID_KEYWORDS', '* Invalid search key\n');
 define('TEXT_LOGIN_ERROR', '<font color="#ff0000"><strong>ERROR:</strong></font> Wrong e-mail address or password.');
 define('TEXT_NO_EMAIL_ADDRESS_FOUND', '<font color="#ff0000"><strong>ERROR:</strong></font> Wrong e-mail address or password.');
-define('TEXT_NO_EMAIL_ADDRESS_FOUND', '<font color="#ff0000"><strong>ERROR:</strong></font> Wrong e-mail address or password.');
+define('TEXT_LOGIN_ERROR_NO_CAPTCHA', '<font color="#ff0000"><strong>ERROR:</strong></font> reCaptcha verification failed, please try again.');
 define('TEXT_PASSWORD_SENT', 'A new password was sent by e-mail.');
 define('TEXT_PRODUCT_NOT_FOUND', 'Product not found!');
 define('TEXT_MORE_INFORMATION', 'For further information, please visit the <a style="text-decoration:underline;" href="%s" onclick="window.open(this.href); return false;">homepage</a> of this product.');
@@ -416,10 +416,12 @@ define('TEXT_EMAIL_SUBJECT','Your newsletter account');
 
 define('TEXT_CUSTOMER_GUEST','Guest');
 
-define('TEXT_LINK_MAIL_SENDED','Your new password request must be confirmed.<br />An e-mail with a confirmation link has been send out. Click the link in order to complete recieve a new password!');
+define('TEXT_LINK_MAIL_SENDED','Your request for a new password must first be confirmed by you. <br /><br /> Therefore, the system sent you an e-mail with a confirmation link. Please click on the link after receiving the e-mail. Otherwise you cannot assign a new password! <br /><br /> The confirmation link is valid for %s seconds.');
 define('TEXT_PASSWORD_MAIL_SENDED','You will receive an e-mail with your new password within minutes.<br />Please change your password after your first login.');
 define('TEXT_CODE_ERROR','The security code you entered was not correct.<br />Please try again.');
 define('TEXT_EMAIL_ERROR','The e-mail address is not registered in our store.<br />Please try again.');
+define('TEXT_RECAPTCHA_ERROR','reCaptcha verification failed, please try again.');
+define('TEXT_REQUEST_NOT_VALID', 'This link is not valid. Please make a new Password request.');
 define('TEXT_NO_ACCOUNT','Your request for a new password is either invalid or timed out.<br />Please try again.');
 define('HEADING_PASSWORD_FORGOTTEN','Password renewal?');
 define('TEXT_PASSWORD_FORGOTTEN','Change your password in three easy steps.');

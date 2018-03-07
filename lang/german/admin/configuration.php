@@ -733,6 +733,8 @@ define('IBN_BILLNR_FORMAT_DESC', 'Aufbauschema Rechn.Nr.: {n}=laufende Nummer, {
 
 define('FAILED_LOGINS_LIMIT_TITLE', 'Limit f&uuml;r fehlgeschlagene Anmeldungen');
 define('FAILED_LOGINS_LIMIT_DESC', 'Maximale Anzahl von Anmeldeversuchen, bevor eine Captcha-Validierung erforderlich ist.');
+define('VALID_REQUEST_TIME_TITLE', 'Zeit f&uuml;r die Anforderung einer g&uuml;ltigen Passwortverl&auml;ngerung');
+define('VALID_REQUEST_TIME_DESC', 'Stellen Sie eine g&uuml;ltige Zeit f&uuml;r die Anforderung der Passwortverl&auml;ngerung in Sekunden ein, f&uuml;r die die Erneuerung des Passworts nach dem Senden einer Anfrage aktiviert ist (Standard 3600 Sekunden).');
 
 //BOC - h-h-h - 2011-12-23 - Button "Buy Now" optional - default off
 define('SHOW_BUTTON_BUY_NOW_TITLE', 'Zeige "Jetzt Kaufen" in den Artikellisten');

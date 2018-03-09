@@ -75,12 +75,14 @@ if (isset ($_GET['action']) && ($_GET['action'] == 'process')) {
       xtc_db_perform(TABLE_CUSTOMERS_LOGIN, $sql_data_array);
     }  
     $captcha_error = false;
-    if ($_SESSION['customers_login_tries'] > FAILED_LOGINS_LIMIT) {  
-           $captcha_error = true;
-        if (isset($_POST['g-recaptcha-response']) && !empty( $_POST['g-recaptcha-response'])) {
-            $captcha_error = false;
-        } else {
-            $info_message .= TEXT_LOGIN_ERROR_NO_CAPTCHA."<br />";
+    if (trim(INSERT_RECAPTCHA_KEY) != '') {
+        if ($_SESSION['customers_login_tries'] > FAILED_LOGINS_LIMIT) {  
+               $captcha_error = true;
+            if (isset($_POST['g-recaptcha-response']) && !empty( $_POST['g-recaptcha-response'])) {
+                $captcha_error = false;
+            } else {
+                $info_message .= TEXT_LOGIN_ERROR_NO_CAPTCHA."<br />";
+            }
         }
     }
 	// Check if email exists
@@ -163,9 +165,11 @@ $smarty->assign('LINK_LOST_PASSWORD', xtc_href_link(FILENAME_PASSWORD_DOUBLE_OPT
 $smarty->assign('FORM_END', '</form>');
 
 // captcha
-if ($_SESSION['customers_login_tries'] >= FAILED_LOGINS_LIMIT) {    
-    $smarty->assign('RECAPTCHA','<div class="g-recaptcha" data-sitekey="6LfUijkUAAAAAJsvsJrm_4tpFJFm9fST3uVz7Yty"></div>');
-}
+    if (trim(INSERT_RECAPTCHA_KEY) != '') {
+        if ($_SESSION['customers_login_tries'] >= FAILED_LOGINS_LIMIT) {    
+            $smarty->assign('RECAPTCHA','<div class="g-recaptcha" data-sitekey="'. trim(INSERT_RECAPTCHA_KEY).'"></div>');
+        }
+    }
 
 $smarty->assign('language', $_SESSION['language']);
 $smarty->caching = 0;

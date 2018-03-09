@@ -211,6 +211,7 @@ if(isset($_POST['repair'])  || isset($_POST['show_error'])) {
 <meta http-equiv="content-language" content="de" />
 <meta http-equiv="cache-control" content="no-cache" />
 <meta name="robots" content="noindex, nofollow" />
+<script src="https://www.google.com/recaptcha/api.js" type="text/javascript"></script>
 <style type="text/css">
 html {
   height: 100%;
@@ -323,12 +324,14 @@ input[type=text]:focus, input[type=password]:focus {
   <p><i>Passwort</i>
     <input type="password" name="password" maxlength="30" />
   </p>
-  <?php
-    if ($_SESSION['customers_login_tries'] >= FAILED_LOGINS_LIMIT) {
+  <?php  
+    if (trim(INSERT_RECAPTCHA_KEY) != '') {
+        if ($_SESSION['customers_login_tries'] >= FAILED_LOGINS_LIMIT) {
   ?>  
-    <div class="g-recaptcha login_admin_recaptcha" data-sitekey="6LfUijkUAAAAAJsvsJrm_4tpFJFm9fST3uVz7Yty"></div>
+  <div class="g-recaptcha login_admin_recaptcha" data-sitekey="<?php echo trim(INSERT_RECAPTCHA_KEY);?>"></div>
   <?php
-    }       
+        }    
+    }
   ?>
   <p>
     <input type="submit" class="login" name="Submit" value="Anmelden" />

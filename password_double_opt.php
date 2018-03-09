@@ -58,19 +58,20 @@ if (isset ($_GET['action']) && ($_GET['action'] == 'first_opt_in') && $_POST) {
   $html_mail = $smarty->fetch('db:password_verification_mail.html');
   $txt_mail = $smarty->fetch('db:password_verification_mail.txt');
   $subject = $smarty->fetch('db:password_verification_mail.subject');
-  if (isset($_POST['g-recaptcha-response']) && !empty( $_POST['g-recaptcha-response'])) {
-    if (!xtc_db_num_rows($check_customer_query)) {
-      $case = 'wrong_mail';
-      $info_message = TEXT_EMAIL_ERROR;
+  
+  if (xtc_db_num_rows($check_customer_query)) {
+    if (trim(INSERT_RECAPTCHA_KEY) != '' && (!isset($_POST['g-recaptcha-response']) || empty( $_POST['g-recaptcha-response']))) {
+          $case = 'wrong_recaptcha';
+          $info_message = TEXT_RECAPTCHA_ERROR; 
     } else {
-      $case = 'first_opt_in';
-      xtc_db_query("update ".TABLE_CUSTOMERS." set password_request_key = '".$vlcode."' , password_request_time = '".date('Y-m-d H:i:00')."' where customers_id = '".$check_customer['customers_id']."'");
-      xtc_php_mail(EMAIL_SUPPORT_ADDRESS, EMAIL_SUPPORT_NAME, $check_customer['customers_email_address'], '', '', EMAIL_SUPPORT_REPLY_ADDRESS, EMAIL_SUPPORT_REPLY_ADDRESS_NAME, '', '', $subject, $html_mail, $txt_mail);  
-    
-    }
+        $case = 'first_opt_in';
+        xtc_db_query("update ".TABLE_CUSTOMERS." set password_request_key = '".$vlcode."' , password_request_time = '".date('Y-m-d H:i:00')."' where customers_id = '".$check_customer['customers_id']."'");
+        xtc_php_mail(EMAIL_SUPPORT_ADDRESS, EMAIL_SUPPORT_NAME, $check_customer['customers_email_address'], '', '', EMAIL_SUPPORT_REPLY_ADDRESS, EMAIL_SUPPORT_REPLY_ADDRESS_NAME, '', '', $subject, $html_mail, $txt_mail);
+
+      }
   } else {
-      $case = 'wrong_recaptcha';
-      $info_message = TEXT_RECAPTCHA_ERROR;
+      $case = 'wrong_mail';
+      $info_message = TEXT_EMAIL_ERROR; 
     }
 }
 
@@ -189,7 +190,11 @@ switch ($case) {
     // BOF - DokuMan - 2010-10-28 - added missing arguments for xtc_draw_input_field
     //$smarty->assign('INPUT_EMAIL', xtc_draw_input_field('email', xtc_db_input(isset($_POST['email']) ? $_POST['email'] : '')));
     $smarty->assign('INPUT_EMAIL', xtc_draw_input_field('email', xtc_db_input(isset($_POST['email']) ? $_POST['email'] : ''), '', 'text', false));
-    $smarty->assign('RECAPTCHA','<div class="g-recaptcha" data-sitekey="6LfUijkUAAAAAJsvsJrm_4tpFJFm9fST3uVz7Yty"></div>');
+    
+    if (trim(INSERT_RECAPTCHA_KEY) != '') {
+        $smarty->assign('RECAPTCHA','<div class="g-recaptcha" data-sitekey="'.INSERT_RECAPTCHA_KEY.'"></div>');
+    }
+    
     // EOF - DokuMan - 2010-10-28 - added missing arguments for xtc_draw_input_field
     $smarty->assign('BUTTON_SEND', xtc_image_submit('button_send.gif', IMAGE_BUTTON_LOGIN));
     $smarty->assign('FORM_END', '</form>');
@@ -207,7 +212,11 @@ switch ($case) {
     // BOF - DokuMan - 2010-10-28 - added missing arguments for xtc_draw_input_field
     //$smarty->assign('INPUT_EMAIL', xtc_draw_input_field('email', xtc_db_input(isset($_POST['email']) ? $_POST['email'] : '')));
     $smarty->assign('INPUT_EMAIL', xtc_draw_input_field('email', xtc_db_input(isset($_POST['email']) ? $_POST['email'] : ''), '', 'text', false));
-    $smarty->assign('RECAPTCHA','<div class="g-recaptcha" data-sitekey="6LfUijkUAAAAAJsvsJrm_4tpFJFm9fST3uVz7Yty"></div>');
+    
+    if (trim(INSERT_RECAPTCHA_KEY) != '') {
+        $smarty->assign('RECAPTCHA','<div class="g-recaptcha" data-sitekey="'.trim(INSERT_RECAPTCHA_KEY).'"></div>');
+    }
+    
     // EOF - DokuMan - 2010-10-28 - added missing arguments for xtc_draw_input_field
     $smarty->assign('BUTTON_SEND', xtc_image_submit('button_send.gif', IMAGE_BUTTON_LOGIN));
     $smarty->assign('FORM_END', '</form>');
@@ -224,7 +233,7 @@ switch ($case) {
 
   case 'double_opt' :
     $smarty->assign('text_heading', HEADING_PASSWORD_FORGOTTEN);
-    //    $smarty->assign('info_message', $info_message);
+    //$smarty->assign('info_message', $info_message);
     $smarty->assign('message', TEXT_PASSWORD_FORGOTTEN);
     $smarty->assign('SHOP_NAME', STORE_NAME);
     $smarty->assign('language', $_SESSION['language']);
@@ -233,7 +242,11 @@ switch ($case) {
     // BOF - DokuMan - 2010-10-28 - added missing arguments for xtc_draw_input_field
     //$smarty->assign('INPUT_EMAIL', xtc_draw_input_field('email', xtc_db_input(isset($_POST['email']) ? $_POST['email'] : '')));
     $smarty->assign('INPUT_EMAIL', xtc_draw_input_field('email', xtc_db_input(isset($_POST['email']) ? $_POST['email'] : ''), '', 'text', false));
-    $smarty->assign('RECAPTCHA','<div class="g-recaptcha" data-sitekey="6LfUijkUAAAAAJsvsJrm_4tpFJFm9fST3uVz7Yty"></div>');
+    
+    if (trim(INSERT_RECAPTCHA_KEY) != '') {
+        $smarty->assign('RECAPTCHA','<div class="g-recaptcha" data-sitekey="'.trim(INSERT_RECAPTCHA_KEY).'"></div>');
+    }
+    
     // EOF - DokuMan - 2010-10-28 - added missing arguments for xtc_draw_input_field
     $smarty->assign('BUTTON_SEND', xtc_image_submit('button_continue.gif', IMAGE_BUTTON_CONTINUE));
     $smarty->assign('FORM_END', '</form>');

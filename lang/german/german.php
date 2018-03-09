@@ -406,12 +406,12 @@ define('TEXT_NEWSLETTER','Sie m&ouml;chten immer auf dem Laufenden bleiben?<br /
 define('TEXT_EMAIL_INPUT','Ihre E-Mail-Adresse wurde in unser System eingetragen.<br />Gleichzeitig wurde Ihnen vom System eine E-Mail mit einem Aktivierungslink geschickt. Bitte klicken Sie nach dem Erhalt der E-Mail auf den Link, um Ihre Eintragung zu best&auml;tigen. Ansonsten bekommen Sie keinen Newsletter von uns zugestellt!');
 
 define('TEXT_WRONG_CODE','<font color="#ff0000">Ihr eingegebener Sicherheitscode stimmte nicht mit dem angezeigten Code &uuml;berein. Bitte versuchen Sie es erneut.</font>');
-define('TEXT_EMAIL_EXIST_NO_NEWSLETTER','<font color="#008000">Es wurde ein neuer Sicherheitscode auf diese Adresse gesendet!</font>');
+define('TEXT_EMAIL_EXIST_NO_NEWSLETTER','<font color="#ff0000">Es wurde ein neuer Sicherheitscode auf diese Adresse gesendet!</font>');
 define('TEXT_EMAIL_EXIST_NEWSLETTER','<font color="#ff0000">Diese E-Mail-Adresse existiert bereits in unserer Datenbank und ist f&uuml;r den Newsletterempfang bereits freigeschaltet!</font>');
 define('TEXT_EMAIL_NOT_EXIST','<font color="#ff0000">Diese E-Mail-Adresse existiert nicht in unserer Datenbank!</font>');
 define('TEXT_EMAIL_DEL','Ihre E-Mail-Adresse wurde aus unserer Newsletterdatenbank gel&ouml;scht.');
 define('TEXT_EMAIL_DEL_ERROR','<font color="#ff0000">Es ist ein Fehler aufgetreten, Ihre E-Mail-Adresse wurde nicht gel&ouml;scht!</font>');
-define('TEXT_EMAIL_ACTIVE','<font color="#008000">Ihre E-Mail-Adresse wurde erfolgreich f&uuml;r den Newsletterempfang freigeschaltet!</font>');
+define('TEXT_EMAIL_ACTIVE','<font color="#ff0000">Ihre E-Mail-Adresse wurde erfolgreich f&uuml;r den Newsletterempfang freigeschaltet!</font>');
 define('TEXT_EMAIL_ACTIVE_ERROR','<font color="#ff0000">Es ist ein Fehler aufgetreten, Ihre E-Mail-Adresse wurde nicht freigeschaltet!</font>');
 define('TEXT_EMAIL_SUBJECT','Ihre Newsletter-Anmeldung');
 

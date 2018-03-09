@@ -726,6 +726,8 @@ define('FAILED_LOGINS_LIMIT_TITLE', 'Failed logins limit');
 define('FAILED_LOGINS_LIMIT_DESC', 'Maximum number of login tries before captcha validation is required');
 define('VALID_REQUEST_TIME_TITLE', 'Valid password renewal request time');
 define('VALID_REQUEST_TIME_DESC', 'Set valid password renewal request time in seconds for which the renewal of the password is enabled after sending a request (default 3600 seconds)');
+define('INSERT_RECAPTCHA_KEY_TITLE', 'Google reCaptcha api key');
+define('INSERT_RECAPTCHA_KEY_DESC', 'Here you can insert valid Google reCaptcha api key (<strong><span style="color: #FF0000;">reCaptcha will not be displayed if input field is empty!</span></strong>) <br /> <br />  <a href="https://www.google.com/recaptcha/admin#list" target="_blank"> Click to get Google reCaptcha api key</a> <br /><br /> <strong> Make sure to select reCAPTCHA V2! <br /> <br /> <span style="color: #FF0000;"> Please do not type the API key - just copy it and paste it in here!</span></strong>');
 
 //BOC - h-h-h - 2011-12-23 - Button "Buy Now" optional - default off
 define('SHOW_BUTTON_BUY_NOW_TITLE', 'Show "Buy Now" in productlists');

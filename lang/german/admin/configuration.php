@@ -735,6 +735,8 @@ define('FAILED_LOGINS_LIMIT_TITLE', 'Limit f&uuml;r fehlgeschlagene Anmeldungen'
 define('FAILED_LOGINS_LIMIT_DESC', 'Maximale Anzahl von Anmeldeversuchen, bevor eine Captcha-Validierung erforderlich ist.');
 define('VALID_REQUEST_TIME_TITLE', 'Zeit f&uuml;r die Anforderung einer g&uuml;ltigen Passwortverl&auml;ngerung');
 define('VALID_REQUEST_TIME_DESC', 'Stellen Sie eine g&uuml;ltige Zeit f&uuml;r die Anforderung der Passwortverl&auml;ngerung in Sekunden ein, f&uuml;r die die Erneuerung des Passworts nach dem Senden einer Anfrage aktiviert ist (Standard 3600 Sekunden).');
+define('INSERT_RECAPTCHA_KEY_TITLE', 'Google reCaptcha api key');
+define('INSERT_RECAPTCHA_KEY_DESC', 'Hier k&ouml;nnen Sie g&uuml;ltige Google reCaptcha api key (<strong><span style="color: #FF0000;">wird nicht angezeigt, wenn das Eingabefeld leer ist!</span></strong>) <br /> <br />  <a href="https://www.google.com/recaptcha/admin#list" target="_blank"> Klicken Sie hier Google reCaptcha api key</a> <br /><br /> <strong> Stellen Sie sicher, dass Sie reCAPTCHA V2! <br /><br /> <span style="color: #FF0000;">Bitte tippen Sie den API-Schl&uuml;ssel nicht ein - kopieren Sie ihn einfach und f&uuml;gen Sie ihn hier ein!</span></strong>');
 
 //BOC - h-h-h - 2011-12-23 - Button "Buy Now" optional - default off
 define('SHOW_BUTTON_BUY_NOW_TITLE', 'Zeige "Jetzt Kaufen" in den Artikellisten');

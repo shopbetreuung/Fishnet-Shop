@@ -18,3 +18,5 @@ INSERT INTO configuration (configuration_id, configuration_key, configuration_va
 
 ALTER TABLE customers ADD password_request_time DATETIME NULL DEFAULT '0000-00-00 00:00:00';
 
+INSERT INTO configuration (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('', 'INSERT_RECAPTCHA_KEY', '', '5', '132', NULL, NOW(), NULL, NULL);
+

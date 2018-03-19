@@ -496,6 +496,7 @@ define('SHIPPING_COSTS','Shipping costs');
 // changes 3.0.4 SP2
 define('SHIPPING_TIME','Shipping time: ');
 define('MORE_INFO','[More]');
+define('READ_INFO','[Read]');
 
 // changes 3.0.4 SP2.2
 define('ENTRY_PRIVACY_ERROR','Please accept our privacy policy!');
@@ -544,7 +545,7 @@ define('ERROR_SQL_DB_QUERY','We are sorry, but an database error has occurred so
 define('ERROR_SQL_DB_QUERY_REDIRECT','You will be redirected back to our home page in %s seconds!');
 // EOF - DokuMan - 2011-09-20 - E-Mail SQL errors
 
-define('TEXT_AGB_CHECKOUT','Please take note of our General Terms & Conditions %s and Cancellation Policy %s');
+define('TEXT_AGB_CHECKOUT','General Terms & Conditions %s <br /> Cancellation Policy %s <br /> Privacy policy %s');
 
 define('_SHIPPING_FREE','Download');
 

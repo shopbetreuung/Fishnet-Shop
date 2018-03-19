@@ -497,6 +497,7 @@ define('SHIPPING_COSTS','Versandkosten');
 // changes 3.0.4 SP2
 define('SHIPPING_TIME','Lieferzeit: ');
 define('MORE_INFO','[Mehr]');
+define('READ_INFO','[Lesen]');
 
 // changes 3.0.4 SP2.2
 define('ENTRY_PRIVACY_ERROR','Bitte akzeptieren Sie unsere Datenschutzrichtlinien!');
@@ -544,7 +545,7 @@ define('ERROR_SQL_DB_QUERY','Es tut uns leid, aber es ist ein Datenbankfehler au
 define('ERROR_SQL_DB_QUERY_REDIRECT','Sie werden in %s Sekunden auf unsere Homepage weitergeleitet!');
 // EOF - DokuMan - 2011-09-20 - E-Mail SQL errors
 
-define('TEXT_AGB_CHECKOUT','Bitte nehmen Sie unsere AGB und Kundeninformation %s sowie unsere Widerrufsbelehrung %s zur Kenntnis.');
+define('TEXT_AGB_CHECKOUT','AGB und Kundeninformation %s <br /> Widerrufsbelehrung %s <br /> Datenschutzerkl&auml;rung %s');
 
 define('_SHIPPING_FREE','Download');
 

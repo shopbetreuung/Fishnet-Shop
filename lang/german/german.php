@@ -541,7 +541,7 @@ define('ERROR_SQL_DB_QUERY','Es tut uns leid, aber es ist ein Datenbankfehler au
 define('ERROR_SQL_DB_QUERY_REDIRECT','Sie werden in %s Sekunden auf unsere Homepage weitergeleitet!');
 // EOF - DokuMan - 2011-09-20 - E-Mail SQL errors
 
-define('TEXT_AGB_CHECKOUT','Bitte nehmen Sie unsere AGB und Kundeninformation %s sowie unsere Widerrufsbelehrung %s zur Kenntnis.');
+define('TEXT_AGB_CHECKOUT','AGB und Kundeninformation %s <br /> Widerrufsbelehrung %s');
 
 define('_SHIPPING_FREE','Download');
 

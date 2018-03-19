@@ -41,6 +41,8 @@ define('TABLE_HEADING_ORDERS', '# Bestellungen');
 define('TABLE_HEADING_ITEMS', '# Artikel');
 define('TABLE_HEADING_REVENUE', 'Umsatz');
 define('TABLE_HEADING_SHIPPING', 'Versand');
+define('TABLE_HEADING_TAX_7', 'MwSt Produkte 7%');
+define('TABLE_HEADING_TAX_19', 'MwSt Produkte 19%');
 
 define('DET_HEAD_ONLY', 'keine Details');
 define('DET_DETAIL', 'Details anzeigen');

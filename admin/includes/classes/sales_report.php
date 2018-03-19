@@ -104,6 +104,9 @@
 
       // query for shipping
       $this->queryShipping = "SELECT sum(ot.value/o.currency_value) as shipping FROM " . TABLE_ORDERS . " o, " . TABLE_ORDERS_TOTAL . " ot WHERE ot.orders_id = o.orders_id AND  ot.class = 'ot_shipping'";
+      
+      $this->queryTaxes_7 = "SELECT sum(op.final_price - ( op.final_price / ( (op.products_tax +100) /100 ) ) ) as taxes FROM " . TABLE_ORDERS . " o, " . TABLE_ORDERS_PRODUCTS . " op WHERE op.orders_id = o.orders_id AND CAST( op.products_tax AS UNSIGNED ) = '7'";
+      $this->queryTaxes_19 = "SELECT sum(op.final_price - ( op.final_price / ( (op.products_tax +100) /100 ) ) ) as taxes FROM " . TABLE_ORDERS . " o, " . TABLE_ORDERS_PRODUCTS . " op WHERE op.orders_id = o.orders_id AND CAST( op.products_tax AS UNSIGNED ) = '19'";
 
       switch ($sort) {
         case '0':
@@ -172,7 +175,12 @@
 
       $rqShipping = xtc_db_query($this->queryShipping . " AND o.date_purchased >= '" . xtc_db_input(date("Y-m-d\TH:i:s", $sd)) . "' AND o.date_purchased < '" . xtc_db_input(date("Y-m-d\TH:i:s", $ed)) . "'" . $filterString);
       $shipping = xtc_db_fetch_array($rqShipping);
-
+      
+      $rqTaxes_7 = xtc_db_query($this->queryTaxes_7 . " AND o.date_purchased >= '" . xtc_db_input(date("Y-m-d\TH:i:s", $sd)) . "' AND o.date_purchased < '" . xtc_db_input(date("Y-m-d\TH:i:s", $ed)) . "'" . $filterString);
+      $Taxes_7 = xtc_db_fetch_array($rqTaxes_7);
+      $rqTaxes_19 = xtc_db_query($this->queryTaxes_19 . " AND o.date_purchased >= '" . xtc_db_input(date("Y-m-d\TH:i:s", $sd)) . "' AND o.date_purchased < '" . xtc_db_input(date("Y-m-d\TH:i:s", $ed)) . "'" . $filterString);
+      $Taxes_19 = xtc_db_fetch_array($rqTaxes_19);
+      
       $rqItems = xtc_db_query($this->queryItemCnt . " AND o.date_purchased >= '" . xtc_db_input(date("Y-m-d\TH:i:s", $sd)) . "' AND o.date_purchased < '" . xtc_db_input(date("Y-m-d\TH:i:s", $ed)) . "'" . $filterString . " group by pid " . $this->sortString);
 
       // set the return values
@@ -254,6 +262,8 @@
         $resp[$cnt]['psum'] = $resp[$cnt]['pquant'] * $price;
         $resp[$cnt]['order'] = $order['order_cnt'];
         $resp[$cnt]['shipping'] = $shipping['shipping'];
+        $resp[$cnt]['taxes_7'] = $Taxes_7['taxes'];
+        $resp[$cnt]['taxes_19'] = $Taxes_19['taxes'];
 
         // values per date and item
         $sumTot += $resp[$cnt]['psum'];

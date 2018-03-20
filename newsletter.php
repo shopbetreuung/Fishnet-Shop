@@ -58,7 +58,7 @@ if (isset ($_GET['action']) && ($_GET['action'] == 'process')) {
 
 	// Check if email exists 
   //BOF - web28 - 2010-02-09: NEWSLETTER ERROR HANDLING
-	if (xtc_validate_email(trim($_POST['email'])) && (isset($_POST['add']))) {
+	if (xtc_validate_email(trim($_POST['email'])) && (isset($_POST['add'])) && empty($_POST['honeytrap']) && (bool) $_POST['honeytrap'] === FALSE) {
   //BOF - web28 - 2010-02-09: NEWSLETTER ERROR HANDLING
 
 		$check_mail_query = xtc_db_query("select customers_email_address, mail_status from ".TABLE_NEWSLETTER_RECIPIENTS." where customers_email_address = '".xtc_db_input($_POST['email'])."'");
@@ -150,10 +150,11 @@ if (isset ($_GET['action']) && ($_GET['action'] == 'process')) {
 	    //$info_message = TEXT_WRONG_CODE;
 	    if (!xtc_validate_email(trim($_POST['email']))) $info_message .= ERROR_EMAIL;
 		//EOF - web28 - 2010-02-09: NEWSLETTER ERROR HANDLING
+            if (!empty($_POST['honeytrap']) && (bool) $_POST['honeytrap'] === TRUE) $err_msg .= ERROR_HONEYPOT;
 	}
 
   //BOF - web28 - 2010-02-09: NEWSLETTER ERROR HANDLING
-	if (xtc_validate_email(trim($_POST['email'])) && (isset($_POST['delete']))) {
+	if (xtc_validate_email(trim($_POST['email'])) && (isset($_POST['delete'])) && empty($_POST['honeytrap']) && (bool) $_POST['honeytrap'] === FALSE) {
   //EOF - web28 - 2010-02-09: NEWSLETTER ERROR HANDLING
 
             $check_mail_query = xtc_db_query("select customers_email_address from ".TABLE_NEWSLETTER_RECIPIENTS." where customers_email_address = '".xtc_db_input($_POST['email'])."'");
@@ -246,6 +247,8 @@ $smarty->assign('INPUT_EMAIL', xtc_draw_input_field('email', ((isset($_GET['emai
 if (trim(INSERT_RECAPTCHA_KEY) != '') {
     $smarty->assign('RECAPTCHA','<div class="g-recaptcha" data-sitekey="'. trim(INSERT_RECAPTCHA_KEY).'"></div>');
 }
+
+$smarty->assign('HONEY_TRAP',xtc_draw_checkbox_field('honeytrap','1',false,'style="display:none !important" tabindex="-1" autocomplete="off"'));
 
 if(isset($_POST['check']) && $_POST['add'] == '') {$inp = 'true'; $del = '';}
 if(isset($_POST['check']) && $_POST['delete'] == '') {$inp = ''; $del = 'true';}	

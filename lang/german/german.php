@@ -564,4 +564,5 @@ define('SITEMAP_CONTENTPAGE', 'Content pages');
 define('SITEMAP_EXPORT', 'exportiert');
 
 define('TEXT_EDIT_CATEGORIES', 'Kategorie editieren');
+define('ERROR_HONEYPOT','<p>Es gab ein Problem mit dem Kontaktformular</p>');
 ?>

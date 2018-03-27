@@ -88,9 +88,17 @@
 				</div>
 				<div class="equalize products_short_description_block">{$module_data.PRODUCTS_SHORT_DESCRIPTION}</div>
 				
+				<div class="equalize products_info_block">
+					<p>
+						{if $module_data.PRODUCTS_VPE}<br /><strong>{#vpe#}</strong> {$module_data.PRODUCTS_VPE}{/if}
+						{if $module_data.PRODUCTS_SHIPPING_NAME}<br /><strong>{#text_shippingtime#}</strong> {$module_data.PRODUCTS_SHIPPING_NAME_LINK}{/if}
+					</p>
+				</div>
+				
 				<div class="equalize products_price_block">
 					<p>
 						<br /><span class="lead">{$module_data.PRODUCTS_PRICE}</span>
+						<br /><small>({$module_data.PRODUCTS_TAX_INFO}{$module_data.PRODUCTS_SHIPPING_LINK})</small>
 					</p>				
 				</div>
 			</div> 

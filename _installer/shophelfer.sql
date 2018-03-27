@@ -297,7 +297,7 @@ CREATE TABLE admin_access (
   globaledit INT(1) NOT NULL DEFAULT 0,
   stock_range INT(1) NOT NULL DEFAULT 0,
   dsgvo_export INT(1) NOT NULL DEFAULT 0,
-  blacklist_log INT(1) NOT NULL DEFAULT 0,
+  blacklist_logs INT(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (customers_id)
 ) ENGINE=MyISAM;
 
@@ -476,7 +476,7 @@ CREATE TABLE customers (
   customers_date_added DATETIME DEFAULT '0000-00-00 00:00:00',
   customers_last_modified DATETIME DEFAULT '0000-00-00 00:00:00',
   customers_symbol INT(11) DEFAULT 0 NOT NULL,
-  password_request_time DATETIME NULL DEFAULT '0000-00-00 00:00:00';
+  password_request_time DATETIME NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (customers_id)
 ) ENGINE=MyISAM;
 

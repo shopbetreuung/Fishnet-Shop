@@ -11,7 +11,7 @@
    (c) 2003         nextcommerce (paypal.php,v 1.4 2003/08/13); www.nextcommerce.org
    Released under the GNU General Public License
    ---------------------------------------------------------------------------------------*/
-define('MODULE_PAYMENT_PAYPAL_TEXT_TITLE', 'PayPal Kaufabwicklung');
+define('MODULE_PAYMENT_PAYPAL_TEXT_TITLE', 'PayPal Kaufabwicklung (veraltet)');
 define('MODULE_PAYMENT_PAYPAL_TEXT_INFO','<img src="https://www.paypal.com/de_DE/DE/i/logo/lockbox_150x47.gif" />');
 define('MODULE_PAYMENT_PAYPAL_TEXT_DESCRIPTION', 'Sie werden nach dem "Best&auml;tigen" zu PayPal geleitet um hier Ihre Bestellung zu bezahlen.<br />Danach gelangen Sie zur&uuml;ck in den Shop und erhalten Ihre Bestell-Best&auml;tigung.');
 define('MODULE_PAYMENT_PAYPAL_ALLOWED_TITLE' , 'Erlaubte Zonen');

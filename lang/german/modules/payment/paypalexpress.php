@@ -15,7 +15,7 @@
 
    Released under the GNU General Public License
 ---------------------------------------------------------------------------------------*/
-define('MODULE_PAYMENT_PAYPALEXPRESS_TEXT_TITLE', 'PayPal Express Kaufabwicklung (Warenkorb)');
+define('MODULE_PAYMENT_PAYPALEXPRESS_TEXT_TITLE', 'Express Kaufabwicklung (Warenkorb, veraltet)');
 define('MODULE_PAYMENT_PAYPALEXPRESS_TEXT_DESCRIPTION', 'PayPal Express Kaufabwicklung');
 define('MODULE_PAYMENT_PAYPAL_TEXT_EXTENDED_DESCRIPTION', '<strong><font color="red">ACHTUNG:</font></strong> Bitte nehmen Sie noch die Einstellungen unter Erw. Konfiguration -> Partner -> <a href="'.xtc_href_link(FILENAME_CONFIGURATION, 'gID=111125').'">PayPal</a> vor!');
 define('MODULE_PAYMENT_PAYPALEXPRESS_TEXT_INFO', '');

@@ -171,6 +171,6 @@ define('TEXT_SHIPPING_TO', 'Versand nach');
 define('TABLE_HEADING_COMMENTS_SENT', 'Kommentar versandt');
 
 define('TABLE_HEADING_CARRIER', 'Transporteur');
-define('TABLE_HEADING_PARCEL_LINK', 'Statuslink');
+define('TABLE_HEADING_PARCEL_LINK', 'Paketnummer');
 define('TABLE_HEADING_REMOVE_LINK', 'Link entfernen');
 ?>

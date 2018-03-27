@@ -254,15 +254,18 @@ class ot_coupon {
                 //BOF - web28 - 2012-01-10 - new restrict_to_categories check
                 $cat_path = xtc_get_product_path(xtc_get_prid($order->products[$i]['id']));
                 $prod_cat_ids_array = explode("_", $cat_path);
+				$processed_products = array();
                 for ($ii = 0 , $nn = count($cat_ids); $ii < $nn ; $ii ++) {
-                  if (in_array($cat_ids[$ii], $prod_cat_ids_array) && !$p_flag) {
+                  if (in_array($cat_ids[$ii], $prod_cat_ids_array) && !$p_flag && !in_array($order->products[$i]['id'], $processed_products)) {
                     if ($get_result['coupon_type'] == 'P') {
                       $pr_c = $this->product_price($order->products[$i]['id']);//web28- 2010-07-29 - FIX no xtc_get_prid
                       $pod_amount = round($pr_c*10)/10*$c_deduct/100;
                       $od_amount = $od_amount + $pod_amount;
+					  $processed_products[] = $order->products[$i]['id'];
                     } else {
                       $od_amount = $c_deduct;
                       $pr_c += $this->product_price($order->products[$i]['id']);  //web28- 2010-07-29 - FIX no xtc_get_prid  //web28- 2010-05-21 - FIX - restrict  max coupon amount
+					  $processed_products[] = $order->products[$i]['id'];
                     }
                   }
                 }

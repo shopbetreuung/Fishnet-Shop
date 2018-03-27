@@ -87,7 +87,7 @@ if (!$box_smarty->is_cached(CURRENT_TEMPLATE.'/boxes/box_imagesliders.html', $ca
 			if ($imagesliders_data['imagesliders_url_target'] == '0') {
 				$target = '';
 			} elseif ($imagesliders_data['imagesliders_url_target'] == '1') {
-				$target = ' target="_blank"';
+				$target = ' target="_blank" rel="noopener"';
 			} elseif ($imagesliders_data['imagesliders_url_target'] == '2') {
 				$target = ' target="_top"';
 			} elseif ($imagesliders_data['imagesliders_url_target'] == '3') {

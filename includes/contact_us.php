@@ -31,6 +31,7 @@
 	if (CONTACT_FORM_CONSENT == 'true') {  
 		if (!isset($_POST['checkbox'])) $err_msg .= ERROR_CHECKBOX;
 	}  
+    if (!empty($_POST['honeytrap']) && (bool) $_POST['honeytrap'] === TRUE) $err_msg .= ERROR_HONEYPOT;
     //EOF error handling
 
     $smarty->assign('error_message', ERROR_MAIL . $err_msg);
@@ -185,7 +186,7 @@
 
     $smarty->assign('INPUT_NAME', xtc_draw_input_field('name', ($error ? $_POST['name'] : $customers_name), 'size="30"'));
     $smarty->assign('INPUT_EMAIL', xtc_draw_input_field('email', ($error ? $_POST['email'] : $email_address), 'size="30"'));
-	$smarty->assign('INPUT_HONEYPOT', xtc_draw_input_field('email2_FT7ughj521dfdf', ($error ? $_POST['email2_FT7ughj521dfdf'] : ''), 'size="30"'));
+    $smarty->assign('HONEY_TRAP',xtc_draw_checkbox_field('honeytrap','1',false,'style="display:none !important" tabindex="-1" autocomplete="off"'));
     // BOF - Tomcraft - 2009-11-05 - Advanced contact form (additional fields)
     $smarty->assign('INPUT_PHONE', xtc_draw_input_field('phone', ($error ? $_POST['phone'] : $phone), 'size="30"'));
     $smarty->assign('INPUT_COMPANY', xtc_draw_input_field('company', ($error ? $_POST['company'] : $company), 'size="30"'));

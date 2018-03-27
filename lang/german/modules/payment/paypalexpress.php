@@ -22,7 +22,7 @@ define('MODULE_PAYMENT_PAYPALEXPRESS_TEXT_INFO', '');
 define('MODULE_PAYMENT_PAYPALEXPRESS_STATUS_TITLE', 'PayPal-Express Modul aktivieren');
 define('MODULE_PAYMENT_PAYPALEXPRESS_STATUS_DESC', 'M&ouml;chten Sie Zahlungen per PayPal-Express akzeptieren?');
 define('MODULE_PAYMENT_PAYPALEXPRESS_ALT_BUTTON', ' Bezahlen mit PayPal ');
-define('MODULE_PAYMENT_PAYPALEXPRESS_LP', '<br /><br /><a target="_blank" href="http://www.paypal.com/de/webapps/mpp/referral/paypal-business-account2"><strong>Jetzt PayPal Konto hier erstellen.</strong></a>');
+define('MODULE_PAYMENT_PAYPALEXPRESS_LP', '<br /><br /><a target="_blank" rel="noopener" href="http://www.paypal.com/de/webapps/mpp/referral/paypal-business-account2"><strong>Jetzt PayPal Konto hier erstellen.</strong></a>');
 
 // Hendrik - 15.07.2010 - exlusion config for shipping modules 
 define('MODULE_PAYMENT_PAYPALEXPRESS_NEG_SHIPPING_TITLE', 'Ausschlu&szlig; bei Versandmodulen'); 

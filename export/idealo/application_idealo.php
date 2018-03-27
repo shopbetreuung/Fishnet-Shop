@@ -36,7 +36,10 @@ if (file_exists('../../includes/local/configure.php')) {
 } else {
 	include dirname ( __FILE__ ) . '/../../includes/configure.php';
 }
-
+// xss secure
+if (is_file('includes/xss_secure.php')) {
+  include ('includes/xss_secure.php');
+}
 /**
  * set the level of error reporting
  */
@@ -178,9 +181,6 @@ while ($configuration = xtc_db_fetch_array($configuration_query)) {
 require_once (DIR_WS_CLASSES.'class.phpmailer.php');
 if (EMAIL_TRANSPORT == 'smtp')
 	require_once (DIR_WS_CLASSES.'class.smtp.php');
-if(file_exists(DIR_FS_INC.'xtc_Security.inc.php')){
-    require_once (DIR_FS_INC.'xtc_Security.inc.php');
-}
 // set the application parameters
 
 function xtDBquery($query, $link='db_link') {

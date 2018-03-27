@@ -239,9 +239,8 @@ if ($_GET['action'] != 'update_option') {
   for ($i = 0, $n = sizeof($languages);$i < $n;$i++) {
     $lang_img = '<span style="float:left; padding-top:2px;">'. xtc_image(DIR_WS_LANGUAGES . $languages[$i]['directory'].'/admin/images/'.$languages[$i]['image'], $languages[$i]['name']) . '</span>';
     $inputs.= $lang_img . '&nbsp;<input type="text" value="'.$po_name[$languages[$i]['id']].'" name="option_name[' . $languages[$i]['id'] . ']" style="width:200px;">&nbsp;<br />';
-  }
-  ?>
-                    <form name="options" action="<?php echo xtc_href_link(FILENAME_PRODUCTS_ATTRIBUTES, 'action=add_product_options&option_page=' . $option_page, 'NONSSL');?>" method="post">
+  } ?>
+                    <?php echo xtc_draw_form('options' , FILENAME_PRODUCTS_ATTRIBUTES, 'action=add_product_options&option_page=' . $option_page, 'post', ''); ?>
                     <input type="hidden" name="products_options_id" value="<?php echo $next_id;?>">
                     <tr style="background-color: #d4d4d4;">
                        <td align="center" class="smallText">&nbsp;<?php echo $next_id; ?>&nbsp;</td>
@@ -272,7 +271,7 @@ while ($options_values = xtc_db_fetch_array($options)) {
       $inputs.= $lang_img . '&nbsp;<input type="text" name="option_name[' . $languages[$i]['id'] . ']" style="width:200px;" value="' . $option_name['products_options_name'] . '">&nbsp;<br />';
     }
   ?>
-                    <form name="option" action="<?php echo xtc_href_link(FILENAME_PRODUCTS_ATTRIBUTES, 'action=update_option_name&option_page='.$_GET['option_page'], 'NONSSL') ;?>" method="post">
+                    <?php echo xtc_draw_form('option', FILENAME_PRODUCTS_ATTRIBUTES, 'action=update_option_name&option_page='.$_GET['option_page'], 'post', ''); ?>
                     <tr style="background-color: #d4d4d4;">
                        <td align="center" class="smallText">
                         <?php echo $options_values['products_options_id']; ?><input type="hidden" name="option_id" value="<?php echo $options_values['products_options_id']; ?>">

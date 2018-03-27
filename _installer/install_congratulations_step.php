@@ -26,7 +26,7 @@ include('language/' . $lang . '.php');
         <div class="container nopad">
             <div class="row">
                 <div class="col-xs-12 nopad">
-                    <a href="http://www.shophelfer.com/" target="_blank"><img src="images/logo.png" alt="shophelfer.com" /></a>
+                    <a href="http://www.shophelfer.com/" target="_blank" rel="noopener"><img src="images/logo.png" alt="shophelfer.com" /></a>
                 </div>
             </div>
         </div>
@@ -59,7 +59,7 @@ include('language/' . $lang . '.php');
             <div class="row">
                 <div class="col-xs-2 pull-right nopad">
                     <div class="pull-right">
-                        <a class="btn btn-primary" href="<?php echo HTTP_CATALOG_SERVER . DIR_WS_CATALOG . 'index.php'; ?>" target="_blank"><?php echo TEXT_VISIT_SHOP; ?></a>
+                        <a class="btn btn-primary" href="<?php echo HTTP_CATALOG_SERVER . DIR_WS_CATALOG . 'index.php'; ?>" target="_blank" rel="noopener"><?php echo TEXT_VISIT_SHOP; ?></a>
                     </div>
                 </div>
             </div>

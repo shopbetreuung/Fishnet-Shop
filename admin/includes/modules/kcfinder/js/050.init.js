@@ -53,9 +53,9 @@ _.checkAgent = function() {
         ($.agent.opera && (parseInt($.agent.version) < 10)) ||
         ($.agent.firefox && (parseFloat($.agent.firefox) < 1.8))
     ) {
-        var html = '<div style="padding:10px">Your browser is not capable to display KCFinder. Please update your browser or install another one: <a href="http://www.mozilla.com/firefox/" target="_blank">Mozilla Firefox</a>, <a href="http://www.apple.com/safari" target="_blank">Apple Safari</a>, <a href="http://www.google.com/chrome" target="_blank">Google Chrome</a>, <a href="http://www.opera.com/browser" target="_blank">Opera</a>.';
+        var html = '<div style="padding:10px">Your browser is not capable to display KCFinder. Please update your browser or install another one: <a href="http://www.mozilla.com/firefox/" target="_blank" rel="noopener">Mozilla Firefox</a>, <a href="http://www.apple.com/safari" target="_blank" rel="noopener">Apple Safari</a>, <a href="http://www.google.com/chrome" target="_blank" rel="noopener">Google Chrome</a>, <a href="http://www.opera.com/browser" target="_blank" rel="noopener">Opera</a>.';
         if ($.agent.msie && !$.agent.opera)
-            html += ' You may also install <a href="http://www.google.com/chromeframe" target="_blank">Google Chrome Frame ActiveX plugin</a> to get Internet Explorer 6, 7, 8 working.';
+            html += ' You may also install <a href="http://www.google.com/chromeframe" target="_blank" rel="noopener">Google Chrome Frame ActiveX plugin</a> to get Internet Explorer 6, 7, 8 working.';
         html += '</div>';
         $('body').html(html);
         return false;

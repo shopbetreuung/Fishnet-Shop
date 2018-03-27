@@ -15,7 +15,7 @@
    Released under the GNU General Public License 
    --------------------------------------------------------------*/
 
-define('HEADING_TITLE', 'Imageslider v1.5 <small style="font-weight:normal;font-size:0.6em;">&copy; 2009 by <a href="http://www.merz-it-service.de/" target="_blank">Hetfield</a></small>');
+define('HEADING_TITLE', 'Imageslider v1.5 <small style="font-weight:normal;font-size:0.6em;">&copy; 2009 by <a href="http://www.merz-it-service.de/" target="_blank" rel="noopener">Hetfield</a></small>');
 define('TABLE_HEADING_IMAGESLIDERS', 'Imageslider');
 define('TABLE_HEADING_SORTING', 'Sorting');
 define('TABLE_HEADING_STATUS', 'Status');

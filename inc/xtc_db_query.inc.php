@@ -38,7 +38,7 @@
     //BOF - DokuMan - 2010-02-25 - also check for defined STORE_DB_TRANSACTIONS constant
     //if (STORE_DB_TRANSACTIONS == 'true') {
     if (defined('STORE_DB_TRANSACTIONS') && STORE_DB_TRANSACTIONS == 'true') {
-       error_log('QUERY ' . $query . "\n", 3, STORE_PAGE_PARSE_TIME_LOG);
+       error_log('QUERY ' . $query . "\n", 3, DIR_FS_DOCUMENT_ROOT.'log/'.STORE_PAGE_PARSE_TIME_LOG);
     //EOF - DokuMan - 2010-02-25 - also check for defined STORE_DB_TRANSACTIONS constant   
        $result_error = mysqli_error(${$link});
        error_log('RESULT NUM ROWS: ' . $result->num_rows." - FIELD COUNT ".$result->field_count . ' ' . $result_error . "\n", 3, DIR_FS_DOCUMENT_ROOT.'log/'.STORE_PAGE_PARSE_TIME_LOG);

@@ -393,7 +393,7 @@ $n=sizeof($temp_prods);
 for ($i=0; $i<$n; $i++) {
 //EOF - DokuMan - 2011-12-19 - precount for performance
 //	$temp_prods[$i]['details']='&nbsp;&#187;<a style="cursor:pointer" onclick="javascript:window.open(\''.xtc_href_link(FILENAME_PRINT_PRODUCT_INFO, 'products_id='.$temp_prods[$i]['id']).'\', \'popup\', \'toolbar=0, width=640, height=600\')" alt="" /><small>Details</small></a>';
-	$temp_prods[$i]['details']='&nbsp;&#187;<a href="'.xtc_href_link(FILENAME_PRODUCT_INFO, xtc_product_link($temp_prods[$i]['id'], $temp_prods[$i]['name'])).'" target="_blank"><small>Details</small></a>';
+	$temp_prods[$i]['details']='&nbsp;&#187;<a href="'.xtc_href_link(FILENAME_PRODUCT_INFO, xtc_product_link($temp_prods[$i]['id'], $temp_prods[$i]['name'])).'" target="_blank" rel="noopener"><small>Details</small></a>';
 	$image = xtc_get_products_image($temp_prods[$i]['id']);
 	if ($image!= '') {
 		$temp_prods[$i]['image']='<img height="60px" src="'.DIR_WS_THUMBNAIL_IMAGES.$image.'" alt="'.$temp_prods[$i]['name'].'" title="'.$temp_prods[$i]['name'].'" />';

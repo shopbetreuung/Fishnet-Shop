@@ -17,7 +17,7 @@
           $rss->addAttribute('encoding', 'UTF-8');
           ?>
           <div style="background:#F0F1F1;font-size:11px; border:1px solid #999; padding:5px; font-weight: 700" align="left">
-            <a target="_blank" href="<?php echo $rss->channel->link; ?>"><?php echo $rss->channel->title; ?></a>
+            <a target="_blank" rel="noopener" href="<?php echo $rss->channel->link; ?>"><?php echo $rss->channel->title; ?></a>
             <br/>
             <?php echo $rss->channel->description; ?>
           </div>
@@ -26,7 +26,7 @@
           for ($i=0; $i<=3; $i++) {
           ?>
             <div class="feedtitle" align="left" style="padding:5px;font-size:11px;">
-              <a target="_blank" href="<?php echo $rss->channel->item[$i]->link; ?>"><?php echo $rss->channel->item[$i]->title; ?></a>
+              <a target="_blank" rel="noopener" href="<?php echo $rss->channel->item[$i]->link; ?>"><?php echo $rss->channel->item[$i]->title; ?></a>
               <br/>
               <?php echo $rss->channel->item[$i]->description; ?>
             </div>
@@ -36,7 +36,7 @@
         } else {
         ?>
           <div style="background:#F0F1F1;font-size:11px; border:1px solid #999; padding:5px; font-weight: 700" align="left">
-            <a target="_blank" href="<?php echo RSS_FEED_LINK; ?>"><?php echo RSS_FEED_TITLE; ?></a>
+            <a target="_blank" rel="noopener" href="<?php echo RSS_FEED_LINK; ?>"><?php echo RSS_FEED_TITLE; ?></a>
             <br/>
             <?php echo RSS_FEED_DESCRIPTION; ?>
           </div>

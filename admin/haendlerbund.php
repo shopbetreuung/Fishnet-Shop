@@ -41,8 +41,8 @@ if($_GET["api_konfiguration"] == 1) {
 		<!-- body //-->
                 <div class='row'>
                     <div class='col-xs-12'>
-                        	<a href="https://partner.haendlerbund.de/partnerdoor.php?partnerid=kg004&bannerid=18" target="_blank"><img src="includes/haendlerbund/images/haendlerbund_logo.png" hspace="0" vspace="0" style="padding:10px" /></a>
-                                <a href="https://partner.haendlerbund.de/partnerdoor.php?partnerid=kg004&bannerid=18" target="_blank"><img src="includes/haendlerbund/images/groesster-onlinehandelsverband-europas.png" style="padding:10px" /></a>
+                        	<a href="https://partner.haendlerbund.de/partnerdoor.php?partnerid=kg004&bannerid=18" target="_blank" rel="noopener"><img src="includes/haendlerbund/images/haendlerbund_logo.png" hspace="0" vspace="0" style="padding:10px" /></a>
+                                <a href="https://partner.haendlerbund.de/partnerdoor.php?partnerid=kg004&bannerid=18" target="_blank" rel="noopener"><img src="includes/haendlerbund/images/groesster-onlinehandelsverband-europas.png" style="padding:10px" /></a>
 				
 						
                     </div>

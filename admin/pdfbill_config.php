@@ -296,7 +296,7 @@ function toggle_column() {
       <td  class="BillMainOuterTd">
         <table cellspacing="0" cellpadding="0" width="100%">
           <tr>
-            <form name="pdfkatalog" <?php echo 'action="' . xtc_href_link('pdfbill_config.php', '', 'NONSSL') . '"'; ?> method="post">
+            <?php echo xtc_draw_form('pdfkatalog', 'pdfbill_config.php', '', 'post', ''); ?>
             <td class="BillMainOuterDiv" >
     
     

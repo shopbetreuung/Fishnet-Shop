@@ -58,7 +58,7 @@ if (isset ($_GET['action']) && ($_GET['action'] == 'process')) {
 
 	// Check if email exists 
   //BOF - web28 - 2010-02-09: NEWSLETTER ERROR HANDLING
-	if (xtc_validate_email(trim($_POST['email'])) && (isset($_POST['add']))) {
+	if (xtc_validate_email(trim($_POST['email'])) && (isset($_POST['add'])) && empty($_POST['honeytrap']) && (bool) $_POST['honeytrap'] === FALSE) {
   //BOF - web28 - 2010-02-09: NEWSLETTER ERROR HANDLING
 
 		$check_mail_query = xtc_db_query("select customers_email_address, mail_status from ".TABLE_NEWSLETTER_RECIPIENTS." where customers_email_address = '".xtc_db_input($_POST['email'])."'");
@@ -90,50 +90,98 @@ if (isset ($_GET['action']) && ($_GET['action'] == 'process')) {
 			$sql_data_array = array ('customers_email_address' => xtc_db_input($_POST['email']), 'customers_id' => xtc_db_input($customers_id), 'customers_status' => xtc_db_input($customers_status), 'customers_firstname' => xtc_db_input($customers_firstname), 'customers_lastname' => xtc_db_input($customers_lastname), 'mail_status' => '0', 'mail_key' => xtc_db_input($vlcode), 'date_added' => 'now()');
 			xtc_db_perform(TABLE_NEWSLETTER_RECIPIENTS, $sql_data_array);
 
-			$success_message = TEXT_EMAIL_INPUT;
-
-			if (SEND_EMAILS == true) {
-				xtc_php_mail(EMAIL_SUPPORT_ADDRESS, EMAIL_SUPPORT_NAME, xtc_db_input($_POST['email']), '', '', EMAIL_SUPPORT_REPLY_ADDRESS, EMAIL_SUPPORT_REPLY_ADDRESS_NAME, '', '', $subject, $html_mail, $txt_mail);
-			}
+                        if (trim(INSERT_RECAPTCHA_KEY) != '') {                         
+                            if (isset($_POST['g-recaptcha-response']) && !empty( $_POST['g-recaptcha-response'])) {
+                                $success_message = TEXT_EMAIL_INPUT;
+                                
+                                if (SEND_EMAILS == true) {
+                                    xtc_php_mail(EMAIL_SUPPORT_ADDRESS, EMAIL_SUPPORT_NAME, xtc_db_input($_POST['email']), '', '', EMAIL_SUPPORT_REPLY_ADDRESS, EMAIL_SUPPORT_REPLY_ADDRESS_NAME, '', '', $subject, $html_mail, $txt_mail);
+                                }
+                            
+                            } else {
+                                $info_message .= TEXT_LOGIN_ERROR_NO_CAPTCHA."<br />";
+                            }        
+                        } else {
+                            $success_message = TEXT_EMAIL_INPUT;
+                            if (SEND_EMAILS == true) {
+                                xtc_php_mail(EMAIL_SUPPORT_ADDRESS, EMAIL_SUPPORT_NAME, xtc_db_input($_POST['email']), '', '', EMAIL_SUPPORT_REPLY_ADDRESS, EMAIL_SUPPORT_REPLY_ADDRESS_NAME, '', '', $subject, $html_mail, $txt_mail);
+                            }  
+                        }
 
 		} else {
-			$check_mail = xtc_db_fetch_array($check_mail_query);
+                    $check_mail = xtc_db_fetch_array($check_mail_query);
+                    
+                    if ($check_mail['mail_status'] == '0') {
+                        
+                        xtc_db_query("UPDATE ".TABLE_NEWSLETTER_RECIPIENTS." SET mail_key = '".xtc_db_input($vlcode)."' WHERE customers_email_address='".$_POST['email']."'");
 
-			if ($check_mail['mail_status'] == '0') {
+                        if (trim(INSERT_RECAPTCHA_KEY) != '') {
+                            if (isset($_POST['g-recaptcha-response']) && !empty( $_POST['g-recaptcha-response'])) {
+                                $info_message = TEXT_EMAIL_EXIST_NO_NEWSLETTER;
+                                
+                                if (SEND_EMAILS == true) {
+                                    xtc_php_mail(EMAIL_SUPPORT_ADDRESS, EMAIL_SUPPORT_NAME, xtc_db_input($_POST['email']), '', '', EMAIL_SUPPORT_REPLY_ADDRESS, EMAIL_SUPPORT_REPLY_ADDRESS_NAME, '', '', $subject, $html_mail, $txt_mail);
+                                }
+                            } else {
+                                $info_message .= TEXT_LOGIN_ERROR_NO_CAPTCHA."<br />";
+                            }
+                        } else {
+                            $info_message = TEXT_EMAIL_EXIST_NO_NEWSLETTER;
+                            if (SEND_EMAILS == true) {
+                                xtc_php_mail(EMAIL_SUPPORT_ADDRESS, EMAIL_SUPPORT_NAME, xtc_db_input($_POST['email']), '', '', EMAIL_SUPPORT_REPLY_ADDRESS, EMAIL_SUPPORT_REPLY_ADDRESS_NAME, '', '', $subject, $html_mail, $txt_mail);
+                            }
+                        }
 
-                xtc_db_query("UPDATE ".TABLE_NEWSLETTER_RECIPIENTS." SET mail_key = '".xtc_db_input($vlcode)."' WHERE customers_email_address='".$_POST['email']."'");
-
-				$info_message = TEXT_EMAIL_EXIST_NO_NEWSLETTER;
-
-				if (SEND_EMAILS == true) {
-					xtc_php_mail(EMAIL_SUPPORT_ADDRESS, EMAIL_SUPPORT_NAME, xtc_db_input($_POST['email']), '', '', EMAIL_SUPPORT_REPLY_ADDRESS, EMAIL_SUPPORT_REPLY_ADDRESS_NAME, '', '', $subject, $html_mail, $txt_mail);
-				}
-
-			} else {
-				$info_message = TEXT_EMAIL_EXIST_NEWSLETTER;
-			}
-
-		}
+                    } else {
+                        if (trim(INSERT_RECAPTCHA_KEY) != '') {
+                            if (isset($_POST['g-recaptcha-response']) && !empty( $_POST['g-recaptcha-response'])) {
+                                $info_message = TEXT_EMAIL_EXIST_NEWSLETTER;
+                            } else {
+                                $info_message .= TEXT_LOGIN_ERROR_NO_CAPTCHA."<br />";
+                            }
+                        } else {
+                            $info_message = TEXT_EMAIL_EXIST_NEWSLETTER;
+                        }
+                    }
+                }
 
 	} else {
 	    //BOF - web28 - 2010-02-09: NEWSLETTER ERROR HANDLING
 	    //$info_message = TEXT_WRONG_CODE;
 	    if (!xtc_validate_email(trim($_POST['email']))) $info_message .= ERROR_EMAIL;
 		//EOF - web28 - 2010-02-09: NEWSLETTER ERROR HANDLING
+            if (!empty($_POST['honeytrap']) && (bool) $_POST['honeytrap'] === TRUE) $err_msg .= ERROR_HONEYPOT;
 	}
 
   //BOF - web28 - 2010-02-09: NEWSLETTER ERROR HANDLING
-	if (xtc_validate_email(trim($_POST['email'])) && (isset($_POST['delete']))) {
+	if (xtc_validate_email(trim($_POST['email'])) && (isset($_POST['delete'])) && empty($_POST['honeytrap']) && (bool) $_POST['honeytrap'] === FALSE) {
   //EOF - web28 - 2010-02-09: NEWSLETTER ERROR HANDLING
 
-		$check_mail_query = xtc_db_query("select customers_email_address from ".TABLE_NEWSLETTER_RECIPIENTS." where customers_email_address = '".xtc_db_input($_POST['email'])."'");
-		if (!xtc_db_num_rows($check_mail_query)) {
-			$info_message = TEXT_EMAIL_NOT_EXIST;
-		} else {
-			$del_query = xtc_db_query("delete from ".TABLE_NEWSLETTER_RECIPIENTS." where customers_email_address ='".xtc_db_input($_POST['email'])."'");
-           
-			$success_message = TEXT_EMAIL_DEL;
-		}	
+            $check_mail_query = xtc_db_query("select customers_email_address from ".TABLE_NEWSLETTER_RECIPIENTS." where customers_email_address = '".xtc_db_input($_POST['email'])."'");
+            if (!xtc_db_num_rows($check_mail_query)) {
+                 if (trim(INSERT_RECAPTCHA_KEY) != '') {
+                    if (isset($_POST['g-recaptcha-response']) && !empty( $_POST['g-recaptcha-response'])) {
+                        $info_message = TEXT_EMAIL_NOT_EXIST;
+                    } else {
+                        $info_message .= TEXT_LOGIN_ERROR_NO_CAPTCHA."<br />";
+                    }
+                } else {
+                    $info_message = TEXT_EMAIL_NOT_EXIST;
+                }
+
+            } else {                
+                if (trim(INSERT_RECAPTCHA_KEY) != '') {
+                    if (isset($_POST['g-recaptcha-response']) && !empty( $_POST['g-recaptcha-response'])) {
+                        $del_query = xtc_db_query("delete from ".TABLE_NEWSLETTER_RECIPIENTS." where customers_email_address ='".xtc_db_input($_POST['email'])."'");
+                        $success_message = TEXT_EMAIL_DEL;
+                    } else {
+                        $info_message .= TEXT_LOGIN_ERROR_NO_CAPTCHA."<br />";
+                    }
+                } else {
+                    $del_query = xtc_db_query("delete from ".TABLE_NEWSLETTER_RECIPIENTS." where customers_email_address ='".xtc_db_input($_POST['email'])."'");
+                    $success_message = TEXT_EMAIL_DEL;
+                }
+            }	
 	}	
 }
 
@@ -194,6 +242,14 @@ $smarty->assign('FORM_ACTION', xtc_draw_form('sign', xtc_href_link(FILENAME_NEWS
 $smarty->assign('INPUT_EMAIL', xtc_draw_input_field('email', ((isset($_GET['email']) && xtc_db_input($_GET['email'])!='') ? xtc_db_input($_GET['email']):((isset($_POST['email']) && xtc_db_input($_POST['email']))?xtc_db_input($_POST['email']):''))));
 //EOF - web28 - 2010-02-09: SHOW EMAIL IN INPUT FIELD
 //BOF - web28 - 2010-02-09: NEWSLETTER ERROR HANDLING
+
+// captcha
+if (trim(INSERT_RECAPTCHA_KEY) != '') {
+    $smarty->assign('RECAPTCHA','<div class="g-recaptcha" data-sitekey="'. trim(INSERT_RECAPTCHA_KEY).'"></div>');
+}
+
+$smarty->assign('HONEY_TRAP',xtc_draw_checkbox_field('honeytrap','1',false,'style="display:none !important" tabindex="-1" autocomplete="off"'));
+
 if(isset($_POST['check']) && $_POST['add'] == '') {$inp = 'true'; $del = '';}
 if(isset($_POST['check']) && $_POST['delete'] == '') {$inp = ''; $del = 'true';}	
 #$smarty->assign('CHECK_INP', xtc_draw_radio_field('check', 'inp', $inp));

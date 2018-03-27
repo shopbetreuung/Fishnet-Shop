@@ -178,10 +178,10 @@
 		  								<div class="title_hb">
       									<h5 class="title_hb">H&auml;ndlerbund Mitgliedschaft</h5>
     									</div>
-                                                                        <p><strong>Achtung! Es gibt eine neue Schnittstelle, die aber vom <a href="https://partner.haendlerbund.de/partnerdoor.php?partnerid=kg004&bannerid=18" target="_blank">H&auml;ndlerbund</a> individualisiert wird und daher hier nicht pauschal eingebaut werden kann. Sie brauchen diese aber nur in Ihrem <a href="https://partner.haendlerbund.de/partnerdoor.php?partnerid=kg004&bannerid=18" target="_blank">Mitgliedskonto</a> herunterladen und in Ihren Shop hochladen. Die Einrichtung ist extrem einfach und kann gegen sehr geringes Entgeld auch vom H&auml;ndlerbund vorgenommen werden.</strong></p>
+                                                                        <p><strong>Achtung! Es gibt eine neue Schnittstelle, die aber vom <a href="https://partner.haendlerbund.de/partnerdoor.php?partnerid=kg004&bannerid=18" target="_blank" rel="noopener">H&auml;ndlerbund</a> individualisiert wird und daher hier nicht pauschal eingebaut werden kann. Sie brauchen diese aber nur in Ihrem <a href="https://partner.haendlerbund.de/partnerdoor.php?partnerid=kg004&bannerid=18" target="_blank" rel="noopener">Mitgliedskonto</a> herunterladen und in Ihren Shop hochladen. Die Einrichtung ist extrem einfach und kann gegen sehr geringes Entgeld auch vom H&auml;ndlerbund vorgenommen werden.</strong></p>
 <p>Die hier eingebaute alte Schnittstelle funktioniert aber auch weiterhin.</p>
 											<br />
-        							Sie ben&ouml;tigen f&uuml;r die Verwendung dieser Schnittstellen eine H&auml;ndlerbund Mitgliedschaft, welche Sie hier beantragen k&ouml;nnen:<br /><br />&gt;&gt;&gt; <a target="_blank" href="https://partner.haendlerbund.de/partnerdoor.php?partnerid=kg004&bannerid=18" style="color: #3581C1; font-family: Arial,Helvetica,sans-serif; font-size: 12px; text-decoration: underline;">Jetzt Mitglied werden</a> &lt;&lt;&lt;
+        							Sie ben&ouml;tigen f&uuml;r die Verwendung dieser Schnittstellen eine H&auml;ndlerbund Mitgliedschaft, welche Sie hier beantragen k&ouml;nnen:<br /><br />&gt;&gt;&gt; <a target="_blank" rel="noopener" href="https://partner.haendlerbund.de/partnerdoor.php?partnerid=kg004&bannerid=18" style="color: #3581C1; font-family: Arial,Helvetica,sans-serif; font-size: 12px; text-decoration: underline;">Jetzt Mitglied werden</a> &lt;&lt;&lt;
 											<br />
 											<br />
 											<div class="title_hb">

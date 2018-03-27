@@ -80,7 +80,7 @@ class sofort_sofortueberweisung extends sofort{
 		}
 		
 		//add ks-link, if ks is active
-		$title = str_replace('[[link_beginn]]', '<a href="'.MODULE_PAYMENT_SOFORT_MULTIPAY_SU_CHECKOUT_INFOLINK_KS.'" target="_blank">', $title);
+		$title = str_replace('[[link_beginn]]', '<a href="'.MODULE_PAYMENT_SOFORT_MULTIPAY_SU_CHECKOUT_INFOLINK_KS.'" target="_blank" rel="noopener">', $title);
 		$title = str_replace('[[link_end]]', '</a>', $title);
 
 		$cost = '';

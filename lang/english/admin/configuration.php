@@ -60,7 +60,7 @@ define('SEND_EXTRA_ORDER_EMAILS_TO_TITLE' , 'Send Copies of Order E-Mails to:');
 define('SEND_EXTRA_ORDER_EMAILS_TO_DESC' , 'Send copies of order e-mails to the following e-mail addresses, like: Name1 &lt;e-mail@address1&gt;, Name2 &lt;e-mail@address2&gt;');
 
 define('SEARCH_ENGINE_FRIENDLY_URLS_TITLE' , 'Use Search-Engine Safe URLs?');
-define('SEARCH_ENGINE_FRIENDLY_URLS_DESC' , 'Use search-engine friendly URLs for all site links.<br /><br /><strong>For search-engine optimized URLs, the file _.htaccess in the root directory has to be activated, i.e. renamed to .htaccess! Moreover, your webserver has to support the <a href="http://www.modrewrite.com/" target="_blank">mod_rewrite</a> module!</strong> (Please ask your webhoster if you are unsure how to check that.)');
+define('SEARCH_ENGINE_FRIENDLY_URLS_DESC' , 'Use search-engine friendly URLs for all site links.<br /><br /><strong>For search-engine optimized URLs, the file _.htaccess in the root directory has to be activated, i.e. renamed to .htaccess! Moreover, your webserver has to support the <a href="http://www.modrewrite.com/" target="_blank" rel="noopener">mod_rewrite</a> module!</strong> (Please ask your webhoster if you are unsure how to check that.)');
 
 define('DISPLAY_CART_TITLE' , 'Display Cart After Adding a Product?');
 define('DISPLAY_CART_DESC' , 'Display the shopping cart after adding a product or return back to product?');
@@ -642,7 +642,7 @@ define('DISPLAY_REVOCATION_ON_CHECKOUT_DESC','Display right of revocation on che
 
 // BOF - Tomcraft - 2009-10-03 - Paypal Express Modul
 define('PAYPAL_MODE_TITLE','PayPal Mode:');
-define('PAYPAL_MODE_DESC','Live (Default) or Test (Sandbox). Depending on the mode, you first have to create the PayPal API access: <br/>Link: <a href="https://www.paypal.com/de/cgi-bin/webscr?cmd=_get-api-signature&generic-flow=true" target="_blank"><strong>Create API-access for live-mode</strong></a><br/>Link: <a href="https://www.sandbox.paypal.com/de/cgi-bin/webscr?cmd=_get-api-signature&generic-flow=true" target="_blank"><strong>Create API-access for sandbox-mode</strong></a><br/>You still have no PayPal account? <a href="https://www.paypal.com/de/cgi-bin/webscr?cmd=_registration-run" target="_blank"><strong>Click here to create one.</strong></a>');
+define('PAYPAL_MODE_DESC','Live (Default) or Test (Sandbox). Depending on the mode, you first have to create the PayPal API access: <br/>Link: <a href="https://www.paypal.com/de/cgi-bin/webscr?cmd=_get-api-signature&generic-flow=true" target="_blank" rel="noopener"><strong>Create API-access for live-mode</strong></a><br/>Link: <a href="https://www.sandbox.paypal.com/de/cgi-bin/webscr?cmd=_get-api-signature&generic-flow=true" target="_blank" rel="noopener"><strong>Create API-access for sandbox-mode</strong></a><br/>You still have no PayPal account? <a href="https://www.paypal.com/de/cgi-bin/webscr?cmd=_registration-run" target="_blank" rel="noopener"><strong>Click here to create one.</strong></a>');
 define('PAYPAL_API_USER_TITLE','PayPal API-User (Live)');
 define('PAYPAL_API_USER_DESC','Enter user name (live)');
 define('PAYPAL_API_PWD_TITLE','PayPal API-Password (Live)');
@@ -722,6 +722,13 @@ define('IBN_BILLNR_FORMAT_TITLE', 'Invoice number format');
 define('IBN_BILLNR_FORMAT_DESC', 'Format invoice number.: {n}=number, {d}=day, {m}=month, {y}=year, <br>example. "100{n}-{d}-{m}-{y}" => "10099-28-02-2007"');
 //EOF - hendrik - 2011-05-14 - independent invoice number and date
 
+define('FAILED_LOGINS_LIMIT_TITLE', 'Failed logins limit');
+define('FAILED_LOGINS_LIMIT_DESC', 'Maximum number of login tries before captcha validation is required');
+define('VALID_REQUEST_TIME_TITLE', 'Valid password renewal request time');
+define('VALID_REQUEST_TIME_DESC', 'Set valid password renewal request time in seconds for which the renewal of the password is enabled after sending a request (default 3600 seconds)');
+define('INSERT_RECAPTCHA_KEY_TITLE', 'Google reCaptcha api key');
+define('INSERT_RECAPTCHA_KEY_DESC', 'Here you can insert valid Google reCaptcha api key (<strong><span style="color: #FF0000;">reCaptcha will not be displayed if input field is empty!</span></strong>) <br /> <br />  <a href="https://www.google.com/recaptcha/admin#list" target="_blank"> Click to get Google reCaptcha api key</a> <br /><br /> <strong> Make sure to select reCAPTCHA V2! <br /> <br /> <span style="color: #FF0000;"> Please do not type the API key - just copy it and paste it in here!</span></strong>');
+
 //BOC - h-h-h - 2011-12-23 - Button "Buy Now" optional - default off
 define('SHOW_BUTTON_BUY_NOW_TITLE', 'Show "Buy Now" in productlists');
 define('SHOW_BUTTON_BUY_NOW_DESC', '<b>Caution:</b><br /> This option is judicially critical if customers can\'t see all important informations directly in the productlists .');
@@ -796,7 +803,7 @@ define ('POPUP_PRINT_ORDER_SIZE_DESC', 'Sets the size of the popup window to be 
 define('TRACKING_COUNT_ADMIN_ACTIVE_TITLE' , 'Count page views of the shop owner');
 define('TRACKING_COUNT_ADMIN_ACTIVE_DESC' , 'By activating this option, all page views of the administration usersof the shop owner will be counted as well. This will falsify the visitor stats.');
 define('TRACKING_GOOGLEANALYTICS_ACTIVE_TITLE' , 'Activate Google Analytics tracking');
-define('TRACKING_GOOGLEANALYTICS_ACTIVE_DESC' , 'By activating this option, all page views will be submitted to Google Analytics for later evaluation. Before using this option, you need to register at <a href="http://www.google.com/analytics/" target="_blank"><b>Google Analytics</b></a> and create a new account.');
+define('TRACKING_GOOGLEANALYTICS_ACTIVE_DESC' , 'By activating this option, all page views will be submitted to Google Analytics for later evaluation. Before using this option, you need to register at <a href="http://www.google.com/analytics/" target="_blank" rel="noopener"><b>Google Analytics</b></a> and create a new account.');
 define('TRACKING_GOOGLEANALYTICS_ID_TITLE' , 'Google Analytics account number');
 define('TRACKING_GOOGLEANALYTICS_ID_DESC' , 'Enter your Google Analytics account number in the format "UA-XXXXXXXX-X" which you received after successfully creating an account.');
 define('TRACKING_GOOGLEANALYTICS_UNIVERSAL_TITLE' , 'Google Universal Analytics');
@@ -810,13 +817,13 @@ define('TRACKING_GOOGLE_DISPLAY_DESC' , 'The areas to demographics and interests
 define('TRACKING_GOOGLE_ECOMMERCE_TITLE' , 'Google E-Commerce Tracking');
 define('TRACKING_GOOGLE_ECOMMERCE_DESC' , 'Set up an E-Commerce tracking to find out what visitors buy from your website or app. In addition, you receive the following information:<br><br><strong>Products:</strong> Purchased products and the quantities and the revenues from these products<br><strong>Transactions:</strong> Information about sales, tax, shipping costs and quantities for each transaction<br><strong>time to Purchase:</strong> Number of days and visits, starting from the current campaign until the completion of the transaction');
 define('TRACKING_PIWIK_ACTIVE_TITLE' , 'Activate PIWIK Web-Analytics tracking');
-define('TRACKING_PIWIK_ACTIVE_DESC' , 'In order to use PIWIK at all, you have to download and install it to your webspace at first. See also <a href="http://http://de.piwik.org/" target="_blank"><b>PIWIK Web-Analytics</b></a>. In comparison to Google Analytics all data will be stored locally, i.e. you as show owner have complete control over all data.');
+define('TRACKING_PIWIK_ACTIVE_DESC' , 'In order to use PIWIK at all, you have to download and install it to your webspace at first. See also <a href="http://http://de.piwik.org/" target="_blank" rel="noopener"><b>PIWIK Web-Analytics</b></a>. In comparison to Google Analytics all data will be stored locally, i.e. you as show owner have complete control over all data.');
 define('TRACKING_PIWIK_LOCAL_PATH_TITLE' , 'PIWIK install path (without "http://")');
 define('TRACKING_PIWIK_LOCAL_PATH_DESC' , 'Enter the path when PIWIK was installed successfully. The complete path of the domain has to be given, but without "http://", e.g. "www.domain.de/piwik".');
 define('TRACKING_PIWIK_ID_TITLE' , 'PIWIK page ID');
 define('TRACKING_PIWIK_ID_DESC' , 'In the PIWIK administration a page ID will be created per domain (usually "1")');
 define('TRACKING_PIWIK_GOAL_TITLE' , 'PIWIK campaign number (optional)');
-define('TRACKING_PIWIK_GOAL_DESC' , 'Enter your campaign number, if you want to track predefined goals.. Details see <a href="http://piwik.org/docs/tracking-goals-web-analytics/" target="_blank"><b>PIWIK: Tracking Goal Conversions</b></a>');
+define('TRACKING_PIWIK_GOAL_DESC' , 'Enter your campaign number, if you want to track predefined goals.. Details see <a href="http://piwik.org/docs/tracking-goals-web-analytics/" target="_blank" rel="noopener"><b>PIWIK: Tracking Goal Conversions</b></a>');
 // EOF - Dokuman - 2012-08-27 - added entries for new google analytics & piwik tracking
 
 define ('CONFIRM_SAVE_ENTRY_TITLE', 'Confirmation when saving articles/category');
@@ -854,3 +861,12 @@ define('USE_ATTRIBUTES_IFRAME_DESC', 'Open Attribute Manager in the Category / P
 
 define('USE_SEARCH_ORDER_REDIRECT_TITLE', 'Open order directly');
 define('USE_SEARCH_ORDER_REDIRECT_DESC', 'After search order by id, it will open order directly.');
+
+define('REQUIRED_PHONE_NUMBER_TITLE','Required phone number');
+define('REQUIRED_PHONE_NUMBER_DESC','If it\'s required, it will ask for minimum 3 digits');
+
+define('CSRF_TOKEN_SYSTEM_TITLE', 'Admin Token System');
+define('CSRF_TOKEN_SYSTEM_DESC', 'Use Token System in admin area?<br/><b>Attention:</b> The Token System is used to secure the admin area.');
+
+define('ADMIN_HEADER_X_FRAME_OPTIONS_TITLE', 'Admin Clickjacking Protection');
+define('ADMIN_HEADER_X_FRAME_OPTIONS_DESC', 'Protect Adminarea with Header "X-Frame-Options: SAMEORIGIN"<br>Supported Browsers: FF 3.6.9+ Chrome 4.1.249.1042+ IE 8+ Safari 4.0+ Opera 10.50+ ');

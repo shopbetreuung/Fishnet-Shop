@@ -21,7 +21,7 @@
    ---------------------------------------------------------------------------------------*/
 
 define('MODULE_PAYMENT_AMONEYBOOKERS_TEXT_TITLE', 'Sicher bezahlen &uuml;ber Moneybookers');
-define('MODULE_PAYMENT_AMONEYBOOKERS_TEXT_DESCRIPTION', 'Moneybookers<br /><br /><img src="images/icon_arrow_right.gif"> <b><a href="http://www.xt-commerce.com/index.php?option=com_content&task=view&id=76&lang=de" target="_blank">Hilfe zu Einstellungen</a></b>');
+define('MODULE_PAYMENT_AMONEYBOOKERS_TEXT_DESCRIPTION', 'Moneybookers<br /><br /><img src="images/icon_arrow_right.gif"> <b><a href="http://www.xt-commerce.com/index.php?option=com_content&task=view&id=76&lang=de" target="_blank" rel="noopener">Hilfe zu Einstellungen</a></b>');
 define('MODULE_PAYMENT_AMONEYBOOKERS_NOCURRENCY_ERROR', 'Es ist keine von Moneybookers akzeptierte W&auml;hrung installiert!');
 define('MODULE_PAYMENT_AMONEYBOOKERS_ERRORTEXT1', 'payment_error=');
 define('MODULE_PAYMENT_AMONEYBOOKERS_TEXT_INFO', '');
@@ -56,7 +56,7 @@ define('MODULE_PAYMENT_AMONEYBOOKERS_ICONS_TITLE', 'Icons');
 define('MODULE_PAYMENT_AMONEYBOOKERS_ICONS_DESC', '');
 
 define('MODULE_PAYMENT_AMONEYBOOKERS_STATUS_TITLE', 'Moneybookers aktivieren');
-define('MODULE_PAYMENT_AMONEYBOOKERS_STATUS_DESC', 'M&ouml;chten Sie Zahlungen per Moneybookers akzeptieren?<br /><br /><img src="images/icon_arrow_right.gif"> <b><a href="http://www.xt-commerce.com/index.php?option=com_content&task=view&id=76&lang=de" target="_blank">Hilfe zu Einstellungen</a></b>');
+define('MODULE_PAYMENT_AMONEYBOOKERS_STATUS_DESC', 'M&ouml;chten Sie Zahlungen per Moneybookers akzeptieren?<br /><br /><img src="images/icon_arrow_right.gif"> <b><a href="http://www.xt-commerce.com/index.php?option=com_content&task=view&id=76&lang=de" target="_blank" rel="noopener">Hilfe zu Einstellungen</a></b>');
 define('MODULE_PAYMENT_AMONEYBOOKERS_EMAILID_TITLE', 'Moneybookers E-Mail Adresse');
 define('MODULE_PAYMENT_AMONEYBOOKERS_EMAILID_DESC', 'E-Mail Adresse, die bei Moneybookers registriert ist. <br /><font color="#ff0000">* Erforderlich</font>');
 define('MODULE_PAYMENT_AMONEYBOOKERS_PWD_TITLE', 'Moneybookers Geheimwort');

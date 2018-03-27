@@ -217,7 +217,9 @@ class moneybookers_callback {
 			if (EMAIL_TRANSPORT == 'smtp') {
 				require_once (DIR_WS_CLASSES . 'class.smtp.php');
       }
-			require_once (DIR_FS_INC . 'xtc_Security.inc.php');
+			if (is_file(DIR_WS_INCLUDES.'xss_secure.php')) {
+			  include (DIR_WS_INCLUDES'xss_secure.php');
+			}
 	
 	
     xtc_php_mail(EMAIL_BILLING_ADDRESS, 

@@ -181,7 +181,7 @@ function get_db_size()
         <div class="container nopad">
             <div class="row">
                 <div class="col-xs-12 nopad">
-                    <a href="http://www.shophelfer.com/" target="_blank"><img src="images/logo.png" alt="shophelfer.com" /></a>
+                    <a href="http://www.shophelfer.com/" target="_blank" rel="noopener"><img src="images/logo.png" alt="shophelfer.com" /></a>
                 </div>
             </div>
         </div>

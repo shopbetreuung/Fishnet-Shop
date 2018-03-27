@@ -411,6 +411,8 @@
                                 <td class="dataTableHeadingContent" align="right"><?php echo TABLE_HEADING_ITEMS; ?></td>
                                 <td class="dataTableHeadingContent hidden-xs" align="right"><?php echo TABLE_HEADING_REVENUE;?></td>
                                 <td class="dataTableHeadingContent hidden-xs" align="right"><?php echo  TABLE_HEADING_SHIPPING;?></td>
+                                <td class="dataTableHeadingContent hidden-xs" align="right"><?php echo  TABLE_HEADING_TAX_7;?></td>
+                                <td class="dataTableHeadingContent hidden-xs" align="right"><?php echo  TABLE_HEADING_TAX_19;?></td>
                               </tr>
                               <?php
                             } // end of if $srExp < 2 csv export
@@ -443,6 +445,8 @@
                                   <td class="dataTableContent" align="right"><?php echo /*$info[$last - 1]['totitem'];*/ (isset($info[$last - 1]['totitem']) ? $info[$last - 1]['totitem'] : '&nbsp;'); /*Dokuman - 2010-10-31 - Undefined offset: -1 */ ?></td>
                                   <td class="dataTableContent hidden-xs" align="right"><?php echo /*$currencies->format($info[$last - 1]['totsum']);*/ (isset($info[$last - 1]['totsum']) ? $currencies->format($info[$last - 1]['totsum']) : '&nbsp;' ); /*Dokuman - 2010-10-31 - Undefined offset: -1 */?></td>
                                   <td class="dataTableContent hidden-xs" align="right"><?php echo $currencies->format($info[0]['shipping']);?></td>
+                                  <td class="dataTableContent hidden-xs" align="right"><?php echo $currencies->format($info[0]['taxes_7']);?></td>
+                                  <td class="dataTableContent hidden-xs" align="right"><?php echo $currencies->format($info[0]['taxes_19']);?></td>
                                 </tr>
                                 <?php
                               } else {
@@ -451,7 +455,9 @@
                                 echo $info[0]['order'] . SR_SEPARATOR1;
                                 echo $info[$last - 1]['totitem'] . SR_SEPARATOR1;
                                 echo $currencies->format($info[$last - 1]['totsum']) . SR_SEPARATOR1;
-                                echo $currencies->format($info[0]['shipping']) . SR_NEWLINE;
+                                echo $currencies->format($info[0]['shipping']) . SR_SEPARATOR1;
+                                echo $currencies->format($info[0]['taxes_7']) . SR_SEPARATOR1;
+                                echo $currencies->format($info[0]['taxes_19']) . SR_NEWLINE;
                               }
                               if ($srDetail) {
                                 for ($i = 0; $i < $last; $i++) {
@@ -461,7 +467,7 @@
                                       <tr class="dataTableRow" onMouseOver="this.className='dataTableRowOver';this.style.cursor='pointer'" onMouseOut="this.className='dataTableRow'">
                                         <td class="dataTableContent">&nbsp;</td>
                                         <td class="dataTableContent" align="left">
-                                          <a href="<?php echo xtc_catalog_href_link("product_info.php?products_id=" . $info[$i]['pid']) ?>" target="_blank"><?php echo $info[$i]['pmodel'].' : '.$info[$i]['pname']; ?></a>
+                                          <a href="<?php echo xtc_catalog_href_link("product_info.php?products_id=" . $info[$i]['pid']) ?>" target="_blank" rel="noopener"><?php echo $info[$i]['pmodel'].' : '.$info[$i]['pname']; ?></a>
                                           <?php
                                           if (is_array($info[$i]['attr'])) {
                                             $attr_info = $info[$i]['attr'];
@@ -504,6 +510,8 @@
                                           <?php
                                         }
                                         ?>
+                                        <td class="dataTableContent">&nbsp;</td>
+                                        <td class="dataTableContent">&nbsp;</td>
                                         <td class="dataTableContent">&nbsp;</td>
                                       </tr>
                                       <?php

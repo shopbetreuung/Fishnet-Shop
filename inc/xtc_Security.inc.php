@@ -40,7 +40,7 @@
     Protects better diverse attempts of Cross-Site Scripting
        attacks, thanks to webmedic, Timax, larsneo.
  */
-
+die('Deprecated Function xtc_Security. Use xss_secure instead.');
 function xtc_Security()
 {
     // Cross-Site Scripting attack defense - Sent by larsneo

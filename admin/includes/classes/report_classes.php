@@ -86,16 +86,16 @@ class xtc_export_csv_invoice_orders {
 }
 
 class xtc_export_csv_inventory_turnover{
-    function xtc_export_csv_inventory_turnover($filename, $products_name, $ai, $it, $start_date, $inventory_turnover){
+    function xtc_export_csv_inventory_turnover($filename, $products_name, $products_model, $ai, $it, $start_date, $inventory_turnover){
             header('Content-Type: text/csv; charset=utf-8');
             header('Content-Disposition: attachment; filename=' . $filename . '.csv');
             ob_end_clean();
             $output = fopen('php://output', 'w');
-            $output_header_fields = TEXT_PRODUCTS_NAME.";".TEXT_AI.";".CSV_TEXT_INVENTORY_TURNOVER;
+            $output_header_fields = TEXT_PRODUCTS_NAME.";".TEXT_PRODUCTS_MODEL.";".TEXT_AI.";".CSV_TEXT_INVENTORY_TURNOVER;
 
             fputcsv($output, explode(';', $output_header_fields), ";");
             $today = date('Y-m-d H:i:s', time());
-            $products_query = xtc_db_query("select distinct op.products_id, op.products_name, p.products_quantity, p.products_ordered from " . TABLE_PRODUCTS. " p
+            $products_query = xtc_db_query("select distinct op.products_id, op.products_name, p.products_quantity, p.products_ordered, p.products_model from " . TABLE_PRODUCTS. " p
                     JOIN products_description pd ON p.products_id = pd.products_id
                     JOIN orders_products op ON p.products_id = op.products_id
                     JOIN orders o ON op.orders_id = o.orders_id 
@@ -107,6 +107,7 @@ class xtc_export_csv_inventory_turnover{
                 $sold_stock = $products_values['products_ordered'];
                 
                 $products_name = $products_values['products_name'];
+                $products_model = $products_values['products_model'];
                 $current_stock = $products_values['products_quantity'];
                 
                 $whole_stock = $current_stock + $sold_stock;
@@ -114,7 +115,7 @@ class xtc_export_csv_inventory_turnover{
 
                 $it = $sold_stock / $ai;
                 if($inventory_turnover > xtc_round($it, 2)){
-                    $output_fields = $products_name.";".$ai.";".xtc_round($it, 2).";";
+                    $output_fields = $products_name.";".$products_model.";".$ai.";".xtc_round($it, 2).";";
                 }
                 
                 $products_attributes_query = xtc_db_query("SELECT op.products_quantity, opa.products_options_values, pa.attributes_stock, op.products_quantity

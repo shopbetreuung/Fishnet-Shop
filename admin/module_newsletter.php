@@ -259,7 +259,8 @@
 <!-- header //-->
 <?php
   require(DIR_WS_INCLUDES . 'header.php');
-  echo '<form name="newsletter_send" action="'. xtc_href_link(FILENAME_MODULE_NEWSLETTER,'send='.($limits + NEWSLETTER_EXECUTE_LIMIT).'&ID='.(int)$_GET['ID']) .'" method="POST"></form>';
+  echo xtc_draw_form('newsletter_send', FILENAME_MODULE_NEWSLETTER, 'send='.($limits + NEWSLETTER_EXECUTE_LIMIT).'&ID='.(int)$_GET['ID'], 'post', '');
+  echo '</form>';
 ?>
 <!-- header_eof //-->
 <!-- body //-->

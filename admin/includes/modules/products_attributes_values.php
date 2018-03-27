@@ -249,7 +249,7 @@ if (xtc_db_num_rows($products)) {
       $inputs.= $lang_img . '&nbsp;<input type="text" name="value_name[' . $languages[$i]['id'] . ']" style="width:200px;">&nbsp;<br />';
     }
     ?>
-                  <form name="values" action="<?php echo xtc_href_link(FILENAME_PRODUCTS_ATTRIBUTES, 'action=add_product_option_values&value_page=' . $_GET['value_page'].$option_filter, 'NONSSL');?>" method="post">
+                  <?php echo xtc_draw_form('values', FILENAME_PRODUCTS_ATTRIBUTES, 'action=add_product_option_values&value_page=' . $_GET['value_page'].$option_filter, 'post', ''); ?>
                   <tr style="background-color: #d4d4d4;">
                     <td align="center" class="smallText">&nbsp;<?php echo $next_id; ?>&nbsp;</td>
                     <td align="left" class="smallText">&nbsp;<select name="option_id"><?php echo $options_dropdown_select;?></select>&nbsp;</td>
@@ -284,7 +284,7 @@ while ($values_values = xtc_db_fetch_array($values)) {
       $inputs .= $lang_img . '&nbsp;<input type="text" name="value_name[' . $languages[$i]['id'] . ']" style="width:200px;" value="' . $value_name['products_options_values_name'] . '">&nbsp;<br />';
     }
 ?>
-                    <form name="values" action="<?php echo xtc_href_link(FILENAME_PRODUCTS_ATTRIBUTES, 'action=update_value&value_page='.$_GET['value_page'].$page_info.$option_id, 'NONSSL');?>" method="post">
+                    <?php echo xtc_draw_form('values', FILENAME_PRODUCTS_ATTRIBUTES, 'action=update_value&value_page='.$_GET['value_page'].$page_info.$option_id, 'post', ''); ?>
                     <tr style="background-color: #d4d4d4;">
                       <td align="center" class="smallText">&nbsp;<?php echo $values_values['products_options_values_id']; ?>
                         <input type="hidden" name="value_id" value="<?php echo $values_values['products_options_values_id']; ?>">

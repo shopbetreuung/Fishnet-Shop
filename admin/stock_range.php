@@ -34,8 +34,7 @@ require_once(DIR_WS_INCLUDES.'head.php');
 </div>
 <div class='col-xs-12'><br></div>
 <div class='col-xs-12'>
-    <form method="post" action="stock_range.php">
-        
+        <?php echo xtc_draw_form('', 'stock_range.php', '', 'post', ''); ?>
         <div class="col-xs-12">
                 <?php echo TEXT_DATE; ?>
                 <div style="display: inline-block;"><input type="text" size="2" maxlength="2" onFocus="javascript:CheckMe('1',this.form);" name="from_t" value="<?php echo $_POST['from_t']; ?>"> / </div>

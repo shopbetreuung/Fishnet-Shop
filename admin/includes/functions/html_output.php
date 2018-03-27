@@ -145,6 +145,14 @@
       $form .= ' ' . $params;
     }
     $form .= '>';
+    // add session if is in url
+    if (isset($_GET[xtc_session_name()]) && $_GET[xtc_session_name()] == xtc_session_id()) {
+      $form .= '<input type="hidden" name="'.xtc_session_name().'" value="'.xtc_session_id().'">';
+    }
+    // secure form with a random token
+    if (CSRF_TOKEN_SYSTEM == 'true' && isset($_SESSION['CSRFToken']) && isset($_SESSION['CSRFName']) && strtolower($method) == 'post') {
+      $form .= '<input type="hidden" name="'.$_SESSION['CSRFName'].'" value="'.$_SESSION['CSRFToken'].'">';
+    }
     return $form;
   }
 

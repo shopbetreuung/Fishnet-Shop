@@ -259,7 +259,7 @@
         <input type="submit" class="btn btn-default" name="prod_update" value="<?php echo BUTTON_UPDATE; ?>" <?php echo $confirm_save_entry;?>>
         <?php
         if (isset($_GET['pID']) && $_GET['pID'] > 0) {
-          echo '&nbsp;&nbsp;<a class="btn btn-default" href="' . xtc_href_link('../product_info.php', 'products_id=' . $_GET['pID']) . '" target="_blank">' . BUTTON_VIEW_PRODUCT . '</a>';
+          echo '&nbsp;&nbsp;<a class="btn btn-default" href="' . xtc_href_link('../product_info.php', 'products_id=' . $_GET['pID']) . '" target="_blank" rel="noopener">' . BUTTON_VIEW_PRODUCT . '</a>';
         }
         echo '&nbsp;&nbsp;<a class="btn btn-default" href="' . xtc_href_link($page, $cancel_page).'">' . BUTTON_CANCEL . '</a>';
         ?>
@@ -396,7 +396,7 @@
           <input type="submit" class="btn btn-default" name="prod_update" value="<?php echo BUTTON_UPDATE; ?>" <?php echo $confirm_save_entry;?>>
           <?php
           if (isset($_GET['pID']) && $_GET['pID'] > 0) {
-            echo '&nbsp;&nbsp;<a class="btn btn-default" href="' . xtc_href_link('../product_info.php', 'products_id=' . $_GET['pID']) . '" target="_blank">' . BUTTON_VIEW_PRODUCT . '</a>';
+            echo '&nbsp;&nbsp;<a class="btn btn-default" href="' . xtc_href_link('../product_info.php', 'products_id=' . $_GET['pID']) . '" target="_blank" rel="noopener">' . BUTTON_VIEW_PRODUCT . '</a>';
           }
           echo '&nbsp;&nbsp;<a class="btn btn-default" href="' . xtc_href_link($page, $cancel_page). '">' . BUTTON_CANCEL . '</a>';
           ?>

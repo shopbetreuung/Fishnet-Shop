@@ -123,9 +123,9 @@ require (DIR_WS_INCLUDES.'head.php');
     <div class='col-xs-12'>
         <div class='col-xs-12'>
             <div class='col-xs-12 col-sm-2'>
-                <a href ="http://www.econda.de/web-analyse/shop-monitor/testen/" target="_blank"><img src="../includes/econda/gfx/exitbereiche.png" alt="" width="540" height="360" border ="0" style="width: 132px; height: 88px;" /></a>
+                <a href ="http://www.econda.de/web-analyse/shop-monitor/testen/" target="_blank" rel="noopener"><img src="../includes/econda/gfx/exitbereiche.png" alt="" width="540" height="360" border ="0" style="width: 132px; height: 88px;" /></a>
                 <br><br>
-                <a href ="http://www.econda.de/web-analyse/shop-monitor/testen/" target="_blank"><img src="../includes/econda/gfx/diff.png" alt="" width="540" height="360" border ="0" style="width: 132px; height: 88px;" /></a>
+                <a href ="http://www.econda.de/web-analyse/shop-monitor/testen/" target="_blank" rel="noopener"><img src="../includes/econda/gfx/diff.png" alt="" width="540" height="360" border ="0" style="width: 132px; height: 88px;" /></a>
             </div>
             <div class='col-xs-12 col-sm-10'>
 	  
@@ -162,9 +162,9 @@ require (DIR_WS_INCLUDES.'head.php');
     </div>
         <div class='col-xs-12'>
             <div class='col-xs-12 col-sm-2'>
-                <a href ="http://www.econda.de/web-analyse/shop-monitor/testen/" target="_blank"><img src="../includes/econda/gfx/searchConversion.png" alt="" width="540" height="360" border ="0" style="width: 132px; height: 88px;" /></a>
+                <a href ="http://www.econda.de/web-analyse/shop-monitor/testen/" target="_blank" rel="noopener"><img src="../includes/econda/gfx/searchConversion.png" alt="" width="540" height="360" border ="0" style="width: 132px; height: 88px;" /></a>
                 <br><br>
-                <a href ="http://www.econda.de/web-analyse/shop-monitor/testen/" target="_blank"><img src="../includes/econda/gfx/srcumsatz.png" alt="" width="540" height="360" border ="0" style="width: 132px; height: 88px;" /></a>
+                <a href ="http://www.econda.de/web-analyse/shop-monitor/testen/" target="_blank" rel="noopener"><img src="../includes/econda/gfx/srcumsatz.png" alt="" width="540" height="360" border ="0" style="width: 132px; height: 88px;" /></a>
             </div>
             <div class='col-xs-12 col-sm-10'>
 				    <p><strong>ECONDA</strong> Shop Monitor kann durch die Eingabe Ihres pers&ouml;nlichen Aktivierungscodes, den Sie von ECONDA erhalten, gestartet werden. Der Aufwand zur Aktivierung von ECONDA ist damit gleich null. </p>
@@ -199,14 +199,14 @@ require (DIR_WS_INCLUDES.'head.php');
         
         <div class='col-xs-12'>
             <div class='col-xs-12 col-sm-2'>
-                <a href ="http://www.econda.de/web-analyse/shop-monitor/testen/" target="_blank"><img src="../includes/econda/gfx/crtl.png" alt="" width="540" height="360" border ="0" style="width: 132px; height: 88px;" /></a>
+                <a href ="http://www.econda.de/web-analyse/shop-monitor/testen/" target="_blank" rel="noopener"><img src="../includes/econda/gfx/crtl.png" alt="" width="540" height="360" border ="0" style="width: 132px; height: 88px;" /></a>
             </div>
             <div class='col-xs-12 col-sm-10'>
 		<p><strong>Jetzt kostenlos Testen und in 5 Minuten Ihre Statistiken sehen!</strong></p>
         <p>ECONDA bietet Ihnen gerne einen 14-t&auml;gigen, unverbindlichen und kostenlosen Test inkl. eines pers&ouml;nlichen Optimierungsgespr&auml;chs am Ende der Testphase. <br />
           Verwenden Sie bitte das folgende Formular, um einen Testaccount zu bestellen. Sie erhalten dann umgehend Ihren Aktivierungscode und Ihre Log-in Informationen von ECONDA. <br />
           <br />
-          <a href="http://www.econda.de/web-analyse/shop-monitor/testen/" target="_blank">&gt;&gt; Jetzt 14-t&auml;gigen Testzugang f&uuml;r Ihre modified eCommerce Shopsoftware anfordern. </a></p>
+          <a href="http://www.econda.de/web-analyse/shop-monitor/testen/" target="_blank" rel="noopener">&gt;&gt; Jetzt 14-t&auml;gigen Testzugang f&uuml;r Ihre modified eCommerce Shopsoftware anfordern. </a></p>
         <ul>
           <p></p>
                 </ul>

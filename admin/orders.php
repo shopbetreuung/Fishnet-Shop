@@ -565,7 +565,7 @@ switch ($action) {
 		  while ($tracking_link = xtc_db_fetch_array($tracking_links_query)) {
 			//$tracking_link['carrier_tracking_link'] = str_replace('$2',$lang_code,$tracking_link['carrier_tracking_link']); //TODO
 			$parcel_link = str_replace('$1',$tracking_link['ortra_parcel_id'],$tracking_link['carrier_tracking_link']);
-			$parcel_link_html .= '<a href="'.$parcel_link.'" target="_blank">'.$parcel_link.'</a><br />';
+			$parcel_link_html .= '<a href="'.$parcel_link.'" target="_blank" rel="noopener">'.$parcel_link.'</a><br />';
 			$parcel_link_txt .= $parcel_link."\n\n";
 		  }
 		}
@@ -1029,7 +1029,7 @@ require (DIR_WS_INCLUDES.'header.php');
           echo '          <tr class="dataTableRow">'.PHP_EOL;
           echo '            <td class="dataTableContent" valign="top" align="right">'.$order->products[$i]['qty'].'&nbsp;x&nbsp;</td>'.PHP_EOL;
           echo '            <td class="dataTableContent" valign="top">'.PHP_EOL;
-          echo '              <a href="'.HTTP_CATALOG_SERVER.DIR_WS_CATALOG.'product_info.php?products_id='.$order->products[$i]['id'].'" target="_blank">'.$order->products[$i]['name'].'</a>';
+          echo '              <a href="'.HTTP_CATALOG_SERVER.DIR_WS_CATALOG.'product_info.php?products_id='.$order->products[$i]['id'].'" target="_blank" rel="noopener">'.$order->products[$i]['name'].'</a>';
           if (isset($order->products[$i]['attributes']) && sizeof($order->products[$i]['attributes']) > 0) {
             for ($j = 0, $k = sizeof($order->products[$i]['attributes']); $j < $k; $j ++) {
               echo '<br /><nobr><i>&nbsp; - '.$order->products[$i]['attributes'][$j]['option'].': '.$order->products[$i]['attributes'][$j]['value'].'</i></nobr> '; //web28- 2010-03-21 - format correction
@@ -1097,7 +1097,7 @@ require (DIR_WS_INCLUDES.'header.php');
                 if (xtc_db_num_rows($tracking_links_query)) {
                   while ($tracking_link = xtc_db_fetch_array($tracking_links_query)) {
                     echo '          <tr>'.PHP_EOL.'            <td class="smallText" align="left">'.$tracking_link['carrier_name'].'</td>'.PHP_EOL.'            <td class="smallText" align="left">';
-                    echo '            <a href="'.str_replace('$1',$tracking_link['ortra_parcel_id'],$tracking_link['carrier_tracking_link']).'" target="_blank"><b>'.$tracking_link['ortra_parcel_id'].'</b></a></td>'.PHP_EOL.'            <td class="smallText" align="center">';
+                    echo '            <a href="'.str_replace('$1',$tracking_link['ortra_parcel_id'],$tracking_link['carrier_tracking_link']).'" target="_blank" rel="noopener"><b>'.$tracking_link['ortra_parcel_id'].'</b></a></td>'.PHP_EOL.'            <td class="smallText" align="center">';
                     echo '            <a href="'.xtc_href_link(FILENAME_ORDERS, 'oID='.$oID.'&trackingid='.$tracking_link['ortra_id'].'&action=deletetracking').'">'.xtc_image(DIR_WS_ICONS.'cross.gif', ICON_CROSS)."</td>".PHP_EOL;
                     echo '          <tr>'.PHP_EOL;
                   }

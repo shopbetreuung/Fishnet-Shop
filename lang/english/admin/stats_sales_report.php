@@ -41,6 +41,8 @@ define('TABLE_HEADING_ORDERS', '# Orders');
 define('TABLE_HEADING_ITEMS', '# Products');
 define('TABLE_HEADING_REVENUE', 'Revenue');
 define('TABLE_HEADING_SHIPPING', 'Shipping');
+define('TABLE_HEADING_TAX_7', 'VAT products 7%');
+define('TABLE_HEADING_TAX_19', 'VAT products 19%');
 
 define('DET_HEAD_ONLY', 'no details');
 define('DET_DETAIL', 'show details');

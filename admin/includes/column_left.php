@@ -169,6 +169,12 @@
 											"access"	=> "imagesliders",
 											"check"		=> true);
 												
+  $menu_items['content'][] = array(		"name" 		=> BOX_BLACKLIST_LOGS,
+											"is_main"	=> true,
+											"link" 		=> xtc_href_link(FILENAME_BLACKLIST_LOGS, '', 'NONSSL'),
+											"access"	=> "blacklist_logs",
+											"check"		=> true);
+    
 	$menu_items['content'][] = array(		"name" 		=> BOX_IMPORT_EXPORT,
 											"is_main"	=> true,
 											"link" 		=> false,
@@ -179,7 +185,12 @@
 											"is_main"	=> false,
 											"link" 		=> xtc_href_link(FILENAME_BLZ_UPDATE, '', 'NONSSL'),
 											"access"	=> "blz_update",
-											"check"		=> true);			
+											"check"		=> true);
+        $menu_items['content'][] = array(		"name" 		=> BOX_DSGVO_CUSTOMER_EXPORT,
+							"is_main"	=> false,
+							"link" 		=> xtc_href_link(FILENAME_DSGVO_EXPORT, '', 'NONSSL'),
+							"access"	=> "dsgvo_export",
+							"check"		=> true);
 											
 	$menu_items['content'][] = array(		"name" 		=> BOX_IMPORT,
 											"is_main"	=> false,

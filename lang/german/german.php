@@ -317,6 +317,7 @@ define('JS_PRICE_TO_LESS_THAN_PRICE_FROM', '* Preis bis muss gr&ouml;&szlig;er o
 define('JS_INVALID_KEYWORDS', '* Suchbegriff unzul&auml;ssig\n');
 define('TEXT_LOGIN_ERROR', '<font color="#ff0000"><strong>FEHLER:</strong></font> Falsche E-Mail Adresse oder Passwort.');
 define('TEXT_NO_EMAIL_ADDRESS_FOUND', '<font color="#ff0000"><strong>FEHLER:</strong></font> Falsche E-Mail Adresse oder Passwort.');
+define('TEXT_LOGIN_ERROR_NO_CAPTCHA', '<font color="#ff0000"><strong>FEHLER:</strong></font> reCaptcha Verifizierung fehlgeschlagen, bitte versuchen Sie es erneut.');
 define('TEXT_PASSWORD_SENT', 'Ein neues Passwort wurde per E-Mail verschickt.');
 define('TEXT_PRODUCT_NOT_FOUND', 'Artikel wurde nicht gefunden!');
 define('TEXT_MORE_INFORMATION', 'F&uuml;r weitere Informationen besuchen Sie bitte die <a style="text-decoration:underline;" href="%s" onclick="window.open(this.href); return false;">Homepage</a> zu diesem Artikel.');
@@ -416,10 +417,12 @@ define('TEXT_EMAIL_SUBJECT','Ihre Newsletter-Anmeldung');
 
 define('TEXT_CUSTOMER_GUEST',' Gast');
 
-define('TEXT_LINK_MAIL_SENDED','Ihre Anfrage nach einem neuen Passwort muss von Ihnen erst best&auml;tigt werden.<br />Deshalb wurde Ihnen vom System eine E-Mail mit einem Best&auml;tigungslink geschickt. Bitte klicken Sie nach Erhalt der E-Mail auf den mitgeschickten Link, um eine weitere E-Mail mit Ihrem neuen Anmelde-Passwort zu erhalten. Andernfalls wird Ihnen das neue Passwort nicht zugestellt oder eingerichtet!');
+define('TEXT_LINK_MAIL_SENDED','Ihre Anfrage nach einem neuen Passwort muss zunächst von Ihnen best&auml;tigt werden. Daher hat Ihnen das System eine E-Mail mit einem Best&auml;tigungslink geschickt. Bitte klicken Sie nach Erhalt der E-Mail auf den Link. Andernfalls k&ouml;nnen Sie kein neues Passwort vergeben! <br /><br /><br /> Der Best&auml;tigungslink ist f&uuml;r %s Sekunden g&uuml;ltig.');
 define('TEXT_PASSWORD_MAIL_SENDED','Eine E-Mail mit einem neuen Anmelde-Passwort wurde Ihnen soeben zugestellt.<br />Bitte &auml;ndern Sie nach Ihrer n&auml;chsten Anmeldung Ihr Passwort wie gew&uuml;nscht.');
 define('TEXT_CODE_ERROR','Bitte geben Sie Ihre E-Mail-Adresse erneut ein. <br />Achten Sie dabei auf Tippfehler!');
-define('TEXT_EMAIL_ERROR','Bitte geben Sie Ihre E-Mail-Adresse erneut ein. <br />Achten Sie dabei auf Tippfehler!');
+define('TEXT_EMAIL_ERROR','Die E-Mail-Adresse ist nicht in unserem Shop registriert.<br /> Bitte versuchen Sie es erneut.');
+define('TEXT_REQUEST_NOT_VALID', 'Dieser Link ist nicht gültig. Bitte fordern Sie ein neues Passwort an.');
+define('TEXT_RECAPTCHA_ERROR','reCaptcha &Uuml;berpr&uuml;fung fehlgeschlagen, bitte versuchen Sie es erneut.');
 define('TEXT_NO_ACCOUNT','Leider m&uuml;ssen wir Ihnen mitteilen, dass Ihre Anfrage f&uuml;r ein neues Anmelde-Passwort entweder ung&uuml;ltig war oder abgelaufen ist.<br />Bitte versuchen Sie es erneut.');
 define('HEADING_PASSWORD_FORGOTTEN','Passwort vergessen?');
 define('TEXT_PASSWORD_FORGOTTEN','&Auml;ndern Sie Ihr Passwort in drei leichten Schritten.');
@@ -494,6 +497,7 @@ define('SHIPPING_COSTS','Versandkosten');
 // changes 3.0.4 SP2
 define('SHIPPING_TIME','Lieferzeit: ');
 define('MORE_INFO','[Mehr]');
+define('READ_INFO','[Lesen]');
 
 // changes 3.0.4 SP2.2
 define('ENTRY_PRIVACY_ERROR','Bitte akzeptieren Sie unsere Datenschutzrichtlinien!');
@@ -541,7 +545,8 @@ define('ERROR_SQL_DB_QUERY','Es tut uns leid, aber es ist ein Datenbankfehler au
 define('ERROR_SQL_DB_QUERY_REDIRECT','Sie werden in %s Sekunden auf unsere Homepage weitergeleitet!');
 // EOF - DokuMan - 2011-09-20 - E-Mail SQL errors
 
-define('TEXT_AGB_CHECKOUT','AGB und Kundeninformation %s <br /> Widerrufsbelehrung %s');
+define('TEXT_AGB_CHECKOUT','AGB und Kundeninformation %s <br /> Widerrufsbelehrung %s <br /> Datenschutzerkl&auml;rung %s');
+
 
 define('_SHIPPING_FREE','Download');
 
@@ -560,4 +565,5 @@ define('SITEMAP_CONTENTPAGE', 'Content pages');
 define('SITEMAP_EXPORT', 'exportiert');
 
 define('TEXT_EDIT_CATEGORIES', 'Kategorie editieren');
+define('ERROR_HONEYPOT','<p>Es gab ein Problem mit dem Kontaktformular</p>');
 ?>

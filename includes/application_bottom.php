@@ -19,7 +19,7 @@
 // page parse time
 if (STORE_PAGE_PARSE_TIME == 'true') {
   $parse_time = number_format((microtime(true)-PAGE_PARSE_START_TIME), 3);
-  error_log(strftime(STORE_PARSE_DATE_TIME_FORMAT) . ' - ' . getenv('REQUEST_URI') . ' (' . $parse_time . 's)' . "\n", 3, STORE_PAGE_PARSE_TIME_LOG);
+  error_log(strftime(STORE_PARSE_DATE_TIME_FORMAT) . ' - ' . getenv('REQUEST_URI') . ' (' . $parse_time . 's)' . "\n", 3, DIR_FS_DOCUMENT_ROOT.'log/'.STORE_PAGE_PARSE_TIME_LOG);
 }
 if (DISPLAY_PAGE_PARSE_TIME == 'true') {
   $parse_time = number_format((microtime(true)-PAGE_PARSE_START_TIME), 3);
@@ -41,7 +41,30 @@ if ((GZIP_COMPRESSION == 'true') && ($ext_zlib_loaded == true) && ($ini_zlib_out
 if (TRACKING_ECONDA_ACTIVE == 'true') {
   require_once (DIR_WS_INCLUDES . 'econda/econda.php');
 }
+if (defined('XSS_SEND_LOG') && XSS_SEND_LOG === true) {
+	$xss_files_array = glob(DIR_FS_LOG.'*.mail', GLOB_BRACE);
+	if (count($xss_files_array) > 0) {
+	  foreach ($xss_files_array as $xss_file) {
+		$mail_txt = file_get_contents($xss_file);
 
+		xtc_php_mail(EMAIL_SUPPORT_ADDRESS,
+					 EMAIL_SUPPORT_NAME,
+					 EMAIL_SUPPORT_ADDRESS,
+					 EMAIL_SUPPORT_NAME,
+					 EMAIL_SUPPORT_FORWARDING_STRING,
+					 EMAIL_SUPPORT_ADDRESS,
+					 EMAIL_SUPPORT_NAME,
+					 '',
+					 '',
+					 'Security Alert - '.STORE_NAME,
+					 nl2br($mail_txt),
+					 $mail_txt
+					 );
+
+		unlink($xss_file);
+	  }
+	}
+}
 // end of page
 echo '</body>';
 echo '</html>';

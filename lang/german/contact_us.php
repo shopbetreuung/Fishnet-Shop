@@ -18,5 +18,6 @@
  define('ERROR_EMAIL','<p><b>Ihre E-Mail-Adresse:</b> Keine oder ung&uuml;ltige Eingabe!</p>');
  define('ERROR_MSG_BODY','<p><b>Ihre Nachricht:</b> Keine Eingabe!</p>');
  define('ERROR_CHECKBOX', '<p><b>Checkbox:</b> Die Checkbox muss best&auml;tigt werden!</p>');
+  define('ERROR_HONEYPOT','<p>Es gab ein Problem mit dem Kontaktformular</p>');
    
 ?>

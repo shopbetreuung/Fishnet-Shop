@@ -450,11 +450,13 @@
         }
       }
 
-      if (strlen($customers_telephone) < ENTRY_TELEPHONE_MIN_LENGTH) {
-        $error = true;
-        $entry_telephone_error = true;
-      } else {
-        $entry_telephone_error = false;
+      if((REQUIRED_PHONE_NUMBER == 'false' && $customers_telephone !='') || (REQUIRED_PHONE_NUMBER == 'true')){
+        if (strlen($customers_telephone) < ENTRY_TELEPHONE_MIN_LENGTH) { //When required phone number is false
+           $error = true;
+           $entry_telephone_error = true;
+        }else {
+           $entry_telephone_error = false;
+        }
       }
 
       // BOF - DokuMan - 2009-05-22 - Bugfix #0000218 - force to enter password when editing users
@@ -724,7 +726,31 @@ function check_form() {
   if (customers_telephone == "" || customers_telephone.length < <?php echo ENTRY_TELEPHONE_MIN_LENGTH; ?>) {
     error_message = error_message + "<?php echo xtc_js_lang(JS_TELEPHONE); ?>";
     error = 1;
-  }
+  }<?php 
+    if (REQUIRED_PHONE_NUMBER == 'true') {
+  ?>
+
+   if (customers_telephone == "" || customers_telephone.length < <?php echo ENTRY_TELEPHONE_MIN_LENGTH; ?>) {
+      error_message = error_message + "<?php echo xtc_js_lang(JS_TELEPHONE); ?>";
+      error = 1;
+    }
+
+    <?php
+    }
+  ?>
+
+  <?php 
+    if (REQUIRED_PHONE_NUMBER == 'false') {
+  ?>
+
+   if (customers_telephone != "" && customers_telephone.length < <?php echo ENTRY_TELEPHONE_MIN_LENGTH; ?>) {
+      error_message = error_message + "<?php echo xtc_js_lang(JS_TELEPHONE); ?>";
+      error = 1;
+    }
+
+    <?php
+    }
+  ?>
 
   if (error == 1) {
     alert(unescape(error_message));
@@ -1201,7 +1227,7 @@ function check_form() {
                     echo $cInfo->customers_telephone.xtc_draw_hidden_field('customers_telephone');
                   }
                 } else {
-                  echo xtc_draw_input_field('customers_telephone', $cInfo->customers_telephone, 'maxlength="32"', true);
+                  echo xtc_draw_input_field('customers_telephone', $cInfo->customers_telephone, 'maxlength="32"', (REQUIRED_PHONE_NUMBER =='true') ? true:false);
                 }
               ?>
               </div>

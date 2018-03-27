@@ -8,6 +8,7 @@ define('TEXT_UNTIL_TODAY','bis heute ');
 define('BUTTON_SHOW_INVENTORY_TURNOVER', 'Produkte anzeigen');
 define('BUTTON_EXPORT_INVENTORY_TURNOVER_CSV', 'Export CSV Produkte');
 define('TEXT_PRODUCTS_NAME', 'Produktname');
+define('TEXT_PRODUCTS_MODEL', 'Produktmodell');
 define('TEXT_AI', 'Durchschnittlicher Lagerbestand');
 define('TEXT_IT', 'Lagerumschlagsh&auml;ufigkeit');
 define('CSV_NAME_FILE', 'lu');

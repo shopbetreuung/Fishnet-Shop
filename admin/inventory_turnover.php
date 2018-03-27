@@ -15,7 +15,7 @@ require('includes/application_top.php');
 
 if($_GET['action'] == 'inventory_turnover'){
 	require_once (DIR_WS_CLASSES . 'report_classes.php');
-	$handler = new xtc_export_csv_inventory_turnover(CSV_NAME_FILE, $products_name, $ai, $it, $_SESSION['start_date'], $_SESSION['inventory_turnover']);
+	$handler = new xtc_export_csv_inventory_turnover(CSV_NAME_FILE, $products_name, $products_model, $ai, $it, $_SESSION['start_date'], $_SESSION['inventory_turnover']);
 }
 require_once (DIR_WS_INCLUDES.'head.php');
 ?>
@@ -33,7 +33,7 @@ require_once (DIR_WS_INCLUDES.'head.php');
 </div>
 <div class='col-xs-12'><br></div>
 <div class='col-xs-12'>
-    <form method="post" action="inventory_turnover.php">
+    <?php echo xtc_draw_form('', 'inventory_turnover.php', '', 'post', ''); ?>
         
         <div class="col-xs-12">
                 <?php echo TEXT_INVENTORY_TURNOVER; ?><input type="text" size="4" value="<?php echo $_POST['inventory_turnover']; ?>" name ="inventory_turnover"/> <br />
@@ -47,7 +47,7 @@ require_once (DIR_WS_INCLUDES.'head.php');
 </div>
     <div class='table-responsive col-xs-12'>
         <table class='table table-bordered'>
-            <tr><td> <?php echo TEXT_PRODUCTS_NAME; ?> </td> <td> <?php echo TEXT_AI; ?> </td> <td> <?php echo TEXT_IT; ?> </td></tr>
+            <tr><td> <?php echo TEXT_PRODUCTS_NAME; ?> </td> <td> <?php echo TEXT_PRODUCTS_MODEL; ?> </td> <td> <?php echo TEXT_AI; ?> </td> <td> <?php echo TEXT_IT; ?> </td></tr>
         <?php
         if (isset($_POST['from_t']) && is_numeric($_POST['from_t']) && isset($_POST['from_m']) && is_numeric($_POST['from_m']) && isset($_POST['from_y']) && is_numeric($_POST['from_y']) && isset($_POST['inventory_turnover']) && is_numeric($_POST['inventory_turnover'])) {
             $start_date = (int) $_POST['from_y'] . '-' . (int) $_POST['from_m'] . '-' . (int) $_POST['from_t'] . ' 00:00:00';
@@ -55,7 +55,7 @@ require_once (DIR_WS_INCLUDES.'head.php');
             $_SESSION['start_date'] = $start_date;
             $_SESSION['inventory_turnover'] = $inputed_inventory_turnover;
             $today = date('Y-m-d H:i:s', time());
-            $products_query = xtc_db_query("select distinct op.products_id, op.products_name, p.products_quantity, p.products_ordered from " . TABLE_PRODUCTS. " p
+            $products_query = xtc_db_query("select distinct op.products_id, op.products_name, p.products_quantity, p.products_ordered, p.products_model from " . TABLE_PRODUCTS. " p
                     JOIN products_description pd ON p.products_id = pd.products_id
                     JOIN orders_products op ON p.products_id = op.products_id
                     JOIN orders o ON op.orders_id = o.orders_id 
@@ -86,9 +86,10 @@ require_once (DIR_WS_INCLUDES.'head.php');
                                                GROUP BY opa.products_options_values 
                             ");
                 if($inputed_inventory_turnover > xtc_round($it, 2)){
-                    echo '<tr><td width="33.3333333%" class="dataTableContent">'.$products_values['products_name'] . '</td>';
-                        echo '<td width="33.3333333%" class="dataTableContent">'.$ai.'</td>';
-                        echo '<td width="33.3333333%" class="dataTableContent">'.xtc_round($it, 2).'</td>';
+                    echo '<tr><td width="25%" class="dataTableContent">'.$products_values['products_name'] . '</td>';
+                        echo '<td width="25%" class="dataTableContent">'.$products_values['products_model'].'</td>';
+                        echo '<td width="25%" class="dataTableContent">'.$ai.'</td>';
+                        echo '<td width="25%" class="dataTableContent">'.xtc_round($it, 2).'</td>';
                     echo '</tr>';
                 }
                 while ($products_attributes_values = xtc_db_fetch_array($products_attributes_query)) {
@@ -103,9 +104,10 @@ require_once (DIR_WS_INCLUDES.'head.php');
                     $it_attr = $sold_attr_stock / $ai_attr;
 
                     if($inputed_inventory_turnover > xtc_round($it_attr, 2)){
-                        echo '<tr><td width="33.3333333%" class="dataTableContent">&nbsp;&nbsp;&nbsp;&nbsp;-'.$products_attributes_values['products_options_values'] . '</td>';
-                            echo '<td width="33.3333333%" class="dataTableContent">'.$ai_attr.'</td>';
-                            echo '<td width="33.3333333%" class="dataTableContent">'.xtc_round($it_attr, 2).'</td>';
+                        echo '<tr><td width="25%" class="dataTableContent">&nbsp;&nbsp;&nbsp;&nbsp;-'.$products_attributes_values['products_options_values'] . '</td>';
+                            echo '<td width="25%" class="dataTableContent">&nbsp;</td>';
+                            echo '<td width="25%" class="dataTableContent">'.$ai_attr.'</td>';                            
+                            echo '<td width="25%" class="dataTableContent">'.xtc_round($it_attr, 2).'</td>';
                         echo '</tr>';
                     }
                 }

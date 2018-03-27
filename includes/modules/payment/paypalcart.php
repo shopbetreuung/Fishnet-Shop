@@ -299,7 +299,7 @@ class paypalcart extends PayPalPayment {
       $shop_content_data = $main->getContentData(3);
       $module_smarty->assign('AGB_TITLE', $shop_content_data['content_heading']);
       $module_smarty->assign('AGB_LINK', $main->getContentLink(3, MORE_INFO,'SSL'));
-      $module_smarty->assign('TEXT_AGB_CHECKOUT', sprintf(TEXT_AGB_CHECKOUT,$main->getContentLink(3, MORE_INFO,'SSL') , $main->getContentLink(REVOCATION_ID, MORE_INFO,'SSL')));
+      $module_smarty->assign('TEXT_AGB_CHECKOUT', sprintf(TEXT_AGB_CHECKOUT , $main->getContentLink(3, READ_INFO,'SSL') , $main->getContentLink(REVOCATION_ID, READ_INFO,'SSL'), $main->getContentLink(2, READ_INFO,'SSL')));
     }
 
     //check if display conditions on checkout page is true

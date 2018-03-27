@@ -273,7 +273,7 @@ if (DISPLAY_REVOCATION_ON_CHECKOUT == 'true') {
 
   $smarty->assign('AGB_TITLE', $shop_content_data['content_heading']);
   $smarty->assign('AGB_LINK', $main->getContentLink(3, MORE_INFO,'SSL'));
-  $smarty->assign('TEXT_AGB_CHECKOUT', sprintf(TEXT_AGB_CHECKOUT,$main->getContentLink(3, MORE_INFO,'SSL') , $main->getContentLink(REVOCATION_ID, MORE_INFO,'SSL')));
+  $smarty->assign('TEXT_AGB_CHECKOUT', sprintf(TEXT_AGB_CHECKOUT , $main->getContentLink(3, READ_INFO,'SSL') , $main->getContentLink(REVOCATION_ID, READ_INFO,'SSL') , $main->getContentLink(2, READ_INFO,'SSL')));
 }
 
 $breadcrumb->add(NAVBAR_TITLE_1_CHECKOUT_CONFIRMATION, xtc_href_link(FILENAME_CHECKOUT_SHIPPING, '', 'SSL'));

@@ -30,7 +30,7 @@
    --------------------------------------------------------------*/
 
 // DB version, used for updates (_installer)
-define('DB_VERSION', 'SH_1.11.2');
+define('DB_VERSION', 'SH_1.12.0');
 //Run Mode
 define('RUN_MODE_ADMIN',true);
 
@@ -336,6 +336,11 @@ require(DIR_WS_CLASSES . 'box.php');
 // initialize the message stack for output messages
 require(DIR_WS_CLASSES . 'message_stack.php');
 $messageStack = new messageStack();
+
+// verfiy CSRF Token
+if (CSRF_TOKEN_SYSTEM == 'true') {
+  require_once(DIR_FS_INC . 'csrf_token.inc.php');
+}
 
 // split-page-results
 require(DIR_WS_CLASSES . 'split_page_results.php');

@@ -54,6 +54,7 @@
   define('TABLE_CUSTOMERS_BASKET_ATTRIBUTES', 'customers_basket_attributes');
   define('TABLE_CUSTOMERS_INFO', 'customers_info');
   define('TABLE_CUSTOMERS_IP', 'customers_ip');
+  define('TABLE_CUSTOMERS_LOGIN', 'customers_login');
   define('TABLE_CUSTOMERS_MEMO','customers_memo');
   define('TABLE_CUSTOMERS_STATUS', 'customers_status');
   define('TABLE_CUSTOMERS_STATUS_HISTORY', 'customers_status_history');

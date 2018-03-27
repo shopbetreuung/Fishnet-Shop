@@ -80,7 +80,7 @@
   <br />
   {#label_tracking#}
   {foreach item=tracking_link from=$TRACKING_LINKS}
-    <a href="{$tracking_link.href}" target="_blank">{$tracking_link.carrier} ({$tracking_link.number})</a>&nbsp;
+    <a href="{$tracking_link.href}" target="_blank" rel="noopener">{$tracking_link.carrier} ({$tracking_link.number})</a>&nbsp;
   {/foreach}
 {/if}
 {if $text_print!=''}

@@ -30,7 +30,7 @@
     $expire = DB_CACHE_EXPIRE; // 24 hours
 
     if (STORE_DB_TRANSACTIONS == 'true') {
-      error_log('QUERY ' . $query . "\n", 3, STORE_PAGE_PARSE_TIME_LOG);
+      error_log('QUERY ' . $query . "\n", 3, DIR_FS_DOCUMENT_ROOT.'log/'.STORE_PAGE_PARSE_TIME_LOG);
     }
 
     if (file_exists($file) && filemtime($file) > (time() - $expire)) {
@@ -47,7 +47,7 @@
 
         if (STORE_DB_TRANSACTIONS == 'true') {
                 $result_error = mysqli_error(${$link});
-                error_log('RESULT ' . $result . ' ' . $result_error . "\n", 3, STORE_PAGE_PARSE_TIME_LOG);
+                error_log('RESULT ' . $result . ' ' . $result_error . "\n", 3, DIR_FS_DOCUMENT_ROOT.'log/'.STORE_PAGE_PARSE_TIME_LOG);
         }
 
         // fetch data into array

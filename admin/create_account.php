@@ -269,12 +269,15 @@
       }
     }
 
-    if (strlen($customers_telephone) < ENTRY_TELEPHONE_MIN_LENGTH) {
-      $error = true;
-      $entry_telephone_error = true;
-    } else {
-      $entry_telephone_error = false;
+    if((REQUIRED_PHONE_NUMBER =='false' && $customers_telephone !='') || (REQUIRED_PHONE_NUMBER =='true') ){
+        if (strlen($customers_telephone) < ENTRY_TELEPHONE_MIN_LENGTH) {
+          $error = true;
+          $entry_telephone_error = true;
+        }else {
+          $entry_telephone_error = false;
+        }
     }
+
 
     $check_email = xtc_db_query("-- /admin/create_account.php
                                  SELECT customers_email_address

@@ -83,7 +83,7 @@ require (DIR_WS_INCLUDES.'head.php');
            <iframe src="?phpInfo" width="100%" height="700" style="border: solid 1px #a3a3a3;">
            <p>Der verwendete Browser kann leider nicht mit inline Frames (iframe)
              umgehen:
-             <a href="?phpInfo" target="_blank">Hier geht es zur phpinfo()
+             <a href="?phpInfo" target="_blank" rel="noopener">Hier geht es zur phpinfo()
              Seite vom System</a>
            </p>
          </iframe>

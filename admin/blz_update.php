@@ -137,8 +137,8 @@ require (DIR_WS_INCLUDES.'head.php');
 
       default:
         echo BLZ_INFO_TEXT;
-        echo '<p><a href="'.$blz_file_default_link.'" target="_blank"><b>'.$blz_file_default_link.'</b></a></p>';
-        echo '<form method="GET" action="blz_update.php">';
+        echo '<p><a href="'.$blz_file_default_link.'" target="_blank" rel="noopener"><b>'.$blz_file_default_link.'</b></a></p>';
+        echo xtc_draw_form('', 'blz_update.php', '', 'get', '');
         echo '<input type="hidden" name="action" value="do_blz">';
         echo '<table style="empty-cells:collapse; background:#FCFCFC; border-collapse:collapse;">';
         //echo xtc_draw_textarea_field('blz_file','','120%','2',$blz_file_default_link);

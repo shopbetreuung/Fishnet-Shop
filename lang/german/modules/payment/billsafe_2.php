@@ -45,7 +45,7 @@ define('MODULE_PAYMENT_BILLSAFE_2_STATUS_TEXT', 'Status');
 define('MODULE_PAYMENT_BILLSAFE_2_TRANSACTIONID', 'BillSAFE Transaktions-ID');
 define('MODULE_PAYMENT_BILLSAFE_2_CODE_TEXT', 'Code');
 define('MODULE_PAYMENT_BILLSAFE_2_MESSAGE_TEXT', 'Message');
-define('MODULE_PAYMENT_BILLSAFE_2_TEXT_DESCRIPTION', '<img src="images/icon_popup.gif" border="0" />&nbsp;<a href="https://client.billsafe.de" target="_blank" style="text-decoration: underline; font-weight: bold;">Zur BillSAFE-Website</a>');
+define('MODULE_PAYMENT_BILLSAFE_2_TEXT_DESCRIPTION', '<img src="images/icon_popup.gif" border="0" />&nbsp;<a href="https://client.billsafe.de" target="_blank" rel="noopener" style="text-decoration: underline; font-weight: bold;">Zur BillSAFE-Website</a>');
 define('MODULE_PAYMENT_BILLSAFE_2_STATUS_TITLE', 'BillSAFE Rechnungskauf aktivieren');
 define('MODULE_PAYMENT_BILLSAFE_2_STATUS_DESC', 'M&ouml;chten Sie Kauf auf Rechnung mit BillSAFE anbieten?');
 define('MODULE_PAYMENT_BILLSAFE_2_MERCHANT_ID_TITLE', 'Merchant-ID');

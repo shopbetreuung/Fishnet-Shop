@@ -401,21 +401,21 @@ define('NAVBAR_GV_SEND', 'Send Voucher');
  */
 
 define('TEXT_NEWSLETTER','You want to stay up to date?<br />No problem, receive our newsletter for the latest updates.');
-define('TEXT_EMAIL_INPUT','Your e-mail adress has been registered in our system.<br />An e-mail with a confirmation link has been send out. Click the link in order to complete registration!');
+define('TEXT_EMAIL_INPUT','Your e-mail adress has been registered in our system.<br />An e-mail with a confirmation link has been sent out. Click the link in order to complete registration!');
 
 define('TEXT_WRONG_CODE','<font color="#ff0000">The security code you entered was not correct. Please try again. <br />The form is not case sensitive.</font>');
-define('TEXT_EMAIL_EXIST_NO_NEWSLETTER','<font color="#ff0000">New code sent on this address!</font>');
+define('TEXT_EMAIL_EXIST_NO_NEWSLETTER','<font color="#008000">New code sent on this address!</font>');
 define('TEXT_EMAIL_EXIST_NEWSLETTER','<font color="#ff0000">This e-mail address is already registered for the newsletter!</font>');
 define('TEXT_EMAIL_NOT_EXIST','<font color="#ff0000">This e-mail address is not registered for newsletters!</font>');
 define('TEXT_EMAIL_DEL','Your e-mail address was deleted successfully from our newsletter-database.');
 define('TEXT_EMAIL_DEL_ERROR','<font color="#ff0000">An Error occured, your e-mail address has not been removed from our database!</font>');
-define('TEXT_EMAIL_ACTIVE','<font color="#ff0000">Your e-mail address has successfully been registered for the newsletter!</font>');
+define('TEXT_EMAIL_ACTIVE','<font color="#008000">Your e-mail address has successfully been registered for the newsletter!</font>');
 define('TEXT_EMAIL_ACTIVE_ERROR','<font color="#ff0000">An error occured, your e-mail address has not been registered for the newsletter!</font>');
 define('TEXT_EMAIL_SUBJECT','Your newsletter account');
 
 define('TEXT_CUSTOMER_GUEST','Guest');
 
-define('TEXT_LINK_MAIL_SENDED','Your new password request must be confirmed.<br />An e-mail with a confirmation link has been send out. Click the link in order to complete recieve a new password!');
+define('TEXT_LINK_MAIL_SENDED','Your new password request must be confirmed.<br />An e-mail with a confirmation link has been sent out. Click the link in order to complete recieve a new password!');
 define('TEXT_PASSWORD_MAIL_SENDED','You will receive an e-mail with your new password within minutes.<br />Please change your password after your first login.');
 define('TEXT_CODE_ERROR','The security code you entered was not correct.<br />Please try again.');
 define('TEXT_EMAIL_ERROR','The e-mail address is not registered in our store.<br />Please try again.');
@@ -541,7 +541,7 @@ define('ERROR_SQL_DB_QUERY','We are sorry, but an database error has occurred so
 define('ERROR_SQL_DB_QUERY_REDIRECT','You will be redirected back to our home page in %s seconds!');
 // EOF - DokuMan - 2011-09-20 - E-Mail SQL errors
 
-define('TEXT_AGB_CHECKOUT','Please take note of our General Terms & Conditions %s and Cancellation Policy %s');
+define('TEXT_AGB_CHECKOUT','General Terms & Conditions %s <br /> Cancellation Policy %s');
 
 define('_SHIPPING_FREE','Download');
 

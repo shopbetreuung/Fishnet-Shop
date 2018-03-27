@@ -11,7 +11,7 @@
    (c) 2003         nextcommerce (paypal.php,v 1.4 2003/08/13); www.nextcommerce.org
    Released under the GNU General Public License
    ---------------------------------------------------------------------------------------*/
-define('MODULE_PAYMENT_PAYPAL_TEXT_TITLE', 'PayPal Checkout');
+define('MODULE_PAYMENT_PAYPAL_TEXT_TITLE', 'Paypal Checkout (deprecated)');
 define('MODULE_PAYMENT_PAYPAL_TEXT_INFO','<img src="https://www.paypal.com/de_DE/DE/i/logo/lockbox_150x47.gif" />');
 define('MODULE_PAYMENT_PAYPAL_TEXT_DESCRIPTION', 'After "confirm" your will be routet to PayPal to pay your order.<br />Back in shop you will get your order-mail.');
 define('MODULE_PAYMENT_PAYPAL_ALLOWED_TITLE' , 'Allowed zones');

@@ -15,7 +15,7 @@
 				</div>
 				<div class="equalize products_short_description_block">{$products_data.PRODUCTS_SHORT_DESCRIPTION}</div>
 				<div class="equalize products_info_block">
-				{if $products_data.PRODUCTS_VPE}<p class="vpe">{$module_data.PRODUCTS_VPE}</p>{/if}
+				{if $products_data.PRODUCTS_VPE}<p class="vpe">{$products_data.PRODUCTS_VPE}</p>{/if}
 				{if $products_data.PRODUCTS_SHIPPING_NAME}<p class="shippingtime">{#text_shippingtime#}{if $products_data.PRODUCTS_SHIPPING_IMAGE}<img src="{$products_data.PRODUCTS_SHIPPING_IMAGE}" alt="{$products_data.PRODUCTS_SHIPPING_NAME}" />{/if}
 					{$products_data.PRODUCTS_SHIPPING_NAME_LINK}</p>
 				{/if}

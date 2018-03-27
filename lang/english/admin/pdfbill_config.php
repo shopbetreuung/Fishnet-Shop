@@ -7,8 +7,8 @@ define( PDFBILL_PROFILE_LANG, 'Profil für Sprache: ');
 $help_var_orderdata = kl('
   *date_order* = Bestelldatum      <br />
   *date_invoice* = Rechnungsdatum  <br />
-  *orders_id_sys* = Rechnungsnummer <br />
-  *orders_id* = Bestell ID         <br />
+  *orders_id_sys* = Bestellnummer <br />
+  *orders_id* = Rechnungsnummer        <br />
   *customers_id* = Kunden ID       <br />
   *ust_id* = Kunden UST ID       <br />
   *payment_method* = Zahlungsweise <br />

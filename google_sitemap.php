@@ -219,6 +219,7 @@ if (xtc_db_num_rows($product_result) > 0) {
                                    FROM ".TABLE_CONTENT_MANAGER."
                                   WHERE languages_id='".$_SESSION['languages_id']."'
                                     AND parent_id='0'
+                                    AND content_meta_index != 0
                                ORDER BY content_group,sort_order
                                  ");
     if (xtc_db_num_rows($content_query) > 0) { 

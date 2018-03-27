@@ -64,7 +64,7 @@ define('JS_BANK_OWNER', '* Bitte geben Sie den Namen des Kontoinhabers ein!\n\n'
 define('JS_BANK_OWNER_EMAIL', '* Bitte geben Sie die E-Mail-Adresse des Kontoinhabers ein!\n\n');
 
 define('MODULE_PAYMENT_BANKTRANSFER_DATABASE_BLZ_TITLE', 'Datenbanksuche f&uuml;r die Bankleitzahlen-Pr&uuml;fung verwenden?');
-define('MODULE_PAYMENT_BANKTRANSFER_DATABASE_BLZ_DESC', 'M&ouml;chten Sie die Datenbank f&uuml;r die Bankleitzahlen-Plausibilit&auml;tspr&uuml;fung verwenden ("true")?<br/>Vergewissern Sie sich, dass die Bankleitzahlen in der Datenbank auf dem aktuellen Stand sind!<br/><a href="'.xtc_href_link(defined('FILENAME_BLZ_UPDATE')?FILENAME_BLZ_UPDATE:'').'" target="_blank"><strong>Link: --> BLZ UPDATE <-- </strong></a><br/><br/>Bei "false" (standard) wird die mitgelieferte blz.csv Datei verwendet, die m&ouml;glicherweise veraltete Eintr&auml;ge enth&auml;lt!');
+define('MODULE_PAYMENT_BANKTRANSFER_DATABASE_BLZ_DESC', 'M&ouml;chten Sie die Datenbank f&uuml;r die Bankleitzahlen-Plausibilit&auml;tspr&uuml;fung verwenden ("true")?<br/>Vergewissern Sie sich, dass die Bankleitzahlen in der Datenbank auf dem aktuellen Stand sind!<br/><a href="'.xtc_href_link(defined('FILENAME_BLZ_UPDATE')?FILENAME_BLZ_UPDATE:'').'" target="_blank" rel="noopener"><strong>Link: --> BLZ UPDATE <-- </strong></a><br/><br/>Bei "false" (standard) wird die mitgelieferte blz.csv Datei verwendet, die m&ouml;glicherweise veraltete Eintr&auml;ge enth&auml;lt!');
 define('MODULE_PAYMENT_BANKTRANSFER_URL_NOTE_TITLE', 'Fax-URL');
 define('MODULE_PAYMENT_BANKTRANSFER_URL_NOTE_DESC', 'Die Fax-Best&auml;tigungsdatei. Diese muss im Catalog-Verzeichnis liegen');
 define('MODULE_PAYMENT_BANKTRANSFER_FAX_CONFIRMATION_TITLE', 'Fax Best&auml;tigung erlauben');

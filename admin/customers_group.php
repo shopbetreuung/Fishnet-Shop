@@ -85,7 +85,7 @@ require (DIR_WS_INCLUDES.'head.php');
             <div class='col-xs-12'>
                 <div class='col-xs-12'>
                     <div class="main col-xs-12">
-                    <form action="customers_group.php?action=send" method="post">
+                    <?php echo xtc_draw_form('', 'customers_group.php', 'action=send', 'post', ''); ?>
                     <?php
                     $group_query = xtc_db_query('SELECT customers_status_id,
                                                         customers_status_name

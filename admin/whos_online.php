@@ -108,7 +108,7 @@
 				// BOF - Fishnet Services - Nicolas Gemsjäger
 				// Bei Produkten - Link zum Produkt anzeigen
 				if (preg_match('/::([0-9]+)|--([0-9]+)|\?products_id=([0-9]+)/i', $last_page_url) == 1) {
-					$last_page_url = '<a href="'.$last_page_url.'" target="_blank">'.$last_page_url.'</a>';
+					$last_page_url = '<a href="'.$last_page_url.'" target="_blank" rel="noopener">'.$last_page_url.'</a>';
 				}
 				// EOF - Fishnet Services - Nicolas Gemsjäger
 				
@@ -116,7 +116,7 @@
                 <td class="dataTableContent" align="center"><?php echo gmdate('H:i:s', $time_online); ?></td>
                 <td class="dataTableContent" align="center"><?php echo $whos_online['customer_id']; ?></td>
                 <td class="dataTableContent"  align="center"><?php echo $whos_online['full_name']; ?></td>
-                <td class="dataTableContent hidden-xs" align="center"><a href="<?php echo WHOS_ONLINE_IP_WHOIS_SERVICE.$whos_online['ip_address']; ?>" style="font-weight:bold; text-decoration:underline;" target="_blank"><?php echo $whos_online['ip_address']; ?></a><?php  echo (isset($whos_online_hostname) ? $whos_online_hostname : ''); ?></td>
+                <td class="dataTableContent hidden-xs" align="center"><a href="<?php echo WHOS_ONLINE_IP_WHOIS_SERVICE.$whos_online['ip_address']; ?>" style="font-weight:bold; text-decoration:underline;" target="_blank" rel="noopener"><?php echo $whos_online['ip_address']; ?></a><?php  echo (isset($whos_online_hostname) ? $whos_online_hostname : ''); ?></td>
                 <!--td class="dataTableContent" align="center"><?php echo $geoip_data['geoplugin_countryName'].' ('.$geoip_data['geoplugin_countryCode'].')'; ?></td-->
                 <td class="dataTableContent hidden-xs"  align="center"><?php echo date('H:i:s', $whos_online['time_entry']); ?></td>
                 <td class="dataTableContent hidden-xs" align="center"><?php echo date('H:i:s', $whos_online['time_last_click']); ?></td>

@@ -431,7 +431,9 @@ require (DIR_WS_INCLUDES.'head.php');
 	<?php } ?>
 </div>
 <div class='col-xs-12'>
-<table class='table'><form action="<?php echo $post_url ?>" method="POST"><tr class="dataTableHeadingRow">
+<table class='table'>
+<?php echo xtc_draw_form('', 'billsafe_orders_2hp.php', 'oID='.$order_id, 'post', ''); ?>
+<tr class="dataTableHeadingRow">
 <td class="dataTableHeadingContent"><?php echo MODULE_PAYMENT_BILLSAFE_2HP_PRODUCTS; ?></td>
 <td class="dataTableHeadingContent"><?php echo MODULE_PAYMENT_BILLSAFE_2HP_MODEL; ?></td>
 <td class="dataTableHeadingContent" align="right"><?php echo MODULE_PAYMENT_BILLSAFE_2HP_TAX; ?></td>
@@ -487,7 +489,8 @@ require (DIR_WS_INCLUDES.'head.php');
 	}
 	$prod_history_query = xtc_db_query('SELECT bd.articlenumber, bd.articletype, bsod.bsordersdetails_id, bd.articlename, bsod.transactionmethod, bsod.date, bd.retoure, bd.pause FROM billsafe_transactions_2 bsod, billsafe_orders_details_2 bd WHERE bsod.ordernumber = "'.xtc_db_input($order_id).'" AND bd.ordernumber = "'.xtc_db_input($order_id).'" AND bsod.bsordersdetails_id = bd.id');
 	if (xtc_db_num_rows($prod_history_query) > 0) { ?>
-		<form action="<?php echo $post_url ?>" method="POST"><?php
+                <?php echo xtc_draw_form('', 'billsafe_orders_2hp.php', 'oID='.$order_id, 'post', ''); ?>
+		<?php
 		echo '<table border="0" width="100%" cellspacing="0" cellpadding="2"><tr class="dataTableHeadingRow"><td class="dataTableHeadingContent" align="center"><strong>'.MODULE_PAYMENT_BILLSAFE_2HP_MODEL.'</strong></td><td class="dataTableHeadingContent" align="center"><strong>'.MODULE_PAYMENT_BILLSAFE_2HP_PRODUCTS.'</strong></td><td class="dataTableHeadingContent" align="center"><strong>'.MODULE_PAYMENT_BILLSAFE_2HP_PREPORT_METHOD.'</strong></td><td class="dataTableHeadingContent" align="center"><strong>'.MODULE_PAYMENT_BILLSAFE_2HP_PREPORT_DATE.'</strong></td><td class="dataTableHeadingContent" align="center">&nbsp;</td></tr>';
 		while ($prod_history = xtc_db_fetch_array($prod_history_query)) {
 			if ($prod_history['transactionmethod'] == 'reportShipmentFull') {
@@ -535,14 +538,14 @@ require (DIR_WS_INCLUDES.'head.php');
 <td class="dataTableHeadingContent"><?php echo MODULE_PAYMENT_BILLSAFE_2HP_UPDATEARTICLELISTVOUCHER; ?></td>
 </tr><tr class="dataTableRow">
 <td class="dataTableContent" align="right" valign="top">
-<form id="voucher" method="POST" action="<?php echo $post_url ?>">
+<?php echo xtc_draw_form('voucher', 'billsafe_orders_2hp.php', 'oID='.$order_id, 'post', ''); ?>
 <input id="voucherAmount" type="text" style="float:none;" maxlength="4" name="voucherAmount" size="4" value="" />,<input style="float:none;" id="voucherAmountKomma" type="text" maxlength="2" name="voucherAmountKomma" size="2" value="" />&nbsp;<?php echo $currency; ?>,&nbsp;<?php echo MODULE_PAYMENT_BILLSAFE_2HP_TAX.': '; echo xtc_draw_pull_down_menu('voucherTax', $tax_class_array, $tax_class_id); ?><br /><br />
 <input type="submit" name="updateArticleListVoucher" value="<?php echo MODULE_PAYMENT_BILLSAFE_2HP_UPDATEARTICLELISTVOUCHER; ?>" />
 </form></td></tr></table>
 </div>
 <div class='col-sm-3 col-xs-12'>
 <a class="btn btn-default" href="Javascript:void()" onclick="window.open('<?php echo xtc_href_link('billsafe_print_order_2.php', 'oID='.$order_id); ?>', 'popup', 'toolbar=0, width=640, height=600')"><?php echo BUTTON_INVOICE; ?></a><br /><br />
-<a class="btn btn-default" href="https://client.billsafe.de" target="_blank"><?php echo MODULE_PAYMENT_BILLSAFE_2HP_MP; ?></a>
+<a class="btn btn-default" href="https://client.billsafe.de" target="_blank" rel="noopener"><?php echo MODULE_PAYMENT_BILLSAFE_2HP_MP; ?></a>
 </div>
 </div>
 <?php require(DIR_WS_INCLUDES.'footer.php'); ?>

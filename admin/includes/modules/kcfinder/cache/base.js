@@ -2144,9 +2144,9 @@ _.checkAgent = function() {
         ($.agent.opera && (parseInt($.agent.version) < 10)) ||
         ($.agent.firefox && (parseFloat($.agent.firefox) < 1.8))
     ) {
-        var html = '<div style="padding:10px">Your browser is not capable to display KCFinder. Please update your browser or install another one: <a href="http://www.mozilla.com/firefox/" target="_blank">Mozilla Firefox</a>, <a href="http://www.apple.com/safari" target="_blank">Apple Safari</a>, <a href="http://www.google.com/chrome" target="_blank">Google Chrome</a>, <a href="http://www.opera.com/browser" target="_blank">Opera</a>.';
+        var html = '<div style="padding:10px">Your browser is not capable to display KCFinder. Please update your browser or install another one: <a href="http://www.mozilla.com/firefox/" target="_blank" rel="noopener">Mozilla Firefox</a>, <a href="http://www.apple.com/safari" target="_blank" rel="noopener">Apple Safari</a>, <a href="http://www.google.com/chrome" target="_blank" rel="noopener">Google Chrome</a>, <a href="http://www.opera.com/browser" target="_blank" rel="noopener">Opera</a>.';
         if ($.agent.msie && !$.agent.opera)
-            html += ' You may also install <a href="http://www.google.com/chromeframe" target="_blank">Google Chrome Frame ActiveX plugin</a> to get Internet Explorer 6, 7, 8 working.';
+            html += ' You may also install <a href="http://www.google.com/chromeframe" target="_blank" rel="noopener">Google Chrome Frame ActiveX plugin</a> to get Internet Explorer 6, 7, 8 working.';
         html += '</div>';
         $('body').html(html);
         return false;
@@ -2403,11 +2403,11 @@ _.initToolbar = function() {
 
     $('#toolbar a[href="kcact:about"]').click(function() {
         var html = '<div class="box about">' +
-            '<div class="head"><a href="http://kcfinder.sunhater.com" target="_blank">KCFinder</a> ' + _.version + '</div>';
+            '<div class="head"><a href="http://kcfinder.sunhater.com" target="_blank" rel="noopener">KCFinder</a> ' + _.version + '</div>';
         if (_.support.check4Update)
             html += '<div id="checkver"><span class="loading"><span>' + _.label("Checking for new version...") + '</span></span></div>';
         html +=
-            '<div>' + _.label("Licenses:") + ' <a href="http://opensource.org/licenses/GPL-3.0" target="_blank">GPLv3</a> & <a href="http://opensource.org/licenses/LGPL-3.0" target="_blank">LGPLv3</a></div>' +
+            '<div>' + _.label("Licenses:") + ' <a href="http://opensource.org/licenses/GPL-3.0" target="_blank" rel="noopener">GPLv3</a> & <a href="http://opensource.org/licenses/LGPL-3.0" target="_blank" rel="noopener">LGPLv3</a></div>' +
             '<div>Copyright &copy;2010-2014 Pavel Tzonkov</div>' +
         '</div>';
 
@@ -2428,7 +2428,7 @@ _.initToolbar = function() {
                         return;
                     }
                     if (_.version < data.version)
-                        span.html('<a href="http://kcfinder.sunhater.com/download" target="_blank">' + _.label("Download version {version} now!", {version: data.version}) + '</a>');
+                        span.html('<a href="http://kcfinder.sunhater.com/download" target="_blank" rel="noopener">' + _.label("Download version {version} now!", {version: data.version}) + '</a>');
                     else
                         span.html(_.label("KCFinder is up to date!"));
                 },

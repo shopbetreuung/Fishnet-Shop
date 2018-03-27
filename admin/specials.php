@@ -202,7 +202,7 @@ require (DIR_WS_INCLUDES.'head.php');
 </script>
 <!-- EOF - Tomcraft - 2009-11-06 - SPIFFY CAL 2.1 //-->
 <div class='col-xs-12'>
-     <form name="new_special" <?php echo 'action="' . xtc_href_link(FILENAME_SPECIALS, xtc_get_all_get_params(array('action', 'info', 'sID')) . 'action=' . $form_action, 'NONSSL') . '"'; ?> method="post"><?php if ($form_action == 'update') echo xtc_draw_hidden_field('specials_id', $_GET['sID']); ?>
+     <?php echo xtc_draw_form('new_special', FILENAME_SPECIALS, xtc_get_all_get_params(array('action', 'info', 'sID')) . 'action=' . $form_action ,'post', ''); ?>
         <div class="col-xs-12">
           
                 <div class="main col-xs-12 col-sm-1"><?php echo TEXT_SPECIALS_PRODUCT; echo ($sInfo->products_name) ? "" :  ''; ?>&nbsp;</div>

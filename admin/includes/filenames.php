@@ -112,4 +112,5 @@ define('FILENAME_OUTSTANDING_ORDERS', 'outstanding.php');
 define('FILENAME_INVENTORY_TURNOVER_ORDERS', 'inventory_turnover.php');
 define('FILENAME_STOCK_RANGE', 'stock_range.php');
 define('FILENAME_DSGVO_EXPORT', 'dsgvo_export.php');
+define('FILENAME_BLACKLIST_LOGS', 'blacklist_logs.php');
 ?>

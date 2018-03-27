@@ -38,7 +38,10 @@ if (file_exists('includes/local/configure.php')) {
 } else {
   include ('includes/configure.php');
 }
-
+// xss secure
+if (is_file('includes/xss_secure.php')) {
+  include ('includes/xss_secure.php');
+}
 // call Installer
 if (DB_DATABASE == '' && is_dir('./_installer')) {
   header("Location: ./_installer");
@@ -200,7 +203,6 @@ if (EMAIL_TRANSPORT == 'smtp') {
   require_once (DIR_WS_CLASSES.'class.smtp.php');
 }
 
-require_once (DIR_FS_INC.'xtc_Security.inc.php');
 
 // move to xtc_db_queryCached.inc.php
 function xtDBquery($query, $link='db_link') {

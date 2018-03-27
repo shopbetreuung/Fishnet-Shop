@@ -212,7 +212,8 @@ require (DIR_WS_INCLUDES.'head.php');
   </head>
   <body marginwidth="0" marginheight="0" topmargin="0" bottommargin="0" leftmargin="0" rightmargin="0" bgcolor="#FFFFFF">
     <?php
-      echo '<form name="restore" action="'. $bk_filename.'?dbdump='.session_id().'" method="POST"></form>';
+      echo xtc_draw_form('restore', $bk_filename, 'dbdump='.session_id(), 'post', '');
+      echo '</form>';
     ?>
     <table border="0" width="100%" cellspacing="2" cellpadding="2">
       <tr>

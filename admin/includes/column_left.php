@@ -169,6 +169,12 @@
 											"access"	=> "imagesliders",
 											"check"		=> true);
 												
+  $menu_items['content'][] = array(		"name" 		=> BOX_BLACKLIST_LOGS,
+											"is_main"	=> true,
+											"link" 		=> xtc_href_link(FILENAME_BLACKLIST_LOGS, '', 'NONSSL'),
+											"access"	=> "blacklist_logs",
+											"check"		=> true);
+    
 	$menu_items['content'][] = array(		"name" 		=> BOX_IMPORT_EXPORT,
 											"is_main"	=> true,
 											"link" 		=> false,

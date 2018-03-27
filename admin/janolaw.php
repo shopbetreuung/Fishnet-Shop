@@ -90,7 +90,7 @@ require (DIR_WS_INCLUDES.'head.php');
                       </div>
                       <p align="left">
                         <br />
-                        <a href="https://www.janolaw.de/internetrecht/internetshop/abmahnschutz-internetshop.html#menu" target="_blank"><font size="3" color="#893769"><u><strong>Jetzt buchen und Online-Shop dauerhaft rechtssicher gestalten</strong></u></font></a> 
+                        <a href="https://www.janolaw.de/internetrecht/internetshop/abmahnschutz-internetshop.html#menu" target="_blank" rel="noopener"><font size="3" color="#893769"><u><strong>Jetzt buchen und Online-Shop dauerhaft rechtssicher gestalten</strong></u></font></a> 
                       </p>
         </div>
     </div>

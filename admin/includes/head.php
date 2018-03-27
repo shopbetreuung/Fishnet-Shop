@@ -18,6 +18,9 @@
   defined( '_VALID_XTC' ) or die( 'Direct Access to this location is not allowed.' );
   
   define('NEW_ADMIN_STYLE',true);
+    if (defined('ADMIN_HEADER_X_FRAME_OPTIONS') && ADMIN_HEADER_X_FRAME_OPTIONS == 'true') { 
+        header('X-Frame-Options: SAMEORIGIN'); // only in an iframe of the same site 
+    }
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html <?php echo HTML_PARAMS; ?>>

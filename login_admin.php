@@ -317,7 +317,7 @@ input[type=text]:focus, input[type=password]:focus {
 <body>
 <form name="login" method="post" action="<?php echo $action; ?>" style="height: <?php echo ($_SESSION['customers_login_tries'] >= FAILED_LOGINS_LIMIT) ? '290px' : '190px'?>">
   <h1>Administrator-Login</h1>
-  <a href="http://www.shophelfer.com/index.php?title=Login_im_Wartungsmodus_nicht_m%C3%B6glich" target="_blank"><img src="images/icons/question.png" width="32" height="32" title="Eingabehilfe und Repataturoptionen" /></a>
+  <a href="http://www.shophelfer.com/index.php?title=Login_im_Wartungsmodus_nicht_m%C3%B6glich" target="_blank" rel="noopener"><img src="images/icons/question.png" width="32" height="32" title="Eingabehilfe und Repataturoptionen" /></a>
   <p><i>E-Mail</i>
     <input type="text" name="email_address" maxlength="50" />
   </p>

@@ -380,7 +380,7 @@
                         </tr>
                         <tr>
                           <td width="10" valign="top">' . xtc_image(DIR_WS_IMAGES . 'icon_info.gif') . '</dt>
-                          <td class="main"><a href="' . xtc_href_link(FILENAME_PAYPAL, 'view=detail&paypal_ipn_id=' . $data['paypal_ipn_id']) . '" target="_blank">' . TEXT_PAYPAL_DETAIL . '</td>
+                          <td class="main"><a href="' . xtc_href_link(FILENAME_PAYPAL, 'view=detail&paypal_ipn_id=' . $data['paypal_ipn_id']) . '" target="_blank" rel="noopener">' . TEXT_PAYPAL_DETAIL . '</td>
                         </tr>';
         }
         $output .= '    </table>

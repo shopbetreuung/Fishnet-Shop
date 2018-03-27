@@ -16,7 +16,7 @@
 
 $num = 3; //Anzahl der Rabattstaffeln
 
-define('MODULE_ORDER_TOTAL_PAYMENT_HELP_LINK', ' <a onclick="window.open(\'popup_help.php?type=order_total&modul=ot_payment&lng=german\', \'Hilfe\', \'scrollbars=yes,resizable=yes,menubar=yes,width=800,height=600\'); return false" target="_blank" href="popup_help.php?type=order_total&modul=ot_payment&lng=german"><b>[HILFE]</b></a>');
+define('MODULE_ORDER_TOTAL_PAYMENT_HELP_LINK', ' <a onclick="window.open(\'popup_help.php?type=order_total&modul=ot_payment&lng=german\', \'Hilfe\', \'scrollbars=yes,resizable=yes,menubar=yes,width=800,height=600\'); return false" target="_blank" rel="noopener" href="popup_help.php?type=order_total&modul=ot_payment&lng=german"><b>[HILFE]</b></a>');
 define('MODULE_ORDER_TOTAL_PAYMENT_HELP_TEXT', '<h2>Rabatt und Zuschlag auf Zahlungsarten</h2>
 Sollen mehr Rabattstaffeln m&ouml;glich sein (Standard sind <b>3</b>), muss vor der Installation in allen Dateien der Wert der Variable $num (Sprachdateien) bzw. $this-&gt;num (Moduldatei) auf den gew&uuml;nschten Wert ge&auml;ndert werden.
 <hr>

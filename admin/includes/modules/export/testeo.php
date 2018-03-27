@@ -14,7 +14,7 @@
    Released under the GNU General Public License 
    ---------------------------------------------------------------------------------------*/
 defined( '_VALID_XTC' ) or die( 'Direct Access to this location is not allowed.' );
-define('MODULE_TESTEO_TEXT_DESCRIPTION', '<hr noshade="noshade"><br /><center><a href="http://www.testeo.de/" target="_blank" title="Testberichte"><img src="http://rating.testeo.de/pban/de-de/small/s/partner.gif" width="100" height="61" border="0" alt="Testberichte" /></a></center><br /><br />
+define('MODULE_TESTEO_TEXT_DESCRIPTION', '<hr noshade="noshade"><br /><center><a href="http://www.testeo.de/" target="_blank" rel="noopener" title="Testberichte"><img src="http://rating.testeo.de/pban/de-de/small/s/partner.gif" width="100" height="61" border="0" alt="Testberichte" /></a></center><br /><br />
 <strong>Export</strong><br />Testeo.de<br /><br />
 <strong>Trennzeichen</strong><br />getrennt durch | (PIPE)<br /><br />
 <strong>Format</strong><br />- ProduktID<br />- Gewicht<br />- EAN<br />- Hersteller<br />- ProduktBezeichnung<br />- ArtikelNr. (ggf. auch Hersteller-ArtikelNr.)<br />- Preis<br />- Produktbeschreibung (kurz)<br />- Produktbeschreibung (lang)<br />- Lieferzeit<br />- Produktlink<br />- FotoLink<br />- Kategoriename<br /><br />

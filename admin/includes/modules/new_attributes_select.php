@@ -26,7 +26,8 @@ $adminImages = DIR_WS_CATALOG . "lang/". $_SESSION['language'] ."/admin/images/b
   <div class='col-xs-12'>
     <p class="h2"><?php echo $pageTitle; ?></p>
   </div>
-<form action="<?php echo $_SERVER['PHP_SELF']; ?>" name="SELECT_PRODUCT" method="post"><input type="hidden" name="action" value="edit">
+<?php echo xtc_draw_form('SELECT_PRODUCT', 'new_attributes.php', '', 'post', ''); ?>
+<input type="hidden" name="action" value="edit">
 <?php
 echo xtc_draw_hidden_field(xtc_session_name(), xtc_session_id());
   echo "<div class='col-xs-12'>";

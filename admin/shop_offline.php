@@ -53,7 +53,7 @@
         
 <div class='col-xs-12'>
     <div class="main col-xs-12"  style="border: 1px solid; border-color: #aaaaaa; padding: 5px;">    
-      <form role="form" name="img_upload" action="shop_offline.php" method="post" enctype="multipart/form-data">
+      <?php echo xtc_draw_form('img_upload', 'shop_offline.php', '', 'post', 'role="form" enctype="multipart/form-data"'); ?>
                         <input type="checkbox" name="shop_offline" value="checked" <?php echo xtc_get_shop_conf('SHOP_OFFLINE'); ?>>
                         <?php echo SETTINGS_OFFLINE ?><br /><br />
                         <?php echo SETTINGS_OFFLINE_MSG ?>:<br />

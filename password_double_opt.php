@@ -238,7 +238,7 @@ switch ($case) {
     $smarty->assign('SHOP_NAME', STORE_NAME);
     $smarty->assign('language', $_SESSION['language']);
     $smarty->caching = 0;
-    $smarty->assign('FORM_ACTION', xtc_draw_form('sign', xtc_href_link(FILENAME_PASSWORD_DOUBLE_OPT, 'action=first_opt_in', 'SSL')));
+    $smarty->assign('FORM_ACTION', xtc_draw_form('sign', xtc_href_link(FILENAME_PASSWORD_DOUBLE_OPT, 'action=first_opt_in', 'SSL'), 'post'));
     // BOF - DokuMan - 2010-10-28 - added missing arguments for xtc_draw_input_field
     //$smarty->assign('INPUT_EMAIL', xtc_draw_input_field('email', xtc_db_input(isset($_POST['email']) ? $_POST['email'] : '')));
     $smarty->assign('INPUT_EMAIL', xtc_draw_input_field('email', xtc_db_input(isset($_POST['email']) ? $_POST['email'] : ''), '', 'text', false));

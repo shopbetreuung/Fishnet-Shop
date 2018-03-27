@@ -291,7 +291,8 @@ require (DIR_WS_INCLUDES.'head.php');
     <!-- header_eof //-->
     <!-- body //-->
     <?php
-      echo '<form name="dump" action="'. $bk_filename.'?dbdump='.session_id().'" method="POST"></form>';
+      echo xtc_draw_form('dump', $bk_filename, 'dbdump='.session_id(), 'post', '');
+      echo '</form>';
     ?>
     <table border="0" width="100%" cellspacing="2" cellpadding="2">
       <tr>

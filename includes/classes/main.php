@@ -62,10 +62,10 @@ class main {
       define('POPUP_SHIPPING_LINK_CLASS', 'thickbox');
     }
     if (USE_BOOTSTRAP == "true") {
-		return '<a rel="nofollow" target="_blank" href="'.xtc_href_link(FILENAME_POPUP_CONTENT, 'coID='.SHIPPING_STATUS_INFOS, $request_type).'" data-title="'.$this->getContentHeading(SHIPPING_STATUS_INFOS).'" data-toggle="lightbox" data-parent="" data-gallery="remoteload">'.(isset($this->SHIPPING[$id]['name']) ? $this->SHIPPING[$id]['name'] : '').'</a>';
+		return '<a rel="nofollow" target="_blank" rel="noopener" href="'.xtc_href_link(FILENAME_POPUP_CONTENT, 'coID='.SHIPPING_STATUS_INFOS, $request_type).'" data-title="'.$this->getContentHeading(SHIPPING_STATUS_INFOS).'" data-toggle="lightbox" data-parent="" data-gallery="remoteload">'.(isset($this->SHIPPING[$id]['name']) ? $this->SHIPPING[$id]['name'] : '').'</a>';
   	
 	} else {
-		return '<a rel="nofollow" target="_blank" href="'.xtc_href_link(FILENAME_POPUP_CONTENT, 'coID='.SHIPPING_STATUS_INFOS.POPUP_SHIPPING_LINK_PARAMETERS, $request_type).'" title="Information" class="'.POPUP_SHIPPING_LINK_CLASS.'">'.(isset($this->SHIPPING[$id]['name']) ? $this->SHIPPING[$id]['name'] : '').'</a>';
+		return '<a rel="nofollow" target="_blank" rel="noopener" href="'.xtc_href_link(FILENAME_POPUP_CONTENT, 'coID='.SHIPPING_STATUS_INFOS.POPUP_SHIPPING_LINK_PARAMETERS, $request_type).'" title="Information" class="'.POPUP_SHIPPING_LINK_CLASS.'">'.(isset($this->SHIPPING[$id]['name']) ? $this->SHIPPING[$id]['name'] : '').'</a>';
 	}
   }
   // EOF - Tutorial: Umsetzung der EU-Verbraucherrichtlinie vom 13.06.2014
@@ -109,9 +109,9 @@ class main {
       define('POPUP_SHIPPING_LINK_CLASS', 'thickbox');
     }
     if (USE_BOOTSTRAP == "true") {
-		return ' '.SHIPPING_EXCL.' <a rel="nofollow" target="_blank" href="'.xtc_href_link(FILENAME_POPUP_CONTENT, 'coID='.SHIPPING_INFOS, $request_type).'" data-title="'.$this->getContentHeading(SHIPPING_INFOS).'" data-toggle="lightbox" data-parent="" data-gallery="remoteload">'.SHIPPING_COSTS.'</a>';
+		return ' '.SHIPPING_EXCL.' <a rel="nofollow" target="_blank" rel="noopener" href="'.xtc_href_link(FILENAME_POPUP_CONTENT, 'coID='.SHIPPING_INFOS, $request_type).'" data-title="'.$this->getContentHeading(SHIPPING_INFOS).'" data-toggle="lightbox" data-parent="" data-gallery="remoteload">'.SHIPPING_COSTS.'</a>';
 	} else {
-		return ' '.SHIPPING_EXCL.' <a rel="nofollow" target="_blank" href="'.xtc_href_link(FILENAME_POPUP_CONTENT, 'coID='.SHIPPING_INFOS.POPUP_SHIPPING_LINK_PARAMETERS, $request_type).'" title="Information" class="'.POPUP_SHIPPING_LINK_CLASS.'">'.SHIPPING_COSTS.'</a>';
+		return ' '.SHIPPING_EXCL.' <a rel="nofollow" target="_blank" rel="noopener" href="'.xtc_href_link(FILENAME_POPUP_CONTENT, 'coID='.SHIPPING_INFOS.POPUP_SHIPPING_LINK_PARAMETERS, $request_type).'" title="Information" class="'.POPUP_SHIPPING_LINK_CLASS.'">'.SHIPPING_COSTS.'</a>';
 	}
   }
 
@@ -193,9 +193,9 @@ class main {
       define('POPUP_CONTENT_LINK_CLASS', 'thickbox');
     }
     if (USE_BOOTSTRAP == "true") {
-		return '<a target="_blank" href="'.xtc_href_link(FILENAME_POPUP_CONTENT, 'coID='.$coID, $ssl).'" data-title="'.$this->getContentHeading($coID).'" data-toggle="lightbox" data-parent="" data-gallery="remoteload"><font color="#ff0000">'.$text.'</font></a>';
+		return '<a target="_blank" rel="noopener" href="'.xtc_href_link(FILENAME_POPUP_CONTENT, 'coID='.$coID, $ssl).'" data-title="'.$this->getContentHeading($coID).'" data-toggle="lightbox" data-parent="" data-gallery="remoteload"><font color="#ff0000">'.$text.'</font></a>';
 	} else {
-		return '<a target="_blank" href="'.xtc_href_link(FILENAME_POPUP_CONTENT, 'coID='.$coID.POPUP_CONTENT_LINK_PARAMETERS, $ssl).'" title="Information" class="'.POPUP_CONTENT_LINK_CLASS.'"><font color="#ff0000">'.$text.'</font></a>';
+		return '<a target="_blank" rel="noopener" href="'.xtc_href_link(FILENAME_POPUP_CONTENT, 'coID='.$coID.POPUP_CONTENT_LINK_PARAMETERS, $ssl).'" title="Information" class="'.POPUP_CONTENT_LINK_CLASS.'"><font color="#ff0000">'.$text.'</font></a>';
 	}
   }
   
@@ -273,9 +273,9 @@ class main {
     if ($class == 'image') {
       require_once (DIR_FS_INC . 'xtc_get_products_image.inc.php');
       $products_image = DIR_WS_THUMBNAIL_IMAGES.xtc_get_products_image($pID);   
-      return '<a target="_blank" href="'.xtc_href_link('print_product_info.php', 'pID='.$pID.POPUP_PRODUCT_LINK_PARAMETERS, $request_type).'" class="'.POPUP_PRODUCT_LINK_CLASS.'">'.'<img class="'.$class.'" alt="" src="'.$products_image.'" />'.'</a>';
+      return '<a target="_blank" rel="noopener" href="'.xtc_href_link('print_product_info.php', 'pID='.$pID.POPUP_PRODUCT_LINK_PARAMETERS, $request_type).'" class="'.POPUP_PRODUCT_LINK_CLASS.'">'.'<img class="'.$class.'" alt="" src="'.$products_image.'" />'.'</a>';
     }
-    return '<a target="_blank" href="'.xtc_href_link('print_product_info.php', 'pID='.$pID.POPUP_PRODUCT_LINK_PARAMETERS.$add_params, $request_type).'" class="'.POPUP_PRODUCT_LINK_CLASS.' '.$class.'">'.$text.'</a>';
+    return '<a target="_blank" rel="noopener" href="'.xtc_href_link('print_product_info.php', 'pID='.$pID.POPUP_PRODUCT_LINK_PARAMETERS.$add_params, $request_type).'" class="'.POPUP_PRODUCT_LINK_CLASS.' '.$class.'">'.$text.'</a>';
   }
 
   /**

@@ -467,7 +467,7 @@
                                       <tr class="dataTableRow" onMouseOver="this.className='dataTableRowOver';this.style.cursor='pointer'" onMouseOut="this.className='dataTableRow'">
                                         <td class="dataTableContent">&nbsp;</td>
                                         <td class="dataTableContent" align="left">
-                                          <a href="<?php echo xtc_catalog_href_link("product_info.php?products_id=" . $info[$i]['pid']) ?>" target="_blank"><?php echo $info[$i]['pmodel'].' : '.$info[$i]['pname']; ?></a>
+                                          <a href="<?php echo xtc_catalog_href_link("product_info.php?products_id=" . $info[$i]['pid']) ?>" target="_blank" rel="noopener"><?php echo $info[$i]['pmodel'].' : '.$info[$i]['pname']; ?></a>
                                           <?php
                                           if (is_array($info[$i]['attr'])) {
                                             $attr_info = $info[$i]['attr'];

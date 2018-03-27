@@ -751,16 +751,16 @@ if (USE_WYSIWYG=='true' && $_GET['action'] == 'email') {
        <tr>
         <td align="left"><?php echo COUPON_PRODUCTS; ?></td>
         <?php // BOF - web28 - 2010-11-13 - FIX popup link ?>
-        <!--td align="left"><?php //echo xtc_draw_input_field('coupon_products', $coupon_products, 'style="width: 150px"'); ?> <A HREF="validproducts.php" TARGET="_blank" ONCLICK="window.open('validproducts.php', 'Valid_Products', 'scrollbars=yes,resizable=yes,menubar=yes,width=600,height=600'); return false">View</A></td-->
-        <td align="left"><?php echo xtc_draw_input_field('coupon_products', $coupon_products, 'style="width: 150px"'); ?> <a href="<?php echo xtc_href_link('validproducts.php', '' , 'NONSSL');?>" target="_blank" onclick="window.open('validproducts.php', 'Valid_Products', 'scrollbars=yes,resizable=yes,menubar=yes,width=600,height=600'); return false"><?php echo TEXT_VIEW_SHORT;?></a></td>
+        <!--td align="left"><?php //echo xtc_draw_input_field('coupon_products', $coupon_products, 'style="width: 150px"'); ?> <A HREF="validproducts.php" target="_blank" rel="noopener" ONCLICK="window.open('validproducts.php', 'Valid_Products', 'scrollbars=yes,resizable=yes,menubar=yes,width=600,height=600'); return false">View</A></td-->
+        <td align="left"><?php echo xtc_draw_input_field('coupon_products', $coupon_products, 'style="width: 150px"'); ?> <a href="<?php echo xtc_href_link('validproducts.php', '' , 'NONSSL');?>" target="_blank" rel="noopener" onclick="window.open('validproducts.php', 'Valid_Products', 'scrollbars=yes,resizable=yes,menubar=yes,width=600,height=600'); return false"><?php echo TEXT_VIEW_SHORT;?></a></td>
         <?php // EOF - web28 - 2010-11-13 - FIX popup link ?>
         <td align="left"><?php echo COUPON_PRODUCTS_HELP; ?></td>
       </tr>
       <tr>
         <td align="left"><?php echo COUPON_CATEGORIES; ?></td>
         <?php // BOF - web28 - 2010-11-13 - FIX popup link ?>
-        <!--td align="left"><?php //echo xtc_draw_input_field('coupon_categories', $coupon_categories, 'style="width: 150px"'); ?> <A HREF="validcategories.php" TARGET="_blank" ONCLICK="window.open('validcategories.php', 'Valid_Categories', 'scrollbars=yes,resizable=yes,menubar=yes,width=600,height=600'); return false">View</A></td-->
-        <td align="left"><?php echo xtc_draw_input_field('coupon_categories', $coupon_categories, 'style="width: 150px"'); ?> <a href="<?php echo xtc_href_link('validcategories.php', '' , 'NONSSL');?>" target="_blank" onclick="window.open('validcategories.php', 'Valid_Categories', 'scrollbars=yes,resizable=yes,menubar=yes,width=600,height=600'); return false"><?php echo TEXT_VIEW_SHORT;?></a></td>
+        <!--td align="left"><?php //echo xtc_draw_input_field('coupon_categories', $coupon_categories, 'style="width: 150px"'); ?> <A HREF="validcategories.php" target="_blank" rel="noopener" ONCLICK="window.open('validcategories.php', 'Valid_Categories', 'scrollbars=yes,resizable=yes,menubar=yes,width=600,height=600'); return false">View</A></td-->
+        <td align="left"><?php echo xtc_draw_input_field('coupon_categories', $coupon_categories, 'style="width: 150px"'); ?> <a href="<?php echo xtc_href_link('validcategories.php', '' , 'NONSSL');?>" target="_blank" rel="noopener" onclick="window.open('validcategories.php', 'Valid_Categories', 'scrollbars=yes,resizable=yes,menubar=yes,width=600,height=600'); return false"><?php echo TEXT_VIEW_SHORT;?></a></td>
         <?php //EOF - web28 - 2010-11-13 - FIX popup link ?>
         <td align="left"><?php echo COUPON_CATEGORIES_HELP; ?></td>
       </tr>
@@ -934,11 +934,11 @@ if (USE_WYSIWYG=='true' && $_GET['action'] == 'email') {
       } else {
         $prod_details = TEXT_NONE;
         if ($cInfo->restrict_to_products) {
-          $prod_details = '<a href="listproducts.php?cid=' . $cInfo->coupon_id . '" target="_blank" onclick="window.open(\'listproducts.php?cid=' . $cInfo->coupon_id . '\', \'Valid_Categories\', \'scrollbars=yes,resizable=yes,menubar=yes,width=600,height=600\'); return false"><strong>' . TEXT_VIEW_SHORT .'</strong></a>';
+          $prod_details = '<a href="listproducts.php?cid=' . $cInfo->coupon_id . '" target="_blank" rel="noopener" onclick="window.open(\'listproducts.php?cid=' . $cInfo->coupon_id . '\', \'Valid_Categories\', \'scrollbars=yes,resizable=yes,menubar=yes,width=600,height=600\'); return false"><strong>' . TEXT_VIEW_SHORT .'</strong></a>';
         }
         $cat_details = TEXT_NONE;
         if ($cInfo->restrict_to_categories) {
-          $cat_details = '<a href="listcategories.php?cid=' . $cInfo->coupon_id . '" target="_blank" onclick="window.open(\'listcategories.php?cid=' . $cInfo->coupon_id . '\', \'Valid_Categories\', \'scrollbars=yes,resizable=yes,menubar=yes,width=600,height=600\'); return false"><strong>' . TEXT_VIEW_SHORT .'</strong></a>';
+          $cat_details = '<a href="listcategories.php?cid=' . $cInfo->coupon_id . '" target="_blank" rel="noopener" onclick="window.open(\'listcategories.php?cid=' . $cInfo->coupon_id . '\', \'Valid_Categories\', \'scrollbars=yes,resizable=yes,menubar=yes,width=600,height=600\'); return false"><strong>' . TEXT_VIEW_SHORT .'</strong></a>';
         }
         $coupon_name_query = xtc_db_query("select coupon_name from " . TABLE_COUPONS_DESCRIPTION . " where coupon_id = '" . (int)$cInfo->coupon_id . "' and language_id = '" . (int)$_SESSION['languages_id'] . "'");
         $coupon_name = xtc_db_fetch_array($coupon_name_query);

@@ -45,7 +45,7 @@ define('MODULE_PAYMENT_BILLSAFE_2HP_STATUS_TEXT', 'Status');
 define('MODULE_PAYMENT_BILLSAFE_2HP_TRANSACTIONID', 'BillSAFE Transaktions-ID');
 define('MODULE_PAYMENT_BILLSAFE_2HP_CODE_TEXT', 'Code');
 define('MODULE_PAYMENT_BILLSAFE_2HP_MESSAGE_TEXT', 'Message');
-define('MODULE_PAYMENT_BILLSAFE_2HP_TEXT_DESCRIPTION', '<img src="images/icon_popup.gif" border="0" />&nbsp;<a href="https://client.billsafe.de" target="_blank" style="text-decoration: underline; font-weight: bold;">Zur BillSAFE-Website</a>');
+define('MODULE_PAYMENT_BILLSAFE_2HP_TEXT_DESCRIPTION', '<img src="images/icon_popup.gif" border="0" />&nbsp;<a href="https://client.billsafe.de" target="_blank" rel="noopener" style="text-decoration: underline; font-weight: bold;">Zur BillSAFE-Website</a>');
 define('MODULE_PAYMENT_BILLSAFE_2HP_STATUS_TITLE', 'BillSAFE Ratenkauf aktivieren');
 define('MODULE_PAYMENT_BILLSAFE_2HP_STATUS_DESC', 'M&ouml;chten Sie Kauf auf Raten mit BillSAFE anbieten?');
 define('MODULE_PAYMENT_BILLSAFE_2HP_MERCHANT_ID_TITLE', 'Merchant-ID');

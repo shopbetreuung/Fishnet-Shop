@@ -57,7 +57,7 @@ if (isset ($_SESSION['cc_id'])) {
   if (!defined('POPUP_SHIPPING_LINK_CLASS')) {
     define('POPUP_SHIPPING_LINK_CLASS', 'thickbox');
   }
-	$gift_smarty->assign('COUPON_HELP_LINK', '<a target="_blank" class="'.POPUP_SHIPPING_LINK_CLASS.'" href="'.xtc_href_link(FILENAME_POPUP_COUPON_HELP, 'cID='.$_SESSION['cc_id'].POPUP_COUPON_HELP_LINK_PARAMETERS, $request_type).'">');
+	$gift_smarty->assign('COUPON_HELP_LINK', '<a target="_blank" rel="noopener" class="'.POPUP_SHIPPING_LINK_CLASS.'" href="'.xtc_href_link(FILENAME_POPUP_COUPON_HELP, 'cID='.$_SESSION['cc_id'].POPUP_COUPON_HELP_LINK_PARAMETERS, $request_type).'">');
 }
 if (isset ($_SESSION['customer_id'])) {
 	$gift_smarty->assign('C_FLAG', 'true');

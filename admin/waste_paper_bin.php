@@ -1,9 +1,6 @@
 <?php
 
-require('includes/application_top.php');
-?>
-
-    <?php 
+require('includes/application_top.php'); 
     if (is_array($_POST['multi_products']) && isset($_POST['multi_products'])) {
         foreach($_POST['multi_products'] as $product){
             if(isset($_POST['put_out_of_wastebin'])){
@@ -72,24 +69,8 @@ require('includes/application_top.php');
         //xtc_redirect(xtc_href_link(FILENAME_WASTE_PAPER_BIN, '', 'SSL'));
         
     }
-    ?>
-<html>
-<head>
-    <?php
     require (DIR_WS_INCLUDES.'head.php');
     ?>
-    <script type="text/javascript" language="JavaScript">
-
-    function checkCheckBoxes(theForm) {
-            if (theForm.if_checked.checked == false)
-            {
-                    alert ('You didn\'t choose any of the checkboxes!');
-                    return false;
-            } else {
-                return confirm('Sind Sie sicher? \n Are you sure?');
-            }
-    }
-</script> 
 </head>
 <body style="margin: 0; background-color: #FFFFFF">
     <!-- header //-->
@@ -110,7 +91,7 @@ require('includes/application_top.php');
     
     ?>
     <p class="h2"> <?php echo HEADER_WASTE_PAPER_BIN; ?> </p><br />
-    <form action="<?php echo HTTP_CATALOG_SERVER.DIR_WS_ADMIN.FILENAME_WASTE_PAPER_BIN; ?>" method="post" onsubmit="return checkCheckBoxes(this);">
+    <?php echo xtc_draw_form('wastepaperbin', FILENAME_WASTE_PAPER_BIN, '', 'post', 'onsubmit="return checkCheckBoxes(this);"'); ?>
     <div id ="responsive_table" class="table-responsive pull-left col-sm-12">
         <table class="table table-bordered table-striped">
                 <tr class="dataTableHeadingRow">
@@ -245,6 +226,19 @@ require('includes/application_top.php');
     <!-- footer //-->
     <?php require(DIR_WS_INCLUDES . 'footer.php'); ?>
     <!-- footer_eof //-->
+        <script type="text/javascript" language="JavaScript">
+
+    function checkCheckBoxes(theForm) {
+            if (theForm.if_checked.checked == false)
+            {
+                    alert ('You didn\'t choose any of the checkboxes!');
+                    return false;
+            } else {
+                return confirm('Sind Sie sicher? \n Are you sure?');
+            }
+    }
+</script> 
 </body>
+
 </html>
 <?php require(DIR_WS_INCLUDES . 'application_bottom.php'); ?>

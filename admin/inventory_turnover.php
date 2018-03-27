@@ -33,7 +33,7 @@ require_once (DIR_WS_INCLUDES.'head.php');
 </div>
 <div class='col-xs-12'><br></div>
 <div class='col-xs-12'>
-    <form method="post" action="inventory_turnover.php">
+    <?php echo xtc_draw_form('', 'inventory_turnover.php', '', 'post', ''); ?>
         
         <div class="col-xs-12">
                 <?php echo TEXT_INVENTORY_TURNOVER; ?><input type="text" size="4" value="<?php echo $_POST['inventory_turnover']; ?>" name ="inventory_turnover"/> <br />

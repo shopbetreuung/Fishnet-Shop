@@ -450,12 +450,10 @@
         }
       }
 
-      if((REQUIRED_PHONE_NUMBER == 'false' && $customers_telephone !='') || (REQUIRED_PHONE_NUMBER == 'true')){
+      if($customers_telephone !='' && (REQUIRED_PHONE_NUMBER == 'true')){
         if (strlen($customers_telephone) < ENTRY_TELEPHONE_MIN_LENGTH) { //When required phone number is false
            $error = true;
            $entry_telephone_error = true;
-        }else {
-           $entry_telephone_error = false;
         }
       }
 
@@ -723,27 +721,11 @@ function check_form() {
     }
   }
 
-  if (customers_telephone == "" || customers_telephone.length < <?php echo ENTRY_TELEPHONE_MIN_LENGTH; ?>) {
-    error_message = error_message + "<?php echo xtc_js_lang(JS_TELEPHONE); ?>";
-    error = 1;
-  }<?php 
+  <?php 
     if (REQUIRED_PHONE_NUMBER == 'true') {
   ?>
 
    if (customers_telephone == "" || customers_telephone.length < <?php echo ENTRY_TELEPHONE_MIN_LENGTH; ?>) {
-      error_message = error_message + "<?php echo xtc_js_lang(JS_TELEPHONE); ?>";
-      error = 1;
-    }
-
-    <?php
-    }
-  ?>
-
-  <?php 
-    if (REQUIRED_PHONE_NUMBER == 'false') {
-  ?>
-
-   if (customers_telephone != "" && customers_telephone.length < <?php echo ENTRY_TELEPHONE_MIN_LENGTH; ?>) {
       error_message = error_message + "<?php echo xtc_js_lang(JS_TELEPHONE); ?>";
       error = 1;
     }

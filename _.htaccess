@@ -32,10 +32,19 @@ FileETag None
 </IfModule>
 
 # Do not allow access to excerpt PHP files
-<FilesMatch "\.(php_)">
+<FilesMatch ".*\.(php_)">
+  <IfModule mod_authz_core.c>
+    # Apache 2.4
+    <RequireAll>
+      Require all denied
+    </RequireAll>
+  </IfModule>
+  <IfModule !mod_authz_core.c>
+    # Apache 2.2
     Order Deny,Allow
     Deny from all
-</FilesMatch>
+  </IfModule>
+</FilesMatch> 
 
 ##-- Customization of HTTP request and response headers
 <IfModule mod_headers.c>

@@ -190,6 +190,7 @@ define('BOX_INVOICED_ORDERS', 'Outgoing orders');
 define('BOX_OUTSTANDING_ORDERS', 'Outstanding');
 define('BOX_INVENTORY_TURNOVER', 'Inventory turnover');
 define('BOX_STOCK_RANGE', 'Stock range');
+define('BOX_DSGVO_CUSTOMER_EXPORT','DSGVO customer export');
 
 define('TXT_GROUPS','<b>Groups</b>:');
 define('TXT_SYSTEM','System');

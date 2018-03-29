@@ -869,7 +869,7 @@ define('USE_SEARCH_ORDER_REDIRECT_TITLE', 'Bestellung direkt &ouml;ffnen');
 define('USE_SEARCH_ORDER_REDIRECT_DESC', 'Nach der Suche nach id wird die Bestellung direkt ge&ouml;ffnet.');
 
 define('REQUIRED_PHONE_NUMBER_TITLE','Ben&ouml;tigte Telefonnummer');
-define('REQUIRED_PHONE_NUMBER_DESC','Wenn es erforderlich ist, wird es mindestens 3 Ziffern verlangen');
+define('REQUIRED_PHONE_NUMBER_DESC','Soll Telefonnummer ein Pflichtfeld sein? ');
 
 define('CSRF_TOKEN_SYSTEM_TITLE', 'Admin Token System');
 define('CSRF_TOKEN_SYSTEM_DESC', 'Soll das Token System in Admin verwendet werden?<br/><b>Achtung:</b> Das Token System wurde zur Erh&ouml;hung der Sicherheit eingef&uuml;hrt.');

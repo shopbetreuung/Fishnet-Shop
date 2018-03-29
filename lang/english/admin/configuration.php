@@ -863,7 +863,7 @@ define('USE_SEARCH_ORDER_REDIRECT_TITLE', 'Open order directly');
 define('USE_SEARCH_ORDER_REDIRECT_DESC', 'After search order by id, it will open order directly.');
 
 define('REQUIRED_PHONE_NUMBER_TITLE','Required phone number');
-define('REQUIRED_PHONE_NUMBER_DESC','If it\'s required, it will ask for minimum 3 digits');
+define('REQUIRED_PHONE_NUMBER_DESC','Should telephone number be a required field?');
 
 define('CSRF_TOKEN_SYSTEM_TITLE', 'Admin Token System');
 define('CSRF_TOKEN_SYSTEM_DESC', 'Use Token System in admin area?<br/><b>Attention:</b> The Token System is used to secure the admin area.');

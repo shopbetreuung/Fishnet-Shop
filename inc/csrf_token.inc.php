@@ -54,10 +54,10 @@ if (defined('RUN_MODE_ADMIN')) {
   }
 }
 // verfiy CSRF Token
-if (is_array($_POST) && count($_POST) > 0) {
+if (is_array($_POST) && count($_POST) > 0 && $CSRFKeep == false) {
   if (isset($_POST[$_SESSION['CSRFName']])) {
     if ($_POST[$_SESSION['CSRFName']] != $_SESSION['CSRFToken']) {
-      trigger_error("CSRFToken manipulation.\n".print_r($_POST, true), E_USER_WARNING);
+      @trigger_error("CSRFToken manipulation.\n".print_r($_POST, true), E_USER_WARNING);
       unset($_POST);
       unset($_GET['action']);
       unset($_GET['saction']);
@@ -71,7 +71,7 @@ if (is_array($_POST) && count($_POST) > 0) {
       }
     }
   } else {
-    trigger_error("CSRFToken not defined.\n".print_r($_POST, true), E_USER_WARNING);
+    @trigger_error("CSRFToken not defined.\n".print_r($_POST, true), E_USER_WARNING);
     unset($_POST);
     unset($_GET['action']);
     unset($_GET['saction']);

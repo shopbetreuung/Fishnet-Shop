@@ -1,5 +1,4 @@
 <?php
-
 define('TEXT_CHANGE_CATEGORIES', 'Kategorien &auml;ndern');
 define('TEXT_CHANGE_PRODUCTS', 'Produkte &auml;ndern');
 
@@ -17,4 +16,3 @@ define('TEXT_LIST_CATEGORIES', 'Liste der ausgew&auml;hlten Kategorien');
 define('TEXT_ERROR', '<strong>Achtung!</strong> Jede Eingabe muss ausgef&uuml;llt werden.');
 define('TEXT_SUCCESS', '<strong>Erfolg!</strong> Erfolgreich ge&auml;ndert.');
 ?>
-

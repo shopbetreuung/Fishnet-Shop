@@ -1,5 +1,4 @@
 <?php
-
 define('TEXT_CHANGE_CATEGORIES', 'Change categories');
 define('TEXT_CHANGE_PRODUCTS', 'Change products');
 
@@ -17,4 +16,3 @@ define('TEXT_LIST_CATEGORIES', 'List of selected categories');
 define('TEXT_ERROR', '<strong>Danger!</strong> Every input must be filled.');
 define('TEXT_SUCCESS', '<strong>Success!</strong> Successfully changed.');
 ?>
-

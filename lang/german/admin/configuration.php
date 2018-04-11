@@ -737,6 +737,8 @@ define('VALID_REQUEST_TIME_TITLE', 'Zeit f&uuml;r die Anforderung einer g&uuml;l
 define('VALID_REQUEST_TIME_DESC', 'Stellen Sie eine g&uuml;ltige Zeit f&uuml;r die Anforderung der Passwortverl&auml;ngerung in Sekunden ein, f&uuml;r die die Erneuerung des Passworts nach dem Senden einer Anfrage aktiviert ist (Standard 3600 Sekunden).');
 define('INSERT_RECAPTCHA_KEY_TITLE', 'Google reCaptcha api key');
 define('INSERT_RECAPTCHA_KEY_DESC', 'Hier k&ouml;nnen Sie einen g&uuml;ltigen Google reCaptcha API Key eingeben. (<strong><span style="color: #FF0000;">reCaptcha wird nicht angezeigt wenn dieses Feld leer ist!</span></strong>) <br /> <br />  <a href="https://www.google.com/recaptcha/admin#list" target="_blank"> Klicken Sie hier um einen Google reCaptcha API Key zu erhalten.</a> <br /><br /> <strong> Stellen Sie sicher, das Sie reCAPTCHA V2 ausw&auml;hlen! <br /><br /> <span style="color: #FF0000;">Bitte den API key nicht abtippen - nur kopieren und hier einf&uuml;gen!</span></strong>');
+define('RECAPTCHA_SECRET_KEY_TITLE', 'Google reCatpcha secret key');
+define('RECAPTCHA_SECRET_KEY_DESC', 'Geben Sie hier den passenden Secret Key ein. Bitte achten Sie beim Kopieren darauf, das Sie keine Leerzeichen davor oder dahinter mitkopieren.');
 
 //BOC - h-h-h - 2011-12-23 - Button "Buy Now" optional - default off
 define('SHOW_BUTTON_BUY_NOW_TITLE', 'Zeige "Jetzt Kaufen" in den Artikellisten');

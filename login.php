@@ -32,6 +32,7 @@ $smarty = new Smarty;
 require (DIR_FS_CATALOG.'templates/'.CURRENT_TEMPLATE.'/source/boxes.php');
 
 // include needed functions
+require_once(DIR_FS_INC.'verify_recaptcha.inc.php');  
 require_once (DIR_FS_INC.'xtc_validate_password.inc.php');
 require_once (DIR_FS_INC.'xtc_array_to_string.inc.php');
 require_once (DIR_FS_INC.'xtc_write_user_info.inc.php');
@@ -75,10 +76,10 @@ if (isset ($_GET['action']) && ($_GET['action'] == 'process')) {
       xtc_db_perform(TABLE_CUSTOMERS_LOGIN, $sql_data_array);
     }  
     $captcha_error = false;
-    if (trim(INSERT_RECAPTCHA_KEY) != '') {
+    if (trim(INSERT_RECAPTCHA_KEY) != '' && trim(RECAPTCHA_SECRET_KEY) != '') {
         if ($_SESSION['customers_login_tries'] > FAILED_LOGINS_LIMIT) {  
                $captcha_error = true;
-            if (isset($_POST['g-recaptcha-response']) && !empty( $_POST['g-recaptcha-response'])) {
+            if (isset($_POST['g-recaptcha-response']) && !empty( $_POST['g-recaptcha-response']) && verify_recaptcha($_POST['g-recaptcha-response'], RECAPTCHA_SECRET_KEY) === false) {
                 $captcha_error = false;
             } else {
                 $info_message .= TEXT_LOGIN_ERROR_NO_CAPTCHA."<br />";
@@ -165,7 +166,7 @@ $smarty->assign('LINK_LOST_PASSWORD', xtc_href_link(FILENAME_PASSWORD_DOUBLE_OPT
 $smarty->assign('FORM_END', '</form>');
 
 // captcha
-    if (trim(INSERT_RECAPTCHA_KEY) != '') {
+    if (trim(INSERT_RECAPTCHA_KEY) != '' && trim(RECAPTCHA_SECRET_KEY) != '') {
         if ($_SESSION['customers_login_tries'] >= FAILED_LOGINS_LIMIT) {    
             $smarty->assign('RECAPTCHA','<div class="g-recaptcha" data-sitekey="'. trim(INSERT_RECAPTCHA_KEY).'"></div>');
         }

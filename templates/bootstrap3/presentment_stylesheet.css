@@ -1,0 +1,71 @@
+.paypal_popup_container {
+      overflow:hidden;
+      padding:0px 10px;
+}
+.ppc_logo {
+  text-align:center;
+  margin: 0 0 10px 0;
+}
+.ppc_logo img {
+  width:100%;
+  max-width:200px;
+  height:auto;
+}
+.ppc_text {
+  font-size:13px;
+  line-height:21px;
+  text-align:center;
+  padding: 5px 0px;
+}
+.ppc_rating_row {
+  margin: 0px -5px 0px -5px !important;
+  padding: 10px 0 0 0;
+}
+.ppc_rating_item {
+  float:left;
+  width:50%;
+  padding: 0px 5px;
+  margin: 0px 0px 10px 0px;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.ppc_rating_item_inner {
+  border: 1px solid #ccc;
+  padding:5px;
+}
+.ppc_rating_plan_heading {
+  text-align:center;
+  font-weight:bold;
+  padding:0 0 5px 0;
+}
+.ppc_rating_item table {
+  padding: 0px;
+  margin: 0px;
+  width:100%;
+}
+.ppc_rating_item table tr:nth-child(odd) td {
+  background:#f2f2f2;
+}
+.ppc_rating_item table td {
+  padding: 3px 0px;
+  vertical-align:top;
+  border-top: 1px solid #ddd;
+}
+.ppc_rating_item table td.td_total {
+  text-align:right;
+  white-space:nowrap;
+  padding-left:5px;
+}
+.ppc_disclaimer {
+  text-align:center;
+  font-size:10px;
+  line-height:12px;
+  padding: 4px 0px;
+}
+.ppc_store_owner {
+  text-align:center;
+  font-size:13px;
+  line-height:19px;
+  padding: 4px 0px;
+}

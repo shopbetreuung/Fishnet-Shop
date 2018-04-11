@@ -37,7 +37,7 @@
  *
  */
 
-define('MODULE_PAYMENT_PN_SOFORTUEBERWEISUNG_TEXT_TITLE', 'sofort&uuml;berweisung.de (veraltet)');
+define('MODULE_PAYMENT_PN_SOFORTUEBERWEISUNG_TEXT_TITLE', 'sofort&uuml;berweisung.de');
 define('MODULE_PAYMENT_PN_SOFORTUEBERWEISUNG_KS_TEXT_TITLE', 'sofort&uuml;berweisung.de mit K&auml;uferschutz');
 define('MODULE_PAYMENT_PN_SOFORTUEBERWEISUNG_TEXT_DESCRIPTION', '<div>' . (MODULE_PAYMENT_PN_SOFORTUEBERWEISUNG_STATUS != 'True' ? '<div align = "center"><a class="button" href=' . xtc_href_link(FILENAME_MODULES, 'set=payment&module=pn_sofortueberweisung&action=install&autoinstall=1', 'SSL') . '>Autoinstaller (empfohlen)</a></div><br />' : ''). '<br /><b>sofort&uuml;berweisung.de</b><br>Sobald der Kunde sofort&uuml;berweisung.de ausgew&auml;hlt hat und auf Bestellen klickt, wird eine tempor&auml;re Bestellung angelegt. Ist die Zahlung erfolgreich, wird die Bestellung fest in die Datenbank eingetragen. Bei Abbruch wird die Bestellung r&uuml;ckg&auml;ngig gemacht und die Bestellnummer verworfen, so dass bei der n&auml;chsten Bestellung die Bestellnummer um eins erh&ouml;ht wird.</div>');
 

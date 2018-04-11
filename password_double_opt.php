@@ -27,6 +27,7 @@ $request_time = is_numeric(VALID_REQUEST_TIME) ? VALID_REQUEST_TIME : '3600';
 require (DIR_FS_CATALOG.'templates/'.CURRENT_TEMPLATE.'/source/boxes.php');
 
 // include needed functions
+require_once (DIR_FS_INC.'verify_recaptcha.inc.php');
 require_once (DIR_FS_INC.'xtc_random_charcode.inc.php');
 require_once (DIR_FS_INC.'xtc_encrypt_password.inc.php');
 $case = 'double_opt';
@@ -60,7 +61,7 @@ if (isset ($_GET['action']) && ($_GET['action'] == 'first_opt_in') && $_POST) {
   $subject = $smarty->fetch('db:password_verification_mail.subject');
   
   if (xtc_db_num_rows($check_customer_query)) {
-    if (trim(INSERT_RECAPTCHA_KEY) != '' && (!isset($_POST['g-recaptcha-response']) || empty( $_POST['g-recaptcha-response']))) {
+    if ((trim(INSERT_RECAPTCHA_KEY) != '' && trim(RECAPTCHA_SECRET_KEY) != '') && (!isset($_POST['g-recaptcha-response']) || empty( $_POST['g-recaptcha-response']) || && verify_recaptcha($_POST['g-recaptcha-response'], RECAPTCHA_SECRET_KEY) === true)) {
           $case = 'wrong_recaptcha';
           $info_message = TEXT_RECAPTCHA_ERROR; 
     } else {
@@ -191,7 +192,7 @@ switch ($case) {
     //$smarty->assign('INPUT_EMAIL', xtc_draw_input_field('email', xtc_db_input(isset($_POST['email']) ? $_POST['email'] : '')));
     $smarty->assign('INPUT_EMAIL', xtc_draw_input_field('email', xtc_db_input(isset($_POST['email']) ? $_POST['email'] : ''), '', 'text', false));
     
-    if (trim(INSERT_RECAPTCHA_KEY) != '') {
+    if (trim(INSERT_RECAPTCHA_KEY) != '' && trim(RECAPTCHA_SECRET_KEY) != '') {
         $smarty->assign('RECAPTCHA','<div class="g-recaptcha" data-sitekey="'.INSERT_RECAPTCHA_KEY.'"></div>');
     }
     
@@ -213,7 +214,7 @@ switch ($case) {
     //$smarty->assign('INPUT_EMAIL', xtc_draw_input_field('email', xtc_db_input(isset($_POST['email']) ? $_POST['email'] : '')));
     $smarty->assign('INPUT_EMAIL', xtc_draw_input_field('email', xtc_db_input(isset($_POST['email']) ? $_POST['email'] : ''), '', 'text', false));
     
-    if (trim(INSERT_RECAPTCHA_KEY) != '') {
+    if (trim(INSERT_RECAPTCHA_KEY) != '' && trim(RECAPTCHA_SECRET_KEY) != '') {
         $smarty->assign('RECAPTCHA','<div class="g-recaptcha" data-sitekey="'.trim(INSERT_RECAPTCHA_KEY).'"></div>');
     }
     
@@ -243,7 +244,7 @@ switch ($case) {
     //$smarty->assign('INPUT_EMAIL', xtc_draw_input_field('email', xtc_db_input(isset($_POST['email']) ? $_POST['email'] : '')));
     $smarty->assign('INPUT_EMAIL', xtc_draw_input_field('email', xtc_db_input(isset($_POST['email']) ? $_POST['email'] : ''), '', 'text', false));
     
-    if (trim(INSERT_RECAPTCHA_KEY) != '') {
+    if (trim(INSERT_RECAPTCHA_KEY) != '' && trim(RECAPTCHA_SECRET_KEY) != '') {
         $smarty->assign('RECAPTCHA','<div class="g-recaptcha" data-sitekey="'.trim(INSERT_RECAPTCHA_KEY).'"></div>');
     }
     

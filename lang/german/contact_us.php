@@ -19,5 +19,6 @@
  define('ERROR_MSG_BODY','<p><b>Ihre Nachricht:</b> Keine Eingabe!</p>');
  define('ERROR_CHECKBOX', '<p><b>Checkbox:</b> Die Checkbox muss best&auml;tigt werden!</p>');
   define('ERROR_HONEYPOT','<p>Es gab ein Problem mit dem Kontaktformular</p>');
+define('ERROR_RECAPTCHA','<p><b>reCaptcha</b> Verifizierung fehlgeschlagen, bitte versuchen Sie es erneut.</p>');
    
 ?>

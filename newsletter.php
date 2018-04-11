@@ -25,6 +25,7 @@ $smarty = new Smarty;
 require (DIR_FS_CATALOG.'templates/'.CURRENT_TEMPLATE.'/source/boxes.php');
 
 // include needed functions
+require_once (DIR_FS_INC.'verify_recaptcha.inc.php');
 require_once (DIR_FS_INC.'xtc_random_charcode.inc.php');
 require_once (DIR_FS_INC.'xtc_encrypt_password.inc.php');
 require_once (DIR_FS_INC.'xtc_validate_password.inc.php');
@@ -90,8 +91,8 @@ if (isset ($_GET['action']) && ($_GET['action'] == 'process')) {
 			$sql_data_array = array ('customers_email_address' => xtc_db_input($_POST['email']), 'customers_id' => xtc_db_input($customers_id), 'customers_status' => xtc_db_input($customers_status), 'customers_firstname' => xtc_db_input($customers_firstname), 'customers_lastname' => xtc_db_input($customers_lastname), 'mail_status' => '0', 'mail_key' => xtc_db_input($vlcode), 'date_added' => 'now()');
 			xtc_db_perform(TABLE_NEWSLETTER_RECIPIENTS, $sql_data_array);
 
-                        if (trim(INSERT_RECAPTCHA_KEY) != '') {                         
-                            if (isset($_POST['g-recaptcha-response']) && !empty( $_POST['g-recaptcha-response'])) {
+                        if (trim(INSERT_RECAPTCHA_KEY) != '' && trim(RECAPTCHA_SECRET_KEY) != '') {                         
+                            if (isset($_POST['g-recaptcha-response']) && !empty( $_POST['g-recaptcha-response']) && verify_recaptcha($_POST['g-recaptcha-response'], RECAPTCHA_SECRET_KEY) === false) {
                                 $success_message = TEXT_EMAIL_INPUT;
                                 
                                 if (SEND_EMAILS == true) {
@@ -115,8 +116,8 @@ if (isset ($_GET['action']) && ($_GET['action'] == 'process')) {
                         
                         xtc_db_query("UPDATE ".TABLE_NEWSLETTER_RECIPIENTS." SET mail_key = '".xtc_db_input($vlcode)."' WHERE customers_email_address='".$_POST['email']."'");
 
-                        if (trim(INSERT_RECAPTCHA_KEY) != '') {
-                            if (isset($_POST['g-recaptcha-response']) && !empty( $_POST['g-recaptcha-response'])) {
+                        if (trim(INSERT_RECAPTCHA_KEY) != '' && trim(RECAPTCHA_SECRET_KEY) != '') {
+                            if (isset($_POST['g-recaptcha-response']) && !empty( $_POST['g-recaptcha-response']) && verify_recaptcha($_POST['g-recaptcha-response'], RECAPTCHA_SECRET_KEY) === false) {
                                 $info_message = TEXT_EMAIL_EXIST_NO_NEWSLETTER;
                                 
                                 if (SEND_EMAILS == true) {
@@ -133,8 +134,8 @@ if (isset ($_GET['action']) && ($_GET['action'] == 'process')) {
                         }
 
                     } else {
-                        if (trim(INSERT_RECAPTCHA_KEY) != '') {
-                            if (isset($_POST['g-recaptcha-response']) && !empty( $_POST['g-recaptcha-response'])) {
+                        if (trim(INSERT_RECAPTCHA_KEY) != '' && trim(RECAPTCHA_SECRET_KEY) != '') {
+                            if (isset($_POST['g-recaptcha-response']) && !empty( $_POST['g-recaptcha-response']) && verify_recaptcha($_POST['g-recaptcha-response'], RECAPTCHA_SECRET_KEY) === false) {
                                 $info_message = TEXT_EMAIL_EXIST_NEWSLETTER;
                             } else {
                                 $info_message .= TEXT_LOGIN_ERROR_NO_CAPTCHA."<br />";
@@ -159,8 +160,8 @@ if (isset ($_GET['action']) && ($_GET['action'] == 'process')) {
 
             $check_mail_query = xtc_db_query("select customers_email_address from ".TABLE_NEWSLETTER_RECIPIENTS." where customers_email_address = '".xtc_db_input($_POST['email'])."'");
             if (!xtc_db_num_rows($check_mail_query)) {
-                 if (trim(INSERT_RECAPTCHA_KEY) != '') {
-                    if (isset($_POST['g-recaptcha-response']) && !empty( $_POST['g-recaptcha-response'])) {
+                 if (trim(INSERT_RECAPTCHA_KEY) != '' && trim(RECAPTCHA_SECRET_KEY) != '') {
+                    if (isset($_POST['g-recaptcha-response']) && !empty( $_POST['g-recaptcha-response']) && verify_recaptcha($_POST['g-recaptcha-response'], RECAPTCHA_SECRET_KEY) === false) {
                         $info_message = TEXT_EMAIL_NOT_EXIST;
                     } else {
                         $info_message .= TEXT_LOGIN_ERROR_NO_CAPTCHA."<br />";
@@ -170,8 +171,8 @@ if (isset ($_GET['action']) && ($_GET['action'] == 'process')) {
                 }
 
             } else {                
-                if (trim(INSERT_RECAPTCHA_KEY) != '') {
-                    if (isset($_POST['g-recaptcha-response']) && !empty( $_POST['g-recaptcha-response'])) {
+                if (trim(INSERT_RECAPTCHA_KEY) != '' && trim(RECAPTCHA_SECRET_KEY) != '') {
+                    if (isset($_POST['g-recaptcha-response']) && !empty( $_POST['g-recaptcha-response']) && verify_recaptcha($_POST['g-recaptcha-response'], RECAPTCHA_SECRET_KEY) === false) {
                         $del_query = xtc_db_query("delete from ".TABLE_NEWSLETTER_RECIPIENTS." where customers_email_address ='".xtc_db_input($_POST['email'])."'");
                         $success_message = TEXT_EMAIL_DEL;
                     } else {
@@ -244,7 +245,7 @@ $smarty->assign('INPUT_EMAIL', xtc_draw_input_field('email', ((isset($_GET['emai
 //BOF - web28 - 2010-02-09: NEWSLETTER ERROR HANDLING
 
 // captcha
-if (trim(INSERT_RECAPTCHA_KEY) != '') {
+if (trim(INSERT_RECAPTCHA_KEY) != '' && trim(RECAPTCHA_SECRET_KEY) != '') {
     $smarty->assign('RECAPTCHA','<div class="g-recaptcha" data-sitekey="'. trim(INSERT_RECAPTCHA_KEY).'"></div>');
 }
 

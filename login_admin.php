@@ -325,7 +325,7 @@ input[type=text]:focus, input[type=password]:focus {
     <input type="password" name="password" maxlength="30" />
   </p>
   <?php  
-    if (trim(INSERT_RECAPTCHA_KEY) != '') {
+    if (trim(INSERT_RECAPTCHA_KEY) != '' && trim(RECAPTCHA_SECRET_KEY) != '') {
         if ($_SESSION['customers_login_tries'] >= FAILED_LOGINS_LIMIT) {
   ?>  
   <div class="g-recaptcha login_admin_recaptcha" data-sitekey="<?php echo trim(INSERT_RECAPTCHA_KEY);?>"></div>

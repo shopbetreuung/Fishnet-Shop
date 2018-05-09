@@ -33,7 +33,7 @@ $group_query = xtc_db_query("SELECT customers_status_image,
                                     customers_status_name
                                FROM ".TABLE_CUSTOMERS_STATUS."
                               WHERE language_id = '".$_SESSION['languages_id']."'
-                              AND customers_status_id != '0'");
+                              ");
 while ($group_values = xtc_db_fetch_array($group_query)) {
   // load data into array
   $i ++;
@@ -64,7 +64,7 @@ while ($group_values = xtc_db_fetch_array($group_query)) {
     </div>
   </div>
 <?php
-for ($col = 1, $n = sizeof($group_data); $col < $n +1; $col ++) { //DokuMan - changed $col from 0 to 1 (there is no 0?)
+for ($col = 0, $n = sizeof($group_data); $col < $n +1; $col ++) { //DokuMan - changed $col from 0 to 1 (there is no 0?)
   if ($group_data[$col]['STATUS_NAME'] != '') {
 ?>
   <div class='col-xs-12'>

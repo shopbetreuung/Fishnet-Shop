@@ -704,7 +704,7 @@ class categories {
     $group_query = xtc_db_query("SELECT customers_status_id
                                          FROM ".TABLE_CUSTOMERS_STATUS."
                                         WHERE language_id = '".(int) $_SESSION['languages_id']."'
-                                          AND customers_status_id != '0'");
+                                         ");
     while ($group_values = xtc_db_fetch_array($group_query)) {
       // load data into array
       $i ++;
@@ -713,13 +713,14 @@ class categories {
     for ($col = 0, $n = sizeof($group_data); $col < $n +1; $col ++) {
       if ($group_data[$col]['STATUS_ID'] != '') {
         $personal_price = xtc_db_prepare_input($products_data['products_price_'.$group_data[$col]['STATUS_ID']]);
-        if ($personal_price == '' || $personal_price == '0.0000') {
-          $personal_price = '0.00';
+        if ($personal_price == '') {
+          continue;
         } else {
           if (PRICE_IS_BRUTTO == 'true') {
             $personal_price = ($personal_price / (xtc_get_tax_rate($products_data['products_tax_class_id']) + 100) * 100);
-          }
-          $personal_price = xtc_round($personal_price, PRICE_PRECISION);
+          }else{
+          	$personal_price = xtc_round($personal_price, PRICE_PRECISION);
+		  }
         }
         if ($action == 'insert') {
           xtc_db_query("DELETE FROM personal_offers_by_customers_status_".$group_data[$col]['STATUS_ID']."
@@ -732,10 +733,22 @@ class categories {
                                  'products_id' => $products_id);
           xtc_db_perform("personal_offers_by_customers_status_".$group_data[$col]['STATUS_ID'], $insert_array);
         } else {
-          xtc_db_query("UPDATE personal_offers_by_customers_status_".$group_data[$col]['STATUS_ID']."
+		  $personal_offer = xtc_db_query("SELECT * FROM personal_offers_by_customers_status_".$group_data[$col]['STATUS_ID']." WHERE personal_offer = '".$personal_price."' AND products_id = '".$products_id."'");
+		  if(xtc_db_num_rows($personal_offer) > 0){
+          	xtc_db_query("UPDATE personal_offers_by_customers_status_".$group_data[$col]['STATUS_ID']."
                                          SET personal_offer = '".$personal_price."'
                                        WHERE products_id = '".$products_id."'
                                          AND quantity    = '1'");
+		  }else{
+			  xtc_db_query("DELETE FROM personal_offers_by_customers_status_".$group_data[$col]['STATUS_ID']."
+                              WHERE products_id = '".$products_id."'
+                                AND quantity    = '1'");
+			  $insert_array = array ();
+          	  $insert_array = array ('personal_offer' => $personal_price,
+                                 'quantity' => '1',
+                                 'products_id' => $products_id);
+             xtc_db_perform("personal_offers_by_customers_status_".$group_data[$col]['STATUS_ID'], $insert_array);
+		  }
         }
       }
     }

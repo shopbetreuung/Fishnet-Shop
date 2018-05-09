@@ -257,6 +257,10 @@ if(isset($_POST['check']) && $_POST['delete'] == '') {$inp = ''; $del = 'true';}
 //EOF - web28 - 2010-02-09: NEWSLETTER ERROR HANDLING
 #$smarty->assign('CHECK_DEL', xtc_draw_radio_field('check', 'del', $del));
 
+//privacy link
+$shop_content_data = $main->getContentData(2);
+$smarty->assign('PRIVACY_LINK', $main->getContentLink(2, $shop_content_data['content_title'],'SSL'));
+
 $smarty->assign('BUTTON_SEND', xtc_image_submit('button_send.gif', IMAGE_BUTTON_LOGIN_NEWSLETTER, "name=add"));
 $smarty->assign('BUTTON_UNSUB', xtc_image_submit('button_delete.gif', IMAGE_BUTTON_UNSUBSCRIBE_NEWSLETTER, "name=delete"));
 $smarty->assign('FORM_END', '</form>');

@@ -61,7 +61,7 @@ if (isset ($_GET['action']) && ($_GET['action'] == 'first_opt_in') && $_POST) {
   $subject = $smarty->fetch('db:password_verification_mail.subject');
   
   if (xtc_db_num_rows($check_customer_query)) {
-    if ((trim(INSERT_RECAPTCHA_KEY) != '' && trim(RECAPTCHA_SECRET_KEY) != '') && (!isset($_POST['g-recaptcha-response']) || empty( $_POST['g-recaptcha-response']) || && verify_recaptcha($_POST['g-recaptcha-response'], RECAPTCHA_SECRET_KEY) === true)) {
+    if ((trim(INSERT_RECAPTCHA_KEY) != '' && trim(RECAPTCHA_SECRET_KEY) != '') && (!isset($_POST['g-recaptcha-response']) || empty( $_POST['g-recaptcha-response']) || verify_recaptcha($_POST['g-recaptcha-response'], RECAPTCHA_SECRET_KEY) === true)) {
           $case = 'wrong_recaptcha';
           $info_message = TEXT_RECAPTCHA_ERROR; 
     } else {

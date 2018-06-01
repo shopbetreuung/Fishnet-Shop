@@ -26,30 +26,39 @@ define('XSS_SEND_LOG', false); //default: false
 define('XSS_WRITE_LOG', true); //default: true
 define('XSS_BLACKLIST', true); //default: true
 define('XSS_BLACKLIST_TIME', 3600); // time to block IP in seconds. default: 3600
+define('XSS_WHITELIST_TIME', 3600);
 //############  KONFIGURATION ##############//
 
 
 function xss_secure($params_arr, $ip, $type) 
 {
-    foreach ($params_arr as $secvalue) 
-    {
-        if (!is_array($secvalue)) {
-         #hs - speed improvement
-         #stackoverflow.com/questions/14342427
-          if (strpos($secvalue, '<') !== false ||
-              ( (
-                strpos($secvalue, '=') !== false ||
-                stripos($secvalue, 'like') !== false
-              ) && (
-                stripos($secvalue, ' or ') !== false ||
-                stripos($secvalue, ' and ') !== false
-              ) )
-             )#hs
-          xss_secure_params($secvalue, $ip, $type);
-        } else {
-          xss_secure($secvalue, $ip, $type);
-        }
-    }
+	$whitelist_approved = true;
+	foreach (xss_read_whitelist() as $whitelist_address => $whitelist_time) {
+		if ($ip == $whitelist_address) {
+		 $whitelist_approved = false;
+		}
+	}
+	if ($whitelist_approved === true) {
+		foreach ($params_arr as $secvalue) 
+		{
+			if (!is_array($secvalue)) {
+			 #hs - speed improvement
+			 #stackoverflow.com/questions/14342427
+			  if (strpos($secvalue, '<') !== false ||
+				  ( (
+					strpos($secvalue, '=') !== false ||
+					stripos($secvalue, 'like') !== false
+				  ) && (
+					stripos($secvalue, ' or ') !== false ||
+					stripos($secvalue, ' and ') !== false
+				  ) )
+				 )#hs
+			  xss_secure_params($secvalue, $ip, $type);
+			} else {
+			  xss_secure($secvalue, $ip, $type);
+			}
+		}
+	}
 }
 
 
@@ -303,6 +312,18 @@ function xss_write_blacklist($blacklist_arr)
   @fclose($fp);
 }
 
+function xss_write_whitelist($whitelist_arr) {
+  $whitelist_file = XSS_PATH.'log/xss_whitelist.log';  
+  $fp = fopen($whitelist_file, 'w');
+  flock($fp, LOCK_EX);
+  ftruncate($fp, 0);
+  rewind($fp);
+  foreach(array_keys($whitelist_arr) as $key){    
+	@fwrite($fp, $key . ';' . $whitelist_arr[$key] . "\r\n");
+  }
+  flock($fp, LOCK_UN);
+  @fclose($fp);
+}
 
 function xss_read_blacklist()
 {
@@ -328,6 +349,28 @@ function xss_read_blacklist()
     
   }
   return $blacklist_arr;
+}
+
+function xss_read_whitelist() {
+  $whitelist_arr = array();
+  $whitelist_file = XSS_PATH.'log/xss_whitelist.log';
+  if (is_file($whitelist_file)) {
+	$fp = fopen($whitelist_file, 'r');
+	flock($fp, LOCK_EX);
+	$count = 0;
+	while (($whitelist_val = @fgetcsv($fp, 4096, ';')) != false) {
+	  if (is_array($whitelist_val) && count($whitelist_val) == 2) {
+	if (($whitelist_val[1]+XSS_WHITELIST_TIME) > time()) {
+	  $whitelist_arr[$whitelist_val[0]] = $whitelist_val[1];
+	}
+	  }
+	  $count ++;
+	}
+	flock($fp, LOCK_UN);
+	fclose($fp);
+
+  }
+  return $whitelist_arr;
 }
 
 // here comes the action

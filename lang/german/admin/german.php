@@ -547,3 +547,5 @@ define('FEEDBACK_SENT', 'Feedback gesendet');
 define('TEXT_DISPLAY_NUMBER_OF_DSGVO_EXPORT', 'Angezeigt werden <b>%d</b> to <b>%d</b> (of <b>%d</b> DSGVOstatus)');
 define('CSRF_TOKEN_MANIPULATION', 'CSRFToken Manipulation (Aus Sicherheits-Aspekten ist es nicht mehr erlaubt im Adminbereich in verschiedenen Tabs zu arbeiten.)');
 define('CSRF_TOKEN_NOT_DEFINED', 'CSRFToken nicht definiert (Aus Sicherheits-Aspekten ist es nicht mehr erlaubt im Adminbereich in verschiedenen Tabs zu arbeiten.)');
+
+define('BOX_WHITELIST_LOGS', 'Whitelist logs');

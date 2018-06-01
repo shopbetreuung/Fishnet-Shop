@@ -298,6 +298,7 @@ CREATE TABLE admin_access (
   stock_range INT(1) NOT NULL DEFAULT 0,
   dsgvo_export INT(1) NOT NULL DEFAULT 0,
   blacklist_logs INT(1) NOT NULL DEFAULT 0,
+  whitelist_logs INT(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (customers_id)
 ) ENGINE=MyISAM;
 

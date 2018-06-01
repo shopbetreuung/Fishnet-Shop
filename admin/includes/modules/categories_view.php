@@ -925,7 +925,13 @@
                   $heading[]  = array('align' => 'center', 'text' => '<b>' . xtc_get_products_name($pInfo->products_id, $_SESSION['languages_id']) . '</b>');
                   //Multi Element Actions
                   $contents[] = array('align' => 'center', 'text' => '<div style="padding-top: 5px; font-weight: bold; width: 90%;">' . TEXT_MARKED_ELEMENTS . '</div>');
-                  $contents[] = array('align' => 'center', 'text' => xtc_button(BUTTON_DELETE, 'submit', 'name="multi_delete"').'&nbsp;'.xtc_button(BUTTON_WASTE_BIN, 'submit', 'name="waste_bin"').'&nbsp;'.xtc_button(BUTTON_MOVE, 'submit', 'name="multi_move"').'&nbsp;'.xtc_button(BUTTON_COPY, 'submit', 'name="multi_copy"'));
+
+                  if ($_GET['search'] != '' && isset($_GET['search']) && !empty($_GET['search'])) {
+                    $contents[] = array('align' => 'center', 'text' => xtc_button(BUTTON_DELETE, 'submit', 'name="multi_delete"').'&nbsp;'.xtc_button(BUTTON_WASTE_BIN, 'submit', 'name="waste_bin"'));
+                  } else {
+                    $contents[] = array('align' => 'center', 'text' => xtc_button(BUTTON_DELETE, 'submit', 'name="multi_delete"').'&nbsp;'.xtc_button(BUTTON_WASTE_BIN, 'submit', 'name="waste_bin"').'&nbsp;'.xtc_button(BUTTON_MOVE, 'submit', 'name="multi_move"').'&nbsp;'.xtc_button(BUTTON_COPY, 'submit', 'name="multi_copy"'));
+                  }
+                  
                   $contents[] = array('align' => 'center', 'text' => '<input type="submit" class="btn btn-default" name="multi_status_on" onclick="this.blur();" value="'. BUTTON_STATUS_ON . '">&nbsp;<input type="submit" class="btn btn-default" onclick="this.blur();" name="multi_status_off" value="' . BUTTON_STATUS_OFF . '">');
                   $contents[] = array('align' => 'center', 'text' => '<input type="submit" class="btn btn-default" name="global_edit" onclick="this.blur();" value="'. BUTTON_GLOBAL_EDIT . '">');
                   $contents[] = array('text'  => '</form>');

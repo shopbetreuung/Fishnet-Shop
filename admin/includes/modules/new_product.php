@@ -25,6 +25,23 @@
    --------------------------------------------------------------*/
  defined( '_VALID_XTC' ) or die( 'Direct Access to this location is not allowed.' );
 
+?>
+
+<script type="text/javascript">
+    $(document).keydown(function(e) {
+        if(e.which == 120 && e.ctrlKey) {
+           $('#keypress_save').submit();
+        }
+    });
+
+    $(document).keydown(function(e) {
+        if(e.which == 123 && e.ctrlKey) {
+           $('#duplicate_btn').click();
+        }
+    });
+</script>
+
+<?php
   $confirm_save_entry = 'onclick="return confirm(\''. SAVE_ENTRY .'\')"';
   if (defined('CONFIRM_SAVE_ENTRY')) {
     $confirm_save_entry = CONFIRM_SAVE_ENTRY == 'true' ? $confirm_save_entry : '';
@@ -116,7 +133,7 @@
       $page1 = $cancel_page . '&action='.$form_action;
   }
 
-  echo xtc_draw_form('new_product' , $page, $page1, 'post', 'enctype="multipart/form-data"');
+  echo xtc_draw_form('new_product' , $page, $page1, 'post', 'id = "keypress_save" enctype="multipart/form-data"');
   ?>
 <div class='row'>
         <div class='col-xs-12 left_mobile'>
@@ -257,6 +274,7 @@
         <input type="submit" class="btn btn-default" value="<?php echo BUTTON_SAVE; ?>" <?php echo $confirm_save_entry;?>>
         &nbsp;&nbsp;
         <input type="submit" class="btn btn-default" name="prod_update" value="<?php echo BUTTON_UPDATE; ?>" <?php echo $confirm_save_entry;?>>
+        <input type="submit" class="btn btn-default" name="duplicate_btn" id = "duplicate_btn" value="<?php echo BUTTON_DUPLICATE; ?>">
         <?php
         if (isset($_GET['pID']) && $_GET['pID'] > 0) {
           echo '&nbsp;&nbsp;<a class="btn btn-default" href="' . xtc_href_link('../product_info.php', 'products_id=' . $_GET['pID']) . '" target="_blank" rel="noopener">' . BUTTON_VIEW_PRODUCT . '</a>';

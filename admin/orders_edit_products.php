@@ -288,6 +288,8 @@ if ($_GET['action'] =='product_search') {
     $products_split = new splitPageResults($_GET['page'], MAX_DISPLAY_PRODUCTS_SEARCH_RESULTS, $products_query_raw, $products_query_numrows);
     $products_query = xtc_db_query($products_query_raw);
     while($products = xtc_db_fetch_array($products_query)) {
+      $products_to_categories_query = xtc_db_query("SELECT products_id FROM ".TABLE_PRODUCTS_TO_CATEGORIES. " WHERE products_id = ".$products['products_id']);
+        if (xtc_db_num_rows($products_to_categories_query) == 1) {
       ?>
       <tr class="dataTableRow">
         <?php
@@ -353,6 +355,7 @@ if ($_GET['action'] =='product_search') {
     </tr>
   </table>
   <?php
+    }
 }
 ?>
 

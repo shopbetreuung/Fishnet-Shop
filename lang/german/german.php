@@ -500,7 +500,7 @@ define('MORE_INFO','[Mehr]');
 define('READ_INFO','[Lesen]');
 
 // changes 3.0.4 SP2.2
-define('ENTRY_PRIVACY_ERROR','Bitte akzeptieren Sie unsere Datenschutzrichtlinien!');
+define('ENTRY_PRIVACY_ERROR','Bitte best&auml;tigen Sie, dass Sie unsere Datenschutzrichtlinien zur Kenntnis genommen haben!');
 define('TEXT_PAYMENT_FEE','Zahlungsgeb&uuml;hr');
 
 define('_MODULE_INVALID_SHIPPING_ZONE', 'Es ist leider kein Versand in dieses Land m&ouml;glich');

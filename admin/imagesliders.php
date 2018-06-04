@@ -315,13 +315,13 @@ if (($_GET['action'] != 'new') && ($_GET['action'] != 'edit')) {
 			
 	  $imageslider_title_string = '';
 	  for ($i = 0, $n = sizeof($languages); $i < $n; $i++) {
-        $imageslider_title_string .= '<table width="100%"><tr><td class="infoBoxContent" width="1%" valign="top">' . xtc_image(DIR_WS_LANGUAGES . $languages[$i]['directory'] . '/admin/images/' . $languages[$i]['image'], $languages[$i]['name']) . '</td><td>' . xtc_draw_input_field('imagesliders_title[' . $languages[$i]['id'] . ']', $i_title[$languages[$i]['id']], 'style="width:99%;"').'</td></tr></table>';
+        $imageslider_title_string .= '<table width="100%"><tr><td class="infoBoxContent" width="1%" valign="top">' . xtc_image(DIR_WS_LANGUAGES . $languages[$i]['directory'] . '/admin/images/' . $languages[$i]['image'], $languages[$i]['name']) . '</td><td>' . xtc_draw_input_field('imagesliders_title[' . $languages[$i]['id'] . ']', $i_title[$languages[$i]['id']], 'style="width:99% !important;"').'</td></tr></table>';
 	  }
 	  $contents[] = array('text' => '<table width="100%"><tr><td class="infoBoxContent" width="30%" valign="top">' . TEXT_IMAGESLIDERS_TITLE .'</td></tr></table>' .  $imageslider_title_string);
 		
 	  $imageslider_alt_string = '';
 	  for ($i = 0, $n = sizeof($languages); $i < $n; $i++) {
-        $imageslider_alt_string .= '<table width="100%"><tr><td class="infoBoxContent" width="1%" valign="top">' . xtc_image(DIR_WS_LANGUAGES . $languages[$i]['directory'] . '/admin/images/' . $languages[$i]['image'], $languages[$i]['name']) . '</td><td>' . xtc_draw_input_field('imagesliders_alt[' . $languages[$i]['id'] . ']', $i_alt[$languages[$i]['id']], 'style="width:99%;"').'</td></tr></table>';
+        $imageslider_alt_string .= '<table width="100%"><tr><td class="infoBoxContent" width="1%" valign="top">' . xtc_image(DIR_WS_LANGUAGES . $languages[$i]['directory'] . '/admin/images/' . $languages[$i]['image'], $languages[$i]['name']) . '</td><td>' . xtc_draw_input_field('imagesliders_alt[' . $languages[$i]['id'] . ']', $i_alt[$languages[$i]['id']], 'style="width:99% !important;"').'</td></tr></table>';
 	  }
 	  $contents[] = array('text' => '<table width="100%"><tr><td class="infoBoxContent" width="30%" valign="top">' . TEXT_IMAGESLIDERS_ALT .'</td></tr></table>' .  $imageslider_alt_string);	  
 		  

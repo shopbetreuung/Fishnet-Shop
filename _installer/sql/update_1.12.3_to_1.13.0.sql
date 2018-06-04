@@ -8,3 +8,12 @@ INSERT INTO configuration (configuration_id, configuration_key, configuration_va
 
 ALTER TABLE `admin_access` ADD `whitelist_logs` INT( 1 ) NOT NULL ;
 
+ALTER TABLE `content_manager` CHANGE `group_ids` `group_ids` LONGTEXT;
+ALTER TABLE `content_manager` CHANGE `content_title` `content_title` LONGTEXT;
+ALTER TABLE `content_manager` CHANGE `content_heading` `content_heading` LONGTEXT;
+ALTER TABLE `content_manager` CHANGE `content_text` `content_text` LONGTEXT;
+ALTER TABLE `content_manager` CHANGE `content_meta_title` `content_meta_title` LONGTEXT;
+ALTER TABLE `content_manager` CHANGE `content_meta_description` `content_meta_description` LONGTEXT;
+ALTER TABLE `content_manager` CHANGE `content_meta_keywords` `content_meta_keywords` LONGTEXT;
+
+

@@ -881,3 +881,6 @@ define('ADMIN_HEADER_X_FRAME_OPTIONS_DESC', 'Adminbereich mit dem Header "X-Fram
 
 define('PRIVACY_STATEMENT_ID_TITLE','Datenschutzerkl&auml;rung ID');
 define('PRIVACY_STATEMENT_ID_DESC','Content ID des Datenschutzerkl&auml;rung');
+
+define('STOCK_ATTRIBUTE_REORDER_LEVEL_TITLE','E-Mail an Admin, wenn der Attributbestand niedriger ist');
+define('STOCK_ATTRIBUTE_REORDER_LEVEL_DESC','Wenn der Bestand eines Produktattributs unter einer bestimmten Anzahl liegt, wird der Administrator benachrichtigt.');

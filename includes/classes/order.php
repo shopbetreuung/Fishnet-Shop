@@ -262,6 +262,7 @@
             $this->products[$index]['attributes'][$subindex] = array('option' => $attributes['products_options'],
                                                                      'value' => $attributes['products_options_values'],
                                                                      'prefix' => $attributes['price_prefix'],
+																	 'attributes_stock' => $attributes['attributes_stock'],
                                                                      'price' => $attributes['options_values_price']);
             //if ($attributes['products_options'] == 'Downloads') {
             if (strtoupper($attributes['products_options']) == 'DOWNLOADS') {
@@ -565,6 +566,7 @@
                                                                      'option_id' => $option,
                                                                      'value_id' => $value,
                                                                      'prefix' => $attributes['price_prefix'],
+																	 'attributes_stock' => $attributes['attributes_stock'],
                                                                      'price' => $attributes['options_values_price'],
                                                                      'price_formated' => $xtPrice->xtcFormat($attributes['options_values_price'], true)
                                                                      );

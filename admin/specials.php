@@ -97,7 +97,7 @@
       }
       // EOF - Tomcraft - 2009-11-06 - SPIFFY CAL 2.1
 
-      xtc_db_query("update " . TABLE_SPECIALS . " set specials_quantity = '" . $_POST['specials_quantity'] . "', specials_new_products_price = '" . $_POST['specials_price'] . "', specials_last_modified = now(), expires_date = '" . $expires_date . "' where specials_id = '" . $_POST['specials_id'] . "'");
+      xtc_db_query("update " . TABLE_SPECIALS . " set specials_quantity = '" . $_POST['specials_quantity'] . "', specials_new_products_price = '" . $_POST['specials_price'] . "', specials_last_modified = now(), expires_date = '" . $expires_date . "' where specials_id = '" . $_GET['sID']. "'");
       xtc_redirect(xtc_href_link(FILENAME_SPECIALS, 'page=' . $_GET['page'] . '&sID=' . $specials_id));
       break;
 
@@ -202,7 +202,7 @@ require (DIR_WS_INCLUDES.'head.php');
 </script>
 <!-- EOF - Tomcraft - 2009-11-06 - SPIFFY CAL 2.1 //-->
 <div class='col-xs-12'>
-     <?php echo xtc_draw_form('new_special', FILENAME_SPECIALS, xtc_get_all_get_params(array('action', 'info', 'sID')) . 'action=' . $form_action ,'post', ''); ?>
+     <?php echo xtc_draw_form('new_special', FILENAME_SPECIALS, xtc_get_all_get_params(array('action', 'info', 'sID')) .'sID='.$_GET['sID'].'&action=' . $form_action ,'post', ''); ?>
         <div class="col-xs-12">
           
                 <div class="main col-xs-12 col-sm-1"><?php echo TEXT_SPECIALS_PRODUCT; echo ($sInfo->products_name) ? "" :  ''; ?>&nbsp;</div>

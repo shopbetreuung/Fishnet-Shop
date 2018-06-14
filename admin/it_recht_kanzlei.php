@@ -102,7 +102,7 @@ require (DIR_WS_INCLUDES.'head.php');
                     </ul>
                     <p align="left">
                       <br />
-                      <a href="http://www.it-recht-kanzlei.de/Service/agb-online-shop.php" target="_blank" rel="noopener"><font size="3" color="#893769"><u><strong>Jetzt den Update-Service der IT-Recht Kanzlei buchen.</strong></u></font></a> 
+                      <a href="http://www.it-recht-kanzlei.de/Service/rechtstexte_fuer_onlineshops.php?partner_id=168/" target="_blank" rel="noopener"><font size="3" color="#893769"><u><strong>Jetzt den Update-Service der IT-Recht Kanzlei buchen.</strong></u></font></a> 
                     </p>
                   </td>
                 </tr>

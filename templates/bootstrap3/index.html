@@ -86,7 +86,7 @@
 			{/if}
 			
 			{if strstr ($smarty.server.PHP_SELF, 'index')}
-				{if $smarty.get.cPath==null and $smarty.get.manufacturers_id==''}
+				{if $smarty.get.manufacturers_id == ''}
 					{$box_IMAGESLIDER}
 					{if $BANNER}{$BANNER}{/if}
 				{/if}

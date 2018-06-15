@@ -18,4 +18,6 @@ ALTER TABLE `content_manager` CHANGE `content_meta_title` `content_meta_title` L
 ALTER TABLE `content_manager` CHANGE `content_meta_description` `content_meta_description` LONGTEXT;
 ALTER TABLE `content_manager` CHANGE `content_meta_keywords` `content_meta_keywords` LONGTEXT;
 
+ALTER TABLE orders ADD ibn_reminderpdfnotifydate DATE NOT NULL ;
+
 

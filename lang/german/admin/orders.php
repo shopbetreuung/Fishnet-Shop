@@ -173,4 +173,8 @@ define('TABLE_HEADING_COMMENTS_SENT', 'Kommentar versandt');
 define('TABLE_HEADING_CARRIER', 'Transporteur');
 define('TABLE_HEADING_PARCEL_LINK', 'Paketnummer');
 define('TABLE_HEADING_REMOVE_LINK', 'Link entfernen');
+
+define('BUTTON_PDFBILL_SEND_REMINDER_MAIL', 'Erinnerung senden');
+define('BUTTON_PDFBILL_SEND_REMINDER_MAIL2', 'Resend PDF-Reminder');
+define('PDFBILL_MSG_REMINDER_SENT', 'E-Mail gesendet');
 ?>

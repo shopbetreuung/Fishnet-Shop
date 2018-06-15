@@ -168,7 +168,8 @@
                           // --- bof -- ipdfbill --------
                           'ibn_billnr'    => $order['ibn_billnr'],      // ibillnr       
                           'ibn_billdate'  => $order['ibn_billdate'],    // ibillnr   
-                          'ibn_pdfnotifydate'  => $order['ibn_pdfnotifydate'],    // ibillnr   
+                          'ibn_pdfnotifydate'  => $order['ibn_pdfnotifydate'],    // ibillnr
+						  'ibn_reminderpdfnotifydate'  => $order['ibn_reminderpdfnotifydate'],
                           'ibn_fullbillnr'  => $order['ibn_fullbillnr'],    // ibillnr   
                           // --- eof -- ipdfbill -------- 
                           

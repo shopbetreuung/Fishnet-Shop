@@ -175,4 +175,8 @@ define('TABLE_HEADING_CARRIER', 'Carrier');
 define('TABLE_HEADING_PARCEL_LINK', 'Parcel link');
 define('TABLE_HEADING_REMOVE_LINK', 'delete link');
 
+define('BUTTON_PDFBILL_SEND_REMINDER_MAIL', 'Send Reminder');
+define('BUTTON_PDFBILL_SEND_REMINDER_MAIL2', 'Resend PDF-Reminder');
+define('PDFBILL_MSG_REMINDER_SENT', 'E-Mail sent');
+
 ?>

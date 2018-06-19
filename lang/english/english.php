@@ -566,5 +566,6 @@ define('SITEMAP_CONTENTPAGE', 'Content pages');
 define('SITEMAP_EXPORT', 'exported');
 
 define('TEXT_EDIT_CATEGORIES', 'Edit category');
+define('TEXT_EDIT_CONTENT_MANAGER', 'Content manager');
 
 ?>

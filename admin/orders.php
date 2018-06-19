@@ -1302,7 +1302,10 @@ require (DIR_WS_INCLUDES.'header.php');
 			
              <?php 
             // --- bof -- ipdfbill -------- 
-            $form = xtc_draw_form('pdf_bill', FILENAME_ORDERS, xtc_get_all_get_params(array('pdf')).'pdf=1');
+            $form = xtc_draw_form('pdf_bill', FILENAME_ORDERS, xtc_get_all_get_params(array('pdf')).'pdf=1#pdf_bill_container');
+            ?>
+              <div id="pdf_bill_container">
+            <?php
             $input_deliverydate = xtc_draw_input_field('pdfbill_deliverydate',$_POST['pdfbill_deliverydate'], 'size="12"');
 
             $profile_list = profile_list();
@@ -1419,6 +1422,7 @@ require (DIR_WS_INCLUDES.'header.php');
             //echo "<pre>"; print_r($_SESSION); echo "</pre>";
                                 
             ?>
+                </div>
              </div>
             </div>
 </div>

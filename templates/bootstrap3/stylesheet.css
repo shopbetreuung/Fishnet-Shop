@@ -719,3 +719,7 @@ BASIC Template for AGB Hosting Content
 .nav-stacked > li.level5 > a > h3.h6 {
 	padding-left: 15px;
 }
+
+.carousel-caption {
+	text-align: unset;
+}

@@ -50,7 +50,7 @@ require (DIR_WS_INCLUDES.'head.php');
                 <td class="dataTableHeadingContent" align="right"><?php echo TABLE_HEADING_ACTION; ?>&nbsp;</td>
               </tr>
 <?php
-  $products_query_raw = "select pd.products_id, pd.products_name, p.products_date_available from " . TABLE_PRODUCTS_DESCRIPTION . " pd, " . TABLE_PRODUCTS . " p where p.products_id = pd.products_id and p.products_date_available != '' and pd.language_id = '" . $_SESSION['languages_id'] . "' order by p.products_date_available DESC";
+  $products_query_raw = "select pd.products_id, pd.products_name, p.products_date_available from " . TABLE_PRODUCTS_DESCRIPTION . " pd, " . TABLE_PRODUCTS . " p where p.products_id = pd.products_id and p.products_date_available != '0000-00-00 00:00:00' and pd.language_id = '" . $_SESSION['languages_id'] . "' order by p.products_date_available DESC";
   $products_split = new splitPageResults($_GET['page'], '20', $products_query_raw, $products_query_numrows);
   $products_query = xtc_db_query($products_query_raw);
   while ($products = xtc_db_fetch_array($products_query)) {

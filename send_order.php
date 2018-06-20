@@ -201,10 +201,16 @@ if ($_SESSION['customer_id'] == $order_check['customers_id'] || $send_by_admin) 
 
   // EOF - Tomcraft - 2011-06-17 - Added revocation to email
   
-  $shop_privacy_statment = $main->getContentData(PRIVACY_STATEMENT_ID);
-  $privacy_statement = $shop_privacy_statment['content_text'];  
-  $smarty->assign('PRIVACY_STATEMENT_HTML', $privacy_statement);
-  $smarty->assign('PRIVACY_STATEMENT_TXT', $privacy_statement);
+  if (DISPLAY_PRIVACY == 'true') {
+    $privacy_content = $main->getContentData(PRIVACY_ID);
+    $privacy = $privacy_content['content_text'];
+    $smarty->assign('PRIVACY_INFO_TXT', $privacy);
+  }
+  
+//  $shop_privacy_statment = $main->getContentData(PRIVACY_STATEMENT_ID);
+//  $privacy_statement = $shop_privacy_statment['content_text'];  
+//  $smarty->assign('PRIVACY_STATEMENT_HTML', $privacy_statement);
+//  $smarty->assign('PRIVACY_STATEMENT_TXT', $privacy_statement);
 
   ## PayOne
   if (strpos($order->info['payment_method'], 'payone') !== false) {

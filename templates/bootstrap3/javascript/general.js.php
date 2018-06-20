@@ -70,3 +70,12 @@ if (strstr($PHP_SELF, FILENAME_PRODUCT_INFO ) && 1==2) {
 		});
 	});
 </script>
+
+<script type="text/javascript">
+	$(document).ready(function ($) {
+
+		var paragraphAlign = $('.carousel-caption').find('p').css('text-align');
+		$('.carousel-caption').find('h6').css('text-align',paragraphAlign);
+
+	});
+</script>

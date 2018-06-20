@@ -49,7 +49,9 @@ function xtc_php_mail($from_email_address, $from_email_name,
   //EOF - web28 - 2010-06-05 - Widerruf in Email
 
 //**********************************************************************************************
-require_once(DIR_FS_CATALOG.'includes/classes/PHPMailerAutoload.php'); // hpzeller - 2014-10-24 - Update PHPMailer v5.2.9
+	require_once(DIR_FS_CATALOG.'includes/classes/phpmailer/PHPMailer.php');
+	require_once(DIR_FS_CATALOG.'includes/classes/phpmailer/SMTP.php');
+	require_once(DIR_FS_CATALOG.'includes/classes/phpmailer/Exception.php');
 
   // --- bof -- language mail subject in mailtemplate -- h.koch@hen-vm68.com -- 01.2015 ------------------------ 
 
@@ -94,24 +96,35 @@ require_once(DIR_FS_CATALOG.'includes/classes/PHPMailerAutoload.php'); // hpzell
   $mail->CharSet = 'utf-8';
   $charset = 'utf-8';
 
-  if (EMAIL_TRANSPORT == 'smtp') {
-    $mail->isSMTP(); // hpzeller - 2014-10-24 - Update PHPMailer v5.2.9
-    $mail->SMTPKeepAlive = true; // set mailer to use SMTP
-    $mail->SMTPAuth = SMTP_AUTH == 'true' ? true : false; // turn on SMTP authentication true/false
-    $mail->Port = SMTP_PORT; // SMTP port
-    $mail->SMTPSecure = SMTP_SECURE == '---' ? '' : SMTP_SECURE; // hpzeller - 2014-10-24 - Update PHPMailer v5.2.9 add SMTP encryption method
-    $mail->Username = SMTP_USERNAME; // SMTP username
-    $mail->Password = SMTP_PASSWORD; // SMTP password
-    $mail->Host = SMTP_MAIN_SERVER.';'.SMTP_BACKUP_SERVER; // specify main and backup server "smtp1.example.com;smtp2.example.com"
-  }
+	if (EMAIL_TRANSPORT == 'smtp') {
+    
+	    $mail->IsSMTP();
+	    $mail->SMTPKeepAlive = true;
+	    $mail->SMTPAuth = (SMTP_AUTH == 'true') ? true : false;
+	    $mail->SMTPSecure = (defined('SMTP_SECURE') && SMTP_SECURE != 'none') ? SMTP_SECURE : '';
+	    $mail->Port = SMTP_PORT;
+	    $mail->Username = SMTP_USERNAME;
+	    $mail->Password = SMTP_PASSWORD;
+	    $mail->Host = SMTP_MAIN_SERVER.';'.SMTP_BACKUP_SERVER;
+	    $mail->SMTPAutoTLS = (defined('SMTP_AUTO_TLS') && SMTP_AUTO_TLS == 'true') ? true : false;
+	    $mail->SMTPDebug = (defined('SMTP_DEBUG')) ? (int)SMTP_DEBUG : 0;
+	    $mail->SMTPOptions = array(
+	      'ssl' => array(
+		'verify_peer' => false,
+		'verify_peer_name' => false,
+		'allow_self_signed' => true
+	      )
+	    );
+	  }
 
-  if (EMAIL_TRANSPORT == 'sendmail') { // set mailer to use SMTP
-    $mail->isSendmail(); // hpzeller - 2014-10-24 - Update PHPMailer v5.2.9
-    $mail->Sendmail = SENDMAIL_PATH;
-  }
-  if (EMAIL_TRANSPORT == 'mail') {
-    $mail->isMail(); // hpzeller - 2014-10-24 - Update PHPMailer v5.2.9
-  }
+	  if (EMAIL_TRANSPORT == 'sendmail') {
+	    $mail->isSendmail();
+	    $mail->Sendmail = SENDMAIL_PATH;
+	  }
+
+	  if (EMAIL_TRANSPORT == 'mail') {
+	    $mail->isMail();
+	  }
 
   //BOF  - web28 - 2010-08-27 -  decode html2txt
   $html_array = array('<br />', '<br/>', '<br>');

@@ -174,7 +174,13 @@
 											"link" 		=> xtc_href_link(FILENAME_BLACKLIST_LOGS, '', 'NONSSL'),
 											"access"	=> "blacklist_logs",
 											"check"		=> true);
-    
+	  
+	  $menu_items['content'][] = array("name" => BOX_WHITELIST_LOGS,
+									"is_main"	=> true,
+									"link" 		=> xtc_href_link(FILENAME_WHITELIST_LOGS, '', 'NONSSL'),
+									"access"	=> "whitelist_logs",
+									"check"		=> true);
+	  
 	$menu_items['content'][] = array(		"name" 		=> BOX_IMPORT_EXPORT,
 											"is_main"	=> true,
 											"link" 		=> false,

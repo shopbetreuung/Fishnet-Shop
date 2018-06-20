@@ -64,6 +64,7 @@
               <td class="border"><strong>{#head_artnr#}</strong></td>
               <td class="border" width="150"><div align="right"><strong>{#head_single_price#}</strong></div></td>
               <td class="border" width="150"><div align="right"><strong>{#head_price#}</strong></div></td>
+			        <td class="border" width="150"><div align="right"><strong>{#head_tax_price#}</strong></div></td>
             </tr>
           {foreach name=aussen item=order_values from=$order_data}
             <tr>
@@ -77,6 +78,7 @@
               <td class="border">{$order_values.PRODUCTS_MODEL}<em>{$order_values.PRODUCTS_ATTRIBUTES_MODEL}</em></td>
               <td width="150" class="border"><div align="right">{$order_values.PRODUCTS_SINGLE_PRICE}</div></td>
               <td width="150" class="border"><div align="right">{$order_values.PRODUCTS_PRICE}</div></td>
+			        <td width="150" class="border"><div align="right">{#tax_heading#}&nbsp;{$order_values.PRODUCTS_TAX}{#tax_percent#}{$order_values.TAX_PER_PRODUCTS}</div></td>
             </tr>
           {/foreach}
           </table>

@@ -86,7 +86,7 @@
 			{/if}
 			
 			{if strstr ($smarty.server.PHP_SELF, 'index')}
-				{if $smarty.get.cPath==null and $smarty.get.manufacturers_id==''}
+				{if $smarty.get.manufacturers_id == ''}
 					{$box_IMAGESLIDER}
 					{if $BANNER}{$BANNER}{/if}
 				{/if}
@@ -112,9 +112,9 @@
 </div>
 
 <!--Start Google Analytics-->
-{if $smarty.const.TRACKING_COUNT_ADMIN_ACTIVE=='true' and $smarty.const.TRACKING_GOOGLEANALYTICS_ACTIVE=='true' and ($smarty.session.customers_status.customers_status_id != 0 || $smarty.session.customers_status.customers_status_id == 0)}	
+{if $smarty.const.TRACKING_COUNT_ADMIN_ACTIVE=='true' and $smarty.const.TRACKING_GOOGLEANALYTICS_ACTIVE=='true' and ($smarty.session.customers_status.customers_status_id != 0 || $smarty.session.customers_status.customers_status_id == 0) and !strstr($smarty.server.PHP_SELF, 'newsletter') and !isset($smarty.post.email)}	
     {googleanalytics account=$smarty.const.TRACKING_GOOGLEANALYTICS_ID}
-{elseif $smarty.const.TRACKING_COUNT_ADMIN_ACTIVE=='false' and $smarty.const.TRACKING_GOOGLEANALYTICS_ACTIVE=='true' and $smarty.session.customers_status.customers_status_id != 0}
+{elseif $smarty.const.TRACKING_COUNT_ADMIN_ACTIVE=='false' and $smarty.const.TRACKING_GOOGLEANALYTICS_ACTIVE=='true' and $smarty.session.customers_status.customers_status_id != 0 and !strstr($smarty.server.PHP_SELF, 'newsletter') and !isset($smarty.post.email)}
 	{googleanalytics account=$smarty.const.TRACKING_GOOGLEANALYTICS_ID}
 {/if}
 <!--End Google Analytics-->

@@ -437,6 +437,34 @@ if (isset ($_SESSION['tmp_oID']) && is_numeric($_SESSION['tmp_oID'])) { // Dokum
           xtc_db_perform(TABLE_ORDERS_PRODUCTS_DOWNLOAD, $sql_data_array);
         }
       }
+		for ($j = 0, $n3 = sizeof($order->products[$i]['attributes']); $j < $n3; $j++) {
+            $attribute_stock = $order->products[$i]['attributes'][$j]['attributes_stock'] - $order->products[$i]['qty'];
+            if ($attribute_stock <= STOCK_ATTRIBUTE_REORDER_LEVEL) {
+                $smarty->assign('language', $order->info['language']);
+
+                $smarty->assign("PRODUCTS_NAME", $order->products[$i]['name'].' - '.$order->products[$i]['attributes'][$j]['option'].' : '.$order->products[$i]['attributes'][$j]['value']);
+                $smarty->assign("PRODUCTS_CURRENT_QTY", $attribute_stock);
+
+                $html_mail = $smarty->fetch('db:stock_reorder_mail.html');
+                $txt_mail = $smarty->fetch('db:stock_reorder_mail.txt');
+
+                $restock_subject = $smarty->fetch('db:stock_reorder_mail.subject');
+
+                xtc_php_mail(EMAIL_BILLING_ADDRESS,
+                             EMAIL_BILLING_NAME,
+                             EMAIL_BILLING_ADDRESS,
+                             STORE_NAME,
+                             EMAIL_BILLING_FORWARDING_STRING,
+                             EMAIL_BILLING_ADDRESS,
+                             STORE_NAME,
+                             '',
+                             '',
+                             $restock_subject,
+                             $html_mail,
+                             $txt_mail
+                );
+            }
+        }
     }
     //------insert customer choosen option eof ----
     $total_weight += ($order->products[$i]['qty'] * $order->products[$i]['weight']);

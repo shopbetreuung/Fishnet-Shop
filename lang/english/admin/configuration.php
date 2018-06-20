@@ -875,3 +875,6 @@ define('ADMIN_HEADER_X_FRAME_OPTIONS_DESC', 'Protect Adminarea with Header "X-Fr
 
 define('PRIVACY_STATEMENT_ID_TITLE','Privacy statement ID');
 define('PRIVACY_STATEMENT_ID_DESC','Content ID of privacy statement content');
+
+define('STOCK_ATTRIBUTE_REORDER_LEVEL_TITLE','E-Mail to admin if attribute stock is below');
+define('STOCK_ATTRIBUTE_REORDER_LEVEL_DESC','If stock of any product attribute is below certain number, admin will be notified.');

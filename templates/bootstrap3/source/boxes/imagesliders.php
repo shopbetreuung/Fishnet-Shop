@@ -73,8 +73,15 @@ if (!$box_smarty->is_cached(CURRENT_TEMPLATE.'/boxes/box_imagesliders.html', $ca
 			$categories_array = substr($categories_array, strrpos($categories_array, "_")+1);
 		}
 		
-		if(in_array($categories_array, $imagesliders_categories) === true) {
-			$allowed = true;
+		if (!empty($cPath)) {
+                  $category_query = xtc_db_query("SELECT categories_image FROM ".TABLE_CATEGORIES." WHERE categories_id = ".$cPath);
+                  $categoryImage = xtc_db_fetch_array($category_query);
+                }
+                
+                if (!empty($cPath) AND $categoryImage['categories_image'] != NULL) {
+                  $allowed = false;
+                } else if (in_array($categories_array, $imagesliders_categories) === true) {
+                  $allowed = true;
 		}
 		if($allowed == false) {
 			continue;

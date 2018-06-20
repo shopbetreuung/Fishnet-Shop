@@ -500,7 +500,7 @@ define('MORE_INFO','[More]');
 define('READ_INFO','[Read]');
 
 // changes 3.0.4 SP2.2
-define('ENTRY_PRIVACY_ERROR','Please accept our privacy policy!');
+define('ENTRY_PRIVACY_ERROR','Please confirm that you have taken note of our data protection guidelines!');
 define('TEXT_PAYMENT_FEE','Paymentfee');
 
 define('_MODULE_INVALID_SHIPPING_ZONE', 'Unfortunately we do not deliver to the chosen country.');
@@ -566,5 +566,6 @@ define('SITEMAP_CONTENTPAGE', 'Content pages');
 define('SITEMAP_EXPORT', 'exported');
 
 define('TEXT_EDIT_CATEGORIES', 'Edit category');
+define('TEXT_EDIT_CONTENT_MANAGER', 'Content manager');
 
 ?>

@@ -87,4 +87,5 @@ define('BUTTON_VIEW_PRODUCT', 'Artikel ansehen');
 define('BUTTON_DELETE_GUESTS', 'L&ouml;sche G&auml;ste');
 
 define('BUTTON_GLOBAL_EDIT', 'Globale Bearbeitung');
+define('BUTTON_DUPLICATE', 'Duplizieren (CTRL+F2)');
 ?>

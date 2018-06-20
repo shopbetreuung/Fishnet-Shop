@@ -882,3 +882,7 @@ define('PRIVACY_ID_DESC', 'Content ID of privacy content');
 define('DISPLAY_PRIVACY_TITLE','Send privacy content in order mail?');
 define('DISPLAY_PRIVACY_DESC','');
 // EOF - DM - 2018-04-11 - Added Privacy content to mail
+
+define('STOCK_ATTRIBUTE_REORDER_LEVEL_TITLE','E-Mail to admin if attribute stock is below');
+define('STOCK_ATTRIBUTE_REORDER_LEVEL_DESC','If stock of any product attribute is below certain number, admin will be notified.');
+

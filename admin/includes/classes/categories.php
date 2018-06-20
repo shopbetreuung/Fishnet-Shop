@@ -449,6 +449,17 @@ class categories {
   // inserts / updates a product from given data
 
   function insert_product($products_data, $dest_category_id, $link, $action = 'insert') {
+      
+    if (isset($_POST['duplicate_btn'])) {
+        $catfunc = new categories();
+        $category_id_array = explode('_', $_GET['cPath']);
+        $category_id_last = end($category_id_array);
+        $action = '&action=new_product';        
+        $duplicate_product_ids[] = $catfunc->duplicate_product($_POST['products_id'], $category_id_last);
+        $pID = is_array($duplicate_product_ids) && isset($duplicate_product_ids) ? '&pID='. end($duplicate_product_ids) : '';        
+        xtc_redirect(xtc_href_link(FILENAME_CATEGORIES, 'cPath='.$category_id_last.$pID.$action.'&'.xtc_get_all_get_params(array ('cPath', 'action', 'pID', 'cID')))); 
+    }  
+      
     $products_id = xtc_db_prepare_input($products_data['products_id']);
     $products_date_available = xtc_db_prepare_input($products_data['products_date_available']);
     $products_date_available = (date('Y-m-d') < $products_date_available) ? $products_date_available : 'null';

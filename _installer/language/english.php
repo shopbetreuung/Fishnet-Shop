@@ -308,3 +308,4 @@
   define('USED_FILES', '<br /><br />The following files will be used for the upgrade to the newest database version:<br /><br />');
   define('CURRENT_DB_VERSION', '<br />Your current database version is: ');
   define('TEXT_TITLE','Shophelfer Shopsoftware database upgrade process');
+  define('ENTRY_PASSWORD_ERROR_NOT_MATCHING', 'Your passwords do not match.');

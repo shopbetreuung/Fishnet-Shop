@@ -310,3 +310,4 @@
   define('USED_FILES', '<br /><br />Folgende Dateien werden f&uuml;r das Upgrade auf die neueste Datenbank-Version verwendet:<br /><br />');
   define('CURRENT_DB_VERSION', '<br />Ihre derzeitige Datenbank-Version ist: ');
   define('TEXT_TITLE','Shophelfer Shopsoftware Datenbankupgrade');
+  define('ENTRY_PASSWORD_ERROR_NOT_MATCHING', 'Die Passw&ouml;rter stimmen nicht &uuml;berein!');

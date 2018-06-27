@@ -263,33 +263,35 @@ if ($_GET['action'] =='product_search') {
       <td class="dataTableHeadingContent">&nbsp;</td>
     </tr>
     <?php   
-    $products_query_raw = ("SELECT
-                                   p.products_id,
-                                   p.products_model,
-                                   p.products_ean,
-                                   p.products_quantity,
-                                   p.products_image,
-                                   p.products_price,
-                                   p.products_discount_allowed,
-                                   p.products_tax_class_id,
-                                   p.products_date_available,
-                                   p.products_status,
-                                   pd.products_name                                         
-                              FROM " . TABLE_PRODUCTS . " p,
-                                   " . TABLE_PRODUCTS_DESCRIPTION . " pd
-                             WHERE p.products_id = pd.products_id
-                               AND pd.language_id = '" . $_SESSION['languages_id'] . "'
-                               AND (pd.products_name LIKE ('%" . $_GET['search'] . "%') OR 
-                                    p.products_model LIKE ('%" . $_GET['search'] . "%') OR 
-                                    p.products_ean LIKE ('%" . $_GET['search'] . "%')
-                                   )
-                          ORDER BY pd.products_name");
+        $products_query_raw = ("SELECT
+                                       p.products_id,
+                                       p.products_model,
+                                       p.products_ean,
+                                       p.products_quantity,
+                                       p.products_image,
+                                       p.products_price,
+                                       p.products_discount_allowed,
+                                       p.products_tax_class_id,
+                                       p.products_date_available,
+                                       p.products_status,
+                                       pd.products_name
+                                  FROM " . TABLE_PRODUCTS . " p,
+                                       " . TABLE_PRODUCTS_DESCRIPTION . " pd
+                                  JOIN " . TABLE_PRODUCTS_TO_CATEGORIES . " p2c 
+                                    ON pd.products_id = p2c.products_id
+                                 WHERE p.products_id = pd.products_id
+                                   AND pd.language_id = '" . $_SESSION['languages_id'] . "'
+                                   AND (pd.products_name LIKE ('%" . $_GET['search'] . "%') OR 
+                                        p.products_model LIKE ('%" . $_GET['search'] . "%') OR 
+                                        p.products_ean LIKE ('%" . $_GET['search'] . "%')
+                                       )
+                                  GROUP BY p.products_id
+                              ORDER BY pd.products_name desc
+                              ");
                                 
-    $products_split = new splitPageResults($_GET['page'], MAX_DISPLAY_PRODUCTS_SEARCH_RESULTS, $products_query_raw, $products_query_numrows);
+    $products_split = new splitPageResults($_GET['page'], MAX_DISPLAY_PRODUCTS_SEARCH_RESULTS, $products_query_raw, $products_query_numrows, 'p.products_id');
     $products_query = xtc_db_query($products_query_raw);
     while($products = xtc_db_fetch_array($products_query)) {
-      $products_to_categories_query = xtc_db_query("SELECT products_id FROM ".TABLE_PRODUCTS_TO_CATEGORIES. " WHERE products_id = ".$products['products_id']);
-        if (xtc_db_num_rows($products_to_categories_query) == 1) {
       ?>
       <tr class="dataTableRow">
         <?php
@@ -355,7 +357,6 @@ if ($_GET['action'] =='product_search') {
     </tr>
   </table>
   <?php
-    }
 }
 ?>
 

@@ -78,8 +78,8 @@ if (!$box_smarty->is_cached(CURRENT_TEMPLATE.'/boxes/box_imagesliders.html', $ca
             $categoryImage = xtc_db_fetch_array($category_query);
         }
                 
-        if (!empty($cPath) && $categoryImage['categories_image'] == '') {
-          $allowed = true;
+        if (!empty($cPath) && $categoryImage['categories_image'] != NULL) {
+          $allowed = false;
         } else if (in_array($categories_array, $imagesliders_categories) === true) {
           $allowed = true;
         }

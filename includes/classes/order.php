@@ -316,17 +316,25 @@
         $attributes_data = '';
         $attributes_model = '';
         $attributes_query = xtc_db_query($attributes_query);
-		$attributes_price = '';
+		    $attributes_price = '';
         while ($attributes_data_values = xtc_db_fetch_array($attributes_query)) {
           $attributes_data .= '<br />'.$attributes_data_values['products_options'].':'.$attributes_data_values['products_options_values'];
           $attributes_model .= '<br />'.xtc_get_attributes_model($order_data_values['products_id'], $attributes_data_values['products_options_values'],$attributes_data_values['products_options'],$order_lang_id);
-		  $attributes_price = $attributes_data_values['options_values_price'];
+		      $attributes_price = $attributes_data_values['options_values_price'];
         }
 		  
-		$products_price_query = xtc_db_query("SELECT products_price FROM ".TABLE_PRODUCTS." WHERE products_id = ".$order_data_values['products_id']);
-        $products_price = xtc_db_fetch_array($products_price_query);
+		    $products_price_query = xtc_db_query("SELECT products_price FROM ".TABLE_PRODUCTS." WHERE products_id = ".$order_data_values['products_id']);
+        $products_price_array = xtc_db_fetch_array($products_price_query);
+        $products_price = $products_price_array['products_price'];
+
+        $product_special_price_query = xtc_db_query("SELECT specials_new_products_price FROM ".TABLE_SPECIALS." WHERE products_id = ".$order_data_values['products_id']." AND status = 1 AND expires_date > NOW() ");
+
+        if (xtc_db_num_rows($product_special_price_query) > 0) {
+            $products_price_array = xtc_db_fetch_array($product_special_price_query);
+            $products_price = $products_price_array['specials_new_products_price'];
+        }
         
-        $price_no_discount = $products_price['products_price'] + $attributes_price;
+        $price_no_discount = $products_price + $attributes_price;
         $tax_per_product = $order_data_values['products_tax'] / 100 * $price_no_discount * $order_data_values['products_quantity'];
 
         $short_description = CHECKOUT_USE_PRODUCTS_SHORT_DESCRIPTION == 'true' ? xtc_get_short_description($order_data_values['products_id'],$order_lang_id) : '';
@@ -349,7 +357,7 @@
                                'PRODUCTS_SINGLE_PRICE' => $xtPrice->xtcFormat($order_data_values['final_price']/$order_data_values['products_quantity'], true),
                                'PRODUCTS_TAX' => ($order_data_values['products_tax'] > 0.00) ? number_format($order_data_values['products_tax'], TAX_DECIMAL_PLACES):0,
                                //'PRODUCTS_VPE' => $order_data_values['products_order_vpe'],
-							   'TAX_PER_PRODUCTS' => $xtPrice->xtcFormat($tax_per_product, true),
+							                 'TAX_PER_PRODUCTS' => $xtPrice->xtcFormat($tax_per_product, true),
                                'PRODUCTS_QTY' => $order_data_values['products_quantity']
                               );
       }

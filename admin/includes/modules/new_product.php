@@ -271,7 +271,7 @@
       <?php } ?>
     </div>
       <div class='col-xs-12 text-right'>
-        <input type="submit" class="btn btn-default" value="<?php echo BUTTON_SAVE; ?>" <?php echo $confirm_save_entry;?>>
+        <input type="submit" class="btn btn-default" value="<?php echo BUTTON_SAVE_F9; ?>" <?php echo $confirm_save_entry;?>>
         &nbsp;&nbsp;
         <input type="submit" class="btn btn-default" name="prod_update" value="<?php echo BUTTON_UPDATE; ?>" <?php echo $confirm_save_entry;?>>
         <input type="submit" class="btn btn-default" name="duplicate_btn" id = "duplicate_btn" value="<?php echo BUTTON_DUPLICATE; ?>">
@@ -409,7 +409,7 @@
           }
           echo xtc_draw_hidden_field('products_id', $pInfo->products_id);
           ?>
-          <input type="submit" class="btn btn-default" value="<?php echo BUTTON_SAVE; ?>" <?php echo $confirm_save_entry;?>>
+          <input type="submit" class="btn btn-default" value="<?php echo BUTTON_SAVE_F9; ?>" <?php echo $confirm_save_entry;?>>
           &nbsp;&nbsp;
           <input type="submit" class="btn btn-default" name="prod_update" value="<?php echo BUTTON_UPDATE; ?>" <?php echo $confirm_save_entry;?>>
           <?php

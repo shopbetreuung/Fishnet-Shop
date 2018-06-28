@@ -50,7 +50,11 @@
           <td class="model">{$order_values.PRODUCTS_MODEL}{$order_values.PRODUCTS_ATTRIBUTES_MODEL}</td>
           <td class="singleprice">{$order_values.PRODUCTS_SINGLE_PRICE}</td>
           <td class="totalprice">{$order_values.PRODUCTS_PRICE}</td>
-          <td class="totalprice">{#tax_heading#}&nbsp;{$order_values.PRODUCTS_TAX}{#tax_percent#}{$order_values.TAX_PER_PRODUCTS}</td>
+          <td class="totalprice">
+            {if $order_values.TAX_PER_PRODUCTS > 0.00}
+              {$order_values.PRODUCTS_TAX}{#tax_percent#}&nbsp; {$order_values.TAX_PER_PRODUCTS|number_format:2:",":"."}&nbsp;{#tax_price_value#}
+            {/if}
+          </td>
         </tr>
       {/foreach}
       <tr>

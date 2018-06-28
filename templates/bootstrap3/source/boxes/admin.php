@@ -67,9 +67,11 @@ $box_smarty->assign('tpl_path','templates/'.CURRENT_TEMPLATE.'/');
 		$box_content .= '<li><a href="' . xtc_href_link_admin(FILENAME_EDIT_PRODUCTS, 'cPath=' . $cPath . '&amp;cID=' . $current_category_id) . '&amp;action=edit_category' . '" onclick="window.open(this.href); return false;">' . TEXT_EDIT_CATEGORIES . '</a></li>';
 	}
 
-	if(basename($_SERVER[SCRIPT_NAME]) == 'shop_content.php' && isset($_GET['coID'])) {
-		$box_content .= '<li><a href="' . xtc_href_link_admin(FILENAME_CONTENT_MANAGER) . '' . '" onclick="window.open(this.href); return false;">' . TEXT_EDIT_CONTENT_MANAGER . '</a></li>';
-	}
+  if(basename($_SERVER[SCRIPT_NAME]) == 'shop_content.php' && isset($_GET['coID'])) {
+    $content_manager_query = xtc_db_query("SELECT content_id FROM ".TABLE_CONTENT_MANAGER." WHERE content_group = ".$_GET['coID']." AND languages_id = ".$_SESSION['languages_id']);
+    $content_manager_id = xtc_db_fetch_array($content_manager_query);
+    $box_content .= '<li><a href="' . xtc_href_link_admin(FILENAME_CONTENT_MANAGER) . '?action=edit&coID='.$content_manager_id['content_id']. '" onclick="window.open(this.href); return false;">' . TEXT_EDIT_CONTENT_MANAGER . '</a></li>';
+  }
 
     if ($flag==true) define('SEARCH_ENGINE_FRIENDLY_URLS',true);
     $box_smarty->assign('BOX_CONTENT', $box_content);

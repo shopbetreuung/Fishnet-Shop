@@ -193,15 +193,21 @@
 	        				products_id,
 	        				orders_products_id,
 	        				products_model,
+							products_price,
 	        				products_name,
 	        				final_price,
-	        			  	products_shipping_time,
+                  			products_tax,
+	        			    products_shipping_time,
 	        				products_quantity
-	        				FROM ".TABLE_ORDERS_PRODUCTS."
+	        			  FROM ".TABLE_ORDERS_PRODUCTS."
 	        				WHERE orders_id='".(int) $oID."'";
 	$order_data = array ();
 	$order_query = xtc_db_query($order_query);
 	while ($order_data_values = xtc_db_fetch_array($order_query)) {
+		
+		$price_without_tax = ($order_data_values['products_price'] / (($order_data_values['products_tax'] + 100) / 100));
+        $tax_per_product = ($order_data_values['products_price'] - $price_without_tax) * $order_data_values['products_quantity'];
+		
 		$attributes_query = "SELECT
 		        				products_options,
 		        				products_options_values,
@@ -215,7 +221,9 @@
 		while ($attributes_data_values = xtc_db_fetch_array($attributes_query)) {
 			$attributes_data .= "\n".$attributes_data_values['products_options'].':'.$attributes_data_values['products_options_values'];
 			$attributes_model .= "\n".xtc_get_attributes_model($order_data_values['products_id'], $attributes_data_values['products_options_values'],$attributes_data_values['products_options']);
-		}
+		}                 
+    $tax_value = ($order_data_values['products_tax'] > 0.00) ? number_format($order_data_values['products_tax'], TAX_DECIMAL_PLACES) : 0;
+
 //for($ii=0;$ii<40;$ii++)    
 		$order_data[] = array ('PRODUCTS_MODEL' => $order_data_values['products_model'], 
                            'PRODUCTS_NAME' => $order_data_values['products_name'],
@@ -224,6 +232,7 @@
                            'PRODUCTS_ATTRIBUTES_MODEL' => $attributes_model, 
                            'PRODUCTS_PRICE' => $xtPrice->xtcFormat($order_data_values['final_price'], true),
                            'PRODUCTS_SINGLE_PRICE' => $xtPrice->xtcFormat($order_data_values['final_price']/$order_data_values['products_quantity'], true), 
+                           'TAX_PER_PRODUCTS' => ((float)$tax_per_product > 0.00) ? $tax_value.'%:'.$xtPrice->xtcFormat($tax_per_product, true) : '',
                            'PRODUCTS_QTY' => $order_data_values['products_quantity']);
 
 	}

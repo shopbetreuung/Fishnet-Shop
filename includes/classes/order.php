@@ -309,6 +309,9 @@
       $order_data = array ();
       $order_query = xtc_db_query($order_query);
       while ($order_data_values = xtc_db_fetch_array($order_query)) {
+		$price_without_tax = ($order_data_values['products_price'] / (($order_data_values['products_tax'] + 100) / 100));
+        $tax_per_product = ($order_data_values['products_price'] - $price_without_tax) * $order_data_values['products_quantity'];
+		  
         $attributes_query = "SELECT *
                                FROM ".TABLE_ORDERS_PRODUCTS_ATTRIBUTES."
                               WHERE orders_products_id='".$order_data_values['orders_products_id']."'
@@ -316,18 +319,10 @@
         $attributes_data = '';
         $attributes_model = '';
         $attributes_query = xtc_db_query($attributes_query);
-		$attributes_price = '';
         while ($attributes_data_values = xtc_db_fetch_array($attributes_query)) {
           $attributes_data .= '<br />'.$attributes_data_values['products_options'].':'.$attributes_data_values['products_options_values'];
           $attributes_model .= '<br />'.xtc_get_attributes_model($order_data_values['products_id'], $attributes_data_values['products_options_values'],$attributes_data_values['products_options'],$order_lang_id);
-		  $attributes_price = $attributes_data_values['options_values_price'];
         }
-		  
-		$products_price_query = xtc_db_query("SELECT products_price FROM ".TABLE_PRODUCTS." WHERE products_id = ".$order_data_values['products_id']);
-        $products_price = xtc_db_fetch_array($products_price_query);
-        
-        $price_no_discount = $products_price['products_price'] + $attributes_price;
-        $tax_per_product = $order_data_values['products_tax'] / 100 * $price_no_discount * $order_data_values['products_quantity'];
 
         $short_description = CHECKOUT_USE_PRODUCTS_SHORT_DESCRIPTION == 'true' ? xtc_get_short_description($order_data_values['products_id'],$order_lang_id) : '';
         //using short description  if order description is not defined or empty
@@ -349,7 +344,7 @@
                                'PRODUCTS_SINGLE_PRICE' => $xtPrice->xtcFormat($order_data_values['final_price']/$order_data_values['products_quantity'], true),
                                'PRODUCTS_TAX' => ($order_data_values['products_tax'] > 0.00) ? number_format($order_data_values['products_tax'], TAX_DECIMAL_PLACES):0,
                                //'PRODUCTS_VPE' => $order_data_values['products_order_vpe'],
-							   'TAX_PER_PRODUCTS' => $xtPrice->xtcFormat($tax_per_product, true),
+							   'TAX_PER_PRODUCTS' => (float)$tax_per_product,
                                'PRODUCTS_QTY' => $order_data_values['products_quantity']
                               );
       }

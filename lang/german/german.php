@@ -139,7 +139,7 @@ define('ENTRY_TELEPHONE_NUMBER_TEXT', '*');
 define('ENTRY_FAX_NUMBER_TEXT', '');
 define('ENTRY_NEWSLETTER_TEXT', '');
 define('ENTRY_PASSWORD_ERROR', 'Ihr Passwort muss aus mindestens ' . ENTRY_PASSWORD_MIN_LENGTH . ' Zeichen bestehen.');
-define('ENTRY_PASSWORD_ERROR_NOT_MATCHING', 'Ihre Passw&ouml;rter stimmen nicht &uuml;berein.');
+define('ENTRY_PASSWORD_ERROR_NOT_MATCHING', 'Die Passw&ouml;rter stimmen nicht &uuml;berein!');
 define('ENTRY_PASSWORD_TEXT', '*');
 define('ENTRY_PASSWORD_CONFIRMATION_TEXT', '*');
 define('ENTRY_PASSWORD_CURRENT_TEXT', '*');
@@ -566,5 +566,5 @@ define('SITEMAP_EXPORT', 'exportiert');
 
 define('TEXT_EDIT_CATEGORIES', 'Kategorie editieren');
 define('ERROR_HONEYPOT','<p>Es gab ein Problem mit dem Kontaktformular</p>');
-define('TEXT_EDIT_CONTENT_MANAGER', 'Content manager');
+define('TEXT_EDIT_CONTENT_MANAGER', 'Content editieren');
 ?>

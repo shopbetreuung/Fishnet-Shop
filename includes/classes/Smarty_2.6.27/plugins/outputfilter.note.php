@@ -23,9 +23,9 @@ function smarty_outputfilter_note($tpl_output, &$smarty) {
   global $PHP_SELF;
   
   if (USE_BOOTSTRAP == "true") {
-	$cop='<div class="container footer">'.((basename($PHP_SELF)=='index.php' && $_SERVER['QUERY_STRING']=='')?'<a href="http://www.shophelfer.com" target="_blank">':'').'<span class="cop_sh_blue">shophelfer</span><span class="cop_sh_grey">.com &copy; 2014-' . date('Y') . '</span>'.((basename($PHP_SELF)=='index.php' && $_SERVER['QUERY_STRING']=='')?'</a>':'').'</div>';
+    $cop='<div class="container footer">'.((basename($PHP_SELF)=='index.php' && $_SERVER['QUERY_STRING']=='')?'<a href="https://www.shopbetreuung.com/" target="_blank">':'').'<span class="cop_sh_blue">Shopbetreuung</span><span class="cop_sh_grey">.com &copy; 2014-' . date('Y') . '</span>'.((basename($PHP_SELF)=='index.php' && $_SERVER['QUERY_STRING']=='')?'</a>':'').'</div>';
   } else {
-	$cop='<div class="footer footer_div">'.((basename($PHP_SELF)=='index.php' && $_SERVER['QUERY_STRING']=='')?'<a href="http://www.shophelfer.com" target="_blank">':'').'<span class="cop_sh_blue">shophelfer</span><span class="cop_sh_grey">.com &copy; 2014-' . date('Y') . '</span>'.((basename($PHP_SELF)=='index.php' && $_SERVER['QUERY_STRING']=='')?'</a>':'').'</div>';  
+    $cop='<div class="footer footer_div">'.((basename($PHP_SELF)=='index.php' && $_SERVER['QUERY_STRING']=='')?'<a href="https://www.shopbetreuung.com/" target="_blank">':'').'<span class="cop_sh_blue">Shopbetreuung</span><span class="cop_sh_grey">.com &copy; 2014-' . date('Y') . '</span>'.((basename($PHP_SELF)=='index.php' && $_SERVER['QUERY_STRING']=='')?'</a>':'').'</div>';  
   }
   //web28 - making output W3C-Conform: replace ampersands, rest is covered by the modified shopstat_functions.php - preg_replace by cYbercOsmOnauT: don't replace &&
   $tpl_output = preg_replace("/((?<!&))&(?!(&|amp;|#[0-9]+;|[a-z0-9]+;))/i", "&amp;", $tpl_output);

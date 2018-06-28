@@ -26,6 +26,7 @@ $help_var_posdata = kl('
   *p_single_price* = Artikel Einzelpreis                          <br />  
   *p_price* = Preis der Position (Menge x Einzelpreis)            <br />  
   *p_qty* = Menge                                                 <br />  
+  *p_single_tax* = Steuer pro Produkt                             <br />
 ');                                                              
 
 

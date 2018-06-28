@@ -120,4 +120,5 @@ define('TEXT_PRODUCTS_EAN', 'EAN:');
 define('TEXT_PRODUCTS_TAX_RATE', 'Tax:');
 define('TEXT_PRODUCTS_DATE_AVAILABLE', 'Date Available:');
 define('TEXT_IMAGE_NONEXISTENT', '---');
+define('TEXT_EDIT_OTHER', 'Edit and insert shipping costs, payment methods, currencies, languages, etc.');
 ?>

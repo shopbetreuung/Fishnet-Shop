@@ -88,5 +88,7 @@ define('BUTTON_DELETE_GUESTS', 'Delete guests');
 
 define('BUTTON_GLOBAL_EDIT', 'Global edit');
 
-define('BUTTON_DUPLICATE', 'Duplicate (CTRL+F2)');
+define('BUTTON_DUPLICATE', 'Duplicate (CTRL+F12)');
+define('BUTTON_SAVE_F9', 'Save (CTRL+F9)');
+
 ?>

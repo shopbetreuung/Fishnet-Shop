@@ -11,6 +11,11 @@
 {* EOF - GTB - 2010-09-15 - change Print Button to Form *}
 <h1>{#heading_success#}</h1>
 <p class="alert alert-success">{#text_success#}</p>
+
+{if $MODULE_PAYMENT_TEXT_DESCRIPTION != null}
+  <p>{$MODULE_PAYMENT_TEXT_DESCRIPTION}</p>
+{/if}
+
 <h2>{#title_printorder#}</h2>
 <p>{#text_printorder#}<br />
 <strong>{#text_thankyou#}</strong></p>

@@ -87,6 +87,10 @@ require_once (DIR_WS_CLASSES . 'payment.php');
 $payment_modules = new payment($payment_class);
 $smarty->assign('PAYMENT_INFO', $payment_modules->success());
 
+if ($_SESSION['payment'] == "eustandardtransfer" || $_SESSION['payment'] == "moneyorder") {
+  $smarty->assign('MODULE_PAYMENT_TEXT_DESCRIPTION', ($_SESSION['payment'] == "eustandardtransfer")? MODULE_PAYMENT_EUTRANSFER_TEXT_DESCRIPTION : MODULE_PAYMENT_MONEYORDER_TEXT_DESCRIPTION);
+}
+
 // BOF - GTB - 2011-04-12 - changes for Guest Account
 // $smarty->assign('FORM_ACTION', xtc_draw_form('order', xtc_href_link(FILENAME_CHECKOUT_SUCCESS, 'action=update', 'SSL')));
 $smarty->assign('FORM_ACTION', xtc_draw_form('order', xtc_href_link(FILENAME_CHECKOUT_SUCCESS, 'action=update', 'SSL')).xtc_draw_hidden_field('account_type', $_SESSION['account_type']));

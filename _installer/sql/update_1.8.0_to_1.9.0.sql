@@ -28,9 +28,6 @@ UPDATE email_manager SET em_subject = 'Rechnung zu Ihrer Bestellung vom {$ORDER_
 UPDATE email_manager SET em_subject = 'Please confirm your newsletter registration.' WHERE em_name = 'newsletter_mail' AND em_language = '1';
 UPDATE email_manager SET em_subject = 'Bitte bestätigen Sie Ihre Newsletteranmeldung.' WHERE em_name = 'newsletter_mail' AND em_language = '2';
 
-UPDATE email_manager SET em_subject = 'You\'ve received a new password!' WHERE em_name = 'new_password_mail' AND em_language = '1';
-UPDATE email_manager SET em_subject = 'Wir haben Ihr Passwort geändert.' WHERE em_name = 'new_password_mail' AND em_language = '2';
-
 UPDATE email_manager SET em_subject = 'Your order {$nr} from {$date}' WHERE em_name = 'order_mail' AND em_language = '1';
 UPDATE email_manager SET em_subject = 'Ihre Bestellung {$nr} vom {$date}' WHERE em_name = 'order_mail' AND em_language = '2';
 

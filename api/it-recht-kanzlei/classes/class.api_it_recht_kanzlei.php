@@ -244,7 +244,10 @@ class it_recht_kanzlei {
         } else {
           $sql_data_array = array('content_text' => $this->charset_decode_utf_8($xml->rechtstext_html.$pdf_file_text));
           xtc_db_perform(TABLE_CONTENT_MANAGER, $sql_data_array, 'update', "content_group = '".$content_group."' AND languages_id = '".$languages_id."'");
-          if (mysql_affected_rows() < 1) {
+
+          $affected_rows = (version_compare(PHP_VERSION, '7.1.20', '>=')) ? mysqli_affected_rows($link) : mysql_affected_rows();
+
+          if ($affected_rows < 1) {
             $check_content_query = xtc_db_query("SELECT content_text 
                                                    FROM ".TABLE_CONTENT_MANAGER." 
                                                   WHERE content_group = '".$content_group."' 

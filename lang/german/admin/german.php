@@ -172,7 +172,7 @@ define('BOX_GV_ADMIN_QUEUE', 'Gutscheine freigeben');
 define('BOX_GV_ADMIN_MAIL', 'Gutscheine versenden');
 define('BOX_GV_ADMIN_SENT', 'Versendete Gutscheine');
 define('BOX_HEADING_COUPON_ADMIN','Rabatt Coupons');
-define('BOX_COUPON_ADMIN','Rabattcoupons');
+define('BOX_COUPON_ADMIN','Rabattcodes');
 define('BOX_TOOLS_BLACKLIST','Kreditkarten-Blacklist');
 define('BOX_IMPORT_EXPORT','Import / Export');
 define('BOX_IMPORT','Import/Export');

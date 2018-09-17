@@ -243,12 +243,11 @@ if (is_array($payment_modules->modules)) {
   $payment_button .= $payment_modules->process_button();
 }
 $smarty->assign('MODULE_BUTTONS', $payment_button);
-if ($order->info['total'] > 0) {
+
 if ($_SESSION['shipping']['id'] != '1_1') {
-	$smarty->assign('CHECKOUT_BUTTON', xtc_image_submit('button_confirm_order.gif', IMAGE_BUTTON_CONFIRM_ORDER) . '</form>' . "\n");
+  $smarty->assign('CHECKOUT_BUTTON', xtc_image_submit('button_confirm_order.gif', IMAGE_BUTTON_CONFIRM_ORDER) . '</form>' . "\n");
 } else {
-	$smarty->assign('CHECKOUT_BUTTON', '</form>' . "\n");
-    }
+  $smarty->assign('CHECKOUT_BUTTON', '</form>' . "\n");
 }
 
 $error_stack = '';

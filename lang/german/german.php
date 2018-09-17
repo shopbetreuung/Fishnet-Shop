@@ -567,4 +567,5 @@ define('SITEMAP_EXPORT', 'exportiert');
 define('TEXT_EDIT_CATEGORIES', 'Kategorie editieren');
 define('ERROR_HONEYPOT','<p>Es gab ein Problem mit dem Kontaktformular</p>');
 define('TEXT_EDIT_CONTENT_MANAGER', 'Content editieren');
+define('ERROR_MESSAGE_PRODUCT_NEGATIVE_AMOUNT', 'Negativer Betrag. Bitte kontaktieren Sie uns f&uuml;r ein Angebot.');
 ?>

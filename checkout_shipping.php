@@ -69,6 +69,14 @@ if ($_SESSION['cart']->show_total() > 0 ) {
 }
 //EOF - Dokuman - 2009-06-06 - checkout only if minimum order value is reached
 
+foreach($_SESSION['cart']->get_products() as $value) {
+	if ($value['final_price'] < 0) {
+		$error = str_replace('\n', '<br />', ERROR_MESSAGE_PRODUCT_NEGATIVE_AMOUNT);
+		xtc_redirect(xtc_href_link(FILENAME_SHOPPING_CART, 'error_message=' . urlencode(utf8_decode($error)), 'SSL', true, false));
+		break;
+	}
+}
+
 // Stock Check
 if (STOCK_CHECK == 'true' && STOCK_ALLOW_CHECKOUT != 'true') {
 	$any_out_of_stock = false;

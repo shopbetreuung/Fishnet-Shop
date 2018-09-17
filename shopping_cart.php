@@ -284,6 +284,11 @@ if (!empty($_SERVER['HTTP_REFERER']) && strpos($_SERVER['HTTP_REFERER'], FILENAM
 if(!empty($_SESSION['continue_link'])) {
   $smarty->assign('CONTINUE_LINK',$_SESSION['continue_link']);
 }
+
+if (isset ($_GET['error_message']) && xtc_not_null($_GET['error_message'])) {
+  $smarty->assign('error', utf8_encode($_GET['error_message']));
+}
+
 $smarty->assign('BUTTON_CONTINUE_SHOPPING', xtc_image_button('button_continue_shopping.gif', IMAGE_BUTTON_CONTINUE_SHOPPING));
 //EOF - web28 - 2011-05-15 - new continue shopping link
 

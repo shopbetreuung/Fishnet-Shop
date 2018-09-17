@@ -339,7 +339,7 @@ define('TEXT_DEFAULT', 'Standard');
 define('TEXT_SET_DEFAULT', 'als Standard definieren');
 define('TEXT_FIELD_REQUIRED', '&nbsp;<span class="fieldRequired">* Erforderlich</span>');
 
-define('ERROR_NO_DEFAULT_CURRENCY_DEFINED', 'Fehler: Es wurde keine Standardw&auml;hrung definiert. Bitte definieren Sie unter Adminstration -> Sprachen/W&auml;hrungen -> W&auml;hrungen eine Standardw&auml;hrung.');
+define('ERROR_NO_DEFAULT_CURRENCY_DEFINED', 'Fehler: Es wurde keine Standardw&auml;hrung definiert. Bitte definieren Sie unter Konfiguration -> Land/Steuer -> W&auml;hrungen eine Standardw&auml;hrung.');
 
 define('TEXT_CACHE_CATEGORIES', 'Kategorien Box');
 define('TEXT_CACHE_MANUFACTURERS', 'Hersteller Box');

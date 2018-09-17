@@ -336,7 +336,7 @@ define('TEXT_DEFAULT', 'Default');
 define('TEXT_SET_DEFAULT', 'Set as default');
 define('TEXT_FIELD_REQUIRED', '&nbsp;<span class="fieldRequired">* Required</span>');
 
-define('ERROR_NO_DEFAULT_CURRENCY_DEFINED', 'Error: There is currently no default currency set. Please set one at: Administration Tool -> Localization -> Currencies');
+define('ERROR_NO_DEFAULT_CURRENCY_DEFINED', 'Error: No default currency has been defined. Please define a default currency under Configuration -> Zone/Tax -> Currencies.');
 
 define('TEXT_CACHE_CATEGORIES', 'Categories Box');
 define('TEXT_CACHE_MANUFACTURERS', 'Manufacturers Box');

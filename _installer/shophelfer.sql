@@ -318,9 +318,9 @@ CREATE TABLE admin_access (
   dsgvo_export INT(1) NOT NULL DEFAULT 0,
   blacklist_logs INT(1) NOT NULL DEFAULT 0,
   whitelist_logs INT(1) NOT NULL DEFAULT 0,
+  seo_tool_box INT(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (customers_id)
 ) ENGINE=MyISAM;
-
 
 DROP TABLE IF EXISTS banktransfer;
 CREATE TABLE banktransfer (

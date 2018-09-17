@@ -47,3 +47,5 @@ INSERT INTO configuration (configuration_key, configuration_value, configuration
 INSERT INTO configuration (configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('CLEVERREACH_API_IMPORT_SUBSCRIBERS', 'true', '17', '19', NULL, now(), NULL, 'xtc_cfg_select_option(array(\'true\', \'false\'),');
 INSERT INTO configuration (configuration_key, configuration_value, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES ('CLEVERREACH_API_IMPORT_BUYERS', 'false', '17', '20', NULL, now(), NULL, 'xtc_cfg_select_option(array(\'true\', \'false\'),');
 
+ALTER TABLE `admin_access` ADD `seo_tool_box` INT( 1 ) NOT NULL ;
+

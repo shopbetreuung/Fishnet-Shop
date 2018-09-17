@@ -387,6 +387,12 @@
 											"link" 		=> xtc_href_link(FILENAME_MODULE_EXPORT, '', 'NONSSL'),
 											"access"	=> "module_export",
 											"check"		=> true);
+
+    $menu_items['marketingseo'][] = array(	"name" 		=> BOX_SEO_TOOL,
+											"is_main"	=> true,
+											"link" 		=> xtc_href_link(FILENAME_SEO_TOOL_BOX, '', 'NONSSL'),
+											"access"	=> "seo_tool_box",
+											"check"		=> true);
 												
 	// Setup: Configuration
 	// =================================================================================================================											

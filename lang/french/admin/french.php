@@ -547,4 +547,6 @@ define('TEXT_DISPLAY_NUMBER_OF_DSGVO_EXPORT', 'Affichés sont <b>%d</b> - <b>%d</
 define('CSRF_TOKEN_MANIPULATION', 'manipulation CSRFToken (pour des raisons de sécurité, il n&apos;est plus permis de travailler dans différents onglets de la zone d&apos;administration)');
 define('CSRF_TOKEN_NOT_DEFINED', 'CSRFToken non défini (Pour des raisons de sécurité, il n&apos;est plus autorisé à travailler dans des onglets différents dans la zone d&apos;administration.)');
 define('BOX_WHITELIST_LOGS', 'Whitelist logs');
+define('BOX_SEO_TOOL','SEO Tool Box');
+define('TEXT_DISPLAY_NUMBER_OF_ZONES', 'Affichés sont <b>%d</b> - <b>%d</b> (sur <b>%d</b> SEOToolBox)');
 ?>

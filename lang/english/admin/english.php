@@ -549,3 +549,5 @@ define('CSRF_TOKEN_MANIPULATION', 'CSRFToken manipulation (Due to security aspec
 define('CSRF_TOKEN_NOT_DEFINED', 'CSRFToken not defined (Due to security aspects it is not allowed to work in the admin area in different browser tabs anymore.)');
 
 define('BOX_WHITELIST_LOGS', 'Whitelist logs');
+define('BOX_SEO_TOOL','SEO Tool Box');
+define('TEXT_DISPLAY_NUMBER_OF_SEO_TOOL_BOX', 'Displaying <b>%d</b> to <b>%d</b> (of <b>%d</b> SEOToolBox)');

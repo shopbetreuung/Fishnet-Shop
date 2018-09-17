@@ -188,6 +188,7 @@
     $smarty->assign('INPUT_NAME', xtc_draw_input_field('name', ($error ? $_POST['name'] : $customers_name), 'size="30"'));
     $smarty->assign('INPUT_EMAIL', xtc_draw_input_field('email', ($error ? $_POST['email'] : $email_address), 'size="30"'));
     $smarty->assign('HONEY_TRAP',xtc_draw_checkbox_field('contact_data','1',false,'style="display:none !important" tabindex="-1" autocomplete="off"'));
+    $smarty->assign('INPUT_HONEYPOT', xtc_draw_input_field('email2_FT7ughj521dfdf', ($error ? $_POST['email2_FT7ughj521dfdf'] : ''), 'size="30"'));
 	if (trim(INSERT_RECAPTCHA_KEY) != '' && trim(RECAPTCHA_SECRET_KEY) != '') { 
 		$smarty->assign('RECAPTCHA','<div class="g-recaptcha" data-sitekey="'. trim(INSERT_RECAPTCHA_KEY).'"></div>');
 	}

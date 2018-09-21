@@ -340,7 +340,7 @@ if ( (WARN_DOWNLOAD_DIRECTORY_NOT_READABLE == 'true') && (DOWNLOAD_ENABLED == 't
 }
 
 if (USE_BOOTSTRAP == "true") {
-	$smarty->assign('navtrail',$breadcrumb->trail('', '<li>', '</li>', '<li class="active">'));
+	$smarty->assign('navtrail',$breadcrumb->trail('', '<li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">', '</li>', '<li class="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">'));
 } else {
 	$smarty->assign('navtrail',$breadcrumb->trail(' &raquo; '));
 }

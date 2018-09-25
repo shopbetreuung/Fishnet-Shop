@@ -69,7 +69,7 @@ if (isset($_POST['psmgoogle'])) {
 } else {
   if( $res !== false ) {
     $resArray = xtc_db_fetch_array($res) ;
-    $UseGoogle = $resArray['configuration_value'] == "Y";
+    $UseGoogle = $resArray == "Y";
   } else {
     $UseGoogle = false;
   }    

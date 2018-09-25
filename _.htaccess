@@ -55,7 +55,7 @@ FileETag None
     Header set Cache-Control "max-age=604800, public"
   </FilesMatch>
   <FilesMatch "\\.(js)$">
-    Header set Cache-Control "max-age=216000, private"
+    Header set Cache-Control "max-age=2592000, private"
   </FilesMatch>
   <FilesMatch "\\.(xml|txt)$">
     Header set Cache-Control "max-age=216000, public, must-revalidate"
@@ -74,8 +74,11 @@ FileETag None
   ExpiresByType image/png "access plus 2592000 seconds"
   ExpiresByType text/html "access plus 1 seconds"
   ExpiresByType text/css "access plus 604800 seconds"
-  ExpiresByType text/javascript "access plus 216000 seconds"
-  ExpiresByType application/x-javascript "access plus 216000 seconds"
+  ExpiresByType text/javascript "access plus 2592000 seconds"
+  ExpiresByType application/x-font-ttf "access plus 1 year"
+  ExpiresByType application/x-font-opentype "access plus 1 year"
+  ExpiresByType application/x-font-woff2 "access plus 1 year"	
+  ExpiresByType application/x-javascript "access plus 2592000 seconds"
 </IfModule>
 
 ##-- Configure php_flags if necessary

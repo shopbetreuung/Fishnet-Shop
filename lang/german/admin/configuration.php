@@ -893,3 +893,14 @@ define('DISPLAY_PRIVACY_DESC','');
 define('STOCK_ATTRIBUTE_REORDER_LEVEL_TITLE','E-Mail an Admin, wenn der Attributbestand niedriger ist');
 define('STOCK_ATTRIBUTE_REORDER_LEVEL_DESC','Wenn der Bestand eines Produktattributs unter einer bestimmten Anzahl liegt, wird der Administrator benachrichtigt.');
 
+define('CLEVERREACH_API_CLIENT_ID_TITLE', 'Cleverreach Client ID');
+define('CLEVERREACH_API_CLIENT_ID_DESC', '');
+define('CLEVERREACH_API_USERNAME_TITLE', 'Cleverreach Username');
+define('CLEVERREACH_API_USERNAME_DESC', '');
+define('CLEVERREACH_API_PASSWORD_TITLE', 'Cleverreach Password');
+define('CLEVERREACH_API_PASSWORD_DESC', '');
+define('CLEVERREACH_API_IMPORT_SUBSCRIBERS_TITLE', 'Cleverreach Importiere Newsletterabonnenten');
+define('CLEVERREACH_API_IMPORT_SUBSCRIBERS_DESC', '');
+define('CLEVERREACH_API_IMPORT_BUYERS_TITLE', 'Cleverreach Importiere K&auml;ufer');
+define('CLEVERREACH_API_IMPORT_BUYERS_DESC', '');
+   

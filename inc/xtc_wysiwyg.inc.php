@@ -186,6 +186,20 @@ function xtc_wysiwyg($type, $lang, $langID = '') {
 			     oFCKeditor.ReplaceTextarea() ;
 			   ';
 	  break;
+
+  case 'indeximages_description':
+    $val ='var oFCKeditor = new FCKeditor( \'indeximages_description['.$langID.']\', \'100%\', \'300\' ) ;
+           oFCKeditor.BasePath = "'.$path.'" ;
+           oFCKeditor.Config["LinkBrowserURL"] = "'.$filemanager.$file_path.'" ;
+           oFCKeditor.Config["ImageBrowserURL"] = "'.$filemanager.$image_path.'" ;
+           oFCKeditor.Config["FlashBrowserURL"] = "'.$filemanager.$flash_path.'" ;
+           oFCKeditor.Config["MediaBrowserURL"] = "'.$filemanager.$media_path.'" ;
+           oFCKeditor.Config["AutoDetectLanguage"] = false ;
+           oFCKeditor.Config["DefaultLanguage"] = "'.$lang.'" ;
+           oFCKeditor.ReplaceTextarea() ;
+         ';
+    break;
+    
     // WYSIWYG editor shop offline
     case 'shop_offline':
       $val ='<script type="text/javascript" src="'.$js_src.'"></script>

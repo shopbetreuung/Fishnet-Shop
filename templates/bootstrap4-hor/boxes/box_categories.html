@@ -1,0 +1,15 @@
+{config_load file="$language/lang_$language.conf" section="boxes"}
+<div class="d-sm-block col-sm-12" style="margin-bottom: 1rem;">
+	<nav class="categories_nav navbar navbar-expand-sm border-bottom navbar-light">
+		<a></a>
+		<button class="navbar-toggler pull-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+	    	<span class="navbar-toggler-icon"></span>
+		</button>
+	    <!-- <h6 class="h4 card-title">{#heading_categories#}</h6> -->
+	    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+		    <ul class="navbar-nav mr-auto">
+		            {$BOX_CONTENT}
+		    </ul>
+	    </div>
+	</nav>
+</div>

@@ -479,7 +479,7 @@ define('BOX_HEADING_CONFIGURATION2','Advanced Configuration');
 
 //BOF - web28 - 2010-04-10 - ADMIN SEARCH BAR
 define('ASB_QUICK_SEARCH_CUSTOMER','Customer: ');
-define('ASB_QUICK_SEARCH_ORDER_ID','Order: ');
+define('ASB_QUICK_SEARCH_ORDER_ID','Order/Name: ');
 define('ASB_QUICK_SEARCH_ARTICLE','Product: ');
 define('ASB_QUICK_SEARCH_EMAIL', 'E-Mail Address:');
 //EOF - web28 - 2010-04-10 - ADMIN SEARCH BAR
@@ -549,3 +549,8 @@ define('CSRF_TOKEN_MANIPULATION', 'CSRFToken manipulation (Due to security aspec
 define('CSRF_TOKEN_NOT_DEFINED', 'CSRFToken not defined (Due to security aspects it is not allowed to work in the admin area in different browser tabs anymore.)');
 
 define('BOX_WHITELIST_LOGS', 'Whitelist logs');
+define('BOX_SEO_TOOL','SEO Tool Box');
+define('TEXT_DISPLAY_NUMBER_OF_SEO_TOOL_BOX', 'Displaying <b>%d</b> to <b>%d</b> (of <b>%d</b> SEOToolBox)');
+
+define('TXT_MENU_LAGERVERWALTUNG','Quick stock update');
+define('BOX_INDEXIMAGES','Start Page Images');

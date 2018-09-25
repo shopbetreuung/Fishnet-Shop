@@ -15,4 +15,9 @@ define('TEXT_LIST_PRODUCTS', 'List of selected products');
 define('TEXT_LIST_CATEGORIES', 'List of selected categories');
 define('TEXT_ERROR', '<strong>Danger!</strong> Every input must be filled.');
 define('TEXT_SUCCESS', '<strong>Success!</strong> Successfully changed.');
+
+define('TEXT_MAX_DISCOUNT', 'Change max allowed discount for selected categories: ');
+define('TEXT_MAX_DISCOUNT_WARRNING', 'Attention this change will take affect for subcategories too.');
+define('TEXT_ERROR_MAX_DISCOUNT', '<strong>Danger! </strong>Input must be filled.');
+
 ?>

@@ -54,6 +54,49 @@ require('includes/application_top.php');
                 ?>
                 <input type="submit" class="btn btn-default" name="categories_change" value="<?php echo BUTTON_SAVE; ?>" <?php echo $confirm_save_entry;?>>
                 </form>
+
+                <?php
+            
+                function getAllChilds($cid) {
+                    $all_child_categories = array($cid);
+
+                    $all_child_categories_query = xtc_db_query ("SELECT categories_id, parent_id FROM categories WHERE parent_id = '".$cid."'");
+
+                    foreach($all_child_categories_query as $row) {
+                        $all_child_categories = array_merge($all_child_categories, getAllChilds($row["categories_id"]));
+                    }
+
+                    return $all_child_categories;
+                }
+
+                if ($_GET['cPath'] != '') {
+                    if (isset($_POST['products_discount_allowed']) && !empty($_POST['products_discount_allowed'])) {
+                        foreach ($cPath_array as $cid) {
+                            
+                            $all_categories_ids_array = getAllChilds($cid);
+                            
+                            foreach ($all_categories_ids_array as $categories_id) {
+                                $get_product_ids_query = xtc_db_query("SELECT products_id FROM ".TABLE_PRODUCTS_TO_CATEGORIES." WHERE categories_id = ".$categories_id."");
+                                
+                                while ($products_id = xtc_db_fetch_array($get_product_ids_query)) {
+                                    foreach($products_id as $pid) {
+                                        xtc_db_query("UPDATE ".TABLE_PRODUCTS." SET products_discount_allowed = '".$_POST['products_discount_allowed']."', products_last_modified = NOW() WHERE products_id = ".$pid."");
+                                    }
+                                }
+                            } 
+                        }
+                        echo '<p class="alert alert-success">'.TEXT_SUCCESS.'</p>';   
+                    } elseif (isset($_POST['products_discount_allowed']) && empty($_POST['products_discount_allowed'])) {
+                        echo '<p class="alert alert-danger">'.TEXT_ERROR_MAX_DISCOUNT.'</p>';
+                    }
+                    echo xtc_draw_form("change_categories_max_discount", "globaledit.php?pPath=".$_GET['pPath'].'&cPath='.$_GET['cPath'],"","post","id=change_categories_max_discount");
+                    echo '<b>'.TEXT_MAX_DISCOUNT_WARRNING.'</b><br />';
+                    echo TEXT_MAX_DISCOUNT.xtc_draw_input_field('products_discount_allowed', '' ,'style="width: 200px !important"').'<br />';
+                } 
+            ?>
+            <input type="submit" class="btn btn-default" name="change_categories_max_discount" value="<?php echo BUTTON_SAVE; ?>" <?php echo $confirm_save_entry;?>>
+            </form>
+
                 <p class="h4"> <?php echo TEXT_LIST_CATEGORIES; ?> </p>
      <?php } ?>
             <ul class="list-group">

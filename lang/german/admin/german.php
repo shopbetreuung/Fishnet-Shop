@@ -551,3 +551,5 @@ define('CSRF_TOKEN_NOT_DEFINED', 'CSRFToken nicht definiert (Aus Sicherheits-Asp
 define('BOX_WHITELIST_LOGS', 'Whitelist logs');
 define('BOX_SEO_TOOL','SEO Tool Box');
 define('TEXT_DISPLAY_NUMBER_OF_SEO_TOOL_BOX', 'Angezeigt werden <b>%d</b> bis <b>%d</b> (von insgesamt <b>%d</b> SEOToolBox)');
+
+define('TXT_MENU_LAGERVERWALTUNG','Schnelle Lagerverwaltung');

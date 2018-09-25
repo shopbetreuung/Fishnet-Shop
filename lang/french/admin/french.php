@@ -549,4 +549,6 @@ define('CSRF_TOKEN_NOT_DEFINED', 'CSRFToken non défini (Pour des raisons de sécu
 define('BOX_WHITELIST_LOGS', 'Whitelist logs');
 define('BOX_SEO_TOOL','SEO Tool Box');
 define('TEXT_DISPLAY_NUMBER_OF_ZONES', 'Affichés sont <b>%d</b> - <b>%d</b> (sur <b>%d</b> SEOToolBox)');
+
+define('TXT_MENU_LAGERVERWALTUNG','Schnelle Lagerverwaltung');
 ?>

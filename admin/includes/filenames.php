@@ -115,4 +115,6 @@ define('FILENAME_DSGVO_EXPORT', 'dsgvo_export.php');
 define('FILENAME_BLACKLIST_LOGS', 'blacklist_logs.php');
 define('FILENAME_WHITELIST_LOGS', 'whitelist_logs.php');
 define('FILENAME_SEO_TOOL_BOX', 'seo_tool_box.php');
+
+define('FILENAME_QUICK_STOCKUPDATE', 'quick_stockupdate.php');
 ?>

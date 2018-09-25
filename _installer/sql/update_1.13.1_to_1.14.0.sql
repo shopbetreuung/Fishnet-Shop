@@ -49,3 +49,6 @@ INSERT INTO configuration (configuration_key, configuration_value, configuration
 
 ALTER TABLE `admin_access` ADD `seo_tool_box` INT( 1 ) NOT NULL ;
 
+ALTER TABLE `admin_access` ADD `quick_stockupdate` INT( 1 ) DEFAULT '0' NOT NULL;
+UPDATE `admin_access` SET `quick_stockupdate` = 1;
+

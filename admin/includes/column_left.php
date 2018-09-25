@@ -141,6 +141,12 @@
 											"is_main"	=> true,
 											"link" 		=> xtc_href_link(FILENAME_PRODUCTS_EXPECTED, '', 'NONSSL'),
 											"access"	=> "products_expected",
+											"check"		=> true);
+
+	$menu_items['products'][] = array(		"name" 		=> TXT_MENU_LAGERVERWALTUNG,
+											"is_main"	=> true,
+											"link" 		=> xtc_href_link(FILENAME_QUICK_STOCKUPDATE, '', 'NONSSL'),
+											"access"	=> "quick_stockupdate",
 											"check"		=> true);	
 											
 	$menu_items['products'][] = array(		"name" 		=> BOX_REMOVEOLDPICS,

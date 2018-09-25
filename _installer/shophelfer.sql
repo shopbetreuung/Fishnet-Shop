@@ -319,6 +319,7 @@ CREATE TABLE admin_access (
   blacklist_logs INT(1) NOT NULL DEFAULT 0,
   whitelist_logs INT(1) NOT NULL DEFAULT 0,
   seo_tool_box INT(1) NOT NULL DEFAULT 0,
+  quick_stockupdate INT(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (customers_id)
 ) ENGINE=MyISAM;
 

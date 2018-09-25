@@ -171,7 +171,7 @@ define('BOX_HEADING_GV_ADMIN', 'Vouchers/Coupons');
 define('BOX_GV_ADMIN_QUEUE', 'Gift Voucher Queue');
 define('BOX_GV_ADMIN_MAIL', 'Mail Gift Voucher');
 define('BOX_GV_ADMIN_SENT', 'Gift Vouchers sent');
-define('BOX_COUPON_ADMIN','Coupon Admin');
+define('BOX_COUPON_ADMIN','Discount Codes');
 define('BOX_TOOLS_BLACKLIST','Creditcard-Blacklist');
 define('BOX_IMPORT','Import/Export'); 
 define('BOX_PRODUCTS_VPE','Packing unit');
@@ -336,7 +336,7 @@ define('TEXT_DEFAULT', 'Default');
 define('TEXT_SET_DEFAULT', 'Set as default');
 define('TEXT_FIELD_REQUIRED', '&nbsp;<span class="fieldRequired">* Required</span>');
 
-define('ERROR_NO_DEFAULT_CURRENCY_DEFINED', 'Error: There is currently no default currency set. Please set one at: Administration Tool -> Localization -> Currencies');
+define('ERROR_NO_DEFAULT_CURRENCY_DEFINED', 'Error: No default currency has been defined. Please define a default currency under Configuration -> Zone/Tax -> Currencies.');
 
 define('TEXT_CACHE_CATEGORIES', 'Categories Box');
 define('TEXT_CACHE_MANUFACTURERS', 'Manufacturers Box');

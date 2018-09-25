@@ -37,10 +37,6 @@ if ((GZIP_COMPRESSION == 'true') && ($ext_zlib_loaded == true) && ($ini_zlib_out
   }
 }
 
-// econda tracking
-if (TRACKING_ECONDA_ACTIVE == 'true') {
-  require_once (DIR_WS_INCLUDES . 'econda/econda.php');
-}
 if (defined('XSS_SEND_LOG') && XSS_SEND_LOG === true) {
 	$xss_files_array = glob(DIR_FS_LOG.'*.mail', GLOB_BRACE);
 	if (count($xss_files_array) > 0) {

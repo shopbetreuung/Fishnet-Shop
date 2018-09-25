@@ -385,12 +385,6 @@ $main = new main();
 require (DIR_WS_CLASSES.'xtcPrice.php');
 $xtPrice = new xtcPrice($_SESSION['currency'], $_SESSION['customers_status']['customers_status_id']);
 
-// econda tracking
-if (TRACKING_ECONDA_ACTIVE=='true') {
-  require(DIR_WS_INCLUDES . 'econda/class.econda304SP2.php');
-  $econda = new econda();
-}
-
 // PayPal Express
 if (defined('PAYPAL_API_VERSION')) {
   require_once (DIR_WS_CLASSES . 'paypal_checkout.php');
@@ -471,11 +465,6 @@ $account_type_query = xtc_db_query("-- /includes/application_top.php
 
 // modification for nre graduated system
 unset ($_SESSION['actual_content']);
-
-// econda tracking
-if (TRACKING_ECONDA_ACTIVE == 'true') {
-  require(DIR_WS_INCLUDES . 'econda/emos.php');
-}
 
 // BOF - Tomcraft - 2011-06-17 - Added janolaw AGB hosting service
 if (defined('MODULE_JANOLAW_STATUS') && MODULE_JANOLAW_STATUS == 'True') {

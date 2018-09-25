@@ -217,7 +217,7 @@
   if (!$_GET['action']) {
 ?>
                   <div class="col-xs-12">
-                    <div class="col-xs-6"><?php if (CURRENCY_SERVER_PRIMARY) { echo '<a class="btn btn-default" onclick="this.blur();" href="' . xtc_href_link(FILENAME_CURRENCIES, 'page=' . $_GET['page'] . '&cID=' . $cInfo->currencies_id . '&action=update') . '">' . BUTTON_UPDATE . '</a>'; } ?></div>
+                    <div class="col-xs-6"><?php if (CURRENCY_SERVER_PRIMARY) { echo '<a class="btn btn-default" onclick="this.blur();" href="' . xtc_href_link(FILENAME_CURRENCIES, 'page=' . $_GET['page'] . '&cID=' . $cInfo->currencies_id . '&action=update') . '">' . BUTTON_UPDATE_CURRENCIES . '</a>'; } ?></div>
                     <div class="col-xs-6"><?php echo '<a class="btn btn-default pull-right" onclick="this.blur();" href="' . xtc_href_link(FILENAME_CURRENCIES, 'page=' . $_GET['page'] . '&cID=' . $cInfo->currencies_id . '&action=new') . '">' . BUTTON_NEW_CURRENCY . '</a>'; ?></div>
                   </div>
 <?php
@@ -271,7 +271,7 @@
       $contents[] = array('text' => '<br />' . TEXT_INFO_CURRENCY_DECIMAL_PLACES . '<br />' . xtc_draw_input_field('decimal_places', $cInfo->decimal_places));
       $contents[] = array('text' => '<br />' . TEXT_INFO_CURRENCY_VALUE . '<br />' . xtc_draw_input_field('value', $cInfo->value));
       if (DEFAULT_CURRENCY != $cInfo->code) $contents[] = array('text' => '<br />' . xtc_draw_checkbox_field('default') . ' ' . TEXT_INFO_SET_AS_DEFAULT);
-      $contents[] = array('align' => 'center', 'text' => '<br /><input type="submit" class="btn btn-default" onclick="this.blur();" value="' . BUTTON_UPDATE . '"/> <a class="btn btn-default" onclick="this.blur();" href="' . xtc_href_link(FILENAME_CURRENCIES, 'page=' . $_GET['page'] . '&cID=' . $cInfo->currencies_id) . '">' . BUTTON_CANCEL . '</a>');
+      $contents[] = array('align' => 'center', 'text' => '<br /><input type="submit" class="btn btn-default" onclick="this.blur();" value="' . BUTTON_UPDATE_CURRENCIES . '"/> <a class="btn btn-default" onclick="this.blur();" href="' . xtc_href_link(FILENAME_CURRENCIES, 'page=' . $_GET['page'] . '&cID=' . $cInfo->currencies_id) . '">' . BUTTON_CANCEL . '</a>');
       break;
 
     case 'delete':

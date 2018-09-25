@@ -35,20 +35,22 @@
 
       for ($i=0, $n=sizeof($this->_trail); $i<$n; $i++) {
         if (isset($this->_trail[$i]['link']) && xtc_not_null($this->_trail[$i]['link'])) {
-		  if ($i+1 < $n) {
-			$trail_string .= $prefix . '<a href="' . $this->_trail[$i]['link'] . '" class="headerNavigation">' . $this->_trail[$i]['title'] . '</a>' . $suffix;
-		  } else {
-			$trail_string .= $active . $this->_trail[$i]['title'] . $suffix;
-		  }
+          if ($i+1 < $n) {
+            $counter = $i+1;
+            $trail_string .= $prefix . '<a href="' . $this->_trail[$i]['link'] . '" class="headerNavigation" itemprop="item"><span itemprop="name">' . $this->_trail[$i]['title'] . '</span></a><meta itemprop="position" content="'.$counter.'">' . $suffix;
+          } else {
+            $counter = $i+1;
+            $trail_string .= $active .'<span itemprop="item"><span itemprop="name">'.$this->_trail[$i]['title'] .'<meta itemprop="position" content="'.$counter.'"></span>'. $suffix.'</span>'; //<meta itemprop="position" content="'.$counter.'">
+          }
         } else {
           $trail_string .= $prefix . $this->_trail[$i]['title'] . $suffix;
         }
 
         if (($i+1) < $n) $trail_string .= $separator;
-      }
+        }
 
-      return $trail_string;
-    }
+        return $trail_string;
+      }
     
         // Begin Econda-Monitor
 

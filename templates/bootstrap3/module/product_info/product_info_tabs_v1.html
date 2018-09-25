@@ -14,10 +14,13 @@
 	<div id="productinfoprice" class="col-sm-6 col-md-7">
 		<p class="productprice"><strong>{$PRODUCTS_PRICE}</strong></p>
                 
-                {* --- bof -- prices for search engines -- *}
-                <meta itemprop="price" content="{$PRODUCTS_PRICE_PLAIN}" /> 
-                <meta itemprop="priceCurrency" content="{$PRODUCTS_PRICE_CURRENCY}" />  
-                {* --- eof -- prices for search engines-- *} 
+        <span itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+    	{* --- bof -- prices for search engines -- *}
+            <meta itemprop="price" content="{$PRODUCTS_PRICE_PLAIN}" /> 
+            <meta itemprop="priceCurrency" content="{$PRODUCTS_PRICE_CURRENCY}" /> 
+        {* --- eof -- prices for search engines-- *}
+		</span>
+    	<meta itemprop="description" content="{$PRODUCTS_DESCRIPTION}" />
                 
 		<p class="taxandshippinginfo" style="white-space:nowrap">{$PRODUCTS_TAX_INFO}{if $PRODUCTS_SHIPPING_LINK}{$PRODUCTS_SHIPPING_LINK}{/if}</p>
 		{if $SHIPPING_NAME}<p class="shippingtime"><strong>{#text_shippingtime#}</strong>{if $SHIPPING_IMAGE}<img src="{$SHIPPING_IMAGE}" alt="{$SHIPPING_NAME}" />{/if} {$SHIPPING_NAME_LINK}</p>
@@ -37,7 +40,7 @@
 			</span>		
 		{/if}	
 			
-		{if $MANUFACTURER}<br /><strong>{#manufacturer#}</strong> <a href="{$MANUFACTURER_LINK}">{$MANUFACTURER}</a>{/if}
+		{if $MANUFACTURER}<br /><strong>{#manufacturer#}</strong> <a href="{$MANUFACTURER_LINK}"><span itemprop="manufacturer">{$MANUFACTURER}</span></a>{/if}
 		{if $PRODUCTS_MODEL!=''}<br /><strong>{#model#}</strong> <span itemprop="mpn">{$PRODUCTS_MODEL}</span>{/if}
 		{if $PRODUCTS_WEIGHT!='' && $PRODUCTS_WEIGHT!='0.00'}<br /><strong>{#weight#}</strong> {$PRODUCTS_WEIGHT|string_format:"%.2f"|replace:".":","} kg{/if}
 		{if $PRODUCTS_URL != ''}

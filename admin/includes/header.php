@@ -83,7 +83,7 @@ if (isset($_GET['feedbacktext']) && $_GET['feedbacksend'] == 'Send' && !empty($_
 <nav class="navbar navbar-default navbar-fixed-top">
 	<div class="container-fluid">
 		<div class="navbar-header">
-			<a class="navbar-brand" href="<?php echo xtc_href_link('start.php', '', 'NONSSL') ; ?>"><img class="img-responsive" style="height: 40px;" src="images/shophelferlogo.png" /></a>
+			<a class="navbar-brand" href="<?php echo xtc_href_link('start.php', '', 'NONSSL') ; ?>"><img class="img-responsive" style="height: 50px;" src="images/shophelferlogo.png" /></a>
                         <button class="navbar-toggle collapsed" aria-controls="navbar" aria-expanded="false" data-target="#navbar" data-toggle="collapse" type="button">
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
@@ -102,7 +102,7 @@ if (isset($_GET['feedbacktext']) && $_GET['feedbacksend'] == 'Send' && !empty($_
 			
 			<form class="navbar-form navbar-left hidden-xs hidden-sm" role="search" action="<?php echo xtc_href_link('orders.php'); ?>" method="get">
 				<div class="form-group">
-					<input name="searchOrders" type="text" value="<?php echo $search_ord;?>" class="form-control" placeholder="Bestellnummer" style="width: 200px !important;" />
+					<input name="searchOrders" type="text" value="<?php echo $search_ord;?>" class="form-control" placeholder="Bestellnummer/Name" style="width: 200px !important;" />
 					<!--<input type="hidden" name="action" value="search" />-->
 					<input name="<?php echo xtc_session_name(); ?>" type="hidden" value="<?php echo xtc_session_id(); ?>" />
 				</div>

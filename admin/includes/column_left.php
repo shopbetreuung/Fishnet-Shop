@@ -141,6 +141,12 @@
 											"is_main"	=> true,
 											"link" 		=> xtc_href_link(FILENAME_PRODUCTS_EXPECTED, '', 'NONSSL'),
 											"access"	=> "products_expected",
+											"check"		=> true);
+
+	$menu_items['products'][] = array(		"name" 		=> TXT_MENU_LAGERVERWALTUNG,
+											"is_main"	=> true,
+											"link" 		=> xtc_href_link(FILENAME_QUICK_STOCKUPDATE, '', 'NONSSL'),
+											"access"	=> "quick_stockupdate",
 											"check"		=> true);	
 											
 	$menu_items['products'][] = array(		"name" 		=> BOX_REMOVEOLDPICS,
@@ -167,6 +173,12 @@
 											"is_main"	=> true,
 											"link" 		=> xtc_href_link(FILENAME_IMAGESLIDERS, '', 'NONSSL'),
 											"access"	=> "imagesliders",
+											"check"		=> true);
+	
+	$menu_items['content'][] = array(		"name" 		=> BOX_INDEXIMAGES,
+											"is_main"	=> true,
+											"link" 		=> xtc_href_link(FILENAME_INDEXIMAGES, '', 'NONSSL'),
+											"access"	=> "index_images",
 											"check"		=> true);
 												
   $menu_items['content'][] = array(		"name" 		=> BOX_BLACKLIST_LOGS,
@@ -386,6 +398,12 @@
 											"is_main"	=> true,
 											"link" 		=> xtc_href_link(FILENAME_MODULE_EXPORT, '', 'NONSSL'),
 											"access"	=> "module_export",
+											"check"		=> true);
+
+    $menu_items['marketingseo'][] = array(	"name" 		=> BOX_SEO_TOOL,
+											"is_main"	=> true,
+											"link" 		=> xtc_href_link(FILENAME_SEO_TOOL_BOX, '', 'NONSSL'),
+											"access"	=> "seo_tool_box",
 											"check"		=> true);
 												
 	// Setup: Configuration

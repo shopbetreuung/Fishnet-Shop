@@ -723,3 +723,23 @@ BASIC Template for AGB Hosting Content
 .carousel-caption {
 	text-align: unset;
 }
+
+@media screen and (max-width: 530px) {
+    
+    div.highlightbox input, div.highlightbox textarea {
+	width: 200px !important;
+    }
+}
+
+@media screen and (max-width: 350px) {
+    
+    div.highlightbox input, div.highlightbox textarea {
+	width: 150px !important;
+    }
+}
+
+@media screen and (max-width: 300px) {    
+	div.highlightbox input, div.highlightbox textarea {
+	width: 125px !important;
+    }
+}

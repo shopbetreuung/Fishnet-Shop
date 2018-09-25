@@ -3,9 +3,9 @@
    $Id: english.php 3072 2012-06-18 15:01:13Z hhacker $
 
    modified eCommerce Shopsoftware
-   http://www.modified-shop.org
+   http://www.fishnet-shop.org
 
-   Copyright (c) 2009 - 2013 [www.modified-shop.org]
+   Copyright (c) 2009 - 2013 [www.fishnet-shop.org]
    --------------------------------------------------------------
    based on:
    (c) 2003 nextcommerce (install_step7.php,v 1.26 2003/08/17); www.nextcommerce.org
@@ -35,7 +35,7 @@
   define('TEXT_DB_ERROR_1','Please click on the <i>Back</i> graphic to review your database server settings.');
   define('TEXT_DB_ERROR_2','If you require help with your database server settings, please consult your hosting company.');
   // BOF - web28 - 2010.12.13 - NEW db-upgrade
-  define('TEXT_DB_UPGRADE','<strong>Only perform database upgrade on already installed shophelfer.com Shopsoftware</strong>!');
+  define('TEXT_DB_UPGRADE','<strong>Only perform database upgrade on already installed Fishnet Shopsoftware</strong>!');
   // BOF - web28 - 2010.12.13 - NEW db-upgrade
   // BOF - vr - 2010-01-14 - check MySQL *server* version
   define('TEXT_DB_SERVER_VERSION_ERROR','Your MySQL version is too old. The shop requires at least version: ');
@@ -66,8 +66,8 @@
   define('TEXT_CURL_NOT_SUPPORTED','CURL IS NOT SUPPORTED. Some third-pary modules require cURL. They will not work without cURL support!');
   // EOF - DokuMan - 2012-06-11 - check cURL
   define('TEXT_NO_GDLIB_FOUND',': GDLIB NOT FOUND!');
-  define('TEXT_GDLIBV2_SUPPORT','if GDlib version &lt; 2+ , please contact the support!');
-  define('TEXT_GDLIB_MISSING_GIF_SUPPORT','You do not have GIF support in GDlib. Therefo using GIF images and GIF watermarks is not possible!');
+  define('TEXT_GDLIBV2_SUPPORT','if GDlib version &lt; 2+ , please contact the support of your Hoster!');
+  define('TEXT_GDLIB_MISSING_GIF_SUPPORT','You do not have GIF support in GDlib. Therefore using GIF images and GIF watermarks is not possible!');
   define('TEXT_GDLIB_GIF_VERSION','GDlib GIF support');
   define('TEXT_CHMOD_REMARK_HEADLINE','Attention');
   define('TEXT_CHMOD_REMARK','The following files and folders require write permission ( CHMOD 0777 )');
@@ -76,24 +76,24 @@
   // EOF - DokuMan - 2010-08-16 - language dependent definitions for index.php
 
   // index.php
-  define('TITLE_SELECT_LANGUAGE','Select your language / W&auml;hlen Sie eine Sprache aus!:');
+  define('TITLE_SELECT_LANGUAGE','Select your language / W&auml;hlen Sie eine Sprache aus:');
   define('TEXT_WELCOME','Welcome');
-  define('TEXT_WELCOME_INDEX','<b>Welcome to shophelfer.com Shopsoftware</b><br /><br />The shophelfer.com Shopsoftware is an open source e-commerce solution that is constantly developed by Fishnet Services<br />Its out-of-the-box installation allows the shop owner to install, run and manage his online shop with a minimum of effort and expense.<br /><br />The shophelfer.com Shopsoftware runs on any system that provides a PHP environment (starting with PHP 5.6) and MySQL, such as Linux, Solaris, BSD, and Microsoft Windows.<br /><br />The shophelfer.com Shopsoftware is an OpenSource project - we always look forward to help. <br /> <br /> <b>Willkommen zur shophelfer.com Shopsoftware</b><br /><br />Die shophelfer.com Shopsoftware ist eine Open-Source e-commerce L&ouml;sung, die st&auml;ndig von Fishnet Services weiterentwickelt wird.<br /> Seine out-of-the-box Installation erlaubt es dem Shop-Besitzer seinen Online-Shop mit einem Minimum an Aufwand und Kosten zu installieren, zu betreiben und zu verwalten.<br /><br />Die shophelfer.com Shopsoftware ist auf jedem System lauff&auml;hig, welches eine PHP Umgebung (ab PHP 5.6) und MySQL zur Verf&uuml;gung stellt, wie zum Beispiel Linux, Solaris, BSD, und Microsoft Windows.<br /><br />Die shophelfer.com Shopsoftware ist ein OpenSource-Projekt – &uuml;ber Hilfe freuen wir uns immer.');
+  define('TEXT_WELCOME_INDEX','<b>Welcome to Fishnet Shopsoftware</b><br /><br />The Fishnet Shopsoftware is an open source e-commerce solution that is constantly developed by Fishnet Services<br />Its out-of-the-box installation allows the shop owner to install, run and manage his online shop with a minimum of effort and expense.<br /><br />The Fishnet Shopsoftware runs on any system that provides a PHP environment (starting with PHP 5.6, we recommend PHP 7.1) and MySQL, such as Linux, Solaris, BSD, and Microsoft Windows.<br /><br />The Fishnet Shopsoftware is an OpenSource project - we are always happy to receive help.<br>WITH THE INSTALLATION YOU ACKNOWLEDGE THAT THE PUBLICATION TAKES PLACE WITHOUT ANY GUARANTEE OR LIABILITY ON OUR PART. INSTALLATION AND USE ARE ENTIRELY AT YOUR OWN RISK. DO NOT INSTALL THE SOFTWARE IF YOU DO NOT AGREE.<br /> <br /> <b>Willkommen zur Fishnet Shopsoftware</b><br /><br />Die Fishnet Shopsoftware ist eine Open-Source e-commerce L&ouml;sung, die st&auml;ndig von Fishnet Services weiterentwickelt wird.<br /> Seine out-of-the-box Installation erlaubt es dem Shop-Besitzer seinen Online-Shop mit einem Minimum an Aufwand und Kosten zu installieren, zu betreiben und zu verwalten.<br /><br />Die Fishnet Shopsoftware ist auf jedem System lauff&auml;hig, welches eine PHP Umgebung (ab PHP 5.6, empfohlen PHP 7.1) und MySQL zur Verf&uuml;gung stellt, wie zum Beispiel Linux, Solaris, BSD, und Microsoft Windows.<br /><br />Die Fishnet Shopsoftware ist ein OpenSource-Projekt – &uuml;ber Hilfe freuen wir uns immer.  <br />MIT DER INSTALLATION ERKENNEN SIE AN, DAS DIE VER&Ouml;FFENTLICHUNG OHNE JEDE GEW&Auml;HRLEISTUNG ODER HAFTUNG UNSERERSEITS STATTFINDET. DIE INSTALLATION UND NUTZUNG ERFOLGT KOMPLETT AUF IHRE EIGENE VERANTWORTUNG. INSTALLIEREN SIE DIE SOFTWARE NICHT, WENN SIE NICHT DAMIT EINVERSTANDEN SIND.');
   define('TEXT_WELCOME_REQUIREMENTS_STEP', '<b>Requirements</b>');
   define('TEXT_WELCOME_DBCONNECTION_STEP', 'Database Connection');
   define('TEXT_WELCOME_PERMISSIONS_STEP', 'Permissions check');
   define('TEXT_WELCOME_STEP1','<b>Main database and webserver settings</b><br /><br />Please enter your Database and webserver settings.<br />');
-  define('TEXT_WELCOME_STEP2','<b>Install database</b><br /><br />The shophelfer.com Shopsoftware installer will automatically install the shophelfer.com Shopsoftware database.');
+  define('TEXT_WELCOME_STEP2','<b>Install database</b><br /><br />The Fishnet Shopsoftware installer will automatically install the Fishnet Shopsoftware database.');
   // BOF - web28 - 2010.02.20 - NEW STEP2-4 Handling
-  define('TEXT_WELCOME_STEP2A','<b>Database installation has been disabled</b><br /><br />The installation of the shophelfer.com Shopsoftware database in Step3 is skipped.');
+  define('TEXT_WELCOME_STEP2A','<b>Database installation has been disabled</b><br /><br />The installation of the Fishnet Shopsoftware database in Step3 is skipped.');
   // EOF - web28 - 2010.02.20 - NEW STEP2-4 Handling
   define('TEXT_WELCOME_ADMIN', 'Admin account configuration');
   define('TEXT_WELCOME_ADD_ADMIN', 'Additional admins');
   define('TEXT_WELCOME_STEP3','<b>Database import.</b><br /><br />');
-  define('TEXT_WELCOME_STEP4','<b>Configure shophelfer.com Shopsoftware main files</b><br /><br /><b>If there are old configure files from a further installation, the shophelfer.com Shopsoftware will delete them</b><br /><br />The installer will set up the configuration files with the main parameters for database and file structur.<br /><br />You can choose between different session handling systems.');
+  define('TEXT_WELCOME_STEP4','<b>Configure Fishnet Shopsoftware main files</b><br /><br /><b>If there are old configure files from a further installation, the Fishnet Shopsoftware will delete them</b><br /><br />The installer will set up the configuration files with the main parameters for database and file structur.<br /><br />You can choose between different session handling systems.');
   define('TEXT_WELCOME_STEP5','<b>Webserver Configuration</b><br /><br />');
-  define('TEXT_WELCOME_STEP6','<b>Basic shop configuration</b><br /><br />The installer will create the admin account and will perform some db actions.<br /> The given information for <b>Country</b> and <b>Post Code</b> are used for shipping and tax callculations.<br /><br />If you wish, the shophelfer.com Shopsoftware can automatically setup the zones,tax-rates and tax-classes for delivering/selling within the European Union.<br />Just set <b>setup zones for EU</b> to <b>YES</b>.');
-  define('TEXT_WELCOME_STEP7','<b>Guest and default customers setup</b><br /><br />The shophelfer.com Shopsoftware group- and pricesystem got nearly infinite possibilities of different prices.<br /><br />
+  define('TEXT_WELCOME_STEP6','<b>Basic shop configuration</b><br /><br />The installer will create the admin account and will perform some db actions.<br /> The given information for <b>Country</b> and <b>Post Code</b> are used for shipping and tax callculations.<br /><br />If you wish, the Fishnet Shopsoftware can automatically setup the zones,tax-rates and tax-classes for delivering/selling within the European Union.<br />Just set <b>setup zones for EU</b> to <b>YES</b>.');
+  define('TEXT_WELCOME_STEP7','<b>Guest and default customers setup</b><br /><br />The Fishnet Shopsoftware group- and pricesystem got nearly infinite possibilities of different prices.<br /><br />
     <b>% discount on single product</b><br />
     %max can be set for every single product, and single customers group<br />
     if %max at product = 10.00% and %max for group = 5% -> 5% discount on product<br />
@@ -108,7 +108,7 @@
     user group 3 -> a special group price on product Y<br />
     user group 4 -> netto price on product Y<br />
   ');
-  define('TEXT_WELCOME_FINISHED1','<b>The shophelfer.com Shopsoftware installation was successful!</b>');
+  define('TEXT_WELCOME_FINISHED1','<b>The Fishnet Shopsoftware installation was successful!</b>');
   define('TEXT_WELCOME_FINISHED2', 'The installer has now set up the basic functions of your shop. Log in to the shop with your admin account and go to the admin area to complete the configuration of your shop.');
   define('TEXT_CONTINUE_BUTTON','Continue');
   define('TEXT_CANCEL_BUTTON', 'Cancel');
@@ -120,15 +120,15 @@
 
   // install_step1.php
   define('TITLE_CUSTOM_SETTINGS','Custom Settings');
-  define('TEXT_IMPORT_DB','Install the shophelfer.com Shopsoftware Database');
-  define('TEXT_IMPORT_DB_LONG','Install the shophelfer.com Shopsoftware database structure which includes tables and sample data. <b>(Mandatory on initial setup!)</b>');
+  define('TEXT_IMPORT_DB','Install the Fishnet Shopsoftware Database');
+  define('TEXT_IMPORT_DB_LONG','Install the Fishnet Shopsoftware database structure which includes tables and sample data. <b>(Mandatory on initial setup!)</b>');
   define('TEXT_AUTOMATIC','Automatic Configuration');
-  define('TEXT_AUTOMATIC_LONG','The information you submit regarding the web server and database server will be automatically saved into both shophelfer.com Shopsoftware and Administration Tool configuration files.');
+  define('TEXT_AUTOMATIC_LONG','The information you submit regarding the web server and database server will be automatically saved into both Fishnet Shopsoftware and Administration Tool configuration files.');
   define('TITLE_DATABASE_SETTINGS','Database Settings');
   define('TEXT_DATABASE_SERVER','Database Server');
   define('TEXT_DATABASE_SERVER_LONG','The database server can be in the form of a hostname, such as <i>db1.myserver.com</i>, or as an IP address, such as <i>192.168.0.1</i>.');
   define('TEXT_USERNAME','Username');
-  define('TEXT_USERNAME_LONG','The username is used to connect to the database server. An example username is <i>mysql_10</i>.<br /><br />Note: If the shophelfer.com Shopsoftware Database is to be imported (selected above), the account used to connect to the database server needs to have Create and Drop permissions.');
+  define('TEXT_USERNAME_LONG','The username is used to connect to the database server. An example username is <i>mysql_10</i>.<br /><br />Note: If the Fishnet Shopsoftware Database is to be imported (selected above), the account used to connect to the database server needs to have Create and Drop permissions.');
   define('TEXT_PASSWORD','Password');
   define('TEXT_PASSWORD_LONG','The password is used together with the username, which forms the database user account.');
   define('TEXT_DATABASE','Database');
@@ -137,13 +137,13 @@
   define('TEXT_WS_ROOT','Webserver Root Directory');
   define('TEXT_WS_ROOT_LONG','The directory where your web pages are being served from, usually <i>/home/myname/public_html</i>.');
   define('TEXT_WS_XTC','Webserver Shop Directory');
-  define('TEXT_WS_XTC_LONG','The directory where your catalog pages are being served from (from the webserver root directory), usually <i>/home/myname/public_html<b>/modified-shop/</b></i>.');
+  define('TEXT_WS_XTC_LONG','The directory where your catalog pages are being served from (from the webserver root directory), usually <i>/home/myname/public_html<b>/fishnet-shop/</b></i>.');
   define('TEXT_WS_ADMIN','Webserver Administration Tool Directory');
-  define('TEXT_WS_ADMIN_LONG','The directory where your administration tool pages are being served from (from the webserver root directory), usually <i>/home/myname/public_html<b>/modified-shop/admin/</b></i>.');
+  define('TEXT_WS_ADMIN_LONG','The directory where your administration tool pages are being served from (from the webserver root directory), usually <i>/home/myname/public_html<b>/fishnet-shop/admin/</b></i>.');
   define('TEXT_WS_CATALOG','WWW Catalog Directory');
-  define('TEXT_WS_CATALOG_LONG','The virtual directory where the shophelfer.com Shopsoftware Catalog module resides, usually <i>/modified-shop/</i>.');
+  define('TEXT_WS_CATALOG_LONG','The virtual directory where the Fishnet Shopsoftware Catalog module resides, usually <i>/fishnet-shop/</i>.');
   define('TEXT_WS_ADMINTOOL','WWW Administration Tool Directory');
-  define('TEXT_WS_ADMINTOOL_LONG','The virtual directory where the shophelfer.com Shopsoftware Administration Tool resides, usually <i>/modified-shop/admin/</i>');
+  define('TEXT_WS_ADMINTOOL_LONG','The virtual directory where the Fishnet Shopsoftware Administration Tool resides, usually <i>/fishnet-shop/admin/</i>');
   //BOF WEBSERVER INFO
   define('TITLE_WEBSERVER_INFO','The default paths should be altered only in exceptional cases!');
   define('TEXT_WS_ROOT_INFO','The path is automatically determined');
@@ -182,14 +182,14 @@
   define('TEXT_SESS_LONG','The location to store PHPs sessions files.');
   define('TITLE_CHECK_FILES','Please check your file information');
   //BOF - web28 - 2010-03-02 - New SSL-PROXY info
-  define('TEXT_SSL_PROXY_LONG','<b>* Enable SSL Proxy: </b><br />When using a SSL Proxy adjust the path to <b>HTTPS server</b>!');
+  define('TEXT_SSL_PROXY_LONG','<b>* Enable SSL Proxy (not recommended): </b><br />When using a SSL Proxy adjust the path to <b>HTTPS server</b>!  We strongly recommend a real SSL certificate, which is now even available for free, for example from Lets Encrypt!');
   //BOF - GTB - 2010-08-31 - Layout correction
   define('TEXT_SSL_PROXY_EXP','<b>SSL Proxy examples of some providers: </b><br /><br /><div class="prov">Hosteurope: </div><div class="proxy">https://ssl.webpack.de/nureinbeispiel.de</div><div class="clear">&nbsp;</div><div class="prov">ALL-INKL.COM: </div><div class="proxy">https://ssl-account.com/nureinbeispiel.de</div><div class="clear">&nbsp;</div><div class="prov">1und1: </div><div class="proxy">https://ssl.kundenserver.de/nureinbeispiel.de</div><div class="clear">&nbsp;</div><div class="prov">Strato: </div><div class="proxy">https://www.ssl-id.de/nureinbeispiel.de</div><div class="clear">&nbsp;</div><div class="prov">domainFactory: </div><div class="proxy">https://sslsites.de/nureinbeispiel.de</div><div class="clear">&nbsp;</div>');
   //EOF - GTB - 2010-08-31 - Layout correction
   //EOF - web28 - 2010-03-02 - New SSL-PROXY info
 
   // install_step5.php
-  define('TEXT_WS_CONFIGURATION_SUCCESS','The <strong>shophelfer.com Shopsoftware</strong> Webserver configuration was successful');
+  define('TEXT_WS_CONFIGURATION_SUCCESS','The <strong>Fishnet Shopsoftware</strong> Webserver configuration was successful');
 
   // install_step6.php
   define('TITLE_ADMIN_CONFIG','Administrator configuration');
@@ -217,7 +217,7 @@
   define('TITLE_ZONE_CONFIG','Zone configuration');
   define('TEXT_ZONE','Set up zones for EU?');
   define('TEXT_BLZ','Set up German bank numbers?');
-  define('TITLE_ZONE_CONFIG_NOTE','*Note: The shophelfer.com Shopsoftware can automatically setup the right Zone-Setup if your store is located within the EU.');
+  define('TITLE_ZONE_CONFIG_NOTE','*Note: The Fishnet Shopsoftware can automatically setup the right Zone-Setup if your store is located within the EU.');
   define('TITLE_SHOP_CONFIG_NOTE','*Note: Information for basic Shop configuration');
   define('TITLE_ADMIN_CONFIG_NOTE','*Note: Information for Admin/Superuser');
   define('TEXT_ZONE_NO','No');
@@ -246,9 +246,9 @@
 
   // install_step7
   define('TITLE_GUEST_CONFIG','Guest configuration');
-  define('TITLE_GUEST_CONFIG_NOTE','*Note; Settings for standard user (non-regristrated customer)');
+  define('TITLE_GUEST_CONFIG_NOTE','*Note; Settings for standard user (non-registered customer)');
   define('TITLE_CUSTOMERS_CONFIG','Default customers configuration');
-  define('TITLE_CUSTOMERS_CONFIG_NOTE','*Note; Settings for standard user (regristrated customer)');
+  define('TITLE_CUSTOMERS_CONFIG_NOTE','*Note; Settings for standard user (registered customer)');
   define('TEXT_STATUS_DISCOUNT','Product discount');
   define('TEXT_STATUS_DISCOUNT_LONG','discount on products <i>(in percent, like 10.00 , 20.00)</i>');
   define('TEXT_STATUS_OT_DISCOUNT_FLAG','Discount on order total');
@@ -279,9 +279,9 @@
   define('SELECT_TAX_ERROR2','Show Tax -Default');
 
   // install_finished.php
-  define('TEXT_SHOP_CONFIG_SUCCESS','The <strong>shophelfer.com Shopsoftware</strong> Shop configuration was successful.');
-  define('TEXT_TEAM','Thank you for chosing the shophelfer.com Shopsoftware. Please visit the <a href="http://www.shophelfer.com">shophelfer.com Shopsoftware Community</a>.');
-  define('TEXT_VISIT_SHOP', 'Visit your new Shophelfer shop');
+  define('TEXT_SHOP_CONFIG_SUCCESS','The <strong>Fishnet Shopsoftware</strong> Shop configuration was successful.');
+  define('TEXT_TEAM','Thank you for choosing the Fishnet Shopsoftware. Please visit our <a href="https://wiki.fishnet-services.com/index.php?title=Die_ersten_Schritte">WIKI</a>.');
+  define('TEXT_VISIT_SHOP', 'Visit your new Fishnet shop');
 
   // BOC flth new permission change system
   define ('FTP_CHANGE_PERM_EXPLAIN', 'To set the file and directory permissions, you can either use your FTP program or enter your FTP information here to have set the required access permissions automatically.');
@@ -307,5 +307,5 @@
   define('UPGRADE_NOT_POSSIBLE', '<font style="color: red;">No automatic update possible for your shopversion!</font>');
   define('USED_FILES', '<br /><br />The following files will be used for the upgrade to the newest database version:<br /><br />');
   define('CURRENT_DB_VERSION', '<br />Your current database version is: ');
-  define('TEXT_TITLE','Shophelfer Shopsoftware database upgrade process');
+  define('TEXT_TITLE','Fishnet Shopsoftware database upgrade process');
   define('ENTRY_PASSWORD_ERROR_NOT_MATCHING', 'Your passwords do not match.');

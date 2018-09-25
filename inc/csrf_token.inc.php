@@ -40,6 +40,7 @@ if (defined('RUN_MODE_ADMIN')) {
     'products_tags', 
     'validproducts', 
     'validcategories',
+    'quick_stockupdate',
   );
   if (isset($user_exclusions) && is_array($user_exclusions)) {
     $exclusions = array_merge($exclusions, $user_exclusions);

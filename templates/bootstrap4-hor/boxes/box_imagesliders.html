@@ -1,0 +1,34 @@
+{if is_array($BOX_IMAGESLIDER_ARRAY)}
+	<div id="carousel-shophelfer" class="carousel slide" data-ride="carousel">
+		<!-- Positionsanzeiger -->
+		<ol class="carousel-indicators">
+			{foreach from=$BOX_IMAGESLIDER_ARRAY item=imageslider_indicators_item key=imageslider_indicators}
+			<li data-target="#carousel-shophelfer" data-slide-to="{$imageslider_indicators}" {if $imageslider_indicators == 0}class="active"{/if}></li>
+			{/foreach}
+		</ol>
+
+		<!-- Verpackung für die Elemente -->
+		<div class="carousel-inner">
+			{foreach from=$BOX_IMAGESLIDER_ARRAY item=imageslider_inner key=imageslider_inner_key}
+			<div class="carousel-item {if $imageslider_inner_key == 0}active{/if}">
+				{if $imageslider_inner.imagesliders_image_url_link}<a href="{$imageslider_inner.imagesliders_image_url_link}" {$imageslider_inner.imagesliders_image_url_target}>{/if}
+				<img class="img-fluid" src="{$imageslider_inner.imagesliders_image_url}" alt="{$imageslider_inner.imagesliders_alt}" title="{$imageslider_inner.imagesliders_title}">
+				<div class="carousel-caption">
+					{if $imageslider_inner.imagesliders_description}{$imageslider_inner.imagesliders_description}{/if}
+				</div>
+				{if $imageslider_inner.imagesliders_image_url_link}</a>{/if}
+			</div>
+			{/foreach}
+		</div>
+
+		<!-- Schalter -->
+	        <a class="carousel-control-prev" href="#carousel-shophelfer" role="button" data-slide="prev">
+	            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+	            <span class="sr-only">Previous</span>
+		</a>
+		<a class="carousel-control-next" href="#carousel-shophelfer" role="button" data-slide="next">
+	            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+	            <span class="sr-only">Next</span>
+		</a>
+	</div>
+{/if}

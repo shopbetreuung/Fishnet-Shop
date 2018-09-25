@@ -91,4 +91,6 @@ define('BUTTON_GLOBAL_EDIT', 'Global edit');
 define('BUTTON_DUPLICATE', 'Duplicate (CTRL+F12)');
 define('BUTTON_SAVE_F9', 'Save (CTRL+F9)');
 
+define('BUTTON_UPDATE_CURRENCIES', 'Update currency exchange rates');
+
 ?>

@@ -105,6 +105,7 @@ define('FILENAME_HAENDLERBUND', 'haendlerbund.php'); //Tomcraft - 2012-12-08 - A
 define('FILENAME_SAFETERMS','safeterms.php'); // Tomcraft - 2013-06-21 - Safeterms AGB interface
 define('FILENAME_IT_RECHT_KANZLEI','it_recht_kanzlei.php');
 define('FILENAME_IMAGESLIDERS', 'imagesliders.php');  // Imageslider (c)2008 by Hetfield - www.MerZ-IT-SerVice.de
+define('FILENAME_INDEXIMAGES', 'index_images.php');
 define('FILENAME_ERROR_DISPLAY', 'error_display.php');
 define('FILENAME_INVENTORY', 'inventory.php');
 define('FILENAME_INVOICED_ORDERS', 'invoiced_orders.php');
@@ -114,4 +115,7 @@ define('FILENAME_STOCK_RANGE', 'stock_range.php');
 define('FILENAME_DSGVO_EXPORT', 'dsgvo_export.php');
 define('FILENAME_BLACKLIST_LOGS', 'blacklist_logs.php');
 define('FILENAME_WHITELIST_LOGS', 'whitelist_logs.php');
+define('FILENAME_SEO_TOOL_BOX', 'seo_tool_box.php');
+
+define('FILENAME_QUICK_STOCKUPDATE', 'quick_stockupdate.php');
 ?>

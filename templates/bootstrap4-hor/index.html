@@ -1,0 +1,115 @@
+{config_load file="$language/lang_$language.conf" section="index"}
+
+{$box_ADMIN}
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-6">
+			<a href="{$index}"><img src="{$tpl_path}img/logo.png" class="img-fluid" alt="{$store_name}" title="{$store_name}" /></a>
+		</div>
+		<div class="col-md-6">
+			<div class="row">
+				<div class="col-12">
+				{$box_LANGUAGES}
+				<ul class="list-inline float-right">
+					{if $smarty.session.customers_status.customers_status_id == '1'}
+					<li class="list-inline-item"><a href="{php}echo xtc_href_link(FILENAME_CREATE_ACCOUNT, '', 'SSL');{/php}">{#new_customer#}</a></li>
+					{else}
+						{if $account}
+						<li class="list-inline-item"><a href="{$account}">{#link_account#}</a></li>
+						{/if}
+					{/if}
+					{if $smarty.session.customer_id}
+					<li class="list-inline-item"><a href="{$logoff}">{#link_logoff#}</a></li>
+					{else}
+					<li class="list-inline-item"><a href="{$login}">{#link_login#}</a></li>
+					{/if}			
+				</ul>
+				</div>		
+			</div>
+			<div class="row"><div class="col-12">{$box_SEARCH}</div></div>
+			<div class="row">
+				<div class="col-12">
+					<ul class="list-inline float-right">
+						<li class="list-inline-item"><a href="{$checkout}">{#link_checkout#}</a></li>
+						<li class="list-inline-item">&nbsp;</li>
+						{$box_CART}
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="container">
+	<div class="row">
+		<div class="d-none d-sm-block col-sm-12">
+			<ol class="breadcrumb" itemscope itemtype="http://schema.org/BreadcrumbList">
+				{$navtrail}
+			</ol>
+		</div>
+	</div>
+</div>
+
+<div class="container">
+	<div class="row">
+		{$box_CATEGORIES}
+	</div>
+</div>
+
+<div class="container">
+
+	<div class="row row-offcanvas row-offcanvas-left">
+
+		{if !strstr($smarty.server.PHP_SELF, 'shopping_cart') && !strstr($smarty.server.PHP_SELF, 'checkout')}  
+
+		<div class="col-12 col-md-12 col-lg-12">
+		{else}
+		<div class="col-12">
+		{/if}
+			
+			{if strstr ($smarty.server.PHP_SELF, 'index')}
+				{if $smarty.get.manufacturers_id == ''}
+					{$box_IMAGESLIDER}
+					{if $BANNER}{$BANNER}{/if}
+				{/if}
+
+				{if $smarty.get.cPath==null and $smarty.get.manufacturers_id==''}
+                	{$box_INDEXIMAGES}
+                {/if}
+			{/if}
+			{$main_content}	
+		</div>
+		
+	</div>
+
+</div>
+
+<div class="container">
+	<div class="row row-offcanvas row-offcanvas-left" style="margin-top: 30px;">
+		<div class="col-md-3">{$box_CONTENT}</div>
+		<div class="col-md-3">{$box_INFORMATION}</div>
+		<div class="col-md-3">{$box_CONTENT_TEMPLATEBOX1}</div>
+		<div class="col-md-3">{$box_NEWSLETTER}</div>
+	</div>
+</div>
+	
+<div class="container footer">
+	{$smarty.const.TITLE} &copy; {$smarty.now|date_format:"%Y"} | Template &copy; 2014-{$smarty.now|date_format:"%Y"} by fishnet-shop.com
+</div>
+
+<!--Start Google Analytics-->
+{if $smarty.const.TRACKING_COUNT_ADMIN_ACTIVE=='true' and $smarty.const.TRACKING_GOOGLEANALYTICS_ACTIVE=='true' and ($smarty.session.customers_status.customers_status_id != 0 || $smarty.session.customers_status.customers_status_id == 0) and !strstr($smarty.server.PHP_SELF, 'newsletter') and !isset($smarty.post.email)}	
+    {googleanalytics account=$smarty.const.TRACKING_GOOGLEANALYTICS_ID}
+{elseif $smarty.const.TRACKING_COUNT_ADMIN_ACTIVE=='false' and $smarty.const.TRACKING_GOOGLEANALYTICS_ACTIVE=='true' and $smarty.session.customers_status.customers_status_id != 0 and !strstr($smarty.server.PHP_SELF, 'newsletter') and !isset($smarty.post.email)}
+	{googleanalytics account=$smarty.const.TRACKING_GOOGLEANALYTICS_ID}
+{/if}
+<!--End Google Analytics-->
+	
+<!--Start Piwik-->
+{if $smarty.const.TRACKING_COUNT_ADMIN_ACTIVE=='true' and $smarty.const.TRACKING_PIWIK_ACTIVE=='true' and ($smarty.session.customers_status.customers_status_id != 0 || $smarty.session.customers_status.customers_status_id == 0)}
+	{piwik url=$smarty.const.TRACKING_PIWIK_LOCAL_PATH id=$smarty.const.TRACKING_PIWIK_ID goal=$smarty.const.TRACKING_PIWIK_GOAL}
+{elseif $smarty.const.TRACKING_COUNT_ADMIN_ACTIVE=='false' and $smarty.const.TRACKING_PIWIK_ACTIVE=='true' and $smarty.session.customers_status.customers_status_id != 0}
+	{piwik url=$smarty.const.TRACKING_PIWIK_LOCAL_PATH id=$smarty.const.TRACKING_PIWIK_ID goal=$smarty.const.TRACKING_PIWIK_GOAL}
+{/if}
+<!--End Piwik-->

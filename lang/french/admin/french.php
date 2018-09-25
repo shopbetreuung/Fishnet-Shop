@@ -551,4 +551,5 @@ define('BOX_SEO_TOOL','SEO Tool Box');
 define('TEXT_DISPLAY_NUMBER_OF_ZONES', 'Affichés sont <b>%d</b> - <b>%d</b> (sur <b>%d</b> SEOToolBox)');
 
 define('TXT_MENU_LAGERVERWALTUNG','Schnelle Lagerverwaltung');
+define('BOX_INDEXIMAGES','Startseitenbilder');
 ?>

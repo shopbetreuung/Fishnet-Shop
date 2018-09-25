@@ -1,0 +1,14 @@
+{config_load file="$language/lang_$language.conf" section="boxes"}
+<nav class="navbar navbar-dark bg-dark fixed-top navbar-expand-md py-0">
+	<div class="container">
+		<span class="navbar-brand navbar-brand-admin">{#heading_admin#}</span>
+		<button type="button" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div id="navbar" class="collapse navbar-collapse">
+			<ul class="nav navbar-nav">
+				{$BOX_CONTENT}
+			</ul>
+		</div>
+	</div>
+</nav>

@@ -571,4 +571,6 @@ define('ERROR_HONEYPOT','<p>Il y a eu un problème avec le formulaire de contact
 
 define('ERROR_MESSAGE_PRODUCT_NEGATIVE_AMOUNT', 'Montant négatif. Veuillez nous contacter pour un devis.');
 
+define('TEXT_TO_CATEGORY', 'Zur Kategorie');
+
 ?>

@@ -132,4 +132,8 @@
   define('TABLE_CARRIERS', 'carriers');
   define('TABLE_ORDERS_TRACKING', 'orders_tracking');
 
+  define('TABLE_INDEXIMAGES', 'indeximages');
+  define('TABLE_IMAGESLIDERS_INFO', 'imagesliders_info'); 
+  define('TABLE_INDEXIMAGES_INFO', 'indeximages_info');
+
 ?>

@@ -1,0 +1,39 @@
+{config_load file="$language/lang_$language.conf" section="cross_selling"} 
+<h6 class="h5">{#heading_text#}</h6>
+
+<div class="row">
+{foreach name=aussen item=module_data from=$module_content}
+	{foreach item=products_data from=$module_data.PRODUCTS}
+	<div class="col-md-6 col-lg-4">
+		<div class="thumbnail" data-col="{$smarty.foreach.aussen.iteration}">
+			<div class="equalize products_image_block">
+				{if $products_data.PRODUCTS_IMAGE!=''}<a href="{$products_data.PRODUCTS_LINK}"><img src="{$products_data.PRODUCTS_IMAGE}" alt="{$products_data.PRODUCTS_IMAGE_ALT}" title="{$products_data.PRODUCTS_IMAGE_TITLE}" class="img-fluid" /></a>{/if}
+			</div>
+			<div class="caption" data-col="{$smarty.foreach.aussen.iteration}">
+				<div class="equalize products_name_block">
+					<h4 class="h2"><a href="{$products_data.PRODUCTS_LINK}">{$products_data.PRODUCTS_NAME}</a></h4>
+				</div>
+				<div class="equalize products_short_description_block">{$products_data.PRODUCTS_SHORT_DESCRIPTION}</div>
+				<div class="equalize products_info_block">
+				{if $products_data.PRODUCTS_VPE}<p class="vpe">{$module_data.PRODUCTS_VPE}</p>{/if}
+				{if $products_data.PRODUCTS_SHIPPING_NAME}<p class="shippingtime">{#text_shippingtime#}{if $products_data.PRODUCTS_SHIPPING_IMAGE}<img src="{$products_data.PRODUCTS_SHIPPING_IMAGE}" alt="{$products_data.PRODUCTS_SHIPPING_NAME}" />{/if}
+					{$products_data.PRODUCTS_SHIPPING_NAME_LINK}</p>
+				{/if}
+				</div>
+				<div class="equalize products_price_block">
+					<p>
+						<br /><span class="lead">{$products_data.PRODUCTS_PRICE}</span>
+						<br /><small>({$products_data.PRODUCTS_TAX_INFO}{$products.PRODUCTS_SHIPPING_LINK})</small>
+					</p>				
+				</div>
+			</div>
+			<div class="d-block d-xl-none col-xl-4" style="padding:0;">{$products_data.PRODUCTS_BUTTON_DETAILS}</div>
+			<div class="d-block d-xl-none col-xl-8" style="padding:0; text-align: right;">{$products_data.PRODUCTS_BUTTON_BUY_NOW}</div>
+			<div class="hidden-lg col-12" style="padding:0;">{$products_data.PRODUCTS_BUTTON_DETAILS|replace:"btn btn-default":"btn btn-default btn-fullwidth"}</div>
+			<div class="hidden-lg col-12" style="padding:0;">{$products_data.PRODUCTS_BUTTON_BUY_NOW|replace:"btn btn-primary":"btn btn-primary btn-fullwidth"}</div>
+			<div style="clear: both;"></div>	
+		</div>
+	</div>
+	{/foreach}
+{/foreach}
+</div>

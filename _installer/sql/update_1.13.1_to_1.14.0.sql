@@ -52,3 +52,32 @@ ALTER TABLE `admin_access` ADD `seo_tool_box` INT( 1 ) NOT NULL ;
 ALTER TABLE `admin_access` ADD `quick_stockupdate` INT( 1 ) DEFAULT '0' NOT NULL;
 UPDATE `admin_access` SET `quick_stockupdate` = 1;
 
+DROP TABLE IF EXISTS indeximages;
+CREATE TABLE indeximages (
+  indeximages_id int(11) NOT NULL AUTO_INCREMENT,
+  indeximages_name varchar(32) NOT NULL,
+  date_added datetime NOT NULL,
+  last_modified datetime DEFAULT NULL,
+  status tinyint(1) NOT NULL DEFAULT 0,
+  sorting int(2) NOT NULL DEFAULT 0,
+  PRIMARY KEY (indeximages_id)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
+
+DROP TABLE IF EXISTS indeximages_info;
+CREATE TABLE indeximages_info (
+  indeximages_id int(11) NOT NULL,
+  languages_id int(11) NOT NULL,
+  indeximages_title varchar(100) NOT NULL,
+  indeximages_alt varchar(100) NOT NULL,
+  indeximages_url varchar(255) NOT NULL,
+  indeximages_url_target tinyint(1) NOT NULL DEFAULT 0,
+  indeximages_url_type tinyint(1) NOT NULL DEFAULT 0,
+  indeximages_description text,
+  indeximages_image varchar(64) NOT NULL,
+  url_clicked int(5) DEFAULT NULL,
+  date_last_click datetime DEFAULT NULL,
+  PRIMARY KEY (indeximages_id,languages_id)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+ALTER TABLE `admin_access` ADD `index_images` INT( 1 ) NOT NULL DEFAULT '1';
+

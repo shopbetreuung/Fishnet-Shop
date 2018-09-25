@@ -32,6 +32,47 @@ function xtc_image_button($image, $alt = '', $parameters = '', $submit = false) 
     //      'iconposition' => 'iconleft' (die Position des Icons im Button - 'iconleft' = links vom Text, 'iconright' = rechts vom Text).
     //      'Class' => '' (hier kann dem Button noch eine zusätzliche CSS-Klasse zugewiesen werden).
     /* Buttons array */
+    if (CURRENT_TEMPLATE == 'bootstrap4-hor' || CURRENT_TEMPLATE == 'bootstrap4') { 
+    $buttons = array(
+    'default'                       => array('Image' => '',                       'Text' => $alt,                           'icon' => '',                     'iconposition' => '',             'Class' => 'btn-secondary'),
+    'button_add_address.gif'        => array('Image' => '',                       'Text' => $alt,                           'icon' => 'fas fa-edit',            'iconposition' => 'iconleft',     'Class' => 'btn-secondary'),
+    'button_add_quick.gif'          => array('Image' => '',                       'Text' => IMAGE_BUTTON_IN_CART,           'icon' => 'fas fa-shopping-cart',   'iconposition' => 'iconleft',     'Class' => 'btn-primary'),
+    'button_admin.gif'              => array('Image' => '',                       'Text' => $alt,                           'icon' => 'fas fa-wrench',          'iconposition' => 'iconleft',     'Class' => 'btn-secondary'),
+    'button_back.gif'               => array('Image' => '',                       'Text' => $alt,                           'icon' => 'fas fa-arrow-left',      'iconposition' => 'iconleft',     'Class' => 'btn-secondary'),
+    'button_buy_now.gif'            => array('Image' => '',                       'Text' => IMAGE_BUTTON_IN_CART,           'icon' => 'fas fa-shopping-cart',   'iconposition' => 'iconleft',     'Class' => 'btn-primary'),
+    'button_change_address.gif'     => array('Image' => '',                       'Text' => $alt,                           'icon' => 'fas fa-edit',            'iconposition' => 'iconleft',     'Class' => 'btn-secondary'),
+    'button_checkout.gif'           => array('Image' => '',                       'Text' => $alt,                           'icon' => 'fas fa-check',           'iconposition' => 'iconright',    'Class' => 'btn-primary'),
+    'button_confirm.gif'            => array('Image' => '',                       'Text' => $alt,                           'icon' => 'fas fa-check',           'iconposition' => 'iconright',    'Class' => 'btn-secondary'),
+    'button_confirm_order.gif'      => array('Image' => '',                       'Text' => $alt,                           'icon' => 'fas fa-check',           'iconposition' => 'iconright',    'Class' => 'btn-success'),
+    'button_continue.gif'           => array('Image' => '',                       'Text' => $alt,                           'icon' => 'fas fa-arrow-right',     'iconposition' => 'iconright',    'Class' => 'btn-primary'),
+    'button_continue_shopping.gif'  => array('Image' => '',                       'Text' => $alt,                           'icon' => 'fas fa-arrow-left',      'iconposition' => 'iconleft',     'Class' => 'btn-secondary'),
+    'button_delete.gif'             => array('Image' => '',                       'Text' => $alt,                           'icon' => 'fas fa-remove',          'iconposition' => 'iconleft',     'Class' => 'btn-secondary'),
+    'button_download.gif'           => array('Image' => '',                       'Text' => $alt,                           'icon' => 'fas fa-download',        'iconposition' => 'iconleft',     'Class' => 'btn-secondary'),
+    'button_login.gif'              => array('Image' => '',                       'Text' => $alt,                           'icon' => 'fas fa fa-user',         'iconposition' => 'iconleft',     'Class' => 'btn-primary'),
+    'button_logoff.gif'             => array('Image' => '',                       'Text' => $alt,                           'icon' => '',                       'iconposition' => '',             'Class' => 'btn-secondary'),
+    'button_in_cart.gif'            => array('Image' => '',                       'Text' => $alt,                           'icon' => 'fas fa-shopping-cart',   'iconposition' => 'iconleft',     'Class' => 'btn-primary'),
+    'button_login_newsletter.gif'   => array('Image' => '',                       'Text' => $alt,                           'icon' => 'fas fa-check',           'iconposition' => 'iconleft',     'Class' => 'btn-secondary'),
+    'button_print.gif'              => array('Image' => '',                       'Text' => $alt,                           'icon' => 'fas fa-print',           'iconposition' => 'iconleft',     'Class' => 'btn-secondary'),
+    'button_product_more.gif'       => array('Image' => '',                       'Text' => IMAGE_BUTTON_PRODUCT_MORE,      'icon' => 'fas fa-info',          'iconposition' => 'iconleft',     'Class' => 'btn-secondary'),
+    'button_quick_find.gif'         => array('Image' => '',                       'Text' => $alt,                           'icon' => 'fas fa-search',          'iconposition' => 'iconleft',     'Class' => 'btn-secondary'),
+    'button_redeem.gif'             => array('Image' => '',                       'Text' => $alt,                           'icon' => 'fas fa-asterisk',        'iconposition' => 'iconleft',     'Class' => 'btn-secondary'),
+    'button_search.gif'             => array('Image' => '',                       'Text' => $alt,                           'icon' => 'fas fa-search',          'iconposition' => 'iconleft',     'Class' => 'btn-secondary'),
+    'button_send.gif'               => array('Image' => '',                       'Text' => $alt,                           'icon' => 'fas fa-check',           'iconposition' => 'iconleft',     'Class' => 'btn-secondary'),
+    'button_login_small.gif'        => array('Image' => '',                       'Text' => $alt,                           'icon' => 'fas fa-user',            'iconposition' => 'iconleft',     'Class' => 'btn-primary'),
+    'button_update.gif'             => array('Image' => '',                       'Text' => $alt,                           'icon' => 'fas fa-sync-alt',        'iconposition' => 'iconleft',     'Class' => 'btn-secondary'),
+    'button_update_cart.gif'        => array('Image' => '',                       'Text' => $alt,                           'icon' => 'fas fa-sync-alt',        'iconposition' => 'iconleft',     'Class' => 'btn-secondary'),
+    'button_view.gif'               => array('Image' => '',                       'Text' => $alt,                           'icon' => 'fas fa-eye-open',        'iconposition' => 'iconleft',     'Class' => 'btn-secondary'),
+    'button_write_review.gif'       => array('Image' => '',                       'Text' => $alt,                           'icon' => 'fas fa-edit',            'iconposition' => 'iconleft',     'Class' => 'btn-secondary'),
+    'small_edit.gif'                => array('Image' => '',                       'Text' => $alt,                           'icon' => 'fas fa-edit',            'iconposition' => 'iconleft',     'Class' => 'btn-secondary'),
+    'small_delete.gif'              => array('Image' => '',                       'Text' => $alt,                           'icon' => 'fas fa-remove',          'iconposition' => 'iconright',    'Class' => 'btn-secondary'),
+    'small_view.gif'                => array('Image' => '',                       'Text' => $alt,                           'icon' => 'fas fa-eye-open',        'iconposition' => 'iconright',    'Class' => 'btn-secondary'),
+    'cart_del.gif'                  => array('Image' => 'cart_del.gif',           'Text' => $alt,                           'icon' => '',                       'iconposition' => '',             'Class' => 'btn-secondary'),
+    'edit_product.gif'              => array('Image' => '',                       'Text' => $alt,                           'icon' => 'fas fa-edit',            'iconposition' => 'iconleft',     'Class' => 'btn-secondary'),
+    'print.gif'                     => array('Image' => '',                       'Text' => TEXT_PRINT,                     'icon' => 'fas fa-print',           'iconposition' => 'iconleft',     'Class' => 'btn-secondary'),
+    'button_goto_cart_gif'          => array('Image' => '',                       'Text' => $alt,                           'icon' => 'fas fa-shopping-cart',   'iconposition' => 'iconleft',     'Class' => 'btn-secondary'),
+    'button_manufactors_info.gif'   => array('Image' => '',                       'Text' => $alt,                           'icon' => 'fas fa-list-alt',        'iconposition' => 'iconleft',     'Class' => 'btn-secondary'),
+    );
+  } else {
     $buttons = array(
     'default'                       => array('Image' => '',                       'Text' => $alt,                           'icon' => '',                     'iconposition' => '',             'Class' => 'btn-default'),
     'button_add_address.gif'        => array('Image' => '',                       'Text' => $alt,                           'icon' => 'glyphicon glyphicon-edit',            'iconposition' => 'iconleft',     'Class' => 'btn-default'),
@@ -71,6 +112,7 @@ function xtc_image_button($image, $alt = '', $parameters = '', $submit = false) 
     'button_goto_cart_gif'          => array('Image' => '',                       'Text' => $alt,                           'icon' => 'glyphicon glyphicon-shopping-cart',   'iconposition' => 'iconleft',     'Class' => 'btn-default'),
     'button_manufactors_info.gif'   => array('Image' => '',                       'Text' => $alt,                           'icon' => 'glyphicon glyphicon-list-alt',        'iconposition' => 'iconleft',     'Class' => 'btn-default'),
     );
+  }
 
     if (!array_key_exists($name, $buttons)) {$name = 'default';}
     // kein Submitbutton

@@ -553,3 +553,5 @@ define('BOX_SEO_TOOL','SEO Tool Box');
 define('TEXT_DISPLAY_NUMBER_OF_SEO_TOOL_BOX', 'Angezeigt werden <b>%d</b> bis <b>%d</b> (von insgesamt <b>%d</b> SEOToolBox)');
 
 define('TXT_MENU_LAGERVERWALTUNG','Schnelle Lagerverwaltung');
+
+define('BOX_INDEXIMAGES','Startseitenbilder')

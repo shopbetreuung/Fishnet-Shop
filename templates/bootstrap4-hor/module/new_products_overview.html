@@ -1,0 +1,84 @@
+{config_load file="$language/lang_$language.conf" section="new_products"} 
+<h1>{#heading_text#}</h1>
+{if $NO_NEW_PRODUCTS}<p>{$NO_NEW_PRODUCTS}</p>{/if}
+
+{$NAVIGATION_BAR}
+<div class="hrproductpreview"></div>
+
+<div class="row">
+{foreach name=aussen item=module_data from=$module_content}
+	{if $module_data.PRODUCTS_BUTTON_BUY_NOW}
+	<div class="col-12 col-md-6 col-lg-4">
+		<div class="card p-3 mb-3" data-col="{$smarty.foreach.aussen.iteration}">
+			<div class="equalize products_image_block">
+				{if $module_data.PRODUCTS_IMAGE!=''}<a href="{$module_data.PRODUCTS_LINK}"><img src="{$module_data.PRODUCTS_IMAGE}" alt="{$module_data.PRODUCTS_IMAGE_ALT}" title="{$module_data.PRODUCTS_IMAGE_TITLE}" class="img-fluid img-center d-block" /></a>{/if}
+			</div>
+			<div class="p-2" data-col="{$smarty.foreach.aussen.iteration}">
+				<div class="equalize products_name_block">
+					<h2 class="h4"><a href="{$module_data.PRODUCTS_LINK}">{$module_data.PRODUCTS_NAME}</a></h2>
+				</div>
+				<div class="equalize products_short_description_block">{$module_data.PRODUCTS_SHORT_DESCRIPTION}</div>
+				
+				<div class="equalize products_info_block">
+					<p>
+					{if $module_data.PRODUCTS_WEIGHT && $module_data.PRODUCTS_WEIGHT!='' && $module_data.PRODUCTS_WEIGHT!='0.00'}<br /><strong>{#text_weight#}:{#weight#}</strong> {$module_data.PRODUCTS_WEIGHT|string_format:"%.2f"|replace:".":","} kg{/if}
+					{if $module_data.PRODUCTS_VPE}<br /><strong>{#vpe#}</strong> {$module_data.PRODUCTS_VPE}{/if}
+					{if $module_data.PRODUCTS_SHIPPING_NAME}<br /><strong>{#text_shippingtime#}</strong> {$module_data.PRODUCTS_SHIPPING_NAME_LINK}{/if}
+					</p>
+				</div>
+				
+				<div class="equalize products_price_block">
+					<p>
+						<br /><span class="lead">{$module_data.PRODUCTS_PRICE}</span>
+						<br /><small>({$module_data.PRODUCTS_TAX_INFO}{$module_data.PRODUCTS_SHIPPING_LINK})</small>
+					</p>				
+				</div>
+				
+			</div> 
+			<div class="equalize products_button_block row p-2">
+				<div class="d-none d-xl-inline-block col-lg-4 p-0">{$module_data.PRODUCTS_BUTTON_DETAILS}</div>
+				<div class="d-none d-xl-inline-block col-lg-8 p-0 text-right">{$module_data.PRODUCTS_BUTTON_BUY_NOW}</div>
+				<div class="d-xl-none col-12 p-0">{$module_data.PRODUCTS_BUTTON_DETAILS|replace:"btn btn-secondary":"btn btn-secondary btn-fullwidth"}</div>
+				<div class="d-xl-none col-12 p-0">{$module_data.PRODUCTS_BUTTON_BUY_NOW|replace:"btn btn-primary":"btn btn-primary btn-fullwidth"}</div>
+			</div>
+			<div style="clearfix"></div>
+		</div>
+	</div>
+	{else}
+	<div class="col-12 col-md-6 col-lg-4">
+		<div class="card p-3 mb-3" data-col="{$smarty.foreach.aussen.iteration}">
+			<div class="equalize products_image_block">
+				{if $module_data.PRODUCTS_IMAGE!=''}<a href="{$module_data.PRODUCTS_LINK}"><img src="{$module_data.PRODUCTS_IMAGE}" alt="{$module_data.PRODUCTS_IMAGE_ALT}" title="{$module_data.PRODUCTS_IMAGE_TITLE}" class="img-fluid img-center d-block" /></a>{/if}
+			</div>
+			<div class="p-2" data-col="{$smarty.foreach.aussen.iteration}">
+				<div class="equalize products_name_block">
+					<h2 class="h4"><a href="{$module_data.PRODUCTS_LINK}">{$module_data.PRODUCTS_NAME}</a></h2>
+				</div>
+				<div class="equalize products_short_description_block">{$module_data.PRODUCTS_SHORT_DESCRIPTION}</div>
+				
+				<div class="equalize products_info_block">
+					<p>
+						{if $module_data.PRODUCTS_VPE}<br /><strong>{#vpe#}</strong> {$module_data.PRODUCTS_VPE}{/if}
+						{if $module_data.PRODUCTS_SHIPPING_NAME}<br /><strong>{#text_shippingtime#}</strong> {$module_data.PRODUCTS_SHIPPING_NAME_LINK}{/if}
+					</p>
+				</div>
+				
+				<div class="equalize products_price_block">
+					<p>
+						<br /><span class="lead">{$module_data.PRODUCTS_PRICE}</span>
+						<br /><small>({$module_data.PRODUCTS_TAX_INFO}{$module_data.PRODUCTS_SHIPPING_LINK})</small>
+					</p>				
+				</div>
+			</div>
+			<div class="equalize products_button_block">
+				<div class="text-center">{$module_data.PRODUCTS_BUTTON_DETAILS|replace:"btn btn-secondary":"btn btn-secondary btn-fullwidth"}</div>
+			</div>
+			<div class="clearfix"></div>
+		</div>
+	</div>
+	{/if}
+	
+{/foreach}
+</div>
+
+{$NAVIGATION_BAR}

@@ -174,6 +174,12 @@
 											"link" 		=> xtc_href_link(FILENAME_IMAGESLIDERS, '', 'NONSSL'),
 											"access"	=> "imagesliders",
 											"check"		=> true);
+	
+	$menu_items['content'][] = array(		"name" 		=> BOX_INDEXIMAGES,
+											"is_main"	=> true,
+											"link" 		=> xtc_href_link(FILENAME_INDEXIMAGES, '', 'NONSSL'),
+											"access"	=> "index_images",
+											"check"		=> true);
 												
   $menu_items['content'][] = array(		"name" 		=> BOX_BLACKLIST_LOGS,
 											"is_main"	=> true,

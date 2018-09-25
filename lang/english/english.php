@@ -570,4 +570,6 @@ define('TEXT_EDIT_CONTENT_MANAGER', 'Edit Content');
 
 define('ERROR_MESSAGE_PRODUCT_NEGATIVE_AMOUNT', 'Negative amount. Please contact us for a quote.');
 
+define('TEXT_TO_CATEGORY', 'To category');
+
 ?>

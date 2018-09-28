@@ -63,7 +63,7 @@ switch($seo_tool_box_action) {
         $product_meta_title_array = array();
         
         while ($products_meta_title_array = xtc_db_fetch_array($products_meta_title_query)) {
-            $product_meta_title_array[] = "'".$products_meta_title_array['products_meta_title']."'";
+            $product_meta_title_array[] = "'".addslashes($products_meta_title_array['products_meta_title'])."'";
         }
 
         $seo_tool_box_where = " AND pd.products_meta_title IN (".implode(',',$product_meta_title_array).") AND pd.products_meta_title != '' ";
@@ -74,7 +74,7 @@ switch($seo_tool_box_action) {
         $product_meta_description_array = array();
         
         while ($products_meta_description_array = xtc_db_fetch_array($products_meta_description_query)) {
-            $product_meta_description_array[] = "'".$products_meta_description_array['products_meta_description']."'";
+            $product_meta_description_array[] = "'".addslashes($products_meta_description_array['products_meta_description'])."'";
         }
 
         $seo_tool_box_where = " AND pd.products_meta_description IN (".implode(',',$product_meta_description_array).") AND pd.products_meta_description != '' ";

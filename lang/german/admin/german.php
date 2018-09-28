@@ -554,4 +554,4 @@ define('TEXT_DISPLAY_NUMBER_OF_SEO_TOOL_BOX', 'Angezeigt werden <b>%d</b> bis <b
 
 define('TXT_MENU_LAGERVERWALTUNG','Schnelle Lagerverwaltung');
 
-define('BOX_INDEXIMAGES','Startseitenbilder')
+define('BOX_INDEXIMAGES','Startseitenbilder');

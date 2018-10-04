@@ -1025,7 +1025,12 @@ class xtc_afterbuy_functions
 				$this->payment_id = '5';
 				$this->payment_name = "Paypal";
 			break;
-			
+			case 'paypal_ppp_rechnung':
+				case 'paypalplus':
+				$this->payment_id = '5';
+				$this->payment_name = "Paypal Rechnung";
+				$this->paid = 1;
+			break;
             case 'sofort_sofortueberweisung':
 			case 'sofortueberweisung':
 			case 'sofortueberweisungredirect':

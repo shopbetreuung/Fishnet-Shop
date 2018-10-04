@@ -17,7 +17,14 @@ $sales_report_query = xtc_db_query("SELECT
 										ot.class = 'ot_total'");
 $sales_report = xtc_db_fetch_array($sales_report_query);	
 ?>
-
+ <?php
+     
+            $admin_access_query = xtc_db_query("select * from " . TABLE_ADMIN_ACCESS . " where customers_id = '" . $_SESSION['customer_id'] . "'");
+            $admin_access = xtc_db_fetch_array($admin_access_query);
+           
+            if($admin_access['stats_sales_report'] == 1) {
+     
+      ?>
 <table class="table table-bordered">
 	<tr>
 		 <th><?php echo TURNOVER_TODAY; ?>:</th>
@@ -44,3 +51,8 @@ $sales_report = xtc_db_fetch_array($sales_report_query);
 		 <td align="right"><?php echo $currencies->format($sales_report['total']); ?></td>
 	</tr>
 </table>
+ <?php
+           
+                    }
+                   
+            ?>

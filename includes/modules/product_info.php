@@ -123,6 +123,9 @@ if (!is_object($product) || !$product->isProduct()) {
   //products formated price
   $info_smarty->assign('PRODUCTS_PRICE', $products_price['formated']);
 
+  //products plain price so we can ask for example for 0.00 
+    $info_smarty->assign('PRODUCTS_PRICE_PLAIN', $products_price['plain']);
+	
   //price for search engines
   $info_smarty->assign('PRODUCTS_PRICE_PLAIN', $products_price['plain']);
   $info_smarty->assign('PRODUCTS_PRICE_CURRENCY', $xtPrice->actualCurr);

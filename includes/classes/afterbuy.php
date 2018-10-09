@@ -614,7 +614,7 @@ class xtc_afterbuy_functions
 			$this->afterbuyString .= "Artikelnr_".$nr."=99999996&";
 			$this->afterbuyString .= "Artikelname_".$nr."=Kupon&";
 			
-			$value_ot_total = $this->get_ot_total_fee($customers_status_show_price_tax, $tax_rate, $xt_currency, $coupon);
+			$value_ot_total = $this->get_ot_total_fee($customers_status_show_price_tax, $tax_rate, $xt_currency, -$coupon);
 			
 			$this->afterbuyString .= "ArtikelEPreis_".$nr."=".$value_ot_total."&";
 			$this->afterbuyString .= "ArtikelMwst_".$nr."=".$tax."&";

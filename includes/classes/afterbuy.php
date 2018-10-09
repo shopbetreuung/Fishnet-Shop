@@ -464,6 +464,7 @@ class xtc_afterbuy_functions
 		// ############# ORDER_TOTAL #############
 
 		$order_total_query = xtc_db_query("SELECT
+											  title,
 						                      class,
 						                      value,
 						                      sort_order
@@ -513,6 +514,7 @@ class xtc_afterbuy_functions
 			if ($order_total_values['class'] == 'ot_coupon') {
 				$coupon_flag = true;
 				$coupon = $order_total_values['value'];
+				$coupon_title = $order_total_values['title'];
 			}
 			// ot_payment
 			if ($order_total_values['class']=='ot_payment') {

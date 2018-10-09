@@ -612,7 +612,8 @@ class xtc_afterbuy_functions
 		if ($coupon_flag) {
 			$nr ++;
 			$this->afterbuyString .= "Artikelnr_".$nr."=99999996&";
-			$this->afterbuyString .= "Artikelname_".$nr."=Kupon&";
+		    $ab_coupon_title .=  $coupon_title;
+		    $this->afterbuyString .= "Artikelname_".$nr."=$ab_coupon_title&";
 			
 			$value_ot_total = $this->get_ot_total_fee($customers_status_show_price_tax, $tax_rate, $xt_currency, -$coupon);
 			

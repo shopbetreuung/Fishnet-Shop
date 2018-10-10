@@ -1,17 +1,17 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: coupon_admin.php 1502 2010-11-16 18:13:52Z dokuman $
+   coupon_admin.php
 
-   XT-Commerce - community made shopping
-   http://www.xt-commerce.com
+   Fishnet Services
+   https://fishnet-services.com
 
-   Copyright (c) 2003 XT-Commerce
-   -----------------------------------------------------------------------------------------
+   Copyright (c) 2018 Fishnet Services
+   --------------------------------------------------------------
    based on:
-   (c) 2000-2001 The Exchange Project  (earlier name of osCommerce)
-   (c) 2002-2003 osCommerce(coupon_admin.php,v 1.1.2.5 2003/05/13); www.oscommerce.com
-
-   Released under the GNU General Public License
+   (c) 2003	 nextcommerce
+   (c) 2003	 Xt Commerce
+   
+   Released under the GNU General Public License 
    -----------------------------------------------------------------------------------------
    Third Party contributions:
 
@@ -25,102 +25,102 @@
    Released under the GNU General Public License
    ---------------------------------------------------------------------------------------*/
 
-define('TOP_BAR_TITLE', 'Statistics');
-define('HEADING_TITLE', 'Discount Coupons');
-define('HEADING_TITLE_STATUS', 'Status : ');
-define('TEXT_CUSTOMER', 'Customer:');
-define('TEXT_COUPON', 'Coupon Name');
-define('TEXT_COUPON_ALL', 'All Coupons');
-define('TEXT_COUPON_ACTIVE', 'Active Coupons');
-define('TEXT_COUPON_INACTIVE', 'Inactive Coupons');
-define('TEXT_SUBJECT', 'Subject:');
-define('TEXT_FROM', 'From:');
-define('TEXT_FREE_SHIPPING', 'Free Shipping');
+define('TOP_BAR_TITLE', 'Statistiques');
+define('HEADING_TITLE', 'Coupons de réduction');
+define('HEADING_TITLE_STATUS', 'Statut : ');
+define('TEXT_CUSTOMER', 'Client:');
+define('TEXT_COUPON', 'Nom du coupon');
+define('TEXT_COUPON_ALL', 'Tous les coupons');
+define('TEXT_COUPON_ACTIVE', 'Coupons actifs');
+define('TEXT_COUPON_INACTIVE', 'Coupons inactifs');
+define('TEXT_SUBJECT', 'Sujet:');
+define('TEXT_FROM', 'De:');
+define('TEXT_FREE_SHIPPING', 'Livraison gratuite');
 define('TEXT_MESSAGE', 'Message:');
-define('TEXT_SELECT_CUSTOMER', 'Select Customer');
-define('TEXT_ALL_CUSTOMERS', 'All Customers');
-define('TEXT_NEWSLETTER_CUSTOMERS', 'To All Newsletter Subscribers');
-define('TEXT_CONFIRM_DELETE', 'By klicking <b>Confirm</b> the selected coupon will be set <b>inactive</b>. Note: This coupon can not be reactivated for further usage. <br /><br />Do you really want to deactivate this coupon?');
+define('TEXT_SELECT_CUSTOMER', 'Sélectionnez Client');
+define('TEXT_ALL_CUSTOMERS', 'Tous les clients');
+define('TEXT_NEWSLETTER_CUSTOMERS', 'À tous les abonnés du bulletin d&apos;information');
+define('TEXT_CONFIRM_DELETE', 'En cliquant sur <b>Confirmer</b> le coupon sélectionné sera réglé sur <b>inactif</b>. Note : Ce coupon ne peut pas être réactivé pour une utilisation ultérieure. <br /><br />Voulez-vous vraiment désactiver ce coupon ?');
 
-define('TEXT_TO_REDEEM', 'You can redeem this coupon during checkout. Just enter the code in the box provided, and click on the redeem button.');
-define('TEXT_IN_CASE', ' in case you have any problems. ');
-define('TEXT_VOUCHER_IS', 'The coupon code is ');
-define('TEXT_REMEMBER', 'Don\'t lose the coupon code, make sure to keep the code safe so you can benefit from this special offer.');
-define('TEXT_VISIT', 'when you visit ' . HTTP_SERVER . DIR_WS_CATALOG);
-define('TEXT_ENTER_CODE', ' and enter the code ');
+define('TEXT_TO_REDEEM', 'Vous pouvez échanger ce coupon lors de la validation de votre commande. Il suffit d&apos;entrer le code dans la case prévue à cet effet et de cliquer sur le bouton d&apos;échange.');
+define('TEXT_IN_CASE', '  au cas où vous auriez des problèmes. ');
+define('TEXT_VOUCHER_IS', 'Le code coupon est  ');
+define('TEXT_REMEMBER', 'Ne perdez pas le code de bon de réduction, assurez-vous de le conserver en lieu sûr afin de pouvoir bénéficier de cette offre spéciale.');
+define('TEXT_VISIT', 'lorsque vous visitez ' . HTTP_SERVER . DIR_WS_CATALOG);
+define('TEXT_ENTER_CODE', ' et entrez le code ');
 
 define('TABLE_HEADING_ACTION', 'Action');
 
-define('CUSTOMER_ID', 'Customer ID');
-define('CUSTOMER_NAME', 'Customer Name');
-define('REDEEM_DATE', 'Date Redeemed');
-define('IP_ADDRESS', 'IP Address');
+define('CUSTOMER_ID', 'Identifiant client');
+define('CUSTOMER_NAME', 'Nom du client');
+define('REDEEM_DATE', 'Date de rachat');
+define('IP_ADDRESS', 'Adresse IP');
 
-define('TEXT_REDEMPTIONS', 'Redemptions');
-define('TEXT_REDEMPTIONS_TOTAL', 'In Total');
-define('TEXT_REDEMPTIONS_CUSTOMER', 'For this Customer');
-define('TEXT_NO_FREE_SHIPPING', 'No Free Shipping');
+define('TEXT_REDEMPTIONS', 'Rachats');
+define('TEXT_REDEMPTIONS_TOTAL', 'Au total');
+define('TEXT_REDEMPTIONS_CUSTOMER', 'Pour ce client');
+define('TEXT_NO_FREE_SHIPPING', 'Pas de livraison gratuite');
 
-define('NOTICE_EMAIL_SENT_TO', 'Notice: email sent to: %s');
-define('ERROR_NO_CUSTOMER_SELECTED', 'Error: No customer has been selected.');
-define('COUPON_NAME', 'Coupon Name');
-define('COUPON_AMOUNT', 'Coupon Amount');
-define('COUPON_CODE', 'Coupon Code');
-define('COUPON_STARTDATE', 'Start Date');
-define('COUPON_FINISHDATE', 'End Date');
-define('COUPON_FREE_SHIP', 'Free Shipping');
-define('COUPON_DESC', 'Coupon Description');
-define('COUPON_MIN_ORDER', 'Coupon Minimum Order');
-define('COUPON_USES_COUPON', 'Uses per Coupon');
-define('COUPON_USES_USER', 'Uses per Customer');
-define('COUPON_PRODUCTS', 'Valid Product List');
-define('COUPON_CATEGORIES', 'Valid Categories List');
-define('VOUCHER_NUMBER_USED', 'Number Used');
-define('DATE_CREATED', 'Date Created');
-define('DATE_MODIFIED', 'Date Modified');
-define('TEXT_HEADING_NEW_COUPON', 'Create New Coupon');
-define('TEXT_NEW_INTRO', 'Please fill out the following information for the new coupon.<br />');
+define('NOTICE_EMAIL_SENT_TO', 'Avis : courriel envoyé à: %s');
+define('ERROR_NO_CUSTOMER_SELECTED', 'Erreur : Aucun client n&apos;a été sélectionné.');
+define('COUPON_NAME', 'Nom du coupon');
+define('COUPON_AMOUNT', 'Montant du coupon');
+define('COUPON_CODE', 'Code du coupon');
+define('COUPON_STARTDATE', 'Date de début');
+define('COUPON_FINISHDATE', 'Date de fin');
+define('COUPON_FREE_SHIP', 'Livraison gratuite');
+define('COUPON_DESC', 'Description du coupon');
+define('COUPON_MIN_ORDER', 'Coupon minimum de commande');
+define('COUPON_USES_COUPON', 'Utilisations par Coupon');
+define('COUPON_USES_USER', 'Utilisations par client');
+define('COUPON_PRODUCTS', 'Liste des produits valides');
+define('COUPON_CATEGORIES', 'Liste des catégories valides');
+define('VOUCHER_NUMBER_USED', 'Nombre utilisé');
+define('DATE_CREATED', 'Date de création');
+define('DATE_MODIFIED', 'Date de modification');
+define('TEXT_HEADING_NEW_COUPON', 'Créer un nouveau coupon');
+define('TEXT_NEW_INTRO', 'Veuillez remplir les informations suivantes pour le nouveau coupon.<br />');
 
 
-define('COUPON_NAME_HELP', 'A short name for the coupon');
-define('COUPON_AMOUNT_HELP', 'The value of the discount for the coupon, either fixed or add a % on the end for a percentage discount.');
-define('COUPON_CODE_HELP', 'You can enter your own code here, or leave blank for an auto generated one.');
-define('COUPON_STARTDATE_HELP', 'The date the coupon will be valid from');
-define('COUPON_FINISHDATE_HELP', 'The date the coupon expires');
-define('COUPON_FREE_SHIP_HELP', 'The coupon gives free shipping on an order. Note. This overrides the coupon_amount figure but respects the minimum order value');
-define('COUPON_DESC_HELP', 'A description of the coupon for the customer');
-define('COUPON_MIN_ORDER_HELP', 'The minimum order value before the coupon is valid');
-define('COUPON_USES_COUPON_HELP', 'The maximum number of times the coupon can be used, leave blank if you want no limit.');
-define('COUPON_USES_USER_HELP', 'Number of times a user can use the coupon, leave blank for no limit.');
-define('COUPON_PRODUCTS_HELP', 'A comma separated list of product_ids that this coupon can be used with. Leave blank for no restrictions.');
-define('COUPON_CATEGORIES_HELP', 'A comma separated list of cpaths that this coupon can be used with, leave blank for no restrictions.');
+define('COUPON_NAME_HELP', 'Un nom court pour le coupon.');
+define('COUPON_AMOUNT_HELP', 'La valeur de la remise pour le coupon, soit fixe, soit ajouter un % à la fin pour un pourcentage de remise.');
+define('COUPON_CODE_HELP', 'Vous pouvez entrer votre propre code ici, ou laisser vide pour un code généré automatiquement.');
+define('COUPON_STARTDATE_HELP', 'La date à laquelle le coupon sera valide à partir du');
+define('COUPON_FINISHDATE_HELP', 'La date d&apos;expiration du coupon');
+define('COUPON_FREE_SHIP_HELP', 'Le coupon donne droit à la livraison gratuite sur une commande. Note. Ceci remplace le montant du coupon mais respecte la valeur minimale de commande.');
+define('COUPON_DESC_HELP', 'Une description du coupon pour le client');
+define('COUPON_MIN_ORDER_HELP', 'Le montant minimum de commande avant que le coupon ne soit valide');
+define('COUPON_USES_COUPON_HELP', 'Le nombre maximum de fois où le coupon peut être utilisé, laissez vide si vous ne voulez pas de limite.');
+define('COUPON_USES_USER_HELP', 'Nombre de fois qu&apos;un utilisateur peut utiliser le coupon, laissez vide sans limite.');
+define('COUPON_PRODUCTS_HELP', 'Une liste séparée par des virgules de product_ids avec laquelle ce coupon peut être utilisé. Ne rien indiquer pour aucune restriction.');
+define('COUPON_CATEGORIES_HELP', 'Une liste de chemins (cPath) séparés par des virgules avec lesquels ce coupon peut être utilisé, laissez vide pour aucune restriction.');
 
 define('COUPON_ID', 'cID');
-define('BUTTON_DELETE_NO_CONFIRM', 'Delete without confirmation');
-define('TEXT_NONE', 'no restrictions');
-define('TEXT_COUPON_DELETE', 'Delete');
-define('TEXT_COUPON_STATUS', 'Status');
-define('TEXT_COUPON_DETAILS', 'Coupon details');
-define('TEXT_COUPON_EMAIL', 'send email');
-define('TEXT_COUPON_OVERVIEW', 'Overview');
+define('BUTTON_DELETE_NO_CONFIRM', 'Supprimer sans confirmation');
+define('TEXT_NONE', 'aucune restriction');
+define('TEXT_COUPON_DELETE', 'Supprimer');
+define('TEXT_COUPON_STATUS', 'Statut');
+define('TEXT_COUPON_DETAILS', 'Détails du coupon');
+define('TEXT_COUPON_EMAIL', 'envoyer un courriel');
+define('TEXT_COUPON_OVERVIEW', 'Vue d&apos;ensemble');
 define('TEXT_COUPON_EMAIL_PREVIEW', 'Confirmation');
-define('TEXT_COUPON_MINORDER', 'min. Order Value');
-define('TEXT_VIEW', 'List view');
-define('TEXT_VIEW_SHORT', 'Show');
+define('TEXT_COUPON_MINORDER', 'min. valeur de commande');
+define('TEXT_VIEW', 'Vue de liste');
+define('TEXT_VIEW_SHORT', 'Montrer');
 
 //BOF - web28 - 2011-04-13 - ADD Coupon message infos
-define('COUPON_MINORDER_INFO', "\nCoupon Minimum Order: ");
-define('COUPON_RESTRICT_INFO', "\nThis coupon is only valid for certain products!"); 
-define('COUPON_INFO', "\nCoupon Amount: "); 
-define('COUPON_FREE_SHIPPING', 'Free Shipping');
+define('COUPON_MINORDER_INFO', "\nCoupon Commande minimum: ");
+define('COUPON_RESTRICT_INFO', "\nCe coupon n&apos;est valable que pour certains produits !"); 
+define('COUPON_INFO', "\nMontant du coupon: "); 
+define('COUPON_FREE_SHIPPING', 'Livraison gratuite');
 define('COUPON_LINK_TEXT', '\n\nDetails');
-define('COUPON_CATEGORIES_RESTRICT', '\nValid for these categories');
-define('COUPON_PRODUCTS_RESTRICT', '\nValid for these products');
-define('COUPON_NO_RESTRICT', '\nValid for all products');; 
+define('COUPON_CATEGORIES_RESTRICT', '\nValable pour ces catégories');
+define('COUPON_PRODUCTS_RESTRICT', '\nValable pour ces produits');
+define('COUPON_NO_RESTRICT', '\nValable pour tous les produits');; 
 //EOF - web28 - 2011-04-13 - ADD Coupon message infos
 
 //BOF - web28 - 2011-07-05 - ADD error message
-define('ERROR_NO_COUPON_NAME', 'ERROR: No Coupon Name ');
-define('ERROR_NO_COUPON_AMOUNT', 'ERROR: No Coupon Amount ');
+define('ERROR_NO_COUPON_NAME', 'ERREUR : Aucun coupon Nom  ');
+define('ERROR_NO_COUPON_AMOUNT', 'ERREUR : Aucun coupon Montant ');
 //EOF - web28 - 2011-07-05 - ADD error message
 ?>

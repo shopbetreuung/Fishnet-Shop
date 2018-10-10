@@ -1,0 +1,176 @@
+{literal}
+<script type="text/javascript">
+    function checkempty() {
+        var check1 = document.getElementById("PreferredNeighbour");
+        var check2 = document.getElementById("PreferredLocation");
+        if (check1.value=='') {
+            check2.disabled=false;
+            check1.style.backgroundColor="whitesmoke";
+        } else {
+            check2.disabled=true;
+            check1.style.backgroundColor="gold"; 
+        }
+
+        if (check2.value=='') {
+            check1.disabled=false;
+            check2.style.backgroundColor="whitesmoke"
+        } else {
+            check1.disabled=true;
+            check2.style.backgroundColor="gold";   
+        }
+
+        if (check1.value=='' && check2.value=='') {
+            check1.style.backgroundColor="whitesmoke";
+            check2.style.backgroundColor="whitesmoke";
+        }
+    }
+
+    function clear_select(element, option) {
+        var element_state = document.getElementById(option).checked;
+        var options = document.getElementsByName(element);
+
+        for(var i = 0; i < options.length; ++i)
+        {
+            options[i].checked = false;
+        }
+
+        document.getElementById(option).checked = element_state; 
+    }
+</script>
+
+<style>
+    .dhlgkapi div {
+        float:left;
+        height: 60px;
+        margin: 5px;
+        overflow: hidden;
+        display: table; 
+    }
+
+    .dhlgkapi div input[type="checkbox"] {
+        display: none;
+    }
+
+    .dhlgkapi div label {
+        display: table-cell;
+        height: 100%;
+        vertical-align: middle;
+        text-align:center;
+        padding: 5px;  
+        width: 45px; 
+        background-color: whitesmoke;
+    }
+
+    .dhlgkapi div label:hover {
+        background-color: gold;
+    }
+
+    .dhlgkapi div input[type="checkbox"]:checked+label {
+        background-color: gold;
+        font-weight: bold; 
+    }
+
+    .dhlgkapi input[type="text"] {
+        background-color: whitesmoke;
+        margin: 5px;
+    }
+
+    .dhlgkapi a {
+        float: right;
+        color: #555;
+        display: table-cell;
+        vertical-align: middle;
+        text-align:center;
+        padding: 5px;
+        margin: 5px;  
+        background-color: whitesmoke; 
+    }
+
+    .dhlgkapi a:hover {
+        text-decoration: none;
+        background-color: gold; 
+    }
+
+    a.tooltip {
+        color: #555;
+        position: relative;
+        text-decoration: none;
+        background-color: whitesmoke;
+        padding: 1px 3px 1px 3px;
+        border: 1px solid #eee;
+    }
+    a.tooltip:after {
+        content: attr(data-tooltip);
+        position: absolute;
+        bottom: 130%;
+        left: 0px;
+        background: whitesmoke;
+        padding: 5px 15px;
+        color: black;
+        white-space: pre;
+        opacity: 0;
+        display: inline-block;
+    }
+
+    a.tooltip:hover:after {
+        bottom: 130%;
+    }
+    a.tooltip:hover:before {
+        bottom: 70%;
+    }
+    a.tooltip:hover:after, a:hover:before {
+        opacity: 1;
+    }    
+</style>
+{/literal}
+
+<div>
+    <div>
+        <img alt="DHL Logo" src="/images/icons/DHL_rgb_147px.png">
+    </div>
+    <h2>{$WUNSCHPAKET_TEXT_TITLE}</h2>
+    <p>{$WUNSCHPAKET_TEXT_DESC}</p>
+
+    <h2>{$PD_TITLE}</h2>
+    <p>{$PD_DESC}&nbsp;<a href="#" class="tooltip" data-tooltip="{$PD_TOOLTIP}">?</a></p>
+    <div class="dhlgkapi">
+        {foreach from=$PD_DATA item=pd}
+        <div>
+            {$pd}
+        </div>
+        {/foreach}
+    </div>
+    <br style="clear: both;" />
+
+    <h2>{$PT_TITLE}</h2>
+    <p>{$PT_DESC}&nbsp;<a href="#" class="tooltip" data-tooltip="{$PT_TOOLTIP}">?</a></p>
+    <div class="dhlgkapi">
+        {foreach from=$PT_DATA item=pt}
+        <div>
+            {$pt}
+        </div>
+        {/foreach}
+    </div>
+    <br style="clear: both;" />
+
+    <h2>{$PN_TITLE}</h2>
+    <p>{$PN_DESC}&nbsp;<a href="#" class="tooltip" data-tooltip="{$PN_TOOLTIP}">?</a></p>
+    <div class="dhlgkapi">
+        {$PN_DATA}
+    </div>
+
+    <h2>{$PL_TITLE}</h2>
+    <p>{$PL_DESC}&nbsp;<a href="#" class="tooltip" data-tooltip="{$PL_TOOLTIP}">?</a></p>
+    <div class="dhlgkapi">
+        {$PL_DATA}
+    </div>
+
+    <!-- <h2>{$PSF_TITLE}</h2> -->
+    <!-- {$PSF_DESC} -->
+    <br style="clear: both;" />
+    <div>
+        {$BUTTON_PSF}
+    </div>
+    <!-- <br clear="all" /> -->
+</div>
+

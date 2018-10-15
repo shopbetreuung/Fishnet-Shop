@@ -25,9 +25,9 @@
    Released under the GNU General Public License
    ---------------------------------------------------------------------------------------*/
 
-  define('MODULE_ORDER_TOTAL_GV_TITLE', 'Chèques-cadeaux');
-  define('MODULE_ORDER_TOTAL_GV_HEADER', 'Chèques-cadeaux');
-  define('MODULE_ORDER_TOTAL_GV_DESCRIPTION', 'Chèques-cadeaux');
+  define('MODULE_ORDER_TOTAL_GV_TITLE', 'Bon cadeau');
+  define('MODULE_ORDER_TOTAL_GV_HEADER', 'Bon cadeau');
+  define('MODULE_ORDER_TOTAL_GV_DESCRIPTION', 'Bon cadeau');
   define('SHIPPING_NOT_INCLUDED', ' [Livraison non comprise]');
   define('TAX_NOT_INCLUDED', ' [Taxe en sus]');
   define('MODULE_ORDER_TOTAL_GV_USER_PROMPT', 'Cochez cette case pour utiliser le solde de votre compte Chèque-cadeau. ->&nbsp;');

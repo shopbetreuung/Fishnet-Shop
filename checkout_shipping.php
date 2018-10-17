@@ -166,8 +166,11 @@ if ($free_shipping == true) {
 }
 
 // process the selected shipping method
+$address_query = xtc_db_query("select entry_street_address as street_address from " . TABLE_ADDRESS_BOOK . " where customers_id = '" . $_SESSION['customer_id'] . "' and address_book_id = '" . $_SESSION['sendto'] . "'");
+$address = xtc_db_fetch_array($address_query);
 if (isset ($_POST['action']) && ($_POST['action'] == 'process')) {
-
+//check no street
+if(preg_match('#[0-9]#', $address['street_address'])){ 
 	if ((xtc_count_shipping_modules() > 0) || ($free_shipping == true)) {
 		if ((isset ($_POST['shipping'])) && (strpos($_POST['shipping'], '_'))) {
 			$_SESSION['shipping'] = $_POST['shipping'];
@@ -200,6 +203,10 @@ if (isset ($_POST['action']) && ($_POST['action'] == 'process')) {
 	} else {
 		$_SESSION['shipping'] = false;
     $smarty->assign('error', ERROR_CHECKOUT_SHIPPING_NO_MODULE);
+	}
+	}else{
+    //check no street
+    $smarty->assign('error_street', ENTRY_STREET_ADDRESS_ERROR);
 	}
 }
 

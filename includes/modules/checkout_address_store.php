@@ -52,7 +52,7 @@
       $messageStack->add('checkout_address', ENTRY_LAST_NAME_ERROR);
     }
 
-    if (strlen($street_address) < ENTRY_STREET_ADDRESS_MIN_LENGTH) {
+    if (strlen($street_address) < ENTRY_STREET_ADDRESS_MIN_LENGTH || !preg_match('#[0-9]#', $street_address)) {
       $error = true;
 
       $messageStack->add('checkout_address', ENTRY_STREET_ADDRESS_ERROR);

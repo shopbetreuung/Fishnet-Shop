@@ -127,7 +127,7 @@ if (isset($_POST['action']) && ($_POST['action'] == 'process')) {
     $messageStack->add('create_account', ENTRY_EMAIL_ERROR_NOT_MATCHING);
   }
 
-  if (strlen($street_address) < ENTRY_STREET_ADDRESS_MIN_LENGTH) {
+  if (strlen($street_address) < ENTRY_STREET_ADDRESS_MIN_LENGTH || !preg_match('#[0-9]#', $street_address)) {
     $error = true;
     $messageStack->add('create_account', ENTRY_STREET_ADDRESS_ERROR);
   }
@@ -233,11 +233,12 @@ if (isset($_POST['action']) && ($_POST['action'] == 'process')) {
 
     $_SESSION['customer_id'] = xtc_db_insert_id();
 
+	$street_address_withoutsinglenull = (substr_count($street_address, '0') > 0 && !preg_match('#[1-9]#', $street_address)) ? str_replace('0', '', $street_address) : $street_address;
     $sql_data_array = array (
       'customers_id' => $_SESSION['customer_id'],
       'entry_firstname' => $firstname,
       'entry_lastname' => $lastname,
-      'entry_street_address' => $street_address,
+      'entry_street_address' => $street_address_withoutsinglenull,
       'entry_postcode' => $postcode,
       'entry_city' => $city,
       'entry_country_id' => $country,

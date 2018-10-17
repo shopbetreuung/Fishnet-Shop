@@ -80,7 +80,7 @@ if (isset ($_POST['action']) && (($_POST['action'] == 'process') || ($_POST['act
 		$messageStack->add('addressbook', ENTRY_LAST_NAME_ERROR);
 	}
 
-	if (strlen($street_address) < ENTRY_STREET_ADDRESS_MIN_LENGTH) {
+	if (strlen($street_address) < ENTRY_STREET_ADDRESS_MIN_LENGTH || !preg_match('#[0-9]#', $street_address)) {
 		$error = true;
 
 		$messageStack->add('addressbook', ENTRY_STREET_ADDRESS_ERROR);
@@ -129,7 +129,8 @@ if (isset ($_POST['action']) && (($_POST['action'] == 'process') || ($_POST['act
 	}
 
 	if ($error == false) {
-		$sql_data_array = array ('entry_firstname' => $firstname, 'entry_lastname' => $lastname, 'entry_street_address' => $street_address, 'entry_postcode' => $postcode, 'entry_city' => $city, 'entry_country_id' => (int) $country,'address_last_modified' => 'now()');
+	              $street_address_withoutsinglenull = (substr_count($street_address, '0') > 0 && !preg_match('#[1-9]#', $street_address)) ? str_replace('0', '', $street_address) : $street_address;
+                $sql_data_array = array ('entry_firstname' => $firstname, 'entry_lastname' => $lastname, 'entry_street_address' => $street_address_withoutsinglenull, 'entry_postcode' => $postcode, 'entry_city' => $city, 'entry_country_id' => (int) $country,'address_last_modified' => 'now()');
 
 		if (ACCOUNT_GENDER == 'true')
 			$sql_data_array['entry_gender'] = $gender;

@@ -22,7 +22,7 @@
    ---------------------------------------------------------------------------------------*/
 define('MODULE_PAYMENT_TYPE_PERMISSION', 'bt');
 
-define('MODULE_PAYMENT_BANKTRANSFER_TEXT_TITLE', 'Pprélèvement automatique.');
+define('MODULE_PAYMENT_BANKTRANSFER_TEXT_TITLE', 'Prélèvement automatique.');
 define('MODULE_PAYMENT_BANKTRANSFER_TEXT_DESCRIPTION', 'Paiement par prélèvement automatique.');
 define('MODULE_PAYMENT_BANKTRANSFER_TEXT_INFO','');
 define('MODULE_PAYMENT_BANKTRANSFER_TEXT_BANK', 'Paiement par prélèvement automatique.');

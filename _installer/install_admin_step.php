@@ -293,7 +293,7 @@ if (isset($_POST['action']) && ($_POST['action'] == 'process'))
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <title>shophelfer.com Installer</title>
+        <title>Fishnet Shop Installer</title>
         <link rel="stylesheet" type="text/css" href="includes/bootstrap.min.css" />
         <link rel="stylesheet" type="text/css" href="includes/stylesheet.css" />
     </head>
@@ -301,7 +301,7 @@ if (isset($_POST['action']) && ($_POST['action'] == 'process'))
         <div class="container nopad">
             <div class="row">
                 <div class="col-xs-12 nopad">
-                    <a href="http://www.shophelfer.com/" target="_blank" rel="noopener"><img src="images/logo.png" alt="shophelfer.com" /></a>
+                    <a href="http://www.fishnet-shop.com/" target="_blank" rel="noopener"><img src="images/logo.png" alt="fishnetshop" /></a>
                 </div>
             </div>
         </div>

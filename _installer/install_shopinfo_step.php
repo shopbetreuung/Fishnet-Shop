@@ -502,7 +502,7 @@ if (isset($_POST['action']) && ($_POST['action'] == 'process'))
             $banktransfer = array();
             $blz = array();
             
-            $handle = @fopen("http://www.bundesbank.de/Redaktion/DE/Downloads/Aufgaben/Unbarer_Zahlungsverkehr/Bankleitzahlen/2017_06_04/blz_2017_03_06_txt.txt?__blob=publicationFile", "r");
+            $handle = @fopen("https://www.bundesbank.de/resource/blob/602632/a44cbafa539a539be6222ffa06d33996/mL/blz-2018-09-03-txt-data.txt", "r");
             if ($handle) {
                 while (!feof($handle)) {
                     $line = stream_get_line($handle, 65535, "\n");
@@ -552,7 +552,7 @@ if (isset($_POST['action']) && ($_POST['action'] == 'process'))
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <title>shophelfer.com Installer</title>
+        <title>Fishnet Shop Installer</title>
         <link rel="stylesheet" type="text/css" href="includes/bootstrap.min.css" />
         <link rel="stylesheet" type="text/css" href="includes/stylesheet.css" />
     </head>
@@ -560,7 +560,7 @@ if (isset($_POST['action']) && ($_POST['action'] == 'process'))
         <div class="container nopad">
             <div class="row">
                 <div class="col-xs-12 nopad">
-                    <a href="http://www.shophelfer.com/" target="_blank" rel="noopener"><img src="images/logo.png" alt="shophelfer.com" /></a>
+                    <a href="http://www.fishnet-shop.com/" target="_blank" rel="noopener"><img src="images/logo.png" alt="fishnetshop" /></a>
                 </div>
             </div>
         </div>

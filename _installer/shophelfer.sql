@@ -731,6 +731,7 @@ CREATE TABLE orders (
   ibn_billdate DATE NOT NULL,
   ibn_pdfnotifydate DATE NOT NULL,
   ibn_reminderpdfnotifydate DATE NOT NULL,
+  ibn_secondreminderpdfnotifydate DATE NOT NULL,
   ibn_fullbillnr CHAR( 60 ) NOT NULL,
   PRIMARY KEY (orders_id),
   KEY idx_customers_id (customers_id),

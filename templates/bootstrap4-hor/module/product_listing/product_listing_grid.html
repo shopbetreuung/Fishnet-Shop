@@ -9,7 +9,7 @@
 	<h1>{$CATEGORIES_NAME}</h1>
 {/if}
 {if $CATEGORIES_DESCRIPTION || $CATEGORIES_IMAGE || $MANUFACTURER_DROPDOWN}
-	{if $CATEGORIES_IMAGE}<a data-toggle="lightbox" data-title="{$CATEGORIES_NAME}" href="{$CATEGORIES_IMAGE}" class="catimglink"><img src="{$CATEGORIES_IMAGE}" alt="{$CATEGORIES_NAME}" class="float-left img-fluid" /></a><br />{/if}
+	{if $CATEGORIES_IMAGE}<a data-toggle="lightbox" data-title="{$CATEGORIES_NAME}" href="{$CATEGORIES_IMAGE}" class="catimglink"><img src="{$CATEGORIES_IMAGE}" alt="{$CATEGORIES_IMAGE_ALT}" title="{$CATEGORIES_IMAGE_TITLE}" class="float-left img-fluid" /></a><br />{/if}
 	{if $CATEGORIES_DESCRIPTION}{$CATEGORIES_DESCRIPTION}<br />{/if}
 	{if $MANUFACTURER_DROPDOWN}{$MANUFACTURER_DROPDOWN}<br />{/if}
 {/if}

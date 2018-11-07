@@ -84,6 +84,8 @@ if ($category_depth == 'nested') {
                             c.categories_template,
                             cd.categories_name,
                             cd.categories_heading_title,
+                            cd.categorie_image_title,
+                            cd.categorie_image_alt,
                             cd.categories_description
                           FROM ".TABLE_CATEGORIES." c
                           JOIN ".TABLE_CATEGORIES_DESCRIPTION." cd on cd.categories_id = c.categories_id
@@ -101,6 +103,8 @@ if ($category_depth == 'nested') {
                                 c.parent_id,
                                 cd.categories_name,
                                 cd.categories_heading_title,
+                                cd.categorie_image_title,
+                                cd.categorie_image_alt,
                                 cd.categories_description
                               FROM ".TABLE_CATEGORIES." c
                               JOIN ".TABLE_CATEGORIES_DESCRIPTION." cd on cd.categories_id = c.categories_id
@@ -122,6 +126,8 @@ if ($category_depth == 'nested') {
       $categories_content[] = array ('CATEGORIES_NAME' => $categories['categories_name'],
                                      'CATEGORIES_HEADING_TITLE' => $categories['categories_heading_title'],
                                      'CATEGORIES_IMAGE' => $image,
+                                     'CATEGORIES_IMAGE_TITLE' => $categories['categorie_image_title'],
+                                     'CATEGORIES_IMAGE_ALT' => $categories['categorie_image_alt'],
                                      'CATEGORIES_LINK' => xtc_href_link(FILENAME_DEFAULT, $cPath_new),
                                      'CATEGORIES_DESCRIPTION' => $categories['categories_description']);
     }
@@ -189,6 +195,8 @@ if ($category_depth == 'nested') {
   $default_smarty->assign('CATEGORIES_HEADING_TITLE', $category['categories_heading_title']);
   $default_smarty->assign('CATEGORIES_IMAGE', $image);
   $default_smarty->assign('CATEGORIES_DESCRIPTION', $category['categories_description']);
+  $default_smarty->assign('CATEGORIES_IMAGE_TITLE', $category['categorie_image_title']);
+  $default_smarty->assign('CATEGORIES_IMAGE_ALT', $category['categorie_image_alt']);
   $default_smarty->assign('language', $_SESSION['language']);
   $default_smarty->assign('module_content', $categories_content);
   $default_smarty->caching = 0;

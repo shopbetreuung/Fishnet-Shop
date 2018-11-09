@@ -20,4 +20,8 @@ define('TEXT_MAX_DISCOUNT', 'Ändern Sie den maximal zulässigen Rabatt für aus
 define('TEXT_MAX_DISCOUNT_WARRNING', 'Achtung, diese Änderung wirkt sich auch auf die Unterkategorien aus.');
 define('TEXT_ERROR_MAX_DISCOUNT', '<strong>Achtung! </strong> Eingang muss ausgef&uuml;llt werden');
 
+define('TEXT_CHANGE_MANUFACTURER', 'Hersteller ausw&auml;hlen:');
+define('TEXT_CHANGE_MANUFACTURER_NONE', '--none--');
+define('ENTRY_MANUFACTURER', 'Hersteller');
+
 ?>

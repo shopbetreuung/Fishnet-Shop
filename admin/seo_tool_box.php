@@ -66,7 +66,7 @@ switch($seo_tool_box_action) {
             $product_meta_title_array[] = "'".addslashes($products_meta_title_array['products_meta_title'])."'";
         }
 
-        $seo_tool_box_where = " AND pd.products_meta_title IN (".implode(',',$product_meta_title_array).") AND pd.products_meta_title != '' ";
+        $seo_tool_box_where = " AND pd.products_meta_title IN (".implode(',',$product_meta_title_array).") AND pd.products_meta_title != '' ORDER BY pd.products_meta_title ";
         break;
     case 12:
 
@@ -77,7 +77,7 @@ switch($seo_tool_box_action) {
             $product_meta_description_array[] = "'".addslashes($products_meta_description_array['products_meta_description'])."'";
         }
 
-        $seo_tool_box_where = " AND pd.products_meta_description IN (".implode(',',$product_meta_description_array).") AND pd.products_meta_description != '' ";
+        $seo_tool_box_where = " AND pd.products_meta_description IN (".implode(',',$product_meta_description_array).") AND pd.products_meta_description != '' ORDER BY pd.products_meta_description ";
 
     break;
 
@@ -120,6 +120,14 @@ switch($seo_tool_box_action) {
                     case 10:
                         $seo_tool_box_select = "SELECT DISTINCT pd.products_id, pd.products_name FROM ".TABLE_PRODUCTS_DESCRIPTION." pd JOIN ".TABLE_PRODUCTS_IMAGES." pi ON pd.products_id = pi.products_id WHERE pd.language_id = ".$_SESSION['languages_id'].$seo_tool_box_where."";
                         break;
+                    case 11:
+                        $seo_tool_box_select = "SELECT pd.products_id, pd.products_name, pd.products_meta_title FROM ".TABLE_PRODUCTS_DESCRIPTION." pd WHERE pd.language_id = ".$_SESSION['languages_id'].$seo_tool_box_where."";
+                        $product_meta_title_value = null;
+                        break;
+                    case 12:
+                        $seo_tool_box_select = "SELECT pd.products_id, pd.products_name, pd.products_meta_description FROM ".TABLE_PRODUCTS_DESCRIPTION." pd WHERE pd.language_id = ".$_SESSION['languages_id'].$seo_tool_box_where."";
+                        $products_meta_description_value = null;
+                        break;
                     default:
                         $seo_tool_box_select = "SELECT pd.products_id, pd.products_name FROM ".TABLE_PRODUCTS_DESCRIPTION." pd WHERE pd.language_id = ".$_SESSION['languages_id'].$seo_tool_box_where."";
                         break;
@@ -130,11 +138,52 @@ switch($seo_tool_box_action) {
 
                 while ($seo_tool_box_array = xtc_db_fetch_array($seo_tool_box_query)) {
 
-                echo '<tr class="dataTableRow" onmouseover="this.className=\'dataTableRowOver\';this.style.cursor=\'pointer\'" onmouseout="this.className=\'dataTableRow\'" onclick="document.location.href=\''.xtc_href_link(FILENAME_CATEGORIES, xtc_get_all_get_params(array ('pID', 'action')).'pID='.$seo_tool_box_array['products_id'].'&action=new_product').'\'">'."\n";
+                    echo '<tr class="dataTableRow" onmouseover="this.className=\'dataTableRowOver\';this.style.cursor=\'pointer\'" onmouseout="this.className=\'dataTableRow\'" onclick="document.location.href=\''.xtc_href_link(FILENAME_CATEGORIES, xtc_get_all_get_params(array ('pID', 'action')).'pID='.$seo_tool_box_array['products_id'].'&action=new_product').'\'">'."\n";
+                
+                    switch($seo_tool_box_action) {
+                        case 11:
+                            if (!isset($product_meta_title_value)) {
+                                $product_meta_title_value = $seo_tool_box_array['products_meta_title'];
+                            }
+                            
+                            if ($product_meta_title_value == $seo_tool_box_array['products_meta_title']) {
+                            ?>
+                                <td class="dataTableContent" align="right" width="25%" style="color:#007bff;"><?php echo $seo_tool_box_array['products_name']; ?>&nbsp;</td>  
+                            <?php
+                            } else {
+                            ?>
+                                <td class="dataTableContent" align="right" width="25%" style="border-top: 2px solid #aaa1a1; color:#007bff;"><?php echo $seo_tool_box_array['products_name']; ?>&nbsp;</td>  
+                            <?php
+                                unset($product_meta_title_value);
+                            }
+                            
+                            break;
+                        case 12:
+                            if (!isset($products_meta_description_value)) {
+                                $products_meta_description_value = $seo_tool_box_array['products_meta_description'];
+                            }
+                            
+                            if ($products_meta_description_value == $seo_tool_box_array['products_meta_description']) {
+                            ?>
+                                <td class="dataTableContent" align="right" width="25%" style="color:#007bff;"><?php echo $seo_tool_box_array['products_name']; ?>&nbsp;</td>  
+                            <?php
+                            } else {
+                            ?>
+                                <td class="dataTableContent" align="right" width="25%" style="border-top: 2px solid #aaa1a1; color:#007bff;"><?php echo $seo_tool_box_array['products_name']; ?>&nbsp;</td>  
+                            <?php
+                                unset($products_meta_description_value);
+                            }
+                            
+                            break;
+                        default:
+                
                 ?>
-                    <td class="dataTableContent" align="right" width="25%" style="color:#007bff;"><?php echo $seo_tool_box_array['products_name']; ?>&nbsp;</td>  
-                </tr> 
+                    <td class="dataTableContent" align="right" width="25%" style="color:#007bff;"><?php echo $seo_tool_box_array['products_name']; ?>&nbsp;</td>                   
+                
                 <?php
+                        break;
+                    }
+                    echo '</tr> ';
                 }
 
                 ?>

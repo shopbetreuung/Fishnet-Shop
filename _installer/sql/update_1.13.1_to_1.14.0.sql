@@ -2,7 +2,7 @@ UPDATE database_version SET version = 'SH_1.14.0';
 
 INSERT INTO languages VALUES (3,'Français','fr','icon.gif','french',3,'utf-8',0);
 
-INSERT INTO content_manager VALUES ('', 0, 0, '', 3, 'Frais d\'expédition', 'Frais d\'expédition', 'Indiquez ici toutes informations concernant les frais d\'expédition.', 0, 1, '', 1, 4, 0, '', '', '', NOW(), 1);
+INSERT INTO content_manager VALUES ('', 0, 0, '', 3, 'Frais d\'expédition', 'Frais d\'expédition', 'Indiquez ici toutes informations concernant les frais d\'expédition.', 0, 1, '', 1, 1, 0, '', '', '', NOW(), 1);
 INSERT INTO content_manager VALUES ('', 0, 0, '', 3, 'Confidentialité et protection des données', 'Confidentialité et protection des données', 'Insérez ici vos informations sur la protection des données.', 0, 1, '', 1, 2, 0, '', '', '', NOW(), 1);
 INSERT INTO content_manager VALUES ('', 0, 0, '', 3, 'Nos conditions générales de vente', 'Conditions générales de vente', '<strong>Conditions générales de vente<br /></strong><br />Indiquez ici toute information concernent les conditions générales.<br />1. Valeur<br />2. Promotions<br />3. Prix<br />4. Expédition et danger de dépassment<br />5. Livraison<br />6. Conditions de paiement<br />7. Réserve de propriété <br />8. Plaintes, Prestation et indemnités<br />9. Retrait d\'obligeance / Refus de prendre la commande<br />10. Lieu d\'exécution et tribunal compétent<br />11. Décisions finales', 0, 1, '', 1, 3, 0, '', '', '', NOW(), 1);
 INSERT INTO content_manager VALUES ('', 0, 0, '', 3, 'Impression', 'Impression', 'Indiquez ici votre impression.', 0, 1, '', 1, 4, 0, '', '', '', NOW(), 1);

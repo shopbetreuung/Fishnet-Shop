@@ -616,5 +616,9 @@ define('TEXT_EQUAL', 'EQUAL');
 define('TEXT_NOT_EQUAL', 'NOT EQUAL');
 define('TEXT_SUBMIT_NEW_PROFILE','Submit new profile');
 
+define('TEXT_PROFILE_REMOVE_CONFIRMATION','Are you sure you want to delete the profile?');
+define('TEXT_PROFILE_REMOVE_YES','Yes');
+define('TEXT_PROFILE_REMOVE_NO','No');
+define('TEXT_PROFILE_REMOVE_TITLE','Delete profile');
 
 ?>

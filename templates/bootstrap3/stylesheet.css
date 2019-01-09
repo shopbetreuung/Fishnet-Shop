@@ -724,6 +724,10 @@ BASIC Template for AGB Hosting Content
 	text-align: unset;
 }
 
+.language-box img {
+    margin: 0 3px;
+}
+
 @media screen and (max-width: 530px) {
     
     div.highlightbox input, div.highlightbox textarea {

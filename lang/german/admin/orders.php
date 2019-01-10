@@ -177,4 +177,9 @@ define('TABLE_HEADING_REMOVE_LINK', 'Link entfernen');
 define('BUTTON_PDFBILL_SEND_REMINDER_MAIL', 'Erinnerung senden');
 define('BUTTON_PDFBILL_SEND_REMINDER_MAIL2', 'Resend PDF-Reminder');
 define('PDFBILL_MSG_REMINDER_SENT', 'E-Mail gesendet');
+
+define('BUTTON_PDFBILL_SEND_SECOND_REMINDER_MAIL', 'Zweite Erinnerung senden');
+define('BUTTON_PDFBILL_SEND_SECOND_REMINDER_MAIL2', 'Erinnerung erneut senden');
+define('PDFBILL_MSG_SECOND_REMINDER_SENT', 'E-Mail gesendet');
+
 ?>

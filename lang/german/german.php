@@ -499,8 +499,12 @@ define('SHIPPING_TIME','Lieferzeit: ');
 define('MORE_INFO','[Mehr]');
 define('READ_INFO','[Lesen]');
 
-// changes 3.0.4 SP2.2
+// Privacy Stuff
 define('ENTRY_PRIVACY_ERROR','Bitte best&auml;tigen Sie, dass Sie unsere Datenschutzrichtlinien zur Kenntnis genommen haben!');
+define('COOKIE_NOTE_TEXT', 'Mit Ihrem Besuch auf unserer Website stimmen Sie der Verwendung von Cookies zu. So können wir den Service für Sie weiter verbessern.');
+define('COOKIE_NOTE_MORE_TEXT', 'Mehr Infos');
+define('COOKIE_NOTE_DISMISS_TEXT', 'Verstanden');
+
 define('TEXT_PAYMENT_FEE','Zahlungsgeb&uuml;hr');
 
 define('_MODULE_INVALID_SHIPPING_ZONE', 'Es ist leider kein Versand in dieses Land m&ouml;glich');
@@ -534,11 +538,11 @@ define('PAYPAL_ADRESSE','Das Land in Ihrer PayPal-Versand-Adresse ist in unserem
 define('PAYPAL_AMMOUNT_NULL','Die zu erwartende Auftrags-Summe (ohne Versand) ist gleich 0.<br />Dadurch steht PayPal Express nicht zur Verf&uuml;gung.<br />Bitte w&auml;hlen Sie eine andere Zahlungsart.<br />Danke f&uuml;r Ihr Verst&auml;ndnis.<br />');
 // EOF - web28 - 2010-05-07 - PayPal API Modul
 define('BASICPRICE_VPE_TEXT','bei dieser Menge nur '); // Hetfield - 2009-11-26 - Added language definition for vpe at graduated prices
-//web - 2010-07-11 - Preisanzeige bei Staffelpreisen (gr��te Staffel)
+//web - 2010-07-11 - Price display for scale prices (largest scale)
 define('GRADUATED_PRICE_MAX_VALUE', 'ab');
 
-//web28 - 2010-08-20 - VERSANDKOSTEN WARENKORB
-define('_SHIPPING_TO', 'Versand nach ');
+//web28 - 2010-08-20 - SHIPPING COSTS SHOPPING CART
+define('_SHIPPING_TO', 'Zeige mir die möglichen Versandarten für: ');
 
 // BOF - DokuMan - 2011-09-20 - E-Mail SQL errors
 define('ERROR_SQL_DB_QUERY','Es tut uns leid, aber es ist ein Datenbankfehler aufgetreten.');
@@ -550,9 +554,7 @@ define('TEXT_AGB_CHECKOUT','AGB und Kundeninformation %s <br /> Widerrufsbelehru
 
 define('_SHIPPING_FREE','Download');
 
-define('COOKIE_NOTE_TEXT', 'Mit Ihrem Besuch auf unserer Website stimmen Sie der Verwendung von Cookies zu. So können wir den Service für Sie weiter verbessern.');
-define('COOKIE_NOTE_MORE_TEXT', 'Mehr Infos');
-define('COOKIE_NOTE_DISMISS_TEXT', 'Verstanden');
+
 
 //google_sitemap.php
 define('SITEMAP_FILE', 'Sitemap-Datei');
@@ -565,8 +567,10 @@ define('SITEMAP_CONTENTPAGE', 'Content pages');
 define('SITEMAP_EXPORT', 'exportiert');
 
 define('TEXT_EDIT_CATEGORIES', 'Kategorie editieren');
-define('ERROR_HONEYPOT','<p>Es gab ein Problem mit dem Kontaktformular</p>');
 define('TEXT_EDIT_CONTENT_MANAGER', 'Content editieren');
+
+define('ERROR_HONEYPOT','<p>Es gab ein Problem mit dem Kontaktformular</p>');
+
 define('ERROR_MESSAGE_PRODUCT_NEGATIVE_AMOUNT', 'Negativer Betrag. Bitte kontaktieren Sie uns f&uuml;r ein Angebot.');
 
 define('TEXT_TO_CATEGORY', 'Zur Kategorie');

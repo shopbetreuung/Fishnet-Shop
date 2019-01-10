@@ -1,24 +1,25 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: configuration.php 3130 2012-06-28 11:17:12Z Tomcraft1980 $
+   $Id: configuration.php  
 
-   modified eCommerce Shopsoftware
-   http://www.modified-shop.org
+   Fishnet Shopsoftware
+   http://fishnet-shop.com
 
-   Copyright (c) 2009 - 2013 [www.modified-shop.org]
+   Copyright (c) 2017 - 2019 [www.fishnet-shop.com]
    -----------------------------------------------------------------------------------------
    based on:
    (c) 2000-2001 The Exchange Project  (earlier name of osCommerce)
    (c) 2002-2003 osCommerce(configuration.php,v 1.8 2002/01/04); www.oscommerce.com
-   (c) 2003 nextcommerce (configuration.php,v 1.16 2003/08/25); www.nextcommerce.org
+   (c) 2003	 nextcommerce (configuration.php,v 1.16 2003/08/25); www.nextcommerce.org
    (c) 2006 XT-Commerce
+   (c) 2013 Modified eCommerce (configuration.php 3130 2012-06-28 11:17:12Z Tomcraft1980 $)
 
    Released under the GNU General Public License
    ---------------------------------------------------------------------------------------*/
    
 // --- bof -- ipdfbill --------
-define('IBN_BILLNR_TITLE', '[ibillnr] Next Invoivenumer');       //ibillnr
-define('IBN_BILLNR_DESC', 'Next number for invoice.'); 
+define('IBN_BILLNR_TITLE', '[ibillnr] Next invoice number');       //ibillnr
+define('IBN_BILLNR_DESC', 'When an order is invoiced, this number is assigned next.'); 
 define('IBN_BILLNR_FORMAT_TITLE', '[ibillnr] Invoicenumber Format');       //ibillnr
 define('IBN_BILLNR_FORMAT_DESC', 'Format invoicenumber.: {n}=number, {d}=day, {m}=month, {y}=year, <br>example. "100{n}-{d}-{m}-{y}" => "10099-28-02-2007"'); 
 // --- eof -- ipdfbill --------    
@@ -28,7 +29,7 @@ define('TABLE_HEADING_CONFIGURATION_TITLE', 'Title');
 define('TABLE_HEADING_CONFIGURATION_VALUE', 'Value');
 define('TABLE_HEADING_ACTION', 'Action');
 
-define('TEXT_INFO_EDIT_INTRO', 'Please make any necessary changes');
+define('TEXT_INFO_EDIT_INTRO', 'Please make all necessary changes');
 define('TEXT_INFO_DATE_ADDED', 'Date Added:');
 define('TEXT_INFO_LAST_MODIFIED', 'Last Modified:');
 
@@ -50,7 +51,7 @@ define('STORE_ZONE_DESC' , 'The district my store is located in.');
 
 define('EXPECTED_PRODUCTS_SORT_TITLE' , 'Expected Products Sort Order');
 define('EXPECTED_PRODUCTS_SORT_DESC' , 'This is the sort order used in the expected products box.');
-define('EXPECTED_PRODUCTS_FIELD_TITLE' , 'Expexted Products Sort Field');
+define('EXPECTED_PRODUCTS_FIELD_TITLE' , 'Expected Products Sort Field');
 define('EXPECTED_PRODUCTS_FIELD_DESC' , 'The column to sort by in the expected products box.');
 
 define('USE_DEFAULT_LANGUAGE_CURRENCY_TITLE' , 'Switch to language specific currency');
@@ -207,10 +208,10 @@ define('CONFIG_CALCULATE_IMAGE_SIZE_TITLE' , 'Calculate Image Size');
 define('CONFIG_CALCULATE_IMAGE_SIZE_DESC' , 'Calculate the size of images?');
 
 define('IMAGE_REQUIRED_TITLE' , 'Image Required');
-define('IMAGE_REQUIRED_DESC' , 'Enable to display broken images. Good for development.');
+define('IMAGE_REQUIRED_DESC' , 'If you set this to "1", non-existing images will be displayed as frames. Good for developers.');
 
 define('MO_PICS_TITLE','Number of product images');
-define('MO_PICS_DESC','if this number is set > 0 , you will be able to upload/display more images per product');
+define('MO_PICS_DESC','Number of product images to be available in addition to the main product image.');
 
 // Category Image
 
@@ -338,9 +339,9 @@ define('SHIPPING_ORIGIN_ZIP_DESC' , 'Enter the Postal Code (ZIP) of the Store to
 define('SHIPPING_MAX_WEIGHT_TITLE' , 'Enter the Maximum Package Weight you will ship');
 define('SHIPPING_MAX_WEIGHT_DESC' , 'Carriers have a max weight limit for a single package. This is a common one for all.');
 define('SHIPPING_BOX_WEIGHT_TITLE' , 'Package Tare weight.');
-define('SHIPPING_BOX_WEIGHT_DESC' , 'Minimum tare weight which is added to the total weight (net) of all products. For example, for 1,5 kg enter 1.5.');
+define('SHIPPING_BOX_WEIGHT_DESC' , 'Minimum tare weight which is added to the total weight (net) of all products. For example, for 1,5 kg enter 1.5. Attention, the input has effects on your shipping costs! Recommended: 0');
 define('SHIPPING_BOX_PADDING_TITLE' , 'Larger packages - percentage increase.');
-define('SHIPPING_BOX_PADDING_DESC' , 'For 10% enter 10');
+define('SHIPPING_BOX_PADDING_DESC' , 'For 10% enter 10. Attention, the input has effects on your shipping costs! Recommended: 0');
 define('SHOW_SHIPPING_TITLE' , 'Shipping Costs in Shopping Cart');
 define('SHOW_SHIPPING_DESC' , 'Show link to shipping costs in shopping cart');
 define('SHIPPING_INFOS_TITLE' , 'Group ID');
@@ -363,7 +364,7 @@ define('STOCK_ALLOW_CHECKOUT_DESC' , 'Allow customer to checkout even if there i
 define('STOCK_MARK_PRODUCT_OUT_OF_STOCK_TITLE' , 'Mark product out of stock');
 define('STOCK_MARK_PRODUCT_OUT_OF_STOCK_DESC' , 'Display on-screen message so customers can see which product has insufficient stock');
 define('STOCK_REORDER_LEVEL_TITLE' , 'E-Mail to admin if stock is below');
-define('STOCK_REORDER_LEVEL_DESC' , 'Below which stock should the system send a mail to admin that he needs to reorder?');
+define('STOCK_REORDER_LEVEL_DESC' , 'Below which stock should the system send a mail to admin that he needs to reorder?  If you do not wish to receive an e-mail, enter the quantity -99999, for example.');
 define('STORE_PAGE_PARSE_TIME_TITLE' , 'Store page parse time');
 define('STORE_PAGE_PARSE_TIME_DESC' , 'Store the time it takes to parse a page');
 define('STORE_PAGE_PARSE_TIME_LOG_TITLE' , 'Log file destination');
@@ -401,7 +402,7 @@ define('EMAIL_USE_HTML_DESC' , 'Send E-Mails in HTML format');
 define('ENTRY_EMAIL_ADDRESS_CHECK_TITLE' , 'Verify E-Mail Address Through DNS');
 define('ENTRY_EMAIL_ADDRESS_CHECK_DESC' , 'Verify e-mail address through a DNS server');
 define('SEND_EMAILS_TITLE' , 'Send E-Mails');
-define('SEND_EMAILS_DESC' , 'Send out E-Mails');
+define('SEND_EMAILS_DESC' , 'Send out E-Mails (for orders, etc.)');
 define('SENDMAIL_PATH_TITLE' , 'The Path to sendmail');
 define('SENDMAIL_PATH_DESC' , 'If you use sendmail, please give the right path (default: /usr/bin/sendmail):');
 define('SMTP_MAIN_SERVER_TITLE' , 'Address of the SMTP Server');
@@ -415,7 +416,7 @@ define('SMTP_PASSWORD_DESC' , 'Please enter the password of your SMTP Account.')
 define('SMTP_AUTH_TITLE' , 'SMTP AUTH');
 define('SMTP_AUTH_DESC' , 'Enable secure authentication for your SMTP Server');
 define('SMTP_PORT_TITLE' , 'SMTP Port');
-define('SMTP_PORT_DESC' , 'Please enter the SMTP port of your SMTP server(default: 25)?');
+define('SMTP_PORT_DESC' , 'Please enter the SMTP port of your SMTP server(default: 25)');
 define('SMTP_SECURE_TITLE', 'SMTP encryption method');
 define('SMTP_SECURE_DESC', 'Select the method \'ssl\' or \'tls\' for e-mail encryption, or select \'---\' for no encryption.');
 
@@ -433,7 +434,7 @@ define('CONTACT_US_FORWARDING_STRING_DESC' , 'Please enter e-mail addresses (sep
 define('CONTACT_US_REPLY_ADDRESS_TITLE' , 'Contact Us - Reply-To');
 define('CONTACT_US_REPLY_ADDRESS_DESC' , 'Please enter an e-mail address where customers can reply to.');
 define('CONTACT_US_REPLY_ADDRESS_NAME_TITLE' , 'Contact Us - Reply-To Name');
-define('CONTACT_US_REPLY_ADDRESS_NAME_DESC' , 'Please enter a name to be used in the reply-to field of "Contact Us" meesages.');
+define('CONTACT_US_REPLY_ADDRESS_NAME_DESC' , 'Please enter a name to be used in the reply-to field of "Contact Us" messages.');
 define('CONTACT_US_EMAIL_SUBJECT_TITLE' , 'Contact Us - E-Mail Subject');
 define('CONTACT_US_EMAIL_SUBJECT_DESC' , 'Please enter an e-mail subject for "Contact Us" messages.');
 
@@ -539,7 +540,7 @@ define('PRODUCT_REVIEWS_VIEW_TITLE','Reviews in Product Details');
 define('PRODUCT_REVIEWS_VIEW_DESC','Number of reviews displayed on the product details page');
 
 define('DELETE_GUEST_ACCOUNT_TITLE','Delete Guest Accounts');
-define('DELETE_GUEST_ACCOUNT_DESC','Shold guest accounts be deleted after placing orders? (Order data will be saved)');
+define('DELETE_GUEST_ACCOUNT_DESC','Shold guest accounts be deleted after placing orders? (Order data will be saved). Recommended: yes');
 
 define('USE_WYSIWYG_TITLE','Activate WYSIWYG Editor');
 define('USE_WYSIWYG_DESC','Activate WYSIWYG editor for CMS and products');
@@ -596,8 +597,8 @@ define('ACCOUNT_COMPANY_VAT_CHECK_TITLE' , 'Validate VAT Reg No');
 define('ACCOUNT_COMPANY_VAT_CHECK_DESC' , 'Customers may enter a VAT Registration number. If no, the box disappears');
 define('ACCOUNT_COMPANY_VAT_LIVE_CHECK_TITLE' , 'Validate VAT Reg No online for plausability');
 define('ACCOUNT_COMPANY_VAT_LIVE_CHECK_DESC' , 'Validate VAT Registration number online for plausability using the webservice of the taxation portal of the EU (<a href="http://ec.europa.eu/taxation_customs" style="font-style:italic">http://ec.europa.eu/taxation_customs</a>).<br/>Requires PHP5 with activated "SOAP" support! <strong><span class="messageStackSuccess">The "PHP5 SOAP"-support is actually '.(in_array ('soap', get_loaded_extensions()) ? '' : '<span class="messageStackError">NOT</span>').' active!</span></strong>');
-define('ACCOUNT_COMPANY_VAT_GROUP_TITLE' , 'Automatic Pruning?');
-define('ACCOUNT_COMPANY_VAT_GROUP_DESC' , 'Set to yes, the customers group will be changed automatically if a valid VAT Reg No is used');
+define('ACCOUNT_COMPANY_VAT_GROUP_TITLE' , 'Customize customer group according to UST ID Check?');
+define('ACCOUNT_COMPANY_VAT_GROUP_DESC' , 'By activating this option, the customer group is changed after a positive UST ID check.');
 define('ACCOUNT_VAT_BLOCK_ERROR_TITLE' , 'Allow Invalid VAT Reg No?');
 define('ACCOUNT_VAT_BLOCK_ERROR_DESC' , 'Set to yes, only validated VAT Reg No are accepted');
 define('DEFAULT_CUSTOMERS_VAT_STATUS_ID_LOCAL_TITLE','Customers Group - Approved VAT Reg No (Shop country)');
@@ -624,9 +625,9 @@ define('AFTERBUY_ORDERSTATUS_TITLE','Order Status');
 define('AFTERBUY_ORDERSTATUS_DESC','Order status for exported orders');
 define('AFTERBUY_URL','You will find detailed Afterbuy info here: <a href="http://www.afterbuy.de" target="new">http://www.afterbuy.de</a>');
 define('AFTERBUY_DEALERS_TITLE', 'mark as Dealer');
-define('AFTERBUY_DEALERS_DESC', 'Example: <em>6,5,8</em>');
-define('AFTERBUY_IGNORE_GROUPE_TITLE', 'Customer group ignor');
-define('AFTERBUY_IGNORE_GROUPE_DESC', 'Example: <em>6,5,8</em>.');
+define('AFTERBUY_DEALERS_DESC', 'Enter the group IDs of the merchants to be included in Afterbuy as merchants. Example: <em>6,5,8</em>');
+define('AFTERBUY_IGNORE_GROUPE_TITLE', 'Ignore customer group');
+define('AFTERBUY_IGNORE_GROUPE_DESC', 'Which customer groups should be ignored? Example: <em>6,5,8</em>.');
 
 // Search-Options
 define('SEARCH_IN_DESC_TITLE','Search in Products Descriptions');
@@ -634,13 +635,12 @@ define('SEARCH_IN_DESC_DESC','Include products descriptions when searching');
 define('SEARCH_IN_ATTR_TITLE','Search in Products Attributes');
 define('SEARCH_IN_ATTR_DESC','Include products attributes when searching');
 
-// changes for 3.0.4 SP2
 define('REVOCATION_ID_TITLE','Revocation ID');
 define('REVOCATION_ID_DESC','Content ID of revocation content');
 define('DISPLAY_REVOCATION_ON_CHECKOUT_TITLE','Display right of revocation?');
 define('DISPLAY_REVOCATION_ON_CHECKOUT_DESC','Display right of revocation on checkout_confirmation?');
 
-// BOF - Tomcraft - 2009-10-03 - Paypal Express Modul
+// Paypal Express Script
 define('PAYPAL_MODE_TITLE','PayPal Mode:');
 define('PAYPAL_MODE_DESC','Live (Default) or Test (Sandbox). Depending on the mode, you first have to create the PayPal API access: <br/>Link: <a href="https://www.paypal.com/de/cgi-bin/webscr?cmd=_get-api-signature&generic-flow=true" target="_blank" rel="noopener"><strong>Create API-access for live-mode</strong></a><br/>Link: <a href="https://www.sandbox.paypal.com/de/cgi-bin/webscr?cmd=_get-api-signature&generic-flow=true" target="_blank" rel="noopener"><strong>Create API-access for sandbox-mode</strong></a><br/>You still have no PayPal account? <a href="https://www.paypal.com/de/cgi-bin/webscr?cmd=_registration-run" target="_blank" rel="noopener"><strong>Click here to create one.</strong></a>');
 define('PAYPAL_API_USER_TITLE','PayPal API-User (Live)');
@@ -707,13 +707,13 @@ define('DELETE_TEMP_CACHE_SUCCESSFUL', 'Templatecache deleted successfully.');
 
 // BOF - DokuMan - 2010-08-13 - set Google RSS Feed in admin section
 define('GOOGLE_RSS_FEED_REFID_TITLE' , 'Google RSS Feed - refID');
-define('GOOGLE_RSS_FEED_REFID_DESC' , 'Enter your campaign ID here. It will be appended to every link of the Google RSS Feed automaticallyt.');
+define('GOOGLE_RSS_FEED_REFID_DESC' , 'Enter the campaign ID here. This will be automatically added to every link in the Google RSS feed.');
 // EOF - DokuMan - 2010-08-13 - set Google RSS Feed in admin section
 
-// BOF - web28 - 2010-08-17 -  Bildgrößenberechnung kleinerer Bilder
+// BOF - web28 - 2010-08-17 -  Image size calculation for smaller images
 define('PRODUCT_IMAGE_NO_ENLARGE_UNDER_DEFAULT_TITLE','Upscaling low-res images)');
-define('PRODUCT_IMAGE_NO_ENLARGE_UNDER_DEFAULT_DESC','If set to <strong>no</strong>, upscaling of low-res images to default settings for image size is disabled. Set to <strong>yes</strong> to enable upscaling of low-res images. In this case those images will be shown blurry.');
-// EOF - web28 - 2010-08-17 -  Bildgrößenberechnung kleinerer Bilder
+define('PRODUCT_IMAGE_NO_ENLARGE_UNDER_DEFAULT_DESC','Activate the <strong>No</strong> setting to prevent article images with a lower resolution from being scaled to the set default values for width and height. If you activate the <strong>Yes</strong> setting, lower-resolution images will also be scaled to the default image size. In this case these images can be very blurred and pixelated.');
+// EOF - web28 - 2010-08-17 -  Image size calculation for smaller images
 
 //BOF - hendrik - 2011-05-14 - independent invoice number and date
 define('IBN_BILLNR_TITLE', 'Next invoice number');
@@ -727,7 +727,7 @@ define('FAILED_LOGINS_LIMIT_DESC', 'Maximum number of login tries before captcha
 define('VALID_REQUEST_TIME_TITLE', 'Valid password renewal request time');
 define('VALID_REQUEST_TIME_DESC', 'Set valid password renewal request time in seconds for which the renewal of the password is enabled after sending a request (default 3600 seconds)');
 define('INSERT_RECAPTCHA_KEY_TITLE', 'Google reCaptcha api key');
-define('INSERT_RECAPTCHA_KEY_DESC', 'Here you can insert valid Google reCaptcha api key (<strong><span style="color: #FF0000;">reCaptcha will not be displayed if input field is empty!</span></strong>) <br /> <br />  <a href="https://www.google.com/recaptcha/admin#list" target="_blank"> Click to get Google reCaptcha api key</a> <br /><br /> <strong> Make sure to select reCAPTCHA V2! <br /> <br /> <span style="color: #FF0000;"> Please do not type the API key - just copy it and paste it in here!</span></strong>');
+define('INSERT_RECAPTCHA_KEY_DESC', 'Here you can insert valid Google reCaptcha api key (<strong><span style="color: #FF0000;">reCaptcha will not be displayed if input field is empty!</span></strong>) <br /> <br />  <a href="https://www.google.com/recaptcha/admin#list" target="_blank"> Click to get Google reCaptcha api key</a> <br /><br /> <strong> Make sure to select reCAPTCHA V2 and the version "I am no robot"! <br /> <br /> <span style="color: #FF0000;"> Please do not type the API key - just copy it and paste it in here!</span></strong>');
 define('RECAPTCHA_SECRET_KEY_TITLE', 'Google reCatpcha secret key');
 define('RECAPTCHA_SECRET_KEY_DESC', 'Enter the appropriate secret key here. When copying, please make sure that you do not copy any spaces before or after it.');
 
@@ -741,7 +741,7 @@ define('MAX_DISPLAY_ORDER_RESULTS_TITLE', 'Number of orders per page');
 define('MAX_DISPLAY_ORDER_RESULTS_DESC', 'Maximum number of orders that are to be displayed in the grid per page.');
 define('MAX_DISPLAY_LIST_PRODUCTS_TITLE', 'Number of products per page');
 define('MAX_DISPLAY_LIST_PRODUCTS_DESC', 'Maximum number of products that are to be displayed in the grid per page.');
-define('MAX_DISPLAY_LIST_CUSTOMERS_TITLE', 'Number of customres per page');
+define('MAX_DISPLAY_LIST_CUSTOMERS_TITLE', 'Number of customers per page');
 define('MAX_DISPLAY_LIST_CUSTOMERS_DESC', 'Maximum number of customers that are to be displayed in the grid per page.');
 define ('MAX_ROW_LISTS_ATTR_OPTIONS_TITLE', 'Product Options: Number of Product Options per page');
 define ('MAX_ROW_LISTS_ATTR_OPTIONS_DESC', 'Maximum number of Product Options to be displayed per page.');
@@ -760,11 +760,11 @@ define ('SESSION_LIFE_CUSTOMERS_DESC', 'time in seconds after the expiry of the 
 
 //checkout confirmation options
 define ('CHECKOUT_USE_PRODUCTS_SHORT_DESCRIPTION_TITLE', 'Order Confirmation page: Description');
-define ('CHECKOUT_USE_PRODUCTS_SHORT_DESCRIPTION_DESC', 'On the order confirmation page you want the Item Description will be displayed? Note: The short description is displayed when there is NO Item Order Description True, the description does not always displayed.');
+define ('CHECKOUT_USE_PRODUCTS_SHORT_DESCRIPTION_DESC', 'Should the article description be displayed on the order confirmation page? Note: The short description will be displayed if there is NO item order description. With No the short description is not displayed!');
 define ('CHECKOUT_SHOW_PRODUCTS_IMAGES_TITLE', 'Order Confirmation page: Product images');
-define ('CHECKOUT_SHOW_PRODUCTS_IMAGES_DESC', 'If on the order confirmation page, the product images are displayed?');
+define ('CHECKOUT_SHOW_PRODUCTS_IMAGES_DESC', 'Should the article pictures be displayed on the order confirmation page?');
 define ('CHECKOUT_SHOW_PRODUCTS_MODEL_TITLE', 'Order Confirmation Page: Item no.');
-define ('CHECKOUT_SHOW_PRODUCTS_MODEL_DESC', 'on the order confirmation page you want the item number will be displayed.');
+define ('CHECKOUT_SHOW_PRODUCTS_MODEL_DESC', 'Should the article numbers be displayed on the order confirmation page?');
 
 // Billing email attachments
 define ('EMAIL_BILLING_ATTACHMENTS_TITLE', 'Billing - e-mail attachments for orders');
@@ -772,38 +772,38 @@ define ('EMAIL_BILLING_ATTACHMENTS_DESC', 'Example of attachments - the files ar
 
 // email images
 define ('SHOW_IMAGES_IN_EMAIL_TITLE', 'Product Images in Order - Insert email');
-define ('SHOW_IMAGES_IN_EMAIL_DESC', 'Product images in the HTML order confirmation - Insert Email (increases risk, which is classified the e-mail as SPAM)');
+define ('SHOW_IMAGES_IN_EMAIL_DESC', 'Insert article images in the HTML order confirmation email (increases the risk that the email will be classified as SPAM)');
 define ('SHOW_IMAGES_IN_EMAIL_DIR_TITLE', 'Email pictures folder');
 define ('SHOW_IMAGES_IN_EMAIL_DIR_DESC', 'Select email pictures folder');
 define ('SHOW_IMAGES_IN_EMAIL_STYLE_TITLE', 'Email images CSS style');
-define ('SHOW_IMAGES_IN_EMAIL_STYLE_DESC', 'Here, simple CSS style information to be entered - for example, the maximum width: max-width: 90px;');
+define ('SHOW_IMAGES_IN_EMAIL_STYLE_DESC', 'Here you can enter simple CSS style information - e.g. for the maximum width: max-width:90px;');
 
 // Popup window configuration
-define ('POPUP_SHIPPING_LINK_PARAMETERS_TITLE', 'Returns popup window URL parameter');
-define ('POPUP_SHIPPING_LINK_PARAMETERS_DESC', 'Here, the URL parameters are entered - Default: & Keep This = true & type = spare true & height = 400 & width = 600');
-define ('POPUP_SHIPPING_LINK_CLASS_TITLE', 'Returns popup CSS class');
-define ('POPUP_SHIPPING_LINK_CLASS_DESC', 'Here CSS classes to be entered - Default: thickbox');
+define ('POPUP_SHIPPING_LINK_PARAMETERS_TITLE', 'Shipping costs popup window URL parameter');
+define ('POPUP_SHIPPING_LINK_PARAMETERS_DESC', 'Here you can enter the URL parameters - default: & Keep This = true & type = spare true & height = 400 & width = 600');
+define ('POPUP_SHIPPING_LINK_CLASS_TITLE', 'Shipping popup CSS class');
+define ('POPUP_SHIPPING_LINK_CLASS_DESC', 'Here you can enter CSS classes - default: thickbox');
 define ('POPUP_CONTENT_LINK_PARAMETERS_TITLE', 'content pages, pop-up URL parameters');
-define ('POPUP_CONTENT_LINK_PARAMETERS_DESC', 'Here, the URL parameters are entered - Default: & Keep This = true & type = spare true & height = 400 & width = 600');
+define ('POPUP_CONTENT_LINK_PARAMETERS_DESC', 'Here you can enter the URL parameters - default: & Keep This = true & type = spare true & height = 400 & width = 600');
 define ('POPUP_CONTENT_LINK_CLASS_TITLE', 'content pages popup CSS class');
-define ('POPUP_CONTENT_LINK_CLASS_DESC', 'Here CSS classes to be entered - Default: thickbox');
+define ('POPUP_CONTENT_LINK_CLASS_DESC', 'Here you can enter CSS classes - default: thickbox');
 define ('POPUP_PRODUCT_LINK_PARAMETERS_TITLE', 'Product pages popup URL parameter');
-define ('POPUP_PRODUCT_LINK_PARAMETERS_DESC', 'Here, the URL parameters are entered - Default: & Keep This = true & type = spare true & height = 450 & width = 750');
+define ('POPUP_PRODUCT_LINK_PARAMETERS_DESC', 'Here you can enter the URL parameters - default: & Keep This = true & type = spare true & height = 450 & width = 750');
 define ('POPUP_PRODUCT_LINK_CLASS_TITLE', 'Product pages popup CSS class');
-define ('POPUP_PRODUCT_LINK_CLASS_DESC', 'Here CSS classes to be entered - Default: thickbox');
+define ('POPUP_PRODUCT_LINK_CLASS_DESC', 'Here you can enter CSS classes - default: thickbox');
 define ('POPUP_COUPON_HELP_LINK_PARAMETERS_TITLE', 'Coupon Help popup window URL parameter');
-define ('POPUP_COUPON_HELP_LINK_PARAMETERS_DESC', 'Here, the URL parameters are entered - Default: & Keep This = true & type = spare true & height = 450 & width = 750');
+define ('POPUP_COUPON_HELP_LINK_PARAMETERS_DESC', 'Here you can enter the URL parameters - default: & Keep This = true & type = spare true & height = 450 & width = 750');
 define ('POPUP_COUPON_HELP_LINK_CLASS_TITLE', 'Coupon Help popup CSS class');
-define ('POPUP_COUPON_HELP_LINK_CLASS_DESC', 'Here CSS classes to be entered - Default: thickbox');
+define ('POPUP_COUPON_HELP_LINK_CLASS_DESC', 'Here you can enter CSS classes - default: thickbox');
 
 define ('POPUP_PRODUCT_PRINT_SIZE_TITLE', 'product Print view window size');
-define ('POPUP_PRODUCT_PRINT_SIZE_DESC', 'Sets the size of the popup window to be defined - default: width = 640, height = 600');
+define ('POPUP_PRODUCT_PRINT_SIZE_DESC', 'Here you can define the size of the popup window - default: width = 640, height = 600');
 define ('POPUP_PRINT_ORDER_SIZE_TITLE', 'order window size Print view');
-define ('POPUP_PRINT_ORDER_SIZE_DESC', 'Sets the size of the popup window to be defined - default: width = 640, height = 600');
+define ('POPUP_PRINT_ORDER_SIZE_DESC', 'Here you can define the size of the popup window - default: width = 640, height = 600');
 
 // BOF - Dokuman - 2012-08-27 - added entries for new google analytics & piwik tracking
 define('TRACKING_COUNT_ADMIN_ACTIVE_TITLE' , 'Count page views of the shop owner');
-define('TRACKING_COUNT_ADMIN_ACTIVE_DESC' , 'By activating this option, all page views of the administration usersof the shop owner will be counted as well. This will falsify the visitor stats.');
+define('TRACKING_COUNT_ADMIN_ACTIVE_DESC' , 'If this option is activated, all accesses of the administrator user of the shop operator are also included, which (due to the more frequent accesses to the shop) can have the visitor statistics.');
 define('TRACKING_GOOGLEANALYTICS_ACTIVE_TITLE' , 'Activate Google Analytics tracking');
 define('TRACKING_GOOGLEANALYTICS_ACTIVE_DESC' , 'By activating this option, all page views will be submitted to Google Analytics for later evaluation. Before using this option, you need to register at <a href="http://www.google.com/analytics/" target="_blank" rel="noopener"><b>Google Analytics</b></a> and create a new account.');
 define('TRACKING_GOOGLEANALYTICS_ID_TITLE' , 'Google Analytics account number');
@@ -813,29 +813,29 @@ define('TRACKING_GOOGLEANALYTICS_UNIVERSAL_DESC' , 'Use Google Universal Analyti
 define('TRACKING_GOOGLEANALYTICS_DOMAIN_TITLE' , 'Google Universal Analytics Shop-URL');
 define('TRACKING_GOOGLEANALYTICS_DOMAIN_DESC' , 'Please enter the Shop-URL (example.com oder www.example.com). Only works with Google Universal Analytics.');
 define('TRACKING_GOOGLE_LINKID_TITLE' , 'Google Universal Analytics LinkID');
-define('TRACKING_GOOGLE_LINKID_DESC' , 'You can see separate information on multiple links on a page that all have the same goal. If there is for example two links are on the same side, both lead to the contact page, you will see separate click information for each link. Only works with Google Universal Analytics.');
+define('TRACKING_GOOGLE_LINKID_DESC' , 'You can see separate information about multiple links on a page that all have the same goal. For example, if there are two links on the same page that both lead to the Contact page, you will see separate click information for each link. Works only for Google Universal Analytics.');
 define('TRACKING_GOOGLE_DISPLAY_TITLE' , 'Google Universal Analytics Displayfeature');
-define('TRACKING_GOOGLE_DISPLAY_DESC' , 'The areas to demographics and interests included an overview and new reports about the performance by age, gender and interest categories. Only works with Google Universal Analytics.');
+define('TRACKING_GOOGLE_DISPLAY_DESC' , 'The areas on demographics and interest include an overview and new reports on performance by age, gender and interest categories. Works for Google Universal Analytics only.');
 define('TRACKING_GOOGLE_ECOMMERCE_TITLE' , 'Google E-Commerce Tracking');
 define('TRACKING_GOOGLE_ECOMMERCE_DESC' , 'Set up an E-Commerce tracking to find out what visitors buy from your website or app. In addition, you receive the following information:<br><br><strong>Products:</strong> Purchased products and the quantities and the revenues from these products<br><strong>Transactions:</strong> Information about sales, tax, shipping costs and quantities for each transaction<br><strong>time to Purchase:</strong> Number of days and visits, starting from the current campaign until the completion of the transaction');
-define('TRACKING_PIWIK_ACTIVE_TITLE' , 'Activate PIWIK Web-Analytics tracking');
-define('TRACKING_PIWIK_ACTIVE_DESC' , 'In order to use PIWIK at all, you have to download and install it to your webspace at first. See also <a href="http://http://de.piwik.org/" target="_blank" rel="noopener"><b>PIWIK Web-Analytics</b></a>. In comparison to Google Analytics all data will be stored locally, i.e. you as show owner have complete control over all data.');
-define('TRACKING_PIWIK_LOCAL_PATH_TITLE' , 'PIWIK install path (without "http://")');
-define('TRACKING_PIWIK_LOCAL_PATH_DESC' , 'Enter the path when PIWIK was installed successfully. The complete path of the domain has to be given, but without "http://", e.g. "www.domain.de/piwik".');
-define('TRACKING_PIWIK_ID_TITLE' , 'PIWIK page ID');
-define('TRACKING_PIWIK_ID_DESC' , 'In the PIWIK administration a page ID will be created per domain (usually "1")');
-define('TRACKING_PIWIK_GOAL_TITLE' , 'PIWIK campaign number (optional)');
-define('TRACKING_PIWIK_GOAL_DESC' , 'Enter your campaign number, if you want to track predefined goals.. Details see <a href="http://piwik.org/docs/tracking-goals-web-analytics/" target="_blank" rel="noopener"><b>PIWIK: Tracking Goal Conversions</b></a>');
+define('TRACKING_MATAMO_ACTIVE_TITLE' , 'Activate MATAMO (ex: Piwik) Web-Analytics tracking');
+define('TRACKING_MATAMO_ACTIVE_DESC' , 'In order to use MATAMO at all, you have to download and install it to your webspace at first. See also <a href="https://matomo.org/" target="_blank" rel="noopener"><b>MATAMO Web-Analytics</b></a>. In comparison to Google Analytics all data will be stored locally, i.e. you as show owner have complete control over all data.');
+define('TRACKING_MATAMO_LOCAL_PATH_TITLE' , 'MATAMO install path (without "http://")');
+define('TRACKING_MATAMO_LOCAL_PATH_DESC' , 'Enter the path when MATAMO was installed successfully. The complete path of the domain has to be given, but without "http://", e.g. "www.domain.de/matamo".');
+define('TRACKING_MATAMO_ID_TITLE' , 'MATAMO page ID');
+define('TRACKING_MATAMO_ID_DESC' , 'In the MATAMO administration a page ID will be created per domain (usually "1")');
+define('TRACKING_MATAMO_GOAL_TITLE' , 'MATAMO campaign number (optional)');
+define('TRACKING_MATAMO_GOAL_DESC' , 'Enter your campaign number, if you want to track predefined goals.. Details see <a href="https://matomo.org/docs/tracking-goals-web-analytics/" target="_blank" rel="noopener"><b>MATAMO: Tracking Goal Conversions</b></a>');
 // EOF - Dokuman - 2012-08-27 - added entries for new google analytics & piwik tracking
 
-define ('CONFIRM_SAVE_ENTRY_TITLE', 'Confirmation when saving articles/category');
-define ('CONFIRM_SAVE_ENTRY_DESC', 'Should be made a confirmation message when saving products/categories? Default: yes');
+define ('CONFIRM_SAVE_ENTRY_TITLE', 'Confirmation query when saving products / categories');
+define ('CONFIRM_SAVE_ENTRY_DESC', 'Should a confirmation query be made when saving articles/categories? Default: Yes)');
 
 define('WHOS_ONLINE_IP_WHOIS_SERVICE_TITLE', 'Who\'s Online - Whois Lookup URL');
 define('WHOS_ONLINE_IP_WHOIS_SERVICE_DESC', 'http://www.utrace.de/?query= or http://whois.domaintools.com/');
 
 define('STOCK_CHECKOUT_UPDATE_PRODUCTS_STATUS_TITLE', 'Completion of order - disable Sold out?');
-define('STOCK_CHECKOUT_UPDATE_PRODUCTS_STATUS_DESC', 'If a sold-out items (stocks 0) be disabled at the end of the order automatically? The article is no longer visible in the shop! <br /> On Products are available again shortly, the option should be set to "no"');
+define('STOCK_CHECKOUT_UPDATE_PRODUCTS_STATUS_DESC', 'Should a sold out item (stock quantity 0) be automatically deactivated at the end of the order? The article is then no longer visible in the shop!<br />For articles that are available again in the near future, the option should be set to "No".');
 
 define('SHIPPING_STATUS_INFOS_TITLE', 'Shippingtime ID');
 define('SHIPPING_STATUS_INFOS_DESC', 'Content ID for Shippingtime');
@@ -849,13 +849,13 @@ define('COOKIE_NOTE_CONTENT_ID_DESC', '');
 define('CONTACT_FORM_CONSENT_TITLE', 'Contact form consent');
 define('CONTACT_FORM_CONSENT_DESC', 'Contact form requires the consent to data processing.');
 
-define('ENABLE_PDFBILL_TITLE', 'Enable PDF Bill');
+define('ENABLE_PDFBILL_TITLE', 'Enable PDF invoices');
 define('ENABLE_PDFBILL_DESC', '');
 
 define('USE_BOOTSTRAP_TITLE', 'Use Bootstrap');
 define('USE_BOOTSTRAP_DESC', '');
 
-define('PDFBILL_AUTOMATIC_INVOICE_TITLE', 'PDF Bill automatic invoice profiles');
+define('PDFBILL_AUTOMATIC_INVOICE_TITLE', 'PDF invoices automatic invoice profiles');
 define('PDFBILL_AUTOMATIC_INVOICE_DESC', '');
 
 define('USE_ATTRIBUTES_IFRAME_TITLE', 'Edit Attributes in iframe');
@@ -887,13 +887,13 @@ define('STOCK_ATTRIBUTE_REORDER_LEVEL_TITLE','E-Mail to admin if attribute stock
 define('STOCK_ATTRIBUTE_REORDER_LEVEL_DESC','If stock of any product attribute is below certain number, admin will be notified.');
 
 define('CLEVERREACH_API_CLIENT_ID_TITLE', 'Cleverreach Client ID');
-define('CLEVERREACH_API_CLIENT_ID_DESC', '');
+define('CLEVERREACH_API_CLIENT_ID_DESC', 'Your Cleverreach customer number');
 define('CLEVERREACH_API_USERNAME_TITLE', 'Cleverreach Username');
-define('CLEVERREACH_API_USERNAME_DESC', '');
+define('CLEVERREACH_API_USERNAME_DESC', 'Your Cleverreach Login Name');
 define('CLEVERREACH_API_PASSWORD_TITLE', 'Cleverreach Password');
-define('CLEVERREACH_API_PASSWORD_DESC', '');
+define('CLEVERREACH_API_PASSWORD_DESC', 'Your Cleverreach Password');
 define('CLEVERREACH_API_IMPORT_SUBSCRIBERS_TITLE', 'Cleverreach Import newsletter subscribers');
-define('CLEVERREACH_API_IMPORT_SUBSCRIBERS_DESC', '');
+define('CLEVERREACH_API_IMPORT_SUBSCRIBERS_DESC', 'Export newsletter subscribers from the shop to Cleverreach?');
 define('CLEVERREACH_API_IMPORT_BUYERS_TITLE', 'Cleverreach Import buyers');
-define('CLEVERREACH_API_IMPORT_BUYERS_DESC', '');
+define('CLEVERREACH_API_IMPORT_BUYERS_DESC', 'Export buyers from the shop to Cleverreach?');
    

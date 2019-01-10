@@ -223,4 +223,8 @@ define('TEXT_HOW_TO_LINK_INFO', 'Item entry screen <br/> (For multiple items to 
 
 define('TEXT_PRODUCTS_IMAGE_TITLE', 'Title (Titel text for the image, for example, the text that is displayed when you hover your mouse over the image): ');
 define('TEXT_PRODUCTS_IMAGE_ALT', 'Alt (Alternative text of the image, that is displayed if the image fails to load): ');
+
+define('TEXT_CATEGORIE_IMG_TITLE', 'Titre de la catégorie image:');
+define('TEXT_CATEGORIE_IMG_ALT', 'Texte alternatif pour l\'image de catégorie:');
+
 ?>

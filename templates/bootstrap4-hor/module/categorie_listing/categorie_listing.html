@@ -4,7 +4,7 @@
 {else}
 	<h1>{$CATEGORIES_NAME}</h1>
 {/if}
-{if $CATEGORIES_IMAGE}<a data-toggle="lightbox" data-title="{$CATEGORIES_NAME}" href="{$CATEGORIES_IMAGE}" class="catimglink"><img src="{$CATEGORIES_IMAGE}" alt="{$CATEGORIES_NAME}" class="img-fluid img-center" /></a><br />{/if}
+{if $CATEGORIES_IMAGE}<a data-toggle="lightbox" data-title="{$CATEGORIES_NAME}" href="{$CATEGORIES_IMAGE}" class="catimglink"><img src="{$CATEGORIES_IMAGE}" alt="{$CATEGORIES_IMAGE_ALT}" title="{$CATEGORIES_IMAGE_TITLE}" class="img-fluid img-center" /></a><br />{/if}
 {if $CATEGORIES_DESCRIPTION}<p>{$CATEGORIES_DESCRIPTION}</p>{/if}
 
 {if $module_content !=''}
@@ -14,7 +14,7 @@
 {foreach name=aussen item=module_data from=$module_content} 
 	<div class="{$COLUMN_STYLE}">
 		<div class="card bg-light card-body mb-3" data-col="{$smarty.foreach.aussen.iteration}">
-			<div class="equalize categories_image text-center">{if $module_data.CATEGORIES_IMAGE}<a href="{$module_data.CATEGORIES_LINK}"><img class="img-fluid img-center" style="max-height: 140px; margin: 0 auto;" src="{$module_data.CATEGORIES_IMAGE}" alt="{$module_data.CATEGORIES_NAME}" /></a>{/if}</div>
+			<div class="equalize categories_image text-center">{if $module_data.CATEGORIES_IMAGE}<a href="{$module_data.CATEGORIES_LINK}"><img class="img-fluid img-center" style="max-height: 140px; margin: 0 auto;" src="{$module_data.CATEGORIES_IMAGE}" alt="{$module_data.CATEGORIES_IMAGE_ALT}" title="{$module_data.CATEGORIES_IMAGE_TITLE}" /></a>{/if}</div>
 			<div class="caption" data-col="{$smarty.foreach.aussen.iteration}">
 				<div class="equalize categories_title text-center"><h2 class="h6"><strong><a href="{$module_data.CATEGORIES_LINK}">{$module_data.CATEGORIES_NAME}</a></strong></h2></div>
 				<div class="equalize categories_description text-center">{$module_data.CATEGORIES_DESCRIPTION}</div>

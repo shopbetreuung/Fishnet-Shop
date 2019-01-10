@@ -29,7 +29,7 @@
   require_once (DIR_FS_INC.'xtc_get_geo_zone_code.inc.php');
 
   // initiate template engine for mail
-  $smarty = new Smarty;
+  $smarty = new SmartyBC;
 
   $customers_statuses_array = xtc_get_customers_statuses();
   if (!isset($customers_password)) {

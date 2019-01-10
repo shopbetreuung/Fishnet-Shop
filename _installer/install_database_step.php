@@ -134,7 +134,8 @@ if (isset($_GET['process']) && $_GET['process'] == 'true'){
 
     $db_error = false;
     $db_warning = '';
-    if (isset($db['DB_SERVER']) && !empty($db['DB_SERVER']) && isset($db['DB_SERVER_USERNAME']) && !empty($db['DB_SERVER_USERNAME']) && isset($db['DB_SERVER_PASSWORD']) && !empty($db['DB_SERVER_PASSWORD']) && isset($db['DB_DATABASE']) && !empty($db['DB_DATABASE'])) {
+    // if (isset($db['DB_SERVER']) && !empty($db['DB_SERVER']) && isset($db['DB_SERVER_USERNAME']) && !empty($db['DB_SERVER_USERNAME']) && isset($db['DB_SERVER_PASSWORD']) && !empty($db['DB_SERVER_PASSWORD']) && isset($db['DB_DATABASE']) && !empty($db['DB_DATABASE'])) {
+    if (isset($db['DB_SERVER']) && !empty($db['DB_SERVER']) && isset($db['DB_SERVER_USERNAME']) && !empty($db['DB_SERVER_USERNAME']) && isset($db['DB_DATABASE']) && !empty($db['DB_DATABASE'])) {
         $conn = xtc_db_connect_installer($db['DB_SERVER'], $db['DB_SERVER_USERNAME'], $db['DB_SERVER_PASSWORD'], $db['DB_DATABASE']);
         if ($conn) {
             $sql = 'ALTER DATABASE ' . $db['DB_DATABASE'] . ' DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;';

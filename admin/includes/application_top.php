@@ -405,4 +405,4 @@ if (xtc_check_permission($pagename) == '0') {
 }
 
 // Include Template Engine
-require(DIR_FS_CATALOG.DIR_WS_CLASSES . 'Smarty_2.6.27/Smarty.class.php');
+require(DIR_FS_CATALOG.DIR_WS_CLASSES . 'Smarty_3.1/libs/SmartyBC.class.php');

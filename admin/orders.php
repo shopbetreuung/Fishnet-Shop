@@ -146,7 +146,7 @@ function profile_automatic_select($order){
       return 'default';
 }
 // initiate template engine for mail
-$smarty = new Smarty;
+$smarty = new SmartyBC;
 require (DIR_WS_CLASSES.'currencies.php');
 $currencies = new currencies();
 

@@ -37,7 +37,7 @@ require_once (DIR_FS_INC.'xtc_get_order_data.inc.php');
 require_once (DIR_FS_INC.'xtc_not_null.inc.php');
 require_once (DIR_FS_INC.'xtc_format_price_order.inc.php');
 
-$smarty = new Smarty;
+$smarty = new SmartyBC;
 $order_query_check = xtc_db_query('SELECT customers_id FROM '.TABLE_ORDERS.' WHERE orders_id = "'.xtc_db_input((int)$_GET['oID']).'"');
 $order_check = xtc_db_fetch_array($order_query_check);
 

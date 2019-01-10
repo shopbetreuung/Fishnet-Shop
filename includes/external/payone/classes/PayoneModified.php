@@ -1469,7 +1469,7 @@ class PayoneModified {
 	}
 
   public function build_html($template, $content) {
-    $module_smarty = new Smarty();
+    $module_smarty = new SmartyBC();
     $module_smarty->template_dir = DIR_FS_EXTERNAL.'payone/templates/';
 
     $module_smarty->assign('language', $_SESSION['language']);

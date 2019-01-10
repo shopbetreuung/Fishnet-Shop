@@ -24,7 +24,7 @@ require_once (DIR_FS_INC.'xtc_date_short.inc.php');
 require_once (DIR_FS_INC.'xtc_get_products_mo_images.inc.php');
 
 // create smarty elements
-$info_smarty = new Smarty;
+$info_smarty = new SmartyBC;
 $info_smarty->assign('tpl_path', 'templates/'.CURRENT_TEMPLATE.'/');
 $info_smarty->assign('charset', $_SESSION['language_charset'] ); 
 

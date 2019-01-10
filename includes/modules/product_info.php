@@ -37,7 +37,7 @@ if (!is_object($product) || !$product->isProduct()) {
 
 } else {
 
-  $info_smarty = new Smarty;
+  $info_smarty = new SmartyBC;
   $info_smarty->assign('tpl_path', 'templates/'.CURRENT_TEMPLATE.'/');
   //include_once(DIR_WS_INCLUDES.'modules/payment/klarna/display_klarna_price.php'); Removed Klarna payment module integration
 

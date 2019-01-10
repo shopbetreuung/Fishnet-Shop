@@ -25,7 +25,7 @@
 include ('includes/application_top.php');
 
 // create smarty elements
-$smarty = new Smarty;
+$smarty = new SmartyBC;
 
 // redirect
 if (!isset($_GET['products_id']) && !isset($_GET['info']) && !isset($_GET['action'])) {
@@ -65,7 +65,7 @@ require (DIR_WS_INCLUDES.'header.php');
 $smarty->assign('language', $_SESSION['language']);
 $smarty->caching = 0;
 if (!defined('RM'))
-	$smarty->load_filter('output', 'note');
+	/*$smarty->load_filter('output', 'note')*/;
 $smarty->display(CURRENT_TEMPLATE.'/index.html');
 
 include ('includes/application_bottom.php');

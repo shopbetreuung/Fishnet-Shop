@@ -18,7 +18,7 @@
 
 include ('includes/application_top.php');
 
-$smarty = new Smarty;
+$smarty = new SmartyBC;
 
 if (USE_BOOTSTRAP != "true") {
 include ('includes/header.php');

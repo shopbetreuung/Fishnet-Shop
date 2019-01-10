@@ -34,7 +34,7 @@ if (!CacheCheck()) {
 	$cache_id = $_SESSION['language'].$_SESSION['customers_status']['customers_status_id'];
 }
 
-if (!$box_smarty->is_cached(CURRENT_TEMPLATE.'/boxes/box_imagesliders.html', $cache_id) || !$cache) {
+if (!$box_smarty->isCached(CURRENT_TEMPLATE.'/boxes/box_imagesliders.html', $cache_id) || !$cache) {
 	$box_smarty->assign('tpl_path', 'templates/'.CURRENT_TEMPLATE.'/');
 
 	$imagesliders_query = "SELECT DISTINCT

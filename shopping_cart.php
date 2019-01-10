@@ -27,7 +27,7 @@
 $cart_empty = false;
 require ("includes/application_top.php");
 // create smarty elements
-$smarty = new Smarty;
+$smarty = new SmartyBC;
 require (DIR_FS_CATALOG.'templates/'.CURRENT_TEMPLATE.'/source/boxes.php');
 // include needed functions
 require_once (DIR_FS_INC.'xtc_array_to_string.inc.php');
@@ -297,7 +297,7 @@ $main_content = $smarty->fetch(CURRENT_TEMPLATE.'/module/shopping_cart.html');
 $smarty->assign('main_content', $main_content);
 $smarty->caching = 0;
 if (!defined('RM')) {
-  $smarty->load_filter('output', 'note');
+  /*$smarty->load_filter('output', 'note')*/;
 }
 $smarty->display(CURRENT_TEMPLATE.'/index.html');
 

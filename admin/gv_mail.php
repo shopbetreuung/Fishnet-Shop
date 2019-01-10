@@ -39,7 +39,7 @@
   require_once(DIR_FS_INC . 'xtc_php_mail.inc.php');
 
   // initiate template engine for mail
-  $smarty = new Smarty;
+  $smarty = new SmartyBC;
 
   if ( ($_GET['action'] == 'send_email_to_user') && ($_POST['customers_email_address'] || $_POST['email_to']) && (!$_POST['back_x']) ) {
     switch ($_POST['customers_email_address']) {

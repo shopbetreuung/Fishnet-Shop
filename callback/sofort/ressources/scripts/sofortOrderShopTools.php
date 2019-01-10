@@ -176,7 +176,7 @@ function shopSofortComment($oID, $order, $status, $comments, $notifyCustomer, $n
 				$notify_comments = '';
 			}
 			
-			$smarty = new Smarty;
+			$smarty = new SmartyBC;
 			
 			$smarty->assign('language', $_SESSION['language']);
 			$smarty->caching = false;

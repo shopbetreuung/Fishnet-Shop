@@ -32,7 +32,7 @@ if (!defined('CHECK_CHEAPEST_SHIPPING_MODUL')) {
   define ('CHECK_CHEAPEST_SHIPPING_MODUL', false); //true, false - default false
 }
 // create smarty elements
-$smarty = new Smarty;
+$smarty = new SmartyBC;
 // include boxes
 require (DIR_FS_CATALOG.'templates/'.CURRENT_TEMPLATE.'/source/boxes.php');
 // include needed functions
@@ -232,7 +232,7 @@ $smarty->assign('BUTTON_ADDRESS', '<a href="'.xtc_href_link(FILENAME_CHECKOUT_SH
 $smarty->assign('BUTON_CONTINUE', xtc_image_submit('button_continue.gif', IMAGE_BUTTON_CONTINUE));
 $smarty->assign('FORM_END', '</form>');
 
-$module_smarty = new Smarty;
+$module_smarty = new SmartyBC;
 $shipping_block = ''; //DokuMan - 2010-08-30 - set undefined variable
 if (xtc_count_shipping_modules() > 0) {
 	$showtax = $_SESSION['customers_status']['customers_status_show_price_tax'];
@@ -282,7 +282,7 @@ $main_content = $smarty->fetch(CURRENT_TEMPLATE.'/module/checkout_shipping.html'
 $smarty->assign('main_content', $main_content);
 $smarty->caching = 0;
 if (!defined('RM'))
-	$smarty->load_filter('output', 'note');
+	/*$smarty->load_filter('output', 'note')*/;
 $smarty->display(CURRENT_TEMPLATE.'/index.html');
 include ('includes/application_bottom.php');
 ?>

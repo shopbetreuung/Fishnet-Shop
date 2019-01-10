@@ -20,7 +20,7 @@
   require_once(DIR_FS_INC .'xtc_not_null.inc.php');
   require_once(DIR_FS_INC .'xtc_format_price_order.inc.php');
 
-  $smarty = new Smarty;
+  $smarty = new SmartyBC;
 
   // BOF - DokuMan - 2011-12-08 - get store name for display in letter box of packing slip
   $query_store_name=xtc_db_query("-- admin/print_packingslip.php

@@ -31,7 +31,7 @@ function xtc_php_mail($from_email_address, $from_email_name,
 // Signatur für E-Mails
 // by Dipl.-Ing. Daniel Wallas für www.tuvino.de
 //*********************************************************************************************
-  $mailsmarty= new Smarty;
+  $mailsmarty= new SmartyBC;
   $mailsmarty->compile_dir = DIR_FS_CATALOG.'templates_c';
 
   $html_signatur = '<br />' .$mailsmarty->fetch('db:signatur.html'); //web28 - 2011-06-10 - ADD Linebreak

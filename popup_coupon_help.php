@@ -19,7 +19,7 @@
 require ('includes/application_top.php');
 require_once (DIR_FS_INC.'xtc_date_short.inc.php');
 
-$smarty = new Smarty;
+$smarty = new SmartyBC;
 
 if (USE_BOOTSTRAP != "true") {
 include ('includes/header.php');

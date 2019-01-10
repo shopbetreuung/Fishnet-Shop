@@ -65,7 +65,7 @@ if (isset($_GET['oID'])
       $approval = $paypal->payment_redirect(false, true, true);
 
       // create smarty elements
-      $smarty = new Smarty;
+      $smarty = new SmartyBC;
 
       // include boxes
       require (DIR_FS_CATALOG.'templates/'.CURRENT_TEMPLATE.'/source/boxes.php');
@@ -109,7 +109,7 @@ if (isset($_GET['oID'])
 
       $smarty->caching = 0;
       if (!defined('RM'))
-        //$smarty->load_filter('output', 'note');
+        ///*$smarty->load_filter('output', 'note')*/;
       $smarty->display(CURRENT_TEMPLATE.'/index.html');
     }
   } else {

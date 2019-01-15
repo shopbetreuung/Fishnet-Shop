@@ -1,8 +1,8 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-$Id: dhlgkapi_print_label.php v2.24 17.09.2018 nb $   
+$Id: dhlgkapi_print_label.php v1.10 02.11.2017 nb $   
 
-Autor: Nico Bauer (c) 2016-2018 Dörfelt GmbH for DHL Paket GmbH
+Autor: Nico Bauer (c) 2016-2017 DÃ¶rfelt GmbH for DHL Paket GmbH
 
 Released under the GNU General Public License (Version 2)
 [http://www.gnu.org/licenses/gpl-2.0.html]  
@@ -19,22 +19,6 @@ Changelog:
 1.10    check if destination country has changed
 1.11    corrected cod calculation
 1.12    display order backend modify message
-1.13    customs value corrected
-1.14    added name to main address field company
-1.15    added order id as reason of bank transaction to COD
-1.16    show warning for multi package shipments
-2.00    usage of geschaeftskundenversand api 2.2, UTF-8 or ISO-8859-1 Data
-2.03	moved some code	
-2.05    disabled email and telephone because of EU-DSGVO
-2.06    corrected wrong date format for Wunschtag
-2.07    new test mode result display to avoid CSRF error
-2.08    change for testlabel generation
-2.12    change for 2.0.4.0
-2.20    correct storno label in db
-2.21    email text depends on configured cut-off time
-2.22    enhanced email Text dependency incl. defined shipping days
-2.23    add extra eMail cut-off time to decouple ordertime and shippingtime
-2.24    remove html entities in DB comment
 -----------------------------------------------------------------------------------------*/
 
 //ini_set('display_errors', '1');
@@ -85,16 +69,17 @@ function find_first_of($haystack, $needlesAsString, $offset=0)
 function soap_request($dhl_xml,$function, $oID = 0, $testmode = false) {
 
     //Webservice URL
-    $dhlwsdlurl='https://cig.dhl.de/cig-wsdls/com/dpdhl/wsdl/geschaeftskundenversand-api/2.2/geschaeftskundenversand-api-2.2.wsdl';
+    $dhlwsdlurl='https://cig.dhl.de/cig-wsdls/com/dpdhl/wsdl/geschaeftskundenversand-api/2.0/geschaeftskundenversand-api-2.0.wsdl';
+    //$location='https://cig.dhl.de/services/sandbox/soap';
     $location='https://cig.dhl.de/services/production/soap';
-
+    
     //CIG Credentials
     $application_id='dhlgkapi_1';
     $application_token='ok8lCcpVAgpHwME98Gd4TJBnqcwzUc';
 
 
     //Optionsarray
-    //Optionen für SSL php 5.6
+    //Optionen fÃ¼r SSL php 5.6
     $ssl_opts = array(
         'ssl' => array('verify_peer'=>false, 'verify_peer_name'=>false)
     );
@@ -103,9 +88,9 @@ function soap_request($dhl_xml,$function, $oID = 0, $testmode = false) {
         'location' => $location,
         'trace' => 1,
         'soap_version' => SOAP_1_1, 
-        'encoding' => (MODULE_SHIPPING_DHLGKAPI_UTF8_ENABLED == 'True' ? 'UTF-8' : 'ISO-8859-1'),
-        'login' => $application_id,
-        'password' => $application_token,
+        'encoding' => 'UTF-8',
+        'login' => $application_id,//MODULE_SHIPPING_DHLGKAPI_CIG_LOGIN, //$config_data['CIG_LOGIN'],
+        'password' => $application_token, //MODULE_SHIPPING_DHLGKAPI_CIG_PASSWORD, //$config_data['CIG_PASSWORD'],
         'authentication' => SOAP_AUTHENTICATION_BASIC,
         'connection_timeout' => 60,
         'cache_wsdl' => WSDL_CACHE_DISK, //NB 1.01 Cache the WSDL to Disk
@@ -115,8 +100,8 @@ function soap_request($dhl_xml,$function, $oID = 0, $testmode = false) {
     $soapClient = new SoapClient($dhlwsdlurl, $options);
 
     $sh_param = array(
-        user => MODULE_SHIPPING_DHLGKAPI_USER, 
-        signature => MODULE_SHIPPING_DHLGKAPI_PASSWORD,
+        user => MODULE_SHIPPING_DHLGKAPI_USER, //$config_data['USER'],  
+        signature => MODULE_SHIPPING_DHLGKAPI_PASSWORD, //$config_data['PASSWORD'],
         type => '0'
     );
 
@@ -129,7 +114,7 @@ function soap_request($dhl_xml,$function, $oID = 0, $testmode = false) {
     try {
         $result = $soapClient->{$function}($dhl_xml);
 
-        //Fehlermeldung prüfen
+        //Fehlermeldung prÃ¼fen
         if (isset($result->CreationState->LabelData->Status)) {
             $status=$result->CreationState->LabelData->Status;
         } else {                                                                                          
@@ -139,22 +124,14 @@ function soap_request($dhl_xml,$function, $oID = 0, $testmode = false) {
         //Fehlerausgabe zusammenstellen
         if ($status->statusCode != '0'){
             $errormsg=urlencode(output_object($status));
-            if (!$testmode) {
-                xtc_redirect(xtc_href_link('dhlgkapi_print_label.php', 'oID='.$oID.'&error='.$errormsg.'&function='.$function)); 
-            } else {
-                return $errormsg;
-            }
+            if (!$testmode) xtc_redirect(xtc_href_link('dhlgkapi_print_label.php', 'oID='.$oID.'&error='.$errormsg.'&function='.$function));
         }
 
     } catch (SoapFault $fault) {
         //Fehlermeldung schon bei der SOAP-Anfrage
         $debugxml=$soapClient->__getLastRequest();
         $errormsg=urlencode(print_r($fault->faultcode.': '.$fault->faultstring,true));
-        if (!$testmode) {
-            xtc_redirect(xtc_href_link('dhlgkapi_print_label.php', 'oID='.$oID.'&error='.$errormsg.'&function='.$function));
-        } else {
-            return $errormsg; 
-        }
+        if (!$testmode) xtc_redirect(xtc_href_link('dhlgkapi_print_label.php', 'oID='.$oID.'&error='.$errormsg.'&function='.$function));
     }
     unset($soapClient);
 
@@ -166,11 +143,9 @@ require ('includes/application_top.php');
 require(DIR_FS_INC . 'xtc_get_attributes_model.inc.php');
 require_once (DIR_WS_CLASSES.'order.php');
 require_once (DIR_FS_CATALOG.DIR_WS_CLASSES.'xtcPrice.php');
-if (!class_exists('PHPMailer') && file_exists(DIR_FS_CATALOG.DIR_WS_CLASSES.'class.phpmailer.php')) require_once (DIR_FS_CATALOG.DIR_WS_CLASSES.'class.phpmailer.php'); //NB 1.05 //NB 2.12
+if (!file_exists(DIR_FS_EXTERNAL.'phpmailer/PHPMailerAutoload.php')) require_once (DIR_FS_CATALOG.DIR_WS_CLASSES.'class.phpmailer.php'); //NB 1.05
 require_once (DIR_FS_INC.'xtc_php_mail.inc.php');
 require_once (DIR_FS_INC.'get_tracking_link.inc.php');
-
-$output_msg = null; 
 
 //OrderID
 $oID = xtc_db_prepare_input($_GET['oID']);
@@ -196,8 +171,8 @@ if (isset($_GET['testlabel'])) {
     $cod_amount = '0.0';
     $order_data['language'] = 'german';
     $order_data['shipping_class'] = 'dhlgkapi_V01PAK';
-    $order_data['delivery_company'] = 'Deutsche Post AG';
-    $order_data['delivery_street_address'] = 'Charles-de-Gaulle-Strasse 20'; //NB 2.08
+    $order_data['delivery_company'] = 'DHL Paket GmbH';
+    $order_data['delivery_street_address'] = 'StrÃ¤ÃŸchensweg 10';
     $order_data['delivery_postcode']='53113';
     $order_data['delivery_city']='Bonn';
     $order_data['delivery_country_iso_code_2']='DE';
@@ -208,6 +183,13 @@ if (isset($_GET['testlabel'])) {
     $order_data_query = xtc_db_query("select * from ".TABLE_ORDERS." where orders_id = '".xtc_db_input($oID)."'");
     $order_data = xtc_db_fetch_array($order_data_query);
 
+    //Wunschpaket Services
+    $wunschpaket_services=array(
+        'PD' => 'PreferredDay',
+        'PT' => 'PreferredTime',
+        'PN' => 'PreferredNeighbour',
+        'PL' => 'PreferredLocation'
+    );
     preg_match('/\[(.*?)\]/',$order_data['shipping_method'],$wunschpaket_array);
     $wunschpaket=array();
     if (!empty($wunschpaket_array)) {
@@ -258,22 +240,16 @@ if (isset($_GET['testlabel'])) {
         }
     }
 
-    //NB 1.16 Warnung für Paketgewicht
-    if ($dhl_weight > SHIPPING_MAX_WEIGHT) $output_msg = MODULE_SHIPPING_DHLGKAPI_WEIGHT_WARNING;
-
-
     //Nachnahmebetrag
     $cod_amount_query=xtc_db_query("select value from ".TABLE_ORDERS_TOTAL." where orders_id='".$oID."' order by sort_order desc");
     $cod_amount_array=xtc_db_fetch_array($cod_amount_query);
-    $cod_amount=$cod_amount_array['value'];     
-
-    $customs_value = number_format($cod_amount, '2','.',''); //NB 1.13 
+    $cod_amount=$cod_amount_array['value'];                                                                                                                            
 
     $cod_fee=preg_replace('/[^0-9.,]/','',MODULE_SHIPPING_DHLGKAPI_COD_DHL_FEE);  
     $cod_fee=str_replace(',','.',$cod_fee);
 
-    if (isset($_POST['CODAmount'])) {
-        $cod_amount=preg_replace('/[^0-9.,]/','',$_POST['CODAmount']);
+    if (isset($_GET['CODAmount'])) {
+        $cod_amount=preg_replace('/[^0-9.,]/','',$_GET['CODAmount']);
         $cod_amount=str_replace(',','.',$cod_amount); 
         $cod_amount -= $cod_fee; //NB 1.11 corrected cod calculation
     }
@@ -298,7 +274,8 @@ $dhl_type_addon=$shipping_method_array[1];
 $dhl_product=preg_replace("/\([\w]*\)/","",$dhl_type);
 $product_code=substr(preg_replace("/[^0-9]/","",$dhl_product),0,2);
 
-//NB 1.09 check, ob Order im Backend verändert wurde: versuchen Versandart heraussuchen...
+//NB 1.09 check, ob Order im Backend verÃ¤ndert wurde: versuchen Versandart heraussuchen...
+$output_msg = '';
 if ((is_array($shipping_class_array) && $shipping_class_array[1] == 'dhlgkapi') || (($order_data['date_purchased'] !=  $order_data['last_modified']) && $order_data['last_modified'] != '')) {
     require ('../includes/modules/shipping/dhlgkapi.php');
 
@@ -318,14 +295,14 @@ if ((is_array($shipping_class_array) && $shipping_class_array[1] == 'dhlgkapi') 
     $dhl_product_new = preg_replace("/\([\w]*\)/","",$dhl_type_new);
     $product_code_new = substr(preg_replace("/[^0-9]/","",$dhl_product_new),0,2);
 
-    //NB 1.10 feststellen, ob Land geändert wurde
+    //NB 1.10 feststellen, ob Land geÃ¤ndert wurde
     if ($dhl_type_new != $dhl_type) {
 
         $dhl_type = $dhl_type_new;
         $dhl_product = $dhl_product_new;
         $product_code = $product_code_new;
 
-        //DHL Produkt Info in DB zurückschreiben
+        //DHL Produkt Info in DB zurÃ¼ckschreiben
         $shipping_class = 'dhlgkapi_'.$dhl_type;
         xtc_db_query("UPDATE ".TABLE_ORDERS." SET shipping_class='".xtc_db_prepare_input($shipping_class)."' WHERE orders_id='".$oID."'");
         //NB 1.12 display order backend modify message
@@ -337,22 +314,22 @@ if ((is_array($shipping_class_array) && $shipping_class_array[1] == 'dhlgkapi') 
 $shipmentdate=date('Y-m-d');                               
 
 //Gewicht per Formular eingegeben    
-if (isset($_POST['WeightInKG'])) {
-    $dhl_weight=preg_replace('/[^0-9.,]/','',$_POST['WeightInKG'.strval($i)]);
+if (isset($_GET['WeightInKG'])) {
+    $dhl_weight=preg_replace('/[^0-9.,]/','',$_GET['WeightInKG'.strval($i)]);
     $dhl_weight=str_replace(',','.',$dhl_weight);
 }
 
 //Formatierung des Gewichtes
 $dhl_weight=number_format($dhl_weight, 2,'.','');
 
-//Straßenname und Hausnummer trennen
+//StraÃŸÅ¸enname und Hausnummer trennen
 $receiver_street_raw = str_replace('.', '. ',trim(substr($order_data['delivery_street_address'],0,40)));
 $look_for="0123456789";
 $nrpos = find_first_of($receiver_street_raw,$look_for,0);
 
 //neue Hausnummernermittlung
-if (preg_match_all("/[0-9]{1,}[a-zA-Z]*[-,\/]*[0-9]*[a-zA-Z]*/", $receiver_street_raw, $matches, PREG_SET_ORDER)) {
-    $receiver_streetnumber=implode(end($matches));
+if (preg_match("/[0-9\,]+[a-zA-Z]*[-,\/]*[0-9]*[a-zA-Z]*/", $receiver_street_raw, $matches)) {
+    $receiver_streetnumber=$matches[0];
     $receiver_streetname=trim(str_replace($receiver_streetnumber,'', $receiver_street_raw));
     $receiver_streetnumber=trim($receiver_streetnumber,'.-, ');
 }
@@ -363,11 +340,11 @@ else {
 }
 
 //XML Bilden
-//Basisgerüst für die Anfrage erstellen
+//BasisgerÃ¼st fÃ¼r die Anfrage erstellen
 $dhl_xml = new stdClass();
-$dhl_xml->Version = new stdClass(); 
+$dhl_xml->Version = new stdClass();
 $dhl_xml->Version->majorRelease=2;
-$dhl_xml->Version->minorRelease=2;
+$dhl_xml->Version->minorRelease=0;
 $dhl_xml->ShipmentOrder = new stdClass();
 $dhl_xml->ShipmentOrder->sequenceNumber=1;
 
@@ -389,22 +366,23 @@ $dhl_xml->ShipmentOrder->Shipment->ShipmentDetails->shipmentDate=$shipmentdate;
 $dhl_xml->ShipmentOrder->Shipment->ShipmentDetails->ShipmentItem = new stdClass();
 $dhl_xml->ShipmentOrder->Shipment->ShipmentDetails->ShipmentItem->weightInKG=$dhl_weight;
 
-//Services buchen (wenn verfügbar)
+//Services buchen (wenn verfÃ¼gbar)
 
 //Services aktivieren
 $dhl_xml->ShipmentOrder->Shipment->ShipmentDetails->Service = new stdClass(); 
 foreach($display_services as $service) {
-    if (isset($_POST[$service])){
+    if (isset($_GET[$service])){
+        
         if($service!='PrintOnlyIfCodeable' && $service!='Return') $dhl_xml->ShipmentOrder->Shipment->ShipmentDetails->Service->{$service}['active']='1';
 
         switch($service) {
             case 'PrintOnlyIfCodeable':  //Nur Label, wenn leitcodierbar
-                $dhl_xml->ShipmentOrder->PrintOnlyIfCodeable['active']=isset($_POST['PrintOnlyIfCodeable'])?'1':'0';
+                $dhl_xml->ShipmentOrder->PrintOnlyIfCodeable['active']=isset($_GET['PrintOnlyIfCodeable'])?'1':'0';
                 break;
 
             case 'AdditionalInsurance': //Transportversicherung
-                if (isset($_POST['insuranceAmount']) && $_POST['insuranceAmount']!='' && $_POST['insuranceAmount'] > 0){
-                    $insuranceAmount=preg_replace('/[^0-9.,]/','',$_POST['insuranceAmount']);
+                if (isset($_GET['insuranceAmount']) && $_GET['insuranceAmount']!='' && $_GET['insuranceAmount'] > 0){
+                    $insuranceAmount=preg_replace('/[^0-9.,]/','',$_GET['insuranceAmount']);
                     $insuranceAmount=str_replace(',','.',$insuranceAmount);
                     $insuranceAmount=number_format($insuranceAmount,'2','.','');
                     $dhl_xml->ShipmentOrder->Shipment->ShipmentDetails->Service->{$service}['insuranceAmount']=$insuranceAmount;
@@ -418,43 +396,33 @@ foreach($display_services as $service) {
                     $dhl_xml->ShipmentOrder->Shipment->ShipmentDetails->Service->CashOnDelivery['codAmount']=$cod_amount;
                     //Bankdaten
                     $dhl_xml->ShipmentOrder->Shipment->ShipmentDetails->BankData = new stdClass();
-                    $dhl_xml->ShipmentOrder->Shipment->ShipmentDetails->BankData->accountOwner = MODULE_SHIPPING_DHLGKAPI_BANKDATA_ACCOUNTOWNER;
-                    $dhl_xml->ShipmentOrder->Shipment->ShipmentDetails->BankData->bankName = MODULE_SHIPPING_DHLGKAPI_BANKDATA_BANKNAME;
-                    $dhl_xml->ShipmentOrder->Shipment->ShipmentDetails->BankData->iban = MODULE_SHIPPING_DHLGKAPI_BANKDATA_IBAN;
-                    $dhl_xml->ShipmentOrder->Shipment->ShipmentDetails->BankData->bic = MODULE_SHIPPING_DHLGKAPI_BANKDATA_BIC;
-                    $dhl_xml->ShipmentOrder->Shipment->ShipmentDetails->BankData->note1 = $oID; //NB 1.15
-
+                    $dhl_xml->ShipmentOrder->Shipment->ShipmentDetails->BankData->accountOwner=MODULE_SHIPPING_DHLGKAPI_BANKDATA_ACCOUNTOWNER;
+                    $dhl_xml->ShipmentOrder->Shipment->ShipmentDetails->BankData->bankName=MODULE_SHIPPING_DHLGKAPI_BANKDATA_BANKNAME;
+                    $dhl_xml->ShipmentOrder->Shipment->ShipmentDetails->BankData->iban=MODULE_SHIPPING_DHLGKAPI_BANKDATA_IBAN;
+                    $dhl_xml->ShipmentOrder->Shipment->ShipmentDetails->BankData->bic=MODULE_SHIPPING_DHLGKAPI_BANKDATA_BIC; 
                 } else {
                     $dhl_xml->ShipmentOrder->Shipment->ShipmentDetails->Service->{$service}['active']='0'; 
                 }
                 break;
 
             case 'VisualCheckOfAge':
-                if (isset($_POST['VisualCheckOfAgeType']) && $_POST['VisualCheckOfAgeType']!='') {
-                    $dhl_xml->ShipmentOrder->Shipment->ShipmentDetails->Service->{$service}['type']=$_POST['VisualCheckOfAgeType'];
+                if (isset($_GET['VisualCheckOfAgeType']) && $_GET['VisualCheckOfAgeType']!='') {
+                    $dhl_xml->ShipmentOrder->Shipment->ShipmentDetails->Service->{$service}['type']=$_GET['VisualCheckOfAgeType'];
                 } else {
                     $dhl_xml->ShipmentOrder->Shipment->ShipmentDetails->Service->{$service}['active']='0'; 
                 }
         } 
     } 
 }
-//NB 2.03
-//Wunschpaket Services
-$wunschpaket_services=array(
-    'PD' => 'PreferredDay',
-    'PT' => 'PreferredTime',
-    'PN' => 'PreferredNeighbour',
-    'PL' => 'PreferredLocation'
-);
 
 //Wunschpaket Services aktivieren
 foreach($wunschpaket_services as $id => $service) {
-    if (isset($_POST[$service]) && $_POST[$service]!='' ) {
+    if (isset($_GET[$service]) && $_GET[$service]!='' ) {
         $dhl_xml->ShipmentOrder->Shipment->ShipmentDetails->Service->{$service}['active']='1';
         if ($id=='PT') {
-            $dhl_xml->ShipmentOrder->Shipment->ShipmentDetails->Service->{$service}['type']=$_POST[$service]; 
+           $dhl_xml->ShipmentOrder->Shipment->ShipmentDetails->Service->{$service}['type']=$_GET[$service]; 
         } else {
-            $dhl_xml->ShipmentOrder->Shipment->ShipmentDetails->Service->{$service}['details']=$_POST[$service]; 
+           $dhl_xml->ShipmentOrder->Shipment->ShipmentDetails->Service->{$service}['details']=$_GET[$service]; 
         }
     }
 }
@@ -467,7 +435,7 @@ if (MODULE_SHIPPING_DHLGKAPI_DHL_EMAIL_ENABLED=='True') {
 
 //Absenderadresse
 $dhl_xml->ShipmentOrder->Shipment->Shipper = new stdClass();
-$dhl_xml->ShipmentOrder->Shipment->Shipper->Name = new stdClass(); 
+$dhl_xml->ShipmentOrder->Shipment->Shipper->Name = new stdClass();
 $dhl_xml->ShipmentOrder->Shipment->Shipper->Name->name1=MODULE_SHIPPING_DHLGKAPI_SHIPPER_NAME;
 $dhl_xml->ShipmentOrder->Shipment->Shipper->Address = new stdClass();
 $dhl_xml->ShipmentOrder->Shipment->Shipper->Address->streetName=MODULE_SHIPPING_DHLGKAPI_SHIPPER_STREETNAME;
@@ -481,27 +449,20 @@ $dhl_xml->ShipmentOrder->Shipment->Shipper->Communication->phone=MODULE_SHIPPING
 $dhl_xml->ShipmentOrder->Shipment->Shipper->Communication->contactPerson=MODULE_SHIPPING_DHLGKAPI_CONTACT_PERSON;
 
 
-//Empfängeradresse
+//EmpfÃ¤ngeradresse
 
 //Hausadresse
 //Firma?
-$dhl_xml->ShipmentOrder->Shipment->Receiver = new stdClass();
-$dhl_xml->ShipmentOrder->Shipment->Receiver->Address = new stdClass(); //NB 1.14 
+$dhl_xml->ShipmentOrder->Shipment->Receiver = new stdClass(); 
 if ($order_data['delivery_company']!='') {
     $dhl_xml->ShipmentOrder->Shipment->Receiver->name1=$order_data['delivery_company'];
-    $dhl_xml->ShipmentOrder->Shipment->Receiver->Address->name2=$order_data['delivery_firstname'].' '.$order_data['delivery_lastname']; //NB 1.14
     $dhl_xml->ShipmentOrder->Shipment->Receiver->Communication = new stdClass();
     $dhl_xml->ShipmentOrder->Shipment->Receiver->Communication->contactPerson=$order_data['delivery_firstname'].' '.$order_data['delivery_lastname'];
 } else {
     $dhl_xml->ShipmentOrder->Shipment->Receiver->name1=$order_data['delivery_firstname'].' '.$order_data['delivery_lastname']; 
 }
-
-if ($order_data['delivery_country_iso_code_2'] == 'DE') { 
-    $dhl_xml->ShipmentOrder->Shipment->Receiver->Address->name3=$order_data['delivery_suburb'];
-} else {
-    $dhl_xml->ShipmentOrder->Shipment->Receiver->Address->addressAddition=$order_data['delivery_suburb'];
-}
-
+$dhl_xml->ShipmentOrder->Shipment->Receiver->Address = new stdClass();
+$dhl_xml->ShipmentOrder->Shipment->Receiver->Address->addressAddition=$order_data['delivery_suburb'];
 $dhl_xml->ShipmentOrder->Shipment->Receiver->Address->streetName=$receiver_streetname;
 $dhl_xml->ShipmentOrder->Shipment->Receiver->Address->streetNumber=$receiver_streetnumber;
 $dhl_xml->ShipmentOrder->Shipment->Receiver->Address->zip=$order_data['delivery_postcode'];
@@ -527,12 +488,13 @@ if (preg_match("/[0-9]{6}/", $order_data['delivery_suburb'])) {
         $dhl_xml->ShipmentOrder->Shipment->Receiver->Packstation->city=$order_data['delivery_city'];
         $dhl_xml->ShipmentOrder->Shipment->Receiver->Packstation->Origin = new stdClass();
         $dhl_xml->ShipmentOrder->Shipment->Receiver->Packstation->Origin->countryISOCode=$order_data['delivery_country_iso_code_2'];
-        //NB 2.05 if (!isset($dhl_xml->ShipmentOrder->Shipment->ShipmentDetails->Notification)) $dhl_xml->ShipmentOrder->Shipment->ShipmentDetails->Notification = new stdClass();
+       //NB 2.05 if (!isset($dhl_xml->ShipmentOrder->Shipment->ShipmentDetails->Notification)) $dhl_xml->ShipmentOrder->Shipment->ShipmentDetails->Notification = new stdClass();
         //NB 2.05 $dhl_xml->ShipmentOrder->Shipment->ShipmentDetails->Notification->recipientEmailAddress=$order_data['customers_email_address']; //NB 1.02
-
+        
         unset($dhl_xml->ShipmentOrder->Shipment->Receiver->Address);
     }
     //Postfiliale
+    
     if (preg_match("/Postfiliale/i", $order_data['delivery_street_address'])) {
         $dhl_xml->ShipmentOrder->Shipment->Receiver->Postfiliale = new stdClass();
         $dhl_xml->ShipmentOrder->Shipment->Receiver->Postfiliale->postfilialNumber=preg_replace('/[^0-9]/','',$order_data['delivery_street_address']);
@@ -541,9 +503,9 @@ if (preg_match("/[0-9]{6}/", $order_data['delivery_suburb'])) {
         $dhl_xml->ShipmentOrder->Shipment->Receiver->Postfiliale->city=$order_data['delivery_city'];
         $dhl_xml->ShipmentOrder->Shipment->Receiver->Postfiliale->Origin = new stdClass();
         $dhl_xml->ShipmentOrder->Shipment->Receiver->Postfiliale->Origin->countryISOCode=$order_data['delivery_country_iso_code_2'];
-        //NB 2.05 if (!isset($dhl_xml->ShipmentOrder->Shipment->ShipmentDetails->Notification)) $dhl_xml->ShipmentOrder->Shipment->ShipmentDetails->Notification = new stdClass();
+       //NB 2.05 if (!isset($dhl_xml->ShipmentOrder->Shipment->ShipmentDetails->Notification)) $dhl_xml->ShipmentOrder->Shipment->ShipmentDetails->Notification = new stdClass();
         //NB 2.05 $dhl_xml->ShipmentOrder->Shipment->ShipmentDetails->Notification->recipientEmailAddress=$order_data['customers_email_address']; //NB 1.02
-
+        
         unset($dhl_xml->ShipmentOrder->Shipment->Receiver->Address);
     }
 }
@@ -558,24 +520,23 @@ if (preg_match("/Paketshop|Parcelshop/i", $order_data['delivery_street_address']
     $dhl_xml->ShipmentOrder->Shipment->Receiver->ParcelShop->city=$order_data['delivery_city'];
     $dhl_xml->ShipmentOrder->Shipment->Receiver->ParcelShop->Origin = new stdClass();
     $dhl_xml->ShipmentOrder->Shipment->Receiver->ParcelShop->Origin->countryISOCode=$order_data['delivery_country_iso_code_2'];
-    //NB 2.05 if (!isset($dhl_xml->ShipmentOrder->Shipment->ShipmentDetails->Notification)) $dhl_xml->ShipmentOrder->Shipment->ShipmentDetails->Notification = new stdClass();
-    //NB 2.05 $dhl_xml->ShipmentOrder->Shipment->ShipmentDetails->Notification->recipientEmailAddress=$order_data['customers_email_address']; //NB 1.02
-
+   //NB 2.05 if (!isset($dhl_xml->ShipmentOrder->Shipment->ShipmentDetails->Notification)) $dhl_xml->ShipmentOrder->Shipment->ShipmentDetails->Notification = new stdClass();
+		//NB 2.05 $dhl_xml->ShipmentOrder->Shipment->ShipmentDetails->Notification->recipientEmailAddress=$order_data['customers_email_address']; //NB 1.02
+     
     unset($dhl_xml->ShipmentOrder->Shipment->Receiver->Address);
 }
 
 //Kommunikationsoptionen
-if (!isset($dhl_xml->ShipmentOrder->Shipment->Receiver->Communication)) $dhl_xml->ShipmentOrder->Shipment->Receiver->Communication = new stdClass();
-//NB 2.05 $dhl_xml->ShipmentOrder->Shipment->Receiver->Communication->phone=$order_data['customers_telephone'];
-$dhl_xml->ShipmentOrder->Shipment->Receiver->Communication->contactPerson = $order_data['delivery_firstname'].' '.$order_data['delivery_lastname']; //NB 2.05
+		if (!isset($dhl_xml->ShipmentOrder->Shipment->Receiver->Communication)) $dhl_xml->ShipmentOrder->Shipment->Receiver->Communication = new stdClass();
+		//NB 2.05 $dhl_xml->ShipmentOrder->Shipment->Receiver->Communication->phone=$order_data['customers_telephone'];
+		$dhl_xml->ShipmentOrder->Shipment->Receiver->Communication->contactPerson = $order_data['delivery_firstname'].' '.$order_data['delivery_lastname']; //NB 2.05
 
 //Retourelabel
-if (MODULE_SHIPPING_DHLGKAPI_RETURN_ENABLED=='True' && isset($_POST['Return'])) {
+if (MODULE_SHIPPING_DHLGKAPI_RETURN_ENABLED=='True' && isset($_GET['Return'])) {
     if (constant('MODULE_SHIPPING_DHLGKAPI_'.$dhl_type.'_RETOURE_ATTENDANCE')!='0') {
         $retoure_products=unserialize(MODULE_SHIPPING_DHLGKAPI_RETOURE_PRODUCTS);
         $dhl_xml->ShipmentOrder->Shipment->ShipmentDetails->returnShipmentAccountNumber=MODULE_SHIPPING_DHLGKAPI_EKP.$retoure_products[$dhl_type].constant('MODULE_SHIPPING_DHLGKAPI_'.$dhl_type.'_RETOURE_ATTENDANCE');
         $dhl_xml->ShipmentOrder->Shipment->ShipmentDetails->returnShipmentReference=$oID;
-
         $dhl_xml->ShipmentOrder->Shipment->ReturnReceiver = new stdClass();
         $dhl_xml->ShipmentOrder->Shipment->ReturnReceiver->Name = new stdClass();
         $dhl_xml->ShipmentOrder->Shipment->ReturnReceiver->Name->name1=MODULE_SHIPPING_DHLGKAPI_RETURN_NAME;
@@ -584,7 +545,6 @@ if (MODULE_SHIPPING_DHLGKAPI_RETURN_ENABLED=='True' && isset($_POST['Return'])) 
         $dhl_xml->ShipmentOrder->Shipment->ReturnReceiver->Address->streetNumber=MODULE_SHIPPING_DHLGKAPI_RETURN_STREETNUMBER;
         $dhl_xml->ShipmentOrder->Shipment->ReturnReceiver->Address->zip=MODULE_SHIPPING_DHLGKAPI_RETURN_ZIP;
         $dhl_xml->ShipmentOrder->Shipment->ReturnReceiver->Address->city=MODULE_SHIPPING_DHLGKAPI_RETURN_CITY;
-
         $dhl_xml->ShipmentOrder->Shipment->ReturnReceiver->Address->Origin = new stdClass();
         $dhl_xml->ShipmentOrder->Shipment->ReturnReceiver->Address->Origin->countryISOCode=MODULE_SHIPPING_DHLGKAPI_RETURN_COUNTRY;
 
@@ -599,62 +559,94 @@ if (MODULE_SHIPPING_DHLGKAPI_RETURN_ENABLED=='True' && isset($_POST['Return'])) 
 //Zolldaten
 if (!in_array($order_data['delivery_country_iso_code_2'],explode(',',MODULE_SHIPPING_DHLGKAPI_EU_COUNTRIES))) {
     $dhl_xml->ShipmentOrder->Shipment->ExportDocument=(object) array(
-        'invoiceNumber' => $_POST['invoiceNumber'],
+        'invoiceNumber' => $_GET['invoiceNumber'],
         'exportType' => 'OTHER',
         'exportTypeDescription' => 'Permanent',
-        'termsOfTrade' => $_POST['termsOfTrade'],
+        'termsOfTrade' => $_GET['termsOfTrade'],
         'placeOfCommital' => MODULE_SHIPPING_DHLGKAPI_SHIPPER_CITY,
-        'additionalFee' => str_replace(',','.',$_POST['additionalFee'])
+        'additionalFee' => str_replace(',','.',$_GET['additionalFee'])
     );
 
     $dhl_xml->ShipmentOrder->Shipment->ExportDocument->ExportDocPosition=(object) array(
         'description' => 'ExportPositionOne',
         'countryCodeOrigin' => MODULE_SHIPPING_DHLGKAPI_SHIPPER_COUNTRY,
-        'customsTariffNumber' => $_POST['customsTariffNumber'],
+        'customsTariffNumber' => $_GET['customsTariffNumber'],
         'amount' => '1',
-        'netWeightInKG' => str_replace(',','.',$_POST['netWeightInKG']),
-        'customsValue' => str_replace(',','.',$_POST['customsValue'])
+        'netWeightInKG' => str_replace(',','.',$_GET['netWeightInKG']),
+        'customsValue' => str_replace(',','.',$_GET['customsValue'])
     );
 }
 
 //Label anfordern / stornieren
-if ((isset($_POST['getlabel']) || isset($_GET['stornolabel']) || isset($_GET['testlabel'])) && !isset($_GET['error'])) {
+if ((isset($_GET['getlabel']) || isset($_GET['stornolabel']) || isset($_GET['testlabel'])) && !isset($_GET['error'])) {
 
     //Testmode
     if (isset($_GET['testlabel'])) {
         $function='createShipmentOrder';
 
         $result=soap_request($dhl_xml, $function, $oID , true);
+?>
+        <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+        <html>
+            <head>
+                <title>DHLGKAPI Test</title>
+                <style>
+                    div {
+                        font-family: Verdana, Arial, sans-serif; 
+                        font-size: large;
+                        font-weight: bold; 
+                        padding: 10px; 
+                        border: 1px solid black;
+                        color: black;
+                    }
+                    .red {
+                        background-color: LightPink;
+                    }
 
-        //NB 2.07
-        if (isset($result) && $result->Status->statusCode == '0') {
-            //Label erhalten -> wieder löschen...
-            //Request bilden
-            unset($dhl_xml->ShipmentOrder);
-            $dhl_xml->shipmentNumber=$result->CreationState->LabelData->shipmentNumber;
+                    .green {
+                        background-color: LightGreen; 
+                    }
+                </style>
+            </head>
+            <body>
 
-            $function='deleteShipmentOrder';
-            $result=soap_request($dhl_xml, $function, $oID, true);
+                <?php
+                if (isset($result) && $result->Status->statusCode=='0') {
+                    //Label erhalten -> wieder lÃ¶schen...
+                    //Request bilden
+                    unset($dhl_xml->ShipmentOrder);
+                    $dhl_xml->shipmentNumber=$result->CreationState->LabelData->shipmentNumber;
 
-            $messageStack->add_session(MODULE_SHIPPING_DHLGKAPI_TEST_OKAY, 'success');
+                    $function='deleteShipmentOrder';
+                    $result=soap_request($dhl_xml, $function, $oID, true);
+                ?>
+                    <div class="green"><?php echo MODULE_SHIPPING_DHLGKAPI_TEST_OKAY; ?></div>
+                    <?php
+                } else {
+                    ?>
+                    <div class="red"><?php echo MODULE_SHIPPING_DHLGKAPI_TEST_NOT_OKAY; ?></div>
+                <?php 
+                }
 
-        } else {
+                ?>
 
-            $messageStack->add_session(MODULE_SHIPPING_DHLGKAPI_TEST_NOT_OKAY . '<br />' . urldecode($result), 'error');
 
-        }
 
-        xtc_redirect(xtc_href_link('modules.php','set=shipping&module=dhlgkapi&action=edit'));
-
+                <br />
+                <br />
+                <input type=button onClick="window.open('', '_self', ''); window.close();" value="schlieÃŸen">
+            </body>
+        </html>
+<?php
         die;
     }
 
 
     //SOAP Aktion festlegen
-    if (isset($_POST['getlabel'])) {
+    if (isset($_GET['getlabel'])) {
         $function='createShipmentOrder';
 
-        //Anfrage durchführen
+        //Anfrage durchfÃ¼hren
         $result=soap_request($dhl_xml, $function, $oID);
 
         //Versandinformationen in Datenbank schreibem
@@ -665,24 +657,13 @@ if ((isset($_POST['getlabel']) || isset($_GET['stornolabel']) || isset($_GET['te
             $parcel_id = xtc_db_prepare_input($result->CreationState->LabelData->shipmentNumber);
             $sql_data_array = array('ortra_order_id' => $oID,
                 'ortra_carrier_id' => $carrier_id,
-                'ortra_parcel_id' => $parcel_id);//NB Fishnet
+                'ortra_parcel_id' => $parcel_id);
             xtc_db_perform(TABLE_ORDERS_TRACKING,$sql_data_array);
             $tracking_id = xtc_db_insert_id();
         }
 
         $status = (int)MODULE_SHIPPING_DHLGKAPI_ORDERSTATUS_SHIPPED;
-
         $comments = xtc_db_prepare_input(MODULE_SHIPPING_DHLGKAPI_EMAILTEXT);
-        
-        //NB 2.22
-        $daynames=unserialize(MODULE_SHIPPING_DHLGKAPI_DAYNAMES);
-        $shipping_days = explode(',', MODULE_SHIPPING_DHLGKAPI_SHIPPING_DAYS); //Versandtage
-        $shipping_days = array_map('strtoupper', $shipping_days);
-        $weekday = date('w', time());
-        
-        if (time() > strtotime(MODULE_SHIPPING_DHLGKAPI_EMAIL_TIME) || !in_array(strtoupper($daynames[$weekday]), $shipping_days)) { //NB 2.21 2.23
-            $comments = xtc_db_prepare_input(MODULE_SHIPPING_DHLGKAPI_EMAILTEXT_TOMORROW);    
-        }      
     }
 
     //Label stornieren
@@ -700,13 +681,13 @@ if ((isset($_POST['getlabel']) || isset($_GET['stornolabel']) || isset($_GET['te
             xtc_redirect(xtc_href_link('dhlgkapi_print_label.php', 'oID='.$oID.'&error='.$errormsg.'&function='.$function));
         }
 
-        //Anfrage durchführen
+        //Anfrage durchfÃ¼hren
         $result=soap_request($dhl_xml, $function, $oID);    
 
         $status = (int)MODULE_SHIPPING_DHLGKAPI_ORDERSTATUS_CANCELED;
         $comments = xtc_db_prepare_input(MODULE_SHIPPING_DHLGKAPI_CANCELTEXT);
 
-        xtc_db_query("DELETE FROM ".TABLE_ORDERS_TRACKING." WHERE ortra_parcel_id='".xtc_db_prepare_input($shipment_number)."'");  //NB 2.2
+        xtc_db_query("DELETE FROM ".TABLE_ORDERS_TRACKING." WHERE ortra_parcel_id=".xtc_db_prepare_input($shipment_number));
     }
 
 
@@ -794,11 +775,13 @@ if ((isset($_POST['getlabel']) || isset($_GET['stornolabel']) || isset($_GET['te
         $smarty->compile_dir = DIR_FS_CATALOG.'templates_c';
         $smarty->config_dir = DIR_FS_CATALOG.'lang';
 
-        $html_mail = $smarty->fetch(CURRENT_TEMPLATE.'/admin/mail/'.$order->info['language'].'/change_order_mail.html');
-        $txt_mail = $smarty->fetch(CURRENT_TEMPLATE.'/admin/mail/'.$order->info['language'].'/change_order_mail.txt');
-        $order_subject_search = array('{$nr}', '{$date}', '{$lastname}', '{$firstname}');
-        $order_subject_replace = array($oID, strftime(DATE_FORMAT_LONG), $order->customer['lastname'], $order->customer['firstname']);
-        $order_subject = str_replace($order_subject_search, $order_subject_replace, EMAIL_BILLING_SUBJECT);
+        $html_mail = $smarty->fetch('db:change_order_mail.html');
+        $txt_mail = $smarty->fetch('db:change_order_mail.txt');
+        $smarty->assign('nr', $oID);
+        $smarty->assign('date', strftime(DATE_FORMAT_LONG));
+        $smarty->assign('lastname', $order->customer['lastname']);
+        $smarty->assign('firstname',$order->customer['firstname']);
+        $order_subject = $smarty->fetch('db:change_order_mail.subject');
 
         xtc_php_mail(EMAIL_BILLING_ADDRESS,
             EMAIL_BILLING_NAME,
@@ -840,17 +823,17 @@ if ((isset($_POST['getlabel']) || isset($_GET['stornolabel']) || isset($_GET['te
         'orders_status_id' => $status,
         'date_added' => 'now()',
         'customer_notified' => $customer_notified,
-        'comments' => html_entity_decode($comments), //NB 2.24
+        'comments' => $comments,
         'comments_sent' => 1
     );
     xtc_db_perform(TABLE_ORDERS_STATUS_HISTORY,$sql_data_array);
-
-    //1.06 Orderstatus ändern
+	
+	//1.06 Orderstatus Ã¤ndern
     xtc_db_query("update " . TABLE_ORDERS . " set orders_status = '".$status."' where orders_id = '".$oID."'");
 
     if (isset($_GET['stornolabel'])) xtc_redirect(xtc_href_link(FILENAME_ORDERS, 'oID='.$oID.'&action=edit'));
 
-    //Label anzeigen und zurück zur Order
+    //Label anzeigen und zurÃ¼ck zur Order
     echo "<html>";
     echo "  <head>";
     echo "      <title>DHLGKAPI</title>";
@@ -913,244 +896,232 @@ require (DIR_WS_INCLUDES.'head.php');
                     </tr>
                 </table>
 
+                <form action="dhlgkapi_print_label.php">
+                    <input type="hidden" name="oID" value="<?php echo $oID?>">
+                    <table class="boxCenter" style="background: gold">
+                        <?php
+                        //NB 1.12 display message
+                        if ($output_msg != '') {
+                        ?>
+                            <tr class="main">
+                                <td colspan="4">
+                                    <strong><?php echo $output_msg; ?></strong>
+                                    <br />
+                                    <br />
+                                </td>
+                            </tr>
+                            <?php    
+                        }
 
-                <?php
-                echo xtc_draw_form('dhlgkapi','dhlgkapi_print_label.php','oID='.$oID);
-                ?>
-
-                <input type="hidden" name="oID" value="<?php echo $oID?>">
-                <table class="boxCenter" style="background: gold">
-                    <?php
-                    //NB 1.12 display message
-                    if ($output_msg != '') {
-                    ?>
-                        <tr class="main">
-                            <td colspan="4" style="border: 1px solid black; padding: 5px;">
-                                <strong><?php echo $output_msg; ?></strong>
-                            </td>
-                        </tr>
-                        <?php    
-                    }
-
-                    $tracking_array = get_tracking_link($oID, $lang_code);
-                    if (count($tracking_array) > 0) {
+                        $tracking_array = get_tracking_link($oID, $lang_code);
+                        if (count($tracking_array) > 0) {
+                        ?>
+                            <tr class="main">
+                                <td style="vertical-align: top;">
+                                    <strong><?php echo MODULE_SHIPPING_DHLGKAPI_SHIPMENTS; ?></strong>
+                                </td>
+                                <td colspan="3" style="text-align: right;">
+                                    <?php
+                                    foreach($tracking_array as $tracking) {
+                                        if ($tracking['carrier_name']=='DHL'){
+                                    ?>
+                                            <a href="<?php echo $tracking['tracking_link']; ?>" target="_blank"><?php echo $tracking['parcel_id']; ?></a>
+                                            &nbsp;&nbsp;
+                                            <a href="dhlgkapi_print_label.php?stornolabel=on&oID=<?php echo $oID; ?>&tracking_id=<?php echo urlencode($tracking['parcel_id']); ?>" class="button">
+                                            <?php echo MODULE_SHIPPING_DHLGKAPI_BUTTON_STORNO; ?>
+                                            </a>
+                                            <br />
+                                    <?php
+                                        }
+                                    }
+                                    ?>
+                                    <br />
+                                    <br />
+                                </td> 
+                            </tr>
+                        <?php
+                        }
                         ?>
                         <tr class="main">
+                            <td style="vertical-align: top;" ><strong><?php echo MODULE_SHIPPING_DHLGKAPI_SHIPPER; ?></strong></td>
                             <td style="vertical-align: top;">
-                                <strong><?php echo MODULE_SHIPPING_DHLGKAPI_SHIPMENTS; ?></strong>
+                                <?php
+                                echo MODULE_SHIPPING_DHLGKAPI_SHIPPER_NAME."<br />";
+                                echo MODULE_SHIPPING_DHLGKAPI_CONTACT_PERSON."<br />";
+                                echo MODULE_SHIPPING_DHLGKAPI_SHIPPER_STREETNAME.' '.MODULE_SHIPPING_DHLGKAPI_SHIPPER_STREETNUMBER."<br />";
+                                echo MODULE_SHIPPING_DHLGKAPI_SHIPPER_ZIP.' '.MODULE_SHIPPING_DHLGKAPI_SHIPPER_CITY."<br />";
+                                echo MODULE_SHIPPING_DHLGKAPI_SHIPPER_COUNTRY."<br />";
+                                ?>
                             </td>
-                            <td colspan="3" style="text-align: right;">
-                                <?php
-                                foreach($tracking_array as $tracking) {
-                                    if ($tracking['carrier_name']=='DHL'){
-                                ?>
-                                        <a href="<?php echo $tracking['tracking_link']; ?>" target="_blank"><?php echo $tracking['parcel_id']; ?></a>
-                                        &nbsp;&nbsp;
-                                        <a href="dhlgkapi_print_label.php?stornolabel=on&oID=<?php echo $oID; ?>&tracking_id=<?php echo urlencode($tracking['parcel_id']); ?>" class="button">
-                                        <?php echo MODULE_SHIPPING_DHLGKAPI_BUTTON_STORNO; ?>
-                                        </a>
-                                        <br />
-                                <?php
-                                    }
-                                }
-                                ?>
-                                <br />
-                                <br />
-                            </td> 
+                            <td style="vertical-align: top; text-align: left;"><strong><?php echo MODULE_SHIPPING_DHLGKAPI_EKP_TEXT; ?></strong><br><strong><?php echo MODULE_SHIPPING_DHLGKAPI_PRODUCT; ?></strong><br /><strong><?php echo MODULE_SHIPPING_DHLGKAPI_ATTENDANCE; ?></strong></td>
+                            <td style="vertical-align: top;"><?php echo MODULE_SHIPPING_DHLGKAPI_EKP;?><br>
+                                <?php echo $dhl_type; ?><br>
+                                <?php echo constant('MODULE_SHIPPING_DHLGKAPI_'.$dhl_type.'_ATTENDANCE'); ?><br><br>
+                            </td>
                         </tr>
-                    <?php
-                    }
-                    ?>
-                    <tr class="main">
-                        <td style="vertical-align: top;" ><strong><?php echo MODULE_SHIPPING_DHLGKAPI_SHIPPER; ?></strong></td>
-                        <td style="vertical-align: top;">
-                            <?php
-                            echo MODULE_SHIPPING_DHLGKAPI_SHIPPER_NAME."<br />";
-                            echo MODULE_SHIPPING_DHLGKAPI_CONTACT_PERSON."<br />";
-                            echo MODULE_SHIPPING_DHLGKAPI_SHIPPER_STREETNAME.' '.MODULE_SHIPPING_DHLGKAPI_SHIPPER_STREETNUMBER."<br />";
-                            echo MODULE_SHIPPING_DHLGKAPI_SHIPPER_ZIP.' '.MODULE_SHIPPING_DHLGKAPI_SHIPPER_CITY."<br />";
-                            echo MODULE_SHIPPING_DHLGKAPI_SHIPPER_COUNTRY."<br />";
-                            ?>
-                        </td>
-                        <td style="vertical-align: top; text-align: left;"><strong><?php echo MODULE_SHIPPING_DHLGKAPI_EKP_TEXT; ?></strong><br><strong><?php echo MODULE_SHIPPING_DHLGKAPI_PRODUCT; ?></strong><br /><strong><?php echo MODULE_SHIPPING_DHLGKAPI_ATTENDANCE; ?></strong></td>
-                        <td style="vertical-align: top;"><?php echo MODULE_SHIPPING_DHLGKAPI_EKP;?><br>
-                            <?php echo $dhl_type; ?><br>
-                            <?php echo constant('MODULE_SHIPPING_DHLGKAPI_'.$dhl_type.'_ATTENDANCE'); ?><br><br>
-                        </td>
-                    </tr>
 
-                    <tr class="main" style="vertical-align: top;">
-                        <td><strong><?php echo MODULE_SHIPPING_DHLGKAPI_SHIPPINGDATE; ?></strong></td>
-                        <td><?php echo $shipmentdate ?></td>
-                        <td><strong><?php echo MODULE_SHIPPING_DHLGKAPI_WEIGHT; ?></strong></td>
-                        <td>
-                            <?php 
-                            echo '<input type="text" name="WeightInKG" value="'.$dhl_weight.'" size="4"/> kg<br>';
-                            ?>
-                        </td>
-                    </tr>
-                    <tr class="main">
-                        <td style="vertical-align: top;"><strong><?php echo MODULE_SHIPPING_DHLGKAPI_RECEIVER; ?></strong></td>
-                        <td style="vertical-align: top;">
-                            <?php
-                            $check_array=array('Packstation','Postfiliale','Parcelshop');
-                            foreach($check_array as $check) {
-                                if(property_exists($dhl_xml->ShipmentOrder->Shipment->Receiver, $check)) {
-                                    echo '<strong style="color: green;">'.$check.'</strong><br />';
-                                }
-                            } 
-                            echo nl2br($name_raw);
-                            echo nl2br($address_raw);
-
-                            ?>
-                            <a href="https://www.google.de/maps/search/<?php echo urlencode(utf8_encode($address_raw));?>" target="_blank">[Google Maps]</a>
-                        </td>
-                        <td style="vertical-align: top;">
-                            <strong><?php echo MODULE_SHIPPING_DHLGKAPI_EMAIL_TEXT; ?></strong><br />
-                            <strong><?php echo MODULE_SHIPPING_DHLGKAPI_PHONE; ?></strong>
-                        </td>
-                        <td style="vertical-align: top;">
-                            <?php echo $order_data['customers_email_address']?><br />
-                            <?php echo $order_data['customers_telephone']?>
-                        </td>
-
-
-                    </tr>
-                    <tr class="main">
-                        <td colspan='2' style="vertical-align: top;">
-                        </td>
-                        <td style="vertical-align: top;">
-                            <strong><?php echo MODULE_SHIPPING_DHLGKAPI_WUNSCHPAKET_TEXT_TITLE; ?></strong>
-                        </td>
-                        <td style="vertical-align: top;">
-                            <?php
-                            foreach ($wunschpaket_services as $id => $service) {
-                                //NB 2.06
-                                $value='';
-                                if (isset($wunschpaket[$id])) $value = $wunschpaket[$id];
-                                if ($id == 'PD' && $value!='') {
-                                    $date_array = explode('.', $value);
-                                    $value =  date('Y-m-d', strtotime($date_array[2].'-'.$date_array[1].'-'.$date_array[0]));
-                                }
-
-                                echo '<strong>'.constant('MODULE_SHIPPING_DHLGKAPI_'.$id.'_TITLE').'</strong><br />';
-                                if (constant('MODULE_SHIPPING_DHLGKAPI_'.$id.'_DESC_BACKEND') != '') echo constant('MODULE_SHIPPING_DHLGKAPI_'.$id.'_DESC_BACKEND').'<br />';
-                                echo '<input maxlength="32" type="text" name="'.$service.'" value="'.$value.'"><br /><br />'; 
-                            }
-                            ?>
-                        </td>
-                    </tr> 
-                    <tr class="main">
-                        <td style="vertical-align: top;">
-                            <strong><?php echo MODULE_SHIPPING_DHLGKAPI_CUSTOMS; ?></strong>
-                        </td>
-                        <td style="vertical-align: top;">
-                            <?php
-                            if (!in_array($order_data['delivery_country_iso_code_2'],explode(',',MODULE_SHIPPING_DHLGKAPI_EU_COUNTRIES))) {
-                                echo MODULE_SHIPPING_DHLGKAPI_INVOICENUMBER.'<br />'.xtc_draw_input_field('invoiceNumber',$oID);
-                                echo '<p>'.MODULE_SHIPPING_DHLGKAPI_ADDITIONALFEE.'<br />'.xtc_draw_input_field('additionalFee','0.00').'</p>';
-                                echo '<p>'.MODULE_SHIPPING_DHLGKAPI_CUSTOMSTARIFFNUMBER.'<br />'.xtc_draw_input_field('customsTariffNumber','').'</p>';
-                                echo '<p>'.MODULE_SHIPPING_DHLGKAPI_NETWEIGHTINKG.'<br />'.xtc_draw_input_field('netWeightInKG',($dhl_weight - SHIPPING_BOX_WEIGHT)).'</p>';
-                                echo '<p>'.MODULE_SHIPPING_DHLGKAPI_CUSTOMSVALUE.'<br />'.xtc_draw_input_field('customsValue',$customs_value).'</p>'; //NB 1.13
-
-                                $terms=array('DDP','DXV','DDU','DDX');
-                                $select_array=array();
-                                foreach($terms as $term) {
-                                    $select_array[]=array('id' => $term, 'text' => $term); 
-                                }
-
-                                echo MODULE_SHIPPING_DHLGKAPI_TERMSOFTRADE .'<br />'. xtc_draw_pull_down_menu('termsOfTrade',  $select_array, 'DDU') .'<br />'. MODULE_SHIPPING_DHLGKAPI_TERMSOFTRADE_DESC;
-                            }
-                            ?>
-                        </td>
-                        <td style="vertical-align: top;">
-                            <strong><?php echo MODULE_SHIPPING_DHLGKAPI_SERVICES; ?></strong><br /><br />
-                        </td>
-                        <td style="vertical-align: top;">
-                            <?php
-                            $ages=array('A16','A18');
-                            $age_array=array();
-                            foreach($ages as $age) {
-                                $age_array[]=array('id' => $age, 'text' => $age); 
-                            }
-                            $count=0;
-                            foreach ($display_services as $service) {
-                                if ($valid_services[$dhl_product][$service]=='1') {
-                                    $extra_input='';
-                                    $checked=$dhl_xml->ShipmentOrder->Shipment->ShipmentDetails->Service->{$service}['active']=='1'?true:false;
-                                    $disabled=false;
-                                    $display='';
-                                    switch($service) {
-                                        case 'CashOnDelivery':
-                                            if ((MODULE_SHIPPING_DHLGKAPI_COD_ENABLED=='True') && (MODULE_SHIPPING_DHLGKAPI_COD_PAYMENT_MODULE==$order_data['payment_class'])) {
-                                                $checked=true; 
-                                                $extra_input= '<input size="10" type="text" name="CODAmount" value="'.$cod_amount.'"/> EUR';
-                                            } else {
-                                                $disabled=true;
-                                            }
-                                            break;
-
-                                        case 'GoGreen':
-                                            if (constant('MODULE_SHIPPING_DHLGKAPI_'.strtoupper($service).'_ENABLED')=='True') {
-                                                $checked=true;
-                                            }
-                                            break;
-
-                                        case 'PrintOnlyIfCodeable':
-                                            $checked=true;
-                                            break;
-
-                                        case 'AdditionalInsurance':
-                                            if ($cod_amount > 500) {
-                                                $extra_input = '<input size="10" type="text" name="insuranceAmount" value="'.$cod_amount.'"/> EUR';
-                                            } else {
-                                                $disabled=true; 
-                                            }
-                                            break;
-
-                                        case 'Return':
-                                            if (constant('MODULE_SHIPPING_DHLGKAPI_'.strtoupper($service).'_ENABLED')=='True') $checked=true;
-                                            break;
-
-                                        case 'VisualCheckOfAge':
-                                            $extra_input = xtc_draw_pull_down_menu('VisualCheckOfAgeType',  $age_array, 'A18');
-                                            break;
-
-                                        case 'IdentCheck':
-                                            $extra_input = '<p>'.ENTRY_LAST_NAME.'<br /><input size="10" type="text" name="surname" value="'.$order_data['delivery_lastname'].'"></p>';
-                                            $extra_input .= '<p>'.ENTRY_FIRST_NAME.'<br /><input size="10" type="text" name="givenName" value="'.$order_data['delivery_firstname'].'"></p>';
-                                            $extra_input .= '<p>'.MODULE_SHIPPING_DHLGKAPI_MINIMUMAGE.'<br /><input size="10" type="text" name="minimumAge" value="18"></p>';
-                                            $extra_input .= '<p>'.ENTRY_DATE_OF_BIRTH.'<br />'.xtc_draw_date_selector('IdentCheck',time()).'</p>';
-
-                                            break; 
+                        <tr class="main" style="vertical-align: top;">
+                            <td><strong><?php echo MODULE_SHIPPING_DHLGKAPI_SHIPPINGDATE; ?></strong></td>
+                            <td><?php echo $shipmentdate ?></td>
+                            <td><strong><?php echo MODULE_SHIPPING_DHLGKAPI_WEIGHT; ?></strong></td>
+                            <td>
+                                <?php 
+                                echo '<input type="text" name="WeightInKG" value="'.$dhl_weight.'" size="4"/> kg<br>';
+                                ?>
+                            </td>
+                        </tr>
+                        <tr class="main">
+                            <td style="vertical-align: top;"><strong><?php echo MODULE_SHIPPING_DHLGKAPI_RECEIVER; ?></strong></td>
+                            <td style="vertical-align: top;">
+                                <?php
+                                $check_array=array('Packstation','Postfiliale','Parcelshop');
+                                foreach($check_array as $check) {
+                                    if(property_exists($dhl_xml->ShipmentOrder->Shipment->Receiver, $check)) {
+                                        echo '<strong style="color: green;">'.$check.'</strong><br />';
                                     }
-                                    echo $count>0?"<p>":'';
-                                    if (!$disabled) echo '<input type="checkbox" name="'.$service.'" value="" '.($checked==true?'checked="checked"':'').' onClick="toggleView(\''.$service.'\')">'.'<strong> '.$service.'</strong>'.'<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'.constant('MODULE_SHIPPING_DHLGKAPI_SERVICE_'.strtoupper($service).'_TEXT'); //NB 1.08
+                                } 
+                                echo nl2br($name_raw);
+                                echo nl2br($address_raw);
 
-                                    if (!$checked) $display="display: none;";
-                                    echo '<div id="'.$service.'" style="padding-left:35px;'.$display.'">'.$extra_input.'</div>';
-                                    echo $count>0?"</p>":'';
-                                    $count++;
-                                }       
-                            }
-                            ?>                       
-                        </td> 
-                    </tr>                                                                                                               
-                    <tr class="main">
-                        <td colspan="2" style="text-align: left;">
-                            <?php
-                            //Zurück
-                            echo '<a class="button" href="'.xtc_href_link(FILENAME_ORDERS, 'oID='.$oID.'&action=edit').'">'.BUTTON_BACK.'</a>&nbsp;';
-                            ?>
-                        </td>
-                        <td colspan="2" style="text-align: right;">
-                            <?php
-                            //Label erstellen 
-                            echo '<input class="button" type="submit" name="getlabel" value="'.MODULE_SHIPPING_DHLGKAPI_BUTTON_GETLABEL.'"/>&nbsp';
-                            ?> 
-                        </td>
-                    </tr>
-                </table>
+                                ?>
+                                <a href="https://www.google.de/maps/search/<?php echo urlencode(utf8_encode($address_raw));?>" target="_blank">[Google Maps]</a>
+                            </td>
+                            <td style="vertical-align: top;">
+                                <strong><?php echo MODULE_SHIPPING_DHLGKAPI_EMAIL_TEXT; ?></strong><br />
+                                <strong><?php echo MODULE_SHIPPING_DHLGKAPI_PHONE; ?></strong>
+                            </td>
+                            <td style="vertical-align: top;">
+                                <?php echo $order_data['customers_email_address']?><br />
+                                <?php echo $order_data['customers_telephone']?>
+                            </td>
+
+
+                        </tr>
+                        <tr class="main">
+                            <td colspan='2' style="vertical-align: top;">
+                            </td>
+                            <td style="vertical-align: top;">
+                                <strong><?php echo MODULE_SHIPPING_DHLGKAPI_WUNSCHPAKET_TEXT_TITLE; ?></strong>
+                            </td>
+                            <td style="vertical-align: top;">
+                                <?php
+                                foreach ($wunschpaket_services as $id => $service) {
+                                    echo '<strong>'.constant('MODULE_SHIPPING_DHLGKAPI_'.$id.'_TITLE').'</strong><br />';
+                                    echo '<input maxlength="32" type="text" name="'.$service.'" value="'.$wunschpaket[$id].'"><br /><br />'; 
+                                }
+                                ?>
+                            </td>
+                        </tr> 
+                        <tr class="main">
+                            <td style="vertical-align: top;">
+                                <strong><?php echo MODULE_SHIPPING_DHLGKAPI_CUSTOMS; ?></strong>
+                            </td>
+                            <td style="vertical-align: top;">
+                                <?php
+                                if (!in_array($order_data['delivery_country_iso_code_2'],explode(',',MODULE_SHIPPING_DHLGKAPI_EU_COUNTRIES))) {
+                                    echo MODULE_SHIPPING_DHLGKAPI_INVOICENUMBER.'<br />'.xtc_draw_input_field('invoiceNumber',$oID);
+                                    echo '<p>'.MODULE_SHIPPING_DHLGKAPI_ADDITIONALFEE.'<br />'.xtc_draw_input_field('additionalFee','0.00').'</p>';
+                                    echo '<p>'.MODULE_SHIPPING_DHLGKAPI_CUSTOMSTARIFFNUMBER.'<br />'.xtc_draw_input_field('customsTariffNumber','').'</p>';
+                                    echo '<p>'.MODULE_SHIPPING_DHLGKAPI_NETWEIGHTINKG.'<br />'.xtc_draw_input_field('netWeightInKG',($dhl_weight - SHIPPING_BOX_WEIGHT)).'</p>';
+                                    echo '<p>'.MODULE_SHIPPING_DHLGKAPI_CUSTOMSVALUE.'<br />'.xtc_draw_input_field('customsValue',$cod_amount).'</p>';
+
+                                    $terms=array('DDP','DXV','DDU','DDX');
+                                    $select_array=array();
+                                    foreach($terms as $term) {
+                                        $select_array[]=array('id' => $term, 'text' => $term); 
+                                    }
+
+                                    echo MODULE_SHIPPING_DHLGKAPI_TERMSOFTRADE .'<br />'. xtc_draw_pull_down_menu('termsOfTrade',  $select_array, 'DDU') .'<br />'. MODULE_SHIPPING_DHLGKAPI_TERMSOFTRADE_DESC;
+                                }
+                                ?>
+                            </td>
+                            <td style="vertical-align: top;">
+                                <strong><?php echo MODULE_SHIPPING_DHLGKAPI_SERVICES; ?></strong><br /><br />
+                            </td>
+                            <td style="vertical-align: top;">
+                                <?php
+                                $ages=array('A16','A18');
+                                $age_array=array();
+                                foreach($ages as $age) {
+                                    $age_array[]=array('id' => $age, 'text' => $age); 
+                                }
+                                $count=0;
+                                foreach ($display_services as $service) {
+                                    if ($valid_services[$dhl_product][$service]=='1') {
+                                        $extra_input='';
+                                        $checked=$dhl_xml->ShipmentOrder->Shipment->ShipmentDetails->Service->{$service}['active']=='1'?true:false;
+                                        $disabled=false;
+                                        $display='';
+                                        switch($service) {
+                                            case 'CashOnDelivery':
+                                                if ((MODULE_SHIPPING_DHLGKAPI_COD_ENABLED=='True') && (MODULE_SHIPPING_DHLGKAPI_COD_PAYMENT_MODULE==$order_data['payment_class'])) {
+                                                    $checked=true; 
+                                                    $extra_input= '<input size="10" type="text" name="CODAmount" value="'.$cod_amount.'"/> EUR';
+                                                } else {
+                                                    $disabled=true;
+                                                }
+                                                break;
+
+                                            case 'GoGreen':
+                                                if (constant('MODULE_SHIPPING_DHLGKAPI_'.strtoupper($service).'_ENABLED')=='True') {
+                                                    $checked=true;
+                                                }
+                                                break;
+
+                                            case 'PrintOnlyIfCodeable':
+                                                $checked=true;
+                                                break;
+
+                                            case 'AdditionalInsurance':
+                                                if ($cod_amount > 500) {
+                                                    $extra_input = '<input size="10" type="text" name="insuranceAmount" value="'.$cod_amount.'"/> EUR';
+                                                } else {
+                                                    $disabled=true; 
+                                                }
+                                                break;
+
+                                            case 'Return':
+                                                if (constant('MODULE_SHIPPING_DHLGKAPI_'.strtoupper($service).'_ENABLED')=='True') $checked=true;
+                                                break;
+
+                                            case 'VisualCheckOfAge':
+                                                $extra_input = xtc_draw_pull_down_menu('VisualCheckOfAgeType',  $age_array, 'A18');
+                                                break;
+
+                                            case 'IdentCheck':
+                                                $extra_input = '<p>'.ENTRY_LAST_NAME.'<br /><input size="10" type="text" name="surname" value="'.$order_data['delivery_lastname'].'"></p>';
+                                                $extra_input .= '<p>'.ENTRY_FIRST_NAME.'<br /><input size="10" type="text" name="givenName" value="'.$order_data['delivery_firstname'].'"></p>';
+                                                $extra_input .= '<p>'.MODULE_SHIPPING_DHLGKAPI_MINIMUMAGE.'<br /><input size="10" type="text" name="minimumAge" value="18"></p>';
+                                                $extra_input .= '<p>'.ENTRY_DATE_OF_BIRTH.'<br />'.xtc_draw_date_selector('IdentCheck',time()).'</p>';
+
+                                                break; 
+                                        }
+                                        echo $count>0?"<p>":'';
+                                        if (!$disabled) echo xtc_draw_checkbox_field($service, '', $checked, null ,'onClick="toggleView(\''.$service.'\')"'). '<strong> '.$service.'</strong>'.'<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'.constant('MODULE_SHIPPING_DHLGKAPI_SERVICE_'.strtoupper($service).'_TEXT');
+                                        if (!$checked) $display="display: none;";
+                                        echo '<div id="'.$service.'" style="padding-left:35px;'.$display.'">'.$extra_input.'</div>';
+                                        echo $count>0?"</p>":'';
+                                        $count++;
+                                    }       
+                                }
+                                ?>                       
+                            </td> 
+                        </tr>                                                                                                               
+                        <tr class="main">
+                            <td colspan="2" style="text-align: left;">
+                                <?php
+                                //ZurÃ¼ck
+                                echo '<a class="button" href="'.xtc_href_link(FILENAME_ORDERS, 'oID='.$oID.'&action=edit').'">'.BUTTON_BACK.'</a>&nbsp;';
+                                ?>
+                            </td>
+                            <td colspan="2" style="text-align: right;">
+                                <?php
+                                //Label erstellen 
+                                echo '<input class="button" type="submit" name="getlabel" value="'.MODULE_SHIPPING_DHLGKAPI_BUTTON_GETLABEL.'"/>&nbsp';
+                                ?> 
+                            </td>
+                        </tr>
+                    </table>
                 </form>
             </td>
         </tr>

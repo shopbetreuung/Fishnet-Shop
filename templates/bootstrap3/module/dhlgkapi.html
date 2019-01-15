@@ -1,13 +1,44 @@
 {literal}
+<script type="text/javascript">
+    function checkempty() {
+        var check1 = document.getElementById("PreferredNeighbour");
+        var check2 = document.getElementById("PreferredLocation");
+        if (check1.value=='') {
+            check2.disabled=false;
+            check1.style.backgroundColor="whitesmoke";
+        } else {
+            check2.disabled=true;
+            check1.style.backgroundColor="gold"; 
+        }
+
+        if (check2.value=='') {
+            check1.disabled=false;
+            check2.style.backgroundColor="whitesmoke"
+        } else {
+            check1.disabled=true;
+            check2.style.backgroundColor="gold";   
+        }
+
+        if (check1.value=='' && check2.value=='') {
+            check1.style.backgroundColor="whitesmoke";
+            check2.style.backgroundColor="whitesmoke";
+        }
+    }
+
+    function clear_select(element, option) {
+        var element_state = document.getElementById(option).checked;
+        var options = document.getElementsByName(element);
+
+        for(var i = 0; i < options.length; ++i)
+        {
+            options[i].checked = false;
+        }
+
+        document.getElementById(option).checked = element_state; 
+    }
+</script>
+
 <style>
-    .dhlgkapi_container {
-        background-color: white;
-    }
-    
-    .dhlgkapi div:first-child {
-      width: 65px !important;
-    }
-    
     .dhlgkapi div {
         float:left;
         height: 60px;
@@ -16,7 +47,7 @@
         display: table; 
     }
 
-    .dhlgkapi div input[type="radio"] {
+    .dhlgkapi div input[type="checkbox"] {
         display: none;
     }
 
@@ -26,24 +57,22 @@
         vertical-align: middle;
         text-align:center;
         padding: 5px;  
-        width: 40px; 
+        width: 45px; 
         background-color: whitesmoke;
     }
-    
+
     .dhlgkapi div label:hover {
-        background-color: #FFCC00;
+        background-color: gold;
     }
 
-    .dhlgkapi div input[type="radio"]:checked+label {
-        background-color: #FFCC00;
+    .dhlgkapi div input[type="checkbox"]:checked+label {
+        background-color: gold;
         font-weight: bold; 
     }
 
-    .dhlgkapi input[type=text] {
-        background-color: none;
-        background: none;
+    .dhlgkapi input[type="text"] {
+        background-color: whitesmoke;
         margin: 5px;
-        color: #555;
     }
 
     .dhlgkapi a {
@@ -59,63 +88,51 @@
 
     .dhlgkapi a:hover {
         text-decoration: none;
-        background-color: #FFCC00; 
+        background-color: gold; 
     }
 
     a.tooltip {
         color: #555;
+        position: relative;
         text-decoration: none;
         background-color: whitesmoke;
-        font-weight: normal;
-        display: inline;
-    }
-
-    a.tooltip span {
-        padding: 3px;
+        padding: 1px 3px 1px 3px;
+        border: 1px solid #eee;
     }
     a.tooltip:after {
         content: attr(data-tooltip);
-        width: 96%;
+        position: absolute;
+        bottom: 130%;
+        left: 0px;
         background: whitesmoke;
-        padding: 2% 2%;
+        padding: 5px 15px;
         color: black;
+        white-space: pre;
         opacity: 0;
-        display: none;
-        visibility: hidden;
-    }
-
-    a.tooltip:hover:after {
-        visibility: visible;
         display: inline-block;
     }
 
+    a.tooltip:hover:after {
+        bottom: 130%;
+    }
     a.tooltip:hover:before {
-
+        bottom: 70%;
     }
-
     a.tooltip:hover:after, a:hover:before {
-        opacity: 1;    
-    }
-    
-    .dhlgkapi_red {
-        background-color: LightPink ;
-        padding: 1%;
+        opacity: 1;
     }    
 </style>
 {/literal}
 
-<div class="dhlgkapi_container">
-
+<div>
+    <div>
+        <img alt="DHL Logo" src="/images/icons/DHL_rgb_147px.png">
+    </div>
     <h2>{$WUNSCHPAKET_TEXT_TITLE}</h2>
     <p>{$WUNSCHPAKET_TEXT_DESC}</p>
 
-    {if $WUNSCHPAKET_ADDRESS_CHANGE}
-    <p class="dhlgkapi_red">{$WUNSCHPAKET_ADDRESS_CHANGE}</p>
-    {/if}
-    
-    {if $PD_TITLE}
-    <h2>{$PD_TITLE}&nbsp;<a href="#" class="tooltip" data-tooltip="{$PD_TOOLTIP}"><span>?</span></a></h2>
-    <p>{if $PD_COST}{$PD_DESC}&nbsp;<span id="pd_cost">{$PD_COST}</span>*{/if}</p>
+    <h2>{$PD_TITLE}</h2>
+    <p>{$PD_DESC}&nbsp;<a href="#" class="tooltip" data-tooltip="{$PD_TOOLTIP}">?</a></p>
     <div class="dhlgkapi">
         {foreach from=$PD_DATA item=pd}
         <div>
@@ -124,11 +141,9 @@
         {/foreach}
     </div>
     <br style="clear: both;" />
-    {/if}
 
-    {if $PT_TITLE}
-    <h2>{$PT_TITLE}&nbsp;<a href="#" class="tooltip" data-tooltip="{$PT_TOOLTIP}"><span>?</span></a></h2>
-    <p>{if $PT_COST}{$PT_DESC}&nbsp;<span id="pt_cost">{$PT_COST}</span>*{/if}</p>
+    <h2>{$PT_TITLE}</h2>
+    <p>{$PT_DESC}&nbsp;<a href="#" class="tooltip" data-tooltip="{$PT_TOOLTIP}">?</a></p>
     <div class="dhlgkapi">
         {foreach from=$PT_DATA item=pt}
         <div>
@@ -137,187 +152,25 @@
         {/foreach}
     </div>
     <br style="clear: both;" />
-    {/if}
 
-    {if $PDPT_COST}
-    <p>*&nbsp;{$PDPT_HINT}&nbsp;<span id="pdpt_cost">{$PDPT_COST}</span></p>
-    {/if}
-
-    {if $PL_TITLE}
-    <h2>{$PL_TITLE}&nbsp;<a href="#" class="tooltip" data-tooltip="{$PL_TOOLTIP}"><span>?</span></a></h2>
-    <p>{$PL_DESC}</p>
-    <div class="dhlgkapi">
-        {$PL_DATA}
-    </div>
-    {/if}
-
-    {if $TEXT_OR}
-    <br /><strong><u>{$TEXT_OR}</u></strong>
-    {/if}
-
-    {if $PN_TITLE}
-    <h2>{$PN_TITLE}&nbsp;<a href="#" class="tooltip" data-tooltip="{$PN_TOOLTIP}"><span>?</span></a></h2>
-    <p>{$PN_DESC}</p>
+    <h2>{$PN_TITLE}</h2>
+    <p>{$PN_DESC}&nbsp;<a href="#" class="tooltip" data-tooltip="{$PN_TOOLTIP}">?</a></p>
     <div class="dhlgkapi">
         {$PN_DATA}
     </div>
-    {/if}
 
-    {if $BUTTON_PSF}
+    <h2>{$PL_TITLE}</h2>
+    <p>{$PL_DESC}&nbsp;<a href="#" class="tooltip" data-tooltip="{$PL_TOOLTIP}">?</a></p>
+    <div class="dhlgkapi">
+        {$PL_DATA}
+    </div>
+
+    <!-- <h2>{$PSF_TITLE}</h2> -->
+    <!-- {$PSF_DESC} -->
     <br style="clear: both;" />
     <div>
         {$BUTTON_PSF}
     </div>
     <!-- <br clear="all" /> -->
-    {/if}
 </div>
-
-{literal}
-
-<!-- DHL Trackingpixel start -->
-<!-- zum Deaktivieren des Trackingpixels diesen Bereich Löschen oder auskommentieren -->
-<script language="javascript"> 
-    s_date = new Date();
-    s_rdm = s_date.getTime();
-    s_url = escape(window.location.host);
-    s_desturl='<img width="1" height="1" src="'+window.location.protocol+'//deutschepostag.112.2o7.net/b/ss/deutschepostdhlprod2/1/H.27.5--NS/'+s_rdm+'?events=event80&v80='+s_url+'" />';
-    document.write(s_desturl);
-</script>
-<!-- DHL Trackingpixel ende -->
-
-<script type="text/javascript"> 
-    function checkempty() {
-
-        String.prototype.replaceArray = function(find) {
-            var replaceString = this;
-            for (var i = 0; i < find.length; i++) {
-                var regEx = new RegExp(find[i], "ig"); 
-                replaceString = replaceString.replace(regEx, '');
-            }
-            return replaceString;
-        };
-
-        var find = [{/literal}{$WUNSCHPAKET_BLACKLIST}{literal}];
-
-    var check1 = document.getElementById("PreferredNeighbour1");
-    var check11 = document.getElementById("PreferredNeighbour2");
-    var check2 = document.getElementById("PreferredLocation");
-
-    if (check1) check1.value = check1.value.replaceArray(find);
-    if (check11) check11.value = check11.value.replaceArray(find);
-    if (check2) check2.value = check2.value.replaceArray(find);
-
-    if (check1 && check11 && check2) {
-        if (check1.value=='' && check11.value=='') {
-            check2.readOnly=false;
-            check2.disabled=false;
-            check1.style.backgroundColor="whitesmoke";
-            check11.style.backgroundColor="whitesmoke";
-        } else {
-            check2.readOnly=true;
-            check2.disabled=true;
-            check1.style.backgroundColor="white";
-            check11.style.backgroundColor="white"; 
-        }
-
-        if (check2.value=='') {
-            check1.readOnly=false;
-            check11.readOnly=false;
-            check1.disabled=false;
-            check11.disabled=false;
-            check2.style.backgroundColor="whitesmoke"
-        } else {
-            check1.readOnly=true;
-            check11.readOnly=true;
-            check1.disabled=true;
-            check11.disabled=true;
-            check2.style.backgroundColor="white";   
-        }
-
-        if (check1.value=='' && check11.value=='' && check2.value=='') {
-            check1.style.backgroundColor="white";
-            check11.style.backgroundColor="white";
-            check2.style.backgroundColor="white";
-        }
-    }
-    }
-
-    function clear_select(element, option) {
-        var element_state = document.getElementById(option).checked;
-        var options = document.getElementsByName(element);
-
-        for(var i = 0; i < options.length; ++i)
-        {
-            options[i].checked = false;
-        }
-
-        document.getElementById(option).checked = element_state; 
-    }
-
-    checkempty();
-</script>
-
-<script type="text/javascript">
-    //NB 2.11 Fishnet
-    $(document).ready(function(){
-        
-        var old = $("td.price.dhlgkapi_V01PAK"); //NB Fishnet
-        var old_dhl_amount = old.html().replace(',', '.'); //NB Fishnet
-    
-        function recalculate_dhl() {
-
-            if (typeof old_dhl_amount !== 'undefined') {
-
-                var split = old_dhl_amount.trim().split(' ', 1); //NB Fishnet
-                var currency = old_dhl_amount.replace(split, '');
-
-                var new_dhl_amount = parseFloat(old_dhl_amount);
-
-                var pd_amount = $("#pd_cost").html();
-                if (typeof pd_amount !== 'undefined') pd_amount = parseFloat(pd_amount.replace(',', '.'));
-                else
-                    pd_amount = 0;
-
-                var pt_amount = $("#pt_cost").html();
-                if (typeof pt_amount !== 'undefined') pt_amount = parseFloat(pt_amount.replace(',', '.'));
-                else
-                    pt_amount = 0;
-
-                var pdpt_amount = $("#pdpt_cost").html();
-                if (typeof pdpt_amount !== 'undefined') pdpt_amount = parseFloat(pdpt_amount.replace(',', '.'));
-                else
-                    pdpt_amount = 0;
-
-                var pd_value = $("input[name='PreferredDay']:checked").val();
-                if (typeof pd_value === 'undefined') pd_value = '-1';
-
-                var pt_value = $("input[name='PreferredTime']:checked").val();
-                if (typeof pt_value === 'undefined') pt_value = '-1';
-
-                if (pt_value != '-1' && pd_value != '-1' && pdpt_amount > 0) {
-                  new_dhl_amount += pdpt_amount;
-                } else {
-                    if (pt_value != '-1' ) 
-                        new_dhl_amount += pt_amount;
-
-                    if (pd_value != '-1' )
-                        new_dhl_amount += pd_amount;
-                }
-                
-                old.html(new_dhl_amount.toFixed(2).replace('.', ',') + ' ' + currency.trim()); //NB Fishnet
-            }
-        }
-
-        $("input[name='PreferredDay']").change(function(){
-            recalculate_dhl();
-        });
-
-        $("input[name='PreferredTime']").change(function(){
-            recalculate_dhl();
-        });
-
-        recalculate_dhl();
-    });
-</script>
-{/literal}
 

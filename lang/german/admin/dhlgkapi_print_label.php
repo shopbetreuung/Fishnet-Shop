@@ -2,8 +2,7 @@
 if (!defined('TABLE_CARRIERS')) define('TABLE_CARRIERS','carriers');
 if (!defined('TABLE_ORDERS_TRACKING')) define('TABLE_ORDERS_TRACKING','orders_tracking');
 
-define('MODULE_SHIPPING_DHLGKAPI_EMAILTEXT','Dein Paket wird heute mit DHL versendet.');
-define('MODULE_SHIPPING_DHLGKAPI_EMAILTEXT_TOMORROW','Dein Paket wird am n&auml;chsten Werktag mit DHL versendet.');
+define('MODULE_SHIPPING_DHLGKAPI_EMAILTEXT','Ihr Paket wird heute mit DHL versendet.');
 define('MODULE_SHIPPING_DHLGKAPI_CANCELTEXT','Der Versand per DHL wurde storniert.');
 define('MODULE_SHIPPING_DHLGKAPI_TRACKINGID_ERROR','Keine Sendungsnummer vorhanden.');
 define('MODULE_SHIPPING_DHLGKAPI_ORDERERROR','Falsche Bestellnummer!');
@@ -13,7 +12,7 @@ define('MODULE_SHIPPING_DHLGKAPI_EU_COUNTRIES','DE,AT,BE,BG,CZ,CY,DK,EE,FI,FR,GR
 
 define('MODULE_SHIPPING_DHLGKAPI_SHIPMENTS','Sendung(en)');
 define('MODULE_SHIPPING_DHLGKAPI_SHIPPER','Absender');
-define('MODULE_SHIPPING_DHLGKAPI_RECEIVER','Empf&auml;nger');
+define('MODULE_SHIPPING_DHLGKAPI_RECEIVER','Empfänger');
 define('MODULE_SHIPPING_DHLGKAPI_SHIPPINGDATE','Versanddatum');
 define('MODULE_SHIPPING_DHLGKAPI_EKP_TEXT','DHL EKP');
 define('MODULE_SHIPPING_DHLGKAPI_PRODUCT','DHL Produkt');
@@ -27,44 +26,29 @@ define('MODULE_SHIPPING_DHLGKAPI_SERVICE_CASHONDELIVERY_TEXT','Nachnahme');
 define('MODULE_SHIPPING_DHLGKAPI_SERVICE_ADDITIONALINSURANCE_TEXT','Zusatzversicherung');
 define('MODULE_SHIPPING_DHLGKAPI_SERVICE_BULKYGOODS_TEXT','Sperrgut');
 define('MODULE_SHIPPING_DHLGKAPI_SERVICE_NOTICEOFNONDELIVERABILITY_TEXT','Unzustellbarkeitsnachricht');
-define('MODULE_SHIPPING_DHLGKAPI_SERVICE_PERSONALLY_TEXT','Eigenh&auml;ndig');
+define('MODULE_SHIPPING_DHLGKAPI_SERVICE_PERSONALLY_TEXT','Eigenhändig');
 define('MODULE_SHIPPING_DHLGKAPI_SERVICE_NONEIGHBOURDELIVERY_TEXT','keine Nachbarschaftszustellung');
-define('MODULE_SHIPPING_DHLGKAPI_SERVICE_NAMEDPERSONONLY_TEXT','pers&ouml;nliche &Uuml;bergabe');
+define('MODULE_SHIPPING_DHLGKAPI_SERVICE_NAMEDPERSONONLY_TEXT','persönliche Übergabe');
 define('MODULE_SHIPPING_DHLGKAPI_SERVICE_RETURN_TEXT','Retoure-Etikett erstellen');
 define('MODULE_SHIPPING_DHLGKAPI_SERVICE_PRINTONLYIFCODEABLE_TEXT','nur erstellen, wenn Leitkodierbar');
-define('MODULE_SHIPPING_DHLGKAPI_SERVICE_VISUALCHECKOFAGE_TEXT','Alterssichtpr&uuml;fung');
-define('MODULE_SHIPPING_DHLGKAPI_SERVICE_IDENTCHECK_TEXT','Identit&auml;tspr&uuml;fung');
+define('MODULE_SHIPPING_DHLGKAPI_SERVICE_VISUALCHECKOFAGE_TEXT','Alterssichtprüfung');
+define('MODULE_SHIPPING_DHLGKAPI_SERVICE_IDENTCHECK_TEXT','Identitätsprüfung');
 
-define('MODULE_SHIPPING_DHLGKAPI_CUSTOMS','Zollerkl&auml;rung');
+define('MODULE_SHIPPING_DHLGKAPI_CUSTOMS','Zollerklärung');
 define('MODULE_SHIPPING_DHLGKAPI_TERMSOFTRADE','Handelsklausel');
 define('MODULE_SHIPPING_DHLGKAPI_TERMSOFTRADE_DESC','incoterms codes:<br />DDP (Delivery Duty Paid)<br />DXV (Delivery duty paid (eXcl. VAT ))<br />DDU (DDU - Delivery Duty Unpaid)<br />DDX (Delivery duty paid (excl. Duties, taxes and VAT)');
 define('MODULE_SHIPPING_DHLGKAPI_INVOICENUMBER','Rechnungsnummer');
-define('MODULE_SHIPPING_DHLGKAPI_ADDITIONALFEE','Zollgeb&uuml;hr');
+define('MODULE_SHIPPING_DHLGKAPI_ADDITIONALFEE','Zollgebühr');
 define('MODULE_SHIPPING_DHLGKAPI_CUSTOMSTARIFFNUMBER','Zolltarifnummer');
 define('MODULE_SHIPPING_DHLGKAPI_NETWEIGHTINKG','Nettogewicht in kg');
 define('MODULE_SHIPPING_DHLGKAPI_CUSTOMSVALUE','Zollwert');
 
-define('MODULE_SHIPPING_DHLGKAPI_PT_DESC_BACKEND','In der Form "1800200" und "19002100" f&uuml;r das entsprechende Zeitfenster.');
-define('MODULE_SHIPPING_DHLGKAPI_PD_DESC_BACKEND','In der Form "yyyy-mm-dd" im Bereich Einlieferungstag +2 bis +6 Werktage.');
-define('MODULE_SHIPPING_DHLGKAPI_PN_DESC_BACKEND','');
-define('MODULE_SHIPPING_DHLGKAPI_PL_DESC_BACKEND','');
-
 define('MODULE_SHIPPING_DHLGKAPI_MINIMUMAGE','Mindestalter:');
 
-define('MODULE_SHIPPING_DHLGKAPI_TEST_OKAY','Test wurde erfolgreich durchgef&uuml;hrt!');
-define('MODULE_SHIPPING_DHLGKAPI_TEST_NOT_OKAY','Nicht erfolgreich!<br />Bitte &uuml;berpr&uuml;fen Sie die eingegebenen Daten!');
+define('MODULE_SHIPPING_DHLGKAPI_TEST_OKAY','Test wurde erfolgreich durchgeführt!');
+define('MODULE_SHIPPING_DHLGKAPI_TEST_NOT_OKAY','Nicht erfolgreich!<br />Bitte überprüfen Sie die eingegebenen Daten!');
 
 define('MODULE_SHIPPING_DHLGKAPI_BACKEND_MODIFIED','Order wurde im Backend bearbeitet! Label kann nun gedruckt werden...<br />Neu ermitteltes DHL Produkt: ');
-
-define('MODULE_SHIPPING_DHLGKAPI_WEIGHT_WARNING','Das Versandgewicht &uuml;berschreitet das konfigurierte maximale Paketgewicht! <br />Bitte mehrere Label erzeugen und tats&auml;chliches Versandgewicht angeben!');
-
-define('MODULE_SHIPPING_DHLGKAPI_PSF_HEADING', 'DHL Parcelshopfinder');
-define('MODULE_SHIPPING_DHLGKAPI_PSF_TEXT', 'Finden Sie eine Packstation oder eine Filiale in Ihrer N&auml;he und die Bestellung wird direkt dorthin geliefert.<br /><strong>Ihre Postnummer (DHL Kundennummer) tragen Sie im Feld Stadtteil ein.</strong>');
-define('MODULE_SHIPPING_DHLGKAPI_PSF_BUTTON2', 'DHL Packstation / Filiale finden');
-
-define('MODULE_SHIPPING_DHLGKAPI_REPLACE_SEARCH', '"PD:", "PT:", "PN:", "PL:","10001200", "12001400", "14001600", "16001800", "18002000", "19002100", "~", "\\\\[", "\\\\]"');
-define('MODULE_SHIPPING_DHLGKAPI_REPLACE_REPLACE', '"Wunschtag: ", "Wunschzeit: ", "Wunschnachbar: ", "Wunschort: ", "10:00 - 12:00 Uhr", "12:00 - 14:00 Uhr", "14:00 - 16:00 Uhr", "16:00 - 18:00 Uhr", "18:00 - 20:00 Uhr", "19:00 - 21:00 Uhr", "<br />", "<br />", ""');
-
 
 $valid_services=array();
 $valid_services['V01PAK']=array(

@@ -41,6 +41,10 @@ elseif (isset($error) && ($error == CATEGORIE_NOT_FOUND || $error == TEXT_PRODUC
   header("Status: 410 Gone"); // FAST CGI 
 }
 
+header('X-Frame-Options: SAMEORIGIN');
+header('X-XSS-Protection: 1');
+header('X-Content-Type-Options: nosniff');
+
 if (USE_BOOTSTRAP == "true") {
 ?>
 <!DOCTYPE html>

@@ -264,7 +264,8 @@ if (xtc_count_shipping_modules() > 0) {
 						if ($_SESSION['customers_status']['customers_status_show_price_tax'] == 0) {
 							$quotes[$i]['tax'] = 0;
             }
-            $quotes[$i]['methods'][$j]['price'] = $xtPrice->xtcFormat(xtc_add_tax($quotes[$i]['methods'][$j]['cost'], isset($quotes[$i]['tax']) ? $quotes[$i]['tax'] : 0), true, 0, true).xtc_draw_hidden_field('shipping', $quotes[$i]['id'].'_'.$quotes[$i]['methods'][$j]['id']);
+            $quotes[$i]['methods'][$j]['radio_field'] = xtc_draw_hidden_field('shipping', $quotes[$i]['id'].'_'.$quotes[$i]['methods'][$j]['id']); //NB Fishnet
+            $quotes[$i]['methods'][$j]['price'] = $xtPrice->xtcFormat(xtc_add_tax($quotes[$i]['methods'][$j]['cost'], isset($quotes[$i]['tax']) ? $quotes[$i]['tax'] : 0), true, 0, true); //NB Fishnet
 					}
 					$radio_buttons ++;
 				}

@@ -720,7 +720,7 @@ CREATE TABLE orders (
   currency_value DECIMAL(14,6),
   account_type INT(1) DEFAULT 0 NOT NULL,
   payment_class VARCHAR(32) NOT NULL,
-  shipping_method VARCHAR(32) NOT NULL,
+  shipping_method VARCHAR(128) NOT NULL,
   shipping_class VARCHAR(32) NOT NULL,
   customers_ip VARCHAR(39) NOT NULL,
   language VARCHAR(32) NOT NULL,

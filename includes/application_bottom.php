@@ -61,6 +61,10 @@ if (defined('XSS_SEND_LOG') && XSS_SEND_LOG === true) {
 	  }
 	}
 }
+
+//NB DHLGKAPI
+include(DIR_WS_INCLUDES . 'extra/application_bottom/dhlgkapi.php');
+
 // end of page
 echo '</body>';
 echo '</html>';

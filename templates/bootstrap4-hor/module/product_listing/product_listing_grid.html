@@ -67,7 +67,7 @@
 						<br /><small>({$module_data.PRODUCTS_TAX_INFO}{$module_data.PRODUCTS_SHIPPING_LINK})</small>
 					</p>				
 				</div>
-				
+				{if $module_data.PRODUCTS_EXPIRES_DATE}<small>{#text_expires_date#} {$module_data.PRODUCTS_EXPIRES_DATE}</small> {/if}
 			</div> 
 			<div class="equalize products_button_block row p-2">
 				<div class="d-none d-xl-inline-block col-lg-4 p-0">{$module_data.PRODUCTS_BUTTON_DETAILS}</div>
@@ -103,6 +103,7 @@
 						<br /><small>({$module_data.PRODUCTS_TAX_INFO}{$module_data.PRODUCTS_SHIPPING_LINK})</small>
 					</p>				
 				</div>
+				{if $module_data.PRODUCTS_EXPIRES_DATE}<small>{#text_expires_date#} {$module_data.PRODUCTS_EXPIRES_DATE}</small> {/if}
 			</div> 
 			<div class="equalize products_button_block">
 				<div class="text-center">{$module_data.PRODUCTS_BUTTON_DETAILS|replace:"btn btn-secondary":"btn btn-secondary btn-fullwidth"}</div>

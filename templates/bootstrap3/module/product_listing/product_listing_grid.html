@@ -67,6 +67,7 @@
 						<br /><small>({$module_data.PRODUCTS_TAX_INFO}{$module_data.PRODUCTS_SHIPPING_LINK})</small>
 					</p>				
 				</div>
+				{if $module_data.PRODUCTS_EXPIRES_DATE}<small>{#text_expires_date#} {$module_data.PRODUCTS_EXPIRES_DATE}</small> {/if}
 				
 			</div> 
 			<div class="visible-lg col-lg-4" style="padding:0;">{$module_data.PRODUCTS_BUTTON_DETAILS}</div>
@@ -101,6 +102,7 @@
 						<br /><small>({$module_data.PRODUCTS_TAX_INFO}{$module_data.PRODUCTS_SHIPPING_LINK})</small>
 					</p>				
 				</div>
+				{if $module_data.PRODUCTS_EXPIRES_DATE}<small>{#text_expires_date#} {$module_data.PRODUCTS_EXPIRES_DATE}</small> {/if}
 			</div> 
 			<div style="text-align: center;">{$module_data.PRODUCTS_BUTTON_DETAILS|replace:"btn btn-default":"btn btn-default btn-fullwidth"}</div>
 			<div style="clear: both;"></div>

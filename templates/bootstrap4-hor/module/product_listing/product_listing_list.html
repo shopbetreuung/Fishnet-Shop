@@ -54,6 +54,7 @@
 		{if $module_data.PRODUCTS_SHIPPING_NAME}<p class="shippingtime">{#text_shippingtime#}{if $module_data.PRODUCTS_SHIPPING_IMAGE}<img src="{$module_data.PRODUCTS_SHIPPING_IMAGE}" alt="{$module_data.PRODUCTS_SHIPPING_NAME}" />{/if}
 			{$module_data.PRODUCTS_SHIPPING_NAME_LINK}</p>
 		{/if}
+		{if $module_data.PRODUCTS_EXPIRES_DATE}<p>{#text_expires_date#} {$module_data.PRODUCTS_EXPIRES_DATE}</p>{/if}
 		<p>{$module_data.PRODUCTS_BUTTON_DETAILS}&nbsp;{$module_data.PRODUCTS_BUTTON_BUY_NOW}</p>	
 	</div>
 	<div class="col-12"><div class="hrproductpreview"></div></div>

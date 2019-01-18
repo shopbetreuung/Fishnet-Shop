@@ -15,6 +15,7 @@
    Released under the GNU General Public License
    ---------------------------------------------------------------------------------------*/
 require_once(DIR_FS_INC . 'xtc_format_price.inc.php');
+require_once(DIR_FS_INC . 'xtc_date_short.inc.php');
 
 class product {
 
@@ -426,6 +427,14 @@ class product {
       list($width, $height, $type, $img_attr) = getimagesize($p_img);
     }
 
+    // show expiry date of active special products
+    $special_expires_date_query = "SELECT expires_date
+                                     FROM ".TABLE_SPECIALS."
+                                    WHERE products_id = '". $array['products_id']."'
+                                      AND status = '1'";
+    $special_expires_date_query = xtDBquery($special_expires_date_query);
+    $sDate = xtc_db_fetch_array($special_expires_date_query, true);
+
     //products data array
     $productData = array ('PRODUCTS_NAME' => $array['products_name'],
                           'COUNT' => isset($array['ID']) ? $array['ID'] : 0,
@@ -452,6 +461,7 @@ class product {
                           // BOF - Tutorial: Umsetzung der EU-Verbraucherrichtlinie vom 13.06.2014
                           'PRODUCTS_SHIPPING_NAME_LINK' => $shipping_status_link,
                           // EOF - Tutorial: Umsetzung der EU-Verbraucherrichtlinie vom 13.06.2014
+                          'PRODUCTS_EXPIRES_DATE' => $sDate['expires_date'] != '0000-00-00 00:00:00' ? xtc_date_short($sDate['expires_date']) : '',
                           'PRODUCTS_DESCRIPTION' => isset($array['products_description']) ? $array['products_description'] : '', //DokuMan - 2010-02-26 - set Undefined index
                           'PRODUCTS_QUANTITY' => isset($array['products_quantity']) ? $array['products_quantity'] : '',
 						  'PRODUCTS_WEIGHT' => $array['products_weight'],

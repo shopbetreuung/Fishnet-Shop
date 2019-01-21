@@ -55,6 +55,9 @@ if (!defined('SMARTY_PLUGINS_DIR')) {
      */
     define('SMARTY_PLUGINS_DIR', SMARTY_DIR . 'plugins' . DIRECTORY_SEPARATOR);
 }
+
+    define('MY_TEMPLATE_PLUGINS', DIR_FS_CATALOG.'templates/'.CURRENT_TEMPLATE.'/smarty');
+
 if (!defined('SMARTY_MBSTRING')) {
     /**
      *
@@ -889,6 +892,7 @@ class Smarty extends Smarty_Internal_TemplateBase
     {
         if (empty($this->plugins_dir)) {
             $this->plugins_dir[] = SMARTY_PLUGINS_DIR;
+            $this->plugins_dir[] = MY_TEMPLATE_PLUGINS;
         }
         $this->plugins_dir = array_merge($this->plugins_dir, (array)$plugins_dir);
         $this->_pluginsDirNormalized = false;
@@ -904,6 +908,7 @@ class Smarty extends Smarty_Internal_TemplateBase
     {
         if (empty($this->plugins_dir)) {
             $this->plugins_dir[] = SMARTY_PLUGINS_DIR;
+            $this->plugins_dir[] = MY_TEMPLATE_PLUGINS;
             $this->_pluginsDirNormalized = false;
         }
         if (!$this->_pluginsDirNormalized) {

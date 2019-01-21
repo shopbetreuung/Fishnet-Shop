@@ -14,6 +14,11 @@ defined('_VALID_XTC') or die('Direct Access to this location is not allowed.');
 
 //include needed functions
 require_once (DIR_FS_INC.'xtc_get_products_mo_images.inc.php');
+require_once (DIR_FS_INC.'get_product_main_image_title.php');
+require_once (DIR_FS_INC.'get_product_main_image_alt.php');
+require_once (DIR_FS_INC.'get_product_images_alt.php');
+require_once (DIR_FS_INC.'get_product_images_title.php');
+require_once (DIR_FS_INC.'get_image_id.php');
 
 // show images
 if ($_GET['action'] == 'new_product') {
@@ -30,9 +35,22 @@ if ($_GET['action'] == 'new_product') {
   } else {
     echo '</td></tr>';
   }
-	echo '<tr><td colspan="4" class="main">'.TEXT_PRODUCTS_IMAGE_TITLE.xtc_draw_input_field('products_image_title', $pInfo->products_image_title, 'style="width: 100% !important;"').'</td></tr>';
-	echo '<tr><td colspan="4" class="main">'.TEXT_PRODUCTS_IMAGE_ALT.xtc_draw_input_field('products_image_alt', $pInfo->products_image_alt, 'style="width: 100% !important;"').'</td></tr>';
-
+    
+    $languages = xtc_get_languages();
+    
+    $product_main_image_title_string = '<tr><td>'.TEXT_PRODUCTS_IMAGE_TITLE.'</td></tr>';
+    for ($i = 0, $n = sizeof($languages); $i < $n; $i++) {
+      $product_main_image_title_string.= '<tr><td colspan="4" class="main">' . xtc_image(DIR_WS_LANGUAGES . $languages[$i]['directory'] . '/admin/images/' . $languages[$i]['image'], $languages[$i]['name']).xtc_draw_input_field('products_main_image_title[' . $languages[$i]['id'] . ']', get_product_main_image_title($pInfo->products_id,$languages[$i]['id']) , 'style="width: 100% !important;"').'</td></tr>';  
+    }
+  
+    echo $product_main_image_title_string;
+    
+    $product_main_image_alt_string = '<tr><td>'.TEXT_PRODUCTS_IMAGE_ALT.'</tr></td>';
+    for ($i = 0, $n = sizeof($languages); $i < $n; $i++) {
+      $product_main_image_alt_string.= '<tr><td colspan="4" class="main">' . xtc_image(DIR_WS_LANGUAGES . $languages[$i]['directory'] . '/admin/images/' . $languages[$i]['image'], $languages[$i]['name']).xtc_draw_input_field('products_main_image_alt[' . $languages[$i]['id'] . ']', get_product_main_image_alt($pInfo->products_id,$languages[$i]['id']), 'style="width: 100% !important;"').'</td></tr>';  
+    }
+    
+    echo $product_main_image_alt_string;
   // display MO PICS
   if (MO_PICS > 0) {
     $mo_images = xtc_get_products_mo_images($pInfo->products_id);
@@ -50,8 +68,17 @@ if ($_GET['action'] == 'new_product') {
       } else {
         echo '</td></tr>';
       }
-		echo '<tr><td colspan="4" class="main">'.TEXT_PRODUCTS_IMAGE_TITLE.xtc_draw_input_field('image_title['.$i.']', $mo_images[$i]["image_title"], 'style="width: 100% !important;"').'</td></tr>';
-		echo '<tr><td colspan="4" class="main">'.TEXT_PRODUCTS_IMAGE_ALT.xtc_draw_input_field('image_alt['.$i.']', $mo_images[$i]["image_alt"], 'style="width: 100% !important;"').'</td></tr>';
+  		  $product_images_title_string = '<tr><td>'.TEXT_PRODUCTS_IMAGE_TITLE.'</td></tr>';
+        for ($j = 0, $n = sizeof($languages); $j < $n; $j++) {
+            $product_images_title_string.= '<tr><td colspan="4" class="main">' . xtc_image(DIR_WS_LANGUAGES . $languages[$j]['directory'] . '/admin/images/' . $languages[$j]['image'], $languages[$j]['name']).xtc_draw_input_field('image_title['.$i.'_'.$languages[$j]['id'].']', get_product_images_title(get_image_id($pInfo->products_id, $i+1),$i+1,$languages[$j]['id']) , 'style="width: 100% !important;"').'</td></tr>';  
+        }
+        echo $product_images_title_string;
+        
+        $product_images_alt_string = '<tr><td>'.TEXT_PRODUCTS_IMAGE_ALT.'</td></tr>';
+        for ($j = 0, $n = sizeof($languages); $j < $n; $j++) {
+          $product_images_alt_string.= '<tr><td colspan="4" class="main">' . xtc_image(DIR_WS_LANGUAGES . $languages[$j]['directory'] . '/admin/images/' . $languages[$j]['image'], $languages[$j]['name']).xtc_draw_input_field('image_alt['.$i.'_'.$languages[$j]['id'].']', get_product_images_alt(get_image_id($pInfo->products_id, $i+1),$i+1,$languages[$j]['id']) , 'style="width: 100% !important;"').'</td></tr>';  
+        }
+        echo $product_images_alt_string;
     }
   }
 

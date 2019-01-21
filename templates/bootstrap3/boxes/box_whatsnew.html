@@ -2,7 +2,7 @@
 <div class="well">
 	<h5 class="h4"><a href="{$LINK_NEW_PRODUCTS}">{#heading_whatsnew#}</a></h5>
 	
-	{if $box_content.PRODUCTS_IMAGE!=''}<p class="text-center"><a href="{$box_content.PRODUCTS_LINK}"><img src="{$box_content.PRODUCTS_IMAGE}" alt="{$box_content.PRODUCTS_NAME}" class="img-responsive img-center" /></a></p>{/if}
+	{if $box_content.PRODUCTS_IMAGE!=''}<p class="text-center"><a href="{$box_content.PRODUCTS_LINK}"><img src="{$box_content.PRODUCTS_IMAGE}" alt="{$box_content.PRODUCTS_IMAGE_ALT}" title="{$box_content.PRODUCTS_IMAGE_TITLE}" class="img-responsive img-center" /></a></p>{/if}
 	<a href="{$box_content.PRODUCTS_LINK}"><h4 class="text-center h6"><strong>{$box_content.PRODUCTS_NAME}</strong></h4></a>
 	<p class="text-center">{$box_content.PRODUCTS_PRICE}
 	{if $box_content.PRODUCTS_VPE}<br />{$box_content.PRODUCTS_VPE}{/if}

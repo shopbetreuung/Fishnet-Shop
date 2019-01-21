@@ -381,7 +381,7 @@ class product {
   function buildDataArray(&$array,$image='thumbnail') {
     global $xtPrice,$main;
 	  
-	$img_data = xtc_db_fetch_array(xtc_db_query("SELECT products_image_title, products_image_alt FROM ".TABLE_PRODUCTS." WHERE products_id = '".$array['products_id']."' LIMIT 1"));
+	  $img_data = xtc_db_fetch_array(xtc_db_query("SELECT products_main_image_title, products_main_image_alt FROM ".TABLE_PRODUCTS_DESCRIPTION." WHERE language_id = '".$_SESSION['languages_id']."' AND products_id = '".$array['products_id']."' LIMIT 1"));
 
     //get tax rate
     $tax_rate = isset($xtPrice->TAX[$array['products_tax_class_id']]) ? $xtPrice->TAX[$array['products_tax_class_id']] : 0; //DokuMan: set Undefined index
@@ -446,8 +446,8 @@ class product {
                           'PRODUCTS_IMAGE' => $products_image,
                           'PRODUCTS_IMAGE_SIZE' => $img_attr,
 						  // 'PRODUCTS_IMAGE_TITLE' => str_replace('"','',$array['products_name']),
-						  'PRODUCTS_IMAGE_TITLE'=>!empty($img_data['products_image_title'])?$img_data['products_image_title']:str_replace('"','',$array['products_name']),
-						  'PRODUCTS_IMAGE_ALT'=>!empty($img_data['products_image_alt'])?$img_data['products_image_alt']:str_replace('"','',$array['products_name']),
+            						  'PRODUCTS_IMAGE_TITLE'=>!empty($img_data['products_main_image_title'])?$img_data['products_main_image_title']:str_replace('"','',$array['products_name']),
+                          'PRODUCTS_IMAGE_ALT'=>!empty($img_data['products_main_image_alt'])?$img_data['products_main_image_alt']:str_replace('"','',$array['products_name']),
                           'PRODUCTS_LINK' => xtc_href_link(FILENAME_PRODUCT_INFO, xtc_product_link($array['products_id'], $array['products_name'])),
                           'PRODUCTS_PRICE' => $products_price['formated'],
 						   //products plain price so we can ask for example for 0.00 

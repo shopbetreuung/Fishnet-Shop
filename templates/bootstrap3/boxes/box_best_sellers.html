@@ -4,7 +4,7 @@
 	
 	{foreach name=aussen item=box_data from=$box_content}
 	
-	{if $box_data.PRODUCTS_IMAGE}<p class="text-center"><a href="{$box_data.PRODUCTS_LINK}"><img src="{$box_data.PRODUCTS_IMAGE}" alt="{$box_data.PRODUCTS_NAME}" title="{$box_data.PRODUCTS_NAME}" class="img-responsive img-center" /></a></p>{/if}
+	{if $box_data.PRODUCTS_IMAGE}<p class="text-center"><a href="{$box_data.PRODUCTS_LINK}"><img src="{$box_data.PRODUCTS_IMAGE}" alt="{$box_data.PRODUCTS_IMAGE_ALT}" title="{$box_data.PRODUCTS_IMAGE_TITLE}" class="img-responsive img-center" /></a></p>{/if}
 	
 		<a href="{$box_content.PRODUCTS_LINK}"><h4 class="text-center h6"><strong>{$box_content.PRODUCTS_NAME}</strong></h4></a>
 		<p class="text-center">{$box_data.PRODUCTS_PRICE}

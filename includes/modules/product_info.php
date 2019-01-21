@@ -29,6 +29,8 @@ require_once (DIR_FS_INC.'xtc_get_vpe_name.inc.php');
 require_once (DIR_FS_INC.'get_cross_sell_name.inc.php');
 require_once (DIR_FS_INC.'xtc_format_price.inc.php');
 require_once (DIR_FS_INC.'xtc_date_short.inc.php');  // for specials
+require_once (DIR_FS_INC.'get_product_images_title.php');
+require_once (DIR_FS_INC.'get_product_images_alt.php');
 
 if (!is_object($product) || !$product->isProduct()) {
   // product not found in database
@@ -150,8 +152,8 @@ if (!is_object($product) || !$product->isProduct()) {
 
   $info_smarty->assign('PRODUCTS_MODEL', $product->data['products_model']);
   $info_smarty->assign('PRODUCTS_EAN', $product->data['products_ean']);
-  $info_smarty->assign('PRODUCTS_IMAGE_TITLE', !empty($product->data['products_image_title'])?$product->data['products_image_title']:str_replace('"','',$product->data['products_name']));
-  $info_smarty->assign('PRODUCTS_IMAGE_ALT', !empty($product->data['products_image_alt'])?$product->data['products_image_alt']:str_replace('"','',$product->data['products_name']));
+  $info_smarty->assign('PRODUCTS_IMAGE_TITLE', !empty($product->data['products_main_image_title'])?$product->data['products_main_image_title']:str_replace('"','',$product->data['products_name']));
+  $info_smarty->assign('PRODUCTS_IMAGE_ALT', !empty($product->data['products_main_image_alt'])?$product->data['products_main_image_alt']:str_replace('"','',$product->data['products_name']));
   $info_smarty->assign('PRODUCTS_MANUFACTURERS_MODEL', $product->data['products_manufacturers_model']);
   $info_smarty->assign('PRODUCTS_QUANTITY', $product->data['products_quantity']);
   $info_smarty->assign('PRODUCTS_WEIGHT', $product->data['products_weight']);
@@ -173,10 +175,12 @@ if (!is_object($product) || !$product->isProduct()) {
   if ($mo_images != false) {
     $more_images_data = array();
     foreach ($mo_images as $img) {
+      $images_alt = get_product_images_alt($img['image_id'],$img['image_nr'],$_SESSION['languages_id']);
+      $images_title = get_product_images_title($img['image_id'],$img['image_nr'],$_SESSION['languages_id']);
       $mo_img = $product->productImage($img['image_name'], 'info');
       $more_images_data[] = array ('PRODUCTS_IMAGE' => $mo_img,
-								  'IMAGE_TITLE' => !empty($img['image_title'])?$img['image_title']:str_replace('"','',$product->data['products_name']),
-								  'IMAGE_ALT' => !empty($img['image_alt'])?$img['image_alt']:str_replace('"','',$product->data['products_name']),
+                                   'IMAGE_TITLE' => !empty($images_title)?$images_title:str_replace('"','',$product->data['products_name']),
+                                   'IMAGE_ALT' => !empty($images_alt)?$images_alt:str_replace('"','',$product->data['products_name']),
                                    'PRODUCTS_POPUP_LINK' => 'javascript:popupWindow(\''.xtc_href_link(FILENAME_POPUP_IMAGE, 
                                    'pID='.$product->data['products_id'].'&imgID='.$img['image_nr']).'\')'
                                    );

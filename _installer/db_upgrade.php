@@ -16,6 +16,7 @@ require_once(DIR_FS_INC . 'xtc_db_connect.inc.php');
 require_once(DIR_FS_INC . 'xtc_db_query.inc.php');
 require_once(DIR_FS_INC . 'xtc_db_fetch_array.inc.php');
 require_once(DIR_FS_INC . 'xtc_redirect.inc.php');
+require_once(DIR_FS_INC . 'get_active_language_ids.php');
 
 if (!$_POST && (!isset($_GET['upgrade_redir']) || $_GET['upgrade_redir'] != 1))
 {
@@ -235,6 +236,29 @@ function get_db_size()
                                 xtc_db_query("UPDATE admin_access SET " . $aa_spalten['Field'] . " = '1' WHERE customers_id = '1'");
                             }
                         }
+
+                        if ($version_array['version'] == "SH_1.15.0") {
+                            $select_database_table_products_images_description = xtc_db_num_rows(xtc_db_query("SELECT table_name FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'products_images_description' "));                                
+                            if($select_database_table_products_images_description == 1) {
+                            
+                                $select_products_query = xtc_db_query("SELECT products_id, products_image_title, products_image_alt FROM ".TABLE_PRODUCTS);
+
+                                while($select_products_array = xtc_db_fetch_array($select_products_query)) {
+                                    $update_products_description_query = xtc_db_query("UPDATE ".TABLE_PRODUCTS_DESCRIPTION." SET products_main_image_title = '". xtc_db_prepare_input($select_products_array['products_image_title'])."', products_main_image_alt = '". xtc_db_prepare_input($select_products_array['products_image_alt'])."' WHERE products_id = ". xtc_db_prepare_input($select_products_array['products_id']));
+                                }   
+
+                                $languages = get_active_language_ids();
+
+                                foreach($languages as $key=> $langID) {
+                                $select_products_images_query = xtc_db_query("SELECT image_id, image_nr, image_title, image_alt FROM ".TABLE_PRODUCTS_IMAGES);
+
+                                    while ($select_products_images_array = xtc_db_fetch_array($select_products_images_query)) {
+                                        $insert_products_description = xtc_db_query("INSERT INTO " . TABLE_PRODUCTS_IMAGES_DESCRIPTION . " (image_id, image_nr, language_id, image_title, image_alt) VALUES ('" . xtc_db_prepare_input($select_products_images_array['image_id']) . "', '" . xtc_db_prepare_input($select_products_images_array['image_nr']) . "', '" . xtc_db_prepare_input($langID['id']). "', '" . xtc_db_prepare_input($select_products_images_array['image_title']) . "', '" . xtc_db_prepare_input($select_products_images_array['image_alt']) . "')");        
+                                    } 
+                                }
+                            }
+                        }
+                        
                         // EOF - Set Admin Flags
                         echo CURRENT_DB_VERSION . ' <strong>' . $version_array['version'] . '</strong>';
                         echo SUCCESS_MESSAGE;

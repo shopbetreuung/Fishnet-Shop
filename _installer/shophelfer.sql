@@ -944,6 +944,8 @@ CREATE TABLE products_description (
   products_url VARCHAR(255) DEFAULT NULL,
   products_viewed INT(5) DEFAULT 0,
   products_order_description text,
+  products_main_image_title VARCHAR( 255 ) NOT NULL,
+  products_main_image_alt VARCHAR( 255 ) NOT NULL,
   PRIMARY KEY (products_id,language_id),
   KEY products_name (products_name)
 ) ENGINE=MyISAM;
@@ -959,6 +961,15 @@ CREATE TABLE products_images (
   PRIMARY KEY (image_id),
   KEY idx_image_nr(image_nr)
 ) ENGINE=MyISAM;
+
+DROP TABLE IF EXISTS products_images_description;
+CREATE TABLE products_images_description (
+  image_id int(11) NOT NULL,
+  image_nr smallint(6) NOT NULL,
+  language_id tinyint(4) NOT NULL,
+  image_title varchar(255) NOT NULL,
+  image_alt varchar(255) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS products_notifications;
 CREATE TABLE products_notifications (

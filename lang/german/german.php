@@ -65,7 +65,7 @@ define('FEMALE', 'Frau');
  */
 
 // text for gift voucher redeeming
-define('IMAGE_REDEEM_GIFT','Gutschein Einl&ouml;sen!');
+define('IMAGE_REDEEM_GIFT','Gutschein einl&ouml;sen!');
 
 define('BOX_TITLE_STATISTICS','Statistik:');
 define('BOX_ENTRY_CUSTOMERS','Kunden:');
@@ -212,7 +212,7 @@ define('IMAGE_BUTTON_PRODUCT_MORE', 'Details');
 // define('IMAGE_BUTTON_LOGIN', 'Anmelden');
 // EOF - vr - 2010-02-20 removed double definition 
 define('IMAGE_BUTTON_SEND', 'Absenden'); //DokuMan - 2010-03-15 - Added button description for contact form
-define('IMAGE_BUTTON_CONTINUE_SHOPPING', 'Einkauf Fortsetzen'); //Hendrik - 2010-11-12 - used in default template ...shopping_cart.html
+define('IMAGE_BUTTON_CONTINUE_SHOPPING', 'Einkauf fortsetzen'); //Hendrik - 2010-11-12 - used in default template ...shopping_cart.html
 define('IMAGE_BUTTON_CHECKOUT_START_PAGE', 'Startseite');
 
 define('SMALL_IMAGE_BUTTON_DELETE', 'L&ouml;schen');

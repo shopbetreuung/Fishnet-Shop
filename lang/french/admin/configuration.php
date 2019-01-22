@@ -760,7 +760,7 @@ define ('SESSION_LIFE_CUSTOMERS_DESC', 'temps en secondes après l&apos;expirati
 
 //checkout confirmation options
 define ('CHECKOUT_USE_PRODUCTS_SHORT_DESCRIPTION_TITLE', 'Page de confirmation de commande : Description');
-define ('CHECKOUT_USE_PRODUCTS_SHORT_DESCRIPTION_DESC', 'La description de l&apos;article doit-elle être affichée sur la page de confirmation de commande ? Note : La description courte sera affichée s'il n'y a AUCUNE description de commande d&apos;article. Avec Non, la description courte n&apos;est pas affichée !');
+define ('CHECKOUT_USE_PRODUCTS_SHORT_DESCRIPTION_DESC', 'La description de l&apos;article doit-elle être affichée sur la page de confirmation de commande ? Note : La description courte sera affichée s&apos;il n&apos;y a AUCUNE description de commande d&apos;article. Avec Non, la description courte n&apos;est pas affichée !');
 define ('CHECKOUT_SHOW_PRODUCTS_IMAGES_TITLE', 'Confirmation de commande : Images des produits');
 define ('CHECKOUT_SHOW_PRODUCTS_IMAGES_DESC', 'Les photos de l&apos;article doivent-elles être affichées sur la page de confirmation de commande ?');
 define ('CHECKOUT_SHOW_PRODUCTS_MODEL_TITLE', 'Confirmation de commande: Article no.');

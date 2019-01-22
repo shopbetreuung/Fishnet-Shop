@@ -135,5 +135,6 @@
   define('TABLE_INDEXIMAGES', 'indeximages');
   define('TABLE_IMAGESLIDERS_INFO', 'imagesliders_info'); 
   define('TABLE_INDEXIMAGES_INFO', 'indeximages_info');
+  define('TABLE_PRODUCTS_IMAGES_DESCRIPTION', 'products_images_description');
 
 ?>

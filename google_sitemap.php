@@ -140,6 +140,7 @@ $cat_result = xtc_db_query("
       ".TABLE_CATEGORIES_DESCRIPTION." cd, 
       ".TABLE_LANGUAGES." l 
     WHERE 
+      cd.language_id = '".$_SESSION['languages_id']."' AND
       c.categories_id = cd.categories_id AND 
       cd.language_id = l.languages_id AND 
       c.categories_status = 1 
@@ -186,7 +187,8 @@ $stmt = "
       ".TABLE_LANGUAGES." l 
     WHERE 
       p.products_status='1' AND 
-      p.products_id = pd.products_id AND 
+      p.products_id = pd.products_id AND
+      pd.language_id = '".$_SESSION['languages_id']."' AND
       pd.language_id = l.languages_id 
     ORDER BY 
       p.products_id 

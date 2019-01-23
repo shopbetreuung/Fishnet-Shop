@@ -27,7 +27,7 @@
    ---------------------------------------------------------------------------------------*/
 
   define('MODULE_ORDER_TOTAL_COUPON_TITLE', 'Coupons de réduction');
-  define('MODULE_ORDER_TOTAL_COUPON_HEADER', 'Chèques-cadeaux/coupons rabais');
+  define('MODULE_ORDER_TOTAL_COUPON_HEADER', 'Bon cadeau/coupons rabais');
   define('MODULE_ORDER_TOTAL_COUPON_DESCRIPTION', 'Coupon de réduction');
   define('SHIPPING_NOT_INCLUDED', ' [Livraison non comprise]');
   define('TAX_NOT_INCLUDED', ' [Taxe en sus]');

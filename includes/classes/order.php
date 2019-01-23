@@ -309,8 +309,13 @@
       $order_data = array ();
       $order_query = xtc_db_query($order_query);
       while ($order_data_values = xtc_db_fetch_array($order_query)) {
-		$price_without_tax = ($order_data_values['products_price'] / (($order_data_values['products_tax'] + 100) / 100));
-        $tax_per_product = ($order_data_values['products_price'] - $price_without_tax) * $order_data_values['products_quantity'];
+
+        if ($order_data_values['allow_tax'] == 0) {
+          $tax_per_product = ($order_data_values['products_price'] * $order_data_values['products_tax'] / 100) * $order_data_values['products_quantity'];
+        } else {
+          $price_without_tax = ($order_data_values['products_price'] / (($order_data_values['products_tax'] + 100) / 100));
+          $tax_per_product = ($order_data_values['products_price'] - $price_without_tax) * $order_data_values['products_quantity'];
+        }
 		  
         $attributes_query = "SELECT *
                                FROM ".TABLE_ORDERS_PRODUCTS_ATTRIBUTES."

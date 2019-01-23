@@ -135,6 +135,16 @@ require (DIR_WS_INCLUDES.'head.php');
 
 ?>
 
+<script type="text/javascript">
+
+  function showModal(id){
+      $('#btn_confirm').attr('href', '<?php echo $PHP_SELF; ?>?del_sel_profile='+id);
+      $('#delModal').modal('show');
+      
+  }
+
+</script>
+
 <link rel="stylesheet" type="text/css" href="includes/ipdfbill/pdfbill.css">
 <script type="text/javascript" src="includes/ipdfbill/movablewindow.js" language="javascript1.2"></script>
 <script language="javascript" type="text/javascript">
@@ -248,7 +258,7 @@ function toggle_column() {
             </a>
             
             <?php if( $p['profile_name']!='default' ) {  ?>
-            <a id="btnDelProfile" onFocus="if(this.blur)this.blur()" href="<?php echo $PHP_SELF?>?del_sel_profile=<?php echo $p['profile_id'] ?>"><img border="0" src="includes/ipdfbill/images/btnDelete.gif" width="17" height="17" alt="Profil l�schen" title="Profil l�schen" /></a>
+            <a id="btnDelProfile" onclick="showModal(<?php echo $p['profile_id']; ?>)" onFocus="if(this.blur)this.blur()"><img border="0"  src="includes/ipdfbill/images/btnDelete.gif" width="17" height="17" alt="<?php echo TEXT_PROFILE_REMOVE_TITLE;?>" title="<?php echo TEXT_PROFILE_REMOVE_TITLE;?>" /></a>
             <?php }  ?>
             
         <?php
@@ -2170,3 +2180,17 @@ die;
   
 
 ?>
+
+<div class="modal fade" id="delModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"><?php echo TEXT_PROFILE_REMOVE_CONFIRMATION;?></h5>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" style="margin:0px;"><?php echo TEXT_PROFILE_REMOVE_NO;?></button>
+        <a id="btn_confirm" href="#" class="btn btn-primary" style="margin-bottom:5px;"><?php echo TEXT_PROFILE_REMOVE_YES;?></a>
+      </div>
+    </div>
+  </div>
+</div>

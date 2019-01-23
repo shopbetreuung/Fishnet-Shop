@@ -439,7 +439,7 @@ class ot_coupon {
     if ($this->include_tax == 'false')
       $order_total = $order_total - $order->info['tax'];
 
-    if ($this->include_shipping == 'false') {
+    if ($this->include_shipping == 'false' && $order->info['shipping_cost'] != "") {
       $order_total = $order_total - $order->info['shipping_cost'];
     }
 

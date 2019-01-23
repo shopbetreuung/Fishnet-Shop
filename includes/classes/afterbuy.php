@@ -464,6 +464,7 @@ class xtc_afterbuy_functions
 		// ############# ORDER_TOTAL #############
 
 		$order_total_query = xtc_db_query("SELECT
+											  title,
 						                      class,
 						                      value,
 						                      sort_order
@@ -513,6 +514,7 @@ class xtc_afterbuy_functions
 			if ($order_total_values['class'] == 'ot_coupon') {
 				$coupon_flag = true;
 				$coupon = $order_total_values['value'];
+				$coupon_title = $order_total_values['title'];
 			}
 			// ot_payment
 			if ($order_total_values['class']=='ot_payment') {
@@ -612,9 +614,10 @@ class xtc_afterbuy_functions
 		if ($coupon_flag) {
 			$nr ++;
 			$this->afterbuyString .= "Artikelnr_".$nr."=99999996&";
-			$this->afterbuyString .= "Artikelname_".$nr."=Kupon&";
+		    $ab_coupon_title .=  $coupon_title;
+		    $this->afterbuyString .= "Artikelname_".$nr."=$ab_coupon_title&";
 			
-			$value_ot_total = $this->get_ot_total_fee($customers_status_show_price_tax, $tax_rate, $xt_currency, $coupon);
+			$value_ot_total = $this->get_ot_total_fee($customers_status_show_price_tax, $tax_rate, $xt_currency, -$coupon);
 			
 			$this->afterbuyString .= "ArtikelEPreis_".$nr."=".$value_ot_total."&";
 			$this->afterbuyString .= "ArtikelMwst_".$nr."=".$tax."&";

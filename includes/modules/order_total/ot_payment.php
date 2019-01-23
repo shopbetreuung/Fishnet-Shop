@@ -102,7 +102,9 @@ class ot_payment
             }
             if ($_SESSION['customers_status']['customers_status_show_price_tax'] && !$_SESSION['customers_status']['customers_status_add_tax_ot']) {
                 //$tod_shipping = $order->info['shipping_cost'] / (100 + $shipping_tax) * $shipping_tax;
-                $tod_shipping = $order->info['shipping_cost'] * ($shipping_tax / 100 + 1) - $order->info['shipping_cost'];  //web28 - Fix shipping tax
+                if( $order->info['shipping_cost'] != "") {
+                    $tod_shipping = $order->info['shipping_cost'] * ($shipping_tax / 100 + 1) - $order->info['shipping_cost'];  //web28 - Fix shipping tax
+                } 
             } else {
                 $tod_shipping = $order->info['shipping_cost'] / 100 * $shipping_tax;
             }
@@ -222,7 +224,7 @@ class ot_payment
                 $this->amounts['total'] += $gv_result['products_price'] * $qty;
             }
         }
-        if ($this->include_shipping == 'false') $order_total -= $order->info['shipping_cost'];
+        if ($this->include_shipping == 'false' && $order->info['shipping_cost'] != "") $order_total -= $order->info['shipping_cost'];
         if ($this->include_tax == 'false') $order_total -= $order->info['tax'];
 
         $this->amount = $order_total;

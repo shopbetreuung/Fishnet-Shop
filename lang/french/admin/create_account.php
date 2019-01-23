@@ -1,17 +1,16 @@
 <?php
 /* --------------------------------------------------------------
-   $Id: create_account.php 985 2005-06-17 22:35:22Z mz $   
+   create_account.php
 
-   XT-Commerce - community made shopping
-   http://www.xt-commerce.com
+   Fishnet Services
+   https://fishnet-services.com
 
-   Copyright (c) 2003 XT-Commerce
+   Copyright (c) 2018 Fishnet Services
    --------------------------------------------------------------
-   based on: 
-   (c) 2000-2001 The Exchange Project  (earlier name of osCommerce)
-   (c) 2002-2003 osCommerce(create_account.php,v 1.13 2003/05/19); www.oscommerce.com 
-   (c) 2003	 nextcommerce (create_account.php,v 1.4 2003/08/14); www.nextcommerce.org
-
+   based on:
+   (c) 2003	 nextcommerce
+   (c) 2003	 Xt Commerce
+   
    Released under the GNU General Public License 
    --------------------------------------------------------------*/
 

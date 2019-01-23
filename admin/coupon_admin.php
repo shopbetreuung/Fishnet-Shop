@@ -37,7 +37,7 @@
   require_once(DIR_FS_INC . 'xtc_php_mail.inc.php');
 
   // initiate template engine for mail
-  $smarty = new Smarty;
+  $smarty = new SmartyBC;
 
   if ($_GET['selected_box']) {
     $_GET['action']='';

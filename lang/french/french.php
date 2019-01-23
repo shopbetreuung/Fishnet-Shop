@@ -500,8 +500,12 @@ define('SHIPPING_TIME','d&eacute;lai de livraison: ');
 define('MORE_INFO','[plus]');
 define('READ_INFO','[lire]');
 
-// changes 3.0.4 SP2.2
+// Privacy Stuff
 define('ENTRY_PRIVACY_ERROR','S&acute;il vous pla&icirc;t acceptez notre politique de confidentialit&eacute;!');
+define('COOKIE_NOTE_TEXT', 'En visitant notre site Web, vous acceptez l&apos;utilisation de cookies. De cette fa&ccedil;on, nous pouvons encore am&eacute;liorer le service pour vous.');
+define('COOKIE_NOTE_MORE_TEXT', 'Plus d&apos;infos');
+define('COOKIE_NOTE_DISMISS_TEXT', 'Compris');
+
 define('TEXT_PAYMENT_FEE','Frais de m&eacute;thodes de paiement');
 
 define('_MODULE_INVALID_SHIPPING_ZONE', 'Livraison dans ce pays n&acute;est pas possible');
@@ -535,11 +539,11 @@ define('PAYPAL_ADRESSE','Le pays de votre adresse de livraison PayPal n&acute;es
 define('PAYPAL_AMMOUNT_NULL','Le montant du contrat pr&eacute;vu (hors frais de port) est &eacute;gal &agrave; 0<,br />ce qui PayPal Express n&acute;est pas disponible<br />S&acute;il vous pla&icirc;t choisir une autre m&eacute;thode de paiement<br />Merci pour votre compr&eacute;hension.<br />');
 // EOF - web28 - 2010-05-07 - PayPal API Modul
 define('BASICPRICE_VPE_TEXT','dans ce volume seulement '); // Hetfield - 2009-11-26 - Added language definition for vpe at graduated prices
-//web - 2010-07-11 - Preisanzeige bei Staffelpreisen (größte Staffel)
+//web - 2010-07-11 - Price display for scale prices (largest scale)
 define('GRADUATED_PRICE_MAX_VALUE', '&agrave; partir de');
 
-//web28 - 2010-08-20 - VERSANDKOSTEN WARENKORB
-define('_SHIPPING_TO', 'Livraison: ');
+//web28 - 2010-08-20 - SHIPPING COSTS SHOPPING CART
+define('_SHIPPING_TO', 'Montrez-moi les méthodes d&apos;expédition possibles pour: ');
 
 // BOF - DokuMan - 2011-09-20 - E-Mail SQL errors
 define('ERROR_SQL_DB_QUERY','D&eacute;sol&eacute;, mais il y a une erreur de notre base de donn&eacute;es.');
@@ -549,10 +553,6 @@ define('ERROR_SQL_DB_QUERY_REDIRECT','Vous allez &ecirc;tre redirig&eacute; vers
 define('TEXT_AGB_CHECKOUT','termes et conditions et les informations clients %s <br/>politique de remboursement %s .');
 
 define('_SHIPPING_FREE','T&eacute;l&eacute;chargement');
-
-define('COOKIE_NOTE_TEXT', 'En visitant notre site Web, vous acceptez l&apos;utilisation de cookies. De cette fa&ccedil;on, nous pouvons encore am&eacute;liorer le service pour vous.');
-define('COOKIE_NOTE_MORE_TEXT', 'Plus d&apos;infos');
-define('COOKIE_NOTE_DISMISS_TEXT', 'Compris');
 
 //google_sitemap.php
 define('SITEMAP_FILE', 'fichier sitemap');

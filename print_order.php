@@ -20,7 +20,7 @@ include ('includes/application_top.php');
 require_once (DIR_FS_INC.'xtc_get_order_data.inc.php');
 require_once (DIR_FS_INC.'xtc_get_attributes_model.inc.php');
 
-$smarty = new Smarty;
+$smarty = new SmartyBC;
 
 $smarty->assign('language', $_SESSION['language']);
 $smarty->assign('base_href', (($request_type == 'SSL') ? HTTPS_SERVER : HTTP_SERVER) . DIR_WS_CATALOG);

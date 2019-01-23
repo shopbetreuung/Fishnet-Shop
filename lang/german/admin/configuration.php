@@ -1,24 +1,25 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: configuration.php 3130 2012-06-28 11:17:12Z Tomcraft1980 $
+   $Id: configuration.php  
 
-   modified eCommerce Shopsoftware
-   http://www.modified-shop.org
+   Fishnet Shopsoftware
+   http://fishnet-shop.com
 
-   Copyright (c) 2009 - 2013 [www.modified-shop.org]
+   Copyright (c) 2017 - 2019 [www.fishnet-shop.com]
    -----------------------------------------------------------------------------------------
    based on:
    (c) 2000-2001 The Exchange Project  (earlier name of osCommerce)
    (c) 2002-2003 osCommerce(configuration.php,v 1.8 2002/01/04); www.oscommerce.com
    (c) 2003	 nextcommerce (configuration.php,v 1.16 2003/08/25); www.nextcommerce.org
    (c) 2006 XT-Commerce
+   (c) 2013 Modified eCommerce (configuration.php 3130 2012-06-28 11:17:12Z Tomcraft1980 $)
 
    Released under the GNU General Public License
    ---------------------------------------------------------------------------------------*/
 
 // --- bof -- ipdfbill --------    
 define('IBN_BILLNR_TITLE',        '[ibillnr] N&auml;chste Rechnungsnummer');       //ibillnr
-define('IBN_BILLNR_DESC',         'Beim fakturieren einer Bestellung wird diese Nummer als n&auml;chstes vergeben.'); 
+define('IBN_BILLNR_DESC',         'Beim Fakturieren einer Bestellung wird diese Nummer als n&auml;chstes vergeben.'); 
 define('IBN_BILLNR_FORMAT_TITLE', '[ibillnr] Rechnungsnummer Format');       //ibillnr
 define('IBN_BILLNR_FORMAT_DESC',  'Aufbauschema Rechn.Nr.: {n}=laufende Nummer, {d}=Tag, {m}=Monat, {y}=Jahr, <br>z.B. "100{n}-{d}-{m}-{y}" ergibt "10099-28-02-2007"'); 
 // --- eof -- ipdfbill --------    
@@ -152,7 +153,7 @@ define('MAX_RANDOM_SELECT_NEW_TITLE' , 'Auswahlpool der Neuen Artikel');
 define('MAX_RANDOM_SELECT_NEW_DESC' , 'Aus wieviel neuen Artikeln sollen die zuf&auml;llig angezeigten neuen Artikel in der Box ausgew&auml;hlt werden?');
 define('MAX_RANDOM_SELECT_SPECIALS_TITLE' , 'Auswahlpool der Sonderangebote');
 define('MAX_RANDOM_SELECT_SPECIALS_DESC' , 'Aus wieviel Sonderangeboten sollen die zuf&auml;llig angezeigten Sonderangebote in der Box ausgew&auml;hlt werden?');
-define('MAX_DISPLAY_CATEGORIES_PER_ROW_TITLE' , 'Anzahl der Kategorien');
+define('MAX_DISPLAY_CATEGORIES_PER_ROW_TITLE' , 'Anzahl der Kategorien pro Zeile');
 define('MAX_DISPLAY_CATEGORIES_PER_ROW_DESC' , 'Anzahl an Kategorien die pro Zeile in den &Uuml;bersichten angezeigt werden sollen. Minimum 1, Maximum 5.');
 define('MAX_DISPLAY_PRODUCTS_NEW_TITLE' , 'Neue Artikel Liste');
 define('MAX_DISPLAY_PRODUCTS_NEW_DESC' , 'Maximum Anzahl neuer Artikel die in der Liste angezeigt werden sollen.');
@@ -174,25 +175,25 @@ define('CATEGORY_IMAGE_WIDTH_DESC' , 'Maximale Breite der Kategorie Bilder in Pi
 define('CATEGORY_IMAGE_HEIGHT_TITLE' , 'H&ouml;he der Kategorie Bilder');
 define('CATEGORY_IMAGE_HEIGHT_DESC' , 'Maximale H&ouml;he der Kategorie Bilder in Pixel (Standard: 150)');
 
-define('PRODUCT_IMAGE_THUMBNAIL_WIDTH_TITLE' , 'Breite der Artikel-Thumbnails');
-define('PRODUCT_IMAGE_THUMBNAIL_WIDTH_DESC' , 'Maximale Breite der Artikel-Thumbnails in Pixel (Standard: 250).');
-define('PRODUCT_IMAGE_THUMBNAIL_HEIGHT_TITLE' , 'H&ouml;he der Artikel-Thumbnails');
-define('PRODUCT_IMAGE_THUMBNAIL_HEIGHT_DESC' , 'Maximale H&ouml;he der Artikel-Thumbnails in Pixel (Standard: 187)');
+define('PRODUCT_IMAGE_THUMBNAIL_WIDTH_TITLE' , 'Breite der Produkt-Miniaturansichten');
+define('PRODUCT_IMAGE_THUMBNAIL_WIDTH_DESC' , 'Maximale Breite der Produkt-Miniaturansichten in Pixel (Standard: 250).');
+define('PRODUCT_IMAGE_THUMBNAIL_HEIGHT_TITLE' , 'H&ouml;he der Produkt-Miniaturansichten');
+define('PRODUCT_IMAGE_THUMBNAIL_HEIGHT_DESC' , 'Maximale H&ouml;he der Produkt-Miniaturansichten in Pixel (Standard: 187)');
 
-define('PRODUCT_IMAGE_INFO_WIDTH_TITLE' , 'Breite der Artikel-Info Bilder');
-define('PRODUCT_IMAGE_INFO_WIDTH_DESC' , 'Maximale Breite der Artikel-Info Bilder in Pixel (Standard: 320).');
-define('PRODUCT_IMAGE_INFO_HEIGHT_TITLE' , 'H&ouml;he der Artikel-Info Bilder');
-define('PRODUCT_IMAGE_INFO_HEIGHT_DESC' , 'Maximale H&ouml;he der Artikel-Info Bilder in Pixel (Standard: 240)');
+define('PRODUCT_IMAGE_INFO_WIDTH_TITLE' , 'Breite der Produkt-Info Bilder');
+define('PRODUCT_IMAGE_INFO_WIDTH_DESC' , 'Maximale Breite der Produkt-Info Bilder in den PRoduktauflistungen in Pixel (Standard: 320).');
+define('PRODUCT_IMAGE_INFO_HEIGHT_TITLE' , 'H&ouml;he der Produkt-Info Bilder');
+define('PRODUCT_IMAGE_INFO_HEIGHT_DESC' , 'Maximale H&ouml;he der Produkt-Info Bilder in Pixel (Standard: 240)');
 
-define('PRODUCT_IMAGE_POPUP_WIDTH_TITLE' , 'Breite der Artikel-Popup Bilder');
-define('PRODUCT_IMAGE_POPUP_WIDTH_DESC' , 'Maximale Breite der Artikel-Popup Bilder in Pixel (Standard: 1000)');
-define('PRODUCT_IMAGE_POPUP_HEIGHT_TITLE' , 'H&ouml;he der Artikel-Popup Bilder');
-define('PRODUCT_IMAGE_POPUP_HEIGHT_DESC' , 'Maximale H&ouml;he der Artikel-Popup Bilder in Pixel (Standard: 750)');
+define('PRODUCT_IMAGE_POPUP_WIDTH_TITLE' , 'Breite der Produkt-Popup Bilder');
+define('PRODUCT_IMAGE_POPUP_WIDTH_DESC' , 'Maximale Breite der Produkt-Popup Bilder in Pixel (Standard: 1000)');
+define('PRODUCT_IMAGE_POPUP_HEIGHT_TITLE' , 'H&ouml;he der Produkt-Popup Bilder');
+define('PRODUCT_IMAGE_POPUP_HEIGHT_DESC' , 'Maximale H&ouml;he der Produkt-Popup Bilder in Pixel (Standard: 750)');
 
-define('SMALL_IMAGE_WIDTH_TITLE' , 'Breite der Artikel Bilder');
-define('SMALL_IMAGE_WIDTH_DESC' , 'Maximale Breite der Artikel Bilder in Pixel');
-define('SMALL_IMAGE_HEIGHT_TITLE' , 'H&ouml;he der Artikel Bilder');
-define('SMALL_IMAGE_HEIGHT_DESC' , 'Maximale H&ouml;he der Artikel Bilderin Pixel');
+define('SMALL_IMAGE_WIDTH_TITLE' , 'Breite der Produkt Bilder');
+define('SMALL_IMAGE_WIDTH_DESC' , 'Maximale Breite der Produkt Bilder in Pixel');
+define('SMALL_IMAGE_HEIGHT_TITLE' , 'H&ouml;he der Produkt Bilder');
+define('SMALL_IMAGE_HEIGHT_DESC' , 'Maximale H&ouml;he der Produkt Bilder in Pixel');
 
 define('HEADING_IMAGE_WIDTH_TITLE' , 'Breite der &Uuml;berschrift Bilder');
 define('HEADING_IMAGE_WIDTH_DESC' , 'Maximale Breite der &Uuml;berschrift Bilder in Pixel');
@@ -241,29 +242,29 @@ define('CATEGORY_IMAGE_MOTION_BLUR_DESC' , 'Kategorie Bilder:Motion-Blur<br /><b
 
 //This is for the Images showing your products for preview. All the small stuff.
 
-define('PRODUCT_IMAGE_THUMBNAIL_BEVEL_TITLE' , 'Artikel-Thumbnails:Bevel');
-define('PRODUCT_IMAGE_THUMBNAIL_BEVEL_DESC' , 'Artikel-Thumbnails:Bevel<br /><br />Default Wert: (8,FFCCCC,330000)<br /><br />shaded bevelled edges<br />Verwendung:<br />(edge width,hex light colour,hex dark colour)');
+define('PRODUCT_IMAGE_THUMBNAIL_BEVEL_TITLE' , 'Produkt-Miniaturansichten:Bevel');
+define('PRODUCT_IMAGE_THUMBNAIL_BEVEL_DESC' , 'Produkt-Miniaturansichten:Bevel<br /><br />Default Wert: (8,FFCCCC,330000)<br /><br />shaded bevelled edges<br />Verwendung:<br />(edge width,hex light colour,hex dark colour)');
 
-define('PRODUCT_IMAGE_THUMBNAIL_GREYSCALE_TITLE' , 'Artikel-Thumbnails:Greyscale');
-define('PRODUCT_IMAGE_THUMBNAIL_GREYSCALE_DESC' , 'Artikel-Thumbnails:Greyscale<br /><br />Default Wert: (32,22,22)<br /><br />basic black n white<br />Verwendung:<br />(int red,int green,int blue)');
+define('PRODUCT_IMAGE_THUMBNAIL_GREYSCALE_TITLE' , 'Produkt-Miniaturansichten:Greyscale');
+define('PRODUCT_IMAGE_THUMBNAIL_GREYSCALE_DESC' , 'Produkt-Miniaturansichten:Greyscale<br /><br />Default Wert: (32,22,22)<br /><br />basic black n white<br />Verwendung:<br />(int red,int green,int blue)');
 
-define('PRODUCT_IMAGE_THUMBNAIL_ELLIPSE_TITLE' , 'Artikel-Thumbnails:Ellipse');
-define('PRODUCT_IMAGE_THUMBNAIL_ELLIPSE_DESC' , 'Artikel-Thumbnails:Ellipse<br /><br />Default Wert: (FFFFFF)<br /><br />ellipse on bg colour<br />Verwendung:<br />(hex background colour)');
+define('PRODUCT_IMAGE_THUMBNAIL_ELLIPSE_TITLE' , 'Produkt-Miniaturansichten:Ellipse');
+define('PRODUCT_IMAGE_THUMBNAIL_ELLIPSE_DESC' , 'Produkt-Miniaturansichten:Ellipse<br /><br />Default Wert: (FFFFFF)<br /><br />ellipse on bg colour<br />Verwendung:<br />(hex background colour)');
 
-define('PRODUCT_IMAGE_THUMBNAIL_ROUND_EDGES_TITLE' , 'Artikel-Thumbnails:Round-edges');
-define('PRODUCT_IMAGE_THUMBNAIL_ROUND_EDGES_DESC' , 'Artikel-Thumbnails:Round-edges<br /><br />Default Wert: (5,FFFFFF,3)<br /><br />corner trimming<br />Verwendung:<br />(edge_radius,background colour,anti-alias width)');
+define('PRODUCT_IMAGE_THUMBNAIL_ROUND_EDGES_TITLE' , 'Produkt-Miniaturansichten:Round-edges');
+define('PRODUCT_IMAGE_THUMBNAIL_ROUND_EDGES_DESC' , 'Produkt-Miniaturansichten:Round-edges<br /><br />Default Wert: (5,FFFFFF,3)<br /><br />corner trimming<br />Verwendung:<br />(edge_radius,background colour,anti-alias width)');
 
-define('PRODUCT_IMAGE_THUMBNAIL_MERGE_TITLE' , 'Artikel-Thumbnails:Merge');
-define('PRODUCT_IMAGE_THUMBNAIL_MERGE_DESC' , 'Artikel-Thumbnails:Merge<br /><br />Default Wert: (overlay.gif,10,-50,60,FF0000)<br /><br />overlay merge image<br />Verwendung:<br />(merge image,x start [neg = from right],y start [neg = from base],opacity, transparent colour on merge image)');
+define('PRODUCT_IMAGE_THUMBNAIL_MERGE_TITLE' , 'Produkt-Miniaturansichten:Merge');
+define('PRODUCT_IMAGE_THUMBNAIL_MERGE_DESC' , 'Produkt-Miniaturansichten:Merge<br /><br />Default Wert: (overlay.gif,10,-50,60,FF0000)<br /><br />overlay merge image<br />Verwendung:<br />(merge image,x start [neg = from right],y start [neg = from base],opacity, transparent colour on merge image)');
 
-define('PRODUCT_IMAGE_THUMBNAIL_FRAME_TITLE' , 'Artikel-Thumbnails:Frame');
-define('PRODUCT_IMAGE_THUMBNAIL_FRAME_DESC' , 'Artikel-Thumbnails:Frame<br /><br />Default Wert: (FFFFFF,000000,3,EEEEEE)<br /><br />plain raised border<br />Verwendung:<br />(hex light colour,hex dark colour,int width of mid bit,hex frame colour [optional - defaults to half way between light and dark edges])');
+define('PRODUCT_IMAGE_THUMBNAIL_FRAME_TITLE' , 'Produkt-Miniaturansichten:Frame');
+define('PRODUCT_IMAGE_THUMBNAIL_FRAME_DESC' , 'Produkt-Miniaturansichten:Frame<br /><br />Default Wert: (FFFFFF,000000,3,EEEEEE)<br /><br />plain raised border<br />Verwendung:<br />(hex light colour,hex dark colour,int width of mid bit,hex frame colour [optional - defaults to half way between light and dark edges])');
 
-define('PRODUCT_IMAGE_THUMBNAIL_DROP_SHADOW_TITLE' , 'Artikel-Thumbnails:Drop-Shadow');
-define('PRODUCT_IMAGE_THUMBNAIL_DROP_SHADOW_DESC' , 'Artikel-Thumbnails:Drop-Shadow<br /><br />Default Wert: (3,333333,FFFFFF)<br /><br />more like a dodgy motion blur [semi buggy]<br />Verwendung:<br />(shadow width,hex shadow colour,hex background colour)');
+define('PRODUCT_IMAGE_THUMBNAIL_DROP_SHADOW_TITLE' , 'Produkt-Miniaturansichten:Drop-Shadow');
+define('PRODUCT_IMAGE_THUMBNAIL_DROP_SHADOW_DESC' , 'Produkt-Miniaturansichten:Drop-Shadow<br /><br />Default Wert: (3,333333,FFFFFF)<br /><br />more like a dodgy motion blur [semi buggy]<br />Verwendung:<br />(shadow width,hex shadow colour,hex background colour)');
 
-define('PRODUCT_IMAGE_THUMBNAIL_MOTION_BLUR_TITLE' , 'Artikel-Thumbnails:Motion-Blur');
-define('PRODUCT_IMAGE_THUMBNAIL_MOTION_BLUR_DESC' , 'Artikel-Thumbnails:Motion-Blur<br /><br />Default Wert: (4,FFFFFF)<br /><br />fading parallel lines<br />Verwendung:<br />(int number of lines,hex background colour)');
+define('PRODUCT_IMAGE_THUMBNAIL_MOTION_BLUR_TITLE' , 'Produkt-Miniaturansichten:Motion-Blur');
+define('PRODUCT_IMAGE_THUMBNAIL_MOTION_BLUR_DESC' , 'Produkt-Miniaturansichten:Motion-Blur<br /><br />Default Wert: (4,FFFFFF)<br /><br />fading parallel lines<br />Verwendung:<br />(int number of lines,hex background colour)');
 
 //And this is for the Images showing your products in single-view
 
@@ -346,9 +347,9 @@ define('SHIPPING_ORIGIN_ZIP_DESC' , 'Bitte geben Sie die Postleitzahl des Versan
 define('SHIPPING_MAX_WEIGHT_TITLE' , 'Maximalgewicht, das als ein Paket versendet werden kann');
 define('SHIPPING_MAX_WEIGHT_DESC' , 'Versandpartner (Post/UPS etc.) haben ein maximales Paketgewicht. Geben Sie einen Wert daf&uuml;r ein.');
 define('SHIPPING_BOX_WEIGHT_TITLE' , 'Taragewicht Minimum');
-define('SHIPPING_BOX_WEIGHT_DESC' , 'Mindest-Taragewicht welches zum Gesamtgewicht (Netto) aller Produkte dazu gerechnet wird. Für z.B. 1,5 kg geben Sie 1.5 ein.');
+define('SHIPPING_BOX_WEIGHT_DESC' , 'Mindest-Taragewicht welches zum Gesamtgewicht (Netto) aller Produkte dazu gerechnet wird. Für z.B. 1,5 kg geben Sie 1.5 ein. Achtung, die Eingabe hat Auswirkungen auf Ihre Versandkosten!! Empfohlen: 0');
 define('SHIPPING_BOX_PADDING_TITLE' , 'Bei gr&ouml;sseren Leerpaketen - Gewichtszuwachs in %.');
-define('SHIPPING_BOX_PADDING_DESC' , 'F&uuml;r etwa 10% geben Sie 10 ein');
+define('SHIPPING_BOX_PADDING_DESC' , 'F&uuml;r etwa 10% geben Sie 10 ein.  Achtung, die Eingabe hat Auswirkungen auf Ihre Versandkosten!! Empfohlen: 0');
 define('SHOW_SHIPPING_TITLE' , 'Versandkosten im Warenkorb');
 define('SHOW_SHIPPING_DESC' , 'Verlinkte Anzeige von "zzgl. Versandkosten" im Warenkorb.');
 define('SHIPPING_INFOS_TITLE' , 'Versandkosten ID');
@@ -371,7 +372,7 @@ define('STOCK_ALLOW_CHECKOUT_DESC' , 'M&ouml;chten Sie auch dann erlauben zu bes
 define('STOCK_MARK_PRODUCT_OUT_OF_STOCK_TITLE' , 'Kennzeichnung vergriffener Artikel');
 define('STOCK_MARK_PRODUCT_OUT_OF_STOCK_DESC' , 'Dem Kunden kenntlich machen, welche Artikel nicht mehr verf&uuml;gbar sind.');
 define('STOCK_REORDER_LEVEL_TITLE' , 'E-Mail an den Admin das ein Artikel nachbestellt werden muss');
-define('STOCK_REORDER_LEVEL_DESC' , 'Ab welcher Stückzahl soll der Admin eine E-Mail erhalten?');
+define('STOCK_REORDER_LEVEL_DESC' , 'Ab welcher Stückzahl soll der Admin eine E-Mail erhalten? Wenn Sie keine E-Mail erhalten möchten, geben Sie z.B. die Menge -99999 ein.');
 define('STORE_PAGE_PARSE_TIME_TITLE' , 'Speichern der Berechnungszeit des Shop-Seitenaufbaus');
 define('STORE_PAGE_PARSE_TIME_DESC' , 'Speicher der Zeit die ben&ouml;tigt wird, um Skripte bis zum Output der Seite zu berechnen');
 define('STORE_PAGE_PARSE_TIME_LOG_TITLE' , 'Zielort der Protokolldatei');
@@ -380,18 +381,18 @@ define('STORE_PARSE_DATE_TIME_FORMAT_TITLE' , 'Datumsformat in der Log-Datei');
 define('STORE_PARSE_DATE_TIME_FORMAT_DESC' , 'Das Datumsformat f&uuml;r Logging (Standard: %d/%m/%Y %H:%M:%S)');
 
 define('DISPLAY_PAGE_PARSE_TIME_TITLE' , 'Berechnungszeiten der Seiten anzeigen');
-define('DISPLAY_PAGE_PARSE_TIME_DESC' , 'Wenn das Speichern der Berechnungszeiten f&uuml;r Seiten eingeschaltet ist, k&ouml;nnen diese im Footer angezeigt werden.');
+define('DISPLAY_PAGE_PARSE_TIME_DESC' , 'Wenn das Speichern der Berechnungszeiten f&uuml;r Seiten eingeschaltet ist, k&ouml;nnen diese im Footer angezeigt werden. Praktisch für Entwickler.');
 define('STORE_DB_TRANSACTIONS_TITLE' , 'Speichern der Datenbank Abfragen');
-define('STORE_DB_TRANSACTIONS_DESC' , 'Speichern der einzelnen Datenbank Abfragen im Logfile f&uuml;r Berechnungszeiten');
+define('STORE_DB_TRANSACTIONS_DESC' , 'Speichern der einzelnen Datenbank Abfragen im Logfile f&uuml;r Berechnungszeiten. Praktisch für Entwickler.');
 
 define('USE_CACHE_TITLE' , 'Cache benutzen');
 define('USE_CACHE_DESC' , 'Die Cache Features verwenden');
 
 define('DB_CACHE_TITLE','DB Cache');
-define('DB_CACHE_DESC','SELECT Abfragen k&ouml;nnen von xt:Commerce gecached werden, um die Datenbankabfragen zu verringern, und die Geschwindigkeit zu erh&ouml;hen');
+define('DB_CACHE_DESC','SELECT Abfragen k&ouml;nnen vom Shop gecached werden, um die Datenbankabfragen zu verringern, und die Geschwindigkeit zu erh&ouml;hen');
 
 define('DB_CACHE_EXPIRE_TITLE','DB Cache Lebenszeit');
-define('DB_CACHE_EXPIRE_DESC','Zeit in Sekunden, bevor Cache Datein mit Daten aus der Datenbank automatisch &Uuml;berschrieben werden.');
+define('DB_CACHE_EXPIRE_DESC','Zeit in Sekunden, bevor Cachedateien mit Daten aus der Datenbank automatisch &uuml;berschrieben werden.');
 
 define('DIR_FS_CACHE_TITLE' , 'Cache Ordner');
 define('DIR_FS_CACHE_DESC' , 'Der Ordner, wo die gecachten Files gespeichert werden sollen');
@@ -423,7 +424,7 @@ define('SMTP_PASSWORD_DESC' , 'Bitte geben Sie hier das Passwort Ihres SMTP Acco
 define('SMTP_AUTH_TITLE' , 'SMTP AUTH');
 define('SMTP_AUTH_DESC' , 'Erfordert der SMTP Server eine sichere Authentifizierung?');
 define('SMTP_PORT_TITLE' , 'SMTP Port');
-define('SMTP_PORT_DESC' , 'Geben sie den SMTP Port Ihres SMTP Servers ein (default: 25)?');
+define('SMTP_PORT_DESC' , 'Geben sie den SMTP Port Ihres SMTP Servers ein (default: 25)');
 define('SMTP_SECURE_TITLE', 'SMTP Verschl&uuml;sselungsverfahren');
 define('SMTP_SECURE_DESC', 'W&auml;hlen Sie das Verfahren \'ssl\' oder \'tls\' zur E-Mail-Verschl&uuml;sselung, oder w&auml;hlen Sie \'---\' f&uuml;r keine Verschl&uuml;sselung.');
 
@@ -513,7 +514,7 @@ define('META_MIN_KEYWORD_LENGTH_TITLE' , 'Minimum L&auml;nge Meta-Keywords');
 define('META_MIN_KEYWORD_LENGTH_DESC' , 'Minimum L&auml;nge der automatisch erzeugten Meta-Keywords (Artikelbeschreibung)');
 define('META_KEYWORDS_NUMBER_TITLE' , 'Anzahl der Meta-Keywords');
 define('META_KEYWORDS_NUMBER_DESC' , 'Anzahl der Meta-Keywords');
-define('META_AUTHOR_TITLE' , 'author');
+define('META_AUTHOR_TITLE' , 'Autor');
 define('META_AUTHOR_DESC' , '<meta name="author">');
 define('META_PUBLISHER_TITLE' , 'publisher');
 define('META_PUBLISHER_DESC' , '<meta name="publisher">');
@@ -548,7 +549,7 @@ define('PRODUCT_REVIEWS_VIEW_TITLE','Bewertungen in Artikeldetails');
 define('PRODUCT_REVIEWS_VIEW_DESC','Anzahl der angezeigten Bewertungen in der Artikeldetailansicht');
 
 define('DELETE_GUEST_ACCOUNT_TITLE','L&ouml;schen von Gast-Konten');
-define('DELETE_GUEST_ACCOUNT_DESC','Sollen Gast-Konten nach erfolgter Bestellung gel&ouml;scht werden? (Empfohlen. Bestelldaten bleiben erhalten)');
+define('DELETE_GUEST_ACCOUNT_DESC','Sollen Gast-Konten nach erfolgter Bestellung gel&ouml;scht werden? (Bestelldaten bleiben erhalten). Empfohlen: ja');
 
 define('USE_WYSIWYG_TITLE','WYSIWYG-Editor aktivieren');
 define('USE_WYSIWYG_DESC','WYSIWYG-Editor f&uuml;r CMS und Artikel aktivieren? (empfohlen)');
@@ -559,8 +560,9 @@ define('PRICE_IS_BRUTTO_DESC','Erm&ouml;glicht die Eingabe der Bruttopreise im A
 define('PRICE_PRECISION_TITLE','Brutto/Netto Dezimalstellen');
 define('PRICE_PRECISION_DESC','Umrechnungsgenauigkeit (Hat keinen Einfluss auf die Anzeige im Shop, dort werden immer 2 Nachkommastellen angezeigt.)');
 
-define('CHECK_CLIENT_AGENT_TITLE','Spider Sessions vermeiden?');
-define('CHECK_CLIENT_AGENT_DESC','Bekannte Suchmaschinen Spider ohne Session auf die Seite lassen. (empfohlen)');
+define('CHECK_CLIENT_AGENT_TITLE','Suchmaschinen Sessions vermeiden?');
+define('CHECK_CLIENT_AGENT_DESC','Bekannte Suchmaschinen ohne Session auf die Seite lassen.');
+
 define('SHOW_IP_LOG_TITLE','IP-Log im Checkout?');
 define('SHOW_IP_LOG_DESC','Text "Ihre IP wird aus Sicherheitsgr&uuml;nden gespeichert", beim Checkout anzeigen? (NICHT empfohlen)');
 
@@ -627,8 +629,9 @@ define('AFTERBUY_PARTNERID_TITLE','Partner ID');
 define('AFTERBUY_PARTNERID_DESC','Ihre Afterbuy Partner ID');
 define('AFTERBUY_PARTNERPASS_TITLE','Partner Passwort');
 define('AFTERBUY_PARTNERPASS_DESC','Ihr Partner Passwort f&uuml;r die Afterbuy XML Schnittstelle');
-define('AFTERBUY_USERID_TITLE','User ID');
-define('AFTERBUY_USERID_DESC','Ihr Afterbuy Mitgliedsname');
+define('AFTERBUY_USERID_TITLE','Kundennummer');
+define('AFTERBUY_USERID_DESC','Ihre Afterbuy Kundennummer');
+
 define('AFTERBUY_ORDERSTATUS_TITLE','Bestellstatus');
 define('AFTERBUY_ORDERSTATUS_DESC','Bestellstatus nach erfolgreicher &Uuml;betragung der Bestelldaten');
 define('AFTERBUY_URL','Eine Beschreibung von Afterbuy finden Sie hier: <a href="http://www.afterbuy.de" target="new">http://www.afterbuy.de</a>');
@@ -643,13 +646,12 @@ define('SEARCH_IN_DESC_DESC','Aktivieren um die Suche in den Artikelbeschreibung
 define('SEARCH_IN_ATTR_TITLE','Suche in Artikel-Attributen');
 define('SEARCH_IN_ATTR_DESC','Aktivieren um die Suche in den Artikelattributen (z.B. Farbe, L&auml;nge) zu erm&ouml;glichen');
 
-// changes for 3.0.4 SP2
 define('REVOCATION_ID_TITLE','Widerrufsrecht ID');
 define('REVOCATION_ID_DESC','Content ID des Widerrufrechts');
 define('DISPLAY_REVOCATION_ON_CHECKOUT_TITLE','Anzeige Widerrufrecht?');
 define('DISPLAY_REVOCATION_ON_CHECKOUT_DESC','Widerrufrecht auf checkout_confirmation anzeigen?');
 
-// BOF - Tomcraft - 2009-10-03 - Paypal Express Modul
+// Paypal Express Script
 define('PAYPAL_MODE_TITLE','PayPal-Modus:');
 define('PAYPAL_MODE_DESC','Live (Normal) oder Testbetrieb (Sandbox). Je nach Modus muss bei PayPal zun&auml;chst ein API-Zugriff erstellt werden: <br/>Link: <a href="https://www.paypal.com/de/cgi-bin/webscr?cmd=_get-api-signature&generic-flow=true" target="_blank" rel="noopener"><strong>API-Zugriff f&uuml;r live-Modus einrichten</strong></a><br/>Link: <a href="https://www.sandbox.paypal.com/de/cgi-bin/webscr?cmd=_get-api-signature&generic-flow=true" target="_blank" rel="noopener"><strong>API-Zugriff f&uuml;r sandbox-Modus einrichten</strong></a><br/>Sie haben noch gar kein PayPal Konto? <a href="https://www.paypal.com/de/cgi-bin/webscr?cmd=_registration-run" target="_blank" rel="noopener"><strong>Klicken Sie hier, um eins zu erstellen.</strong></a>');
 define('PAYPAL_API_USER_TITLE','PayPal-API-Benutzer (Live)');
@@ -698,7 +700,7 @@ define('USE_ADMIN_LANG_TABS_DESC' , 'Sprachtabs bei den Eingabefeldern f&uuml;r 
 // EOF - Tomcraft - 2009-11-02 - Admin language tabs
 
 // BOF - Hendrik - 2010-08-11 - Thumbnails in admin products list
-define('USE_ADMIN_THUMBS_IN_LIST_TITLE' , 'Artikelliste Bilder');
+define('USE_ADMIN_THUMBS_IN_LIST_TITLE' , 'Admin Artikelliste Bilder');
 define('USE_ADMIN_THUMBS_IN_LIST_DESC' , 'In der Admin Artikelliste eine zus&auml;tzliche Spalte mit Bildern der Kategorien / Artikel anzeigen?');
 define('USE_ADMIN_THUMBS_IN_LIST_STYLE_TITLE', 'Artikelliste Bilder CSS-Style');
 define('USE_ADMIN_THUMBS_IN_LIST_STYLE_DESC', 'Hier k&ouml;nnen einfache CSS Style Angaben eingegeben werden - z.B. f&uuml;r die maximale Breite: max-width:90px;');
@@ -736,7 +738,7 @@ define('FAILED_LOGINS_LIMIT_DESC', 'Maximale Anzahl von Anmeldeversuchen, bevor 
 define('VALID_REQUEST_TIME_TITLE', 'Zeit f&uuml;r die Anforderung einer g&uuml;ltigen Passwortverl&auml;ngerung');
 define('VALID_REQUEST_TIME_DESC', 'Stellen Sie eine g&uuml;ltige Zeit f&uuml;r die Anforderung der Passwortverl&auml;ngerung in Sekunden ein, f&uuml;r die die Erneuerung des Passworts nach dem Senden einer Anfrage aktiviert ist (Standard 3600 Sekunden).');
 define('INSERT_RECAPTCHA_KEY_TITLE', 'Google reCaptcha api key');
-define('INSERT_RECAPTCHA_KEY_DESC', 'Hier k&ouml;nnen Sie einen g&uuml;ltigen Google reCaptcha API Key eingeben. (<strong><span style="color: #FF0000;">reCaptcha wird nicht angezeigt wenn dieses Feld leer ist!</span></strong>) <br /> <br />  <a href="https://www.google.com/recaptcha/admin#list" target="_blank"> Klicken Sie hier um einen Google reCaptcha API Key zu erhalten.</a> <br /><br /> <strong> Stellen Sie sicher, das Sie reCAPTCHA V2 ausw&auml;hlen! <br /><br /> <span style="color: #FF0000;">Bitte den API key nicht abtippen - nur kopieren und hier einf&uuml;gen!</span></strong>');
+define('INSERT_RECAPTCHA_KEY_DESC', 'Hier k&ouml;nnen Sie einen g&uuml;ltigen Google reCaptcha API Key eingeben. (<strong><span style="color: #FF0000;">reCaptcha wird nicht angezeigt wenn dieses Feld leer ist!</span></strong>) <br /> <br />  <a href="https://www.google.com/recaptcha/admin#list" target="_blank"> Klicken Sie hier um einen Google reCaptcha API Key zu erhalten.</a> <br /><br /> <strong> Stellen Sie sicher, das Sie reCAPTCHA V2 und die Anfrage "Ich bin kein Roboter" ausw&auml;hlen! <br /><br /> <span style="color: #FF0000;">Bitte den API key nicht abtippen - nur kopieren und hier einf&uuml;gen!</span></strong>');
 define('RECAPTCHA_SECRET_KEY_TITLE', 'Google reCatpcha secret key');
 define('RECAPTCHA_SECRET_KEY_DESC', 'Geben Sie hier den passenden Secret Key ein. Bitte achten Sie beim Kopieren darauf, das Sie keine Leerzeichen davor oder dahinter mitkopieren.');
 
@@ -827,14 +829,14 @@ define('TRACKING_GOOGLE_DISPLAY_TITLE' , 'Google Universal Analytics Displayfeat
 define('TRACKING_GOOGLE_DISPLAY_DESC' , 'Die Bereiche zu demografischen Merkmalen und zum Interesse enthalten eine &Uuml;bersicht sowie neue Berichte zur Leistung nach Alter, Geschlecht und Interessenkategorien. Funktioniert nur f&uuml;r Google Universal Analytics.');
 define('TRACKING_GOOGLE_ECOMMERCE_TITLE' , 'Google E-Commerce-Tracking');
 define('TRACKING_GOOGLE_ECOMMERCE_DESC' , 'Setzen Sie E-Commerce-Tracking ein, um herauszufinden, was Besucher &uuml;ber Ihre Website oder App kaufen. Zudem erhalten Sie folgende Informationen:<br><br><strong>Produkte:</strong> Gekaufte Produkte sowie die Mengen und die mit diesen Produkten erzielten Ums&auml;tze<br><strong>Transaktionen:</strong> Informationen zu Umsatz, Steuern, Versandkosten und Mengen f&uuml;r jede Transaktion<br><strong>Zeit bis zum Kauf:</strong> Anzahl von Tagen und Besuchen, beginnend von der aktuellen Kampagne bis zum Abschluss der Transaktion.');
-define('TRACKING_PIWIK_ACTIVE_TITLE' , 'PIWIK Web-Analytics Tracking aktivieren');
-define('TRACKING_PIWIK_ACTIVE_DESC' , 'Um PIWIK nutzen zu k&ouml;nnen, m&uuml;ssen Sie es zun&auml;chst herunterladen und auf Ihrem Webspace installieren, siehe auch <a href="http://http://de.piwik.org/" target="_blank" rel="noopener"><b>PIWIK Web-Analytics</b></a>. Im Gegensatz zu Google Analytics werden die Daten lokal gespeichert, d.h. Sie als Shopbetreiber haben die Datenhoheit.');
-define('TRACKING_PIWIK_LOCAL_PATH_TITLE' , 'PIWIK Installationsverzeichnis (ohne "http://")');
-define('TRACKING_PIWIK_LOCAL_PATH_DESC' , 'Tragen Sie hier das Verzeichnis ein, nachdem PIWIK erfolgreich installiert worden ist. Als Pfad ist hier der komplette Domainname ohne "http://" einzutragen, z.B. "www.domain.de/piwik".');
-define('TRACKING_PIWIK_ID_TITLE' , 'PIWIK Seiten-ID');
-define('TRACKING_PIWIK_ID_DESC' , 'In der PIWIK Administrationsoberfl&auml;che wird pro angelegter Domain wird eine ID vergeben (meist "1")');
-define('TRACKING_PIWIK_GOAL_TITLE' , 'PIWIK Kampagnen-Nummer (optional)');
-define('TRACKING_PIWIK_GOAL_DESC' , 'Tragen Sie hier eine Kampagnen-Nummer ein, wenn Sie vordefinierte Ziele nachverfolgen m&ouml;chten. Details siehe <a href="http://piwik.org/docs/tracking-goals-web-analytics/" target="_blank" rel="noopener"><b>PIWIK: Tracking Goal Conversions</b></a>');
+define('TRACKING_MATAMO_ACTIVE_TITLE' , 'Mataomo (fr&uuml;her: Piwik) Web-Analytics Tracking aktivieren');
+define('TRACKING_MATAMO_ACTIVE_DESC' , 'Um MATAMO nutzen zu k&ouml;nnen, m&uuml;ssen Sie es zun&auml;chst herunterladen und auf Ihrem Webspace installieren, siehe auch <a href="http://http://de.piwik.org/" target="_blank" rel="noopener"><b>MATAMO Web-Analytics</b></a>. Im Gegensatz zu Google Analytics werden die Daten lokal gespeichert, d.h. Sie als Shopbetreiber haben die Datenhoheit.');
+define('TRACKING_MATAMO_LOCAL_PATH_TITLE' , 'MATAMO Installationsverzeichnis (ohne "http://")');
+define('TRACKING_MATAMO_LOCAL_PATH_DESC' , 'Tragen Sie hier das Verzeichnis ein, nachdem MATAMO erfolgreich installiert worden ist. Als Pfad ist hier der komplette Domainname ohne "http://" einzutragen, z.B. "www.domain.de/piwik".');
+define('TRACKING_MATAMO_ID_TITLE' , 'MATAMO Seiten-ID');
+define('TRACKING_MATAMO_ID_DESC' , 'In der MATAMO Administrationsoberfl&auml;che wird pro angelegter Domain wird eine ID vergeben (meist "1")');
+define('TRACKING_MATAMO_GOAL_TITLE' , 'MATAMO Kampagnen-Nummer (optional)');
+define('TRACKING_MATAMO_GOAL_DESC' , 'Tragen Sie hier eine Kampagnen-Nummer ein, wenn Sie vordefinierte Ziele nachverfolgen m&ouml;chten. Details siehe <a href="https://matomo.org/docs/tracking-goals-web-analytics/" target="_blank" rel="noopener"><b>MATAMO: Tracking Goal Conversions</b></a>');
 // EOF - Dokuman - 2012-08-27 - added entries for new google analytics & piwik tracking
 
 define('CONFIRM_SAVE_ENTRY_TITLE', 'Best&auml;tigungsabfrage beim Speichern von Artikeln/Kategorien');
@@ -894,13 +896,13 @@ define('STOCK_ATTRIBUTE_REORDER_LEVEL_TITLE','E-Mail an Admin, wenn der Attribut
 define('STOCK_ATTRIBUTE_REORDER_LEVEL_DESC','Wenn der Bestand eines Produktattributs unter einer bestimmten Anzahl liegt, wird der Administrator benachrichtigt.');
 
 define('CLEVERREACH_API_CLIENT_ID_TITLE', 'Cleverreach Client ID');
-define('CLEVERREACH_API_CLIENT_ID_DESC', '');
+define('CLEVERREACH_API_CLIENT_ID_DESC', 'Ihre Cleverreach Kundennummer');
 define('CLEVERREACH_API_USERNAME_TITLE', 'Cleverreach Username');
-define('CLEVERREACH_API_USERNAME_DESC', '');
-define('CLEVERREACH_API_PASSWORD_TITLE', 'Cleverreach Password');
-define('CLEVERREACH_API_PASSWORD_DESC', '');
+define('CLEVERREACH_API_USERNAME_DESC', 'Ihr Cleverreach Login Name');
+define('CLEVERREACH_API_PASSWORD_TITLE', 'Cleverreach Passwort');
+define('CLEVERREACH_API_PASSWORD_DESC', 'Ihr Cleverreach Passwort');
 define('CLEVERREACH_API_IMPORT_SUBSCRIBERS_TITLE', 'Cleverreach importiere Newsletterabonnenten');
-define('CLEVERREACH_API_IMPORT_SUBSCRIBERS_DESC', '');
+define('CLEVERREACH_API_IMPORT_SUBSCRIBERS_DESC', 'Newsletterabonnenten aus dem Shop zu Cleverreach exportieren?');
 define('CLEVERREACH_API_IMPORT_BUYERS_TITLE', 'Cleverreach importiere K&auml;ufer');
-define('CLEVERREACH_API_IMPORT_BUYERS_DESC', '');
+define('CLEVERREACH_API_IMPORT_BUYERS_DESC', 'Käufer aus dem Shop zu Cleverreach exportieren?');
    

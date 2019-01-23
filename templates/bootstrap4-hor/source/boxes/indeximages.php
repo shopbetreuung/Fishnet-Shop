@@ -42,7 +42,7 @@
   }
 
   
-  if(!$box_smarty->is_cached(CURRENT_TEMPLATE.'/boxes/box_indeximages.html', $cache_id) || !$cache){
+  if(!$box_smarty->isCached(CURRENT_TEMPLATE.'/boxes/box_indeximages.html', $cache_id) || !$cache){
     
     $language_id = $_SESSION['languages_id'];
     

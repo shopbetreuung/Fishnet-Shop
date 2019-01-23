@@ -13,7 +13,7 @@
 
 require('includes/application_top.php');
 
-$blz_file_default_link = 'http://www.bundesbank.de/Redaktion/DE/Downloads/Aufgaben/Unbarer_Zahlungsverkehr/Bankleitzahlen/2017_06_04/blz_2017_03_06_txt.txt?__blob=publicationFile';
+$blz_file_default_link = 'https://www.bundesbank.de/resource/blob/602632/a44cbafa539a539be6222ffa06d33996/mL/blz-2018-09-03-txt-data.txt';
 $connection = xtc_db_connect();
 
 require (DIR_WS_INCLUDES.'head.php');
@@ -51,7 +51,7 @@ require (DIR_WS_INCLUDES.'head.php');
         if (empty($blz_file)) {
           echo BLZ_LINK_NOT_GIVEN_TEXT;
           break;
-        } elseif (strpos($blz_file, 'http://www.bundesbank.de/') === false ||
+        } elseif (strpos($blz_file, '://www.bundesbank.de/') === false ||
                    strpos($blz_file, '.txt') === false) {
           echo BLZ_LINK_INVALID_TEXT;
           break;

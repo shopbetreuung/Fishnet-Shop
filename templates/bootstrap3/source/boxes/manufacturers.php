@@ -30,8 +30,7 @@
     $box_smarty->cache_modified_check = CACHE_CHECK;
     $cache_id = $_SESSION['language'] . (isset($_GET['manufacturers_id']) ? (int)$_GET['manufacturers_id'] : 0);
   }
-
-  if (!$box_smarty->is_cached(CURRENT_TEMPLATE.'/boxes/box_manufacturers.html', $cache_id) || !$cache) {
+  if (!$box_smarty->isCached(CURRENT_TEMPLATE.'/boxes/box_manufacturers.html', $cache_id) || !$cache) {
 
     $box_smarty->assign('tpl_path', 'templates/'.CURRENT_TEMPLATE.'/');
     

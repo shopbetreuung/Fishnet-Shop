@@ -18,7 +18,7 @@ $language = HelperFunctions::getSofortLanguage($_SESSION['language']);
 include(DIR_WS_LANGUAGES.$language.'/modules/payment/sofort_sofortvorkasse.php');
 
 // create smarty elements
-$smarty = new Smarty;
+$smarty = new SmartyBC;
 // include boxes
 require_once(DIR_FS_CATALOG.'templates/'.CURRENT_TEMPLATE.'/source/boxes.php');
 
@@ -71,7 +71,7 @@ $smarty->assign('main_content', $main_content);
 $smarty->caching = 0;
 
 if (!defined(RM)) {
-	$smarty->load_filter('output', 'note');
+	/*$smarty->load_filter('output', 'note')*/;
 }
 
 $smarty->display(CURRENT_TEMPLATE.'/index.html');

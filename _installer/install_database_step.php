@@ -134,7 +134,8 @@ if (isset($_GET['process']) && $_GET['process'] == 'true'){
 
     $db_error = false;
     $db_warning = '';
-    if (isset($db['DB_SERVER']) && !empty($db['DB_SERVER']) && isset($db['DB_SERVER_USERNAME']) && !empty($db['DB_SERVER_USERNAME']) && isset($db['DB_SERVER_PASSWORD']) && !empty($db['DB_SERVER_PASSWORD']) && isset($db['DB_DATABASE']) && !empty($db['DB_DATABASE'])) {
+    // if (isset($db['DB_SERVER']) && !empty($db['DB_SERVER']) && isset($db['DB_SERVER_USERNAME']) && !empty($db['DB_SERVER_USERNAME']) && isset($db['DB_SERVER_PASSWORD']) && !empty($db['DB_SERVER_PASSWORD']) && isset($db['DB_DATABASE']) && !empty($db['DB_DATABASE'])) {
+    if (isset($db['DB_SERVER']) && !empty($db['DB_SERVER']) && isset($db['DB_SERVER_USERNAME']) && !empty($db['DB_SERVER_USERNAME']) && isset($db['DB_DATABASE']) && !empty($db['DB_DATABASE'])) {
         $conn = xtc_db_connect_installer($db['DB_SERVER'], $db['DB_SERVER_USERNAME'], $db['DB_SERVER_PASSWORD'], $db['DB_DATABASE']);
         if ($conn) {
             $sql = 'ALTER DATABASE ' . $db['DB_DATABASE'] . ' DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;';
@@ -200,7 +201,7 @@ if (isset($_GET['process']) && $_GET['process'] == 'true'){
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=<?php echo $charset; ?>" />
-        <title>shophelfer.com Installer</title>
+        <title>Fishnet Shop Installer</title>
         <link rel="stylesheet" type="text/css" href="includes/bootstrap.min.css" />
         <link rel="stylesheet" type="text/css" href="includes/stylesheet.css" />
     </head>
@@ -208,7 +209,7 @@ if (isset($_GET['process']) && $_GET['process'] == 'true'){
         <div class="container nopad">
             <div class="row">
                 <div class="col-xs-12 nopad">
-                    <a href="http://www.shophelfer.com/" target="_blank" rel="noopener"><img src="images/logo.png" alt="shophelfer.com" /></a>
+                    <a href="http://www.fishnet-shop.com/" target="_blank" rel="noopener"><img src="images/logo.png" alt="fishnetshop" /></a>
                 </div>
             </div>
         </div>

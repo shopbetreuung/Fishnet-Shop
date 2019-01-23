@@ -20,16 +20,17 @@
    Released under the GNU General Public License 
    ---------------------------------------------------------------------------------------*/
 
-define('MODULE_SHIPPING_SELFPICKUP_TEXT_TITLE', 'recouvrement par le client');
-define('MODULE_SHIPPING_SELFPICKUP_TEXT_DESCRIPTION', 'Pickup By The Customer');
-define('MODULE_SHIPPING_SELFPICKUP_SORT_ORDER', 'Ordre de tri');
+define('MODULE_SHIPPING_SELFPICKUP_TEXT_TITLE', 'Collecte personnelle');
+define('MODULE_SHIPPING_SELFPICKUP_TEXT_DESCRIPTION', 'á la site de notre société.');
+define('MODULE_SHIPPING_SELFPICKUP_SORT_ORDER', 'Sort Order');
 
-define('MODULE_SHIPPING_SELFPICKUP_TEXT_TITLE', 'recouvrement par le client');
-define('MODULE_SHIPPING_SELFPICKUP_TEXT_WAY', 'recouvrement par le client dans notre entreprise');
-define('MODULE_SHIPPING_SELFPICKUP_ALLOWED_TITLE' , 'Zones autorisées');
-define('MODULE_SHIPPING_SELFPICKUP_ALLOWED_DESC' , 'Veuillez entrer les zones <b>séparément</b> qui devrait être autorisé à utiliser ce module (par ex. AT,DE (laisser vide si vous voulez autoriser toutes les zones)).');
-define('MODULE_SHIPPING_SELFPICKUP_STATUS_TITLE', 'Activer  recouvrement par le client');
-define('MODULE_SHIPPING_SELFPICKUP_STATUS_DESC', 'Voulez-vous offrir le ramassage par le client ?');
-define('MODULE_SHIPPING_SELFPICKUP_SORT_ORDER_TITLE', 'Ordre de tri');
-define('MODULE_SHIPPING_SELFPICKUP_SORT_ORDER_DESC', 'séquence de présentation');
+define('MODULE_SHIPPING_SELFPICKUP_TEXT_TITLE', 'Collecte personnelle');
+define('MODULE_SHIPPING_SELFPICKUP_TEXT_WAY', 'á la site de notre société.');
+define('MODULE_SHIPPING_SELFPICKUP_TEXT_WAY_LONG', 'á la site de notre société.');
+define('MODULE_SHIPPING_SELFPICKUP_ALLOWED_TITLE' , 'Allowed Zones');
+define('MODULE_SHIPPING_SELFPICKUP_ALLOWED_DESC' , 'Please enter the zones <b>separately</b> which should be allowed to use this modul (e. g. AT,DE (leave empty if you want to allow all zones))');
+define('MODULE_SHIPPING_SELFPICKUP_STATUS_TITLE', 'Enable Self Pickup');
+define('MODULE_SHIPPING_SELFPICKUP_STATUS_DESC', 'Do you want to offer pickup by the customer?');
+define('MODULE_SHIPPING_SELFPICKUP_SORT_ORDER_TITLE', 'Sort Order');
+define('MODULE_SHIPPING_SELFPICKUP_SORT_ORDER_DESC', 'Sort order of display.');
 ?>

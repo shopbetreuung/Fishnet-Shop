@@ -1,4 +1,4 @@
-{config_load file="$language/lang_$language.conf" section="sitemap"}
+{config_load file="lang/$language/lang_$language.conf" section="sitemap"}
 {php}
   if($_SESSION['language'] == "german") {
     $fehler = array(404 => 'Fehler 404: Die gesuchte Seite wurde nicht gefunden!',
@@ -14,8 +14,9 @@
     403 => "Error 403: Forbidden.",
     500 => "Error 500: Internal Server Error.");
   }
-  $this->assign("herror",$fehler[$_REQUEST['error']]);
-{/php}
+  //$this->assign("herror",$fehler[$_REQUEST['error']]);
+  {/php}
+  {$herror=$fehler[$_REQUEST['error']]}
 {if $herror}
   <div class="error">{$herror}</div><br />
 {/if}

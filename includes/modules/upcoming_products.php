@@ -18,7 +18,7 @@
 //BOF - Dokuman - 2009-09-02: show upcoming products only when greater zero
 if (MAX_DISPLAY_UPCOMING_PRODUCTS != '0') {
 //EOF - Dokuman - 2009-09-02: show upcoming products only when greater zero
-  $module_smarty = new Smarty;
+  $module_smarty = new SmartyBC;
   $module_smarty->assign('tpl_path', 'templates/'.CURRENT_TEMPLATE.'/');
   // include needed functions
   require_once (DIR_FS_INC.'xtc_date_short.inc.php');

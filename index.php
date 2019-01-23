@@ -26,8 +26,7 @@ include ('includes/application_top.php');
 
 // create smarty elements
 
-$smarty = new Smarty;
-
+$smarty = new SmartyBC();
 // include boxes
 require (DIR_FS_CATALOG.'templates/'.CURRENT_TEMPLATE.'/source/boxes.php');
 include (DIR_WS_MODULES.'default.php');
@@ -35,8 +34,8 @@ require (DIR_WS_INCLUDES.'header.php'); //web28 - 2013-01-04 - load header.php a
 $smarty->assign('language', $_SESSION['language']);
 
 $smarty->caching = 0;
-if (!defined('RM'))
-	$smarty->load_filter('output', 'note');
+// if (!defined('RM'))
+// /*$smarty->load_filter('output', 'note')*/;
 $smarty->display(CURRENT_TEMPLATE.'/index.html');
 
 include ('includes/application_bottom.php');  

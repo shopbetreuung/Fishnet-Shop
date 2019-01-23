@@ -43,7 +43,7 @@ define('ADD_CATEGORIES_FIELDS','');
 define('ADD_CATEGORIES_DESCRIPTION_FIELDS','');
 
 //###############################//
-
+require_once (DIR_FS_INC.'get_image_id.php');
 // holds functions for manipulating products & categories
 defined('_VALID_XTC') or die('Direct Access to this location is not allowed.');
 class categories {
@@ -186,7 +186,9 @@ class categories {
                               'categories_heading_title' => xtc_db_prepare_input($categories_data['categories_heading_title'][$lang['id']]),
                               'categories_description' => xtc_db_prepare_input($categories_data['categories_description'][$lang['id']]),
                               'categories_meta_title' => xtc_db_prepare_input($categories_data['categories_meta_title'][$lang['id']]),
-                              'categories_meta_description' => xtc_db_prepare_input($categories_data['categories_meta_description'][$lang['id']])
+                              'categories_meta_description' => xtc_db_prepare_input($categories_data['categories_meta_description'][$lang['id']]),          
+                              'categorie_image_title' => xtc_db_prepare_input($categories_data['categorie_image_title'][$lang['id']]),
+                              'categorie_image_alt' => xtc_db_prepare_input($categories_data['categorie_image_alt'][$lang['id']])
                              );
 
       if (trim(ADD_CATEGORIES_DESCRIPTION_FIELDS) != '') {
@@ -388,6 +390,13 @@ class categories {
         xtc_del_image_file($mo_images_values['image_name']);
       }
     }
+
+    $get_images_id_query = xtc_db_query("SELECT image_id FROM ".TABLE_PRODUCTS_IMAGES." WHERE products_id =".$product_id);
+
+    while ($product_reviews = xtc_db_fetch_array($get_images_id_query)) {
+      xtc_db_query("DELETE FROM ".TABLE_PRODUCTS_IMAGES_DESCRIPTION." WHERE image_id = '".xtc_db_input($product_reviews['image_id'])."'");   
+    }
+
     xtc_db_query("DELETE FROM ".TABLE_SPECIALS." WHERE products_id = '".xtc_db_input($product_id)."'");
     xtc_db_query("DELETE FROM ".TABLE_PRODUCTS." WHERE products_id = '".xtc_db_input($product_id)."'");
     xtc_db_query("DELETE FROM ".TABLE_PRODUCTS_IMAGES." WHERE products_id = '".xtc_db_input($product_id)."'");
@@ -449,7 +458,10 @@ class categories {
   // inserts / updates a product from given data
 
   function insert_product($products_data, $dest_category_id, $link, $action = 'insert') {
-      
+    $products_id = xtc_db_prepare_input($products_data['products_id']);
+    $products_date_available = xtc_db_prepare_input($products_data['products_date_available']);
+    $products_date_available = (date('Y-m-d') < $products_date_available) ? $products_date_available : 'null';
+
     if (isset($_POST['duplicate_btn'])) {
         $catfunc = new categories();
         $category_id_array = explode('_', $_GET['cPath']);
@@ -458,11 +470,7 @@ class categories {
         $duplicate_product_ids[] = $catfunc->duplicate_product($_POST['products_id'], $category_id_last);
         $pID = is_array($duplicate_product_ids) && isset($duplicate_product_ids) ? '&pID='. end($duplicate_product_ids) : '';        
         xtc_redirect(xtc_href_link(FILENAME_CATEGORIES, 'cPath='.$category_id_last.$pID.$action.'&'.xtc_get_all_get_params(array ('cPath', 'action', 'pID', 'cID')))); 
-    }  
-      
-    $products_id = xtc_db_prepare_input($products_data['products_id']);
-    $products_date_available = xtc_db_prepare_input($products_data['products_date_available']);
-    $products_date_available = (date('Y-m-d') < $products_date_available) ? $products_date_available : 'null';
+    }
 
     $products_status = xtc_db_prepare_input($products_data['products_status']);
 
@@ -586,6 +594,33 @@ class categories {
 			}
 		  }
 		  xtc_db_perform(TABLE_PRODUCTS_IMAGES, $mo_img, 'update', 'image_name = \''.xtc_db_input($products_data['products_previous_image_'. ($img +1)]).'\'');
+
+        $product_images_data_update = array();
+        foreach($products_data['image_title'] as $key => $value) {
+            $product_images_data_update[$key] = array('title'=> $value, 'alt'=>'');
+        }
+
+        foreach($products_data['image_alt'] as $key=> $value) {
+            $product_images_data_update[$key]['alt'] = $value;
+        }
+
+        foreach($product_images_data_update as $gKey=> $gValue) {
+            $explode_value = explode('_',$gKey);
+            $img_nr = $explode_value[0];
+            $img_lang = $explode_value[1];
+            if (!empty($gValue['title']) && !empty($gValue['alt'])) {
+                $img_id = get_image_id($products_data['products_id'],$img_nr+1);
+                if ($img_id != null) {
+                    $img_nr = $img_nr+1;
+                    $img_id_exist = xtc_db_query("SELECT image_id FROM ".TABLE_PRODUCTS_IMAGES_DESCRIPTION." WHERE image_id = ".$img_id." AND image_nr = ".$img_nr." AND language_id = ".$img_lang);
+                    if (xtc_db_num_rows($img_id_exist) == 0) {
+                        $mo_img = array ('image_id' => xtc_db_prepare_input($img_id),'image_nr' =>xtc_db_prepare_input($img_nr), 'language_id' => xtc_db_prepare_input($img_lang),'image_title' => xtc_db_prepare_input($gValue['title']), 'image_alt' => xtc_db_prepare_input($gValue['alt']));
+                        xtc_db_perform(TABLE_PRODUCTS_IMAGES_DESCRIPTION, $mo_img);
+                    }
+                }
+            }
+        }
+
 		} elseif (!$products_data['products_previous_image_'. ($img +1)]) {
 		  xtc_db_perform(TABLE_PRODUCTS_IMAGES, $mo_img);
 		}
@@ -604,10 +639,19 @@ class categories {
         xtc_db_query("UPDATE ".TABLE_PRODUCTS."
                          SET products_image = NULL
                        WHERE products_id    = '".xtc_db_input($products_id)."'");
+
+        xtc_db_query("UPDATE ".TABLE_PRODUCTS_DESCRIPTION."
+                         SET products_main_image_title = '',
+                                products_main_image_alt = ''
+                       WHERE products_id = '".xtc_db_input($products_id)."'");
     }
 
     if ($products_data['del_mo_pic'] != '') {
       foreach ($products_data['del_mo_pic'] AS $dummy => $val) {
+
+        $products_images_id_query = xtc_db_query("SELECT image_id FROM ".TABLE_PRODUCTS_IMAGES." WHERE products_id = ".$products_id." AND image_name = '".$val."'");
+        $products_images_id_array = xtc_db_fetch_array($products_images_id_query);
+        $products_images_id = $products_images_id_array['image_id'];
         $dup_check_query = xtc_db_query("SELECT COUNT(*) AS total
                                                       FROM ".TABLE_PRODUCTS_IMAGES."
                                                      WHERE image_name = '".$val."'");
@@ -617,6 +661,9 @@ class categories {
         xtc_db_query("DELETE FROM ".TABLE_PRODUCTS_IMAGES."
                                      WHERE products_id = '".xtc_db_input($products_id)."'
                                        AND image_name  = '".$val."'");
+        
+        xtc_db_query("DELETE FROM ".TABLE_PRODUCTS_IMAGES_DESCRIPTION."
+                             WHERE image_id = '".xtc_db_input($products_images_id)."'");
       }
     }
 
@@ -639,9 +686,33 @@ class categories {
         rename(DIR_FS_CATALOG_ORIGINAL_IMAGES.'/'.$pIMG->filename, DIR_FS_CATALOG_ORIGINAL_IMAGES.'/'.$products_image_name);
 		//get data & write to table
 		// $mo_img = array ('products_id' => xtc_db_prepare_input($products_id), 'image_nr' => xtc_db_prepare_input($img +1), 'image_name' => xtc_db_prepare_input($products_image_name));
-		$mo_img = array ('products_id' => xtc_db_prepare_input($products_id), 'image_nr' => xtc_db_prepare_input($img +1), 'image_name' => xtc_db_prepare_input($products_image_name), 'image_title' => xtc_db_prepare_input($products_data['image_title'][$img+1]), 'image_alt' => xtc_db_prepare_input($products_data['image_alt'][$img+1]));
+		    $mo_img = array ('products_id' => xtc_db_prepare_input($products_id), 'image_nr' => xtc_db_prepare_input($img +1), 'image_name' => xtc_db_prepare_input($products_image_name));
+
         if ($action == 'insert') {
           xtc_db_perform(TABLE_PRODUCTS_IMAGES, $mo_img);
+          $products_images_last_id = xtc_db_insert_id();
+
+          $product_images_data = array();
+          
+          foreach($products_data['image_title'] as $key => $value) {
+              $product_images_data[$key] = array('title'=> $value, 'alt'=>'');
+          }
+          
+          foreach($products_data['image_alt'] as $key=> $value) {
+              $product_images_data[$key]['alt'] = $value;
+          }
+          
+          foreach($product_images_data as $key=> $value) {
+            $explode_value = explode('_',$key);
+            $img_nr = $explode_value[0];
+            $img_lang = $explode_value[1];
+            if (($img + 1) === ($img_nr + 1)) {
+                    $mo_img = array ('image_id' => xtc_db_prepare_input($products_images_last_id),'image_nr' =>xtc_db_prepare_input($img_nr+1), 'language_id' => xtc_db_prepare_input($img_lang),'image_title' => xtc_db_prepare_input($value['title']), 'image_alt' => xtc_db_prepare_input($value['alt']));
+                    xtc_db_perform(TABLE_PRODUCTS_IMAGES_DESCRIPTION, $mo_img);
+            }
+                
+          }
+          
         } elseif ($action == 'update' && $products_data['products_previous_image_'. ($img +1)]) {
           if ($products_data['del_mo_pic']) {
             foreach ($products_data['del_mo_pic'] AS $dummy => $val) {
@@ -653,6 +724,28 @@ class categories {
           xtc_db_perform(TABLE_PRODUCTS_IMAGES, $mo_img, 'update', 'image_name = \''.xtc_db_input($products_data['products_previous_image_'. ($img +1)]).'\'');
         } elseif (!$products_data['products_previous_image_'. ($img +1)]) {
           xtc_db_perform(TABLE_PRODUCTS_IMAGES, $mo_img);
+
+          $products_images_last_id = xtc_db_insert_id();
+          
+          $product_images_data = array();
+          
+          foreach($products_data['image_title'] as $key => $value) {
+              $product_images_data[$key] = array('title'=> $value, 'alt'=>'');
+          }
+          
+          foreach($products_data['image_alt'] as $key=> $value) {
+              $product_images_data[$key]['alt'] = $value;
+          }
+          foreach($product_images_data as $key=> $value) {
+            $explode_value = explode('_',$key);
+            $img_nr = $explode_value[0];
+            $img_lang = $explode_value[1];
+            if (($img + 1) === ($img_nr + 1)) {
+                $mo_img_insert = array ('image_id' => xtc_db_prepare_input($products_images_last_id),'image_nr' =>xtc_db_prepare_input($img_nr+1), 'language_id' => xtc_db_prepare_input($img_lang),'image_title' => xtc_db_prepare_input($value['title']), 'image_alt' => xtc_db_prepare_input($value['alt']));
+                xtc_db_perform(TABLE_PRODUCTS_IMAGES_DESCRIPTION, $mo_img_insert);
+            }
+          }
+
         }
         //image processing
         require (DIR_WS_INCLUDES.'product_thumbnail_images.php');
@@ -662,19 +755,29 @@ class categories {
         $this->set_products_images_file_rights($products_image_name);
       }
     }
+    
+    if (is_array($products_data['image_title'])) {
+        foreach ($products_data['image_title'] as $it_image_nr=>$it_image_title) {            
+            $explode_value = explode('_',$it_image_nr);
+            $img_nr = $explode_value[0];
+            $img_lang = $explode_value[1];
+            $image_id = get_image_id($products_id,$it_image_nr+1);    
+            $mo_img = array ('image_title' => xtc_db_prepare_input($it_image_title));
+            xtc_db_perform(TABLE_PRODUCTS_IMAGES_DESCRIPTION, $mo_img, 'update', 'image_id = \''.xtc_db_prepare_input($image_id).'\' AND image_nr = \''.xtc_db_prepare_input($img_nr+1).'\' AND language_id = \''.xtc_db_prepare_input($img_lang).'\'');  
+        }
 
-	if (is_array($products_data['image_title'])) {
-		foreach ($products_data['image_title'] as $it_image_nr=>$it_image_title) {
-			$mo_img = array ('image_title' => xtc_db_prepare_input($it_image_title));
-			xtc_db_perform(TABLE_PRODUCTS_IMAGES, $mo_img, 'update', 'image_nr = \''.xtc_db_prepare_input($it_image_nr+1).'\' AND products_id = \''.xtc_db_prepare_input($products_id).'\'');	
-		}
-	}
-	if (is_array($products_data['image_alt'])) {
-		foreach ($products_data['image_alt'] as $ia_image_nr=>$ia_image_title) {
-			$mo_img = array ('image_alt' => xtc_db_prepare_input($ia_image_title));
-			xtc_db_perform(TABLE_PRODUCTS_IMAGES, $mo_img, 'update', 'image_nr = \''.xtc_db_prepare_input($ia_image_nr+1).'\' AND products_id = \''.xtc_db_prepare_input($products_id).'\'');	
-		}
-	}
+    }
+    
+    if (is_array($products_data['image_alt'])) {
+        foreach ($products_data['image_alt'] as $it_image_nr=>$it_image_title) {            
+            $explode_value = explode('_',$it_image_nr);
+            $img_nr = $explode_value[0];
+            $img_lang = $explode_value[1];
+            $image_id = get_image_id($products_id,$it_image_nr+1);    
+            $mo_img = array ('image_alt' => xtc_db_prepare_input($it_image_title));
+            xtc_db_perform(TABLE_PRODUCTS_IMAGES_DESCRIPTION, $mo_img, 'update', 'image_id = \''.xtc_db_prepare_input($image_id).'\' AND image_nr = \''.xtc_db_prepare_input($img_nr+1).'\' AND language_id = \''.xtc_db_prepare_input($img_lang).'\'');  
+        }
+    }
 
     if (isset ($products_data['products_image']) && xtc_not_null($products_data['products_image']) && ($products_data['products_image'] != 'none')) {
       $sql_data_array['products_image'] = xtc_db_prepare_input($products_data['products_image']);
@@ -804,6 +907,12 @@ class categories {
     }
     foreach ($languages AS $lang) {
       $language_id = $lang['id'];
+
+      if ($products_data['del_pic'] == '') {
+        $products_main_image_title = xtc_db_prepare_input($products_data['products_main_image_title'][$language_id]);
+        $products_main_image_alt = xtc_db_prepare_input($products_data['products_main_image_alt'][$language_id]);
+      }
+
       $sql_data_array = array('products_name' => xtc_db_prepare_input($products_data['products_name'][$language_id]),
                               'products_description' => xtc_db_prepare_input($products_data['products_description_'.$language_id]),
                               'products_short_description' => xtc_db_prepare_input($products_data['products_short_description_'.$language_id]),
@@ -811,7 +920,9 @@ class categories {
                               'products_url' => xtc_db_prepare_input($products_data['products_url'][$language_id]),
                               'products_meta_title' => xtc_db_prepare_input($products_data['products_meta_title'][$language_id]),
                               'products_meta_description' => xtc_db_prepare_input($products_data['products_meta_description'][$language_id]),
-                              'products_meta_keywords' => xtc_db_prepare_input($products_data['products_meta_keywords'][$language_id])
+                              'products_meta_keywords' => xtc_db_prepare_input($products_data['products_meta_keywords'][$language_id]),
+                              'products_main_image_title' => $products_main_image_title,
+                              'products_main_image_alt' => $products_main_image_alt,
                               );
       if (trim(ADD_PRODUCTS_DESCRIPTION_FIELDS)) {
         $sql_data_array = array_merge($sql_data_array, $this->add_data_fields(ADD_PRODUCTS_DESCRIPTION_FIELDS,$products_data,$language_id));

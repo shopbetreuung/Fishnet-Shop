@@ -56,7 +56,7 @@ class payone_elv extends PayonePayment {
 	}
 
 	function _paymentDataForm($active_genre_identifier) {
-	  $payment_smarty = new Smarty();
+	  $payment_smarty = new SmartyBC();
     $payment_smarty->template_dir = DIR_FS_EXTERNAL.'payone/templates/';
 
     $payment_smarty->assign('genre_specific', $this->pg_config['genre_specific']);
@@ -214,7 +214,7 @@ class payone_elv extends PayonePayment {
 			if (isset($mandate_text) == true) {
 				$_SESSION['payone_elv_sepa_mandate_mustconfirm'] = true;
     
-    	  $payment_smarty = new Smarty();
+    	  $payment_smarty = new SmartyBC();
         $payment_smarty->template_dir = DIR_FS_EXTERNAL.'payone/templates/';
         
         $payment_smarty->assign('mandate_text', $mandate_text);

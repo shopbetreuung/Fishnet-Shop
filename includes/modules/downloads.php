@@ -21,7 +21,7 @@ if (!function_exists('xtc_date_long')) {
 	require_once (DIR_FS_INC.'xtc_date_long.inc.php');
 }
 
-$module_smarty = new Smarty;
+$module_smarty = new SmartyBC;
 
 if (!strstr($PHP_SELF, FILENAME_ACCOUNT_HISTORY_INFO)) {
 	// Get last order id for checkout_success

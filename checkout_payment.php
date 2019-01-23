@@ -37,7 +37,7 @@ if (!defined('CHECK_FIRST_PAYMENT_MODUL')) {
   define ('CHECK_FIRST_PAYMENT_MODUL', false); //true, false - default false
 }
 // create smarty elements
-$smarty = new Smarty;
+$smarty = new SmartyBC;
 // include boxes
 require (DIR_FS_CATALOG . 'templates/' . CURRENT_TEMPLATE . '/source/boxes.php');
 // include needed functions
@@ -150,7 +150,7 @@ $smarty->assign('BUTTON_CONTINUE', xtc_image_submit('button_continue.gif', IMAGE
 $smarty->assign('FORM_END', '</form>');
 
 require (DIR_WS_INCLUDES . 'header.php');
-$module_smarty = new Smarty;
+$module_smarty = new SmartyBC;
 $order_total = $xtPrice->xtcFormat($order->info['total'],false); //web28 2012-04-27 - rounded $order_total
 if ($order_total > 0) {
   if (isset ($_GET['payment_error']) && is_object(${ $_GET['payment_error'] }) && ($error = ${$_GET['payment_error']}->get_error())) {
@@ -269,7 +269,7 @@ $main_content = $smarty->fetch(CURRENT_TEMPLATE . '/module/checkout_payment.html
 $smarty->assign('main_content', $main_content);
 $smarty->caching = 0;
 if (!defined('RM')) {
-  $smarty->load_filter('output', 'note');
+  /*$smarty->load_filter('output', 'note')*/;
 }
 $smarty->display(CURRENT_TEMPLATE . '/index.html');
 include ('includes/application_bottom.php');

@@ -496,7 +496,7 @@ class PayPalCommon extends PayPalAuth {
   function get_presentment_details($amount, $currency, $iso_code_2, $type, $single = true) {
     global $request_type;
     
-    $pp_smarty = new Smarty();
+    $pp_smarty = new SmartyBC();
     
     $min_amount = $this->get_min_installment_amount();
     $max_amount = $this->get_max_installment_amount();
@@ -548,7 +548,7 @@ class PayPalCommon extends PayPalAuth {
       $pp_smarty->assign('notice', constant('TEXT_PAYPALINSTALLMENT_NOTICE_'.strtoupper($type)));
       $pp_smarty->assign('total_amount', $this->format_price_currency($amount));
     } else {
-      $pp_smarty = new Smarty();
+      $pp_smarty = new SmartyBC();
       $pp_smarty->assign($type, true);
       $pp_smarty->assign('nopresentment', true);
       $pp_smarty->assign('min_amount', $this->format_price_currency($min_amount['amount']));

@@ -199,6 +199,15 @@
             <td class="main" valign="top"><?php  echo $lng_image.TEXT_META_DESCRIPTION .'<br /> (max. 156 '. TEXT_CHARACTERS .')'; ?></td>
             <td class="main meta"><?php echo xtc_draw_input_field('categories_meta_description[' . $languages[$i]['id'] . ']', (isset($categories_meta_description[$languages[$i]['id']]) ? stripslashes($categories_meta_description[$languages[$i]['id']]) : $categories_desc_fields['categories_meta_description']),'style="width:100%" maxlength="156"'); ?></td>
           </tr>
+          <tr>
+            <td class="main" width="190"><?php echo $lng_image.TEXT_CATEGORIE_IMG_TITLE; ?></td>
+            <td class="main"><?php echo xtc_draw_input_field('categorie_image_title[' . $languages[$i]['id'] . ']', (isset($categories_name[$languages[$i]['id']]) ? stripslashes($categories_name[$languages[$i]['id']]) : $categories_desc_fields['categorie_image_title']), 'style="width:100% !important" maxlength="255"'); ?></td>
+          </tr>          
+          <tr>
+            <td class="main" width="190"><?php echo $lng_image.TEXT_CATEGORIE_IMG_ALT; ?></td>
+            <td class="main"><?php echo xtc_draw_input_field('categorie_image_alt[' . $languages[$i]['id'] . ']', (isset($categories_name[$languages[$i]['id']]) ? stripslashes($categories_name[$languages[$i]['id']]) : $categories_desc_fields['categorie_image_alt']), 'style="width:100% !important" maxlength="255"'); ?></td>
+          </tr>
+
         </table>
         <?php echo ('</div>');?>
         <?php } ?>

@@ -122,7 +122,7 @@ define('ENTRY_EMAIL_ADDRESS_CHECK_ERROR', 'The e-mail address you entered is inc
 define('ENTRY_EMAIL_ERROR_NOT_MATCHING', 'Your entered e-mail addresses do not match.'); // Hetfield - 2009-08-15 - confirm e-mail at registration
 define('ENTRY_EMAIL_ADDRESS_ERROR_EXISTS', 'The e-mail address you entered already exists in our database - please correct it');
 define('ENTRY_EMAIL_ADDRESS_TEXT', '*');
-define('ENTRY_STREET_ADDRESS_ERROR', 'Street/No. must consist of at least ' . ENTRY_STREET_ADDRESS_MIN_LENGTH . ' characters.');
+define('ENTRY_STREET_ADDRESS_ERROR', 'Street/No. must consist of at least ' . ENTRY_STREET_ADDRESS_MIN_LENGTH . ' characters and must have a house number. If you don\'t have a house number please enter a 0.');
 define('ENTRY_STREET_ADDRESS_TEXT', '*');
 define('ENTRY_SUBURB_TEXT', '');
 define('ENTRY_POST_CODE_ERROR', 'Your postcode must consist of at least ' . ENTRY_POSTCODE_MIN_LENGTH . ' characters.');
@@ -499,8 +499,13 @@ define('SHIPPING_TIME','Shipping time: ');
 define('MORE_INFO','[More]');
 define('READ_INFO','[Read]');
 
-// changes 3.0.4 SP2.2
+// Privacy Stuff
 define('ENTRY_PRIVACY_ERROR','Please confirm that you have taken note of our data protection guidelines!');
+define('COOKIE_NOTE_TEXT', 'This website uses cookies to ensure you get the best experience on our website.');
+define('COOKIE_NOTE_MORE_TEXT', 'More info');
+define('COOKIE_NOTE_DISMISS_TEXT', 'Got it!');
+
+
 define('TEXT_PAYMENT_FEE','Paymentfee');
 
 define('_MODULE_INVALID_SHIPPING_ZONE', 'Unfortunately we do not deliver to the chosen country.');
@@ -535,11 +540,11 @@ define('PAYPAL_AMMOUNT_NULL','The order sum which can be expected (without dispa
 // EOF - web28 - 2010-05-07 - PayPal API Modul
 
 define('BASICPRICE_VPE_TEXT','in this volume only '); // Hetfield - 2009-11-26 - Added language definition for vpe at graduated prices
-//web - 2010-07-11 - Preisanzeige bei Staffelpreisen (größte Staffel)
+//web - 2010-07-11 - Price display for scale prices (largest scale)
 define('GRADUATED_PRICE_MAX_VALUE', 'from');
 
-//web28 - 2010-08-20 - VERSANDKOSTEN WARENKORB
-define('_SHIPPING_TO', 'shipping to ');
+//web28 - 2010-08-20 - SHIPPING COSTS SHOPPING CART
+define('_SHIPPING_TO', 'Show me the possible shipping methods for: ');
 
 // BOF - DokuMan - 2011-09-20 - E-Mail SQL errors
 define('ERROR_SQL_DB_QUERY','We are sorry, but an database error has occurred somewhere on this page!');
@@ -551,9 +556,7 @@ define('TEXT_AGB_CHECKOUT','General Terms & Conditions %s <br /> Cancellation Po
 
 define('_SHIPPING_FREE','Download');
 
-define('COOKIE_NOTE_TEXT', 'This website uses cookies to ensure you get the best experience on our website.');
-define('COOKIE_NOTE_MORE_TEXT', 'More info');
-define('COOKIE_NOTE_DISMISS_TEXT', 'Got it!');
+
 
 //google_sitemap.php
 define('SITEMAP_FILE', 'Sitemap file');

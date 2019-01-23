@@ -15,7 +15,7 @@
    Released under the GNU General Public License
    ---------------------------------------------------------------------------------------*/
 
-$module_smarty = new Smarty;
+$module_smarty = new SmartyBC;
 $module_smarty->assign('tpl_path', 'templates/'.CURRENT_TEMPLATE.'/');
 $result = true;
 
@@ -43,6 +43,8 @@ if ($listing_split->number_of_rows > 0) {
   $category_query = xtDBquery("SELECT cd.categories_description,
                                       cd.categories_name,
                                       cd.categories_heading_title,
+                                      cd.categorie_image_title,
+                                      cd.categorie_image_alt,
                                       c.listing_template,
                                       c.categories_image
                                  FROM ".TABLE_CATEGORIES." c,
@@ -82,6 +84,8 @@ if ($listing_split->number_of_rows > 0) {
   $module_smarty->assign('CATEGORIES_HEADING_TITLE', $category['categories_heading_title']);
   $module_smarty->assign('CATEGORIES_IMAGE', $image);
   $module_smarty->assign('CATEGORIES_DESCRIPTION', $category['categories_description']);
+  $module_smarty->assign('CATEGORIES_IMAGE_TITLE', $category['categorie_image_title']);
+  $module_smarty->assign('CATEGORIES_IMAGE_ALT', $category['categorie_image_alt']);
   $rows = 0;
   $listing_query = xtDBquery($listing_split->sql_query);
   while ($listing = xtc_db_fetch_array($listing_query, true)) {

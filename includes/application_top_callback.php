@@ -177,8 +177,8 @@ require (DIR_WS_FUNCTIONS.'sessions.php');
    
 // Include Template Engine
 // BOF - Tomcraft - 2009-05-26 - update smarty template engine to 2.6.26
-////  require(DIR_WS_CLASSES . 'Smarty_2.6.22/Smarty.class.php');
-//  require(DIR_WS_CLASSES . 'Smarty_2.6.26/Smarty.class.php');
+////  require(DIR_WS_CLASSES . 'Smarty_3.1/libs/SmartyBC.class.php');
+//  require(DIR_WS_CLASSES . 'Smarty_3.1/libs/SmartyBC.class.php');
 // EOF - Tomcraft - 2009-05-26 - update smarty template engine to 2.6.26
 
 ?>

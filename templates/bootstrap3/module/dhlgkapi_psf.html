@@ -1,0 +1,95 @@
+{config_load file="$language/lang_$language.conf" section="checkout_shipping_address"}
+
+<div id="dhlgkapi">
+    <div class="highlightbox">
+        <h4>{$PSF_HEADING}</h4>
+        <p>{$PSF_TEXT}</p>
+        <div id='container-parcelshop'></div>
+        <input name="parcelshop-finder" class="dhlpf" onclick="parcelDialog('#dialogOrder');" type="button" value="{$PSF_BUTTON}">
+        <input type="hidden" name="street" id="street">
+        <input type="hidden" name="street_number" id="street_number">
+        <input type="hidden" name="country_code" id="country_code">
+        <br style="clear: both;" />
+    </div>
+    <br />
+</div>
+
+{literal}
+<script> 
+    $(document).ready(function(){
+
+        if ($('.twoColums.last').length) {
+            $('#dhlgkapi').prependTo('.twoColums.last'); //tpl_modified template modified 2.0
+        } else {
+            $('#dhlgkapi').prependTo('.highlightbox:first'); //xtc5 template modified 1.06
+        }
+        var input_names = ['company', 'suburb', 'street_address', 'postcode', 'city'];
+
+        for( i = 0, l = input_names.length; i < l; i++ ) {
+            $('input[name=' + input_names[i] + ']').attr('id', input_names[i]);
+        }
+
+        $('select[name=country]').attr('id', 'country');
+        $('#country').change(function() {
+            $('#country_code').val('');
+        }); 
+
+    });
+</script>
+
+<style>
+    .dhlpfhidden {
+        display:none;
+    }
+
+    .dhlpf {
+        float: right;
+        background-color: gold;
+        border: none;
+        color: #555;
+        padding: 10px 27px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 13px;
+        font-weight: bold;
+    }
+
+    .dhlpf:hover {
+        cursor: pointer;
+    }   
+</style>
+
+<script type='text/javascript'>
+    var psfVars = {
+        street1 : '#street',
+        street1Number : '#street_number',
+        zipCode : '#postcode',
+        city : '#city',
+        countryCode : '#country_code',
+        customButtonStyle : 'dhlpfhidden'
+    };
+
+    function Check_DHL_Input() {
+        var street_address=document.getElementById("street_address");
+        var street=document.getElementById("street");
+        var street_number=document.getElementById("street_number");
+        var country_code=document.getElementById("country_code");
+        var country=document.getElementById("country");      
+        var countries_list_array={/literal}{$JS_COUNTRIES_ARRAY}{literal};
+
+        if (street.value!='' && street_number.value!='') 
+        {   
+            street_address.value = street.value + ' ' + street_number.value;
+        }
+
+        if (country_code.value!='') {
+            country.value=countries_list_array[country_code.value];
+        }
+    }
+
+    setInterval(function() {Check_DHL_Input();}, 500);
+</script>
+
+<script src='https://parcelshopfinder.dhlparcel.com/api/psf-api.js'></script>
+{/literal}

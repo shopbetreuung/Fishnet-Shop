@@ -179,4 +179,8 @@ define('BUTTON_PDFBILL_SEND_REMINDER_MAIL', 'Send Reminder');
 define('BUTTON_PDFBILL_SEND_REMINDER_MAIL2', 'Resend PDF-Reminder');
 define('PDFBILL_MSG_REMINDER_SENT', 'E-Mail sent');
 
+define('BUTTON_PDFBILL_SEND_SECOND_REMINDER_MAIL', 'Send Second Reminder');
+define('BUTTON_PDFBILL_SEND_SECOND_REMINDER_MAIL2', 'Resend PDF-Second Reminder');
+define('PDFBILL_MSG_SECOND_REMINDER_SENT', 'E-Mail sent');
+
 ?>

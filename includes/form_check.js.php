@@ -38,11 +38,14 @@ function check_email(field_name_1, field_name_2, field_size, message_1, message_
   }
 } 
 // EOF - Hetfield - 2009-08-15 - confirm e-mail at registration
-function check_input(field_name, field_size, message) {
+function check_input(field_name, field_size, message, no=false) {
   if (form.elements[field_name] && (form.elements[field_name].type != "hidden")) {
-    var field_value = form.elements[field_name].value;
+    //var field_value = form.elements[field_name].value;
+    var field_value = form.elements[field_name].value,
+        countall = (field_value.match(/[0-9]/g) || []).length;
 
-    if (field_value == '' || field_value.length < field_size) {
+    //if (field_value == '' || field_value.length < field_size) {
+    if (field_value == '' || field_value.length < field_size || (no===true && countall < 1)) {
       error_message = error_message + "* " + message + "\n";
       error = true;
     }
@@ -141,7 +144,7 @@ if (ACCOUNT_GENDER == 'true') echo '  check_radio("gender", "' . xtc_js_lang(ENT
   // BOF - Hetfield - 2009-08-15 - confirm e-mail at registration
   check_email("email_address", "confirm_email_address", <?php echo ENTRY_EMAIL_ADDRESS_MIN_LENGTH; ?>, "<?php echo xtc_js_lang(ENTRY_EMAIL_ADDRESS_ERROR); ?>", "<?php echo xtc_js_lang(ENTRY_EMAIL_ERROR_NOT_MATCHING); ?>");
   // EOF - Hetfield - 2009-08-15 - confirm e-mail at registration
-  check_input("street_address", <?php echo ENTRY_STREET_ADDRESS_MIN_LENGTH; ?>, "<?php echo xtc_js_lang(ENTRY_STREET_ADDRESS_ERROR); ?>");
+  check_input("street_address", <?php echo ENTRY_STREET_ADDRESS_MIN_LENGTH; ?>, "<?php echo xtc_js_lang(ENTRY_STREET_ADDRESS_ERROR); ?>", true);
   check_input("postcode", <?php echo ENTRY_POSTCODE_MIN_LENGTH; ?>, "<?php echo xtc_js_lang(ENTRY_POST_CODE_ERROR); ?>");
   check_input("city", <?php echo ENTRY_CITY_MIN_LENGTH; ?>, "<?php echo xtc_js_lang(ENTRY_CITY_ERROR); ?>");
 

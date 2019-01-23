@@ -437,7 +437,7 @@ define('WARN_SESSION_AUTO_START', 'true');
 define('WARN_DOWNLOAD_DIRECTORY_NOT_READABLE', 'true');
 
 // Smarty Template Engine 
-require (DIR_WS_CLASSES.'Smarty_2.6.27/Smarty.class.php');
+require (DIR_WS_CLASSES.'Smarty_3.1/libs/SmartyBC.class.php');
 
 if (isset ($_SESSION['customer_id'])) {
 $account_type_query = xtc_db_query("-- /includes/application_top.php

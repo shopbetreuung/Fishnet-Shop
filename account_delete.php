@@ -21,7 +21,7 @@ require_once (DIR_FS_INC.'xtc_validate_password.inc.php');
 //EOF - 2009-08-25 - Require password to disable account
 
 // create smarty elements
-$smarty = new Smarty;
+$smarty = new SmartyBC;
 // include boxes
 require (DIR_FS_CATALOG.'templates/'.CURRENT_TEMPLATE.'/source/boxes.php');
 
@@ -103,7 +103,7 @@ $main_content = $smarty->fetch(CURRENT_TEMPLATE.'/module/account_delete.html');
 
 $smarty->assign('main_content', $main_content);
 if (!defined('RM'))
-  $smarty->load_filter('output', 'note');
+  /*$smarty->load_filter('output', 'note')*/;
 $smarty->display(CURRENT_TEMPLATE.'/index.html');
 include ('includes/application_bottom.php');
 ?>

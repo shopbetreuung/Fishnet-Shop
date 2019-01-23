@@ -20,4 +20,8 @@ define('TEXT_MAX_DISCOUNT', 'Change max allowed discount for selected categories
 define('TEXT_MAX_DISCOUNT_WARRNING', 'Attention this change will take affect for subcategories too.');
 define('TEXT_ERROR_MAX_DISCOUNT', '<strong>Danger! </strong>Input must be filled.');
 
+define('TEXT_CHANGE_MANUFACTURER', 'Choose manufacturer:');
+define('TEXT_CHANGE_MANUFACTURER_NONE', '--none--');
+define('ENTRY_MANUFACTURER', 'Manufacturer');
+
 ?>

@@ -22,10 +22,10 @@
    ---------------------------------------------------------------------------------------*/
 define('MODULE_PAYMENT_TYPE_PERMISSION', 'bt');
 
-define('MODULE_PAYMENT_BANKTRANSFER_TEXT_TITLE', 'Banktransfer');
-define('MODULE_PAYMENT_BANKTRANSFER_TEXT_DESCRIPTION', 'Banktransfer Payments');
+define('MODULE_PAYMENT_BANKTRANSFER_TEXT_TITLE', 'Bank debit');
+define('MODULE_PAYMENT_BANKTRANSFER_TEXT_DESCRIPTION', 'Bank debit Payments');
 define('MODULE_PAYMENT_BANKTRANSFER_TEXT_INFO','');
-define('MODULE_PAYMENT_BANKTRANSFER_TEXT_BANK', 'Banktransfer');
+define('MODULE_PAYMENT_BANKTRANSFER_TEXT_BANK', 'Bank debit');
 define('MODULE_PAYMENT_BANKTRANSFER_TEXT_EMAIL_FOOTER', 'Note: You can download our Fax Confirmation form from here: ' . HTTP_SERVER . DIR_WS_CATALOG . MODULE_PAYMENT_BANKTRANSFER_URL_NOTE . '');
 define('MODULE_PAYMENT_BANKTRANSFER_TEXT_BANK_INFO', 'By specifying IBAN/BIC, you can use the direct debit system <b>across the EU</b>.<br/>Fields marked with (*) are mandatory. For a german IBAN specifying a BIC is optional.<br/><br/>');
 define('MODULE_PAYMENT_BANKTRANSFER_TEXT_BANK_OWNER', 'Account Owner:*');

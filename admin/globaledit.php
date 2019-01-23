@@ -118,33 +118,43 @@ require('includes/application_top.php');
         <div class="col-sm-12" style="border-top: 1px solid #e7e7e7;">&nbsp;</div>
         <div class="col-xs-12">
             <?php 
-            if($_GET['pPath'] != ''){
-                if(isset($_POST['search_replace_products']) && isset($_POST['search_products']) && isset($_POST['replace_products']) && !empty($_POST['search_products']) && !empty($_POST['replace_products'])){
-                    switch ($_POST['search_replace_products']){
-                        case '1':
-                            foreach($pPath_array as $id){
-                                xtc_db_query("UPDATE " . TABLE_PRODUCTS_DESCRIPTION . " SET products_name = REPLACE(products_name, '".$_POST['search_products']."', '".$_POST['replace_products']."') WHERE language_id = '" . (int)$_SESSION['languages_id']."' AND products_id = '" . $id . "'");
-                            }
-                        break;
-                        case '2':
-                            foreach($pPath_array as $id){
-                                xtc_db_query("UPDATE " . TABLE_PRODUCTS_DESCRIPTION . " SET products_description = REPLACE(products_description, '".$_POST['search_products']."', '".$_POST['replace_products']."') WHERE language_id = '" . (int)$_SESSION['languages_id']."' AND products_id = '" . $id . "'");
-                            }
-                        break;
-                        case '3':
-                            foreach($pPath_array as $id){
-                                xtc_db_query("UPDATE " . TABLE_PRODUCTS_DESCRIPTION . " SET products_short_description = REPLACE(products_short_description, '".$_POST['search_products']."', '".$_POST['replace_products']."') WHERE language_id = '" . (int)$_SESSION['languages_id']."' AND products_id = '" . $id . "'");
-                            }
-                        break;
-                        case '4':
-                            foreach($pPath_array as $id){
-                                xtc_db_query("UPDATE " . TABLE_PRODUCTS_DESCRIPTION . " SET products_order_description = REPLACE(products_order_description, '".$_POST['search_products']."', '".$_POST['replace_products']."') WHERE language_id = '" . (int)$_SESSION['languages_id']."' AND products_id = '" . $id . "'");
-                            }
-                        break;
+            if($_GET['pPath'] != '') {
+                if (!empty($_POST['search_replace_products']) && !empty($_POST['replace_products'])) {
+                    if(isset($_POST['search_replace_products']) && isset($_POST['search_products']) && isset($_POST['replace_products'])) {
+                        switch ($_POST['search_replace_products']){
+                            case '1':
+                                foreach($pPath_array as $id) {
+                                    xtc_db_query("UPDATE " . TABLE_PRODUCTS_DESCRIPTION . " SET products_name = REPLACE(products_name, '".$_POST['search_products']."', '".$_POST['replace_products']."') WHERE language_id = '" . (int)$_SESSION['languages_id']."' AND products_id = '" . $id . "'");
+                                }
+                            break;
+                            case '2':
+                                foreach($pPath_array as $id) {
+                                    xtc_db_query("UPDATE " . TABLE_PRODUCTS_DESCRIPTION . " SET products_description = REPLACE(products_description, '".$_POST['search_products']."', '".$_POST['replace_products']."') WHERE language_id = '" . (int)$_SESSION['languages_id']."' AND products_id = '" . $id . "'");
+                                }
+                            break;
+                            case '3':
+                                foreach($pPath_array as $id) {
+                                    xtc_db_query("UPDATE " . TABLE_PRODUCTS_DESCRIPTION . " SET products_short_description = REPLACE(products_short_description, '".$_POST['search_products']."', '".$_POST['replace_products']."') WHERE language_id = '" . (int)$_SESSION['languages_id']."' AND products_id = '" . $id . "'");
+                                }
+                            break;
+                            case '4':
+                                foreach($pPath_array as $id) {
+                                    xtc_db_query("UPDATE " . TABLE_PRODUCTS_DESCRIPTION . " SET products_order_description = REPLACE(products_order_description, '".$_POST['search_products']."', '".$_POST['replace_products']."') WHERE language_id = '" . (int)$_SESSION['languages_id']."' AND products_id = '" . $id . "'");
+                                }
+                            break;
+                        }
+                        echo '<p class="alert alert-success">'.TEXT_SUCCESS.'</p>';
+                    } else if(isset($_POST['products_change']) && (empty($_POST['search_products']) || empty($_POST['replace_products']))) {
+                        echo '<p class="alert alert-danger">'.TEXT_ERROR.'</p>';
+                    }
+                
+                }
+                
+                if (isset($_POST['change_manufacturer']) && $_POST['search_replace_products'] == '5') {
+                    foreach($pPath_array as $id) {
+                        xtc_db_query("UPDATE " . TABLE_PRODUCTS . " SET manufacturers_id = ".$_POST['change_manufacturer'].' WHERE products_id = ' . $id . "");
                     }
                     echo '<p class="alert alert-success">'.TEXT_SUCCESS.'</p>';
-                }else if(isset($_POST['products_change']) && (empty($_POST['search_products']) || empty($_POST['replace_products']))){
-                    echo '<p class="alert alert-danger">'.TEXT_ERROR.'</p>';
                 }
                 
                 $products_change = array(
@@ -153,12 +163,35 @@ require('includes/application_top.php');
                     array('id' => '3', 'text' => ENTRY_SHORT_DESCRIPTION),
                     array('id' => '4', 'text' => ENTRY_ORDER_DESCRIPTION)
                 );
+
+                $products_change = array(
+                    array('id' => '1', 'text' => ENTRY_NAME), 
+                    array('id' => '2', 'text' => ENTRY_DESCRIPTION),
+                    array('id' => '3', 'text' => ENTRY_SHORT_DESCRIPTION),
+                    array('id' => '4', 'text' => ENTRY_ORDER_DESCRIPTION),
+                    array('id' => '5', 'text' => ENTRY_MANUFACTURER)
+                );
+
+                $manufacturers_change_array = array();
+                $manucasturer_query = xtc_db_query("SELECT manufacturers_name, manufacturers_id FROM ".TABLE_MANUFACTURERS." ");
+                while ($manucasturer_array = xtc_db_fetch_array($manucasturer_query)) {
+                    $manufacturers_change_array[$manucasturer_array['manufacturers_id']] = array('id'=>$manucasturer_array['manufacturers_id'],'text'=>$manucasturer_array['manufacturers_name']                            
+                    );                    
+                }
+
+                $manufacturers_change_default = array(
+                    array('id'=>'0','text'=> TEXT_CHANGE_MANUFACTURER_NONE)
+                );
+
+                $manufacturers_change = array_merge($manufacturers_change_default,$manufacturers_change_array);
+
                 ?>
                 <?php
                 echo xtc_draw_form("change_products", "globaledit.php?pPath=".$_GET['pPath'].'&cPath='.$_GET['cPath'],"","post","id=change_products");
                     echo TEXT_CHOOSE.xtc_draw_pull_down_menu('search_replace_products', $products_change).'<br />';
                     echo TEXT_SEARCH.xtc_draw_input_field('search_products', '' ,'style="width: 200px !important"').'<br />';
                     echo TEXT_REPLACE.xtc_draw_input_field('replace_products', '' ,'style="width: 200px !important"').'<br />';
+                    echo TEXT_CHANGE_MANUFACTURER.xtc_draw_pull_down_menu('change_manufacturer', $manufacturers_change).'<br />';
                 ?>
                 <input type="submit" class="btn btn-default" name="products_change" value="<?php echo BUTTON_SAVE; ?>" <?php echo $confirm_save_entry;?>>
                 </form>

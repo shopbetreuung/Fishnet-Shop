@@ -21,7 +21,7 @@
    Released under the GNU General Public License
    ---------------------------------------------------------------------------------------*/
   // reset var
-  $box_smarty = new smarty;
+  $box_smarty = new smarty();
   $box_content = '';
   //$rebuild = false; //DokuMan - 2010-02-28 - fix Smarty cache error on unlink
 
@@ -38,8 +38,7 @@
     $box_smarty->cache_modified_check = CACHE_CHECK;
     $cache_id = $_SESSION['language'].$_SESSION['customers_status']['customers_status_id'].'-'.$cPath;
   }
-
-  if(!$box_smarty->is_cached(CURRENT_TEMPLATE.'/boxes/box_categories.html', $cache_id) || !$cache){
+  if(!$box_smarty->isCached(CURRENT_TEMPLATE.'/boxes/box_categories.html', $cache_id) || !$cache){
     //BOF - GTB - 2010-08-03 - Security Fix - Base
     $box_smarty->assign('tpl_path',DIR_WS_BASE.'templates/'.CURRENT_TEMPLATE.'/');
     //$box_smarty->assign('tpl_path', 'templates/'.CURRENT_TEMPLATE.'/');
@@ -160,6 +159,7 @@
   }
   */
   if (!$cache) {
+    //debug_print_backtrace();
     $box_categories = $box_smarty->fetch(CURRENT_TEMPLATE.'/boxes/box_categories.html');
   } else {
     $box_categories = $box_smarty->fetch(CURRENT_TEMPLATE.'/boxes/box_categories.html', $cache_id);

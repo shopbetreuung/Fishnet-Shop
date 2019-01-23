@@ -34,7 +34,7 @@ if (ACTIVATE_GIFT_SYSTEM != 'true')
 require ('includes/classes/http_client.php');
 require_once (DIR_FS_INC.'xtc_validate_email.inc.php');
 
-$smarty = new Smarty;
+$smarty = new SmartyBC;
 // include boxes
 require (DIR_FS_CATALOG.'templates/'.CURRENT_TEMPLATE.'/source/boxes.php');
 
@@ -170,7 +170,7 @@ $main_content = $smarty->fetch(CURRENT_TEMPLATE.'/module/gv_send.html');
 $smarty->assign('main_content', $main_content);
 $smarty->caching = 0;
 if (!defined('RM'))
-  $smarty->load_filter('output', 'note');
+  /*$smarty->load_filter('output', 'note')*/;
 $smarty->display(CURRENT_TEMPLATE.'/index.html');
 include ('includes/application_bottom.php');
 ?>

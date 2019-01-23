@@ -24,7 +24,7 @@
   <tr>
     <td class="radiobutton">{$method_data.radio_field}</td>
     <td class="description">{$method_data.title}</td>
-    <td class="price">{$method_data.price}</td>
+    <td class="price {$module_data.id}_{$method_data.id}">{$method_data.price}</td>
   </tr>
   {/foreach}
   {/if}

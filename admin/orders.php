@@ -146,7 +146,7 @@ function profile_automatic_select($order){
       return 'default';
 }
 // initiate template engine for mail
-$smarty = new Smarty;
+$smarty = new SmartyBC;
 require (DIR_WS_CLASSES.'currencies.php');
 $currencies = new currencies();
 
@@ -398,6 +398,59 @@ if (($action == 'edit' || $action == 'update_order') && $order_exists) {
                     
       xtc_db_query("update ".TABLE_ORDERS." set ibn_reminderpdfnotifydate = now() where orders_id = '".$oID."'");
       $messageStack->add_session(PDFBILL_MSG_REMINDER_SENT, 'success');
+      xtc_redirect(xtc_href_link(FILENAME_ORDERS, xtc_get_all_get_params(array('pdf'))) );
+    }
+
+    if( isset($_POST['pdf_second_reminder_sendmail']) || isset($_POST['pdf_second_reminder_sendmail2']) ) {
+      $check_status_query = xtc_db_query("select customers_name, customers_email_address, orders_status, date_purchased, ibn_billdate, ibn_billnr from ".TABLE_ORDERS." where orders_id = '".xtc_db_input($oID)."'");
+      $check_status = xtc_db_fetch_array($check_status_query);
+
+      $billnr = make_billnr( $check_status['ibn_billdate'], $check_status['ibn_billnr'] );
+
+      // assign language to template for caching
+      $smarty->assign('language', $_SESSION['language']);
+      $smarty->caching = false;
+
+      // set dirs manual
+      $smarty->template_dir = DIR_FS_CATALOG.'templates';
+      $smarty->compile_dir = DIR_FS_CATALOG.'templates_c';
+      $smarty->config_dir = DIR_FS_CATALOG.'lang';
+
+      $smarty->assign('tpl_path', 'templates/'.CURRENT_TEMPLATE.'/');
+      $smarty->assign('logo_path', HTTP_SERVER.DIR_WS_CATALOG.'templates/'.CURRENT_TEMPLATE.'/img/');
+
+      $smarty->assign('NAME', $check_status['customers_name']);
+      $smarty->assign('ORDER_NR', $billnr);
+      $smarty->assign('ORDER_LINK', xtc_catalog_href_link(FILENAME_CATALOG_ACCOUNT_HISTORY_INFO, 'order_id='.$oID, 'SSL'));
+      $smarty->assign('ORDER_DATE', xtc_date_long($check_status['date_purchased']));
+      $smarty->assign('NOTIFY_COMMENTS', $notify_comments);
+      $smarty->assign('ORDER_STATUS', $orders_status_array[$status]);
+
+      $html_mail = $smarty->fetch('db:reminder_mail.html');
+      $txt_mail = $smarty->fetch('db:reminder_mail.txt');
+
+      $pdffile= DIR_FS_ADMIN.get_pdf_2ndreminder_filename( $oID );
+      $pdffile_downloadname = get_pdf_invoice_download_filename( $oID );
+      
+      $smarty->assign('nr', $order->info['ibn_billnr']);
+      $smarty->assign('date', strftime(DATE_FORMAT_LONG));
+      $order_subject = $smarty->fetch('db:reminder_mail.subject');
+      
+      xtc_php_mail( EMAIL_BILLING_ADDRESS,                                  //  $from_email_address,        
+                    EMAIL_BILLING_NAME,                                     //  $from_email_name,           
+                    $check_status['customers_email_address'],               //  $to_email_address,          
+                    $check_status['customers_name'],                        //  $to_name,                   
+                    '',                                                     //  $forwarding_to,             
+                    EMAIL_BILLING_REPLY_ADDRESS,                            //  $reply_address,             
+                    EMAIL_BILLING_REPLY_ADDRESS_NAME,                       //  $reply_address_name,        
+                    $pdffile,                                               //  $path_to_attachement,       
+                    '',                                                     //  $name_of_attachment, 
+                    $order_subject,                                         //  $email_subject,             
+                    $html_mail,                                             //  $message_body_html,         
+                    $txt_mail );                                            //  $message_body_plain
+                    
+      xtc_db_query("update ".TABLE_ORDERS." set ibn_secondreminderpdfnotifydate = now() where orders_id = '".$oID."'");
+      $messageStack->add_session(PDFBILL_MSG_SECOND_REMINDER_SENT, 'success');
       xtc_redirect(xtc_href_link(FILENAME_ORDERS, xtc_get_all_get_params(array('pdf'))) );
     }
     
@@ -1277,8 +1330,14 @@ require (DIR_WS_INCLUDES.'header.php');
           <td>
               <div class='col-xs-12'>
                   <div class='col-xs-12 col-sm-6 text-right'>
-            <a class="btn btn-default" href="<?php echo xtc_href_link(FILENAME_ORDERS, xtc_get_all_get_params(array ('oID', 'action', 'searchOrders')).'oID='.$oID.'&action=send&sta=0&stc=1&site=1'); ?>"><?php echo BUTTON_ORDER_CONFIRMATION; ?></a>
-            <?php
+              <a class="btn btn-default" href="<?php echo xtc_href_link(FILENAME_ORDERS, xtc_get_all_get_params(array ('oID', 'action', 'searchOrders')).'oID='.$oID.'&action=send&sta=0&stc=1&site=1'); ?>"><?php echo BUTTON_ORDER_CONFIRMATION; ?></a>
+			  <?php   
+              if (defined('MODULE_SHIPPING_DHLGKAPI_STATUS') && MODULE_SHIPPING_DHLGKAPI_STATUS == 'True') {
+              ?>
+                <a class="btn btn-default" href="<?php echo xtc_href_link('dhlgkapi_print_label.php', 'oID='.$oID); ?>">DHL Label</a>
+              <?php
+              }
+                
               if (ACTIVATE_GIFT_SYSTEM == 'true') {
                 echo '<a class="btn btn-default" href="'.xtc_href_link(FILENAME_GV_MAIL, xtc_get_all_get_params(array ('cID', 'action')).'cID='.$order->customer['ID']).'">'.BUTTON_SEND_COUPON.'</a>';
               }
@@ -1347,6 +1406,9 @@ require (DIR_WS_INCLUDES.'header.php');
         
             $button_reminder_sendmail  = xtc_button( BUTTON_PDFBILL_SEND_REMINDER_MAIL, 'submit', 'name="pdf_reminder_sendmail" class="btn btn-default"');
             $button_reminder_sendmail2 = xtc_button( BUTTON_PDFBILL_SEND_REMINDER_MAIL2, 'submit', 'name="pdf_reminder_sendmail2" class="btn btn-default"');
+
+            $button_second_reminder_sendmail  = xtc_button( BUTTON_PDFBILL_SEND_SECOND_REMINDER_MAIL, 'submit', 'name="pdf_second_reminder_sendmail" class="btn btn-default"');
+            $button_second_reminder_sendmail2 = xtc_button( BUTTON_PDFBILL_SEND_SECOND_REMINDER_MAIL2, 'submit', 'name="pdf_second_reminder_sendmail2" class="btn btn-default"');
             
             $button_faktur = '<a class="btn btn-default" href="'.xtc_href_link(FILENAME_ORDERS, xtc_get_all_get_params(array('pdf')).'pdf=1&action2=set_ibillnr' ).'">'.BUTTON_BILL.'</a>';
 
@@ -1402,13 +1464,18 @@ require (DIR_WS_INCLUDES.'header.php');
                 }
               }
               
-              if(!pdfbill_2ndreminder_exists($oID)){
+              if(!pdfbill_2ndreminder_exists($oID)) {
                 $arr_2ndreminder[] = $button_2ndreminder_create;
               } else {
                 $arr_2ndreminder[] = $button_2ndreminder_display;
                 $arr_2ndreminder[] = $button_2ndreminder_create;
-              }
-              
+
+                if( $order->info['ibn_secondreminderpdfnotifydate'] == '0000-00-00' ) {    // not sent
+                  $arr_2ndreminder[] = $button_second_reminder_sendmail;
+                } else {
+                  $arr_2ndreminder[] = $button_second_reminder_sendmail2;
+                }
+              }              
 
             }
 

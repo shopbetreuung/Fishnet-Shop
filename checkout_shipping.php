@@ -32,7 +32,7 @@ if (!defined('CHECK_CHEAPEST_SHIPPING_MODUL')) {
   define ('CHECK_CHEAPEST_SHIPPING_MODUL', false); //true, false - default false
 }
 // create smarty elements
-$smarty = new Smarty;
+$smarty = new SmartyBC;
 // include boxes
 require (DIR_FS_CATALOG.'templates/'.CURRENT_TEMPLATE.'/source/boxes.php');
 // include needed functions
@@ -166,8 +166,11 @@ if ($free_shipping == true) {
 }
 
 // process the selected shipping method
+$address_query = xtc_db_query("select entry_street_address as street_address from " . TABLE_ADDRESS_BOOK . " where customers_id = '" . $_SESSION['customer_id'] . "' and address_book_id = '" . $_SESSION['sendto'] . "'");
+$address = xtc_db_fetch_array($address_query);
 if (isset ($_POST['action']) && ($_POST['action'] == 'process')) {
-
+//check no street
+if(preg_match('#[0-9]#', $address['street_address'])){ 
 	if ((xtc_count_shipping_modules() > 0) || ($free_shipping == true)) {
 		if ((isset ($_POST['shipping'])) && (strpos($_POST['shipping'], '_'))) {
 			$_SESSION['shipping'] = $_POST['shipping'];
@@ -201,6 +204,10 @@ if (isset ($_POST['action']) && ($_POST['action'] == 'process')) {
 		$_SESSION['shipping'] = false;
     $smarty->assign('error', ERROR_CHECKOUT_SHIPPING_NO_MODULE);
 	}
+	}else{
+    //check no street
+    $smarty->assign('error_street', ENTRY_STREET_ADDRESS_ERROR);
+	}
 }
 
 // get all available shipping quotes
@@ -225,7 +232,7 @@ $smarty->assign('BUTTON_ADDRESS', '<a href="'.xtc_href_link(FILENAME_CHECKOUT_SH
 $smarty->assign('BUTON_CONTINUE', xtc_image_submit('button_continue.gif', IMAGE_BUTTON_CONTINUE));
 $smarty->assign('FORM_END', '</form>');
 
-$module_smarty = new Smarty;
+$module_smarty = new SmartyBC;
 $shipping_block = ''; //DokuMan - 2010-08-30 - set undefined variable
 if (xtc_count_shipping_modules() > 0) {
 	$showtax = $_SESSION['customers_status']['customers_status_show_price_tax'];
@@ -257,7 +264,8 @@ if (xtc_count_shipping_modules() > 0) {
 						if ($_SESSION['customers_status']['customers_status_show_price_tax'] == 0) {
 							$quotes[$i]['tax'] = 0;
             }
-            $quotes[$i]['methods'][$j]['price'] = $xtPrice->xtcFormat(xtc_add_tax($quotes[$i]['methods'][$j]['cost'], isset($quotes[$i]['tax']) ? $quotes[$i]['tax'] : 0), true, 0, true).xtc_draw_hidden_field('shipping', $quotes[$i]['id'].'_'.$quotes[$i]['methods'][$j]['id']);
+            $quotes[$i]['methods'][$j]['radio_field'] = xtc_draw_hidden_field('shipping', $quotes[$i]['id'].'_'.$quotes[$i]['methods'][$j]['id']); //NB Fishnet
+            $quotes[$i]['methods'][$j]['price'] = $xtPrice->xtcFormat(xtc_add_tax($quotes[$i]['methods'][$j]['cost'], isset($quotes[$i]['tax']) ? $quotes[$i]['tax'] : 0), true, 0, true); //NB Fishnet
 					}
 					$radio_buttons ++;
 				}
@@ -275,7 +283,7 @@ $main_content = $smarty->fetch(CURRENT_TEMPLATE.'/module/checkout_shipping.html'
 $smarty->assign('main_content', $main_content);
 $smarty->caching = 0;
 if (!defined('RM'))
-	$smarty->load_filter('output', 'note');
+	/*$smarty->load_filter('output', 'note')*/;
 $smarty->display(CURRENT_TEMPLATE.'/index.html');
 include ('includes/application_bottom.php');
 ?>

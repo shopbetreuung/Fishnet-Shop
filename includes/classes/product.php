@@ -15,6 +15,7 @@
    Released under the GNU General Public License
    ---------------------------------------------------------------------------------------*/
 require_once(DIR_FS_INC . 'xtc_format_price.inc.php');
+require_once(DIR_FS_INC . 'xtc_date_short.inc.php');
 
 class product {
 
@@ -380,7 +381,7 @@ class product {
   function buildDataArray(&$array,$image='thumbnail') {
     global $xtPrice,$main;
 	  
-	$img_data = xtc_db_fetch_array(xtc_db_query("SELECT products_image_title, products_image_alt FROM ".TABLE_PRODUCTS." WHERE products_id = '".$array['products_id']."' LIMIT 1"));
+	  $img_data = xtc_db_fetch_array(xtc_db_query("SELECT products_main_image_title, products_main_image_alt FROM ".TABLE_PRODUCTS_DESCRIPTION." WHERE language_id = '".$_SESSION['languages_id']."' AND products_id = '".$array['products_id']."' LIMIT 1"));
 
     //get tax rate
     $tax_rate = isset($xtPrice->TAX[$array['products_tax_class_id']]) ? $xtPrice->TAX[$array['products_tax_class_id']] : 0; //DokuMan: set Undefined index
@@ -426,6 +427,14 @@ class product {
       list($width, $height, $type, $img_attr) = getimagesize($p_img);
     }
 
+    // show expiry date of active special products
+    $special_expires_date_query = "SELECT expires_date
+                                     FROM ".TABLE_SPECIALS."
+                                    WHERE products_id = '". $array['products_id']."'
+                                      AND status = '1'";
+    $special_expires_date_query = xtDBquery($special_expires_date_query);
+    $sDate = xtc_db_fetch_array($special_expires_date_query, true);
+
     //products data array
     $productData = array ('PRODUCTS_NAME' => $array['products_name'],
                           'COUNT' => isset($array['ID']) ? $array['ID'] : 0,
@@ -437,10 +446,12 @@ class product {
                           'PRODUCTS_IMAGE' => $products_image,
                           'PRODUCTS_IMAGE_SIZE' => $img_attr,
 						  // 'PRODUCTS_IMAGE_TITLE' => str_replace('"','',$array['products_name']),
-						  'PRODUCTS_IMAGE_TITLE'=>!empty($img_data['products_image_title'])?$img_data['products_image_title']:str_replace('"','',$array['products_name']),
-						  'PRODUCTS_IMAGE_ALT'=>!empty($img_data['products_image_alt'])?$img_data['products_image_alt']:str_replace('"','',$array['products_name']),
+            						  'PRODUCTS_IMAGE_TITLE'=>!empty($img_data['products_main_image_title'])?$img_data['products_main_image_title']:str_replace('"','',$array['products_name']),
+                          'PRODUCTS_IMAGE_ALT'=>!empty($img_data['products_main_image_alt'])?$img_data['products_main_image_alt']:str_replace('"','',$array['products_name']),
                           'PRODUCTS_LINK' => xtc_href_link(FILENAME_PRODUCT_INFO, xtc_product_link($array['products_id'], $array['products_name'])),
                           'PRODUCTS_PRICE' => $products_price['formated'],
+						   //products plain price so we can ask for example for 0.00 
+						  'PRODUCTS_PRICE_PLAIN' => $products_price['plain'], 
                           'PRODUCTS_TAX_INFO' => $main->getTaxInfo($tax_rate),
                           'PRODUCTS_SHIPPING_LINK' => $main->getShippingLink(),
                           'PRODUCTS_BUTTON_BUY_NOW' => $buy_now,
@@ -450,6 +461,7 @@ class product {
                           // BOF - Tutorial: Umsetzung der EU-Verbraucherrichtlinie vom 13.06.2014
                           'PRODUCTS_SHIPPING_NAME_LINK' => $shipping_status_link,
                           // EOF - Tutorial: Umsetzung der EU-Verbraucherrichtlinie vom 13.06.2014
+                          'PRODUCTS_EXPIRES_DATE' => $sDate['expires_date'] != '0000-00-00 00:00:00' ? xtc_date_short($sDate['expires_date']) : '',
                           'PRODUCTS_DESCRIPTION' => isset($array['products_description']) ? $array['products_description'] : '', //DokuMan - 2010-02-26 - set Undefined index
                           'PRODUCTS_QUANTITY' => isset($array['products_quantity']) ? $array['products_quantity'] : '',
 						  'PRODUCTS_WEIGHT' => $array['products_weight'],

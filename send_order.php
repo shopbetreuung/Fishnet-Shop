@@ -163,6 +163,10 @@ if ($_SESSION['customer_id'] == $order_check['customers_id'] || $send_by_admin) 
       $smarty->assign('PAYMENT_BANKTRANSFER_IBAN', $rec['banktransfer_iban']);
       $smarty->assign('PAYMENT_BANKTRANSFER_BANKNAME', $rec['banktransfer_bankname']);
 
+      $iban_nr = $rec['banktransfer_iban'];
+      $iban_number = implode(" ", str_split($iban_nr, 4));
+      $smarty->assign('PAYMENT_BANKTRANSFER_IBAN_READABLE', $iban_number);
+
       $sepa_info = $smarty->fetch('db:sepa_info.html');
           
       $smarty->assign('PAYMENT_INFO_HTML', $sepa_info);

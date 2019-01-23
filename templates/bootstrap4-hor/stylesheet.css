@@ -1024,6 +1024,10 @@ BASIC Template for AGB Hosting Content
 	display: none;
 }
 
+#languages_box img {
+	margin: 0 3px;
+}
+
 @media screen and (min-width: 768px) and (max-width: 992px) {
 	.index_images_box img {
 		height: 150px;

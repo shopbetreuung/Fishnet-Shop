@@ -321,22 +321,22 @@ define('IMAGE_MANIPULATOR_DESC','<br/><br/>Image Manipulator f&uuml;r GD2 oder G
 
 
 define('ACCOUNT_GENDER_TITLE' , 'Anrede');
-define('ACCOUNT_GENDER_DESC' , 'Die Abfrage f&uuml;r die Anrede im Account benutzen');
+define('ACCOUNT_GENDER_DESC' , 'Bei Kunden-Registrierung Anrede abfragen? (empfohlen)');
 define('ACCOUNT_DOB_TITLE' , 'Geburtsdatum');
-define('ACCOUNT_DOB_DESC' , 'Die Abfrage f&uuml;r das Geburtsdatum im Account benutzen');
+define('ACCOUNT_DOB_DESC' , 'Bei Kunden-Registrierung Geburtsdatum abfragen? (nicht empfohlen)');
 define('ACCOUNT_COMPANY_TITLE' , 'Firma');
-define('ACCOUNT_COMPANY_DESC' , 'Die Abfrage f&uuml;r die Firma im Account benutzen');
+define('ACCOUNT_COMPANY_DESC' , 'Bei Kunden-Registrierung Firmennamen abfragen? (nicht empfohlen)');
 define('ACCOUNT_SUBURB_TITLE' , 'Vorort');
-define('ACCOUNT_SUBURB_DESC' , 'Die Abfrage f&uuml;r den Vorort im Account benutzen');
+define('ACCOUNT_SUBURB_DESC' , 'Bei Kunden-Registrierung Vorort/Stadtteil abfragen? (nicht empfohlen)');
 define('ACCOUNT_STATE_TITLE' , 'Bundesland');
-define('ACCOUNT_STATE_DESC' , 'Die Abfrage f&uuml;r das Bundesland im Account benutzen');
+define('ACCOUNT_STATE_DESC' , 'Bei Kunden-Registrierung Bundesland abfragen? (nicht empfohlen)');
 define('PASSWORD_SECURITY_CHECK_TITLE','Kennwort Sicherheitsprüfung');
 define('PASSWORD_SECURITY_CHECK_DESC','Neue Kunden zwingen, sich mit sicherem Passwort zu registrieren (bedeutet mit mindestens 1 Buchstaben und 1 Ziffer. Beachten Sie die Minimum Konfiguration für die Passwort Länge)');
 
 define('DEFAULT_CURRENCY_TITLE' , 'Standard W&auml;hrung');
-define('DEFAULT_CURRENCY_DESC' , 'W&auml;hrung die standardm&auml;ssig benutzt wird');
+define('DEFAULT_CURRENCY_DESC' , 'W&auml;hrung die standardm&auml;ssig benutzt wird.');
 define('DEFAULT_LANGUAGE_TITLE' , 'Standard Sprache');
-define('DEFAULT_LANGUAGE_DESC' , 'Sprache die standardm&auml;ssig benutzt wird');
+define('DEFAULT_LANGUAGE_DESC' , 'Sprache die standardm&auml;ssig benutzt wird.');
 define('DEFAULT_ORDERS_STATUS_ID_TITLE' , 'Standard Bestellstatus bei neuen Bestellungen');
 define('DEFAULT_ORDERS_STATUS_ID_DESC' , 'Wenn eine neue Bestellung eingeht, wird dieser Status als Bestellstatus gesetzt.');
 
@@ -486,13 +486,13 @@ define('DOWNLOAD_MAX_COUNT_TITLE' , 'Maximale Anzahl der Downloads eines gekauft
 define('DOWNLOAD_MAX_COUNT_DESC' , 'Stellen Sie die maximale Anzahl an Downloads ein, die Sie dem Kunden erlauben, der einen Artikel dieser Art erworben hat. 0 bedeutet kein Download.');
 
 define('GZIP_COMPRESSION_TITLE' , 'GZip Kompression einschalten');
-define('GZIP_COMPRESSION_DESC' , 'Schalten Sie HTTP GZip Kompression ein um die Seitenaufbaugeschwindigkeit zu optimieren.');
+define('GZIP_COMPRESSION_DESC' , 'Schalten Sie HTTP GZip Kompression ein um die Seitenaufbaugeschwindigkeit zu optimieren (empfohlen).');
 define('GZIP_LEVEL_TITLE' , 'Kompressions Level');
 define('GZIP_LEVEL_DESC' , 'W&auml;hlen Sie einen Kompressionslevel zwischen 0-9 (0 = Minimum, 9 = Maximum).');
 
 define('SESSION_WARNING', '<br /><br /><font color="#FF0000"><strong>ACHTUNG:</strong></font>
 Diese Funktion kann eventuell die Funktionsf&auml;higkeit des Shops
-beeinflussen. Bitte nur &auml;ndern, wenn man sich &uuml;ber die m&ouml;glichen Folgen im Klaren ist und der Server diese Funktion auch wirklich unterst&uuml;tzt!');
+beeinflussen. Bitte nur &auml;ndern, wenn man sich &uuml;ber die m&ouml;glichen Folgen im Klaren ist und der Server diese Funktion auch wirklich unterst&uuml;tzt!<br/> <font color="#FF0000"><strong>WARNUNG:</strong></font> Wenn Sie einen Shop-Link an einen Kunden versenden, achten Sie vorher IMMER darauf, das der Link KEINE Session ID enth&auml;lt, zB. "?ModSid=123456". Schlimmstenfalls kann sich der Kunde sonst in den Adminbereich einloggen!');
 
 define('SESSION_WRITE_DIRECTORY_TITLE' , 'Session Speicherort');
 define('SESSION_WRITE_DIRECTORY_DESC' , 'Wenn Sessions als Files gespeichert werden sollen, benutzen Sie folgenden Ordner.');
@@ -541,7 +541,7 @@ define('MODULE_SHIPPING_INSTALLED_TITLE' , 'Installierte Versand Module');
 define('MODULE_SHIPPING_INSTALLED_DESC' , 'Liste der Versandmodul-Dateinamen (getrennt durch einen Strichpunkt (;)). Diese wird automatisch aktualisiert, daher ist es nicht notwendig diese zu editieren. (Beispiel: ups.php;flat.php;item.php)');
 
 define('CACHE_LIFETIME_TITLE','Cache Lebenszeit');
-define('CACHE_LIFETIME_DESC','Zeit in Sekunden, bevor Cache Datein automatisch &uuml;berschrieben werden.');
+define('CACHE_LIFETIME_DESC','Zeit in Sekunden, bevor Cache Dateien automatisch &uuml;berschrieben werden.');
 define('CACHE_CHECK_TITLE','Pr&uuml;fe ob Cache modifiziert');
 define('CACHE_CHECK_DESC','Wenn "Ja", dann werden If-Modified-Since headers bei ge-cache-tem Content ber&uuml;cksichtigt, und passende HTTP headers werden ausgegeben. Somit werden regelm&auml;ssig aufgerufene Seiten nicht jedesmal neu an den Client versandt.');
 
@@ -552,27 +552,28 @@ define('DELETE_GUEST_ACCOUNT_TITLE','L&ouml;schen von Gast-Konten');
 define('DELETE_GUEST_ACCOUNT_DESC','Sollen Gast-Konten nach erfolgter Bestellung gel&ouml;scht werden? (Bestelldaten bleiben erhalten). Empfohlen: ja');
 
 define('USE_WYSIWYG_TITLE','WYSIWYG-Editor aktivieren');
-define('USE_WYSIWYG_DESC','WYSIWYG-Editor f&uuml;r CMS und Artikel aktivieren ?');
+define('USE_WYSIWYG_DESC','WYSIWYG-Editor f&uuml;r CMS und Artikel aktivieren? (empfohlen)');
 
 define('PRICE_IS_BRUTTO_TITLE','Brutto Admin');
-define('PRICE_IS_BRUTTO_DESC','Erm&ouml;glicht die Eingabe der Bruttopreise im Admin');
+define('PRICE_IS_BRUTTO_DESC','Erm&ouml;glicht die Eingabe der Bruttopreise im Admin.');
 
 define('PRICE_PRECISION_TITLE','Brutto/Netto Dezimalstellen');
 define('PRICE_PRECISION_DESC','Umrechnungsgenauigkeit (Hat keinen Einfluss auf die Anzeige im Shop, dort werden immer 2 Nachkommastellen angezeigt.)');
 
 define('CHECK_CLIENT_AGENT_TITLE','Suchmaschinen Sessions vermeiden?');
 define('CHECK_CLIENT_AGENT_DESC','Bekannte Suchmaschinen ohne Session auf die Seite lassen.');
-define('SHOW_IP_LOG_TITLE','IP-Log im Checkout?');
-define('SHOW_IP_LOG_DESC','Text "Ihre IP wird aus Sicherheitsgr&uuml;nden gespeichert", beim Checkout anzeigen?');
 
-define('SAVE_IP_IN_DATABASE_TITLE', 'Speichern Sie die IP-Adresse in der Datenbank?');
+define('SHOW_IP_LOG_TITLE','IP-Log im Checkout?');
+define('SHOW_IP_LOG_DESC','Text "Ihre IP wird aus Sicherheitsgr&uuml;nden gespeichert", beim Checkout anzeigen? (NICHT empfohlen)');
+
+define('SAVE_IP_IN_DATABASE_TITLE', 'Speichern Sie die IP-Adresse in der Datenbank? (NICHT empfohlen)');
 define('SAVE_IP_IN_DATABASE_DESC', 'Betrifft nur IPv4 Adressen');
 
 define('ACTIVATE_GIFT_SYSTEM_TITLE','Gutscheinsystem aktivieren?');
 define('ACTIVATE_GIFT_SYSTEM_DESC','Gutscheinsystem aktivieren?');
 
 define('ACTIVATE_SHIPPING_STATUS_TITLE','Versandstatusanzeige aktivieren?');
-define('ACTIVATE_SHIPPING_STATUS_DESC','Versandstatusanzeige aktivieren? (Verschiedene Versandzeiten k&ouml;nnen f&uuml;r einzelne Artikel festgelegt werden. Nach Aktivierung erscheint ein neuer Punkt <b>Lieferstatus</b> bei der Artikeleingabe)');
+define('ACTIVATE_SHIPPING_STATUS_DESC','Versandstatusanzeige aktivieren? (Empfohlen. Verschiedene Versandzeiten k&ouml;nnen f&uuml;r einzelne Artikel festgelegt werden. Nach Aktivierung erscheint ein neuer Punkt <b>Lieferstatus</b> bei der Artikeleingabe)');
 
 define('SECURITY_CODE_LENGTH_TITLE','L&auml;nge des Sicherheitscodes');
 define('SECURITY_CODE_LENGTH_DESC','L&auml;nge des Sicherheitscodes (Geschenk-Gutschein)');
@@ -604,7 +605,7 @@ define('DEFAULT_CUSTOMERS_VAT_STATUS_ID_TITLE' , 'Kundenstatus f&uuml;r UST ID g
 define('DEFAULT_CUSTOMERS_VAT_STATUS_ID_DESC' , 'W&auml;hlen Sie den Kundenstatus(Gruppe) f&uuml;r UST ID gepr&uuml;fte Kunden aus!');
 define('ACCOUNT_COMPANY_VAT_CHECK_TITLE' , 'Umsatzsteuer ID abfragen');
 define('ACCOUNT_COMPANY_VAT_CHECK_DESC' , 'Die Umsatzsteuer ID soll durch Kunden eingegeben werden k&ouml;nnen. Bei "Nein" wird das Eingabefeld nicht mehr angezeigt.');
-define('ACCOUNT_COMPANY_VAT_LIVE_CHECK_TITLE' , 'Umsatzsteuer ID online auf Plausibilit&auml;t &uuml;berpr&uuml;fen');
+define('ACCOUNT_COMPANY_VAT_LIVE_CHECK_TITLE' , 'Umsatzsteuer ID online auf Plausibilit&auml;t &uuml;berpr&uuml;fen, falls EU-Server erreichbar.');
 define('ACCOUNT_COMPANY_VAT_LIVE_CHECK_DESC' , 'Die Umsatzsteuer ID wird online auf Plausibilit&auml;t &uuml;berpr&uuml;ft. Dazu wird der Webservice des Steuerportals der EU (<a href="http://ec.europa.eu/taxation_customs" style="font-style:italic">http://ec.europa.eu/taxation_customs</a>).<br/>Ben&ouml;tigt PHP5 mit aktivierter "SOAP" Unterst&uuml;tztung! <strong><span class="messageStackSuccess">Die "PHP5 SOAP"-Unterst&uuml;tztung ist derzeit '.(in_array ('soap', get_loaded_extensions()) ? '' : '<span class="messageStackError">NICHT</span>').' aktiviert!</span></strong>');
 define('ACCOUNT_COMPANY_VAT_GROUP_TITLE' , 'Kundengruppe nach UST ID Check anpassen?');
 define('ACCOUNT_COMPANY_VAT_GROUP_DESC' , 'Durch Einschalten dieser Option wird die Kundengruppe nach einen postiven UST ID Check ge&auml;ndert');
@@ -630,6 +631,7 @@ define('AFTERBUY_PARTNERPASS_TITLE','Partner Passwort');
 define('AFTERBUY_PARTNERPASS_DESC','Ihr Partner Passwort f&uuml;r die Afterbuy XML Schnittstelle');
 define('AFTERBUY_USERID_TITLE','Kundennummer');
 define('AFTERBUY_USERID_DESC','Ihre Afterbuy Kundennummer');
+
 define('AFTERBUY_ORDERSTATUS_TITLE','Bestellstatus');
 define('AFTERBUY_ORDERSTATUS_DESC','Bestellstatus nach erfolgreicher &Uuml;betragung der Bestelldaten');
 define('AFTERBUY_URL','Eine Beschreibung von Afterbuy finden Sie hier: <a href="http://www.afterbuy.de" target="new">http://www.afterbuy.de</a>');
@@ -719,10 +721,10 @@ define('GOOGLE_RSS_FEED_REFID_TITLE' , 'Google RSS Feed - refID');
 define('GOOGLE_RSS_FEED_REFID_DESC' , 'Tragen Sie hier die Kampagnen-ID ein. Diese wird jedem Link des Google RSS Feeds automatisch hinzugef&uuml;gt.');
 // EOF - DokuMan - 2010-08-13 - set Google RSS Feed in admin section
 
-// BOF - web28 - 2010-08-17 -  Bildgroessenberechnung kleinerer Bilder
+// BOF - web28 - 2010-08-17 -  Image size calculation of smaller images
 define('PRODUCT_IMAGE_NO_ENLARGE_UNDER_DEFAULT_TITLE','Skalierung von Bildern mit geringer Aufl&ouml;sung');
 define('PRODUCT_IMAGE_NO_ENLARGE_UNDER_DEFAULT_DESC','Aktivieren Sie die Einstellung <strong>Nein</strong> um zu verhindern, dass Artikelbilder geringerer Aufl&ouml;sung auf die eingestellten default Werte f&uuml;r Breite und H&ouml;he skaliert werden. Aktivieren Sie die Einstellung <strong>Ja</strong>, werden auch Bilder geringerer Aufl&ouml;sung auf die eingestellten default Bildgr&ouml;&szlig;enwerte skaliert. In diesem Fall k&ouml;nnen diese Bilder aber sehr unscharf und pixelig dargestellt werden.');
-// EOF - web28 - 2010-08-17 -  Bildgroessenberechnung kleinerer Bilder
+// EOF - web28 - 2010-08-17 -  Image size calculation of smaller images
 
 //BOF - hendrik - 2011-05-14 - independent invoice number and date
 define('IBN_BILLNR_TITLE', 'N&auml;chste Rechnungsnummer');

@@ -9,7 +9,7 @@ define('TABLE_HEADING_ACTION', 'Aktion');
 define('TEXT_EDIT_ENTRY', 'Eintrag bearbeiten');
 define('TEXT_NEW_ENTRY', 'Neuer Eintrag');
 define('TEXT_ENTRY_IP', 'IP Adresse');
-define('TEXT_ENTRY_IP_INFO', 'Geben Sie die zu sperrende IP Adresse an.');
+define('TEXT_ENTRY_IP_INFO', 'Geben Sie die zu erlaubende IP Adresse an.');
 define('TEXT_ENTRY_TIME', 'Zeit');
 define('TEXT_ENTRY_TIME_INFO', 'Datum und Uhrzeit bearbeiten.');
 

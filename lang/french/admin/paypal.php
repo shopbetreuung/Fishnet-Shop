@@ -9,7 +9,8 @@
    --------------------------------------------------------------
    Released under the GNU General Public License
 --------------------------------------------------------------*/
-/* ACHTUNG ! Texte nicht ändern da Status abfrage im Programm */
+/* ACHTUNG ! Texte nicht Ã¤ndern da Status abfrage im Programm */
+/* ATTENTION ! do not change texts because status query in program */
 define('HEADING_TITLE','PayPal Transaktionen');
 define('TABLE_HEADING_PAYPAL_ID','Transaktions-Id');
 define('TABLE_HEADING_NAME','Name');
@@ -67,27 +68,27 @@ define('STATUS_COMPLETED','Abgeschlossen');
 define('STATUS_VERIFIED','verifiziert');
 define('STATUS_UNVERIFIED','Nicht Verifiziert');
 define('STATUS_PENDING','Pending');
-define('STATUS_REFUNDED','Zurückgezahlt');
+define('STATUS_REFUNDED','ZurÃ¼ckgezahlt');
 define('STATUS_REVERSED','Reversed');
 define('STATUS_DENIED','Storniert');
-define('STATUS_CASE','Käuferkonflikt');
-define('STATUS_CANCELED_REVERSAL','Rücklastschrift');
-define('STATUS_CANCELLED_REVERSA','Rücklastschrift');
+define('STATUS_CASE','KÃ¤uferkonflikt');
+define('STATUS_CANCELED_REVERSAL','RÃ¼cklastschrift');
+define('STATUS_CANCELLED_REVERSA','RÃ¼cklastschrift');
 define('STATUS_EXPIRED','Abgelaufen');
 define('STATUS_FAILED','Fehlgeschlagen');
 define('STATUS_IN-PROGRESS','In Bearbeitung');
-define('STATUS_PARTIALLY_REFUNDE','Teilweise Zurückgezahlt');
+define('STATUS_PARTIALLY_REFUNDE','Teilweise ZurÃ¼ckgezahlt');
 define('STATUS_PROCESSED','Abgeschlossen');
 define('STATUS_VOIDED','Voided');
 define('STATUS_OPENCAPTURE','Reserviert');
 define('STATUS_CREATED', 'Erstellt');
 define('TYPE_INSTANT','Sofort');
-define('TYPE_ECHECK','Überweisung');
+define('TYPE_ECHECK','Ãœberweisung');
 define('REASON_NOT_AS_DESCRIBE','Produkt nicht wie beschrieben!');
 define('REASON_NON_RECEIPT','Produkt nicht erhalten!');
-define('TYPE_REFUNDED','Rückzahlung');
+define('TYPE_REFUNDED','RÃ¼ckzahlung');
 define('TYPE_REVERSED','-Zahlung gesendet');
-define('TYPE_REFUNDED','Rückzahlung');
+define('TYPE_REFUNDED','RÃ¼ckzahlung');
 define('TEXT_DISPLAY_NUMBER_OF_PAYPAL_TRANSACTIONS','Angezeigt werden <b>%d</b> bis <b>%d</b> (von insgesamt <b>%d</b> Transaktionen)');
 // define NOTES
 define('TEXT_PAYPAL_NOTE_REFUND_INFO','Until 60 days after sending the original payment can carry you out a complete or a partial restitution. If you receive a repayment to arrange, you from PayPal a refund of charges, including the partial fees for partial restitutions.

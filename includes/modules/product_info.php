@@ -93,8 +93,10 @@ if (!is_object($product) || !$product->isProduct()) {
       && (($_SESSION['customers_status']['customers_fsk18'] == '1' && $product->data['products_fsk18'] == '0')
       || $_SESSION['customers_status']['customers_fsk18'] != '1')) {
     $add_pid_to_qty = xtc_draw_hidden_field('products_id', $product->data['products_id']);
-    $info_smarty->assign('ADD_QTY', xtc_draw_input_field('products_qty', '1', ($hide_qty ? '' : 'size="3"'), ($hide_qty ? 'hidden' : 'text')).' '.$add_pid_to_qty);
-    $info_smarty->assign('ADD_CART_BUTTON', xtc_image_submit('button_in_cart.gif', IMAGE_BUTTON_IN_CART));
+    if($product->data['waste_paper_bin'] != '1') {
+      $info_smarty->assign('ADD_QTY', xtc_draw_input_field('products_qty', '1', ($hide_qty ? '' : 'size="3"'), ($hide_qty ? 'hidden' : 'text')).' '.$add_pid_to_qty);
+      $info_smarty->assign('ADD_CART_BUTTON', xtc_image_submit('button_in_cart.gif', IMAGE_BUTTON_IN_CART));
+    }
   }
 
   // show expiry date of active special products

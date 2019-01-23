@@ -88,8 +88,8 @@ define('TEXT_INFO_HEADING_DELETE_CUSTOMERS_STATUS', 'Delete Customer Group');
 define('TEXT_INFO_HEADING_EDIT_CUSTOMERS_STATUS','Edit Group Data');
 define('TEXT_INFO_HEADING_NEW_CUSTOMERS_STATUS', 'New Customer Group');
 
-define('TEXT_INFO_CUSTOMERS_STATUS_BASE', '<strong>Basis Kundengruppe für Artikelpreise</strong>');
-define('ENTRY_CUSTOMERS_STATUS_BASE', 'wird als Grundlage für die Preise der neuen Kundengruppe gewählt. Wenn Auswahl = Admin werden keine Preise für die neue Kundengruppe angelegt.');
+define('TEXT_INFO_CUSTOMERS_STATUS_BASE', '<strong>Basis Kundengruppe fÃ¼r Artikelpreise</strong>');
+define('ENTRY_CUSTOMERS_STATUS_BASE', 'wird als Grundlage fÃ¼r die Preise der neuen Kundengruppe gewÃ¤hlt. Wenn Auswahl = Admin werden keine Preise fÃ¼r die neue Kundengruppe angelegt.');
 
 define('IMAGE_ICON_INFO','action');
 

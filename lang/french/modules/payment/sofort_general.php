@@ -92,7 +92,7 @@ define('MODULE_PAYMENT_SOFORT_MULTIPAY_XML_FAULT_8061',		'Une transaction avec l
 define('MODULE_PAYMENT_SOFORT_MULTIPAY_XML_FAULT_8068',		'L&apos;achat sur compte n&apos;est disponible que pour les clients privés pour le moment.');
 define('MODULE_PAYMENT_SOFORT_MULTIPAY_XML_FAULT_10001', 	'Veuillez remplir les champs numéro de compte, code de tri et titulaire du compte en entier.'); //LS: holder and bankdata missing
 define('MODULE_PAYMENT_SOFORT_MULTIPAY_XML_FAULT_10002',	'Veuillez accepter la politique de confidentialité.');
-define('MODULE_PAYMENT_SOFORT_MULTIPAY_XML_FAULT_10003',	'Malheureusement, le mode de paiement choisi ne peut pas être utilisé pour le paiement d&apos;articles tels que les téléchargements ou les chèques-cadeaux.');  //RBS and virtual content is not allowed
+define('MODULE_PAYMENT_SOFORT_MULTIPAY_XML_FAULT_10003',	'Malheureusement, le mode de paiement choisi ne peut pas être utilisé pour le paiement d&apos;articles tels que les téléchargements ou les bons-cadeaux.');  //RBS and virtual content is not allowed
 define('MODULE_PAYMENT_SOFORT_MULTIPAY_XML_FAULT_10004',	'Une erreur inconnue s&apos;est produite.');  //order could not be saved in table sofort_orders
 define('MODULE_PAYMENT_SOFORT_MULTIPAY_XML_FAULT_10005',	'Une erreur inconnue s&apos;est produite.');  //saving of order (after successful payment-process) MAYBE failed, seller informed
 define('MODULE_PAYMENT_SOFORT_MULTIPAY_XML_FAULT_10006',	'Une erreur inconnue s&apos;est produite.');  //saving of order (after successful payment-process) REALLY failed, seller informed

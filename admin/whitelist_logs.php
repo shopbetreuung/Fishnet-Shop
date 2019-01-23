@@ -9,7 +9,8 @@
    --------------------------------------------------------------
    Released under the GNU General Public License
    --------------------------------------------------------------*/
-  
+    
+
   require('includes/application_top.php');
 
   require_once(DIR_FS_CATALOG.'includes/xss_secure.php');
@@ -19,17 +20,38 @@
     switch ($action) {
       case 'deleteconfirm':
         $contents_array = xss_read_whitelist();
-        unset($contents_array[$_GET['ip']]);
+        
+        unset($contents_array[array_search($_GET['ip'], $contents_array)]);
         xss_write_whitelist($contents_array);
         xtc_redirect(xtc_href_link(FILENAME_WHITELIST_LOGS));
         break;
-
+      case 'update':
+        $whitelist_ip = xtc_db_prepare_input($_POST['whitelist_ip']);
+        
+        if ($whitelist_ip != '' ) {
+           
+          $contents_array = xss_read_whitelist();
+          $found = (array_search($_GET['ip'], $contents_array,false));
+          
+          if($found != -1) {
+            $contents_array[$found] = $whitelist_ip;
+            xss_write_whitelist($contents_array);
+            xtc_redirect(xtc_href_link(FILENAME_WHITELIST_LOGS, 'ip='.$whitelist_ip));
+          }else {
+            $contents_array[] = $whitelist_ip;
+            xss_write_whitelist($contents_array);
+            xtc_redirect(xtc_href_link(FILENAME_WHITELIST_LOGS, 'ip='.$whitelist_ip));
+          }
+        }
+        xtc_redirect(xtc_href_link(FILENAME_WHITELIST_LOGS));
+        break;
       case 'insert':
         $whitelist_ip = xtc_db_prepare_input($_POST['whitelist_ip']);
-        $whitelist_time = strtotime($_POST['whitelist_time']);
-        if ($whitelist_ip != '' && $whitelist_time > 0) {
+        
+       if ($whitelist_ip != '' ) {
+           
           $contents_array = xss_read_whitelist();
-          $contents_array[$whitelist_ip] = (string)$whitelist_time;
+          $contents_array[] = $whitelist_ip;
           xss_write_whitelist($contents_array);
           xtc_redirect(xtc_href_link(FILENAME_WHITELIST_LOGS, 'ip='.$whitelist_ip));
         }
@@ -73,7 +95,7 @@
     <!-- body_text //--> 
         <div class="row">
         <div class="col-xs-12">
-	        <p class="h1"><?php echo HEADING_TITLE;?></p>
+          <p class="h1"><?php echo HEADING_TITLE;?></p>
         </div>
         </div>
             <div id="responsive_table" class="table-responsive pull-left col-sm-12">
@@ -85,20 +107,16 @@
                           ?>
                           <tr class="dataTableHeadingRow">
                             <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_IP; ?></td>
-                            <td class="dataTableHeadingContent txta-c"><?php echo TABLE_HEADING_BANNED; ?></td>
                             <td class="dataTableHeadingContent txta-r"><?php echo TABLE_HEADING_ACTION; ?></td>
                           </tr>
                           <tr>
                           <?php
-                          foreach ($contents_array as $ip => $time) {
-
-                            $time += XSS_WHITELIST_TIME;
+                          foreach ($contents_array as $ip) {
                             $entry = $ip;
                             $orders_action_image = '<a href="' . xtc_href_link(FILENAME_WHITELIST_LOGS, 'ip=' . $ip) . '">' . xtc_image(DIR_WS_IMAGES . 'icon_arrow_grey.gif', IMAGE_ICON_INFO) . '</a>';
                             if ((!isset($_GET['ip']) || ($_GET['ip'] == $ip)) && !isset($buInfo)) {
                               $file_array = array(
                                 'ip' => $ip,
-                                'time' => $time
                               );
                               $buInfo = new objectInfo($file_array);
                               $orders_action_image = xtc_image(DIR_WS_IMAGES . 'icon_arrow_right.gif', ICON_EDIT);
@@ -110,7 +128,6 @@
                             }
                             ?>
                               <td class="dataTableContent"><?php echo $ip; ?></td>
-                              <td class="dataTableContent txta-c"><?php echo xtc_datetime_short(date('Y-m-d H:i:s', $time)); ?></td>
                               <td class="dataTableContent txta-r"><?php echo $orders_action_image; ?></td>
                             </tr>
                             <?php
@@ -119,7 +136,6 @@
                           ?>
                           <tr class="dataTableHeadingRow">
                             <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_IP; ?></td>
-                            <td class="dataTableHeadingContent txta-c"><?php echo TABLE_HEADING_BANNED; ?></td>
                             <td class="dataTableHeadingContent txta-r"><?php echo TABLE_HEADING_ACTION; ?></td>
                           </tr>
                           <?php
@@ -153,15 +169,13 @@
                     $heading[] = array('text' => '<b>' . TEXT_NEW_ENTRY . '</b>');
                     $contents = array('form' => xtc_draw_form('insert', FILENAME_WHITELIST_LOGS, 'action=insert'));
                     $contents[] = array('text' => '<br /><b>' . TEXT_ENTRY_IP . '</b><br />' . TEXT_ENTRY_IP_INFO . '<br />' . xtc_draw_input_field('whitelist_ip', ''));
-                    $contents[] = array('text' => '<br /><b>' . TEXT_ENTRY_TIME . '</b><br />' . TEXT_ENTRY_TIME_INFO . '<br />' . xtc_draw_input_field('whitelist_time', '', 'id="Datepicker1"'));
                     $contents[] = array('align' => 'center', 'text' => '<br /><input type="submit" class="btn btn-default" onclick="this.blur();" value="' . BUTTON_SAVE . '"/> <a class="btn btn-default" onclick="this.blur();" href="' . xtc_href_link(FILENAME_WHITELIST_LOGS) . '">' . BUTTON_CANCEL . '</a><br/><br/>');
                     break;
 
                   case 'edit':
                     $heading[] = array('text' => '<b>' . TEXT_EDIT_ENTRY . '</b>');
-                    $contents = array('form' => xtc_draw_form('insert', FILENAME_WHITELIST_LOGS, 'action=insert'));
+                    $contents = array('form' => xtc_draw_form('insert', FILENAME_WHITELIST_LOGS, 'action=update&ip='.$_GET['ip']));
                     $contents[] = array('text' => '<br /><b>' . TEXT_ENTRY_IP . '</b><br />' . TEXT_ENTRY_IP_INFO . '<br />' . xtc_draw_input_field('whitelist_ip', preg_replace('/[^0-9a-zA-Z:\.]/', '', ((isset($buInfo->ip)) ? $buInfo->ip : $_GET['ip']))));
-                    $contents[] = array('text' => '<br /><b>' . TEXT_ENTRY_TIME . '</b><br />' . TEXT_ENTRY_TIME_INFO . '<br />' . xtc_draw_input_field('whitelist_time', date('Y-m-d H:i', ((isset($buInfo->time)) ? $buInfo->time : time())), 'id="Datepicker1"'));
                     $contents[] = array('align' => 'center', 'text' => '<br /><input type="submit" class="btn btn-default" onclick="this.blur();" value="' . BUTTON_SAVE . '"/> <a class="btn btn-default" onclick="this.blur();" href="' . xtc_href_link(FILENAME_WHITELIST_LOGS) . '">' . BUTTON_CANCEL . '</a><br/><br/>');
                     break;
                   

@@ -157,10 +157,23 @@
 
         $zones_table = preg_split("/[:,]/" , $zones_cost); // Hetfield - 2009-08-18 - replaced deprecated function split with preg_split to be ready for PHP >= 5.3
         $size = sizeof($zones_table);
+        if(is_numeric(SHIPPING_BOX_WEIGHT)) {
+          $shipping_box_weight=floatval(SHIPPING_BOX_WEIGHT);
+        } else {
+          $shipping_box_weight = 0;
+        }
         for ($i=0; $i<$size; $i+=2) {
-          if ($shipping_weight <= $zones_table[$i]) {
+          if ($shipping_weight-$shipping_box_weight <= $zones_table[$i]) {
             $shipping = $zones_table[$i+1];
-            $shipping_method = MODULE_SHIPPING_ZONES_TEXT_WAY . ' ' . $dest_country . ' : ' . $shipping_num_boxes * $shipping_weight . ' ' . MODULE_SHIPPING_ZONES_TEXT_UNITS;
+            $shipping_num_boxes_difference = abs(ceil(($shipping_num_boxes * $shipping_weight)/SHIPPING_MAX_WEIGHT) - $shipping_num_boxes);
+            if ($shipping_num_boxes_difference != 0) {
+              $shipping_total_weight = $shipping_num_boxes * $shipping_weight+SHIPPING_BOX_WEIGHT*$shipping_num_boxes_difference;
+              $shipping_method = MODULE_SHIPPING_ZONES_TEXT_WAY . ' ' . $dest_country . ' : ' . $shipping_total_weight . ' ' . MODULE_SHIPPING_ZONES_TEXT_UNITS;
+              $shipping_num_boxes = ceil(($shipping_num_boxes * $shipping_weight)/SHIPPING_MAX_WEIGHT);
+            } else {
+              $shipping_method = MODULE_SHIPPING_ZONES_TEXT_WAY . ' ' . $dest_country . ' : ' . $shipping_num_boxes * $shipping_weight . ' ' . MODULE_SHIPPING_ZONES_TEXT_UNITS;
+            }
+            
             break;
           }
         }

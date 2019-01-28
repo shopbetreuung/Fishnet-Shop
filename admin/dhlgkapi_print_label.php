@@ -794,11 +794,13 @@ if ((isset($_POST['getlabel']) || isset($_GET['stornolabel']) || isset($_GET['te
         $smarty->compile_dir = DIR_FS_CATALOG.'templates_c';
         $smarty->config_dir = DIR_FS_CATALOG.'lang';
 
-        $html_mail = $smarty->fetch(CURRENT_TEMPLATE.'/admin/mail/'.$order->info['language'].'/change_order_mail.html');
-        $txt_mail = $smarty->fetch(CURRENT_TEMPLATE.'/admin/mail/'.$order->info['language'].'/change_order_mail.txt');
-        $order_subject_search = array('{$nr}', '{$date}', '{$lastname}', '{$firstname}');
-        $order_subject_replace = array($oID, strftime(DATE_FORMAT_LONG), $order->customer['lastname'], $order->customer['firstname']);
-        $order_subject = str_replace($order_subject_search, $order_subject_replace, EMAIL_BILLING_SUBJECT);
+        $html_mail = $smarty->fetch('db:change_order_mail.html');
+        $txt_mail = $smarty->fetch('db:change_order_mail.txt');
+        $smarty->assign('nr', $oID);
+        $smarty->assign('date', strftime(DATE_FORMAT_LONG));
+        $smarty->assign('lastname', $order->customer['lastname']);
+        $smarty->assign('firstname',$order->customer['firstname']);
+        $order_subject = $smarty->fetch('db:change_order_mail.subject');
 
         xtc_php_mail(EMAIL_BILLING_ADDRESS,
             EMAIL_BILLING_NAME,

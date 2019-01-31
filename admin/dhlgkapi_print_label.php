@@ -777,9 +777,20 @@ if ((isset($_POST['getlabel']) || isset($_GET['stornolabel']) || isset($_GET['te
             $smarty->assign('ORDER_LINK', xtc_catalog_href_link(FILENAME_CATALOG_ACCOUNT_HISTORY_INFO, 'order_id='.$oID, 'SSL'));
         }
         // track & trace
-        $tracking_array = get_tracking_link($oID, null, array($tracking_id));
+        $tracking_array = get_tracking_link($oID, $lang_code); //NB Fishnet
         $smarty->assign('PARCEL_COUNT', count($tracking_array));
-        $smarty->assign('PARCEL_ARRAY', $tracking_array);                                    
+        $smarty->assign('PARCEL_ARRAY', $tracking_array);   
+        
+        //NB Fishnat
+        $parcel_link_html='';
+        $parcel_link_txt='';
+        foreach($tracking_array as $parcel) {
+            $parcel_link_html .= '<a target="_blank" href="' . $parcel['tracking_link'] . '">' . $parcel['parcel_id'] . '</a><br />';
+            $parcel_link_txt .= $parcel['tracking_link'] . "\n";
+        }
+        
+        if ($parcel_link_html!='') $smarty->assign('PARCEL_LINK_HTML', $parcel_link_html);
+        if ($parcel_link_txt!='') $smarty->assign('PARCEL_LINK_TXT', $parcel_link_txt);                                 
 
         $smarty->assign('ORDER_DATE', xtc_date_long($order->info['date_purchased']));
         $smarty->assign('NOTIFY_COMMENTS', nl2br($notify_comments));
@@ -794,11 +805,13 @@ if ((isset($_POST['getlabel']) || isset($_GET['stornolabel']) || isset($_GET['te
         $smarty->compile_dir = DIR_FS_CATALOG.'templates_c';
         $smarty->config_dir = DIR_FS_CATALOG.'lang';
 
-        $html_mail = $smarty->fetch(CURRENT_TEMPLATE.'/admin/mail/'.$order->info['language'].'/change_order_mail.html');
-        $txt_mail = $smarty->fetch(CURRENT_TEMPLATE.'/admin/mail/'.$order->info['language'].'/change_order_mail.txt');
-        $order_subject_search = array('{$nr}', '{$date}', '{$lastname}', '{$firstname}');
-        $order_subject_replace = array($oID, strftime(DATE_FORMAT_LONG), $order->customer['lastname'], $order->customer['firstname']);
-        $order_subject = str_replace($order_subject_search, $order_subject_replace, EMAIL_BILLING_SUBJECT);
+        $html_mail = $smarty->fetch('db:change_order_mail.html');
+        $txt_mail = $smarty->fetch('db:change_order_mail.txt');
+        $smarty->assign('nr', $oID);
+        $smarty->assign('date', strftime(DATE_FORMAT_LONG));
+        $smarty->assign('lastname', $order->customer['lastname']);
+        $smarty->assign('firstname',$order->customer['firstname']);
+        $order_subject = $smarty->fetch('db:change_order_mail.subject');
 
         xtc_php_mail(EMAIL_BILLING_ADDRESS,
             EMAIL_BILLING_NAME,

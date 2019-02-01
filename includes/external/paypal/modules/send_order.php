@@ -36,7 +36,7 @@ if (is_object($order) && in_array($order->info['payment_method'], $paypal_paymen
              )
     );
     
-    $paypal_smarty = new SmartyBC;
+    $paypal_smarty = new Smarty;
     if (defined('RUN_MODE_ADMIN')) {
       $paypal_smarty->template_dir = DIR_FS_CATALOG.'templates';
       $paypal_smarty->compile_dir = DIR_FS_CATALOG.'templates_c';
@@ -54,7 +54,7 @@ if (is_object($order) && in_array($order->info['payment_method'], $paypal_paymen
     $paypal_payment_info = $paypal->get_payment_instructions($order->info['order_id']);
   
     if (is_array($paypal_payment_info)) {
-      $paypal_smarty = new SmartyBC;
+      $paypal_smarty = new Smarty;
       if (defined('RUN_MODE_ADMIN')) {
         $paypal_smarty->template_dir = DIR_FS_CATALOG.'templates';
         $paypal_smarty->compile_dir = DIR_FS_CATALOG.'templates_c';

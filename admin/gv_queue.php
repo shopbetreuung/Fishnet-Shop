@@ -33,7 +33,7 @@
   require_once(DIR_FS_INC . 'xtc_php_mail.inc.php');
 
     // initiate template engine for mail
-  $smarty = new SmartyBC;
+  $smarty = new Smarty;
 
   require(DIR_WS_CLASSES . 'currencies.php');
   $currencies = new currencies();

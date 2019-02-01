@@ -398,4 +398,7 @@ if (defined('MODULE_PAYMENT_BILLSAFE_2_LAYER')) {
   }
 }
 //EOF - Dokuman - 2012-06-19 - BILLSAFE payment module - BillSAFE-Layer End
+
+$smarty->assign('create_account_link', xtc_href_link(FILENAME_CREATE_ACCOUNT, '', 'SSL'));
+
 ?>

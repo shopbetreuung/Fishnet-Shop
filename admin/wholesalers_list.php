@@ -41,7 +41,7 @@ if(isset($_GET['wID'])){
   
   if($_GET["action"] == "send"){
     #MN: Send mail with template and unset session("new products") variable
-    $smarty = new SmartyBC;
+    $smarty = new Smarty;
     
     $smarty->template_dir = DIR_FS_CATALOG.'templates';
     $smarty->compile_dir = DIR_FS_CATALOG.'templates_c';

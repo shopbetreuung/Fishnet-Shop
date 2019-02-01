@@ -2,7 +2,7 @@
 /* -----------------------------------------------------------------------------------------
 $Id: dhlgkapi_print_label.php v2.0 23.11.2017 nb $   
 
-Autor: Nico Bauer (c) 2016-2017 Dörfelt GmbH for DHL Paket GmbH
+Autor: Nico Bauer (c) 2016-2017 DÃ¶rfelt GmbH for DHL Paket GmbH
 
 Released under the GNU General Public License (Version 2)
 [http://www.gnu.org/licenses/gpl-2.0.html]
@@ -41,7 +41,7 @@ define('MODULE_SHIPPING_DHLGKAPI_TYPE_V53WPAK(Z4)_TITLE', 'DHL Paket Internation
 define('MODULE_SHIPPING_DHLGKAPI_TYPE_V53WPAK(Z5)_TITLE', 'DHL Paket International Zone 5 (Welt 3)');
 define('MODULE_SHIPPING_DHLGKAPI_TYPE_V53WPAK(Z6)_TITLE', 'DHL Paket International Zone 5 (Welt 4)');
 
-//Texte für Frontend
+//Texte fÃ¼r Frontend
 define('MODULE_SHIPPING_DHLGKAPI_WUNSCHPAKET_TEXT_TITLE', 'Ihr DHL Wunschpaket<br />Gebracht wie gew&uuml;nscht.');
 define('MODULE_SHIPPING_DHLGKAPI_WUNSCHPAKET_TEXT_DESC', 'Mit den Services von DHL Wunschpaket entscheiden Sie, wann und wo Sie Ihre Pakete empfangen. W&auml;hlen Sie Ihre bevorzugte Lieferoption aus:');
 define('MODULE_SHIPPING_DHLGKAPI_WUNSCHPAKET_TEXT_OR', 'oder');
@@ -66,7 +66,7 @@ define('MODULE_SHIPPING_DHLGKAPI_PSF_TITLE', 'Packstation oder Postfiliale finde
 define('MODULE_SHIPPING_DHLGKAPI_PSF_DESC', 'Oder w&auml;hlen Sie die Lieferung an eine Packstation oder Filiale.');
 define('MODULE_SHIPPING_DHLGKAPI_PSF_BUTTON', 'Oder w&auml;hlen Sie die Lieferung an eine Packstation oder Filiale.');
 
-//Österreich
+//Ã–sterreich
 define('MODULE_SHIPPING_DHLGKAPI_TYPE_V86PARCEL_TITLE', 'DHL Paket Austria');                                                                                    
 define('MODULE_SHIPPING_DHLGKAPI_TYPE_V87PARCEL_TITLE', 'DHL Paket Connect Europa');
 define('MODULE_SHIPPING_DHLGKAPI_TYPE_V82PARCEL(Z1)_TITLE', 'DHL Paket International EU');
@@ -164,6 +164,7 @@ define('MODULE_SHIPPING_DHLGKAPI_WUNSCHPAKET_PD_ENABLED_TITLE', '<u>Wunschpaket<
 define('MODULE_SHIPPING_DHLGKAPI_WUNSCHPAKET_PD_ENABLED_DESC', 'aktiviert den Service Wunschtag');
 define('MODULE_SHIPPING_DHLGKAPI_WUNSCHPAKET_PD_COST_TITLE', 'Wunschtag Kosten');
 define('MODULE_SHIPPING_DHLGKAPI_WUNSCHPAKET_PD_COST_DESC', 'Geben Sie hier einen Aufpreis f&uuml;r den Service Wunschtag an.<br />Geben Sie 0 ein, um den Service konstenfrei anzubieten. Nutzen Sie . als Dezimalzeichen.');
+define('MODULE_SHIPPING_DHLGKAPI_WUNSCHPAKET_PD_COST_DESC', 'Preiszuschlag f&uuml;r Wunschtag');
 define('MODULE_SHIPPING_DHLGKAPI_WUNSCHPAKET_PD_PAYMENT_EXCLUDE_TITLE', 'Wunschtag ausgeschlossene Zahlarten');
 define('MODULE_SHIPPING_DHLGKAPI_WUNSCHPAKET_PD_PAYMENT_EXCLUDE_DESC', 'Diese Zahlarten werden im Checkout bei Auswahl Wunschtag nicht mehr angezeigt');
 define('MODULE_SHIPPING_DHLGKAPI_WUNSCHPAKET_PD_STOCK_CHECK_TITLE', 'Wunschtag Lagerbestand ber&uuml;cksichtigen');

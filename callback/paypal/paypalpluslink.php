@@ -65,7 +65,7 @@ if (isset($_GET['oID'])
       $approval = $paypal->payment_redirect(false, true, true);
 
       // create smarty elements
-      $smarty = new SmartyBC;
+      $smarty = new Smarty;
 
       // include boxes
       require (DIR_FS_CATALOG.'templates/'.CURRENT_TEMPLATE.'/source/boxes.php');

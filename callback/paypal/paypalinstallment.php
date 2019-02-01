@@ -29,7 +29,7 @@ if (isset($_GET['amount'])
   if ($paypal_installment->enabled === true) {
     $presentment_array = $paypal_installment->get_presentment($_GET['amount'], ((isset($_GET['currency'])) ? $_GET['currency'] : $_SESSION['currency']), $_GET['country']);
 
-    $pp_smarty = new SmartyBC();
+    $pp_smarty = new Smarty();
     $pp_smarty->assign('logo_image', xtc_image(DIR_WS_IMAGES.'icons/pp_credit-german_v_rgb.png'));
     $pp_smarty->assign('tpl_path', DIR_WS_BASE.'templates/'.CURRENT_TEMPLATE.'/');
     $pp_smarty->assign('html_params', ((TEMPLATE_HTML_ENGINE == 'xhtml') ? ' '.HTML_PARAMS : ' lang="'.$_SESSION['language_code'].'"'));

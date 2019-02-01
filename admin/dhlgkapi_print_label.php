@@ -2,7 +2,7 @@
 /* -----------------------------------------------------------------------------------------
 $Id: dhlgkapi_print_label.php v2.24 17.09.2018 nb $   
 
-Autor: Nico Bauer (c) 2016-2018 Dörfelt GmbH for DHL Paket GmbH
+Autor: Nico Bauer (c) 2016-2018 DÃ¶rfelt GmbH for DHL Paket GmbH
 
 Released under the GNU General Public License (Version 2)
 [http://www.gnu.org/licenses/gpl-2.0.html]  
@@ -94,7 +94,7 @@ function soap_request($dhl_xml,$function, $oID = 0, $testmode = false) {
 
 
     //Optionsarray
-    //Optionen für SSL php 5.6
+    //Optionen fÃ¼r SSL php 5.6
     $ssl_opts = array(
         'ssl' => array('verify_peer'=>false, 'verify_peer_name'=>false)
     );
@@ -129,7 +129,7 @@ function soap_request($dhl_xml,$function, $oID = 0, $testmode = false) {
     try {
         $result = $soapClient->{$function}($dhl_xml);
 
-        //Fehlermeldung prüfen
+        //Fehlermeldung prÃ¼fen
         if (isset($result->CreationState->LabelData->Status)) {
             $status=$result->CreationState->LabelData->Status;
         } else {                                                                                          
@@ -258,7 +258,7 @@ if (isset($_GET['testlabel'])) {
         }
     }
 
-    //NB 1.16 Warnung für Paketgewicht
+    //NB 1.16 Warnung fÃ¼r Paketgewicht
     if ($dhl_weight > SHIPPING_MAX_WEIGHT) $output_msg = MODULE_SHIPPING_DHLGKAPI_WEIGHT_WARNING;
 
 
@@ -298,7 +298,7 @@ $dhl_type_addon=$shipping_method_array[1];
 $dhl_product=preg_replace("/\([\w]*\)/","",$dhl_type);
 $product_code=substr(preg_replace("/[^0-9]/","",$dhl_product),0,2);
 
-//NB 1.09 check, ob Order im Backend verändert wurde: versuchen Versandart heraussuchen...
+//NB 1.09 check, ob Order im Backend verÃ¤ndert wurde: versuchen Versandart heraussuchen...
 if ((is_array($shipping_class_array) && $shipping_class_array[1] == 'dhlgkapi') || (($order_data['date_purchased'] !=  $order_data['last_modified']) && $order_data['last_modified'] != '')) {
     require ('../includes/modules/shipping/dhlgkapi.php');
 
@@ -318,14 +318,14 @@ if ((is_array($shipping_class_array) && $shipping_class_array[1] == 'dhlgkapi') 
     $dhl_product_new = preg_replace("/\([\w]*\)/","",$dhl_type_new);
     $product_code_new = substr(preg_replace("/[^0-9]/","",$dhl_product_new),0,2);
 
-    //NB 1.10 feststellen, ob Land geändert wurde
+    //NB 1.10 feststellen, ob Land geÃ¤ndert wurde
     if ($dhl_type_new != $dhl_type) {
 
         $dhl_type = $dhl_type_new;
         $dhl_product = $dhl_product_new;
         $product_code = $product_code_new;
 
-        //DHL Produkt Info in DB zurückschreiben
+        //DHL Produkt Info in DB zurÃ¼ckschreiben
         $shipping_class = 'dhlgkapi_'.$dhl_type;
         xtc_db_query("UPDATE ".TABLE_ORDERS." SET shipping_class='".xtc_db_prepare_input($shipping_class)."' WHERE orders_id='".$oID."'");
         //NB 1.12 display order backend modify message
@@ -345,7 +345,7 @@ if (isset($_POST['WeightInKG'])) {
 //Formatierung des Gewichtes
 $dhl_weight=number_format($dhl_weight, 2,'.','');
 
-//Straßenname und Hausnummer trennen
+//StraÃŸenname und Hausnummer trennen
 $receiver_street_raw = str_replace('.', '. ',trim(substr($order_data['delivery_street_address'],0,40)));
 $look_for="0123456789";
 $nrpos = find_first_of($receiver_street_raw,$look_for,0);
@@ -363,7 +363,7 @@ else {
 }
 
 //XML Bilden
-//Basisgerüst für die Anfrage erstellen
+//BasisgerÃ¼st fÃ¼r die Anfrage erstellen
 $dhl_xml = new stdClass();
 $dhl_xml->Version = new stdClass(); 
 $dhl_xml->Version->majorRelease=2;
@@ -389,7 +389,7 @@ $dhl_xml->ShipmentOrder->Shipment->ShipmentDetails->shipmentDate=$shipmentdate;
 $dhl_xml->ShipmentOrder->Shipment->ShipmentDetails->ShipmentItem = new stdClass();
 $dhl_xml->ShipmentOrder->Shipment->ShipmentDetails->ShipmentItem->weightInKG=$dhl_weight;
 
-//Services buchen (wenn verfügbar)
+//Services buchen (wenn verfÃ¼gbar)
 
 //Services aktivieren
 $dhl_xml->ShipmentOrder->Shipment->ShipmentDetails->Service = new stdClass(); 
@@ -481,7 +481,7 @@ $dhl_xml->ShipmentOrder->Shipment->Shipper->Communication->phone=MODULE_SHIPPING
 $dhl_xml->ShipmentOrder->Shipment->Shipper->Communication->contactPerson=MODULE_SHIPPING_DHLGKAPI_CONTACT_PERSON;
 
 
-//Empfängeradresse
+//EmpfÃ¤ngeradresse
 
 //Hausadresse
 //Firma?
@@ -628,7 +628,7 @@ if ((isset($_POST['getlabel']) || isset($_GET['stornolabel']) || isset($_GET['te
 
         //NB 2.07
         if (isset($result) && $result->Status->statusCode == '0') {
-            //Label erhalten -> wieder löschen...
+            //Label erhalten -> wieder lÃ¶schen...
             //Request bilden
             unset($dhl_xml->ShipmentOrder);
             $dhl_xml->shipmentNumber=$result->CreationState->LabelData->shipmentNumber;
@@ -654,7 +654,7 @@ if ((isset($_POST['getlabel']) || isset($_GET['stornolabel']) || isset($_GET['te
     if (isset($_POST['getlabel'])) {
         $function='createShipmentOrder';
 
-        //Anfrage durchführen
+        //Anfrage durchfÃ¼hren
         $result=soap_request($dhl_xml, $function, $oID);
 
         //Versandinformationen in Datenbank schreibem
@@ -700,7 +700,7 @@ if ((isset($_POST['getlabel']) || isset($_GET['stornolabel']) || isset($_GET['te
             xtc_redirect(xtc_href_link('dhlgkapi_print_label.php', 'oID='.$oID.'&error='.$errormsg.'&function='.$function));
         }
 
-        //Anfrage durchführen
+        //Anfrage durchfÃ¼hren
         $result=soap_request($dhl_xml, $function, $oID);    
 
         $status = (int)MODULE_SHIPPING_DHLGKAPI_ORDERSTATUS_CANCELED;
@@ -858,12 +858,12 @@ if ((isset($_POST['getlabel']) || isset($_GET['stornolabel']) || isset($_GET['te
     );
     xtc_db_perform(TABLE_ORDERS_STATUS_HISTORY,$sql_data_array);
 
-    //1.06 Orderstatus ändern
+    //1.06 Orderstatus Ã¤ndern
     xtc_db_query("update " . TABLE_ORDERS . " set orders_status = '".$status."' where orders_id = '".$oID."'");
 
     if (isset($_GET['stornolabel'])) xtc_redirect(xtc_href_link(FILENAME_ORDERS, 'oID='.$oID.'&action=edit'));
 
-    //Label anzeigen und zurück zur Order
+    //Label anzeigen und zurÃ¼ck zur Order
     echo "<html>";
     echo "  <head>";
     echo "      <title>DHLGKAPI</title>";
@@ -1013,10 +1013,11 @@ require (DIR_WS_INCLUDES.'head.php');
                                 }
                             } 
                             echo nl2br($name_raw);
-                            echo nl2br($address_raw);
+
 
                             ?>
-                            <a href="https://www.google.de/maps/search/<?php echo urlencode(utf8_encode($address_raw));?>" target="_blank">[Google Maps]</a>
+
+                            <a href="https://www.google.de/maps/search/<?php echo $address_raw;?>" target="_blank">[Google Maps]</a>
                         </td>
                         <td style="vertical-align: top;">
                             <strong><?php echo MODULE_SHIPPING_DHLGKAPI_EMAIL_TEXT; ?></strong><br />
@@ -1152,7 +1153,7 @@ require (DIR_WS_INCLUDES.'head.php');
                     <tr class="main">
                         <td colspan="2" style="text-align: left;">
                             <?php
-                            //Zurück
+                            //ZurÃ¼ck
                             echo '<a class="button" href="'.xtc_href_link(FILENAME_ORDERS, 'oID='.$oID.'&action=edit').'">'.BUTTON_BACK.'</a>&nbsp;';
                             ?>
                         </td>

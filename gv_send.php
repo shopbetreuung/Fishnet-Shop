@@ -34,7 +34,7 @@ if (ACTIVATE_GIFT_SYSTEM != 'true')
 require ('includes/classes/http_client.php');
 require_once (DIR_FS_INC.'xtc_validate_email.inc.php');
 
-$smarty = new SmartyBC;
+$smarty = new Smarty;
 // include boxes
 require (DIR_FS_CATALOG.'templates/'.CURRENT_TEMPLATE.'/source/boxes.php');
 

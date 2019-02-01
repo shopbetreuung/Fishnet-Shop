@@ -1,4 +1,4 @@
-{config_load file="lang/$language/lang_$language.conf" section="index"}
+{config_load file="$language/lang_$language.conf" section="index"}
 
 {$box_ADMIN}
 
@@ -13,7 +13,7 @@
 				{$box_LANGUAGES}
 				<ul class="list-inline float-right">
 					{if $smarty.session.customers_status.customers_status_id == '1'}
-					<li class="list-inline-item"><a href="{php}echo xtc_href_link(FILENAME_CREATE_ACCOUNT, '', 'SSL');{/php}">{#new_customer#}</a></li>
+					<li class="list-inline-item"><a href="{$create_account_link}">{#new_customer#}</a></li>
 					{else}
 						{if $account}
 						<li class="list-inline-item"><a href="{$account}">{#link_account#}</a></li>

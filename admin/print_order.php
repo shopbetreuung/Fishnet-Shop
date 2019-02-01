@@ -23,7 +23,7 @@
   require('includes/ipdfbill/pdfbill_lib.php');                            // ipdfbill
   // --- eof -- ipdfbill -------- 
 
-  $smarty = new SmartyBC;
+  $smarty = new Smarty;
 
   // BOF - DokuMan - 2011-12-08 - get store name for display in letter box of packing slip
   $query_store_name=xtc_db_query("-- admin/print_order.php

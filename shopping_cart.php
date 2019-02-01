@@ -27,7 +27,7 @@
 $cart_empty = false;
 require ("includes/application_top.php");
 // create smarty elements
-$smarty = new SmartyBC;
+$smarty = new Smarty;
 require (DIR_FS_CATALOG.'templates/'.CURRENT_TEMPLATE.'/source/boxes.php');
 // include needed functions
 require_once (DIR_FS_INC.'xtc_array_to_string.inc.php');

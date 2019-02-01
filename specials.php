@@ -17,7 +17,7 @@
    ---------------------------------------------------------------------------------------*/
 
 include ('includes/application_top.php');
-$smarty = new SmartyBC;
+$smarty = new Smarty;
 // include boxes
 require (DIR_FS_CATALOG.'templates/'.CURRENT_TEMPLATE.'/source/boxes.php');
 require_once (DIR_FS_INC.'xtc_get_short_description.inc.php');

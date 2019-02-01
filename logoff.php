@@ -29,7 +29,7 @@
 
 include ('includes/application_top.php');
 // create smarty elements
-$smarty = new SmartyBC;
+$smarty = new Smarty;
 
 if ($messageStack->size('logoff') > 0) {
   $smarty->assign('info_message', $messageStack->output('logoff'));

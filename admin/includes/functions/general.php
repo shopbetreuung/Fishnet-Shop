@@ -428,7 +428,7 @@ function xtc_output_string($string, $translate = false, $protected = false) {
       $select_string .= ' '.$parameters;
     }
     $select_string .= '>';
-    $products_query = xtc_db_query("select p.products_id, pd.products_name,p.products_tax_class_id, p.products_price from ".TABLE_PRODUCTS." p, ".TABLE_PRODUCTS_DESCRIPTION." pd where p.products_id = pd.products_id and pd.language_id = '".(int)$_SESSION['languages_id']."' order by products_name");
+    $products_query = xtc_db_query("select p.products_id, pd.products_name,p.products_tax_class_id, p.products_price from ".TABLE_PRODUCTS." p, ".TABLE_PRODUCTS_DESCRIPTION." pd where p.products_id = pd.products_id and p.waste_paper_bin = 0 and pd.language_id = '".(int)$_SESSION['languages_id']."' order by products_name");
     while ($products = xtc_db_fetch_array($products_query)) {
       if (!in_array($products['products_id'], $exclude)) {
         //brutto admin:

@@ -22,7 +22,7 @@ include ('includes/application_top.php');
 require_once (DIR_FS_INC.'xtc_calculate_tax.inc.php');
 require_once (DIR_FS_INC.'xtc_address_label.inc.php');
 
-$smarty = new SmartyBC;
+$smarty = new Smarty;
 // include boxes
 require (DIR_FS_CATALOG . 'templates/' . CURRENT_TEMPLATE . '/source/boxes.php');
 

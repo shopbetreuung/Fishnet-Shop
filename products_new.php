@@ -70,6 +70,7 @@ $products_new_query_raw = "select distinct
                                     ".TABLE_PRODUCTS_TO_CATEGORIES." p2c 
                            where pd.language_id = '".(int) $_SESSION['languages_id']."'
                            and c.categories_status=1
+                           and p.waste_paper_bin = 0
                            and p.products_id = p2c.products_id
                            and c.categories_id = p2c.categories_id
                            and products_status = '1'
@@ -124,6 +125,7 @@ $module_content = array();
                                     ".TABLE_PRODUCTS_TO_CATEGORIES." p2c 
                            where pd.language_id = '".(int) $_SESSION['languages_id']."'
                            and c.categories_status=1
+                           and p.waste_paper_bin = 0
                            and p.products_id = p2c.products_id
                            and c.categories_id = p2c.categories_id
                            and products_status = '1'

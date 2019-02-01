@@ -146,7 +146,7 @@ function profile_automatic_select($order){
       return 'default';
 }
 // initiate template engine for mail
-$smarty = new SmartyBC;
+$smarty = new Smarty;
 require (DIR_WS_CLASSES.'currencies.php');
 $currencies = new currencies();
 
@@ -1332,7 +1332,10 @@ require (DIR_WS_INCLUDES.'header.php');
                   <div class='col-xs-12 col-sm-6 text-right'>
               <a class="btn btn-default" href="<?php echo xtc_href_link(FILENAME_ORDERS, xtc_get_all_get_params(array ('oID', 'action', 'searchOrders')).'oID='.$oID.'&action=send&sta=0&stc=1&site=1'); ?>"><?php echo BUTTON_ORDER_CONFIRMATION; ?></a>
 			  <?php   
-              if (defined('MODULE_SHIPPING_DHLGKAPI_STATUS') && MODULE_SHIPPING_DHLGKAPI_STATUS == 'True') {
+
+              $dhl_shipping_class =  strpos($order->info['shipping_class'], 'dhlgkapi');
+              
+              if (defined('MODULE_SHIPPING_DHLGKAPI_STATUS') && MODULE_SHIPPING_DHLGKAPI_STATUS == 'True' && $dhl_shipping_class !== false) {
               ?>
                 <a class="btn btn-default" href="<?php echo xtc_href_link('dhlgkapi_print_label.php', 'oID='.$oID); ?>">DHL Label</a>
               <?php

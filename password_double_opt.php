@@ -19,7 +19,7 @@
 require ('includes/application_top.php');
 
 // create smarty elements
-$smarty = new SmartyBC;
+$smarty = new Smarty;
 
 $request_time = is_numeric(VALID_REQUEST_TIME) ? VALID_REQUEST_TIME : '3600';
 

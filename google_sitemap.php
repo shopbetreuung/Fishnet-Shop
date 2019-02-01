@@ -58,7 +58,7 @@ define('SITEMAP_HEADER', "<?xml version='1.0' encoding='UTF-8'?>"."\n".'
 define('SITEMAP_FOOTER', '</urlset>'); 
 define('SITEMAP_ENTRY', "\t".'<url>'."\n\t\t".'<loc>%s</loc>'."\n\t\t".'<priority>%s</priority>'."\n\t\t".'<lastmod>%s</lastmod>'."\n\t\t".'<changefreq>%s</changefreq>'."\n\t".'</url>'."\n"); 
 
-$smarty = new SmartyBC; 
+$smarty = new Smarty; 
 
 $breadcrumb->add('Google Sitemap', xtc_href_link(FILENAME_GOOGLE_SITEMAP, xtc_get_all_get_params(), 'NONSSL')); 
 

@@ -160,7 +160,7 @@ class newsletter {
 
 	function sendRequestMail($mail) {
 				
-		$smarty = new SmartyBC;
+		$smarty = new Smarty;
 		$link = xtc_href_link(FILENAME_NEWSLETTER, 'action=activate&email='.xtc_db_input($mail).'&key='.$this->vlCode, 'NONSSL');
 
 		// assign language to template for caching

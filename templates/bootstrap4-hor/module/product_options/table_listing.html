@@ -4,24 +4,20 @@
 			<tr>
 				<td style="border-bottom: 1px solid;" colspan="4"><strong>{$options_data.NAME}:</strong></td>
 			</tr>
-			{php}
-				$count=0;
-			{/php}
+                        
+			{counter start=0 assign="count"}
+                        
 			{foreach key=key_data item=item_data from=$options_data.DATA}
+                        
+            	{counter}
+
 				<tr class="{cycle values="tableListingI,tableListingII"}">
 					<td>
-						{php}
-							$count++;
-							if ($count==1) { 
-						{/php}
-						<input type="radio" name="id[{$options_data.ID}]" value="{$item_data.ID}" checked="checked" />
-						{php}
-							} else {
-						{/php}
-						<input type="radio" name="id[{$options_data.ID}]" value="{$item_data.ID}" />
-						{php}
-							}
-						{/php}	  
+                        {if $count == 1}
+							<input type="radio" name="id[{$options_data.ID}]" value="{$item_data.ID}" checked="checked" />
+					    {else}
+							<input type="radio" name="id[{$options_data.ID}]" value="{$item_data.ID}" />
+						{/if} 
 					</td>
 					<td>{$item_data.TEXT}</td>
 					<td>{$item_data.FULL_PRICE}</td>

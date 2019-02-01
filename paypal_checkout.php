@@ -23,7 +23,7 @@
 
 include('includes/application_top.php');
 // create smarty elements
-$smarty = new SmartyBC;
+$smarty = new Smarty;
 require(DIR_FS_CATALOG.'templates/'.CURRENT_TEMPLATE.'/source/boxes.php');
 // include needed functions
 require_once(DIR_FS_INC.'xtc_address_label.inc.php');
@@ -282,7 +282,7 @@ if(PAYPAL_EXPRESS_ADDRESS_CHANGE == 'true') {
   $smarty->assign('BUTTON_SHIPPING_ADDRESS', '<a href="'.xtc_href_link(FILENAME_CHECKOUT_SHIPPING_ADDRESS, '', 'SSL').'">'.xtc_image_button('button_change_address.gif', IMAGE_BUTTON_CHANGE_ADDRESS).'</a>');
   $smarty->assign('BUTTON_PAYMENT_ADDRESS', '<a href="' . xtc_href_link(FILENAME_CHECKOUT_PAYMENT_ADDRESS, '', 'SSL') . '">' . xtc_image_button('button_change_address.gif', IMAGE_BUTTON_CHANGE_ADDRESS) . '</a>');
 }
-$module_smarty = new SmartyBC;
+$module_smarty = new Smarty;
 if(xtc_count_shipping_modules() > 0) {
   $showtax = $_SESSION['customers_status']['customers_status_show_price_tax'];
   $module_smarty->assign('FREE_SHIPPING', $free_shipping);

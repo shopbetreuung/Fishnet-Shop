@@ -196,7 +196,7 @@ class paypalcart extends PayPalPayment {
       }                    
     }
 
-    $module_smarty = new SmartyBC;
+    $module_smarty = new Smarty;
     $shipping_block = '';
     if (xtc_count_shipping_modules() > 0) {
       $showtax = $_SESSION['customers_status']['customers_status_show_price_tax'];
@@ -286,7 +286,7 @@ class paypalcart extends PayPalPayment {
   function process_button() {
     global $smarty, $main, $messageStack;
     
-    $module_smarty = new SmartyBC;
+    $module_smarty = new Smarty;
     
     //check if display conditions on checkout page is true
     if (DISPLAY_REVOCATION_ON_CHECKOUT == 'true') {

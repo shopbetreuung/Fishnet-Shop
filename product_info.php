@@ -25,7 +25,7 @@
 include ('includes/application_top.php');
 
 // create smarty elements
-$smarty = new SmartyBC;
+$smarty = new Smarty;
 
 // redirect
 if (!isset($_GET['products_id']) && !isset($_GET['info']) && !isset($_GET['action'])) {

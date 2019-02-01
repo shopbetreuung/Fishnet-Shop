@@ -618,7 +618,7 @@ class Smarty extends Smarty_Internal_TemplateBase
      *
      * @var array
      */
-    protected $config_dir = array('./configs/');
+    protected $config_dir = array('lang');
 
     /**
      * flags for normalized template directory entries

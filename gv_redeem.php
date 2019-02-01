@@ -35,7 +35,7 @@ if (ACTIVATE_GIFT_SYSTEM != 'true')
 // is customer logged on ?
 	if (!isset ($_SESSION['customer_id'])) xtc_redirect(FILENAME_SHOPPING_CART);
 
-$smarty = new SmartyBC;
+$smarty = new Smarty;
 
 // include boxes
 require (DIR_FS_CATALOG.'templates/'.CURRENT_TEMPLATE.'/source/boxes.php');

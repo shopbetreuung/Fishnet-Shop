@@ -16,7 +16,7 @@
    (c) 2003	 nextcommerce (also_purchased_products.php,v 1.9 2003/08/17); www.nextcommerce.org 
    ---------------------------------------------------------------------------------------*/
 
-$module_smarty = new SmartyBC;
+$module_smarty = new Smarty;
 $module_smarty->assign('tpl_path', 'templates/'.CURRENT_TEMPLATE.'/');
 
 $data = $product->getCrossSells();
@@ -34,7 +34,7 @@ if (count($data) > 0) {
 
 // reverse cross selling
 if (ACTIVATE_REVERSE_CROSS_SELLING=='true') {
-$module_smarty = new SmartyBC;
+$module_smarty = new Smarty;
 //BOF - Dokuman - 2010-01-20: set template path also on activated cross selling
 $module_smarty->assign('tpl_path', 'templates/'.CURRENT_TEMPLATE.'/');
 //EOF - Dokuman - 2010-01-20: set template path also on activated cross selling

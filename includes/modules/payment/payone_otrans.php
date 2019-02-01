@@ -40,7 +40,7 @@ class payone_otrans extends PayonePayment {
 	function _paymentDataFormProcess($active_genre_identifier) {
 	  global $order;
 	  
-	  $payment_smarty = new SmartyBC();
+	  $payment_smarty = new Smarty();
 	  $payment_smarty->template_dir = DIR_FS_EXTERNAL.'payone/templates/';
     
     $genre_config = $this->config[$active_genre_identifier];
@@ -108,7 +108,7 @@ class payone_otrans extends PayonePayment {
 	}
 
 	function _paymentDataForm($active_genre_identifier) {
-	  $payment_smarty = new SmartyBC();
+	  $payment_smarty = new Smarty();
     $payment_smarty->template_dir = DIR_FS_EXTERNAL.'payone/templates/';
     
 		$genre_config = $this->config[$active_genre_identifier];

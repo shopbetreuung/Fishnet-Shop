@@ -24,7 +24,7 @@
 
 if ($product->getAttributesCount() > 0) {
 
-  $module_smarty = new SmartyBC;
+  $module_smarty = new Smarty;
 
   $module_smarty->assign('tpl_path',DIR_WS_BASE.'templates/'.CURRENT_TEMPLATE.'/');
 

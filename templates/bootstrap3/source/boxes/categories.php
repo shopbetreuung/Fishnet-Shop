@@ -159,7 +159,6 @@
   }
   */
   if (!$cache) {
-    //debug_print_backtrace();
     $box_categories = $box_smarty->fetch(CURRENT_TEMPLATE.'/boxes/box_categories.html');
   } else {
     $box_categories = $box_smarty->fetch(CURRENT_TEMPLATE.'/boxes/box_categories.html', $cache_id);

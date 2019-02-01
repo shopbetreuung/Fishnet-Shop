@@ -17,7 +17,7 @@
    ---------------------------------------------------------------------------------------*/
 
   // create smarty elements
-  $module_smarty = new SmartyBC;
+  $module_smarty = new Smarty;
   $module_smarty->assign('tpl_path',DIR_WS_BASE.'templates/'.CURRENT_TEMPLATE.'/');
 
   // include needed functions

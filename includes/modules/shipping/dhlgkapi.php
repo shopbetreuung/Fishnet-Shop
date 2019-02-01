@@ -722,15 +722,14 @@ class dhlgkapi {
         xtc_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_key, configuration_value, configuration_group_id, sort_order, date_added) values ('MODULE_SHIPPING_DHLGKAPI_SHIPPING_DAYS', 'Mo,Di,Mi,Do,Fr,Sa', '6', '0', now())");      
 
         xtc_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) VALUES ('MODULE_SHIPPING_DHLGKAPI_PSF_ENABLED', 'True', '6', '0', 'xtc_cfg_select_option(array(\'True\', \'False\'), ', now())");
-        xtc_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) VALUES ('MODULE_SHIPPING_DHLGKAPI_UTF8_ENABLED', 'False', '6', '0', 'xtc_cfg_select_option(array(\'True\', \'False\'), ', now())");
+        xtc_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) VALUES ('MODULE_SHIPPING_DHLGKAPI_UTF8_ENABLED', 'True', '6', '0', 'xtc_cfg_select_option(array(\'True\', \'False\'), ', now())");
 
 
 
         $admin_check_query = xtc_db_query("show columns from ".TABLE_ADMIN_ACCESS." where Field='dhlgkapi_print_label'");
         if (xtc_db_num_rows($admin_check_query)==0) {
-            xtc_db_query("alter table " . TABLE_ADMIN_ACCESS . " add dhlgkapi_print_label INT(1) NOT NULL DEFAULT '0'");  
+            xtc_db_query("alter table " . TABLE_ADMIN_ACCESS . " add dhlgkapi_print_label INT(1) NOT NULL DEFAULT '1'");  
         }
-        xtc_db_query("update " . TABLE_ADMIN_ACCESS . " set dhlgkapi_print_label = '1' where customers_id = '1'");
         
         $carrier_check_query = xtc_db_query("select * from carriers where carrier_name='DHL'");
         if (xtc_db_num_rows($carrier_check_query)==0) {

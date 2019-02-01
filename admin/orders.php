@@ -68,6 +68,28 @@ function get_payment_name($payment_method, $order_id = '') {
   return $static_payment_array[$payment_method] . $text;
 }
 
+function get_shipping_name($shipping_class, $order_id = '') {
+  static $static_shipping_array;
+  
+  $shipping_class = explode('_' , $shipping_class);
+  $shipping_class = $shipping_class [0];
+
+  if (!is_array($static_shipping_array)) {
+    $static_shipping_array = array();
+  }
+  
+  if (!isset($static_shipping_array[$shipping_class])) {    
+    if (file_exists(DIR_FS_CATALOG.'lang/'.$_SESSION['language'].'/modules/shipping/'.$shipping_class.'.php')) {
+      include(DIR_FS_CATALOG.'lang/'.$_SESSION['language'].'/modules/shipping/'.$shipping_class.'.php');
+      $static_shipping_array[$shipping_class] = constant(strtoupper('MODULE_SHIPPING_'.$shipping_class.'_TEXT_TITLE'));
+    } else {
+      $static_shipping_array[$shipping_class] = $shipping_class;
+    }
+  }
+
+  return $static_shipping_array[$shipping_class];
+}
+
 function compare_rule_values($rule, $data){
     $compare_values_array = explode(',', $rule[2]);
     if($rule[1] == '='){
@@ -210,6 +232,7 @@ $order_select_fields = 'o.orders_id,
                         o.customers_name,
                         o.customers_company,
                         o.payment_method,
+                        o.shipping_class,
                         o.last_modified,
                         o.date_purchased,
                         o.orders_status,
@@ -1845,6 +1868,9 @@ elseif ($action == 'custom_action') {
                         $contents[] = array ('text' => TEXT_DATE_ORDER_LAST_MODIFIED.' '.xtc_date_short($oInfo->last_modified));
                       }
                       $contents[] = array ('text' => '<br />'.TEXT_INFO_PAYMENT_METHOD.' '.get_payment_name($oInfo->payment_method, $oInfo->orders_id).' ('.$oInfo->payment_method.')');
+
+                      $contents[] = array ('text' => '<br />'.TEXT_INFO_SHIPPING_METHOD.' '.get_shipping_name($oInfo->shipping_class,$oInfo->orders_id));
+                      
                       $order = new order($oInfo->orders_id);
                       $contents[] = array ('text' => '<br /><br />'.sizeof($order->products).'&nbsp;'.TEXT_PRODUCTS);
                       for ($i = 0; $i < sizeof($order->products); $i ++) {

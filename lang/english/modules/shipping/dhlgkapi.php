@@ -2,7 +2,7 @@
 /* -----------------------------------------------------------------------------------------
 $Id: dhlgkapi_print_label.php v2.0 23.11.2017 nb $   
 
-Autor: Nico Bauer (c) 2016-2017 D�rfelt GmbH for DHL Paket GmbH
+Autor: Nico Bauer (c) 2016-2017 Dörfelt GmbH for DHL Paket GmbH
 
 Released under the GNU General Public License (Version 2)
 [http://www.gnu.org/licenses/gpl-2.0.html]
@@ -41,7 +41,7 @@ define('MODULE_SHIPPING_DHLGKAPI_TYPE_V53WPAK(Z4)_TITLE', 'DHL Paket Internation
 define('MODULE_SHIPPING_DHLGKAPI_TYPE_V53WPAK(Z5)_TITLE', 'DHL Paket International Zone 5 (World 3)');
 define('MODULE_SHIPPING_DHLGKAPI_TYPE_V53WPAK(Z6)_TITLE', 'DHL Paket International Zone 5 (World 4)');
 
-//Texte f�r Frontend
+//Texte für Frontend
 define('MODULE_SHIPPING_DHLGKAPI_WUNSCHPAKET_TEXT_TITLE', 'Your recipient services');
 define('MODULE_SHIPPING_DHLGKAPI_WUNSCHPAKET_TEXT_DESC', 'You decide when and where you want to receive your parcels with the recipient services of DHL. Please choose your preferred delivery option:');
 define('MODULE_SHIPPING_DHLGKAPI_WUNSCHPAKET_TEXT_OR', 'or');
@@ -66,7 +66,7 @@ define('MODULE_SHIPPING_DHLGKAPI_PSF_TITLE', 'Locate a Parcelstation or Post Off
 define('MODULE_SHIPPING_DHLGKAPI_PSF_DESC', 'Or choose a DHL Packstation or a branch as an alternative delivery address.');
 define('MODULE_SHIPPING_DHLGKAPI_PSF_BUTTON', 'Or choose a DHL Packstation or a branch as an alternative delivery address.');
 
-//�sterreich
+//Österreich
 define('MODULE_SHIPPING_DHLGKAPI_TYPE_V86PARCEL_TITLE', 'DHL Paket Austria');                                                                                    
 define('MODULE_SHIPPING_DHLGKAPI_TYPE_V87PARCEL_TITLE', 'DHL Paket Connect Europa');
 define('MODULE_SHIPPING_DHLGKAPI_TYPE_V82PARCEL(Z1)_TITLE', 'DHL Paket International EU');

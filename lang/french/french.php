@@ -117,7 +117,7 @@ define('ENTRY_EMAIL_ADDRESS_CHECK_ERROR', 'votre adresse email est incorrecte, v
 define('ENTRY_EMAIL_ERROR_NOT_MATCHING', 'Vos adresses e-mail ne correspondent pas.');
 define('ENTRY_EMAIL_ADDRESS_ERROR_EXISTS', 'votre adress email existe d&eacute;j&agrave;, veuillez la v&eacute;rifier.');
 define('ENTRY_EMAIL_ADDRESS_TEXT', '*');
-define('ENTRY_STREET_ADDRESS_ERROR', 'Rue/no. doit avoir des ' . ENTRY_STREET_ADDRESS_MIN_LENGTH . ' caract&egrave;res minimum. Un num&eacute;ro de la maison est obligatoire. Si vous avez pas de num&eacute;ro de maison, s&apos;il vous pla&icirc;t entrer un 0 (z&eacute;ro) ');
+define('ENTRY_STREET_ADDRESS_ERROR', 'Rue/no. doit avoir des ' . ENTRY_STREET_ADDRESS_MIN_LENGTH . ' caract&egrave;res minimum. Un num&eacute;ro de la maison est obligatoire. Si vous n&apos;avez pas de numéro de maison, s&apos;il vous pla&icirc;t entrer un 0 (z&eacute;ro) ');
 define('ENTRY_STREET_ADDRESS_TEXT', '*');
 define('ENTRY_SUBURB_TEXT', '');
 define('ENTRY_POST_CODE_ERROR', 'votre code postal doit comporter au minimum ' . ENTRY_POSTCODE_MIN_LENGTH . ' caract&egrave;res.');
@@ -550,7 +550,7 @@ define('ERROR_SQL_DB_QUERY','D&eacute;sol&eacute;, mais il y a une erreur de not
 define('ERROR_SQL_DB_QUERY_REDIRECT','Vous allez &ecirc;tre redirig&eacute; vers %s secondes sur notre page dacute;accueil');
 // EOF - DokuMan - 2011-09-20 - E-Mail SQL errors
 
-define('TEXT_AGB_CHECKOUT','termes et conditions et les informations clients %s <br/>politique de remboursement %s .');
+define('TEXT_AGB_CHECKOUT','termes et conditions et les informations clients %s <br/>politique de remboursement %s  <br /> politique de confidentialité %s');
 
 define('_SHIPPING_FREE','T&eacute;l&eacute;chargement');
 

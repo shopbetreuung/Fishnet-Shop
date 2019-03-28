@@ -540,9 +540,9 @@ class dhlgkapi {
                             $shipping_cost = $service_cost * $shipping_num_boxes; 
                         } else {
                             if (isset($dhl_smarty)) {
-                                $dhl_smarty->clear_assign('PD_COST');
-                                $dhl_smarty->clear_assign('PT_COST');
-                                $dhl_smarty->clear_assign('PDPT_COST');
+                                $dhl_smarty->clearAssign('PD_COST');
+                                $dhl_smarty->clearAssign('PT_COST');
+                                $dhl_smarty->clearAssign('PDPT_COST');
                             }
                         }
                     } else {

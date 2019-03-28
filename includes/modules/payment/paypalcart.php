@@ -277,9 +277,9 @@ class paypalcart extends PayPalPayment {
     $smarty->assign('SHIPPING_ADDRESS_EDIT', xtc_href_link(FILENAME_CHECKOUT_SHIPPING_ADDRESS, xtc_get_all_get_params(), 'SSL'));
     $smarty->assign('BILLING_ADDRESS_EDIT', xtc_href_link(FILENAME_CHECKOUT_PAYMENT_ADDRESS, xtc_get_all_get_params(), 'SSL'));
 
-    $smarty->clear_assign('SHIPPING_EDIT');
-    $smarty->clear_assign('PAYMENT_EDIT');
-    //$smarty->clear_assign('PRODUCTS_EDIT');
+    $smarty->clearAssign('SHIPPING_EDIT');
+    $smarty->clearAssign('PAYMENT_EDIT');
+    //$smarty->clearAssign('PRODUCTS_EDIT');
   }
 
 

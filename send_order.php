@@ -179,8 +179,8 @@ if ($_SESSION['customer_id'] == $order_check['customers_id'] || $send_by_admin) 
         $sepa_txt_mail = $smarty->fetch('db:sepa_mail.txt');
         $sepa_subject = $smarty->fetch('db:sepa_mail.subject');
         // no pre-notification in order mail
-        $smarty->clear_assign('PAYMENT_INFO_HTML');
-        $smarty->clear_assign('PAYMENT_INFO_TXT');
+        $smarty->clearAssign('PAYMENT_INFO_HTML');
+        $smarty->clearAssign('PAYMENT_INFO_TXT');
       }
     }
   }

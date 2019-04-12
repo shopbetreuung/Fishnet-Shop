@@ -36,11 +36,14 @@ define('MAN_DIVIDER',SEO_SEPARATOR.'.'.SEO_SEPARATOR);           //Hersteller ':
 define('PAG_DIVIDER',SEO_SEPARATOR);                             //Seitennummer ':'
 //EOF - web28 - 2010-08-18 -- Definition für die Trennzeichen
 
-if (file_exists(DIR_FS_INC . 'search_replace_'.strtolower($_SESSION['language_charset']) .'.php')) {
-  include (DIR_FS_INC . 'search_replace_'.strtolower($_SESSION['language_charset']) .'.php');
-} else {
-  include (DIR_FS_INC . 'search_replace_default.php');
-}
+//BOF Special characters in URL not working since google chrome update 2019-04 - kg fishnet services
+//if (file_exists(DIR_FS_INC . 'search_replace_'.strtolower($_SESSION['language_charset']) .'.php')) {
+//  include (DIR_FS_INC . 'search_replace_'.strtolower($_SESSION['language_charset']) .'.php');
+//} else {
+//  include (DIR_FS_INC . 'search_replace_default.php');
+//}
+include (DIR_FS_INC . 'search_replace_utf-8.php');
+//EOF Special characters in URL not working since google chrome update 2019-04 - kg fishnet services
 
 if(!function_exists('language')) {
   include_once (DIR_WS_CLASSES.'language.php');

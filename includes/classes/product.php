@@ -115,6 +115,45 @@ class product {
     return $reviews['total'];
   }
 
+
+  /**
+   * Query for last description of review
+   *
+   * @return array
+   */
+  function getReviewsDescription() {
+    $reviews_query = xtDBquery("SELECT r.customers_name, rd.reviews_text 
+                                  FROM ".TABLE_REVIEWS." r,
+                                       ".TABLE_REVIEWS_DESCRIPTION." rd
+                                 WHERE r.products_id = ".$this->pID."
+                                   AND r.reviews_id = rd.reviews_id
+                                   AND rd.languages_id = ".(int)$_SESSION['languages_id']."
+                                   AND rd.reviews_text !=''
+                                   ORDER BY rd.reviews_text DESC
+                              ");
+    $reviews = xtc_db_fetch_array($reviews_query, true);
+
+    return $reviews;
+  }
+
+   /**
+   * Query for avg reviews value
+   *
+   * @return integer
+   */
+  function getAverageValue() {
+    $reviews_query = xtDBquery("SELECT avg(r.reviews_rating) AS total
+                                  FROM ".TABLE_REVIEWS." r,
+                                       ".TABLE_REVIEWS_DESCRIPTION." rd
+                                 WHERE r.products_id = ".$this->pID."
+                                   AND r.reviews_id = rd.reviews_id
+                                   AND rd.languages_id = ".(int)$_SESSION['languages_id']."
+                                   AND rd.reviews_text !=''
+                              ");
+    $reviews = xtc_db_fetch_array($reviews_query, true);
+    return $reviews['total'];
+  }
+
   /**
    * getReviewsAverage
    *

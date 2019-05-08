@@ -18,9 +18,18 @@
     	{* --- bof -- prices for search engines -- *}
             <meta itemprop="price" content="{$PRODUCTS_PRICE_PLAIN}" /> 
             <meta itemprop="priceCurrency" content="{$PRODUCTS_PRICE_CURRENCY}" /> 
+            <link itemprop="availability" href="http://schema.org/{$PRODUCTS_AVAILABILITY}" />
+			<meta itemprop="url" content="{$PRODUCTS_LINK}" />
+			<meta itemprop="priceValidUntil" content="{$PRODUCTS_EXPIRES_DATE}" />
         {* --- eof -- prices for search engines-- *}
 		</span>
-    
+
+		<meta itemprop="sku" content="{$PRODUCTS_EAN}" />
+		<meta itemprop="description" content="{$PRODUCTS_DESCRIPTION}" />
+		<span itemprop="Review" itemscope itemtype="http://schema.org/Review">
+			<meta itemprop="reviewBody" content="{$REVIEW_DESCRIPTION}" /> 
+			<meta itemprop="author" content="{$REVIEW_AUTHOR}" /> 
+		</span>
                 
 		<p class="taxandshippinginfo" style="white-space:nowrap">{$PRODUCTS_TAX_INFO}{if $PRODUCTS_SHIPPING_LINK}{$PRODUCTS_SHIPPING_LINK}{/if}</p>
 		{if $SHIPPING_NAME}<p class="shippingtime"><strong>{#text_shippingtime#}</strong>{if $SHIPPING_IMAGE}<img src="{$SHIPPING_IMAGE}" alt="{$SHIPPING_NAME}" />{/if} {$SHIPPING_NAME_LINK}</p>
@@ -31,16 +40,15 @@
 		{if $PRODUCTS_FSK18=='true'}<img src="{$tpl_path}img/fsk18.gif" alt="" style="cursor:default" />{/if}
 		{if $PRODUCTS_EXPIRES}<p class="taxandshippinginfo">{#text_expires_date#} {$PRODUCTS_EXPIRES}</p>{/if}
 		
-		<!-- { ratings pID=$PRODUCTS_ID width=222} -->
-		{if $RATINGS > 0}
-		<br /><strong>{#rating#}</strong>
-			<span itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
-				<meta itemprop="bestRating" content="5" />
-				<span itemprop="ratingValue" content="{$RATINGSAVG}">{$RATING}</span> (<span itemprop="reviewCount">{$RATINGS}</span>)
-			</span>		
-		{/if}	
+		{if $PRODUCTS_REVIEWS_COUNT > 0}
+			<br / ><strong>{#rating#}</strong>
+		    <span itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
+	        	<meta itemprop="bestRating" content="5" />        
+				<span itemprop="ratingValue" content="{$AVG_RATING}">{$AVG_RATING}</span> (<span itemprop="ratingCount">{$PRODUCTS_REVIEWS_COUNT}</span>)                     
+		    </span>
+		{/if}
 			
-		{if $MANUFACTURER}<br /><strong>{#manufacturer#}</strong> <a href="{$MANUFACTURER_LINK}"><span itemprop="manufacturer">{$MANUFACTURER}</span></a>{/if}
+		{if $MANUFACTURER}<br /><strong>{#manufacturer#}</strong> <a href="{$MANUFACTURER_LINK}"><span itemprop="manufacturer">{$MANUFACTURER}</span></a><meta itemprop="brand" content="{$MANUFACTURER}" />{/if}
 		{if $PRODUCTS_MODEL!=''}<br /><strong>{#model#}</strong> <span itemprop="mpn">{$PRODUCTS_MODEL}</span>{/if}
 		{if $PRODUCTS_WEIGHT!='' && $PRODUCTS_WEIGHT!='0.00'}<br /><strong>{#weight#}</strong> {$PRODUCTS_WEIGHT|string_format:"%.2f"|replace:".":","} kg{/if}
 		{if $PRODUCTS_URL != ''}

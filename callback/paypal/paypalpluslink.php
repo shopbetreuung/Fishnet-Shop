@@ -109,7 +109,7 @@ if (isset($_GET['oID'])
 
       $smarty->caching = 0;
       if (!defined('RM'))
-        ///*$smarty->load_filter('output', 'note')*/;
+        ///*$smarty->load_filter('output', 'note');*/
       $smarty->display(CURRENT_TEMPLATE.'/index.html');
     }
   } else {

@@ -935,7 +935,6 @@ BASIC Template for AGB Hosting Content
 	}
 	
 	.categories_nav .navbar-collapse .navbar-nav .nav-item .subcategories .list-style ul li a:hover {
-		pointer-events: none;
 		cursor: pointer;
 	}
 

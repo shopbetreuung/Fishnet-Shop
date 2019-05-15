@@ -1027,6 +1027,10 @@ BASIC Template for AGB Hosting Content
 	margin: 0 3px;
 }
 
+.productnavigator .navigator-space {
+	margin: 0px 3px;
+}
+
 @media screen and (min-width: 768px) and (max-width: 992px) {
 	.index_images_box img {
 		height: 150px;
@@ -1044,12 +1048,9 @@ BASIC Template for AGB Hosting Content
 
 }
 
-@media (max-width: 572px) { 
+@media (max-width: 572px) {
 	.navbar-toggler {
 		margin-bottom: 10px;
-	}
-	.form-control {
-		width: 100% !important;
 	}
 }
 

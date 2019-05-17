@@ -44,7 +44,7 @@
 
     var $info, $totals, $products, $downloads, $goods, $customer, $delivery, $content_type;
 
-    function order($order_id = '') {
+    function __construct($order_id = '') {
       //global $xtPrice;
       $this->info = array();
       $this->totals = array();

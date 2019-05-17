@@ -48,7 +48,7 @@ class preisroboter {
 var $code, $title, $description, $enabled;
 
 
-function preisroboter() {
+function __construct() {
 global $order;
 
 $this->code = 'preisroboter';

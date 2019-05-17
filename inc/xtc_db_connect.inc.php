@@ -32,8 +32,8 @@
     }
 
     //vr - 2010-01-01 - Disable "STRICT" mode for MySQL 5!
-    if(version_compare(@mysqli_get_server_info(), '5.0.0', '>=')) {
-      @mysqli_query("SET SESSION sql_mode=''");
+    if(version_compare(mysqli_get_server_info(${$link}), '5.0.0', '>=')) {
+      @mysqli_query(${$link}, "SET SESSION sql_mode=''");
     }
 
     if (mysqli_connect_errno()) {

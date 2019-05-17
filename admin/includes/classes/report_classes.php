@@ -1,7 +1,7 @@
 <?php
 
 class xtc_export_csv_stock {
-    function xtc_export_csv_stock($filename, $product_id, $product_name, $product_stock, $products_attributes_name, $product_attribute_stock){
+    function __construct($filename, $product_id, $product_name, $product_stock, $products_attributes_name, $product_attribute_stock){
         header('Content-Type: text/csv; charset=utf-8');
         header('Content-Disposition: attachment; filename=' . $filename . '.csv');
         ob_end_clean();
@@ -42,7 +42,7 @@ class xtc_export_csv_stock {
     }
 }
 class xtc_export_csv_invoice_orders {
-    function xtc_export_csv_invoice_orders($filename, $invoice_number, $invoice_date, $total_net, $total_gross, $paid = false){
+    function __construct($filename, $invoice_number, $invoice_date, $total_net, $total_gross, $paid = false){
         header('Content-Type: text/csv; charset=utf-8');
         header('Content-Disposition: attachment; filename=' . $filename . '.csv');
         ob_end_clean();
@@ -86,7 +86,7 @@ class xtc_export_csv_invoice_orders {
 }
 
 class xtc_export_csv_inventory_turnover{
-    function xtc_export_csv_inventory_turnover($filename, $products_name, $products_model, $ai, $it, $start_date, $inventory_turnover){
+    function __construct($filename, $products_name, $products_model, $ai, $it, $start_date, $inventory_turnover){
             header('Content-Type: text/csv; charset=utf-8');
             header('Content-Disposition: attachment; filename=' . $filename . '.csv');
             ob_end_clean();
@@ -154,7 +154,7 @@ class xtc_export_csv_inventory_turnover{
 }
 
 class xtc_export_csv_stock_range{
-    function xtc_export_csv_stock_range($filename, $products_name, $stock_range, $start_date){
+    function __construct($filename, $products_name, $stock_range, $start_date){
             header('Content-Type: text/csv; charset=utf-8');
             header('Content-Disposition: attachment; filename=' . $filename . '.csv');
             ob_end_clean();

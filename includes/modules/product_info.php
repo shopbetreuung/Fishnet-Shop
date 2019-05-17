@@ -133,6 +133,14 @@ if (!is_object($product) || !$product->isProduct()) {
   //price for search engines
   $info_smarty->assign('PRODUCTS_PRICE_PLAIN', $products_price['plain']);
   $info_smarty->assign('PRODUCTS_PRICE_CURRENCY', $xtPrice->actualCurr);
+  $info_smarty->assign('PRODUCTS_AVAILABILITY', ($product->data['products_quantity'] > 0) ? 'InStock' : 'OutOfStock');
+  $info_smarty->assign('PRODUCTS_LINK', xtc_href_link(FILENAME_PRODUCT_INFO,xtc_product_link($product->data['products_id'], $product->data['products_name'])));
+  $info_smarty->assign('PRODUCTS_EXPIRES_DATE', ($sDate['expires_date'] != NULL ) ? $sDate['expires_date'] : date('Y-m-d H:i:s', strtotime('+1 years')));
+  $info_smarty->assign('PRODUCTS_REVIEWS_COUNT', $product->getReviewsCount());
+  $info_smarty->assign('AVG_RATING', $product->getAverageValue());
+  $review = $product->getReviewsDescription();  
+  $info_smarty->assign('REVIEW_DESCRIPTION', ($review['reviews_text'] != NULL ) ? $review['reviews_text'] : "");
+  $info_smarty->assign('REVIEW_AUTHOR', ($review['customers_name'] != NULL ) ? $review['customers_name'] : "");
  
   //get products vpe
   $info_smarty->assign('PRODUCTS_VPE',$main->getVPEtext($product->data, $products_price['plain'])); //web28 - 2012-04-17 - use classes function getVPEtext() 

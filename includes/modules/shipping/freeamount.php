@@ -20,7 +20,7 @@
     var $code, $title, $description, $icon, $enabled;
 
 
-    function freeamount() {
+    function __construct() {
       $this->code = 'freeamount';
       $this->title = MODULE_SHIPPING_FREEAMOUNT_TEXT_TITLE;
       $this->description = MODULE_SHIPPING_FREEAMOUNT_TEXT_DESCRIPTION;

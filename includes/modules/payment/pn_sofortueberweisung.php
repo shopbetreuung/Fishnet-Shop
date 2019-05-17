@@ -42,7 +42,7 @@ require_once(DIR_FS_CATALOG.'callback/pn_sofortueberweisung/classPnSofortueberwe
 class pn_sofortueberweisung {
 
 	var $code, $title, $description, $enabled, $pnSofortueberweisung;
-	function pn_sofortueberweisung () {
+	function __construct () {
 		global $order;
 		$this->code = 'pn_sofortueberweisung';
 		$this->version = 'pn_modified_v1.06';

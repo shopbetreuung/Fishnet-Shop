@@ -50,7 +50,7 @@ define('DATE_FORMAT_EXPORT', '%d.%m.%Y');  // this is used for strftime()
   class geizhals {
     var $code, $title, $description, $enabled;
 
-    function geizhals() {
+    function __construct() {
       global $order;
 
       $this->code = 'geizhals';

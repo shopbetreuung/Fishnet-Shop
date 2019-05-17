@@ -18,7 +18,7 @@ defined( '_VALID_XTC' ) or die( 'Direct Access to this location is not allowed.'
   class shoppingCart {
     var $contents, $total, $weight;
 
-    function shoppingCart() {
+    function __construct() {
       $this->reset();
     }
 

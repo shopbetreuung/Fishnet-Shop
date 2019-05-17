@@ -105,7 +105,7 @@ if (isset($_POST['gtgoogle'])) {
 
 
 
-    function guenstiger() {
+    function __construct() {
       global $order;
 
       $this->code = 'guenstiger';

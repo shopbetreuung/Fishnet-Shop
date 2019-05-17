@@ -26,7 +26,7 @@ define('IMAGE_EXPORT_TYPE','<hr noshade><b>Stapelverarbeitung:</b>');
   class image_processing_category {
     var $code, $title, $description, $enabled;
 
-    function image_processing_category() {
+    function __construct() {
       global $order;
 
       $this->code = 'image_processing_category';

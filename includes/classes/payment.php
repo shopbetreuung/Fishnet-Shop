@@ -34,7 +34,7 @@
     var $modules, $selected_module;
 
     // class constructor
-    function payment($module = '') {
+    function __construct($module = '') {
       global $PHP_SELF,$order;
 
       if (defined('MODULE_PAYMENT_INSTALLED') && xtc_not_null(MODULE_PAYMENT_INSTALLED)) {

@@ -165,19 +165,21 @@ if (!$box_smarty->isCached(CURRENT_TEMPLATE.'/boxes/box_best_sellers.html', $cac
     $smarty->assign('box_BESTSELLERS', $box_best_sellers);
   }
   */
-  if (count($box_content) > 0) {
-    $box_best_sellers = '';
-      // set cache ID
-    if (!$cache) {
-      if ($box_content!='') {
-          $box_best_sellers = $box_smarty->fetch(CURRENT_TEMPLATE.'/boxes/box_best_sellers.html');
-      }
-    } else {
-      $box_best_sellers = $box_smarty->fetch(CURRENT_TEMPLATE.'/boxes/box_best_sellers.html', $cache_id);
-    }
+    if (is_countable($box_content)) {
+        if (count($box_content) > 0) {
+          $box_best_sellers = '';
+            // set cache ID
+          if (!$cache) {
+            if ($box_content!='') {
+                $box_best_sellers = $box_smarty->fetch(CURRENT_TEMPLATE.'/boxes/box_best_sellers.html');
+            }
+          } else {
+            $box_best_sellers = $box_smarty->fetch(CURRENT_TEMPLATE.'/boxes/box_best_sellers.html', $cache_id);
+          }
 
-    $smarty->assign('box_BESTSELLERS', $box_best_sellers);
-  }
+          $smarty->assign('box_BESTSELLERS', $box_best_sellers);
+        }
+    }
 }
 //EOF - DokuMan - 2010-07-12 - fix Smarty cache error on unlink
 ?>

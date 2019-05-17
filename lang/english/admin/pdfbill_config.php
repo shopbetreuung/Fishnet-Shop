@@ -1,7 +1,7 @@
 <?php
-define( PDFBILL_LOADED_PROFILE, 'Geladenes Profil: ');
-define( PDFBILL_LOAD_PROFILE, 'Lade Profil: ');
-define( PDFBILL_PROFILE_LANG, 'Profil für Sprache: ');
+define('PDFBILL_LOADED_PROFILE' , 'Geladenes Profil: ');
+define('PDFBILL_LOAD_PROFILE', 'Lade Profil: ');
+define('PDFBILL_PROFILE_LANG' , 'Profil für Sprache: ');
 
 
 $help_var_orderdata = kl('

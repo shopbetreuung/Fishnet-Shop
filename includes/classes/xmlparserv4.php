@@ -17,7 +17,7 @@ class XMLParser
     var $output = array();
     var $status;
 
-    function XMLParser($xml){
+    function __construct($xml){
         $this->rawXML = $xml;
         $this->parser = xml_parser_create();
         return $this->parse();

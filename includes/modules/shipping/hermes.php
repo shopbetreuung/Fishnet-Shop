@@ -21,7 +21,7 @@
     var $code, $title, $description, $icon, $enabled;
 
 
-    function hermes() {
+    function __construct() {
       global $order, $shipping_weight;
 
       $this->code = 'hermes';

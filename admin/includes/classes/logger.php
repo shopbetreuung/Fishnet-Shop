@@ -19,7 +19,7 @@ defined( '_VALID_XTC' ) or die( 'Direct Access to this location is not allowed.'
     var $timer_start, $timer_stop, $timer_total;
 
     // class constructor
-    function logger() {
+    function __construct() {
       $this->timer_start();
     }
 

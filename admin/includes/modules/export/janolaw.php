@@ -39,7 +39,7 @@ define('MODULE_JANOLAW_UPDATE_INTERVAL_DESC', 'In welchen Abst&auml;nden sollen 
 class janolaw {
   var $code, $title, $description, $enabled;
 
-  function janolaw() {
+  function __construct() {
     global $order;
 
      $this->code = 'janolaw';

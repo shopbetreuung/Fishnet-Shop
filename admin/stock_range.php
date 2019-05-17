@@ -77,8 +77,9 @@ require_once(DIR_WS_INCLUDES.'head.php');
 
                     $interval = $date2->diff($date1);
                     $number_of_days_between_given_date_and_today = $interval->format('%a');
-
-                    $average_sells_per_day = ($sells_stock / $number_of_days_between_given_date_and_today);
+                    if ($number_of_days_between_given_date_and_today > 0) {
+                        $average_sells_per_day = ($sells_stock / $number_of_days_between_given_date_and_today);
+                    }
 					if($average_sells_per_day > 0){
                     	$stock_range = $average_stock / $average_sells_per_day;
 						echo '<tr><td width="33.3333333%" class="dataTableContent">'.$products_stock['products_name'] . '</td>';

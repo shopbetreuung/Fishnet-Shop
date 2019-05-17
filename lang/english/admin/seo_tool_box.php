@@ -20,4 +20,4 @@ define('SEO_TOOL_BOX_PRODUCTS_WITH_SAME_META_TITLE','Products with same meta tit
 define('SEO_TOOL_BOX_PRODUCTS_WITH_SAME_META_DESCRIPTION','Products with same meta description');
 
 define('SEO_TOOL_BOX_TABLE_PRODUCTS_NAME','Products name');
-
+define('SEO_TOOL_BOX_SHOW_ACTIVE_PRODUCTS','<strong> Show only active products </strong>');

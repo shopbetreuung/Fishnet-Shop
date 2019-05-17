@@ -25,6 +25,7 @@ $seo_tool_box_dropdown_array = array(
 $seo_tool_box_select_array = array_merge($seo_tool_box_dropdown,$seo_tool_box_dropdown_array);
 
 $seo_tool_box_action = (isset($_GET['seo_tool_box']))? $_GET['seo_tool_box'] : 0 ;
+$show_active_products = (isset($_GET['show_active_products']) && $_GET['show_active_products'] == 'true') ? ' AND p.products_status = 1 ' : '';
 
 switch($seo_tool_box_action) {
     case 1:
@@ -46,20 +47,20 @@ switch($seo_tool_box_action) {
         $seo_tool_box_where = " AND pd.products_id NOT IN (SELECT op.products_id FROM ".TABLE_ORDERS_PRODUCTS." op ) ";
         break;
     case 7:
-        $seo_tool_box_where = " AND p.products_image_title = '' ";
+        $seo_tool_box_where = " AND pd.products_main_image_title = '' ";
         break;
     case 8:
-        $seo_tool_box_where = " AND p.products_image_alt = '' ";
+        $seo_tool_box_where = " AND pd.products_main_image_alt = '' ";
         break;
     case 9:
-        $seo_tool_box_where = " AND pi.image_title = '' ";
+        $seo_tool_box_where = " AND pid.image_title = '' ";
         break;
     case 10:
-        $seo_tool_box_where = " AND pi.image_alt = '' ";
+        $seo_tool_box_where = " AND pid.image_alt = '' ";
         break;
     case 11:
         
-        $products_meta_title_query = xtc_db_query("SELECT pd.products_meta_title FROM ".TABLE_PRODUCTS_DESCRIPTION." pd WHERE pd.language_id = ".$_SESSION['languages_id']." GROUP BY products_meta_title HAVING ( COUNT(*) > 1) ");
+        $products_meta_title_query = xtc_db_query("SELECT pd.products_meta_title FROM ".TABLE_PRODUCTS." p JOIN ".TABLE_PRODUCTS_DESCRIPTION." pd ON p.products_id = pd.products_id WHERE pd.language_id = ".$_SESSION['languages_id'].$show_active_products." GROUP BY products_meta_title HAVING ( COUNT(*) > 1) ");
         $product_meta_title_array = array();
         
         while ($products_meta_title_array = xtc_db_fetch_array($products_meta_title_query)) {
@@ -70,9 +71,9 @@ switch($seo_tool_box_action) {
         break;
     case 12:
 
-        $products_meta_description_query = xtc_db_query("SELECT pd.products_meta_description FROM ".TABLE_PRODUCTS_DESCRIPTION." pd WHERE pd.language_id = ".$_SESSION['languages_id']." GROUP BY products_meta_description HAVING ( COUNT(*) > 1) ");
+        $products_meta_description_query = xtc_db_query("SELECT pd.products_meta_description FROM ".TABLE_PRODUCTS." p JOIN ".TABLE_PRODUCTS_DESCRIPTION." pd ON p.products_id = pd.products_id WHERE pd.language_id = ".$_SESSION['languages_id'].$show_active_products." GROUP BY products_meta_description HAVING ( COUNT(*) > 1) ");
         $product_meta_description_array = array();
-        
+
         while ($products_meta_description_array = xtc_db_fetch_array($products_meta_description_query)) {
             $product_meta_description_array[] = "'".addslashes($products_meta_description_array['products_meta_description'])."'";
         }
@@ -93,11 +94,19 @@ switch($seo_tool_box_action) {
         </div>
         <br />
         <div class='col-xs-12'>
-            <?php  
+            <div class="row">
+                <div class="col-xs-6">
+            <?php
                 echo xtc_draw_form('seo_tool_box_form', FILENAME_SEO_TOOL_BOX,'','get');
                 echo SEO_TOOL_BOX_SEARCH.' '.xtc_draw_pull_down_menu('seo_tool_box',$seo_tool_box_select_array, (!isset($_GET['seo_tool_box'])) ? 0 : $_GET['seo_tool_box']);
-                echo xtc_button(SEO_TOOL_BOX_SEARCH_BUTTON, 'submit');
+                echo xtc_button(SEO_TOOL_BOX_SEARCH_BUTTON, 'submit');                
             ?>
+            </div>
+                <div class="col-xs-6 text-right">
+                    <input type="checkbox" name="show_active_products" value="true" class="save-filters" <?php if(isset($_GET['show_active_products'])) echo "checked='checked'"; ?>  onchange="this.form.submit();"/> 
+                    <?php echo SEO_TOOL_BOX_SHOW_ACTIVE_PRODUCTS; ?>
+                </div>
+            </div>
             </form>
             
             <div class='col-xs-12'> <br /> </div>
@@ -114,11 +123,11 @@ switch($seo_tool_box_action) {
                 switch ($seo_tool_box_action) {
                     case 7:
                     case 8:
-                        $seo_tool_box_select = "SELECT pd.products_id, pd.products_name FROM ".TABLE_PRODUCTS_DESCRIPTION." pd JOIN ".TABLE_PRODUCTS." p ON pd.products_id = p.products_id WHERE pd.language_id = ".$_SESSION['languages_id'].$seo_tool_box_where."";
+                        $seo_tool_box_select = "SELECT pd.products_id, pd.products_name FROM ".TABLE_PRODUCTS_DESCRIPTION." pd JOIN ".TABLE_PRODUCTS." p ON pd.products_id = p.products_id WHERE pd.language_id = ".$_SESSION['languages_id'].$seo_tool_box_where.$show_active_products."";
                         break;
                     case 9:
                     case 10:
-                        $seo_tool_box_select = "SELECT DISTINCT pd.products_id, pd.products_name FROM ".TABLE_PRODUCTS_DESCRIPTION." pd JOIN ".TABLE_PRODUCTS_IMAGES." pi ON pd.products_id = pi.products_id WHERE pd.language_id = ".$_SESSION['languages_id'].$seo_tool_box_where."";
+                        $seo_tool_box_select = "SELECT DISTINCT pd.products_id, pd.products_name FROM ".TABLE_PRODUCTS." p JOIN ".TABLE_PRODUCTS_DESCRIPTION." pd  ON p.products_id = pd.products_id JOIN ".TABLE_PRODUCTS_IMAGES." pi ON pd.products_id = pi.products_id JOIN ".TABLE_PRODUCTS_IMAGES_DESCRIPTION." pid  ON pi.image_id = pid.image_id WHERE pd.language_id = ".$_SESSION['languages_id'].$seo_tool_box_where.$show_active_products."";
                         break;
                     case 11:
                         $seo_tool_box_select = "SELECT pd.products_id, pd.products_name, pd.products_meta_title FROM ".TABLE_PRODUCTS_DESCRIPTION." pd WHERE pd.language_id = ".$_SESSION['languages_id'].$seo_tool_box_where."";
@@ -129,7 +138,7 @@ switch($seo_tool_box_action) {
                         $products_meta_description_value = null;
                         break;
                     default:
-                        $seo_tool_box_select = "SELECT pd.products_id, pd.products_name FROM ".TABLE_PRODUCTS_DESCRIPTION." pd WHERE pd.language_id = ".$_SESSION['languages_id'].$seo_tool_box_where."";
+                        $seo_tool_box_select = "SELECT pd.products_id, pd.products_name FROM ".TABLE_PRODUCTS_DESCRIPTION." pd JOIN ".TABLE_PRODUCTS." p ON p.products_id = pd.products_id WHERE pd.language_id = ".$_SESSION['languages_id'].$seo_tool_box_where.$show_active_products."";
                         break;
                 }
                 

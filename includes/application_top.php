@@ -71,6 +71,11 @@ if (file_exists(DIR_FS_CATALOG.'export/_error_reporting.all') || file_exists(DIR
   error_reporting(0);
 }
 
+// new error handling
+if (is_file(DIR_WS_INCLUDES.'error_reporting.php')) {
+  require_once (DIR_WS_INCLUDES.'error_reporting.php');
+}
+
 // include the list of project filenames
 require (DIR_WS_INCLUDES.'filenames.php');
 if (version_compare(PHP_VERSION, '5.1.0', '>=')) {

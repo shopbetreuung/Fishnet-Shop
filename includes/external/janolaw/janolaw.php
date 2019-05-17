@@ -20,7 +20,7 @@ class janolaw_content {
   var $m_shop_id = false;
   var $enabled = false;
   
-  function janolaw_content() {
+  function __construct() {
     if(defined('MODULE_JANOLAW_USER_ID')) {
       $this->m_user_id = xtc_cleanName(MODULE_JANOLAW_USER_ID);
     }

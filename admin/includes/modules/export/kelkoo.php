@@ -42,7 +42,7 @@ define('CAMPAIGNS_DESC','Mit Kampagne zur Nachverfolgung verbinden.');
     var $code, $title, $description, $enabled;
 
 
-    function kelkoo() {
+    function __construct() {
       global $order;
 
       $this->code = 'kelkoo';

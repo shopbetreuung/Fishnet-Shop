@@ -17,7 +17,7 @@ class sofort_sofortrechnung extends sofort{
 
 	var $code, $title, $description, $enabled, $invoice, $paymentMethod;
 
-	function sofort_sofortrechnung() {
+	function __construct() {
 		global $order;
 		
 		parent::sofort();

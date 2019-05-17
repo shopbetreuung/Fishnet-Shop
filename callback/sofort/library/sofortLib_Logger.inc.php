@@ -17,7 +17,7 @@ class SofortLibLogger {
 	public $maxFilesize = 1048576;
 	
 	
-	public function SofortLibLogger() {
+	public function __construct() {
 		// intentionally left empty
 	}
 	

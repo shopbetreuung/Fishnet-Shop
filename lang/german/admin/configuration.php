@@ -906,3 +906,11 @@ define('CLEVERREACH_API_IMPORT_SUBSCRIBERS_DESC', 'Newsletterabonnenten aus dem 
 define('CLEVERREACH_API_IMPORT_BUYERS_TITLE', 'Cleverreach importiere K&auml;ufer');
 define('CLEVERREACH_API_IMPORT_BUYERS_DESC', 'Käufer aus dem Shop zu Cleverreach exportieren?');
    
+define('TRACKING_PIWIK_ACTIVE_TITLE' , 'Piwik Web-Analytics Tracking aktivieren');
+define('TRACKING_PIWIK_ACTIVE_DESC' , 'Um Piwik nutzen zu k&ouml;nnen, m&uuml;ssen Sie es zun&auml;chst herunterladen und auf Ihrem Webspace installieren, siehe auch <a href="http://piwik.org/" target="_blank"><b>Piwik Web-Analytics</b></a>. Im Gegensatz zu Google Analytics werden die Daten lokal gespeichert, d.h. Sie als Shopbetreiber haben die Datenhoheit.');
+define('TRACKING_PIWIK_LOCAL_PATH_TITLE' , 'Piwik Installationsverzeichnis (ohne "http://")');
+define('TRACKING_PIWIK_LOCAL_PATH_DESC' , 'Tragen Sie hier das Verzeichnis ein, nachdem Piwik erfolgreich installiert worden ist. Als Pfad ist hier der komplette Domainname ohne "http://" einzutragen, z.B. "www.domain.de/piwik".');
+define('TRACKING_PIWIK_ID_TITLE' , 'Piwik Seiten-ID');
+define('TRACKING_PIWIK_ID_DESC' , 'In der Piwik Administrationsoberfl&auml;che wird pro angelegter Domain wird eine ID vergeben (meist "1")');
+define('TRACKING_PIWIK_GOAL_TITLE' , 'Piwik Kampagnen-Nummer (optional)');
+define('TRACKING_PIWIK_GOAL_DESC' , 'Tragen Sie hier eine Kampagnen-Nummer ein, wenn Sie vordefinierte Ziele nachverfolgen m&ouml;chten. Details siehe <a href="http://piwik.org/docs/tracking-goals-web-analytics/" target="_blank"><b>Piwik: Tracking Goal Conversions</b></a>');

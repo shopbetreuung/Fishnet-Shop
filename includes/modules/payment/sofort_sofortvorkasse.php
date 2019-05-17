@@ -16,7 +16,7 @@ class sofort_sofortvorkasse extends sofort{
 
 	var $code, $title, $description, $enabled, $sofort, $paymentMethod;
 
-	function sofort_sofortvorkasse() {
+	function __construct() {
 		global $order;
 		
 		parent::sofort();

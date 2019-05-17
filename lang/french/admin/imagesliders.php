@@ -62,4 +62,12 @@ define('TEXT_URL', 'Link address:');
 
 define('ERROR_TEXT_HEADING', 'Slide not saved, fix errors:');
 define('ERROR_TEXT_NAME', 'Name for image entry invalid!');
+
+define('NONE_TARGET', 'Ne vous fixez pas d&apos;objectif');
+define('TARGET_BLANK', '_blank');
+define('TARGET_TOP', '_top');
+define('TARGET_SELF', '_self');
+define('TARGET_PARENT', '_parent');
+define('ACTIVE', 'ACTIF');
+define('NOTACTIVE', 'NON ACTIF');
 ?>

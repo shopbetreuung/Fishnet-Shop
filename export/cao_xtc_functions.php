@@ -2765,7 +2765,7 @@ function SendLog ()
   class upload {
     var $file, $filename, $destination, $permissions, $extensions, $tmp_filename;
 
-    function upload($file = '', $destination = '', $permissions = '777', $extensions = '') {
+    function __construct($file = '', $destination = '', $permissions = '777', $extensions = '') {
 
       $this->set_file($file);
       $this->set_destination($destination);

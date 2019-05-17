@@ -897,3 +897,11 @@ define('CLEVERREACH_API_IMPORT_SUBSCRIBERS_DESC', 'Export newsletter subscribers
 define('CLEVERREACH_API_IMPORT_BUYERS_TITLE', 'Cleverreach Import buyers');
 define('CLEVERREACH_API_IMPORT_BUYERS_DESC', 'Export buyers from the shop to Cleverreach?');
    
+define('TRACKING_PIWIK_ACTIVE_TITLE' , 'Activate Piwik Web-Analytics tracking');
+define('TRACKING_PIWIK_ACTIVE_DESC' , 'In order to use Piwik at all, you have to download and install it to your webspace at first. See also <a href="http://piwik.org/" target="_blank"><b>Piwik Web-Analytics</b></a>. In comparison to Google Analytics all data will be stored locally, i.e. you as show owner have complete control over all data.');
+define('TRACKING_PIWIK_LOCAL_PATH_TITLE' , 'Piwik install path (without "http://")');
+define('TRACKING_PIWIK_LOCAL_PATH_DESC' , 'Enter the path when Piwik was installed successfully. The complete path of the domain has to be given, but without "http://", e.g. "www.domain.de/piwik".');
+define('TRACKING_PIWIK_ID_TITLE' , 'Piwik page ID');
+define('TRACKING_PIWIK_ID_DESC' , 'In the Piwik administration a page ID will be created per domain (usually "1")');
+define('TRACKING_PIWIK_GOAL_TITLE' , 'Piwik campaign number (optional)');
+define('TRACKING_PIWIK_GOAL_DESC' , 'Enter your campaign number, if you want to track predefined goals.. Details see <a href="http://piwik.org/docs/tracking-goals-web-analytics/" target="_blank"><b>Piwik: Tracking Goal Conversions</b></a>');

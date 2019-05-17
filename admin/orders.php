@@ -218,7 +218,7 @@ if ((($_GET['action'] == 'edit') || ($_GET['action'] == 'update_order')) && ($_G
 	    }
 	  }
 	  
-	  if( order_exists==false ) {
+	  if($order_exists==false ) {
 	    $messageStack->add(sprintf(ERROR_ORDER_DOES_NOT_EXIST, $oID), 'error');
 	  }
 	 

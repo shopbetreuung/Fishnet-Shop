@@ -763,7 +763,22 @@ class categories {
             $img_lang = $explode_value[1];
             $image_id = get_image_id($products_id,$it_image_nr+1);    
             $mo_img = array ('image_title' => xtc_db_prepare_input($it_image_title));
-            xtc_db_perform(TABLE_PRODUCTS_IMAGES_DESCRIPTION, $mo_img, 'update', 'image_id = \''.xtc_db_prepare_input($image_id).'\' AND image_nr = \''.xtc_db_prepare_input($img_nr+1).'\' AND language_id = \''.xtc_db_prepare_input($img_lang).'\'');  
+            
+            if($image_id != '') {
+                $more_img_exist_query = xtc_db_query("SELECT image_id FROM ".TABLE_PRODUCTS_IMAGES_DESCRIPTION." WHERE image_id = ".$image_id." AND image_nr = ".xtc_db_prepare_input($img_nr+1)." AND language_id = ".$img_lang);
+                
+                if (xtc_db_num_rows($more_img_exist_query) > 0) {
+                    xtc_db_perform(TABLE_PRODUCTS_IMAGES_DESCRIPTION, $mo_img, 'update', 'image_id = \''.xtc_db_prepare_input($image_id).'\' AND image_nr = \''.xtc_db_prepare_input($img_nr+1).'\' AND language_id = \''.xtc_db_prepare_input($img_lang).'\'');  
+                } else {
+                    $image_id_query = xtc_db_query("SELECT image_id FROM ".TABLE_PRODUCTS_IMAGES." WHERE products_id = ".$products_id." AND image_nr = ".xtc_db_prepare_input($img_nr+1)."");
+                    $image_id_array = xtc_db_fetch_array($image_id_query);
+                          
+                    $mo_img_insert = array ('image_id' => xtc_db_prepare_input($image_id_array['image_id']),'image_nr' =>xtc_db_prepare_input($img_nr+1), 'language_id' => xtc_db_prepare_input($img_lang),'image_title' => xtc_db_prepare_input($it_image_title));
+                    xtc_db_perform(TABLE_PRODUCTS_IMAGES_DESCRIPTION, $mo_img_insert);
+                }
+            }
+            
+
         }
 
     }
@@ -775,7 +790,20 @@ class categories {
             $img_lang = $explode_value[1];
             $image_id = get_image_id($products_id,$it_image_nr+1);    
             $mo_img = array ('image_alt' => xtc_db_prepare_input($it_image_title));
-            xtc_db_perform(TABLE_PRODUCTS_IMAGES_DESCRIPTION, $mo_img, 'update', 'image_id = \''.xtc_db_prepare_input($image_id).'\' AND image_nr = \''.xtc_db_prepare_input($img_nr+1).'\' AND language_id = \''.xtc_db_prepare_input($img_lang).'\'');  
+            
+            if($image_id != '') {
+                $more_img_exist_query = xtc_db_query("SELECT image_id FROM ".TABLE_PRODUCTS_IMAGES_DESCRIPTION." WHERE image_id = ".$image_id." AND image_nr = ".xtc_db_prepare_input($img_nr+1)." AND language_id = ".$img_lang);
+                
+                if (xtc_db_num_rows($more_img_exist_query) > 0) {
+                    xtc_db_perform(TABLE_PRODUCTS_IMAGES_DESCRIPTION, $mo_img, 'update', 'image_id = \''.xtc_db_prepare_input($image_id).'\' AND image_nr = \''.xtc_db_prepare_input($img_nr+1).'\' AND language_id = \''.xtc_db_prepare_input($img_lang).'\''); 
+                } else {
+                    $image_id_query = xtc_db_query("SELECT image_id FROM ".TABLE_PRODUCTS_IMAGES." WHERE products_id = ".$products_id." AND image_nr = ".xtc_db_prepare_input($img_nr+1)."");
+                    $image_id_array = xtc_db_fetch_array($image_id_query);
+                          
+                    $mo_img_insert = array ('image_id' => xtc_db_prepare_input($image_id_array['image_id']),'image_nr' =>xtc_db_prepare_input($img_nr+1), 'language_id' => xtc_db_prepare_input($img_lang),'image_title' => xtc_db_prepare_input($it_image_title));
+                    xtc_db_perform(TABLE_PRODUCTS_IMAGES_DESCRIPTION, $mo_img_insert);
+                }
+            }
         }
     }
 

@@ -876,7 +876,7 @@ CREATE TABLE products (
   products_date_added DATETIME NOT NULL,
   products_last_modified DATETIME,
   products_date_available DATETIME,
-  products_weight DECIMAL(6,3) NOT NULL,
+  products_weight DECIMAL(7,3) NOT NULL,
   products_status TINYINT(1) NOT NULL,
   products_tax_class_id INT NOT NULL,
   product_template VARCHAR(64),

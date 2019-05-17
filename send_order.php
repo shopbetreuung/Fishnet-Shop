@@ -179,8 +179,8 @@ if ($_SESSION['customer_id'] == $order_check['customers_id'] || $send_by_admin) 
         $sepa_txt_mail = $smarty->fetch('db:sepa_mail.txt');
         $sepa_subject = $smarty->fetch('db:sepa_mail.subject');
         // no pre-notification in order mail
-        $smarty->clear_assign('PAYMENT_INFO_HTML');
-        $smarty->clear_assign('PAYMENT_INFO_TXT');
+        $smarty->clearAssign('PAYMENT_INFO_HTML');
+        $smarty->clearAssign('PAYMENT_INFO_TXT');
       }
     }
   }
@@ -210,11 +210,6 @@ if ($_SESSION['customer_id'] == $order_check['customers_id'] || $send_by_admin) 
     $privacy = $privacy_content['content_text'];
     $smarty->assign('PRIVACY_INFO_TXT', $privacy);
   }
-  
-//  $shop_privacy_statment = $main->getContentData(PRIVACY_STATEMENT_ID);
-//  $privacy_statement = $shop_privacy_statment['content_text'];  
-//  $smarty->assign('PRIVACY_STATEMENT_HTML', $privacy_statement);
-//  $smarty->assign('PRIVACY_STATEMENT_TXT', $privacy_statement);
 
   ## PayOne
   if (strpos($order->info['payment_method'], 'payone') !== false) {

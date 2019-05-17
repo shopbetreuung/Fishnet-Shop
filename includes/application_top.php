@@ -31,6 +31,9 @@
 // start the timer for the page parse time log
 define('PAGE_PARSE_START_TIME', microtime(true));
 
+header('X-Frame-Options: SAMEORIGIN');
+header('X-XSS-Protection: 1');
+header('X-Content-Type-Options: nosniff');
 
 // configuration parameters
 if (file_exists('includes/local/configure.php')) {

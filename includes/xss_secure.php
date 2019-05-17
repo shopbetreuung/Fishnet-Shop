@@ -33,7 +33,7 @@ define('XSS_WHITELIST_TIME', 3600);
 function xss_secure($params_arr, $ip, $type) 
 {
   $whitelist_approved = true;
-  foreach (xss_read_whitelist() as $whitelist_address => $whitelist_time) {
+  foreach (xss_read_whitelist() as $whitelist_address) {
     if ($ip == $whitelist_address) {
      $whitelist_approved = false;
     }

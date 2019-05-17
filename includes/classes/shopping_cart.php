@@ -64,9 +64,9 @@ class shoppingCart {
                                         where customers_id = '".(int)$_SESSION['customer_id']."'
                                           and products_id = '".xtc_db_input($products_id)."'");
         if (!xtc_db_num_rows($product_query)) {
-          $sql_data_array = array('customers_id' => $_SESSION['customer_id'],
+          $sql_data_array = array('customers_id' => (int)$_SESSION['customer_id'],
                                   'products_id' => $products_id,
-                                  'customers_basket_quantity' => $qty,
+                                  'customers_basket_quantity' => (int)$qty,
                                   'customers_basket_date_added' => date('Ymd')
                                  );
           xtc_db_perform(TABLE_CUSTOMERS_BASKET, $sql_data_array);
@@ -84,7 +84,7 @@ class shoppingCart {
           }
         } else {
           xtc_db_query("update ".TABLE_CUSTOMERS_BASKET."
-                           set customers_basket_quantity = '".xtc_db_input($qty)."'
+                           set customers_basket_quantity = '".(int)$qty."'
                          where customers_id = '".(int)$_SESSION['customer_id']."'
                            and products_id = '".xtc_db_input($products_id)."'");
         }
@@ -161,9 +161,9 @@ class shoppingCart {
       $this->contents[$products_id] = array ('qty' => (int)$qty);
       // insert into database
       if (isset ($_SESSION['customer_id'])){
-        $sql_data_array = array('customers_id' => $_SESSION['customer_id'],
+        $sql_data_array = array('customers_id' => (int)$_SESSION['customer_id'],
                                 'products_id' => $products_id,
-                                'customers_basket_quantity' => $qty,
+                                'customers_basket_quantity' => (int)$qty,
                                 'customers_basket_date_added' => date('Ymd')
                                );
         xtc_db_perform(TABLE_CUSTOMERS_BASKET, $sql_data_array);
@@ -382,7 +382,7 @@ class shoppingCart {
         if (isset ($this->contents[$products_id]['attributes'])) {
           reset($this->contents[$products_id]['attributes']);
           while (list ($option, $value) = each($this->contents[$products_id]['attributes'])) {
-            $values = $xtPrice->xtcGetOptionPrice($product['products_id'], $option, $value);
+            $values = $xtPrice->xtcGetOptionPrice($product['products_id'], (int)$option, (int)$value);
             $this->weight += $values['weight'] * $qty;
             $this->total += $values['price'] * $qty;
             $attribute_price+=$values['price'];
@@ -454,7 +454,7 @@ class shoppingCart {
     if (isset ($this->contents[$products_id]['attributes'])) {
       reset($this->contents[$products_id]['attributes']);
       while (list ($option, $value) = each($this->contents[$products_id]['attributes'])) {
-        $values = $xtPrice->xtcGetOptionPrice($products_id, $option, $value);
+        $values = $xtPrice->xtcGetOptionPrice($products_id, (int)$option, (int)$value);
         $attributes_price += $values['price'];
       }
     }
@@ -680,7 +680,7 @@ class shoppingCart {
       reset($this->contents);
       while (list ($products_id,) = each($this->contents)) {
         $no_count = false;
-        $gv_query = xtc_db_query("select products_model from ".TABLE_PRODUCTS." where products_id = '".$products_id."'");
+        $gv_query = xtc_db_query("select products_model from ".TABLE_PRODUCTS." where products_id = '".xtc_get_prid($products_id)."'");
         $gv_result = xtc_db_fetch_array($gv_query);
         if (preg_match('/^GIFT/', $gv_result['products_model'])) { // Hetfield - 2009-08-19 - replaced deprecated function ereg with preg_match to be ready for PHP >= 5.3
           $no_count = true;

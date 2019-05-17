@@ -186,6 +186,8 @@
         }
       }
 
+      $shipping_num_boxes = ($shipping_num_boxes == 0 ) ? 1 : $shipping_num_boxes;
+
       $this->quotes = array('id' => $this->code,
                             'module' => MODULE_SHIPPING_ZONES_TEXT_TITLE,
                             'methods' => array(array('id' => $this->code,

@@ -728,6 +728,14 @@ BASIC Template for AGB Hosting Content
     margin: 0 3px;
 }
 
+.productnavigator {
+	word-break: word-break;
+}
+
+.productnavigator .navigator-space {
+	margin: 0px 3px;
+}
+
 @media screen and (max-width: 530px) {
     
     div.highlightbox input, div.highlightbox textarea {

@@ -103,7 +103,7 @@ $main_content = $smarty->fetch(CURRENT_TEMPLATE.'/module/account_delete.html');
 
 $smarty->assign('main_content', $main_content);
 if (!defined('RM'))
-  /*$smarty->load_filter('output', 'note')*/;
+  /*$smarty->load_filter('output', 'note');*/
 $smarty->display(CURRENT_TEMPLATE.'/index.html');
 include ('includes/application_bottom.php');
 ?>

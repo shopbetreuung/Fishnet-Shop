@@ -899,3 +899,12 @@ define('CLEVERREACH_API_IMPORT_SUBSCRIBERS_TITLE', 'Cleverreach importer les abo
 define('CLEVERREACH_API_IMPORT_SUBSCRIBERS_DESC', 'Exporter les abonnés de la newsletter de la boutique vers Cleverreach ?');
 define('CLEVERREACH_API_IMPORT_BUYERS_TITLE', 'Cleverreach importer les acheteurs ?');
 define('CLEVERREACH_API_IMPORT_BUYERS_DESC', 'Exporter les acheteurs de la boutique vers Cleverreach ?');
+
+define('TRACKING_PIWIK_ACTIVE_TITLE' , 'Activer le suivi Piwik Web-Analytics');
+define('TRACKING_PIWIK_ACTIVE_DESC' , 'Pour utiliser Piwik, vous devez d&apos;abord le télécharger et l&apos;installer sur votre espace web. Voir aussi <a href="http://piwik.org/" target="_blank"><b>Piwik Web-Analytics</b></a>. Par rapport à Google Analytics, toutes les données sont stockées localement, c&apos;est-à-dire qu&apos;en tant que propriétaire de l&apos;exposition, vous avez un contrôle total sur toutes les données..');
+define('TRACKING_PIWIK_LOCAL_PATH_TITLE' , 'Chemin d&apos;installation Piwik (sans "http://")');
+define('TRACKING_PIWIK_LOCAL_PATH_DESC' , 'Entrez le chemin d&apos;accès lorsque Piwik a été installé avec succès. Le chemin complet du domaine doit être donné, mais sans "http://", e.g. "www.domain.de/piwik".');
+define('TRACKING_PIWIK_ID_TITLE' , 'ID page Piwik');
+define('TRACKING_PIWIK_ID_DESC' , 'Dans l&apos;administration Piwik, un ID de page sera créé par domaine (généralement "1").');
+define('TRACKING_PIWIK_GOAL_TITLE' , 'Numéro de campagne Piwik (facultatif)');
+define('TRACKING_PIWIK_GOAL_DESC' , 'Entrez votre numéro de campagne, si vous souhaitez suivre des objectifs prédéfinis.. Détails voir <a href="http://piwik.org/docs/tracking-goals-web-analytics/" target="_blank"><b>Piwik: Suivi des conversions d&apos;objectifs</b></a>');

@@ -41,7 +41,7 @@ define('CAMPAIGNS_DESC','Mit Kampagne zur Nachverfolgung verbinden.');
     var $code, $title, $description, $enabled;
 
 
-    function shopboy() {
+    function __construct() {
       global $order;
 
       $this->code = 'shopboy';

@@ -18,7 +18,7 @@
   class breadcrumb {
     var $_trail;
 
-    function breadcrumb() {
+    function __construct() {
       $this->reset();
     }
 

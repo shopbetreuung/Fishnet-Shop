@@ -20,7 +20,7 @@ class classPnSofortueberweisung {
 
 
 
-	function classPnSofortueberweisung($password = '', $hashfunction = 'sha1') {
+	function __construct($password = '', $hashfunction = 'sha1') {
 
 		$this->password = $password;
 		$this->password2 = '';

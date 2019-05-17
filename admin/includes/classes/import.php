@@ -25,7 +25,7 @@ class xtcImport {
    *F xtcImport . . . . . . . . . . . . . . . . . . . . . . . . . . .  xtcImport
    **
 	 ****************************************************************************/
-	function xtcImport($filename) {
+	function __construct($filename) {
 		$this->seperator = CSV_SEPERATOR;
 		$this->TextSign = CSV_TEXTSIGN;
 		//BOF - Dokuman - 2010-02-11 - set default textsign
@@ -641,7 +641,7 @@ class xtcExport {
 	 *F xtcExport . . . . . . . . . . . . . . . . . . . . . . . . . . .  xtcExport
 	 **
 	 ****************************************************************************/
-	function xtcExport($filename) {
+	function __construct($filename) {
 		$this->catDepth = 6;
 		$this->languages = $this->get_lang();
 		$this->filename = $filename;

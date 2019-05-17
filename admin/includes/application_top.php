@@ -72,6 +72,11 @@ if (file_exists(DIR_FS_CATALOG.'export/_error_reporting.all') || file_exists(DIR
   error_reporting(0);
 }
 
+// new error handling
+if (is_file(DIR_FS_CATALOG.DIR_WS_INCLUDES.'error_reporting.php')) {
+  require_once (DIR_FS_CATALOG.DIR_WS_INCLUDES.'error_reporting.php');
+}
+
 // solve compatibility issues
 require_once (DIR_WS_FUNCTIONS.'compatibility.php');
 

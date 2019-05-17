@@ -22,7 +22,7 @@
 
 class campaigns {
 
-	function campaigns(& $get_array) {
+	function __construct(& $get_array) {
 		global $currencies;
 
 		if (count($get_array) == 9) {

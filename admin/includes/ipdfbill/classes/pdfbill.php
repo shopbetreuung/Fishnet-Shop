@@ -14,33 +14,33 @@ require( DIR_FS_CATALOG.'admin/includes/ipdfbill/classes/order_pdf.php' );
 require_once (DIR_FS_INC.'xtc_get_order_data.inc.php');
 require_once (DIR_FS_INC.'xtc_get_attributes_model.inc.php');
 
-define( ATTACHMENT_TXT, 'includes/ipdfbill/user/pdf_attachment.txt' );    
+define('ATTACHMENT_TXT' , 'includes/ipdfbill/user/pdf_attachment.txt' );    
 
-define( COUNT_FOOTERBLOCKS, 4);
+define('COUNT_FOOTERBLOCKS' , 4);
 
-define(DEFAULT_LANGUAGE_ID, 2);   
-define(DEMOTEXT, 'DEMO');                        // if Demomode
+define('DEFAULT_LANGUAGE_ID' , 2);   
+define('DEMOTEXT' , 'DEMO');                        // if Demomode
 
-define(DATA_CELL_WIDTH,      135);               // default
-define(DATA_CELL_HEIGHT,      10);          
-define(DATA_CELL_FONT_COLOR, '#000000' ); 
-define(DATA_CELL_FONT_TYPE,  'arial' );   
-define(DATA_CELL_FONT_STYLE, '' );  
-define(DATA_CELL_FONT_SIZE,  '6' );  
-define(DATA_CELL_POSITION,  'L' );  
+define('DATA_CELL_WIDTH' , 135);               // default
+define('DATA_CELL_HEIGHT' , 10);          
+define('DATA_CELL_FONT_COLOR' , '#000000' ); 
+define('DATA_CELL_FONT_TYPE' , 'arial' );   
+define('DATA_CELL_FONT_STYLE' , '' );  
+define('DATA_CELL_FONT_SIZE' , '6' );  
+define('DATA_CELL_POSITION' , 'L' );  
 
-define(DATA_CELL_IMAGE_WIDTH,      20 );               // default
-define(DATA_CELL_IMAGE_HEIGHT,     20 );          
-//define(DATA_CELL_IMAGE_IMGPATH,   DIR_FS_CATALOG_THUMBNAIL_IMAGES );          
-define(DATA_CELL_IMAGE_IMGPATH,   DIR_FS_CATALOG_INFO_IMAGES );          
+define('DATA_CELL_IMAGE_WIDTH' , 20 );               // default
+define('DATA_CELL_IMAGE_HEIGHT' , 20 );          
+//define('DATA_CELL_IMAGE_IMGPATH' , DIR_FS_CATALOG_THUMBNAIL_IMAGES );          
+define('DATA_CELL_IMAGE_IMGPATH' , DIR_FS_CATALOG_INFO_IMAGES );          
 
-define(PAGE_HEIGHT,  250 ); 
-define(PAGE_WIDTH, 180 );
+define('PAGE_HEIGHT' , 250 ); 
+define('PAGE_WIDTH' , 180 );
 
-define(DEFAULT_BORDER, 0 );
-define(DEFAULT_BORDER_COLOR, '#000000' );
+define('DEFAULT_BORDER' , 0 );
+define('DEFAULT_BORDER_COLOR' , '#000000' );
 
-define( PDF_IMAGE_DIR, 'includes/ipdfbill/images/user/' );
+define('PDF_IMAGE_DIR', 'includes/ipdfbill/images/user/' );
 
 
 
@@ -52,7 +52,7 @@ class pdfbill extends pdfbill_closed {
   var $xtcPrice;
   
   
-  function pdfbill( $parameter_arr, $orders_id, $demomode=false ) {
+  function __construct( $parameter_arr, $orders_id, $demomode=false ) {
     if( !$demomode ) {
       $parameter_arr['pdfdebug']='0';
       $parameter_arr['grids']='0';

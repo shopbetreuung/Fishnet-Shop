@@ -47,7 +47,7 @@ if ( !class_exists( "image_processing_step" ) ) {
     var $code, $title, $description, $enabled;
 
 
-    function image_processing_step() {
+    function __construct() {
       global $order;
 
       $this->code = 'image_processing_step';

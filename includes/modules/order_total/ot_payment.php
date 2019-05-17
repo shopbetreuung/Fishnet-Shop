@@ -28,7 +28,7 @@ class ot_payment
 {
     var $title, $output;
 
-    function ot_payment()
+    function __construct()
     {
         $this->code = 'ot_payment';
         $this->num = 3;

@@ -44,7 +44,7 @@ define('CAMPAIGNS_DESC','Mit Kampagne verbinden.<br />(Nachverfolgung/Tracken/Kl
     var $code, $title, $description, $enabled;
 
 
-    function testeo() {
+    function __construct() {
       global $order;
 
       $this->code = 'testeo';

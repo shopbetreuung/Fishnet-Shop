@@ -64,5 +64,12 @@ define('ERROR_TEXT_HEADING', 'Slide not saved, fix errors:');
 define('ERROR_TEXT_NAME', 'Name for image entry invalid!');
 define('TEXT_TYP', 'Link type:');
 define('TEXT_URL', 'Link address:');
+define('NONE_TARGET', 'Don&apos;t set a target');
+define('TARGET_BLANK', '_blank');
+define('TARGET_TOP', '_top');
+define('TARGET_SELF', '_self');
+define('TARGET_PARENT', '_parent');
+define('ACTIVE', 'Active');
+define('NOTACTIVE', 'Not active');
 
 ?>

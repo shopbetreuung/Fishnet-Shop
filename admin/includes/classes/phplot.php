@@ -174,7 +174,7 @@
     //BEGIN CODE
     //////////////////////////////////////////////////////
     //Constructor: Setup Img pointer, Colors and Size of Image
-    function PHPlot($which_width=600,$which_height=400,$which_output_file="",$which_input_file="") {
+    function __construct($which_width=600,$which_height=400,$which_output_file="",$which_input_file="") {
       $this->SetRGBArray('2');
       $this->background_done = 0; //Set to 1 after background image first drawn
       if ($which_output_file != "") {

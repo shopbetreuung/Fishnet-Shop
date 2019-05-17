@@ -19,7 +19,11 @@
     global $cPath_array;
 
     if (xtc_not_null($current_category_id)) {
-      $cp_size = sizeof($cPath_array);
+        
+      if(is_countable($cPath_array)) {
+        $cp_size = sizeof($cPath_array);
+      }
+      
       if ($cp_size == 0) {
         $cPath_new = $current_category_id;
       } else {

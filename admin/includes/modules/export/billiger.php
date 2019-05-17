@@ -50,7 +50,7 @@ class billiger {
     var $description;
     var $enabled;
 
-    function billiger()
+    function __construct()
     {
         global $order;
 

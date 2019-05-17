@@ -31,7 +31,7 @@ class ot_sofort
 {
     var $title, $output;
 
-    function ot_sofort()
+    function __construct()
     {
         $this->code = 'ot_sofort';
         $this->title = MODULE_ORDER_TOTAL_SOFORT_TITLE;

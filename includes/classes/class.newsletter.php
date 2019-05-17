@@ -22,7 +22,7 @@
 class newsletter {
 	var $message, $message_id;
 	
-	function newsletter() {
+	function __construct() {
 		$this->auto = false;
 	}
 

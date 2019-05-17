@@ -64,5 +64,7 @@ define('ERROR_TEXT_HEADING', 'Fehler! Slide konnte nicht gespeichert werden:');
 define('ERROR_TEXT_NAME', 'Name f&uuml;r Bildeintrag ung&uuml;ltig!');
 define('TEXT_TYP', 'Linkart:');
 define('TEXT_URL', 'Linkadresse:');
+define('ACTIVE', 'AKTIV');
+define('NOTACTIVE', 'NICHT AKTIV');
 
 ?>

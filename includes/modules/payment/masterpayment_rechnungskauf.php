@@ -24,7 +24,7 @@ require_once(DIR_FS_CATALOG . 'includes/masterpayment/MasterpaymentActions.class
   class masterpayment_rechnungskauf extends MasterpaymentActions {
     var $code, $title, $description, $enabled;
 
-    function masterpayment_rechnungskauf() {
+    function __construct() {
       global $order;
 
       $this->code		 	= 'masterpayment_rechnungskauf';

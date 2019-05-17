@@ -24,7 +24,7 @@ require_once(DIR_FS_CATALOG . 'includes/masterpayment/MasterpaymentActions.class
   class masterpayment_debit_card extends MasterpaymentActions {
     var $code, $title, $description, $enabled;
 
-    function masterpayment_debit_card() {
+    function __construct() {
       global $order;
 
       $this->code		 	= 'masterpayment_debit_card';

@@ -100,7 +100,7 @@ if (isset($_POST['psmgoogle'])) {
 
     
     
-    function preissuchmaschine() {
+    function __construct() {
       global $order;
 
       $this->code = 'preissuchmaschine';

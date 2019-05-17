@@ -1,12 +1,12 @@
 <?php
 
 
-define( PDFBILL_FOLDER, 'pdf_invoices/' );
-define( PDFBILL_PREFIX, 'pdf_invoice_' );
-define( PDF_INVOICE_NAME, '%s.pdf' );   // filename of email pdf-attachment invoice
+define('PDFBILL_FOLDER' ,'pdf_invoices/');
+define('PDFBILL_PREFIX' ,'pdf_invoice_');
+define('PDF_INVOICE_NAME', '%s.pdf');   // filename of email pdf-attachment invoice
 
 
-define( LSM_CONFIG_FILE, 'lsm_config.txt');
+define('LSM_CONFIG_FILE' , 'lsm_config.txt');
 
 function lsm_infos() {
   $lines_arr = file(LSM_CONFIG_FILE);

@@ -16,7 +16,7 @@ class sofort_lastschrift extends sofort{
 
 	var $code, $title, $description, $enabled, $sofort, $paymentMethod;
 
-	function sofort_lastschrift() {
+	function __construct() {
 		global $order;
 		
 		parent::sofort(); //call parent constructor

@@ -129,9 +129,12 @@ if (!$box_smarty->isCached(CURRENT_TEMPLATE.'/boxes/box_imagesliders.html', $cac
 		$imagesliders_array[] = $imagesliders_data;
 										
 	}
-		
-	if (count($imagesliders_array) > 0)	
-		$box_smarty->assign('BOX_IMAGESLIDER_ARRAY', $imagesliders_array);
+        
+	if (is_countable($imagesliders_array)) {	
+            if (count($imagesliders_array) > 0) {
+                    $box_smarty->assign('BOX_IMAGESLIDER_ARRAY', $imagesliders_array);
+            }
+        }
 
 }
 

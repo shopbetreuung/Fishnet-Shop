@@ -14,7 +14,7 @@
 class moneybookers_callback {
  	
  	
-  function moneybookers_callback() {
+  function __construct() {
  		$this->repost = false;
 		$this->Error = '';
 		$this->oID = 0;

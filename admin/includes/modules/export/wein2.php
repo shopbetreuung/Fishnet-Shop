@@ -44,7 +44,7 @@
     var $code, $title, $description, $enabled;
 
 
-    function wein2() {
+    function __construct() {
       global $order;
 
       $this->code = 'wein2';

@@ -2,7 +2,7 @@
 
 require('includes/application_top.php');
 
-define( FREEE_INFO, false );  // freies extrafeld, default verstecktes feature
+define('FREEE_INFO' , false);  // freies extrafeld, default verstecktes feature
 
 require(DIR_FS_ADMIN.'includes/ipdfbill/pdfbill_lib.php');
 require_once(DIR_FS_INC . 'xtc_add_tax.inc.php');

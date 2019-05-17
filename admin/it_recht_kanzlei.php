@@ -29,7 +29,8 @@ require (DIR_WS_INCLUDES.'head.php');
   <table class="tableBody">
     <tr>
       <?php //left_navigation
-      if (USE_ADMIN_TOP_MENU == 'false') {
+      
+      if (defined("USE_ADMIN_TOP_MENU") && USE_ADMIN_TOP_MENU == 'false') {
         echo '<td class="columnLeft2">'.PHP_EOL;
         echo '<!-- left_navigation //-->'.PHP_EOL;       
         require_once(DIR_WS_INCLUDES . 'column_left.php');

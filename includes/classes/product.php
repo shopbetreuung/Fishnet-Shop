@@ -26,7 +26,7 @@ class product {
    * @param integer $pID
    * @return product
    */
-  function product($pID = 0) {
+  function __construct($pID = 0) {
     $this->pID = (int)$pID; // DokuMan - 2010-08-28 - typecasting
     
     //set default select, using in function getAlsoPurchased, getCrossSells, getReverseCrossSells

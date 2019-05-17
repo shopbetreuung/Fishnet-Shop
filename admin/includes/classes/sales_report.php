@@ -49,12 +49,14 @@
   class sales_report {
     var $mode, $globalStartDate, $startDate, $endDate, $actDate, $showDate, $showDateEnd, $sortString, $status, $outlet;
 
-    function sales_report($mode, $startDate = 0, $endDate = 0, $sort = 0, $statusFilter = 0, $filter = 0,$payment = 0) {
+    function __construct($mode, $startDate = 0, $endDate = 0, $sort = 0, $statusFilter = 0, $filter = 0,$payment = 0) {
       // startDate and endDate have to be a unix timestamp. Use mktime !
       // if set then both have to be valid startDate and endDate
       $this->mode = $mode;
-      $this->tax_include = DISPLAY_PRICE_WITH_TAX;
-
+      if (defined('DISPLAY_PRICE_WITH_TAX')) {
+        $this->tax_include = DISPLAY_PRICE_WITH_TAX;
+      }
+      
       $this->statusFilter = $statusFilter;
       $this->paymentFilter = $payment;     
       // get date of first sale

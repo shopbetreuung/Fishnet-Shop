@@ -61,4 +61,6 @@ define('IMAGE_ICON_STATUS_RED_LIGHT', 'Deaktivieren');
 
 define('ERROR_TEXT_HEADING', 'Fehler! Slide konnte nicht gespeichert werden:');
 define('ERROR_TEXT_NAME', 'Name f&uuml;r Bildeintrag ung&uuml;ltig!');
+define('ACTIVE', 'AKTIV');
+define('NOTACTIVE', 'NICHT AKTIV');
 ?>

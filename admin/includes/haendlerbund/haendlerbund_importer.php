@@ -9,7 +9,7 @@
     
     
     #Konstruktor
-    function haendlerbund_importer() {
+    function __construct() {
       
     }
     

@@ -1,6 +1,6 @@
 <?php
-define(IPDFBILL_VERSION, 'V1.9.6'); 
-define(IPDFBILL_DATE, '20.08.2009');
+define('IPDFBILL_VERSION' , 'V1.9.6'); 
+define('IPDFBILL_DATE' , '20.08.2009');
 
 require_once(DIR_FS_CATALOG.'admin/includes/ipdfbill/classes/fpdf/fpdf.php');
 

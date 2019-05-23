@@ -130,7 +130,7 @@ if (!$box_smarty->isCached(CURRENT_TEMPLATE.'/boxes/box_imagesliders.html', $cac
 										
 	}
         
-        if (is_countable($imagesliders_array)) {	
+        if (is_array($imagesliders_array)) {	
             if (count($imagesliders_array) > 0) {
                     $box_smarty->assign('BOX_IMAGESLIDER_ARRAY', $imagesliders_array);
             }

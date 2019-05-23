@@ -20,7 +20,7 @@
 
     if (xtc_not_null($current_category_id)) {
         
-      if(is_countable($cPath_array)) {
+      if(is_array($cPath_array)) {
         $cp_size = sizeof($cPath_array);
       }
       

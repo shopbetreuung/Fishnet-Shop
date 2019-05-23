@@ -21,7 +21,7 @@ $module_smarty->assign('tpl_path', 'templates/'.CURRENT_TEMPLATE.'/');
 
 $data = $product->getCrossSells();
 
-if (is_countable($data) && count($data) > 0) {
+if (count($data) > 0) {
 
 	$module_smarty->assign('language', $_SESSION['language']);
 	$module_smarty->assign('module_content', $data);

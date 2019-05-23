@@ -165,7 +165,7 @@ if (!$box_smarty->isCached(CURRENT_TEMPLATE.'/boxes/box_best_sellers.html', $cac
     $smarty->assign('box_BESTSELLERS', $box_best_sellers);
   }
   */
-    if (is_countable($box_content)) {
+    if (is_array($box_content)) {
         if (count($box_content) > 0) {
           $box_best_sellers = '';
             // set cache ID

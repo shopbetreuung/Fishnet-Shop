@@ -13,8 +13,6 @@
   require('includes/application_top.php');
   $action = (isset($_GET['action']) ? $_GET['action'] : '');
   $page_parcel = (isset($_GET['page']) ? $_GET['page'] : '');
-  
-  $number_of_carriers = (defined('TEXT_DISPLAY_NUMBER_OF_CARRIERS')) ? TEXT_DISPLAY_NUMBER_OF_CARRIERS : '';
 
   if (xtc_not_null($action)) {
     switch ($action) {
@@ -109,7 +107,7 @@ require (DIR_WS_INCLUDES.'head.php');
 			</table>
                             <table border="0" width="100%" cellspacing="0" cellpadding="2">
                               <tr>
-                                <td class="smallText" valign="top"><?php echo $carriers_split->display_count($carriers_query_numrows, MAX_DISPLAY_SEARCH_RESULTS, $page_parcel, $number_of_carriers); ?></td>
+                                <td class="smallText" valign="top"><?php echo $carriers_split->display_count($carriers_query_numrows, MAX_DISPLAY_SEARCH_RESULTS, $page_parcel, TEXT_DISPLAY_NUMBER_OF_CARRIERS); ?></td>
                                 <td class="smallText" align="right"><?php echo $carriers_split->display_links($carriers_query_numrows, MAX_DISPLAY_SEARCH_RESULTS, MAX_DISPLAY_PAGE_LINKS, $page_parcel); ?></td>
                               </tr>
                               <?php

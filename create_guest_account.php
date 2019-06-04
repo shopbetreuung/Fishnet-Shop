@@ -87,12 +87,12 @@ if (isset($_POST['action']) && ($_POST['action'] == 'process')) {
     $messageStack->add('create_account', ENTRY_GENDER_ERROR);
   }
 
-  if (strlen($firstname) < ENTRY_FIRST_NAME_MIN_LENGTH) {
+  if ((strlen($firstname) < ENTRY_FIRST_NAME_MIN_LENGTH) OR (preg_match("/http/", $firstname))) {
     $error = true;
     $messageStack->add('create_account', ENTRY_FIRST_NAME_ERROR);
   }
 
-  if (strlen($lastname) < ENTRY_LAST_NAME_MIN_LENGTH) {
+  if ((strlen($lastname) < ENTRY_LAST_NAME_MIN_LENGTH) OR (preg_match("/http/", $lastname))) {
     $error = true;
     $messageStack->add('create_account', ENTRY_LAST_NAME_ERROR);
   }

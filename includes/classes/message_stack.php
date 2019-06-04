@@ -22,7 +22,7 @@
 
   class messageStack extends tableBox {
     // class constructor
-    function __construct() {
+    function messageStack() {
 
       $this->messages = array();
 

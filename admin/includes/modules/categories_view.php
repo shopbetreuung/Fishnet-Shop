@@ -275,7 +275,7 @@
             //EOF - web28- 2010-11-24 FIX undefined $cPath_back
 
             // BOC - web28 - 2012-03-11 - added "go to parent category" icon
-            if (!xtc_not_null($search) && is_countable($cPath_array) &&  count($cPath_array) > 0 && $_GET['cPath'] != '0') {
+            if (!xtc_not_null($search) && is_array($cPath_array) &&  count($cPath_array) > 0 && $_GET['cPath'] != '0') {
               ?>
                <tr class="dataTableRow" onmouseover="this.className='dataTableRowOver';this.style.cursor='pointer'" onmouseout="this.className='dataTableRow'">
                  <td class="categories_view_data hidden-xs">--</td>

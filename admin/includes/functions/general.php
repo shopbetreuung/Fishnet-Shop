@@ -229,24 +229,24 @@ function xtc_output_string($string, $translate = false, $protected = false) {
          $cPath_new = implode('_', $cPath_array);
       }
     } else {
-      if (is_countable($cPath_array) && sizeof($cPath_array) == 0) {
+      if (is_array($cPath_array) && sizeof($cPath_array) == 0) {
         $cPath_new = $current_category_id;
       } else {
         $cPath_new = '';
-        if(is_countable($cPath_array)) {
+        if(is_array($cPath_array)) {
             $last_category_query = xtc_db_query("select parent_id from ".TABLE_CATEGORIES." where categories_id = '".$cPath_array[(sizeof($cPath_array) - 1)]."'");
         }
         $last_category = xtc_db_fetch_array($last_category_query);
         $current_category_query = xtc_db_query("select parent_id from ".TABLE_CATEGORIES." where categories_id = '".$current_category_id."'");
         $current_category = xtc_db_fetch_array($current_category_query);
         if ($last_category['parent_id'] == $current_category['parent_id']) {
-           if(is_countable($cPath_array)) {  
+           if(is_array($cPath_array)) {
                 for ($i = 0, $n = sizeof($cPath_array) - 1; $i < $n; $i ++) {
                   $cPath_new .= '_'.$cPath_array[$i];
                 }
            }
         } else {
-          if(is_countable($cPath_array)) {
+          if(is_array($cPath_array)) {
             for ($i = 0, $n = sizeof($cPath_array); $i < $n; $i ++) {
               $cPath_new .= '_'.$cPath_array[$i];
             }

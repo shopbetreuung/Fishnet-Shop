@@ -262,7 +262,7 @@ if ($srExp < 1) {
 
  <?php
 
-if (is_countable($campaign->result) && count($campaign->result)) {
+if (count($campaign->result)) {
 ?>               
                 
                 

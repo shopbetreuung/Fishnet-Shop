@@ -35,5 +35,6 @@ define('TEXT_INFO_HEADING_DELETE_CARRIER', 'Delete carrier');
 define('BUTTON_NEW_CARRIER', 'New Carrier');
 
 define('TEXT_DISPLAY_NUMBER_OF_TAX_RATES', 'Displaying <b>%d</b> to <b>%d</b> (of <b>%d</b> Carriers)');
+define('TEXT_DISPLAY_NUMBER_OF_CARRIERS','Afficher <b>%d</b> à <b>%d</b> (du total <b>%d</b> fournisseurs de services de colis)');
 
 ?>

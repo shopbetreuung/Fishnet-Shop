@@ -30,7 +30,7 @@
                                    'countries_name' => $countries_values['countries_name']);
       }
       
-    if (is_countable($countries_array_top)) {
+    if (is_array($countries_array_top)) {
         for ($i=0, $n=sizeof($countries_array_top); $i<$n; $i++) {
           $countries_array[] = array('id' => $countries_array_top[$i]['countries_id'], 'text' => $countries_array_top[$i]['countries_name']);
         }

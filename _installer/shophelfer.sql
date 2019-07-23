@@ -946,6 +946,8 @@ CREATE TABLE products_description (
   products_order_description text,
   products_main_image_title VARCHAR( 255 ) NOT NULL,
   products_main_image_alt VARCHAR( 255 ) NOT NULL,
+  content_meta_index TINYINT(1) NULL DEFAULT NULL,
+  canonical_link TEXT CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (products_id,language_id),
   KEY products_name (products_name)
 ) ENGINE=MyISAM;

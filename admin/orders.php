@@ -1771,6 +1771,10 @@ elseif ($action == 'custom_action') {
                       
                       $orders_link = xtc_href_link(FILENAME_ORDERS, xtc_get_all_get_params(array('oID', 'action')) . 'oID=' . $orders['orders_id'] . '&action=edit');
                       $orders_image_preview = xtc_image(DIR_WS_ICONS . 'preview.gif', ICON_PREVIEW);
+                      $already_bought_query = xtc_db_query("SELECT customers_id FROM ".TABLE_ORDERS." WHERE customers_id = ".$orders['customers_id']);
+                      if (xtc_db_num_rows($already_bought_query) > 1) {
+                        $already_bought_image = xtc_image(DIR_WS_ICONS . 'bought_sign.png', ICON_PREVIEW);
+                      }
                       $orders['customers_name'] = (isset($orders['customers_company']) && $orders['customers_company'] != '') ? $orders['customers_company'] : $orders['customers_name'];
                       if (isset($oInfo) && is_object($oInfo) && ($orders['orders_id'] == $oInfo->orders_id) ) {
                         $orders_action_image = xtc_image(DIR_WS_IMAGES . 'icon_arrow_right.gif', ICON_ARROW_RIGHT);
@@ -1779,11 +1783,11 @@ elseif ($action == 'custom_action') {
                       }
                       
                       $customers_symbol_query = xtc_db_query("SELECT customers_symbol FROM " . TABLE_CUSTOMERS . " WHERE customers_id = '".$orders['customers_id']."'");
-				   	$customers_symbol_array = xtc_db_fetch_array($customers_symbol_query);
-					$customers_symbol = $customers_symbol_array['customers_symbol'];
+				            	$customers_symbol_array = xtc_db_fetch_array($customers_symbol_query);
+					            $customers_symbol = $customers_symbol_array['customers_symbol'];
                       
                       ?>
-                      <td class="dataTableContent"><?php echo '<a href="' . $orders_link . '">' . $orders_image_preview . '</a>&nbsp;' . ($symbol_array[$customers_symbol]['image'] ? xtc_image(DIR_WS_ADMIN.'images/' . $symbol_array[$customers_symbol]['image'], $symbol_array[$customers_symbol]['value'], 25, 25) : '') . '&nbsp;' . $orders['customers_name']; ?></td>
+                      <td class="dataTableContent"><?php echo '<a href="' . $orders_link . '">' . $orders_image_preview . '</a>&nbsp;' . ($symbol_array[$customers_symbol]['image'] ? xtc_image(DIR_WS_ADMIN.'images/' . $symbol_array[$customers_symbol]['image'], $symbol_array[$customers_symbol]['value'], 25, 25) : '') . '&nbsp;' . $orders['customers_name'] .'<span style="float:right;">'.$already_bought_image.'</span>'; ?></td>
                       <td class="dataTableContent" align="right"><?php echo $orders['orders_id']; ?></td>
                       <!-- // --- bof -- ipdfbill -------- --> 
                       <td class="dataTableContent hidden-xs" align="right"><?php echo $pdfgen.$fakt ?></td>   <!-- ibillnr -->

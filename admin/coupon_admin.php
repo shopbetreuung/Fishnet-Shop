@@ -658,7 +658,7 @@ if (USE_WYSIWYG=='true' && $_GET['action'] == 'email') {
     if (isset($_POST['coupon_finishdate_day'])) $coupon_expire_date = date('Y-m-d', mktime(0, 0, 0, $_POST['coupon_finishdate_month'],$_POST['coupon_finishdate_day'] ,$_POST['coupon_finishdate_year']));
     //EOF  web28 - 2010-07-04 FIX error handling
 // set some defaults
-    if (!$coupon_uses_user) $coupon_uses_user=1;
+    if (!$coupon_uses_user) $coupon_uses_user = 0;
 ?>
     <td  class="boxCenter" width="100%" valign="top">
     <table border="0" width="100%" cellspacing="0" cellpadding="2">

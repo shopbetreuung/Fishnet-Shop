@@ -14,13 +14,17 @@
 
    Released under the GNU General Public License 
    ---------------------------------------------------------------------------------------*/
-  
-// This function makes a new password from a plaintext password. 
+   // include needed class
+  require_once (DIR_FS_CATALOG.'includes/classes/validpass.php');
+
+  // This function makes a new password from a plaintext password. 
   function xtc_encrypt_password($plain) {
 
-     $password=md5($plain);
+    // init class
+    $validpass = new validpass();
+    // encrypt password
+    $encrypted = $validpass->encrypt_password($plain);
 
-    return $password;
-
+    return $encrypted;
   }
  ?>

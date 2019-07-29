@@ -43,7 +43,7 @@ if (isset ($_POST['action']) && ($_POST['action'] == 'process')) {
     $check_customer_query = xtc_db_query("select customers_password from ".TABLE_CUSTOMERS." where customers_id = '".(int) $_SESSION['customer_id']."'");
     $check_customer = xtc_db_fetch_array($check_customer_query);
 
-    if (!xtc_validate_password($password, $check_customer['customers_password'])) {
+    if (!xtc_validate_password($password, $check_customer['customers_password'],$check_customer['customers_id'])) {
       $messageStack->add('account_delete', TEXT_LOGIN_ERROR);
     } else {
 //EOF - 2009-08-25 - Require password to disable account

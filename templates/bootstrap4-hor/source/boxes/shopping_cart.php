@@ -31,8 +31,6 @@
 
   if ($_SESSION['cart']->count_contents() > 0) {
 
-    $total = $_SESSION['cart']->show_total();
-
     // build array with cart content and count quantity  
     if (strpos($PHP_SELF, FILENAME_LOGOFF) === false) {
       $products = $_SESSION['cart']->get_products();
@@ -45,6 +43,7 @@
       }
     }
 
+    $total = $_SESSION['cart']->show_total();
     // sales discount
     if ($_SESSION['customers_status']['customers_status_ot_discount_flag'] == '1' && $_SESSION['customers_status']['customers_status_ot_discount'] != '0.00') {
       if ($_SESSION['customers_status']['customers_status_show_price_tax'] == 0 && $_SESSION['customers_status']['customers_status_add_tax_ot'] == 1) {

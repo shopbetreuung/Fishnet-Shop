@@ -708,7 +708,7 @@ foreach ($menues as $menu) {
 				} else if ($menue_item['link'] == false && $menue_item['check'] == 'true') {
 					echo '<li class="dropdown-submenu"><a tabindex="0" data-toggle="dropdown">' . $menue_item['name'] . '</a>';
 					echo '<ul class="dropdown-menu">';
-					$last_is_main = $menue_item['is_main'];
+					$last_is_main = !$menue_item['is_main'];
 				}
 			} else {
 			

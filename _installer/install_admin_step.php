@@ -266,14 +266,20 @@ if (isset($_POST['action']) && ($_POST['action'] == 'process'))
                 }
             }
             // groups
-            $groups1_array = ['configuration', 'modules', 'countries', 'currencies', 'zones', 'geo_zones', 'tax_classes', 'tax_rates', 'accounting', 'backup', 'server_info', 'whos_online', 'languages', 'define_language', 'orders_status', 'shipping_status', 'module_export'];
-            $groups3_array = ['orders', 'campaigns', 'print_packingslip', 'print_order', 'popup_memo', 'coupon_admin', 'listproducts', 'listcategories'];
-            $groups4_array = ['gv_queue', 'gv_mail', 'gv_sent', 'validproducts', 'mail'];
-            
-            xtc_db_query("UPDATE admin_access SET cache = '0' WHERE customers_id = 'groups'");
+            $groups1_array = ['configuration', 'modules', 'countries', 'currencies', 'zones', 'geo_zones', 'tax_classes', 'tax_rates', 'cache', 'languages', 'define_language', 'orders_status', 'shipping_status', 'module_export', 'campaigns', 'coupon_admin', 'popup_image', 'products_vpe', 'cross_sell_groups', 'shop_offline', 'xajax', 'pdfbill_config', 'pdfbill_display', 'email_manager', 'email_preview'];
+            $groups2_array = ['accounting', 'customers', 'create_account', 'customers_status', 'customers_group', 'orders', 'print_packingslip', 'print_order', 'popup_memo', 'mail', 'reviews', 'orders_edit', 'econda', 'sofortueberweisung_install', 'janolaw', 'haendlerbund', 'safeterms', 'it_recht_kanzlei', 'payone_config', 'payone_logs', 'wholesalers', 'wholesalers_list', 'parcel_carriers'];
+            $groups3_array = ['listproducts', 'listcategories', 'validproducts', 'validcategories', 'categories', 'new_attributes', 'products_attributes', 'manufacturers', 'specials', 'products_expected', 'products_content', 'globaledit'];
+            $groups4_array = ['gv_queue', 'gv_mail', 'gv_sent', 'stats_products_expected', 'stats_products_viewed', 'stats_products_purchased', 'stats_customers', 'stats_sales_report', 'stats_campaigns', 'stats_stock_warning', 'inventory', 'inventory_turnover', 'outstanding', 'invoiced_orders'];
+            $groups5_array = ['backup', 'server_info', 'whos_online', 'banner_manager', 'banner_statistics', 'module_newsletter', 'content_manager', 'content_preview', 'blacklist', 'csv_backend', 'blz_update', 'removeoldpics', 'imagesliders', 'waste_paper_bin', 'stock_range', 'dsgvo_export', 'blacklist_logs', 'whitelist_logs', 'seo_tool_box', 'quick_stockupdate', 'index_images'];
+            $groups6_array = ['start', 'credits'];
+
             
             foreach ($groups1_array as $group1) {
                 xtc_db_query("UPDATE admin_access SET " . $group1 . " = '1' WHERE customers_id = 'groups'");    
+            }
+            
+            foreach ($groups2_array as $group2) {
+                xtc_db_query("UPDATE admin_access SET " . $group1 . " = '2' WHERE customers_id = 'groups'");    
             }
             
             foreach ($groups3_array as $group3) {
@@ -282,6 +288,14 @@ if (isset($_POST['action']) && ($_POST['action'] == 'process'))
             
             foreach ($groups4_array as $group4) {
                 xtc_db_query("UPDATE admin_access SET " . $group4 . " = '4' WHERE customers_id = 'groups'");    
+            }
+            
+            foreach ($groups5_array as $group5) {
+                xtc_db_query("UPDATE admin_access SET " . $group5 . " = '5' WHERE customers_id = 'groups'");    
+            }
+            
+            foreach ($groups6_array as $group6) {
+                xtc_db_query("UPDATE admin_access SET " . $group6 . " = '6' WHERE customers_id = 'groups'");    
             }
             
             xtc_redirect(xtc_href_link('install_additional_admins.php', '', 'NONSSL'));

@@ -249,12 +249,12 @@ function toggle_column() {
   <td>
 <?php  
       $profile_list = profile_list();
-      asort($profile_list);
       
       foreach( $profile_list as $p ) {
         ?>
-            <a id="SelectCat" onFocus="if(this.blur)this.blur()" class='btn btn-default' href="<?php echo $PHP_SELF?>?profile_name=<?php echo $p['profile_name'] ?>">
+            <a id="SelectCat"  onFocus="if(this.blur)this.blur()" class='btn btn-default <?php echo ($p['default_profile'] == 1 && $p['profile_name'] != 'default') ? "pdf_text_style" : "" ?>' href="<?php echo $PHP_SELF?>?profile_name=<?php echo $p['profile_name'] ?>">
               <?php echo $p['profile_name'] ?>
+              <?php echo ($p['default_profile'] == 1 && $p['profile_name'] != 'default') ? " (default)" : "" ?>
             </a>
             
             <?php if( $p['profile_name']!='default' ) {  ?>

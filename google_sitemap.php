@@ -162,7 +162,7 @@ foreach($cat_array as $lang_array) {
         $lang_param = ($cat_data['code'] != DEFAULT_LANGUAGE) ? '&language='.$cat_data['code'] : ''; 
         $date = ($cat_data['last_modified'] != NULL) ? $cat_data['last_modified'] : $cat_data['date_added'];
 
-        if (is_null($date)) {
+        if (is_null($date) || $date == 0) {
            $date = date(strtotime('first day of January', time()));
         }
  

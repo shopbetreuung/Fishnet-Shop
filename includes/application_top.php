@@ -32,8 +32,11 @@
 define('PAGE_PARSE_START_TIME', microtime(true));
 
 header('X-Frame-Options: SAMEORIGIN');
-header('X-XSS-Protection: 1');
+header("X-XSS-Protection: 1; mode=block");
 header('X-Content-Type-Options: nosniff');
+header("Strict-Transport-Security: max-age=31536000; includeSubDomains");
+header("Referrer-Policy: no-referrer-when-downgrade");
+header("Feature-Policy: vibrate: 'self'; usermedia '*' sync-xhr 'self' ");
 
 // configuration parameters
 if (file_exists('includes/local/configure.php')) {

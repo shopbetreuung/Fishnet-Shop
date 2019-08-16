@@ -76,6 +76,7 @@
 
   $manufacturers_array = array (array ('id' => '', 'text' => TEXT_NONE));
   $manufacturers_query = xtc_db_query("SELECT manufacturers_id, manufacturers_name FROM ".TABLE_MANUFACTURERS." ORDER BY manufacturers_name");
+  $content_meta_index = array(array('id'=> '1', 'text' => 'index'), array('id'=> '0', 'text' => 'noindex'));
   while ($manufacturers = xtc_db_fetch_array($manufacturers_query)) {
     $manufacturers_array[] = array ('id' => $manufacturers['manufacturers_id'], 'text' => $manufacturers['manufacturers_name']);
   }
@@ -188,6 +189,10 @@
             <div class='col-xs-12'>
               <div class="col-xs-12 col-sm-6 main"><span class="main"><?php echo TEXT_FSK18; ?></span></div>
               <div class="col-xs-12 col-sm-6 main"><span class="main"><?php echo xtc_draw_checkbox_field('fsk18', '1', $pInfo->products_fsk18=='1'); ?></span></div>
+            </div>
+            <div class="col-xs-12">
+              <div class="col-xs-12 col-sm-6" ><span class="main"><?php echo META_INDEX; ?></span></div>
+              <div class="col-xs-12 col-sm-6" ><span class="main"><?php echo xtc_draw_pull_down_menu('content_meta_index',$content_meta_index, $pInfo->content_meta_index , 'style="width: 135px"'); ?></span></div>
             </div>
     </div>
     <div class='col-sm-6 col-xs-12'>
@@ -341,6 +346,12 @@
           <div class=" col-xs-12 productspad" >
             <b><?php echo $lng_image . '&nbsp;' . TEXT_PRODUCTS_SHORT_DESCRIPTION; ?></b><br />
           </div>
+          <div class="main col-xs-12 productspad" >
+             <b><?php echo $lng_image . '&nbsp;' . CANONICAL_LINK; ?></b><br />
+          </div>
+          <div class=" col-xs-12 productspad" >              
+              <?php echo xtc_draw_input_field('canonical_link[' . $languages[$i]['id'] . ']',(isset($canonical_link[$languages[$i]['id']]) ? stripslashes($canonical_link[$languages[$i]['id']]) : $products_desc_fields['canonical_link']), 'style="width:100% !important" maxlength="255"'); ?><br/>
+          </div> 
           <div class=" col-xs-12 productspad" >
             <?php echo xtc_draw_textarea_field('products_short_description_' . $languages[$i]['id'], 'soft', '103', '20', (isset($products_short_description[$languages[$i]['id']]) ? stripslashes($products_short_description[$languages[$i]['id']]) : $products_desc_fields['products_short_description'])); ?>
           </div>

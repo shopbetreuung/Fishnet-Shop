@@ -268,14 +268,14 @@ require (DIR_WS_INCLUDES.'head.php');
 ?>
               <div class="col-xs-12">
                 <div class="col-xs-12 col-sm-2 main"><?php echo TEXT_CUSTOMER; ?></div>
-                <div class="col-xs-12 col-sm-10"><?php echo xtc_draw_pull_down_menu('customers_email_address', $customers, $_GET['customer']);?></div>
+                <div class="col-xs-12 col-sm-10"><?php echo xtc_draw_pull_down_menu('customers_email_address', $customers, $_GET['customer'], 'id="customers_email_address" ');?></div>
               </div>
               <div class="col-xs-12">
                 <br>
               </div>
                <div class="col-xs-12">
                 <div class="col-xs-12 col-sm-2 main"><?php echo TEXT_TO; ?></div>
-                <div class="col-xs-12 col-sm-10"><?php echo xtc_draw_input_field('email_to'); ?><?php echo '&nbsp;&nbsp;' . TEXT_SINGLE_EMAIL; ?></div>
+                <div class="col-xs-12 col-sm-10"><?php echo xtc_draw_input_field('email_to', '', 'id="email_to" '); ?><?php echo '&nbsp;&nbsp;' . TEXT_SINGLE_EMAIL; ?></div>
               </div>
               <div class="col-xs-12">
                 <br>
@@ -330,6 +330,27 @@ if (USE_WYSIWYG=='true' && ($_GET['action'] != 'preview' || $error== true)) {
  echo xtc_wysiwyg('gv_mail',$data['code']);
  } 
 ?>
+<script type="text/javascript">
+
+  $(document).ready(function() {
+      $("#email_to").keyup(function() {
+    if($(this).val().length > 0) {
+        $('#customers_email_address').attr('disabled', 'disabled');
+    } else {
+        $('#customers_email_address').removeAttr('disabled');
+    }
+      });    
+      
+      $('#customers_email_address').change(function(){
+    if($(this).val() != '') {
+      $('#email_to').attr('disabled', 'disabled');
+    } else {
+        $('#email_to').removeAttr('disabled');
+    }
+      });
+  });
+
+</script>
 </body>
 </html>
 <?php require(DIR_WS_INCLUDES . 'application_bottom.php'); ?>

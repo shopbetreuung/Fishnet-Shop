@@ -45,7 +45,7 @@ $pfrom = str_replace(",", ".", $pfrom);
 $pto = str_replace(",", ".", $pto);
 
 // error check
-if ($keywords && strlen($keywords) < 3 && strlen($keywords) > 0) {
+if ($keywords && strlen($keywords) < 2 && strlen($keywords) > 0) {
   $errorno += 1;
 }
 if (!$keywords && !$pfrom && !$pto && isset($_GET['x'])) {

@@ -226,5 +226,7 @@ define('TEXT_PRODUCTS_IMAGE_ALT', 'Alt (Alternative text of the image, that is d
 
 define('TEXT_CATEGORIE_IMG_TITLE', 'Titre de la catégorie image:');
 define('TEXT_CATEGORIE_IMG_ALT', 'Texte alternatif pour l\'image de catégorie:');
+define('META_INDEX', 'Meta Index');
+define('CANONICAL_LINK','Lien canonique');   
 
 ?>

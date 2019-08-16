@@ -951,6 +951,8 @@ class categories {
                               'products_meta_keywords' => xtc_db_prepare_input($products_data['products_meta_keywords'][$language_id]),
                               'products_main_image_title' => $products_main_image_title,
                               'products_main_image_alt' => $products_main_image_alt,
+                              'content_meta_index' => xtc_db_prepare_input($products_data['content_meta_index']),
+                              'canonical_link' => xtc_db_prepare_input($products_data['canonical_link'][$language_id]),
                               );
       if (trim(ADD_PRODUCTS_DESCRIPTION_FIELDS)) {
         $sql_data_array = array_merge($sql_data_array, $this->add_data_fields(ADD_PRODUCTS_DESCRIPTION_FIELDS,$products_data,$language_id));

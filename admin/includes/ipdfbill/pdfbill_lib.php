@@ -297,6 +297,10 @@ function profile_list() {
         $typeofbill_array = explode('=', $profile_parameter);
         $data['typeofbill'] = $typeofbill_array[1];
       }
+      if (strstr($profile_parameter, 'default_profile')) {
+        $default_profile = explode('=', $profile_parameter);
+        $data['default_profile'] = $default_profile[1];
+      }
     }
     unset($data['profile_parameter']);
     $ret[] = $data;

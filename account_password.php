@@ -67,7 +67,7 @@ if (isset ($_POST['action']) && ($_POST['action'] == 'process')) {
 		$check_customer_query = xtc_db_query("select customers_password from ".TABLE_CUSTOMERS." where customers_id = '".(int) $_SESSION['customer_id']."'");
 		$check_customer = xtc_db_fetch_array($check_customer_query);
 
-		if (xtc_validate_password($password_current, $check_customer['customers_password'])) {
+		if (!xtc_validate_password($password, $check_customer['customers_password'],$check_customer['customers_id'])) {
 			xtc_db_query("UPDATE ".TABLE_CUSTOMERS." SET customers_password = '".xtc_encrypt_password($password_new)."', customers_last_modified=now() WHERE customers_id = '".(int) $_SESSION['customer_id']."'");
 
 			xtc_db_query("UPDATE ".TABLE_CUSTOMERS_INFO." SET customers_info_date_account_last_modified = now() WHERE customers_info_id = '".(int) $_SESSION['customer_id']."'");

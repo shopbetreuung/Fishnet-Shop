@@ -554,3 +554,4 @@ define('TEXT_DISPLAY_NUMBER_OF_SEO_TOOL_BOX', 'Displaying <b>%d</b> to <b>%d</b>
 
 define('TXT_MENU_LAGERVERWALTUNG','Quick stock update');
 define('BOX_INDEXIMAGES','Start Page Images');
+define('TXT_HOME','Home');

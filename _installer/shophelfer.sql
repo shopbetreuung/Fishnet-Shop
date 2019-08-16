@@ -485,7 +485,7 @@ CREATE TABLE customers (
   customers_default_address_id INT NOT NULL,
   customers_telephone VARCHAR(32) NOT NULL,
   customers_fax VARCHAR(32),
-  customers_password VARCHAR(50) NOT NULL,
+  customers_password VARCHAR(60) NOT NULL,
   customers_newsletter CHAR(1),
   customers_newsletter_mode CHAR(1) DEFAULT '0' NOT NULL,
   member_flag CHAR(1) DEFAULT '0' NOT NULL,
@@ -946,6 +946,8 @@ CREATE TABLE products_description (
   products_order_description text,
   products_main_image_title VARCHAR( 255 ) NOT NULL,
   products_main_image_alt VARCHAR( 255 ) NOT NULL,
+  content_meta_index TINYINT(1) NULL DEFAULT NULL,
+  canonical_link TEXT CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (products_id,language_id),
   KEY products_name (products_name)
 ) ENGINE=MyISAM;
@@ -1426,7 +1428,7 @@ DROP TABLE IF EXISTS personal_offers_by_customers_status_3;
 DROP TABLE IF EXISTS personal_offers_by_customers_status_4;
 
 #database Version
-INSERT INTO database_version(version) VALUES ('SH_1.16.1');
+INSERT INTO database_version(version) VALUES ('SH_1.17.0');
 
 INSERT INTO cm_file_flags (file_flag, file_flag_name) VALUES ('0', 'information');
 INSERT INTO cm_file_flags (file_flag, file_flag_name) VALUES ('1', 'content');
@@ -2103,7 +2105,7 @@ INSERT INTO countries VALUES (122,'Liechtenstein','LI','LIE',1,1,0);
 INSERT INTO countries VALUES (123,'Lithuania','LT','LTU',1,1,0);
 INSERT INTO countries VALUES (124,'Luxembourg','LU','LUX',1,1,0);
 INSERT INTO countries VALUES (125,'Macau','MO','MAC',1,1,0);
-INSERT INTO countries VALUES (126,'Macedonia, The Former Yugoslav Republic of','MK','MKD',1,1,0);
+INSERT INTO countries VALUES (126,'Republic North-Macedonia','MK','MKD',1,1,0);
 INSERT INTO countries VALUES (127,'Madagascar','MG','MDG',1,1,0);
 INSERT INTO countries VALUES (128,'Malawi','MW','MWI',1,1,0);
 INSERT INTO countries VALUES (129,'Malaysia','MY','MYS',1,1,0);

@@ -100,6 +100,10 @@ function set_checkbox (set) {
         <div class="col-xs-3">
             <table class="table table-striped">
       <tr>
+                    <td  bgcolor="EEEEEE" ><?php echo xtc_draw_separator('pixel_trans.gif',15, 15); ?></td>
+                    <td  class="main"><?php echo TXT_HOME; ?></td>
+      </tr>
+      <tr>
                     <td  bgcolor="FF6969" ><?php echo xtc_draw_separator('pixel_trans.gif',15, 15); ?></td>
                     <td  class="main"><?php echo TXT_SYSTEM; ?></td>
       </tr>
@@ -184,7 +188,10 @@ for ($i = 0; $i < $columns; $i++) {
             break;
             case '5':
             $color='#FFE6A8';
-
+            break;
+            case '6':
+            $color='#EEEEEE';
+            break;
     }
     echo '<tr>
     <td width="10" bgcolor="'.$color.'" >'.xtc_draw_separator('pixel_trans.gif',15, 15).'</td>

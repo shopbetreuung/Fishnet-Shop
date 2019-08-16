@@ -552,4 +552,5 @@ define('TEXT_DISPLAY_NUMBER_OF_ZONES', 'Affichés sont <b>%d</b> - <b>%d</b> (su
 
 define('TXT_MENU_LAGERVERWALTUNG','Gestion rapide de l&apos;entrepôt');
 define('BOX_INDEXIMAGES','Petites photos de la page d&apos;accueil');
+define('TXT_HOME','Accueil');
 ?>

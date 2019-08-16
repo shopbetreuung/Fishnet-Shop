@@ -334,6 +334,15 @@ switch(basename($PHP_SELF)) {
       //-- Canonical-URL
       //-- http://www.linkvendor.com/blog/der-canonical-tag-%E2%80%93-was-kann-man-damit-machen.html
       $canonical_url = xtc_href_link(FILENAME_PRODUCT_INFO, 'products_id='.$product->data['products_id'].'&cPath='.$cID,$request_type,false, true, true, true);
+      $contents_meta_query = xtc_db_query("SELECT content_meta_index,canonical_link FROM ".TABLE_PRODUCTS_DESCRIPTION." WHERE language_id = '".$_SESSION['languages_id']."'AND products_id = ".$product->data['products_id']."");
+      $contents_meta = xtc_db_fetch_array($contents_meta_query);
+
+      if($contents_meta['content_meta_index'] == '0') {
+            $meta_robots = 'noindex,follow';
+      } elseif($contents_meta['content_meta_index'] == '1') {
+            $meta_robots = 'index,follow';
+      }
+      if(!empty($contents_meta['canonical_link'])) $canonical_url = $contents_meta['canonical_link'];
     }
     break;
 // ---------------------------------------------------------------------------------------

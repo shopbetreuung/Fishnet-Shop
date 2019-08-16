@@ -15,24 +15,50 @@
    Released under the GNU General Public License 
    ---------------------------------------------------------------------------------------*/
 
-  // This funstion validates a plain text password with an
-  // encrpyted password
-  function xtc_validate_password($plain, $encrypted) {
-	
-	if (xtc_not_null($plain) && xtc_not_null($encrypted)) {
-		// split apart the hash / salt
-		if ($encrypted== md5($plain)){
-			return true;
-		} else {
-			$plain = mb_convert_encoding($plain, "ISO-8859-15", "UTF-8");
-			if ($encrypted== md5($plain)){
-				return true;
-			} else {
-				return false;
-			}
-		}
-	}
-	return false;	
-
+// include needed class
+  require_once (DIR_FS_CATALOG.'includes/classes/validpass.php');
+  
+  // This funstion validates a plain text password with an encrpyted password
+  function xtc_validate_password($plain, $encrypted, $customers_id) {
+    if (xtc_not_null($plain) && xtc_not_null($encrypted)) {
+      
+      $check = xtc_validate_password_collation($plain, $encrypted, $customers_id);
+      if ($check === false) {
+        $plain = mb_convert_encoding($plain, 'ISO-8859-15', 'UTF-8');
+        $check = xtc_validate_password_collation($plain, $encrypted, $customers_id);
+      }
+      
+      return $check;
+    }
   }
+
+  function xtc_validate_password_collation($plain, $encrypted, $customers_id) {
+    if (xtc_not_null($plain) && xtc_not_null($encrypted)) {
+
+      $password_check = false;
+      if ($password_check === true) {
+        return true;
+      }
+
+      // check for old passwords
+      if (preg_match('#^[a-z0-9]{32}$#i', $encrypted)) {
+        if ($encrypted != md5($plain)) {
+          return false;
+        } elseif ($customers_id) {
+          // auth is correct, so update to new password hash 
+          require_once (DIR_FS_INC . 'xtc_encrypt_password.inc.php');
+          xtc_db_query("UPDATE " . TABLE_CUSTOMERS . "
+                           SET customers_password = '" . xtc_encrypt_password($plain) . "'
+                         WHERE customers_id = '" . (int)$customers_id . "'");
+        }
+        return true;
+      } else {
+        // init class
+        $validpass = new validpass();
+        // validate password
+        return $validpass->validate_password($plain, $encrypted);
+      }
+    }
+  }
+
 ?>

@@ -230,6 +230,7 @@ if ((($_GET['action'] == 'edit') || ($_GET['action'] == 'update_order')) && ($_G
 $order_select_fields = 'o.orders_id,
                         o.customers_id,
                         o.customers_name,
+                        o.customers_email_address,
                         o.customers_company,
                         o.payment_method,
                         o.shipping_class,
@@ -1771,7 +1772,9 @@ elseif ($action == 'custom_action') {
                       
                       $orders_link = xtc_href_link(FILENAME_ORDERS, xtc_get_all_get_params(array('oID', 'action')) . 'oID=' . $orders['orders_id'] . '&action=edit');
                       $orders_image_preview = xtc_image(DIR_WS_ICONS . 'preview.gif', ICON_PREVIEW);
-                      $already_bought_query = xtc_db_query("SELECT customers_id FROM ".TABLE_ORDERS." WHERE customers_id = ".$orders['customers_id']);
+                      $already_bought_query = xtc_db_query("SELECT customers_id FROM ".TABLE_ORDERS." WHERE customers_email_address = '".$orders['customers_email_address']."'");
+
+                      $already_bought_image = '';
                       if (xtc_db_num_rows($already_bought_query) > 1) {
                         $already_bought_image = xtc_image(DIR_WS_ICONS . 'bought_sign.png', ICON_PREVIEW);
                       }

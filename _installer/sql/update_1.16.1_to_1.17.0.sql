@@ -65,6 +65,5 @@ UPDATE admin_access SET blacklist_logs = 5 WHERE customers_id = 'groups';
 UPDATE admin_access SET whitelist_logs = 5 WHERE customers_id = 'groups';
 UPDATE admin_access SET seo_tool_box = 5 WHERE customers_id = 'groups';
 UPDATE admin_access SET quick_stockupdate = 5 WHERE customers_id = 'groups';
-UPDATE admin_access SET index_images = 5 WHERE customers_id = 'groups';
 UPDATE admin_access SET invoiced_orders = 4 WHERE customers_id = 'groups';
 

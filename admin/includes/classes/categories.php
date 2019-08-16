@@ -1066,9 +1066,21 @@ class categories {
         xtc_db_query("INSERT INTO ".TABLE_PRODUCTS_IMAGES."
                                            SET products_id = '".$dup_products_id."',
                                                image_nr    = '".$mo_img['image_nr']."',
-											  image_title    = '".$mo_img['image_title']."',
-											  image_alt    = '".$mo_img['image_alt']."',
+											                         image_title    = '".$mo_img['image_title']."',
+											                         image_alt    = '".$mo_img['image_alt']."',
                                                image_name  = '".$dup_products_image_name."'");
+        
+        $mo_images_description_query = xtc_db_query("SELECT * FROM ". TABLE_PRODUCTS_IMAGES_DESCRIPTION ." WHERE image_id = '".$mo_img['image_id']."'");
+            
+        while ($mo_images_description_array = xtc_db_fetch_array($mo_images_description_query)) {
+            $new_image_id = get_image_id($dup_products_id,$mo_img['image_nr']);
+            xtc_db_query("INSERT INTO ".TABLE_PRODUCTS_IMAGES_DESCRIPTION ."
+                                           SET image_id = '". $new_image_id ."',
+                                               image_nr = '". $mo_images_description_array['image_nr'] ."',
+                                               language_id = '". $mo_images_description_array['language_id'] ."',
+                                               image_title = '". $mo_images_description_array['image_title'] ."',
+                                               image_alt = ' ". $mo_images_description_array['image_alt']. "'");
+        }         
       }
     }
     //mo_images EOF

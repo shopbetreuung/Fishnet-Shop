@@ -262,7 +262,8 @@ if ($srExp < 1) {
 
  <?php
 
-if (count($campaign->result)) {
+if (is_array($campaign->result) || is_object($campaign->result)) {
+  if (count($campaign->result)) {
 ?>               
                 
                 
@@ -340,7 +341,7 @@ if (count($campaign->result)) {
 ?>
 </table>
                     </div>
-<?php } ?>
+<?php } } ?>
 </div>
 <!-- body_eof //-->
 

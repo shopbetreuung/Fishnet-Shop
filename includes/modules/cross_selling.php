@@ -21,15 +21,17 @@ $module_smarty->assign('tpl_path', 'templates/'.CURRENT_TEMPLATE.'/');
 
 $data = $product->getCrossSells();
 
-if (count($data) > 0) {
+if (is_array($data) || is_object($data)) {
+	if (count($data) > 0) {
 
-	$module_smarty->assign('language', $_SESSION['language']);
-	$module_smarty->assign('module_content', $data);
-	// set cache ID
+		$module_smarty->assign('language', $_SESSION['language']);
+		$module_smarty->assign('module_content', $data);
+		// set cache ID
 
-	$module_smarty->caching = 0;
-	$module = $module_smarty->fetch(CURRENT_TEMPLATE.'/module/cross_selling.html');
-	$info_smarty->assign('MODULE_cross_selling', $module);
+		$module_smarty->caching = 0;
+		$module = $module_smarty->fetch(CURRENT_TEMPLATE.'/module/cross_selling.html');
+		$info_smarty->assign('MODULE_cross_selling', $module);
+	}
 }
 
 // reverse cross selling

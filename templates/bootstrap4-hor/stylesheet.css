@@ -1031,6 +1031,11 @@ BASIC Template for AGB Hosting Content
 	margin: 0px 3px;
 }
 
+.img-contentmanager {
+    max-width: 100%;
+	height: auto !important;
+}
+
 @media screen and (min-width: 768px) and (max-width: 992px) {
 	.index_images_box img {
 		height: 150px;

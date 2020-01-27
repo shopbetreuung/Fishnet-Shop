@@ -33,6 +33,7 @@ if ($random_product = xtc_random_select("select
                                            p.products_id,
                                            pd.products_name,
                                            p.products_price,
+                                           p.products_model,
                                            p.products_tax_class_id,
                                            p.products_image,
                                            s.expires_date,

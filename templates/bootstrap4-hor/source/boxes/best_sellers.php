@@ -91,6 +91,7 @@ if (!$box_smarty->isCached(CURRENT_TEMPLATE.'/boxes/box_best_sellers.html', $cac
 			$best_sellers_query = "select distinct
 			                       p.products_id,
 			                       p.products_price,
+			                       p.products_model,
 			                       p.products_tax_class_id,
 			                       p.products_image,
 			                       p.products_vpe,
@@ -120,6 +121,7 @@ if (!$box_smarty->isCached(CURRENT_TEMPLATE.'/boxes/box_best_sellers.html', $cac
 			                       p.products_id,
 			                       p.products_image,
 			                       p.products_price,
+			                       p.products_model,
 			                       p.products_vpe,
 			                       p.products_vpe_status,
 			                       p.products_vpe_value,

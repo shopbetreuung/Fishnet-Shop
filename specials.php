@@ -36,6 +36,7 @@ if (GROUP_CHECK == 'true') {
 $specials_query_raw = "select p.products_id,
                               pd.products_name,
                               p.products_price,
+                              p.products_model,
                               p.products_tax_class_id,
                               p.products_shippingtime,
                               p.products_image,

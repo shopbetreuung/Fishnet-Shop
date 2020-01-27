@@ -143,7 +143,7 @@
         {if $data.shipping_time}<br /><span class="nobr small">{$smarty.const.SHIPPING_TIME}{$data.shipping_time}</span>{/if}
 		      </td>      
 		      <td class="main_row" align="right" valign="top">{$data.price_formated}</td>
-		      <td class="main_row" align="right" valign="top">{$data.final_price_formated}{if $ORDER_TAX_GROUPS > 1}<br />{$data.tax} %{/if}</td>
+		      <td class="main_row" align="right" valign="top">{$data.final_price_formated}{if ($ORDER_TAX_GROUPS > 1) && !($data.model|strstr : "GIFT_")}<br />{$data.tax} %{/if}</td>
 		    </tr>
 		    {/foreach}
 		    {foreach name=aussen item=data from=$DOWNLOADS_ARRAY}
@@ -169,7 +169,7 @@
 				    {/if}
       </td>      
       <td class="main_row" align="right" valign="top">{$data.price_formated}</td>
-      <td class="main_row" align="right" valign="top">{$data.final_price_formated}{if $ORDER_TAX_GROUPS > 1}<br />{$data.tax} %{/if}</td>
+      <td class="main_row" align="right" valign="top">{$data.final_price_formated}{if ($ORDER_TAX_GROUPS > 1) && !($data.model|strstr : "GIFT_")}<br />{$data.tax} %{/if}</td>
     </tr>
     {/foreach}
   </table>

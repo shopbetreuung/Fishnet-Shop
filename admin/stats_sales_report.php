@@ -273,7 +273,7 @@
                                 <select name="endD" size="1">
                                   <?php
                                   if ($endDate) {
-                                    $j = date("j", $endDate - 60* 60 * 24);
+                                    $j = date("j", $endDate - 60* 60);
                                   } else {
                                     $j = date("j");
                                   }

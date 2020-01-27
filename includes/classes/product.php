@@ -491,7 +491,7 @@ class product {
                           'PRODUCTS_PRICE' => $products_price['formated'],
 						   //products plain price so we can ask for example for 0.00 
 						  'PRODUCTS_PRICE_PLAIN' => $products_price['plain'], 
-                          'PRODUCTS_TAX_INFO' => $main->getTaxInfo($tax_rate),
+                          'PRODUCTS_TAX_INFO' => (strpos($array['products_model'],'GIFT_') === false) ? $main->getTaxInfo($tax_rate) : '',
                           'PRODUCTS_SHIPPING_LINK' => $main->getShippingLink(),
                           'PRODUCTS_BUTTON_BUY_NOW' => $buy_now,
                           'PRODUCTS_BUTTON_PRODUCT_MORE' => '<a href="'.xtc_href_link(FILENAME_PRODUCT_INFO, xtc_product_link($array['products_id'], $array['products_name'])).'">'.xtc_image_button('button_product_more.gif', IMAGE_BUTTON_PRODUCT_MORE).'</a>',

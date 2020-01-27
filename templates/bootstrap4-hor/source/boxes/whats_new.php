@@ -50,6 +50,7 @@ if ($random_product = xtc_random_select("-- templates/xtc5/source/boxes/whats_ne
                                               p.products_vpe_status,
                                               p.products_vpe_value,
                                               p.products_price,
+                                              p.products_model,
                                               pd.products_name
                                          FROM ".TABLE_PRODUCTS." p
                                     LEFT JOIN ".TABLE_PRODUCTS_DESCRIPTION." pd 

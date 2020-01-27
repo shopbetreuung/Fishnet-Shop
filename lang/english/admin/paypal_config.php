@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: paypal_config.php 10425 2016-11-23 13:29:31Z GTB $
+   $Id: paypal_config.php 11728 2019-04-08 14:58:18Z GTB $
 
    modified eCommerce Shopsoftware
    http://www.modified-shop.org
@@ -33,7 +33,7 @@ $lang_array = array(
   'TEXT_PAYPAL_CONFIG_INVOICE_PREFIX_INFO' => 'Arbitrary string of letters (prefix), which is placed in front of each order number and is used for generating the PayPal invoice number.<br />This allows multiple store operation with only one PayPal App. Conflicts regarding the order numbers are avoided. Each order has its own invoice numbers within the PayPal account.',
 
   'TEXT_PAYPAL_CONFIG_TRANSACTION' => 'Transaction:',
-  'TEXT_PAYPAL_CONFIG_TRANSACTION_INFO' => 'Chose type of Transaction.<br/><br/><b>Note:</b> With PayPal Plus and PayPal Installment always a Sale is made.',
+  'TEXT_PAYPAL_CONFIG_TRANSACTION_INFO' => 'Chose type of Transaction.<br/><br/><b>Note:</b> With PayPal Plus and Installment Powered by PayPal always a Sale is made.',
 
   'TEXT_PAYPAL_CONFIG_CAPTURE' => 'Capture manually:',
   'TEXT_PAYPAL_CONFIG_CAPTURE_INFO' => 'Manually capture PayPal payments?<br/><br/><b>Note:</b> Therefore it is necessary that the Transaction is set to Authorize.',
@@ -63,7 +63,7 @@ $lang_array = array(
   'TEXT_PAYPAL_CONFIG_LOG_INFO' => 'Shall a log be written?',
 
   'TEXT_PAYPAL_CONFIG_LOG_LEVEL' => 'Log Level:',
-  'TEXT_PAYPAL_CONFIG_LOG_LEVEL_INFO' => '<b>Note:</b> In live mode, it is only logged up to level FINE.',
+  'TEXT_PAYPAL_CONFIG_LOG_LEVEL_INFO' => '<b>Note:</b> In live mode, it is only logged up to level INFO.',
   
   'BUTTON_PAYPAL_STATUS_INSTALL' => 'Install orders status',
 );

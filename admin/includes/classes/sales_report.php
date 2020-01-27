@@ -188,7 +188,7 @@
       // set the return values
       $this->actDate = $ed;
       $this->showDate = $sd;
-      $this->showDateEnd = $ed - 60 * 60 * 24;
+      $this->showDateEnd = $ed - 60 * 60;
 
       // execute the query
       $cnt = 0;

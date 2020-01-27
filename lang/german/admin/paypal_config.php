@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: paypal_config.php 10425 2016-11-23 13:29:31Z GTB $
+   $Id: paypal_config.php 11728 2019-04-08 14:58:18Z GTB $
 
    modified eCommerce Shopsoftware
    http://www.modified-shop.org
@@ -33,7 +33,7 @@ $lang_array = array(
   'TEXT_PAYPAL_CONFIG_INVOICE_PREFIX_INFO' => 'Frei w&auml;hlbare Zeichenfolge (Pr&auml;fix), die der Bestellnummer vorangestellt und f&uuml;r die Erzeugung der PayPal-Rechnungsnummer genutzt wird.<br />Dadurch k&ouml;nnen mehrere Shops mit nur einer PayPal App arbeiten. Konflikte bei gleichen Bestellnummern werden vermieden. Jede Bestellung erh&auml;lt eine eigene Rechnungs-Nummer im PayPal Konto.',
 
   'TEXT_PAYPAL_CONFIG_TRANSACTION' => 'Transaktion:',
-  'TEXT_PAYPAL_CONFIG_TRANSACTION_INFO' => 'W&auml;hlen Sie die Art der Transaktion.<br/><br/><b>Hinweis:</b> Bei PayPal Plus und PayPal Ratenzahlung wird immer ein Sale gemacht.',
+  'TEXT_PAYPAL_CONFIG_TRANSACTION_INFO' => 'W&auml;hlen Sie die Art der Transaktion.<br/><br/><b>Hinweis:</b> Bei PayPal Plus und Ratenzahlung Powered by PayPal wird immer ein Sale gemacht.',
 
   'TEXT_PAYPAL_CONFIG_CAPTURE' => 'Manuell erfassen:',
   'TEXT_PAYPAL_CONFIG_CAPTURE_INFO' => 'Wollen Sie Zahlungen bei PayPal manuell erfassen (Capture)?<br/><br/><b>Hinweis:</b> Dazu ist es notwendig, dass die Transaktion auf Authorize gesetzt ist.',
@@ -63,7 +63,7 @@ $lang_array = array(
   'TEXT_PAYPAL_CONFIG_LOG_INFO' => 'Soll ein Log geschrieben werden?',
 
   'TEXT_PAYPAL_CONFIG_LOG_LEVEL' => 'Log Level:',
-  'TEXT_PAYPAL_CONFIG_LOG_LEVEL_INFO' => '<b>Hinweis:</b> Im Livebetrieb wird nur bis Level FINE geloggt.',
+  'TEXT_PAYPAL_CONFIG_LOG_LEVEL_INFO' => '<b>Hinweis:</b> Im Livebetrieb wird nur bis Level INFO geloggt.',
   
   'BUTTON_PAYPAL_STATUS_INSTALL' => 'Bestellstatus installieren',
 );

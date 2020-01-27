@@ -60,6 +60,7 @@ if (isset ($_SESSION['tracking']['products_history'][0])) {
        $random_query = "select p.products_id,
                                            pd.products_name,
                                            p.products_price,
+                                           p.products_model,
                                            p.products_tax_class_id,
                                            p.products_image,
                                            p2c.categories_id,

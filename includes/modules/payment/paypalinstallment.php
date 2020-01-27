@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: paypalinstallment.php 10678 2017-04-11 14:14:58Z GTB $
+   $Id: paypalinstallment.php 12109 2019-09-20 07:06:59Z GTB $
 
    modified eCommerce Shopsoftware
    http://www.modified-shop.org
@@ -56,19 +56,18 @@ class paypalinstallment extends PayPalPayment {
       $this->enabled = false;
     }
     
+    if ($this->enabled === true
+        && ($order->content_type == 'virtual' 
+            || $order->content_type == 'virtual_weight'
+            || $_SESSION['cart']->count_contents_virtual() == 0
+            )
+        )
+    {
+      $this->enabled = false;
+    }
+    
     if ($this->enabled === true) {
-      if (!class_exists('order_total')) {
-        require_once(DIR_WS_CLASSES.'order_total.php');
-      }
-      $order_total_modules = new order_total();
-      $order_totals = $order_total_modules->process();
-      
-      $this->total_amount = 0;
-      for ($i=0, $n=count($order_totals); $i<$n; $i++) {
-        if ($order_totals[$i]['code'] == 'ot_total') {
-          $this->total_amount = $order_totals[$i]['value'];
-        }
-      }
+      $this->total_amount = $this->calculate_total();
       
       $this->presentment_array = $this->get_presentment($this->total_amount, $order->info['currency'], $order->billing['country']['iso_code_2']);
       if (count($this->presentment_array) < 1) {
@@ -81,13 +80,29 @@ class paypalinstallment extends PayPalPayment {
   function selection() {
     global $order, $request_type;
     
-    $presentment = $this->get_presentment_details($this->total_amount, $order->info['currency'], $order->billing['country']['iso_code_2'], 'payment');
-
+    $presentment = '';
+    if ($this->total_amount > 0) {
+      $presentment .= $this->get_presentment_details($this->total_amount, $order->info['currency'], $order->billing['country']['iso_code_2'], 'payment');
+      $presentment .= '<br/><br/><input type="checkbox" value="pp_conditions" name="pp_conditions" id="pp_conditions" />&nbsp;<strong><label for="pp_conditions">'.MODULE_PAYMENT_PAYPALINSTALLMENT_TEXT_CHECKBOX.'</label></strong>';
+    }
+    
     return array(
       'id' => $this->code, 
       'module' => $this->title, 
       'description' => $presentment,
     );
+  }
+
+
+  function javascript_validation() {
+    $js = 'if (payment_value == "' . $this->code . '") {' . "\n" .
+          '  if (!document.getElementById("checkout_payment").pp_conditions.checked) {' . "\n" .
+          '    error_message = error_message + unescape("' . xtc_js_lang(MODULE_PAYMENT_PAYPALINSTALLMENT_TEXT_ERROR_CHECKBOX) . '");' . "\n" .
+          '    error = 1;' . "\n" .
+          '  }' . "\n" .
+          '}' . "\n";
+    
+    return $js;
   }
 
 
@@ -108,6 +123,11 @@ class paypalinstallment extends PayPalPayment {
    		return;
 		}
 		
+    if ((!isset($_POST['pp_conditions']) || $_POST['pp_conditions'] == false) && !isset($_GET['pp_conditions'])) {
+      $error = str_replace('\n', '<br />', MODULE_PAYMENT_PAYPALINSTALLMENT_TEXT_ERROR_CHECKBOX);
+      xtc_redirect(xtc_href_link(FILENAME_CHECKOUT_PAYMENT, 'error_message=' . urlencode($error), 'SSL', true, false));
+    }
+
     // load the selected shipping module
     require_once (DIR_WS_CLASSES . 'shipping.php');
     $shipping_modules = new shipping($_SESSION['shipping']);
@@ -134,7 +154,8 @@ class paypalinstallment extends PayPalPayment {
     );
 	  $this->status_install($stati);
 	  
-	  require_once(DIR_FS_CATALOG.DIR_WS_MODULES.'order_total/ot_paypalinstallment_fee.php');
+    include_once(DIR_FS_LANGUAGES.$_SESSION['language'].'/modules/order_total/ot_paypalinstallment_fee.php');
+	  require_once(DIR_FS_CATALOG.'includes/modules/order_total/ot_paypalinstallment_fee.php');
 	  $pp_fee = new ot_paypalinstallment_fee();
 	  if ($pp_fee->check() != 1) {
 	    $pp_fee->install();

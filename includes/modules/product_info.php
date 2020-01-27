@@ -153,7 +153,7 @@ if (!is_object($product) || !$product->isProduct()) {
 
   // price incl tax and shipping link
   if ($_SESSION['customers_status']['customers_status_show_price'] != '0') {
-    if (isset($xtPrice->TAX[$product->data['products_tax_class_id']])) {
+    if (isset($xtPrice->TAX[$product->data['products_tax_class_id']]) && strpos($product->data['products_model'],'GIFT_') === false) {
       $tax_info = $main->getTaxInfo($xtPrice->TAX[$product->data['products_tax_class_id']]);
       $info_smarty->assign('PRODUCTS_TAX_INFO', $tax_info);
     }

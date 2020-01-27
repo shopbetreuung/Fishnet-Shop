@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: PayPalAdmin.php 10066 2016-07-12 12:26:45Z GTB $
+   $Id: PayPalAdmin.php 12031 2019-07-27 10:35:03Z GTB $
 
    modified eCommerce Shopsoftware
    http://www.modified-shop.org
@@ -46,7 +46,7 @@ class PayPalAdmin extends PayPalPayment {
       $webProfileList = $webProfile->get_list($apiContext);
       $valid = true;
     } catch (Exception $ex) {
-      $this->LoggingManager->log(print_r($ex, true), 'DEBUG');
+      $this->LoggingManager->log('DEBUG', 'Profile', array('exception' => $ex));
       $valid = false;
     }
     
@@ -105,14 +105,12 @@ class PayPalAdmin extends PayPalPayment {
     if ($config['presentation']['locale_code'] != '') {
       $presentation->setLocaleCode(strtoupper($config['presentation']['locale_code']));
     }
-    
-    $addess_override = (($config['input_fields']['address_override'] == '0') ? 1 : 0);
-    
+        
     // set InputFields
     $inputFields = new InputFields();
     $inputFields->setAllowNote(0)
                 ->setNoShipping(0)
-                ->setAddressOverride((int)$addess_override);
+                ->setAddressOverride(1);
 
     // set WebProfile
     $webProfile = new WebProfile();
@@ -125,7 +123,7 @@ class PayPalAdmin extends PayPalPayment {
       $webProfile->create($apiContext);
       $valid = true;
     } catch (Exception $ex) {
-      $this->LoggingManager->log(print_r($ex, true), 'DEBUG');
+      $this->LoggingManager->log('DEBUG', 'Profile', array('exception' => $ex));
       $valid = false;
     }
   }
@@ -151,14 +149,12 @@ class PayPalAdmin extends PayPalPayment {
     if ($config['presentation']['locale_code'] != '') {
       $presentation->setLocaleCode(strtoupper($config['presentation']['locale_code']));
     }
-
-    $addess_override = (($config['input_fields']['address_override'] == '0') ? 1 : 0);
-
+    
     // set InputFields
     $inputFields = new InputFields();
     $inputFields->setAllowNote(0)
                 ->setNoShipping(0)
-                ->setAddressOverride((int)$addess_override);
+                ->setAddressOverride(1);
 
     // set WebProfile
     $webProfile = new WebProfile();
@@ -172,7 +168,7 @@ class PayPalAdmin extends PayPalPayment {
       $webProfile->update($apiContext);
       $valid = true;
     } catch (Exception $ex) {
-      $this->LoggingManager->log(print_r($ex, true), 'DEBUG');
+      $this->LoggingManager->log('DEBUG', 'Profile', array('exception' => $ex));
       $valid = false;
       
       if ($ex instanceof \PayPal\Exception\PayPalConnectionException) {
@@ -209,35 +205,10 @@ class PayPalAdmin extends PayPalPayment {
       ),
       array(
         'config_key' => strtoupper($config['id']).'_ADDRESS', 
-        'config_value' => $addess_override,
+        'config_value' => 1,
       ),          
     );
     $this->save_config($sql_data_array);
-  }
-
-
-  function delete_profile($id) {
-
-    // auth
-    $apiContext = $this->apiContext();
-
-    // set WebProfile
-    $webProfile = new WebProfile();
-    $webProfile->setId($id);
-
-    try {
-      $webProfile->delete($apiContext);
-      $valid = true;
-    } catch (Exception $ex) {
-      $this->LoggingManager->log(print_r($ex, true), 'DEBUG');
-      $valid = false;
-    }
-    
-    if ($id == $this->get_config('PAYPAL_STANDARD_PROFILE')) {
-      $this->delete_config('PAYPAL_STANDARD_PROFILE');
-    }
-
-    $this->delete_config($id, 'config_value');
   }
 
 
@@ -253,7 +224,7 @@ class PayPalAdmin extends PayPalPayment {
       $WebhookList = $webhooks->getAll($apiContext);
       $valid = true;
     } catch (Exception $ex) {
-      $this->LoggingManager->log(print_r($ex, true), 'DEBUG');
+      $this->LoggingManager->log('DEBUG', 'Webhook', array('exception' => $ex));
       $valid = false;
     }
 
@@ -309,7 +280,7 @@ class PayPalAdmin extends PayPalPayment {
     try {
       $WebhookList = $webhook->create($apiContext);
     } catch (Exception $ex) {
-      $this->LoggingManager->log(print_r($ex, true), 'DEBUG');
+      $this->LoggingManager->log('DEBUG', 'Webhook', array('exception' => $ex));
     }    
 
     $sql_data_array = array();
@@ -337,7 +308,7 @@ class PayPalAdmin extends PayPalPayment {
       $WebhookList = $webhook->get($data['id'], $apiContext);
       $valid = true;
     } catch (Exception $ex) {
-      $this->LoggingManager->log(print_r($ex, true), 'DEBUG');
+      $this->LoggingManager->log('DEBUG', 'Webhook', array('exception' => $ex));
       $valid = false;
     }
 
@@ -367,7 +338,7 @@ class PayPalAdmin extends PayPalPayment {
       $WebhookList->update($patchRequest, $apiContext);
       $success = true;
     } catch (Exception $ex) {
-      $this->LoggingManager->log(print_r($ex, true), 'DEBUG');
+      $this->LoggingManager->log('DEBUG', 'Webhook', array('exception' => $ex));
       $success = false;
     }
        
@@ -404,7 +375,7 @@ class PayPalAdmin extends PayPalPayment {
       $WebhookList = $webhook->get($id, $apiContext);
       $valid = true;
     } catch (Exception $ex) {
-      $this->LoggingManager->log(print_r($ex, true), 'DEBUG');
+      $this->LoggingManager->log('DEBUG', 'Webhook', array('exception' => $ex));
       $valid = false;
     }
 
@@ -441,7 +412,7 @@ class PayPalAdmin extends PayPalPayment {
       $WebhookList = $webhook->get($id, $apiContext);
       $valid = true;
     } catch (Exception $ex) {
-      $this->LoggingManager->log(print_r($ex, true), 'DEBUG');
+      $this->LoggingManager->log('DEBUG', 'Webhook', array('exception' => $ex));
       $valid = false;
     }
 
@@ -449,7 +420,7 @@ class PayPalAdmin extends PayPalPayment {
       try {
         $WebhookList->delete($apiContext);
       } catch (Exception $ex) {
-        $this->LoggingManager->log(print_r($ex, true), 'DEBUG');
+        $this->LoggingManager->log('DEBUG', 'Webhook', array('exception' => $ex));
       }
     }
 
@@ -472,7 +443,7 @@ class PayPalAdmin extends PayPalPayment {
       $WebhookList = $webhooks_event->availableEventTypes($apiContext);
       $valid = true;
     } catch (Exception $ex) {
-      $this->LoggingManager->log(print_r($ex, true), 'DEBUG');
+      $this->LoggingManager->log('DEBUG', 'Webhook', array('exception' => $ex));
       $valid = false;
     }
 

@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: paypal_module.php 10739 2017-05-17 06:14:15Z GTB $
+   $Id: paypal_module.php 11714 2019-04-04 12:29:09Z GTB $
 
    modified eCommerce Shopsoftware
    http://www.modified-shop.org
@@ -39,6 +39,12 @@ function get_module_info($module) {
     }
     $keys_extra[$module_keys[$j]]['use_function'] = $key_value['use_function'];
     $keys_extra[$module_keys[$j]]['set_function'] = $key_value['set_function'];
+
+    if ($module->code == 'paypalinstallment') {
+      if ($module_keys[$j] == 'MODULE_PAYMENT_PAYPALINSTALLMENT_ALLOWED') {
+        unset($keys_extra[$module_keys[$j]]);
+      }
+    }
   }
   $module_info['keys'] = $keys_extra;
   
@@ -131,6 +137,7 @@ if (isset($_GET['action'])) {
 
     case 'install':
       if (in_array($_GET['module'], $payment_array)) {                  
+        include_once(DIR_FS_LANGUAGES.$_SESSION['language'].'/modules/payment/'.$_GET['module'].'.php');
         require_once(DIR_FS_CATALOG.'includes/modules/payment/'.$_GET['module'].'.php');
         $module = new $_GET['module']();
         $module->install();
@@ -172,7 +179,7 @@ require (DIR_WS_INCLUDES.'head.php');
         ?>
         <!-- body_text //-->
         <td class="boxCenter">         
-          <div class="pageHeadingImage"><?php echo xtc_image(DIR_WS_ICONS.'heading_configuration.gif'); ?></div>
+          <div class="pageHeadingImage"><?php echo xtc_image(DIR_WS_ICONS.'heading/icon_configuration.png'); ?></div>
           <div class="flt-l">
             <div class="pageHeading pdg2"><?php echo TEXT_PAYPAL_MODULE_HEADING_TITLE; ?></div>
             <div class="main">v<?php echo $paypal->paypal_version; ?></div>
@@ -196,7 +203,7 @@ require (DIR_WS_INCLUDES.'head.php');
                   $mInfo = new objectInfo($module_info);
 
                   reset($mInfo->keys);
-                  while (list($key, $value) = each($mInfo->keys)) {
+                  foreach ($mInfo->keys as $key => $value) {
                     ?>
                     <tr>
                       <td class="dataTableConfig col-left"><?php echo $value['title']; ?></td>
@@ -297,7 +304,7 @@ require (DIR_WS_INCLUDES.'head.php');
                     </tr>
                     <?php
                     if (xtc_not_null(MODULE_PAYMENT_INSTALLED)) {
-                      $thirdparty_module = explode(';', MODULE_PAYMENT_PAYPAL_PLUS_THIRDPARTY_PAYMENT);
+                      $thirdparty_module = explode(';', ((defined('MODULE_PAYMENT_PAYPAL_PLUS_THIRDPARTY_PAYMENT')) ? MODULE_PAYMENT_PAYPAL_PLUS_THIRDPARTY_PAYMENT : ''));
                       $module_array = explode(';', MODULE_PAYMENT_INSTALLED);
                       
                       $thirdparty_exists = false;
@@ -357,7 +364,7 @@ require (DIR_WS_INCLUDES.'head.php');
                 <?php              
               } else {
                 ?>
-                <table class="tableBoxCenter">
+                <table class="tableBoxCenter collapse">
                   <tr class="dataTableHeadingRow">
                     <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_MODULES; ?></td>
                     <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_FILENAME; ?></td>

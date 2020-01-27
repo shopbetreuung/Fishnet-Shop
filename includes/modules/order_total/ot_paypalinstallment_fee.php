@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: ot_paypalinstallment_fee.php 10425 2016-11-23 13:29:31Z GTB $
+   $Id: ot_paypalinstallment_fee.php 11583 2019-03-21 10:23:16Z GTB $
 
    modified eCommerce Shopsoftware
    http://www.modified-shop.org
@@ -26,8 +26,8 @@
       $this->title = MODULE_ORDER_TOTAL_PAYPALINSTALLMENT_FEE_TITLE;
       $this->total_title = MODULE_ORDER_TOTAL_PAYPALINSTALLMENT_FEE_TOTAL_TITLE;
       $this->description = MODULE_ORDER_TOTAL_PAYPALINSTALLMENT_FEE_DESCRIPTION;
-      $this->enabled = ((MODULE_ORDER_TOTAL_PAYPALINSTALLMENT_FEE_STATUS == 'true') ? true : false);
-      $this->sort_order = MODULE_ORDER_TOTAL_PAYPALINSTALLMENT_FEE_SORT_ORDER;
+      $this->enabled = ((defined('MODULE_ORDER_TOTAL_PAYPALINSTALLMENT_FEE_STATUS') && MODULE_ORDER_TOTAL_PAYPALINSTALLMENT_FEE_STATUS == 'true') ? true : false);
+      $this->sort_order = ((defined('MODULE_ORDER_TOTAL_PAYPALINSTALLMENT_FEE_SORT_ORDER')) ? MODULE_ORDER_TOTAL_PAYPALINSTALLMENT_FEE_SORT_ORDER : '');
       
       $this->output = array();
     }

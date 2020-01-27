@@ -736,6 +736,16 @@ BASIC Template for AGB Hosting Content
 	margin: 0px 3px;
 }
 
+.img-contentmanager {
+    max-width: 100%;
+	height: auto !important;
+}
+
+.button_right_checkout .checkoutconditions input[type=checkbox] {
+  vertical-align: middle;
+  bottom: inherit !important;
+}
+
 @media screen and (max-width: 530px) {
     
     div.highlightbox input, div.highlightbox textarea {

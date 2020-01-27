@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: paypalinstallment.php 10434 2016-11-23 15:54:02Z GTB $
+   $Id: paypalinstallment.php 11746 2019-04-11 15:00:51Z GTB $
 
    modified eCommerce Shopsoftware
    http://www.modified-shop.org
@@ -54,7 +54,12 @@ if (isset($_GET['amount'])
     $pp_smarty->assign('presentment', $presentment_array);
 
     $pp_smarty->assign('language', $_SESSION['language']);
-    $pp_smarty->display(DIR_FS_EXTERNAL.'paypal/templates/presentment.html');
+
+    $tpl_file = DIR_FS_EXTERNAL.'paypal/templates/presentment.html';
+    if (is_file(DIR_FS_CATALOG.'templates/'.CURRENT_TEMPLATE.'/module/paypal/presentment.html')) {
+      $tpl_file = DIR_FS_CATALOG.'templates/'.CURRENT_TEMPLATE.'/module/paypal/presentment.html';
+    }
+    $pp_smarty->display($tpl_file);
   } else {
     die('Direct Access to this location is not allowed.');
   }

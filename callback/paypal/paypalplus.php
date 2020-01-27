@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: paypalplus.php 10343 2016-10-26 11:54:18Z GTB $
+   $Id: paypalplus.php 11497 2019-02-05 08:02:41Z Hetfield $
 
    modified eCommerce Shopsoftware
    http://www.modified-shop.org
@@ -21,7 +21,10 @@ if (isset($_GET['checkout']) && $_SESSION['payment'] == 'paypalplus') {
   echo '<script src="https://www.paypalobjects.com/webstatic/ppplus/ppplus.min.js" type="text/javascript"></script>'."\n";
   echo '<script type="text/javascript">PAYPAL.apps.PPP.doCheckout();</script>'."\n";
 } elseif (isset($_SESSION['paypal']['approval'])) {
-  require_once(DIR_FS_EXTERNAL.'paypal/classes/PayPalPayment.php');                                        
+  require_once(DIR_FS_EXTERNAL.'paypal/classes/PayPalPayment.php');
+
+  require_once (DIR_WS_CLASSES . 'order.php');
+  $order = new order();
 
   $selection = get_third_party_payments();
   $paypal = new PayPalPayment('paypalplus');
@@ -43,26 +46,19 @@ if (isset($_GET['checkout']) && $_SESSION['payment'] == 'paypalplus') {
     }
   }
 
-  $country_query = xtc_db_query("SELECT c.countries_iso_code_2
-                                   FROM ".TABLE_COUNTRIES." c
-                                   JOIN ".TABLE_ADDRESS_BOOK." ab
-                                        ON c.countries_id = ab.entry_country_id
-                                           AND address_book_id = '".$_SESSION['customer_default_address_id']."'");
-  $country = xtc_db_fetch_array($country_query);
-
   echo '<div id="ppplus"></div>';
   echo '<script type="text/javascript">
   var ppp = PAYPAL.apps.PPP({	
   "approvalUrl": "'.$_SESSION['paypal']['approval'].'",
   "placeholder": "ppplus",
   "mode": "'.$paypal->get_config('PAYPAL_MODE').'",
-  "language": "'.$_SESSION['language_code'].'_'.$country['countries_iso_code_2'].'",
-  "country": "'.$country['countries_iso_code_2'].'",
+  "language": "'.$_SESSION['language_code'].'_'.$order->customer['country']['iso_code_2'].'",
+  "country": "'.$order->customer['country']['iso_code_2'].'",
   "buttonLocation": "outside",
   "preselection": "paypal",
   "useraction": "continue",
-  "showLoadingIndicator": "true",
-  "showPuiOnSandbox": "true"';
+  "showLoadingIndicator": true,
+  "showPuiOnSandbox": true';
 	
 	if (count($module) > 0) {
 	  echo ','."\n";

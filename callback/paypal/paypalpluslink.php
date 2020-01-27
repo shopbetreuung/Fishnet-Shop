@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: paypalpluslink.php 10051 2016-07-08 13:36:47Z GTB $
+   $Id: paypalpluslink.php 11746 2019-04-11 15:00:51Z GTB $
 
    modified eCommerce Shopsoftware
    http://www.modified-shop.org
@@ -55,11 +55,11 @@ if (isset($_GET['oID'])
       $paypal->complete_cart();
       
       if (isset($_SESSION['customer_id'])) {
-        $messageStack->add_session('paypalpluslink', MODULE_PAYMENT_PAYPALPLUSLINK_TEXT_COMPLETED);
-        xtc_redirect(xtc_href_link(FILENAME_ACCOUNT_HISTORY_INFO, 'info=1&order_id='.(int)$_GET['oID'], 'SSL'));
+        $messageStack->add_session('paypalpluslink', MODULE_PAYMENT_PAYPALPLUSLINK_TEXT_COMPLETED, 'success');
+        xtc_redirect(xtc_href_link(FILENAME_ACCOUNT_HISTORY_INFO, 'order_id='.(int)$_GET['oID'], 'SSL'));
       } else {
-        $messageStack->add_session('logoff', MODULE_PAYMENT_PAYPALPLUSLINK_TEXT_COMPLETED);
-        xtc_redirect(xtc_href_link(FILENAME_LOGOFF, 'info=1', 'SSL'));
+        $messageStack->add_session('logoff', MODULE_PAYMENT_PAYPALPLUSLINK_TEXT_COMPLETED, 'success');
+        xtc_redirect(xtc_href_link(FILENAME_LOGOFF, '', 'SSL'));
       }
     } else {
       $approval = $paypal->payment_redirect(false, true, true);
@@ -84,8 +84,8 @@ if (isset($_GET['oID'])
         "buttonLocation": "outside",
         "preselection": "paypal",
         "useraction": "continue",
-        "showLoadingIndicator": "true",
-        "showPuiOnSandbox": "true"
+        "showLoadingIndicator": true,
+        "showPuiOnSandbox": true
       });
       </script>'."\n";
       $smarty->assign('javascript', $javascript);
@@ -100,16 +100,20 @@ if (isset($_GET['oID'])
         $cancel_link = xtc_href_link(FILENAME_ACCOUNT_HISTORY_INFO, 'order_id='.(int)$_GET['oID'], 'SSL');
       }
       $smarty->assign('BUTTON_BACK', '<a href="'.$cancel_link.'">'.xtc_image_button('button_back.gif', IMAGE_BUTTON_BACK).'</a>');
-      $smarty->assign('BUTTON_CONTINUE', '<a href="#" onclick="ppp.doCheckout(); return false;">'.xtc_image_button('button_confirm.gif', IMAGE_BUTTON_CONFIRM_ORDER).'</a>');
+      $smarty->assign('BUTTON_CONTINUE', '<a href="#" onclick="ppp.doCheckout(); return false;">'.xtc_image_button('button_continue.gif', IMAGE_BUTTON_CONTINUE).'</a>');
     
-      $main_content = $smarty->fetch(DIR_FS_EXTERNAL.'paypal/templates/ppp.html');
+      $tpl_file = DIR_FS_EXTERNAL.'paypal/templates/ppp.html';
+      if (is_file(DIR_FS_CATALOG.'templates/'.CURRENT_TEMPLATE.'/module/paypal/ppp.html')) {
+        $tpl_file = DIR_FS_CATALOG.'templates/'.CURRENT_TEMPLATE.'/module/paypal/ppp.html';
+      }
+      $main_content = $smarty->fetch($tpl_file);
     
       $smarty->assign('main_content', $main_content);
       $smarty->assign('language', $_SESSION['language']);
 
       $smarty->caching = 0;
       if (!defined('RM'))
-        ///*$smarty->load_filter('output', 'note');*/
+        //$smarty->load_filter('output', 'note');
       $smarty->display(CURRENT_TEMPLATE.'/index.html');
     }
   } else {

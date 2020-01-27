@@ -1036,6 +1036,11 @@ BASIC Template for AGB Hosting Content
 	height: auto !important;
 }
 
+.button_right_checkout .checkoutconditions input[type=checkbox] {
+  vertical-align: middle;
+  bottom: inherit !important;
+}
+
 @media screen and (min-width: 768px) and (max-width: 992px) {
 	.index_images_box img {
 		height: 150px;

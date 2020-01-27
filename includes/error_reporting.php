@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: error_reporting.php 10448 2016-11-27 10:01:07Z GTB $
+   $Id: error_reporting.php 12067 2019-08-06 06:46:12Z GTB $
 
    modified eCommerce Shopsoftware
    http://www.modified-shop.org
@@ -10,54 +10,92 @@
    Released under the GNU General Public License
    ---------------------------------------------------------------------------------------*/
 
+
+$error_files = array();
+$ext_array = array('dev', 'all', 'err', 'shop', 'admin', 'none');
+foreach($ext_array as $ext) {
+  if (is_file(DIR_FS_CATALOG.'export/_error_reporting.'.$ext)) {
+    $error_files[] = $ext;
+  }
+}
+$LogLevel = mod_get_log_level($error_files);
+
 // include needed class
 require_once(DIR_FS_CATALOG.'includes/classes/class.logger.php');
+$LoggingManager = new LoggingManager(DIR_FS_LOG.'mod_%s_'.((defined('RUN_MODE_ADMIN')) ? 'admin_' : '').'%s.log', 'modified', strtolower($LogLevel));
 
-$config = array(
-  'LogEnabled' => true,
-  'SplitLogging' => true,
-  'LogLevel' => ((defined('LOGGING_LEVEL')) ? LOGGING_LEVEL : 'INFO'), // DEBUG, FINE, INFO, WARN, ERROR, CUSTOM
-  'LogThreshold' => '2MB',
-  'FileName' => DIR_FS_LOG.'mod_error_'.((defined('RUN_MODE_ADMIN')) ? 'admin_' : '').date('Y-m-d') .'.log',
-  'FileName.debug' => DIR_FS_LOG.'mod_notice_'.((defined('RUN_MODE_ADMIN')) ? 'admin_' : '').date('Y-m-d') .'.log',
-  'FileName.fine' => DIR_FS_LOG.'mod_deprecated_'.((defined('RUN_MODE_ADMIN')) ? 'admin_' : '').date('Y-m-d') .'.log',
-  'FileName.info' => DIR_FS_LOG.'mod_strict_'.((defined('RUN_MODE_ADMIN')) ? 'admin_' : '').date('Y-m-d') .'.log',
-  'FileName.warning' => DIR_FS_LOG.'mod_warning_'.((defined('RUN_MODE_ADMIN')) ? 'admin_' : '').date('Y-m-d') .'.log',
-  'FileName.error' => DIR_FS_LOG.'mod_error_'.((defined('RUN_MODE_ADMIN')) ? 'admin_' : '').date('Y-m-d') .'.log',
-  'FileName.custom' => DIR_FS_LOG.'mod_custom_'.((defined('RUN_MODE_ADMIN')) ? 'admin_' : '').date('Y-m-d') .'.log',
-);
-$LoggingManager = new LoggingManager($config);
+
+/**
+ * check for LogLevel
+ */
+function mod_get_log_level($error_reporting_array) {
+  $error_reporting = basename(array_shift($error_reporting_array));
+    
+  switch ($error_reporting) {
+    case 'err':
+      $LogLevel = 'ERROR';
+      error_reporting(E_ALL & ~E_NOTICE & ~E_STRICT & ~E_DEPRECATED & ~E_WARNING);
+      break;
+    case 'shop':
+    case 'admin':
+      if (($error_reporting == 'admin' && defined('RUN_MODE_ADMIN')) 
+          || ($error_reporting == 'shop' && !defined('RUN_MODE_ADMIN'))
+          )
+      {
+        $LogLevel = 'WARNING';
+        error_reporting(E_ALL & ~E_NOTICE & ~E_STRICT & ~E_DEPRECATED);
+      } else {
+        $LogLevel = mod_get_log_level($error_reporting_array);
+      }
+      break;
+    case 'dev':
+      $LogLevel = 'DEBUG';
+      error_reporting(-1);
+      break;
+    case 'none':
+      $LogLevel = 'NONE';
+      error_reporting(0);
+      break;
+    default:
+      $LogLevel = 'NOTICE';
+      error_reporting(E_ALL);
+      break;
+  }
+  
+  return $LogLevel;
+}
 
 /**
  * Error handler, passes flow over the exception logger with new ErrorException.
  */
-function log_error($num, $str, $file, $line, $context=null)
+function mod_log_error($num, $str, $file, $line, $context=null)
 {
-    log_exception_handler(new ErrorException($str, 0, $num, $file, $line));
+    mod_log_exception_handler(new ErrorException($str, 0, $num, $file, $line));
 }
 
 /**
  * check if exception is an valid object
  */
-function log_exception_handler($e) {
+function mod_log_exception_handler($e) {
   if (is_object($e)) {
-    log_exception($e);
+    mod_log_exception($e);
   }
 }
 
 /**
  * Uncaught exception handler.
  */
-function log_exception($e)
+function mod_log_exception($e)
 {
-    global $error_exceptions, $sql_error, $sql_query, $LoggingManager, $config;
+    global $error_exceptions, $sql_error, $sql_query, $LoggingManager, $LogLevel;
     
     if (!is_object($LoggingManager)) {
-        $LoggingManager = new LoggingManager($config);
+        $LoggingManager = new LoggingManager(DIR_FS_LOG.'mod_%s_'.((defined('RUN_MODE_ADMIN')) ? 'admin_' : '').'%s.log', 'modified', strtolower($LogLevel));
     }
     
     if (strpos($e->getFile(), 'templates_c') !== false
-        || strpos($e->getFile(), 'cache') !== false) return;
+        || strpos($e->getFile(), 'cache') !== false
+        || $LogLevel === 'NONE') return;
 
     if (!is_array($error_exceptions)) {
       $error_exceptions = array();
@@ -67,7 +105,7 @@ function log_exception($e)
         $backtrace = debug_backtrace();
         $error = array();
         $error['number'] = (method_exists($e, 'getseverity') ? $e->getseverity() : 'UNDEFINED_ERROR');
-        $error['name'] = (($error['number'] != 'UNDEFINED_ERROR') ? error_level($error['number']) : 'UNDEFINED_ERROR');
+        $error['name'] = (($error['number'] != 'UNDEFINED_ERROR') ? mod_error_level($error['number']) : 'ERROR');
         $error['line'] = $e->getLine();
         $error['file'] = $e->getFile();
         $error['message'] = $e->getMessage();
@@ -89,11 +127,11 @@ function log_exception($e)
             $error_exceptions[$error['name']][$index] .= '</table>' . PHP_EOL;
 
             // write Logfile
-            $LoggingManager->log(html_entity_decode($error['message']) . ' in File: ' . $error['file'] . ' on Line: ' . $error['line'], $error['name']);
+            $LoggingManager->log($error['name'], html_entity_decode($error['message']) . ' in File: ' . $error['file'] . ' on Line: ' . $error['line']);
             $err = 0;
             for ($i=0, $n=count($backtrace); $i<$n; $i++) {
                 if (isset($backtrace[$i]['file']) && $backtrace[$i]['file'] != $error['file'] && basename($backtrace[$i]['file']) != 'error_reporting.php') {
-                    $LoggingManager->log('Backtrace #'.$err.' - '.$backtrace[$i]['file'].' called at Line '.$backtrace[$i]['line'], $error['name']);
+                    $LoggingManager->log($error['name'], 'Backtrace #'.$err.' - '.$backtrace[$i]['file'].' called at Line '.$backtrace[$i]['line']);
                     $err ++;
                 }
             }
@@ -104,50 +142,50 @@ function log_exception($e)
 /**
  * Checks for a fatal error, work around for set_error_handler not working on fatal errors.
  */
-function check_for_fatal()
+function mod_check_for_fatal()
 {
     $error = error_get_last();
     if ($error['type'] == E_ERROR) {
-        log_error($error['type'], $error['message'], $error['file'], $error['line']);
+        mod_log_error($error['type'], $error['message'], $error['file'], $error['line']);
     }
 }
 
 /**
  * translate error number.
  */
-function error_level($type)
+function mod_error_level($type)
 {
     switch($type) {
         case E_ERROR: // 1 //
-            return 'E_ERROR';
+            return 'ERROR';
         case E_WARNING: // 2 //
-            return 'E_WARNING';
+            return 'WARNING';
         case E_PARSE: // 4 //
-            return 'E_PARSE';
+            return 'INFO';
         case E_NOTICE: // 8 //
-            return 'E_NOTICE';
+            return 'NOTICE';
         case E_CORE_ERROR: // 16 //
-            return 'E_CORE_ERROR';
+            return 'ERROR';
         case E_CORE_WARNING: // 32 //
-            return 'E_CORE_WARNING';
+            return 'WARNING';
         case E_CORE_ERROR: // 64 //
-            return 'E_COMPILE_ERROR';
+            return 'ERROR';
         case E_CORE_WARNING: // 128 //
-            return 'E_COMPILE_WARNING';
+            return 'WARNING';
         case E_USER_ERROR: // 256 //
-            return 'E_USER_ERROR';
+            return 'ERROR';
         case E_USER_WARNING: // 512 //
-            return 'E_USER_WARNING';
+            return 'WARNING';
         case E_USER_NOTICE: // 1024 //
-            return 'E_USER_NOTICE';
+            return 'CUSTOM';
         case E_STRICT: // 2048 //
-            return 'E_STRICT';
+            return 'INFO';
         case E_RECOVERABLE_ERROR: // 4096 //
-            return 'E_RECOVERABLE_ERROR';
+            return 'ERROR';
         case E_DEPRECATED: // 8192 //
-            return 'E_DEPRECATED';
+            return 'DEBUG';
         case E_USER_DEPRECATED: // 16384 //
-            return 'E_USER_DEPRECATED';
+            return 'DEBUG';
     }
     return $type;
 }
@@ -155,7 +193,7 @@ function error_level($type)
 /**
  * set error functions.
  */
-register_shutdown_function('check_for_fatal');
-set_error_handler('log_error');
-set_exception_handler('log_exception_handler');
+register_shutdown_function('mod_check_for_fatal');
+set_error_handler('mod_log_error');
+set_exception_handler('mod_log_exception_handler');
 ?>

@@ -118,4 +118,5 @@ define('FILENAME_WHITELIST_LOGS', 'whitelist_logs.php');
 define('FILENAME_SEO_TOOL_BOX', 'seo_tool_box.php');
 
 define('FILENAME_QUICK_STOCKUPDATE', 'quick_stockupdate.php');
+define('FILENAME_PAYPAL_CONFIG','paypal_config.php');
 ?>

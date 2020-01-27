@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id$
+   $Id: paypal_config.php 11727 2019-04-08 14:51:54Z GTB $
 
    modified eCommerce Shopsoftware
    http://www.modified-shop.org
@@ -65,13 +65,12 @@ $transaction_array = array(
 
 $log_level_array = array(
   array('id' => 'ERROR', 'text' => 'Error'),
-  array('id' => 'WARN', 'text' => 'Warning'),
+  array('id' => 'WARNING', 'text' => 'Warning'),
+  array('id' => 'NOTICE', 'text' => 'Notice'),
   array('id' => 'INFO', 'text' => 'Info'),
-  array('id' => 'FINE', 'text' => 'Fine'),
   array('id' => 'DEBUG', 'text' => 'Debug'),
 ); 
 
-//$locale_code = array(
 require (DIR_WS_INCLUDES.'head.php');
 ?>
 <link rel="stylesheet" type="text/css" href="../includes/external/paypal/css/stylesheet.css">  
@@ -95,7 +94,7 @@ require (DIR_WS_INCLUDES.'head.php');
         ?>
         <!-- body_text //-->
         <td class="boxCenter">         
-          <div class="pageHeadingImage"><?php echo xtc_image(DIR_WS_ICONS.'heading_configuration.gif'); ?></div>
+          <div class="pageHeadingImage"><?php echo xtc_image(DIR_WS_ICONS.'heading/icon_configuration.png'); ?></div>
           <div class="flt-l">
             <div class="pageHeading pdg2"><?php echo TEXT_PAYPAL_CONFIG_HEADING_TITLE; ?></div>
             <div class="main">v<?php echo $paypal->paypal_version; ?></div>

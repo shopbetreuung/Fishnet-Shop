@@ -357,7 +357,7 @@ define('WARNING_NO_FILE_UPLOADED', 'Warnung: No file uploaded.');
 define('DELETE_ENTRY','Delete entry?');
 define('TEXT_PAYMENT_ERROR','<b>WARNING:</b> Please activate a Payment Module!');
 define('TEXT_SHIPPING_ERROR','<b>WARNING:</b> Please activate a Shipping Module!');
-define('TEXT_PAYPAL_CONFIG','<b>WARNUNG:</b> Please configure the PayPal payment settings for "Live mode" here: <a href="%s"><strong>Partner -> PayPal<strong></a>.'); //DokuMan - 2012-05-31 - show warning if PayPal payment module activated, but not configured for live mode yet
+define('TEXT_PAYPAL_CONFIG','<b>WARNING:</b> Please configure the PayPal payment settings for "Live mode" here: <a href="%s"><strong>Partner -> PayPal<strong></a>.'); //DokuMan - 2012-05-31 - show warning if PayPal payment module activated, but not configured for live mode yet
 
 define('TEXT_NETTO','net: ');
 
@@ -540,8 +540,8 @@ define ('BOX_MENU_CONFIGURATION', 'Configuration');
 define('TEXT_PAYPAL_TAB_CONFIG', 'PayPal Configuration');
 define('TEXT_PAYPAL_TAB_PROFILE', 'PayPal Profile');
 define('TEXT_PAYPAL_TAB_WEBHOOK', 'PayPal Webhook');
-define('TEXT_PAYPAL_TAB_MODULE', 'PayPal Module');
-define('TEXT_PAYPAL_TAB_TRANSACTIONS', 'PayPal Transactions');
+define('TEXT_PAYPAL_TAB_MODULE', 'PayPal Products');
+define('TEXT_PAYPAL_TAB_INFO', 'PayPal Information');
 
 define('FEEDBACK_SENT', 'Feedback Sent');
 define('TEXT_DISPLAY_NUMBER_OF_DSGVO_EXPORT', 'Displaying <b>%d</b> to <b>%d</b> (of <b>%d</b> DSGVOstatus)');

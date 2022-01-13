@@ -144,7 +144,7 @@ $products = xtc_db_query("-- products_attributes.php
                         ORDER BY pd.products_name"
                         );
 if (xtc_db_num_rows($products)) {
- //Produkt zugeordnet - Warnung - Optionswert kann nicht gelöscht werden
+ //Produkt zugeordnet - Warnung - Optionswert kann nicht gelÃ¶scht werden
 ?>
                   <table class='table table-bordered'>
                         <tr class="dataTableHeadingRow">
@@ -186,7 +186,7 @@ if (xtc_db_num_rows($products)) {
                       </table>
 <?php
 } else {
-//Produkt nicht zugeordnet - Ok - Optionswert kann gelöscht werden
+//Produkt nicht zugeordnet - Ok - Optionswert kann gelÃ¶scht werden
 ?>
                     <div class='col-xs-12'>
                         <div style="margin:10px 0;">
@@ -305,7 +305,7 @@ while ($values_values = xtc_db_fetch_array($values)) {
                     <td align="center" class="smallText">&nbsp;<?php echo $options_name; ?>&nbsp;</td>
                     <td class="smallText">&nbsp;<?php echo $values_name; ?>&nbsp;</td>
                     <td align="center" class="smallText">
-                      <?php echo xtc_button_link(BUTTON_EDIT, xtc_href_link(FILENAME_PRODUCTS_ATTRIBUTES, 'action=update_option_value&value_id=' . $values_values['products_options_values_id'] . '&value_page=' . $_GET['value_page'].$option_id, 'NONSSL'));
+                      <?php echo xtc_button_link(BUTTON_EDIT, xtc_href_link(FILENAME_PRODUCTS_ATTRIBUTES, 'action=update_option_value&value_id=' . $values_values['products_options_values_id'] . ((isset($_GET['search_optionsname'])) ? '&search_optionsname=' . $_GET['search_optionsname'] : '') . '&value_page=' . $_GET['value_page'].$option_id, 'NONSSL'));
                       //BOF - webkiste - auf der selben Seite bleiben
                       echo xtc_button_link(BUTTON_DELETE, xtc_href_link(FILENAME_PRODUCTS_ATTRIBUTES, 'action=delete_option_value&value_id=' . $values_values['products_options_values_id'] . '&value_page=' . $_GET['value_page'], 'NONSSL'));
                       //EOF - webkiste - auf der selben Seite bleiben
